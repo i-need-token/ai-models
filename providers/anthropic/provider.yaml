@@ -1,0 +1,6 @@
+id: anthropic
+name: Anthropic
+url: https://www.anthropic.com
+api_docs: https://docs.anthropic.com
+apis:
+  anthropic: https://api.anthropic.com

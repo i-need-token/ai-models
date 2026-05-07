@@ -1,0 +1,27 @@
+id: claude-opus-4-6
+name: Claude Opus 4.6
+family: claude-opus
+reasoning: true
+temperature: true
+tool_call: true
+attachment: true
+structured_output: true
+open_weights: false
+limit:
+  context: 1000000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+    - pdf
+  output:
+    - text
+pricing:
+  input: 5
+  output: 25
+  cache_write: 6.25
+  cache_read: 0.5
+knowledge: 2025-05
+release_date: 2026-02-05
+last_updated: 2026-02-05
