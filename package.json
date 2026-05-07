@@ -1,0 +1,27 @@
+{
+  "name": "ai-models",
+  "version": "0.1.0",
+  "description": "A structured catalog of AI model providers and their models",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "sync": "npx tsx scripts/sync.ts",
+    "validate": "npx tsx scripts/validate.ts",
+    "fmt": "oxfmt",
+    "fmt:check": "oxfmt --check",
+    "lint": "oxlint",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run fmt:check && npm run lint && npm run typecheck"
+  },
+  "dependencies": {
+    "linkedom": "^0.18.12",
+    "yaml": "^2.7.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "oxfmt": "^0.48.0",
+    "oxlint": "^1.63.0",
+    "typescript": "^5.7.0"
+  }
+}
