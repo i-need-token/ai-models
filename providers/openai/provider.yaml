@@ -1,0 +1,6 @@
+id: openai
+name: OpenAI
+url: https://www.openai.com
+api_docs: https://platform.openai.com/docs
+apis:
+  openai: https://api.openai.com

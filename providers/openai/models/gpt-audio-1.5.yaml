@@ -1,0 +1,19 @@
+id: gpt-audio-1.5
+name: GPT-audio 1.5
+family: gpt-audio
+tool_call: true
+limit:
+  context: 128000
+  output: 16384
+modalities:
+  input:
+    - text
+    - audio
+  output:
+    - text
+    - audio
+pricing:
+  input: 2.5
+  output: 10
+release_date: unknown
+last_updated: unknown

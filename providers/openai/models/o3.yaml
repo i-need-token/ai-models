@@ -1,0 +1,23 @@
+id: o3
+name: o3
+family: o
+reasoning: true
+tool_call: true
+structured_output: true
+limit:
+  context: 200000
+  output: 100000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 2
+  output: 8
+  cache_read: 0.5
+release_date: 2025-04-16
+last_updated: 2025-04-16
+snapshots:
+  - id: o3-2025-04-16

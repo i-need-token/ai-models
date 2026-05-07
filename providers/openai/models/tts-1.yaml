@@ -1,0 +1,14 @@
+id: tts-1
+name: Tts 1
+family: tts
+modalities:
+  input:
+    - text
+  output:
+    - text
+    - audio
+pricing:
+  input: 15
+  output: 15
+release_date: unknown
+last_updated: unknown

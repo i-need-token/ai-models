@@ -1,0 +1,25 @@
+id: gpt-4o-audio-preview
+name: GPT-4o audio Preview
+family: gpt-o
+tool_call: true
+deprecated: true
+limit:
+  context: 128000
+  output: 16384
+modalities:
+  input:
+    - text
+    - audio
+  output:
+    - text
+    - audio
+pricing:
+  input: 2.5
+  output: 10
+release_date: 2025-06-03
+last_updated: 2025-06-03
+snapshots:
+  - id: gpt-4o-audio-preview-2025-06-03
+    deprecated: true
+  - id: gpt-4o-audio-preview-2024-12-17
+  - id: gpt-4o-audio-preview-2024-10-01

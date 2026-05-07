@@ -1,0 +1,22 @@
+id: gpt-4.1
+name: GPT-4.1
+family: gpt
+tool_call: true
+structured_output: true
+limit:
+  context: 1047576
+  output: 32768
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 2
+  output: 8
+  cache_read: 0.5
+release_date: 2025-04-14
+last_updated: 2025-04-14
+snapshots:
+  - id: gpt-4.1-2025-04-14

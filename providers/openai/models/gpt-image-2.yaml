@@ -1,0 +1,16 @@
+id: gpt-image-2
+name: GPT-image 2
+family: gpt-image
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+    - image
+pricing:
+  unit: free
+release_date: 2026-04-21
+last_updated: 2026-04-21
+snapshots:
+  - id: gpt-image-2-2026-04-21

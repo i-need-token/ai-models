@@ -1,0 +1,27 @@
+id: o1
+name: o1
+family: o
+reasoning: true
+tool_call: true
+structured_output: true
+deprecated: true
+limit:
+  context: 200000
+  output: 100000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 15
+  output: 60
+  cache_read: 7.5
+release_date: 2024-12-17
+last_updated: 2024-12-17
+snapshots:
+  - id: o1-2024-12-17
+    deprecated: true
+  - id: o1-preview-2024-09-12
+    deprecated: true

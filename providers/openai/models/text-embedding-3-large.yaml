@@ -1,0 +1,13 @@
+id: text-embedding-3-large
+name: Text Embedding 3 Large
+family: text-embedding
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.13
+  output: 0.13
+release_date: unknown
+last_updated: unknown

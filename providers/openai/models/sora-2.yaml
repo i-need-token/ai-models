@@ -1,0 +1,21 @@
+id: sora-2
+name: Sora 2
+family: sora
+deprecated: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+    - audio
+    - video
+pricing:
+  unit: per_second
+  price: 0.1
+release_date: 2025-12-08
+last_updated: 2025-12-08
+snapshots:
+  - id: sora-2-2025-12-08
+    deprecated: true
+  - id: sora-2-2025-10-06

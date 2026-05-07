@@ -1,0 +1,15 @@
+id: dall-e-2
+name: Dall E 2
+family: dall-e
+deprecated: true
+modalities:
+  input:
+    - text
+  output:
+    - text
+    - image
+pricing:
+  unit: per_image
+  price: 0.016
+release_date: unknown
+last_updated: unknown

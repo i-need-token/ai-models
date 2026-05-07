@@ -1,0 +1,19 @@
+id: gpt-4
+name: GPT-4
+family: gpt
+limit:
+  context: 8192
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 30
+  output: 60
+release_date: unknown
+last_updated: unknown
+snapshots:
+  - id: gpt-4-0613
+  - id: gpt-4-0314

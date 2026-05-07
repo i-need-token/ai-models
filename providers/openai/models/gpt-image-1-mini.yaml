@@ -1,0 +1,16 @@
+id: gpt-image-1-mini
+name: GPT-image 1 mini
+family: gpt-image
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+    - image
+pricing:
+  input: 2
+  output: 8
+  cache_read: 0.2
+release_date: unknown
+last_updated: unknown

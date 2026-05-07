@@ -1,0 +1,22 @@
+id: gpt-4.1-mini
+name: GPT-4.1 mini
+family: gpt
+tool_call: true
+structured_output: true
+limit:
+  context: 1047576
+  output: 32768
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 0.4
+  output: 1.6
+  cache_read: 0.1
+release_date: 2025-04-14
+last_updated: 2025-04-14
+snapshots:
+  - id: gpt-4.1-mini-2025-04-14

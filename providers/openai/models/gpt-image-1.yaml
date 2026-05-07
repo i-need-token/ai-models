@@ -1,0 +1,17 @@
+id: gpt-image-1
+name: GPT-image 1
+family: gpt-image
+deprecated: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+    - image
+pricing:
+  input: 5
+  output: 40
+  cache_read: 1.25
+release_date: unknown
+last_updated: unknown

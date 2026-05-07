@@ -1,0 +1,13 @@
+id: text-embedding-ada-002
+name: Text Embedding Ada 002
+family: text-embedding
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.1
+  output: 0.1
+release_date: unknown
+last_updated: unknown

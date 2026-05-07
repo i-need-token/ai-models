@@ -1,0 +1,22 @@
+id: gpt-4o-mini
+name: GPT-4o mini
+family: gpt-o
+tool_call: true
+structured_output: true
+limit:
+  context: 128000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 0.15
+  output: 0.6
+  cache_read: 0.075
+release_date: 2024-07-18
+last_updated: 2024-07-18
+snapshots:
+  - id: gpt-4o-mini-2024-07-18

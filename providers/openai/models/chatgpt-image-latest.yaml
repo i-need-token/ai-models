@@ -1,0 +1,16 @@
+id: chatgpt-image-latest
+name: Chatgpt Image Latest
+family: chatgpt
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+    - image
+pricing:
+  input: 5
+  output: 10
+  cache_read: 1.25
+release_date: unknown
+last_updated: unknown

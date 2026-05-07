@@ -1,0 +1,18 @@
+id: chatgpt-4o-latest
+name: Chatgpt 4o Latest
+family: chatgpt
+deprecated: true
+limit:
+  context: 128000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 5
+  output: 15
+release_date: unknown
+last_updated: unknown

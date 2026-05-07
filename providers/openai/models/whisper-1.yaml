@@ -1,0 +1,14 @@
+id: whisper-1
+name: Whisper 1
+family: whisper
+modalities:
+  input:
+    - text
+    - audio
+  output:
+    - text
+pricing:
+  input: 0.006
+  output: 0.006
+release_date: unknown
+last_updated: unknown

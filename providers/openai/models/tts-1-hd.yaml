@@ -1,0 +1,14 @@
+id: tts-1-hd
+name: Tts 1 Hd
+family: tts
+modalities:
+  input:
+    - text
+  output:
+    - text
+    - audio
+pricing:
+  input: 30
+  output: 30
+release_date: unknown
+last_updated: unknown

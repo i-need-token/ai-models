@@ -1,0 +1,17 @@
+id: gpt-4o-mini-tts
+name: GPT-4o mini-tts
+family: gpt-o
+modalities:
+  input:
+    - text
+  output:
+    - text
+    - audio
+pricing:
+  input: 0.6
+  output: 12
+release_date: 2025-12-15
+last_updated: 2025-12-15
+snapshots:
+  - id: gpt-4o-mini-tts-2025-12-15
+  - id: gpt-4o-mini-tts-2025-03-20
