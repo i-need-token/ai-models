@@ -1,6 +1,13 @@
 import { defineModel, defineProvider } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, ModalityPrice, Pricing, ResolutionPrice, TokenPrice } from "../../types/index";
+import type {
+  Model,
+  ModelModality,
+  ModalityPrice,
+  Pricing,
+  ResolutionPrice,
+  TokenPrice,
+} from "../../types/index";
 
 const provider = defineProvider({
   id: "google",
@@ -50,7 +57,8 @@ async function discoverModels(): Promise<DiscoveredModel[]> {
 
   // Detect deprecated/shut down models from link text
   // Format: [Gemini 2.0 Flash Deprecated](url) or [Gemini 3 Pro Preview Shut down](url)
-  const statusLinkPattern = /\[([^\]]*?)\s+(Deprecated|Shut down)\s*\]\(https:\/\/ai\.google\.dev\/gemini-api\/docs\/models\/([^)]+)\)/gi;
+  const statusLinkPattern =
+    /\[([^\]]*?)\s+(Deprecated|Shut down)\s*\]\(https:\/\/ai\.google\.dev\/gemini-api\/docs\/models\/([^)]+)\)/gi;
   while ((match = statusLinkPattern.exec(md)) !== null) {
     const status = match[2]!.toLowerCase();
     const slug = match[3]!;
@@ -219,7 +227,10 @@ function parseModelPage(md: string, slug: string, indexDeprecated: boolean): Mod
   const rows = md.split("\n").filter((l) => l.startsWith("|") && !l.includes("---"));
 
   for (const row of rows) {
-    const cols = row.split("|").map((c) => c.trim()).filter(Boolean);
+    const cols = row
+      .split("|")
+      .map((c) => c.trim())
+      .filter(Boolean);
     if (cols.length < 2) continue;
 
     const property = cols[0]!.toLowerCase();
@@ -313,7 +324,9 @@ function parseModelPage(md: string, slug: string, indexDeprecated: boolean): Mod
     ...(capabilities.get("Structured outputs") ? { structured_output: true } : {}),
     ...(isOpenWeights(primaryId) ? { open_weights: true } : {}),
     ...(indexDeprecated ? { deprecated: true } : {}),
-    ...(contextLimit && outputLimit ? { limit: { context: contextLimit, output: outputLimit } } : {}),
+    ...(contextLimit && outputLimit
+      ? { limit: { context: contextLimit, output: outputLimit } }
+      : {}),
     modalities: {
       input: inputModalities,
       output: outputModalities,
@@ -475,17 +488,32 @@ function parseGeminiPricingTable(tableContent: string, modelId: string): Pricing
   const rows = tableContent.split("\n").filter((l) => l.startsWith("|") && !l.includes("---"));
 
   for (const row of rows) {
-    const cols = row.split("|").map((c) => c.trim()).filter(Boolean);
+    const cols = row
+      .split("|")
+      .map((c) => c.trim())
+      .filter(Boolean);
     if (cols.length < 3) continue;
 
     const label = cols[0]!.toLowerCase();
     const paidText = cols[cols.length - 1]!;
 
     // Skip non-pricing rows
-    if (label.includes("used to improve") || label.includes("grounding") || label.includes("tuning") || label.includes("image generation")) continue;
+    if (
+      label.includes("used to improve") ||
+      label.includes("grounding") ||
+      label.includes("tuning") ||
+      label.includes("image generation")
+    )
+      continue;
 
     // Input price
-    if (label.includes("input") && !label.startsWith("audio input") && !label.startsWith("video input") && !label.startsWith("image input") && !label.startsWith("text input")) {
+    if (
+      label.includes("input") &&
+      !label.startsWith("audio input") &&
+      !label.startsWith("video input") &&
+      !label.startsWith("image input") &&
+      !label.startsWith("text input")
+    ) {
       const modalityInput = extractModalityPrice(paidText);
       inputPrice = modalityInput ?? extractTokenPrice(paidText);
     }
@@ -573,10 +601,7 @@ function extractTokenPrice(text: string): TokenPrice | null {
     const lowerPrice = parseFloat(tierMatch[1]!);
     const lowerBound = parseInt(tierMatch[2]!.replace(/,/g, ""), 10) * 1000;
     const higherPrice = parseFloat(tierMatch[3]!);
-    return [
-      { up_to: lowerBound, inclusive: true, price: lowerPrice },
-      { price: higherPrice },
-    ];
+    return [{ up_to: lowerBound, inclusive: true, price: lowerPrice }, { price: higherPrice }];
   }
 
   // Fixed price: extract the first dollar amount
@@ -591,7 +616,11 @@ function extractTokenPrice(text: string): TokenPrice | null {
 // Imagen per-image pricing parser (markdown)
 // ---------------------------------------------------------------------------
 
-function parseImagenPricing(section: string, modelIds: string[], result: Map<string, Pricing>): void {
+function parseImagenPricing(
+  section: string,
+  modelIds: string[],
+  result: Map<string, Pricing>,
+): void {
   // Map label keywords to model IDs
   const variantMap: Record<string, string> = {
     fast: modelIds.find((id) => id.includes("fast")) || "",
@@ -602,7 +631,10 @@ function parseImagenPricing(section: string, modelIds: string[], result: Map<str
   const rows = section.split("\n").filter((l) => l.startsWith("|") && !l.includes("---"));
 
   for (const row of rows) {
-    const cols = row.split("|").map((c) => c.trim()).filter(Boolean);
+    const cols = row
+      .split("|")
+      .map((c) => c.trim())
+      .filter(Boolean);
     if (cols.length < 3) continue;
 
     const label = cols[0]!.toLowerCase();
@@ -645,7 +677,10 @@ function parseVeoPricing(section: string, modelIds: string[], result: Map<string
   const rows = section.split("\n").filter((l) => l.startsWith("|") && !l.includes("---"));
 
   for (const row of rows) {
-    const cols = row.split("|").map((c) => c.trim()).filter(Boolean);
+    const cols = row
+      .split("|")
+      .map((c) => c.trim())
+      .filter(Boolean);
     if (cols.length < 3) continue;
 
     const label = cols[0]!.toLowerCase();
@@ -712,7 +747,11 @@ function extractResolutionPrice(text: string): ResolutionPrice | null {
 // Lyria per-request pricing parser (markdown)
 // ---------------------------------------------------------------------------
 
-function parseLyriaPricing(section: string, modelIds: string[], result: Map<string, Pricing>): void {
+function parseLyriaPricing(
+  section: string,
+  modelIds: string[],
+  result: Map<string, Pricing>,
+): void {
   const variantMap: Record<string, string> = {};
   for (const id of modelIds) {
     if (id.includes("pro")) variantMap["pro"] = id;
@@ -723,7 +762,10 @@ function parseLyriaPricing(section: string, modelIds: string[], result: Map<stri
   const rows = section.split("\n").filter((l) => l.startsWith("|") && !l.includes("---"));
 
   for (const row of rows) {
-    const cols = row.split("|").map((c) => c.trim()).filter(Boolean);
+    const cols = row
+      .split("|")
+      .map((c) => c.trim())
+      .filter(Boolean);
     if (cols.length < 3) continue;
 
     const label = cols[0]!.toLowerCase();
@@ -749,7 +791,11 @@ function parseLyriaPricing(section: string, modelIds: string[], result: Map<stri
 // Embedding pricing parser (markdown)
 // ---------------------------------------------------------------------------
 
-function parseEmbeddingPricing(section: string, modelIds: string[], result: Map<string, Pricing>): void {
+function parseEmbeddingPricing(
+  section: string,
+  modelIds: string[],
+  result: Map<string, Pricing>,
+): void {
   let textInputPrice: number | null = null;
   const modalityPrices: ModalityPrice = {};
 
@@ -760,7 +806,10 @@ function parseEmbeddingPricing(section: string, modelIds: string[], result: Map<
   const rows = tableContent.split("\n").filter((l) => l.startsWith("|") && !l.includes("---"));
 
   for (const row of rows) {
-    const cols = row.split("|").map((c) => c.trim()).filter(Boolean);
+    const cols = row
+      .split("|")
+      .map((c) => c.trim())
+      .filter(Boolean);
     if (cols.length < 3) continue;
 
     const label = cols[0]!.toLowerCase();
@@ -771,7 +820,11 @@ function parseEmbeddingPricing(section: string, modelIds: string[], result: Map<
     const price = extractTokenPrice(paidText);
     if (price === null) continue;
 
-    if (label === "text input price" || label === "text input" || (label === "input price" && modelIds.some((id) => id.includes("embedding-001")))) {
+    if (
+      label === "text input price" ||
+      label === "text input" ||
+      (label === "input price" && modelIds.some((id) => id.includes("embedding-001")))
+    ) {
       textInputPrice = price;
     }
     if (label.includes("image") && label.includes("input")) modalityPrices.image = price as number;
@@ -781,9 +834,10 @@ function parseEmbeddingPricing(section: string, modelIds: string[], result: Map<
 
   if (textInputPrice !== null) {
     // If we have modality-specific prices, use ModalityPrice for input
-    const inputPrice: TokenPrice = Object.keys(modalityPrices).length > 0
-      ? { text: textInputPrice, ...modalityPrices }
-      : textInputPrice;
+    const inputPrice: TokenPrice =
+      Object.keys(modalityPrices).length > 0
+        ? { text: textInputPrice, ...modalityPrices }
+        : textInputPrice;
     for (const modelId of modelIds) {
       result.set(modelId, { input: inputPrice, output: textInputPrice });
     }
@@ -822,14 +876,15 @@ function deriveName(modelId: string, _slug: string): string {
       const acronymMap: Record<string, string> = { tts: "TTS" };
       const tierName = tier
         .split("-")
-        .map((w) => acronymMap[w] ?? (w.charAt(0).toUpperCase() + w.slice(1)))
+        .map((w) => acronymMap[w] ?? w.charAt(0).toUpperCase() + w.slice(1))
         .join(" ");
       let name = `Gemini ${version} ${tierName}`;
 
       if (modelId.includes("-preview")) name += " Preview";
       if (modelId.includes("-customtools")) name += " CustomTools";
       // TTS suffix not in tier (e.g., gemini-2.5-flash-preview-tts)
-      if (!tier.includes("-tts") && (modelId.endsWith("-tts") || modelId.includes("-tts-"))) name += " TTS";
+      if (!tier.includes("-tts") && (modelId.endsWith("-tts") || modelId.includes("-tts-")))
+        name += " TTS";
       return name;
     }
 
@@ -884,8 +939,10 @@ function deriveFamily(modelId: string): string {
       const tier = match[2]!;
       let family = `gemini-${version}-${tier}`;
       // TTS/Live suffix not captured by regex (e.g., gemini-2.5-flash-preview-tts)
-      if (!tier.includes("-tts") && (modelId.endsWith("-tts") || modelId.includes("-tts-"))) family += "-tts";
-      if (!tier.includes("-live") && (modelId.endsWith("-live") || modelId.includes("-live-"))) family += "-live";
+      if (!tier.includes("-tts") && (modelId.endsWith("-tts") || modelId.includes("-tts-")))
+        family += "-tts";
+      if (!tier.includes("-live") && (modelId.endsWith("-live") || modelId.includes("-live-")))
+        family += "-live";
       return family;
     }
     return "gemini";

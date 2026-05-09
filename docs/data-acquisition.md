@@ -149,4 +149,3 @@ export async function scrape(): Promise<ScrapeResult> {
 2. Updates the YAML file directly
 3. Sets `last_updated` to current date
 4. Validates with `npm run validate`
-

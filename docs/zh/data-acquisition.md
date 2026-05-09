@@ -149,4 +149,3 @@ export async function scrape(): Promise<ScrapeResult> {
 2. 直接更新 YAML 文件
 3. 将 `last_updated` 设为当前日期
 4. 用 `npm run validate` 验证
-
