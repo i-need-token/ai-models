@@ -1,0 +1,22 @@
+id: gemini-3.1-flash-image-preview
+name: Gemini 3.1 Flash Image Preview
+family: gemini-3.1-flash-image
+reasoning: true
+temperature: true
+attachment: true
+modalities:
+  input:
+    - text
+    - image
+    - pdf
+  output:
+    - image
+    - text
+pricing:
+  input: 0.5
+  output:
+    text: 3
+    image: 60
+knowledge: 2025-01
+release_date: 2026-02
+last_updated: 2026-02

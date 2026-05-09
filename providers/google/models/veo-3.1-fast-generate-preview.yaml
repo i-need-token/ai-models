@@ -1,0 +1,20 @@
+id: veo-3.1-fast-generate-preview
+name: Veo 3.1 Fast Preview
+family: veo
+temperature: true
+attachment: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - video
+    - audio
+pricing:
+  unit: per_second
+  price:
+    720p: 0.1
+    1080p: 0.12
+    4k: 0.3
+release_date: 2026-01
+last_updated: 2026-01

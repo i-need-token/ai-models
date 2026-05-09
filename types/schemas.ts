@@ -112,11 +112,12 @@ export const ModelSchema = z.object({
 
 // ==================== provider.ts ====================
 
-export const ApiFormatSchema = z.enum(["openai", "anthropic"]);
+export const ApiFormatSchema = z.enum(["openai", "anthropic", "google"]);
 
 export const ApiEndpointsSchema = z.object({
   openai: z.string().optional(),
   anthropic: z.string().optional(),
+  google: z.string().optional(),
 });
 
 export const ProviderGroupSchema = z.object({

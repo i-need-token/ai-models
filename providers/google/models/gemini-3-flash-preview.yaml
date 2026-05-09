@@ -1,0 +1,32 @@
+id: gemini-3-flash-preview
+name: Gemini 3 Flash Preview
+family: gemini-3-flash
+reasoning: true
+temperature: true
+tool_call: true
+attachment: true
+structured_output: true
+modalities:
+  input:
+    - text
+    - image
+    - video
+    - audio
+    - pdf
+  output:
+    - text
+pricing:
+  input:
+    text: 0.5
+    image: 0.5
+    video: 0.5
+    audio: 1
+  output: 3
+  cache_read:
+    text: 0.05
+    image: 0.05
+    video: 0.05
+    audio: 0.1
+knowledge: 2025-01
+release_date: 2025-12
+last_updated: 2025-12

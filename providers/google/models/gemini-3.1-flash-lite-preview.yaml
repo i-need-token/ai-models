@@ -1,0 +1,32 @@
+id: gemini-3.1-flash-lite-preview
+name: Gemini 3.1 Flash Lite Preview
+family: gemini-3.1-flash-lite
+reasoning: true
+temperature: true
+tool_call: true
+attachment: true
+structured_output: true
+modalities:
+  input:
+    - text
+    - image
+    - video
+    - audio
+    - pdf
+  output:
+    - text
+pricing:
+  input:
+    text: 0.25
+    image: 0.25
+    video: 0.25
+    audio: 0.5
+  output: 1.5
+  cache_read:
+    text: 0.025
+    image: 0.025
+    video: 0.025
+    audio: 0.05
+knowledge: 2025-01
+release_date: 2026-03
+last_updated: 2026-03

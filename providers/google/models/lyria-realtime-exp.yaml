@@ -1,0 +1,13 @@
+id: lyria-realtime-exp
+name: Lyria RealTime
+family: lyria
+temperature: true
+modalities:
+  input:
+    - text
+  output:
+    - audio
+pricing:
+  unit: free
+release_date: 2025-05
+last_updated: 2025-05

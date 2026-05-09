@@ -1,7 +1,7 @@
 import type { Model } from "./model";
 
 /** API format */
-export type ApiFormat = "openai" | "anthropic";
+export type ApiFormat = "openai" | "anthropic" | "google";
 
 /** API endpoints, keyed by format */
 export type ApiEndpoints = Partial<Record<ApiFormat, string>>;

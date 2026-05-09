@@ -1,0 +1,26 @@
+id: gemini-2.5-flash-native-audio-preview-12-2025
+name: Gemini 2.5 Flash Live Preview
+family: gemini-native-audio
+reasoning: true
+temperature: true
+tool_call: true
+attachment: true
+modalities:
+  input:
+    - audio
+    - video
+    - text
+  output:
+    - audio
+    - text
+pricing:
+  input:
+    text: 0.5
+    audio: 3
+    video: 3
+  output:
+    text: 2
+    audio: 12
+knowledge: 2025-01
+release_date: 2025-09
+last_updated: 2025-09

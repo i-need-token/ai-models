@@ -1,0 +1,21 @@
+id: deep-research-preview-04-2026
+name: Deep Research Preview
+family: deep-research
+temperature: true
+attachment: true
+modalities:
+  input:
+    - text
+    - image
+    - pdf
+    - audio
+    - video
+  output:
+    - text
+    - image
+pricing:
+  unit: free
+release_date: 2026-04
+last_updated: 2026-04
+snapshots:
+  - id: deep-research-max-preview-04-2026

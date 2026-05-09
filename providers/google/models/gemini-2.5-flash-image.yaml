@@ -1,0 +1,19 @@
+id: gemini-2.5-flash-image
+name: Gemini 2.5 Flash Image
+family: gemini-2.5-flash-image
+temperature: true
+attachment: true
+structured_output: true
+modalities:
+  input:
+    - image
+    - text
+  output:
+    - image
+    - text
+pricing:
+  unit: per_image
+  price: 0.039
+knowledge: 2025-06
+release_date: 2025-10
+last_updated: 2025-10

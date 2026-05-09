@@ -1,0 +1,22 @@
+id: gemini-3-pro-image-preview
+name: Gemini 3 Pro Image Preview
+family: gemini-3-pro-image
+reasoning: true
+temperature: true
+attachment: true
+structured_output: true
+modalities:
+  input:
+    - image
+    - text
+  output:
+    - image
+    - text
+pricing:
+  input: 2
+  output:
+    text: 12
+    image: 120
+knowledge: 2025-01
+release_date: 2025-11
+last_updated: 2025-11
