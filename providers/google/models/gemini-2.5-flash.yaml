@@ -3,7 +3,6 @@ name: Gemini 2.5 Flash
 family: gemini-2.5-flash
 reasoning: true
 temperature: true
-tool_call: true
 attachment: true
 structured_output: true
 modalities:

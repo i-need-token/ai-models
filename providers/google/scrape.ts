@@ -142,8 +142,7 @@ export async function scrape(): Promise<ScrapeResult> {
                 id: snap.id,
                 name: deriveName(snap.id, snap.id),
                 family: deriveFamily(snap.id),
-                temperature: true,
-                ...(detail.reasoning ? { reasoning: true } : {}),
+                temperature: !isEmbeddingModel(snap.id),
                 ...(detail.tool_call ? { tool_call: true } : {}),
                 ...(detail.attachment ? { attachment: true } : {}),
                 ...(detail.structured_output ? { structured_output: true } : {}),
@@ -176,8 +175,7 @@ export async function scrape(): Promise<ScrapeResult> {
         id: modelId,
         name: deriveName(modelId, modelId),
         family: deriveFamily(modelId),
-        temperature: true,
-        ...(hasImageInput(modalities.input) ? { attachment: true } : {}),
+        temperature: !isEmbeddingModel(modelId),
         modalities,
         pricing,
         release_date: "unknown",
@@ -318,8 +316,7 @@ function parseModelPage(md: string, slug: string, indexDeprecated: boolean): Mod
     name,
     family,
     ...(capabilities.get("Thinking") ? { reasoning: true } : {}),
-    temperature: true,
-    ...(capabilities.get("Function calling") ? { tool_call: true } : {}),
+    temperature: !isEmbeddingModel(primaryId),
     ...(hasImageInput(inputModalities) ? { attachment: true } : {}),
     ...(capabilities.get("Structured outputs") ? { structured_output: true } : {}),
     ...(isOpenWeights(primaryId) ? { open_weights: true } : {}),
@@ -380,6 +377,10 @@ function hasImageInput(modalities: ModelModality[]): boolean {
 
 function isOpenWeights(modelId: string): boolean {
   return modelId.startsWith("gemma-");
+}
+
+function isEmbeddingModel(modelId: string): boolean {
+  return modelId.includes("embedding");
 }
 
 function guessModalities(modelId: string): { input: ModelModality[]; output: ModelModality[] } {
@@ -839,7 +840,7 @@ function parseEmbeddingPricing(
         ? { text: textInputPrice, ...modalityPrices }
         : textInputPrice;
     for (const modelId of modelIds) {
-      result.set(modelId, { input: inputPrice, output: textInputPrice });
+      result.set(modelId, { input: inputPrice, output: 0 });
     }
   }
 }

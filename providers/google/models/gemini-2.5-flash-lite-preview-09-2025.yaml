@@ -2,8 +2,6 @@ id: gemini-2.5-flash-lite-preview-09-2025
 name: Gemini 2.5 Flash Lite Preview
 family: gemini-2.5-flash-lite
 temperature: true
-reasoning: true
-tool_call: true
 attachment: true
 structured_output: true
 modalities:

@@ -3,7 +3,6 @@ name: Gemini 3 Flash Preview
 family: gemini-3-flash
 reasoning: true
 temperature: true
-tool_call: true
 attachment: true
 structured_output: true
 modalities:

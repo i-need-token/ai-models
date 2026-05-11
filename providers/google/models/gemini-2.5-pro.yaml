@@ -3,7 +3,6 @@ name: Gemini 2.5 Pro
 family: gemini-2.5-pro
 reasoning: true
 temperature: true
-tool_call: true
 attachment: true
 structured_output: true
 modalities:

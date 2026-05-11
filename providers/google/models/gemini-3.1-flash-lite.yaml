@@ -3,7 +3,6 @@ name: Gemini 3.1 Flash Lite
 family: gemini-3.1-flash-lite
 reasoning: true
 temperature: true
-tool_call: true
 attachment: true
 structured_output: true
 modalities:

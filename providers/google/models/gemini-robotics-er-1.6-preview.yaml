@@ -3,7 +3,6 @@ name: Gemini Robotics-ER 1.6 Preview
 family: gemini-robotics
 reasoning: true
 temperature: true
-tool_call: true
 attachment: true
 structured_output: true
 modalities:

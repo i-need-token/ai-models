@@ -141,3 +141,107 @@ Lessons learned from building and maintaining AI model catalogs. Each pitfall de
 **Problems**: Massive data duplication. No way to know which snapshot is current. Updating shared fields requires editing every snapshot file.
 
 **Principle**: Model ID is the stable name. Snapshots are nested within the model file with inheritance — only differing fields need to be specified.
+
+## Pricing Extraction
+
+### Check for Alternative Data Formats Before Writing HTML Scrapers
+
+**Pitfall**: Parsing provider HTML with DOM selectors and fragile CSS assumptions.
+
+**Problems**: HTML structure changes break scrapers. Collapsed whitespace, dynamic class names, and nested elements make extraction unreliable.
+
+**Principle**: Before writing an HTML scraper, check if the provider offers JSON, markdown (`.md.txt`), YAML, or other structured formats. These are more stable and far easier to parse. Google's `.md.txt` pages eliminated 8 documented HTML parsing pitfalls.
+
+### Don't Assume Fixed Column Indices in Pricing Tables
+
+**Pitfall**: Using `cols[2]` for the paid price column.
+
+**Problems**: Tables sometimes have 3 columns, sometimes 4. A fixed index grabs the free column in 4-column tables.
+
+**Principle**: Use `cols[cols.length - 1]` for the last column (paid price), or identify columns by header text. Never hardcode column indices.
+
+### Two-Step Extraction: Match Block Boundary, Then Extract Within
+
+**Pitfall**: Using a single regex to extract multiple values from a delimited block (e.g., multiple model IDs in one italic code section).
+
+**Problems**: Only the first and last values are captured; middle values are silently dropped.
+
+**Principle**: First match the outer block boundary (e.g., the italic code section), then extract all inner values (e.g., all backtick-enclosed IDs) from within.
+
+### Pricing Models May Differ Within the Same Provider
+
+**Pitfall**: Assuming all models in a category share the same pricing structure.
+
+**Problems**: Gemini 2.5 Flash Image has per-image output pricing (`UnitPricing`), while Gemini 3 Pro Image has per-modality per-token pricing (`ModalityPrice`). Veo has per-second pricing with resolution tiers. Lyria has per-request pricing. Assuming "all Gemini models use `TokenPricing`" was wrong.
+
+**Principle**: Parse each model's pricing independently. Don't batch-assume pricing type by model family. Watch for these variations:
+
+- Unit pricing (per image/video/request) vs token pricing
+- Tiered pricing (context length thresholds, resolution tiers)
+- Modality-split pricing (different rates for text vs audio vs image)
+- Mixed pricing (token input + per-unit output) — the type system may not support this
+
+### Every `unit: "free"` Model Must Be Verified
+
+**Pitfall**: Silently defaulting to `{ unit: "free" }` when no pricing is found.
+
+**Problems**: Paid models with missing pricing data appear as free. Deep Research models genuinely have no separate pricing, but other models might just have a scraper bug.
+
+**Principle**: After scraping, list all models with `unit: "free"` and verify each one is genuinely free against the provider's pricing page. If a paid model has no pricing, the scraper has a bug.
+
+### Don't Assume Snapshots Share Pricing with Their Parent
+
+**Pitfall**: Storing Imagen fast/ultra and Veo fast/lite as snapshots, assuming they inherit the parent's pricing.
+
+**Problems**: These variants have their own pricing on the pricing page. Treating them as snapshots means they get no pricing data.
+
+**Principle**: After parsing each model's detail page, check if any snapshots have independent pricing on the pricing page. If so, promote them to independent models with their own pricing.
+
+## Regex & Naming
+
+### Regex Alternation Order: Longer Alternatives Before Shorter
+
+**Pitfall**: Writing `pro|pro-tts` in a regex alternation.
+
+**Problems**: `pro` matches first and `pro-tts` is never reached. This caused wrong family/name derivation for compound model variants like `pro-tts`, `pro-image`, `flash-live`, `flash-tts`.
+
+**Principle**: Always order regex alternation from longest/most-specific to shortest: `pro-tts|pro-image|pro` not `pro|pro-tts|pro-image`. Test against all possible inputs.
+
+### Suffixes After Version Markers May Not Be Captured by Prefix-Based Regex
+
+**Pitfall**: A regex that matches the model tier from the ID prefix can't capture suffixes that appear after version markers like `-preview-` or `-stable-`.
+
+**Problems**: The regex matches the base tier but misses the suffix. The model gets the wrong family and name.
+
+**Principle**: For model IDs with suffixes after version markers, add post-processing to detect and append suffixes that the main regex couldn't capture.
+
+### Name and Family Derivation Must Handle All Model ID Patterns
+
+**Pitfall**: Hardcoding version numbers in name derivation (e.g., "Imagen 4", "Lyria 3") or only handling the most common naming patterns.
+
+**Problems**: When the provider releases a new version (Imagen 5, Lyria 4), the hardcoded names are wrong. Compound variants (pro-tts, flash-live) are missed by simple regex.
+
+**Principle**: Before writing name/family derivation, collect ALL model IDs from the source and categorize their naming patterns. Extract versions dynamically from the model ID. Test against the full list.
+
+## Verification
+
+### Model Count Must Match the Official Listing
+
+**Pitfall**: Trusting the scraper output count without cross-checking.
+
+**Problems**: Deprecated models inflate the count, pricing-page-only models are missed, snapshots with independent pricing aren't promoted. Each issue changes the count.
+
+**Principle**: After scraping, compare your model count against the provider's official listing. If the number doesn't match, investigate. Common causes:
+
+- Deprecated/shutdown models not filtered
+- Models only on the pricing page (no detail page) missed
+- Snapshots with independent pricing not promoted
+- Models hidden behind alternative navigation paths
+
+### Iterative CR Until Clean — One Pass Is Never Enough
+
+**Pitfall**: Running one code review and declaring the scraper done.
+
+**Problems**: It took 9 rounds of CR to find all issues in the Google scraper. Each round found 1-5 issues the previous round missed — regex order, pricing type mismatches, missing model properties, README drift, edge cases in parsing.
+
+**Principle**: After building a scraper, run at least 3 rounds of CR. Keep going until a round finds zero issues. Each round should review the full scraper AND a sample of output YAML files.

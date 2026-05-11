@@ -2,7 +2,7 @@ id: claude-opus-4-7
 name: Claude Opus 4.7
 family: claude-opus
 reasoning: true
-temperature: true
+temperature: false
 tool_call: true
 attachment: true
 structured_output: true

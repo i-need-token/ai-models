@@ -638,7 +638,7 @@ function assembleModels(
       name,
       family,
       reasoning: detail?.reasoning ?? true,
-      temperature: true,
+      temperature: stableId === "claude-opus-4-7" ? false : true,
       tool_call: true,
       attachment: true,
       structured_output: true,

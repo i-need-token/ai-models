@@ -3,7 +3,6 @@ name: Gemini 3.1 Pro Preview
 family: gemini-3.1-pro
 reasoning: true
 temperature: true
-tool_call: true
 attachment: true
 structured_output: true
 modalities:

@@ -1,12 +1,16 @@
-id: whisper-1
-name: Whisper 1
-family: whisper
+id: gpt-realtime-translate
+name: GPT-realtime translate
+family: gpt-realtime
+limit:
+  context: 16000
+  output: 2000
 modalities:
   input:
     - text
     - audio
   output:
     - text
+    - audio
 pricing:
   unit: free
 release_date: unknown

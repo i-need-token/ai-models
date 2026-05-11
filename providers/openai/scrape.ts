@@ -222,7 +222,9 @@ function parsePricing(html: string, modelId: string): Pricing | null {
   );
   if (costMatch?.[1]) {
     const price = parseFloat(costMatch[1]);
-    return { input: price, output: price };
+    // Embedding models have no output token price
+    const isEmbedding = modelId.includes("embedding");
+    return { input: price, output: isEmbedding ? 0 : price };
   }
 
   // Free models (moderation)

@@ -1,0 +1,22 @@
+id: gpt-realtime-2
+name: GPT-realtime 2
+family: gpt-realtime
+reasoning: true
+tool_call: true
+limit:
+  context: 128000
+  output: 32000
+modalities:
+  input:
+    - text
+    - image
+    - audio
+  output:
+    - text
+    - audio
+pricing:
+  input: 4
+  output: 24
+  cache_read: 0.4
+release_date: unknown
+last_updated: unknown

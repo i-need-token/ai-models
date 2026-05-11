@@ -8,7 +8,6 @@ modalities:
     - text
     - audio
 pricing:
-  input: 15
-  output: 15
+  unit: free
 release_date: unknown
 last_updated: unknown

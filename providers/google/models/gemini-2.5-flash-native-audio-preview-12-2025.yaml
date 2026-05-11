@@ -3,7 +3,6 @@ name: Gemini 2.5 Flash Live Preview
 family: gemini-native-audio
 reasoning: true
 temperature: true
-tool_call: true
 attachment: true
 modalities:
   input:

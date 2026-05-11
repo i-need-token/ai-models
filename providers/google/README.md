@@ -108,10 +108,10 @@ Lyria 3 has 2 variants:
 
 Gemini Embedding 2 has separate rows per input type:
 
-- `"Text input price"` → $0.20 (extracted)
-- `"Image input price"` → $0.45 (ignored — schema can't store per-type prices)
-- `"Audio input price"` → $6.50 (ignored)
-- `"Video input price"` → $12.00 (ignored)
+- `"Text input price"` → $0.20 (extracted as `ModalityPrice.text`)
+- `"Image input price"` → $0.45 (extracted as `ModalityPrice.image`)
+- `"Audio input price"` → $6.50 (extracted as `ModalityPrice.audio`)
+- `"Video input price"` → $12.00 (extracted as `ModalityPrice.video`)
 
 Gemini Embedding 001 uses a simple `"Input price"` row.
 

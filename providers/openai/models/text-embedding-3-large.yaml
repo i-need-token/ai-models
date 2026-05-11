@@ -8,6 +8,6 @@ modalities:
     - text
 pricing:
   input: 0.13
-  output: 0.13
+  output: 0
 release_date: unknown
 last_updated: unknown

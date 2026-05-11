@@ -1,6 +1,9 @@
-id: whisper-1
-name: Whisper 1
-family: whisper
+id: gpt-realtime-whisper
+name: GPT-realtime whisper
+family: gpt-realtime
+limit:
+  context: 16000
+  output: 2000
 modalities:
   input:
     - text
