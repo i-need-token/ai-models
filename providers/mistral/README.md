@@ -23,6 +23,9 @@ Hardcoded model data and pricing. Mistral's own API (docs.mistral.ai) is current
 - **Codestral** — 22B code generation model, 256K context
 - **Ministral** — Edge/small models (3B, 8B)
 - **Pixtral** — Vision model (text+image input)
+- **Devstral** — Code agent model, tool-calling optimized
+- **Magistral** — Reasoning model (extended thinking)
+- **Voxtral** — Speech-to-text model (text+audio input)
 - **Mixtral** — MoE models (8x7B, 8x22B) — **deprecated**
 - **Mistral 7B** — Original open-weight model — **deprecated**
 
@@ -30,8 +33,7 @@ Hardcoded model data and pricing. Mistral's own API (docs.mistral.ai) is current
 
 - Pricing is in USD per 1M tokens (AWS Bedrock us-east-1 standard on-demand)
 - Codestral pricing from Azure (not available on Bedrock)
+- Devstral, Magistral, Voxtral pricing from AWS Bedrock (not yet on Azure)
 - Mistral Large 3 pricing: $2.00/$6.00 per mtok (same as Pixtral Large)
-- Mistral Small pricing on Bedrock is $1.00/$3.00 per mtok (older version);
-  Mistral Small 3 (latest) is $0.20/$0.60 per mtok on Mistral's own API
 - Deprecated models: Mistral Large 2407, Mixtral 8x22B, Mixtral 8x7B, Mistral 7B
 - docs.mistral.ai was unreachable during data collection
