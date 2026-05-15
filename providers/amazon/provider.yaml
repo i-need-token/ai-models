@@ -1,0 +1,6 @@
+id: amazon
+name: Amazon Nova
+url: https://aws.amazon.com/bedrock
+api_docs: https://docs.aws.amazon.com/nova/latest/userguide/
+apis:
+  openai: https://bedrock.us-east-1.amazonaws.com/v1

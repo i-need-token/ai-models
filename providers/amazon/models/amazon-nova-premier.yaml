@@ -1,0 +1,22 @@
+id: amazon-nova-premier
+name: Amazon Nova Premier
+family: nova
+temperature: true
+tool_call: true
+attachment: true
+limit:
+  context: 1000000
+  output: 10000
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2.5
+  output: 12.5
+release_date: 2025-12-02
+last_updated: 2026-05-16
