@@ -1,0 +1,19 @@
+id: solar-embedding-1-large
+name: Solar Embedding 1 Large
+family: solar-embedding
+temperature: false
+open_weights: true
+limit:
+  context: 4000
+  output: 0
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0
+release_date: 2024-05-10
+last_updated: 2026-05-16

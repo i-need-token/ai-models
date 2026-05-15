@@ -1,0 +1,6 @@
+id: upstage
+name: Upstage
+url: https://www.upstage.ai
+api_docs: https://console.upstage.ai/docs
+apis:
+  openai: https://api.upstage.ai/v1
