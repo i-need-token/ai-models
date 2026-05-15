@@ -1,0 +1,20 @@
+id: granite-4.0-h-micro
+name: Granite 4.0 Micro
+family: granite
+temperature: true
+tool_call: true
+open_weights: true
+limit:
+  context: 131000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.02
+  output: 0.11
+release_date: 2025-01-01
+last_updated: 2026-05-16

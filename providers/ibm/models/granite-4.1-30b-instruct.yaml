@@ -1,0 +1,21 @@
+id: granite-4.1-30b-instruct
+name: Granite 4.1 30B Instruct
+family: granite
+temperature: true
+tool_call: true
+structured_output: true
+open_weights: true
+limit:
+  context: 131072
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.6
+release_date: 2025-06-01
+last_updated: 2026-05-16

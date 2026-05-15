@@ -1,0 +1,21 @@
+id: granite-4.1-8b-instruct
+name: Granite 4.1 8B Instruct
+family: granite
+temperature: true
+tool_call: true
+structured_output: true
+open_weights: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.1
+release_date: 2025-06-01
+last_updated: 2026-05-16

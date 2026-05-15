@@ -1,0 +1,6 @@
+id: ibm
+name: IBM Granite
+url: https://www.ibm.com/granite
+api_docs: https://www.ibm.com/granite/docs
+apis:
+  openai: https://us-south.ml.cloud.ibm.com/ml/v1
