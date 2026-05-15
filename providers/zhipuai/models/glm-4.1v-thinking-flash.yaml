@@ -1,0 +1,19 @@
+id: glm-4.1v-thinking-flash
+name: GLM-4.1V-Thinking-Flash
+family: glm-4.1v
+pricing:
+  unit: free
+limit:
+  context: 64000
+  output: 16000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-05
+last_updated: 2026-05

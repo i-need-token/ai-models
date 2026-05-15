@@ -49,7 +49,7 @@ async function discoverModels(): Promise<DiscoveredModel[]> {
   let match: RegExpExecArray | null;
 
   while ((match = linkPattern.exec(md)) !== null) {
-    const slug = match[1]!;
+    const slug = match[1] as string;
     if (!slug || slug.includes("#") || slug.includes("?") || seen.has(slug)) continue;
     seen.add(slug);
     models.push({ slug, deprecated: false, shutdown: false });
@@ -60,8 +60,8 @@ async function discoverModels(): Promise<DiscoveredModel[]> {
   const statusLinkPattern =
     /\[([^\]]*?)\s+(Deprecated|Shut down)\s*\]\(https:\/\/ai\.google\.dev\/gemini-api\/docs\/models\/([^)]+)\)/gi;
   while ((match = statusLinkPattern.exec(md)) !== null) {
-    const status = match[2]!.toLowerCase();
-    const slug = match[3]!;
+    const status = match[2] as string;
+    const slug = match[3] as string;
     const found = models.find((m) => m.slug === slug);
     if (found) {
       found.deprecated = status === "deprecated";
@@ -168,7 +168,7 @@ export async function scrape(): Promise<ScrapeResult> {
     if (seenModelIds.has(modelId)) continue;
     if (modelId.includes("customtools")) continue;
     if (deprecatedPrefixes.some((p) => modelId.startsWith(p))) continue;
-    const pricing = pricingByModelId.get(modelId)!;
+    const pricing = pricingByModelId.get(modelId) as Pricing;
     const modalities = guessModalities(modelId);
     models.push(
       defineModel({
@@ -231,22 +231,22 @@ function parseModelPage(md: string, slug: string, indexDeprecated: boolean): Mod
       .filter(Boolean);
     if (cols.length < 2) continue;
 
-    const property = cols[0]!.toLowerCase();
-    const description = cols[1]!;
+    const property = (cols[0] as string).toLowerCase();
+    const description = cols[1] as string;
 
     switch (property) {
       case "model code":
       case "agent code":
         // Extract all backtick-enclosed model IDs
-        modelIds = [...description.matchAll(/`([^`]+)`/g)].map((m) => m[1]!);
+        modelIds = [...description.matchAll(/`([^`]+)`/g)].map((m) => m[1] as string);
         break;
 
       case "supported data types": {
         // Parse "**Inputs** Text, images, video, audio **Output** Text"
         const inputMatch = description.match(/\*\*Inputs?\*\*\s*(.+?)(?=\*\*Output|\s*$)/i);
-        if (inputMatch) inputModalities = parseModalityList(inputMatch[1]!);
+        if (inputMatch) inputModalities = parseModalityList(inputMatch[1] as string);
         const outputMatch = description.match(/\*\*Outputs?\*\*\s*(.+)/i);
-        if (outputMatch) outputModalities = parseModalityList(outputMatch[1]!);
+        if (outputMatch) outputModalities = parseModalityList(outputMatch[1] as string);
         break;
       }
 
@@ -264,7 +264,10 @@ function parseModelPage(md: string, slug: string, indexDeprecated: boolean): Mod
         const capPattern = /\*\*([^*]+)\*\*\s*(Supported|Not supported)/gi;
         let capMatch: RegExpExecArray | null;
         while ((capMatch = capPattern.exec(description)) !== null) {
-          capabilities.set(capMatch[1]!.trim(), capMatch[2]!.toLowerCase() === "supported");
+          capabilities.set(
+            (capMatch[1] as string).trim(),
+            (capMatch[2] as string).toLowerCase() === "supported",
+          );
         }
         break;
       }
@@ -274,7 +277,8 @@ function parseModelPage(md: string, slug: string, indexDeprecated: boolean): Mod
         // or "- `Stable: gemini-2.5-pro` - `Preview: gemini-3-flash-preview`"
         // Prefixes may be inside or outside the backticks
         const versionCodes = [...description.matchAll(/`([^`]+)`/g)].map((m) => {
-          let id = m[1]!.trim();
+          let id = m[1] as string;
+          id = id.trim();
           // Strip known prefixes that appear inside backticks
           id = id.replace(/^(Stable|Preview|Shut down|Deprecated):\s*/i, "");
           return id;
@@ -285,7 +289,7 @@ function parseModelPage(md: string, slug: string, indexDeprecated: boolean): Mod
         for (let i = 0; i < versionCodes.length; i++) {
           const prefix = (parts[i] || "").trim();
           if (/\b(Shut down|Deprecated)\s*:\s*$/i.test(prefix)) continue;
-          versions.push(versionCodes[i]!);
+          versions.push(versionCodes[i] as string);
         }
         break;
       }
@@ -305,7 +309,7 @@ function parseModelPage(md: string, slug: string, indexDeprecated: boolean): Mod
     return [];
   }
 
-  const primaryId = modelIds[0]!;
+  const primaryId = modelIds[0] as string;
   const name = deriveName(primaryId, slug);
   const family = deriveFamily(primaryId);
   const releaseDate = formatGoogleDate(latestUpdate) || "unknown";
@@ -404,7 +408,7 @@ function parsePricingPage(md: string): Map<string, Pricing> {
   const sections = md.split(/^## /m).slice(1);
 
   for (const section of sections) {
-    const title = section.split("\n")[0]!.trim();
+    const title = (section.split("\n")[0] as string).trim();
 
     // Skip non-model sections
     if (
@@ -424,8 +428,8 @@ function parsePricingPage(md: string): Map<string, Pricing> {
     let modelIds: string[] = [];
     const italicCodeMatch = section.match(/\*((?:`[^`]+`[\s,]*(?:and\s*)?)+)\*/);
     if (italicCodeMatch) {
-      const codeBlock = italicCodeMatch[1]!;
-      modelIds = [...codeBlock.matchAll(/`([^`]+)`/g)].map((m) => m[1]!.trim());
+      const codeBlock = italicCodeMatch[1] as string;
+      modelIds = [...codeBlock.matchAll(/`([^`]+)`/g)].map((m) => (m[1] as string).trim());
     }
     if (modelIds.length === 0) continue;
 
@@ -476,7 +480,7 @@ function parseGeminiPricing(section: string, modelId: string): Pricing | null {
   }
 
   // Get content up to the next ### heading
-  const tableContent = standardSection.split(/### /)[0]!;
+  const tableContent = standardSection.split(/### /)[0] as string;
   return parseGeminiPricingTable(tableContent, modelId);
 }
 
@@ -495,8 +499,8 @@ function parseGeminiPricingTable(tableContent: string, modelId: string): Pricing
       .filter(Boolean);
     if (cols.length < 3) continue;
 
-    const label = cols[0]!.toLowerCase();
-    const paidText = cols[cols.length - 1]!;
+    const label = (cols[0] as string).toLowerCase();
+    const paidText = cols[cols.length - 1] as string;
 
     // Skip non-pricing rows
     if (
@@ -524,7 +528,7 @@ function parseGeminiPricingTable(tableContent: string, modelId: string): Pricing
       const perImageMatch = paidText.match(/\$([\d.]+)\s+per\s+image/i);
       if (perImageMatch) {
         // Use UnitPricing for per-image output models
-        return { unit: "per_image", price: parseFloat(perImageMatch[1]) };
+        return { unit: "per_image", price: parseFloat(perImageMatch[1] as string) };
       }
       const modalityOutput = extractModalityPrice(paidText);
       outputPrice = modalityOutput ?? extractTokenPrice(paidText);
@@ -562,10 +566,10 @@ function extractModalityPrice(text: string): ModalityPrice | null {
   const segments = [...text.matchAll(/\$([\d.]+)(?:\s+or\s+\$[\d.]+\/min)?\s*\(([^)]+)\)/g)];
   if (segments.length < 2) return null;
 
-  const result: ModalityPrice = {};
+  const result = {} as ModalityPrice;
   for (const seg of segments) {
-    const price = parseFloat(seg[1]!);
-    const modalityText = seg[2]!.toLowerCase();
+    const price = parseFloat(seg[1] as string);
+    const modalityText = (seg[2] as string).toLowerCase();
     if (modalityText.includes("text") || modalityText.includes("thinking")) {
       result.text = price;
     }
@@ -599,9 +603,9 @@ function extractTokenPrice(text: string): TokenPrice | null {
   const tierPattern = /\$([\d.]+)[^$]*?<=\s*([\d,]+)\s*k[^$]*\$([\d.]+)[^$]*?>\s*([\d,]+)\s*k/i;
   const tierMatch = tierPattern.exec(text);
   if (tierMatch) {
-    const lowerPrice = parseFloat(tierMatch[1]!);
-    const lowerBound = parseInt(tierMatch[2]!.replace(/,/g, ""), 10) * 1000;
-    const higherPrice = parseFloat(tierMatch[3]!);
+    const lowerPrice = parseFloat(tierMatch[1] as string);
+    const lowerBound = parseInt((tierMatch[2] as string).replace(/,/g, ""), 10) * 1000;
+    const higherPrice = parseFloat(tierMatch[3] as string);
     return [{ up_to: lowerBound, inclusive: true, price: lowerPrice }, { price: higherPrice }];
   }
 
@@ -638,10 +642,10 @@ function parseImagenPricing(
       .filter(Boolean);
     if (cols.length < 3) continue;
 
-    const label = cols[0]!.toLowerCase();
+    const label = (cols[0] as string).toLowerCase();
     // Table format: | Price type | Per unit | Price (free) | Price (paid) |
     // Paid price is always the LAST column
-    const paidText = cols[cols.length - 1]!;
+    const paidText = cols[cols.length - 1] as string;
 
     if (label.includes("used to improve")) continue;
 
@@ -684,8 +688,8 @@ function parseVeoPricing(section: string, modelIds: string[], result: Map<string
       .filter(Boolean);
     if (cols.length < 3) continue;
 
-    const label = cols[0]!.toLowerCase();
-    const paidText = cols[cols.length - 1]!;
+    const label = (cols[0] as string).toLowerCase();
+    const paidText = cols[cols.length - 1] as string;
 
     if (label.includes("used to improve")) continue;
 
@@ -703,7 +707,7 @@ function parseVeoPricing(section: string, modelIds: string[], result: Map<string
 
     // Veo 2: "Video price" (no variant qualifier)
     if (label === "video price" && modelIds.length === 1) {
-      setPricing(modelIds[0]!);
+      setPricing(modelIds[0] as string);
       continue;
     }
 
@@ -724,16 +728,16 @@ function parseVeoPricing(section: string, modelIds: string[], result: Map<string
  * Returns a ResolutionPrice if multiple resolutions found, null otherwise.
  */
 function extractResolutionPrice(text: string): ResolutionPrice | null {
-  const result: ResolutionPrice = {};
+  const result = {} as ResolutionPrice;
 
   // Match each $price (resolution list) segment
   const segments = [...text.matchAll(/\$([\d.]+)\s*\(([^)]+)\)/g)];
   for (const seg of segments) {
-    const price = parseFloat(seg[1]!);
-    const resText = seg[2]!;
+    const price = parseFloat(seg[1] as string);
+    const resText = seg[2] as string;
 
     // Extract resolution strings like "720p", "1080p", "4k"
-    const resolutions = [...resText.matchAll(/\b(\d+p|\dk)\b/g)].map((m) => m[1]!);
+    const resolutions = [...resText.matchAll(/\b(\d+p|\dk)\b/g)].map((m) => m[1] as string);
     for (const res of resolutions) {
       if (["720p", "1024p", "1080p", "2k", "4k"].includes(res)) {
         result[res as keyof ResolutionPrice] = price;
@@ -769,10 +773,10 @@ function parseLyriaPricing(
       .filter(Boolean);
     if (cols.length < 3) continue;
 
-    const label = cols[0]!.toLowerCase();
+    const label = (cols[0] as string).toLowerCase();
     // Table format: | Price type | Per unit | Price (free) | Price (paid) |
     // Paid price is always the LAST column
-    const paidText = cols[cols.length - 1]!;
+    const paidText = cols[cols.length - 1] as string;
 
     if (label.includes("used to improve")) continue;
 
@@ -797,12 +801,12 @@ function parseEmbeddingPricing(
   modelIds: string[],
   result: Map<string, Pricing>,
 ): void {
-  let textInputPrice: number | null = null;
-  const modalityPrices: ModalityPrice = {};
+  let textInputPrice: TokenPrice | null = null;
+  const modalityPrices = {} as ModalityPrice;
 
   // Find Standard subsection
   const standardSection = section.split(/### Standard/)[1];
-  const tableContent = standardSection ? standardSection.split(/### /)[0]! : section;
+  const tableContent = standardSection ? (standardSection.split(/### /)[0] as string) : section;
 
   const rows = tableContent.split("\n").filter((l) => l.startsWith("|") && !l.includes("---"));
 
@@ -813,8 +817,8 @@ function parseEmbeddingPricing(
       .filter(Boolean);
     if (cols.length < 3) continue;
 
-    const label = cols[0]!.toLowerCase();
-    const paidText = cols[cols.length - 1]!;
+    const label = (cols[0] as string).toLowerCase();
+    const paidText = cols[cols.length - 1] as string;
 
     if (label.includes("used to improve")) continue;
 
@@ -837,7 +841,7 @@ function parseEmbeddingPricing(
     // If we have modality-specific prices, use ModalityPrice for input
     const inputPrice: TokenPrice =
       Object.keys(modalityPrices).length > 0
-        ? { text: textInputPrice, ...modalityPrices }
+        ? ({ ...modalityPrices, text: textInputPrice as number } as ModalityPrice)
         : textInputPrice;
     for (const modelId of modelIds) {
       result.set(modelId, { input: inputPrice, output: 0 });
@@ -871,8 +875,8 @@ function deriveName(modelId: string, _slug: string): string {
       /^gemini-(\d+(?:\.\d+)?)-(pro-tts|pro-image|flash-lite|flash-image|flash-live|flash-tts|flash|pro)/,
     );
     if (match) {
-      const version = match[1]!;
-      const tier = match[2]!;
+      const version = match[1] as string;
+      const tier = match[2] as string;
       // Map known acronyms to their uppercase form
       const acronymMap: Record<string, string> = { tts: "TTS" };
       const tierName = tier
@@ -936,8 +940,8 @@ function deriveFamily(modelId: string): string {
       /^gemini-(\d+(?:\.\d+)?)-(pro-tts|pro-image|flash-lite|flash-image|flash-live|flash-tts|flash|pro)/,
     );
     if (match) {
-      const version = match[1]!;
-      const tier = match[2]!;
+      const version = match[1] as string;
+      const tier = match[2] as string;
       let family = `gemini-${version}-${tier}`;
       // TTS/Live suffix not captured by regex (e.g., gemini-2.5-flash-preview-tts)
       if (!tier.includes("-tts") && (modelId.endsWith("-tts") || modelId.includes("-tts-")))

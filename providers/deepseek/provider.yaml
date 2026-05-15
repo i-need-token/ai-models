@@ -1,0 +1,6 @@
+id: deepseek
+name: DeepSeek
+url: https://deepseek.com
+api_docs: https://api-docs.deepseek.com
+apis:
+  openai: https://api.deepseek.com

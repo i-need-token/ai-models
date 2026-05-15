@@ -1,0 +1,7 @@
+id: alibaba
+name: Alibaba Cloud (Bailian)
+url: https://www.aliyun.com/product/bailian
+api_docs: https://help.aliyun.com/zh/model-studio/
+apis:
+  openai: https://dashscope.aliyuncs.com/compatible-mode/v1
+currency: CNY

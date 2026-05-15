@@ -1,0 +1,20 @@
+id: qwen-plus-character-ja
+name: Qwen Plus Character JA
+family: qwen-character
+pricing:
+  currency: CNY
+  input: 3.67
+  output: 10.275
+limit:
+  context: 32000
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-05
+last_updated: 2026-05

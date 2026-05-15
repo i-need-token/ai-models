@@ -1,0 +1,20 @@
+id: glm-4.5-airx
+name: GLM-4.5-AirX
+family: glm-4.5
+pricing:
+  currency: CNY
+  input: 0.8
+  output: 6
+limit:
+  context: 128000
+  output: 96000
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: false
+tool_call: true
+structured_output: true
+release_date: 2026-05
+last_updated: 2026-05

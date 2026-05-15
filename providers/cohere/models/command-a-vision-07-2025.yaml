@@ -1,0 +1,20 @@
+id: command-a-vision-07-2025
+name: Command A Vision
+family: command-a
+pricing:
+  input: 2.5
+  output: 10
+limit:
+  context: 128000
+  output: 8000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+tool_call: true
+attachment: true
+structured_output: true
+release_date: 2025-07
+last_updated: 2025-07

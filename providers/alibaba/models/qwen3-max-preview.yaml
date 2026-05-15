@@ -1,0 +1,20 @@
+id: qwen3-max-preview
+name: Qwen 3 Max Preview
+family: qwen3
+pricing:
+  currency: CNY
+  input: 6
+  output: 24
+limit:
+  context: 256000
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-01
+last_updated: 2026-01

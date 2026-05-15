@@ -1,0 +1,20 @@
+id: qwen-long-2025-01-25
+name: Qwen Long
+family: qwen-long
+pricing:
+  currency: CNY
+  input: 0.5
+  output: 2
+limit:
+  context: 10000000
+  output: 6000
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-01
+last_updated: 2025-01

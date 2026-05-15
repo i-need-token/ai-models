@@ -1,0 +1,16 @@
+id: glm-ocr
+name: GLM-OCR
+family: glm-ocr
+pricing:
+  unit: free
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: false
+tool_call: true
+structured_output: true
+release_date: 2026-05
+last_updated: 2026-05

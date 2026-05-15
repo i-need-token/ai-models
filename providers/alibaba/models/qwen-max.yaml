@@ -1,0 +1,20 @@
+id: qwen-max
+name: Qwen Max
+family: qwen-max
+pricing:
+  currency: CNY
+  input: 2.4
+  output: 9.6
+limit:
+  context: 128000
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2024-04
+last_updated: 2024-04

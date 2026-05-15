@@ -1,0 +1,16 @@
+id: rerank-v4.0-fast
+name: Rerank v4.0 Fast
+family: rerank
+pricing:
+  unit: per_request
+  price: 0.002
+limit:
+  context: 32000
+  output: 0
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-05-15
+last_updated: 2026-05-15

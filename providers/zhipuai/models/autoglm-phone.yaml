@@ -1,0 +1,19 @@
+id: autoglm-phone
+name: AutoGLM-Phone
+family: autoglm
+pricing:
+  unit: free
+limit:
+  context: 20000
+  output: 2048
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: false
+tool_call: true
+structured_output: true
+release_date: 2026-05
+last_updated: 2026-05

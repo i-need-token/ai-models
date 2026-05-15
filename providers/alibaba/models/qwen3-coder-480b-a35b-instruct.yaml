@@ -1,0 +1,21 @@
+id: qwen3-coder-480b-a35b-instruct
+name: Qwen 3 Coder 480B-A35B Instruct
+family: qwen3-coder
+pricing:
+  currency: CNY
+  input: 6
+  output: 24
+limit:
+  context: 256000
+  output: 64000
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+open_weights: true
+release_date: 2025-09
+last_updated: 2025-09

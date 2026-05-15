@@ -1,0 +1,21 @@
+id: qwen3-next-80b-a3b-thinking
+name: Qwen 3 Next 80B-A3B Thinking
+family: qwen3
+pricing:
+  currency: CNY
+  input: 1
+  output: 8
+limit:
+  context: 256000
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+open_weights: true
+release_date: 2025-06
+last_updated: 2025-06

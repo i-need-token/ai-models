@@ -1,0 +1,25 @@
+id: qwen2.5-omni-7b
+name: Qwen 2.5 Omni 7B
+family: qwen2.5-omni
+pricing:
+  currency: CNY
+  input: 0.6
+  output: 38
+limit:
+  context: 1000000
+  output: 8000
+modalities:
+  input:
+    - text
+    - image
+    - video
+    - audio
+  output:
+    - text
+    - audio
+reasoning: true
+tool_call: true
+structured_output: true
+open_weights: true
+release_date: 2024-09
+last_updated: 2024-09

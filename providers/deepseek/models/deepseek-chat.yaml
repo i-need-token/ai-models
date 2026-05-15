@@ -1,0 +1,19 @@
+id: deepseek-chat
+name: DeepSeek Chat
+family: deepseek-chat
+deprecated: true
+pricing:
+  input: 0.14
+  output: 0.28
+  cache_read: 0.0028
+limit:
+  context: 1000000
+  output: 384000
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+release_date: 2026-04
+last_updated: 2026-04

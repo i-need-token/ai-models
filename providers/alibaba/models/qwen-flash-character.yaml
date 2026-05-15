@@ -1,0 +1,20 @@
+id: qwen-flash-character
+name: Qwen Flash Character
+family: qwen-character
+pricing:
+  currency: CNY
+  input: 0.25
+  output: 1.5
+limit:
+  context: 8000
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-05
+last_updated: 2026-05

@@ -1,0 +1,6 @@
+id: cohere
+name: Cohere
+url: https://cohere.com
+api_docs: https://docs.cohere.com
+apis:
+  openai: https://api.cohere.com

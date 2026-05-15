@@ -1,0 +1,6 @@
+id: zhipuai
+name: Zhipu AI (智谱)
+url: https://open.bigmodel.cn
+api_docs: https://docs.bigmodel.cn
+apis:
+  openai: https://open.bigmodel.cn/api/paas/v4

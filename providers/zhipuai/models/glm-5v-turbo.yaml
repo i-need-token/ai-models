@@ -1,0 +1,21 @@
+id: glm-5v-turbo
+name: GLM-5V-Turbo
+family: glm-5v
+pricing:
+  currency: CNY
+  input: 5
+  output: 22
+limit:
+  context: 200000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-05
+last_updated: 2026-05

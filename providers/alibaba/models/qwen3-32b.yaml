@@ -1,0 +1,21 @@
+id: qwen3-32b
+name: Qwen 3 32B
+family: qwen3
+pricing:
+  currency: CNY
+  input: 2
+  output: 8
+limit:
+  context: 256000
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+open_weights: true
+release_date: 2025-04
+last_updated: 2025-04

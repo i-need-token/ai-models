@@ -1,3 +1,52 @@
 export type { ScrapeResult } from "./types";
 export { defineModel, defineProvider } from "./utils";
 export { writeScrapeResult } from "./writer";
+export { runPipeline, getPipelineSourceReport } from "./pipeline";
+export type {
+  ScrapePipeline,
+  DiscoverStep,
+  ExtractPricingStep,
+  ExtractLimitsStep,
+  ExtractModalitiesStep,
+  ExtractFeaturesStep,
+  ExtractDatesStep,
+  ExtractSnapshotsStep,
+  DeriveNameStep,
+  DeriveFamilyStep,
+  DataSource,
+  SourceType,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+  ExtractedSnapshot,
+} from "./pipeline";
+export type {
+  DeclarativePipeline,
+  Transform,
+  HtmlExtractionRule,
+  HtmlLabelValueRule,
+  HtmlTableRule,
+  HtmlListRule,
+  HtmlSectionRule,
+  MdExtractionRule,
+  MdLabelValueRule,
+  MdTableRule,
+  MdListRule,
+  MdSectionRule,
+  ApiExtractionRule,
+  ApiFieldRule,
+  ApiArrayRule,
+  SourceConfig,
+  DiscoverConfig,
+  ExtractPricingConfig,
+  ExtractLimitsConfig,
+  ExtractModalitiesConfig,
+  ExtractFeaturesConfig,
+  ExtractDatesConfig,
+  ExtractSnapshotsConfig,
+  DeriveNameConfig,
+  DeriveFamilyConfig,
+} from "./extraction-rules";
+export { runDeclarativePipeline, extractHtml, extractMarkdown, extractJson } from "./runtime";
