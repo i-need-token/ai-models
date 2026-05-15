@@ -1,0 +1,6 @@
+id: inception
+name: Inception Labs
+url: https://inceptionlabs.ai
+api_docs: https://docs.inceptionlabs.ai
+apis:
+  openai: https://api.inceptionlabs.ai/v1
