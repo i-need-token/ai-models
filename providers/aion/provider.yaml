@@ -1,0 +1,6 @@
+id: aion
+name: Aion Labs
+url: https://aionlabs.ai
+api_docs: https://docs.aionlabs.ai
+apis:
+  openai: https://api.aionlabs.ai/v1

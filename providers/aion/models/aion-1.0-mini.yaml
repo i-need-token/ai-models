@@ -1,0 +1,18 @@
+id: aion-1.0-mini
+name: Aion 1.0 Mini
+family: aion-1.0
+temperature: true
+limit:
+  context: 131072
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.7
+  output: 1.4
+release_date: 2024-06
+last_updated: 2026-05-16

@@ -1,0 +1,18 @@
+id: aion-2.5
+name: Aion 2.5
+family: aion-2.5
+temperature: true
+limit:
+  context: 131072
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 3
+release_date: 2025-04
+last_updated: 2026-05-16
