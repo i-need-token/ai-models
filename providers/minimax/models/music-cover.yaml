@@ -1,0 +1,15 @@
+id: music-cover
+name: Music Cover
+family: minimax-music
+temperature: false
+modalities:
+  input:
+    - text
+  output:
+    - audio
+pricing:
+  currency: CNY
+  unit: per_request
+  price: 1
+release_date: 2026-05-16
+last_updated: 2026-05-16

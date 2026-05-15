@@ -1,0 +1,7 @@
+id: minimax
+name: MiniMax
+url: https://platform.minimaxi.com
+api_docs: https://platform.minimaxi.com/docs
+apis:
+  openai: https://api.minimaxi.com/v1
+  anthropic: https://api.minimaxi.com/anthropic

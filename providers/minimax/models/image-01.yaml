@@ -1,0 +1,16 @@
+id: image-01
+name: Image 01
+family: minimax-image
+temperature: false
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - image
+pricing:
+  currency: CNY
+  unit: per_image
+  price: 0.025
+release_date: 2026-05-16
+last_updated: 2026-05-16

@@ -1,0 +1,15 @@
+id: speech-2.8-hd
+name: Speech 2.8 HD
+family: minimax-speech
+temperature: false
+modalities:
+  input:
+    - text
+  output:
+    - audio
+pricing:
+  currency: CNY
+  unit: per_request
+  price: 3.5
+release_date: 2026-05-16
+last_updated: 2026-05-16
