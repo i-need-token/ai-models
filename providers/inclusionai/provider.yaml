@@ -1,0 +1,6 @@
+id: inclusionai
+name: InclusionAI
+url: https://inclusionai.com
+api_docs: https://inclusionai.com/docs
+apis:
+  openai: https://api.inclusionai.com/v1
