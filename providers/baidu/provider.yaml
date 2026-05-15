@@ -1,0 +1,6 @@
+id: baidu
+name: Baidu
+url: https://yiyan.baidu.com
+api_docs: https://cloud.baidu.com/doc/WENXINWORKSHOP
+apis:
+  openai: https://qianfan.baidubce.com/v1

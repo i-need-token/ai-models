@@ -1,0 +1,20 @@
+id: qianfan-ocr-fast
+name: Qianfan OCR Fast
+family: qianfan
+temperature: true
+attachment: true
+limit:
+  context: 65536
+  output: 28672
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.68
+  output: 2.81
+release_date: 2025-01-01
+last_updated: 2026-05-16
