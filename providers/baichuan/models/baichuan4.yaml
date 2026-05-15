@@ -1,0 +1,18 @@
+id: baichuan4
+name: Baichuan4
+family: baichuan4
+temperature: true
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 100
+  output: 100
+release_date: 2024-05
+last_updated: 2026-05-16

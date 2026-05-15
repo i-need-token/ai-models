@@ -1,0 +1,7 @@
+id: baichuan
+name: Baichuan AI
+url: https://platform.baichuan-ai.com
+api_docs: https://platform.baichuan-ai.com/docs
+apis:
+  openai: https://api.baichuan-ai.com/v1
+currency: CNY

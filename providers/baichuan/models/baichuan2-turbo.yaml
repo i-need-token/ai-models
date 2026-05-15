@@ -1,0 +1,18 @@
+id: baichuan2-turbo
+name: Baichuan2 Turbo
+family: baichuan2
+temperature: true
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 8
+  output: 8
+release_date: 2023-12
+last_updated: 2026-05-16
