@@ -1,0 +1,6 @@
+id: nousresearch
+name: Nous Research
+url: https://nousresearch.com
+api_docs: https://docs.nousresearch.com
+apis:
+  openai: https://api.nousresearch.com/v1

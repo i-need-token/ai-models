@@ -1,0 +1,21 @@
+id: nous-hermes-2-mixtral-8x7b-dpo
+name: Nous Hermes 2 Mixtral 8x7B DPO
+family: hermes
+temperature: true
+tool_call: true
+open_weights: true
+deprecated: true
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.1
+release_date: 2024-01-01
+last_updated: 2026-05-16
