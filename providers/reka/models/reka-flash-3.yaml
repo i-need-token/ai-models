@@ -1,0 +1,21 @@
+id: reka-flash-3
+name: Reka Flash 3
+family: reka-flash
+temperature: true
+tool_call: true
+attachment: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.4
+release_date: 2025-02-01
+last_updated: 2026-05-16

@@ -1,0 +1,6 @@
+id: reka
+name: Reka AI
+url: https://reka.ai
+api_docs: https://docs.reka.ai
+apis:
+  openai: https://api.reka.ai/v1
