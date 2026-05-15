@@ -1,0 +1,13 @@
+id: step-audio-r1.1
+name: Step Audio R1.1
+family: step-audio
+temperature: false
+modalities:
+  input:
+    - audio
+  output:
+    - audio
+pricing:
+  unit: free
+release_date: 2026-05-16
+last_updated: 2026-05-16

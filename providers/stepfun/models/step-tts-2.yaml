@@ -1,0 +1,15 @@
+id: step-tts-2
+name: Step TTS 2
+family: step-tts
+temperature: false
+modalities:
+  input:
+    - text
+  output:
+    - audio
+pricing:
+  currency: CNY
+  unit: per_request
+  price: 2.8
+release_date: 2026-05-16
+last_updated: 2026-05-16

@@ -1,0 +1,15 @@
+id: step-asr
+name: Step ASR
+family: step-asr
+temperature: false
+modalities:
+  input:
+    - audio
+  output:
+    - text
+pricing:
+  currency: CNY
+  unit: per_second
+  price: 0.00025
+release_date: 2026-05-16
+last_updated: 2026-05-16

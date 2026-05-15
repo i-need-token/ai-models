@@ -1,0 +1,19 @@
+id: step-2-mini
+name: Step 2 Mini
+family: step-2-mini
+temperature: true
+limit:
+  context: 32000
+  output: 32000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1
+  output: 2
+  cache_read: 0.2
+release_date: 2026-05-16
+last_updated: 2026-05-16

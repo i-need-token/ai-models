@@ -1,0 +1,16 @@
+id: step-1o-audio
+name: Step-1o Audio
+family: step-1o-audio
+temperature: false
+modalities:
+  input:
+    - audio
+  output:
+    - audio
+pricing:
+  currency: CNY
+  input: 25
+  output: 60
+  cache_read: 5
+release_date: 2026-05-16
+last_updated: 2026-05-16

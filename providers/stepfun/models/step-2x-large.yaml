@@ -1,0 +1,14 @@
+id: step-2x-large
+name: Step 2X Large
+family: step-2x
+temperature: false
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - image
+pricing:
+  unit: free
+release_date: 2026-05-16
+last_updated: 2026-05-16

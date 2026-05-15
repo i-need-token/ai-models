@@ -1,0 +1,14 @@
+id: step-1x-edit
+name: Step 1X Edit
+family: step-1x
+temperature: false
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - image
+pricing:
+  unit: free
+release_date: 2026-05-16
+last_updated: 2026-05-16

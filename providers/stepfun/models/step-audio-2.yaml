@@ -1,0 +1,16 @@
+id: step-audio-2
+name: Step Audio 2
+family: step-audio
+temperature: false
+modalities:
+  input:
+    - audio
+  output:
+    - audio
+pricing:
+  currency: CNY
+  input: 10
+  output: 70
+  cache_read: 2
+release_date: 2026-05-16
+last_updated: 2026-05-16

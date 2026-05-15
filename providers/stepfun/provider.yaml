@@ -1,0 +1,6 @@
+id: stepfun
+name: StepFun
+url: https://platform.stepfun.com
+api_docs: https://platform.stepfun.com/docs
+apis:
+  openai: https://api.stepfun.com/v1

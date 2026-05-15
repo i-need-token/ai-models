@@ -1,0 +1,19 @@
+id: step-1-8k
+name: Step 1 (8K)
+family: step-1
+temperature: true
+limit:
+  context: 8000
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 5
+  output: 20
+  cache_read: 1
+release_date: 2026-05-16
+last_updated: 2026-05-16
