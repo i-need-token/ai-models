@@ -1,0 +1,19 @@
+id: ministral-3b
+name: Ministral 3B
+family: ministral
+temperature: true
+tool_call: true
+limit:
+  context: 128000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.04
+  output: 0.04
+release_date: 2024-09-18
+last_updated: 2026-05-16

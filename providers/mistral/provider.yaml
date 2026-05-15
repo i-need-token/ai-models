@@ -1,0 +1,6 @@
+id: mistral
+name: Mistral AI
+url: https://mistral.ai
+api_docs: https://docs.mistral.ai
+apis:
+  openai: https://api.mistral.ai/v1
