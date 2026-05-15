@@ -1,0 +1,19 @@
+id: spark-x2
+name: Spark X2
+family: spark-x2
+reasoning: true
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 2
+  output: 2
+release_date: 2025-03
+last_updated: 2026-05-16
