@@ -1,0 +1,21 @@
+id: llama-3.3-nemotron-super-49b-v1.5
+name: Llama 3.3 Nemotron Super 49B v1.5
+family: nemotron-super
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.38
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+tool_call: true
+open_weights: true

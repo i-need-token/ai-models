@@ -1,0 +1,6 @@
+id: nvidia
+name: NVIDIA
+url: https://build.nvidia.com
+api_docs: https://docs.api.nvidia.com
+apis:
+  openai: https://integrate.api.nvidia.com/v1

@@ -1,0 +1,17 @@
+id: nemotron-4-340b-reward
+name: Nemotron 4 340B Reward
+family: nemotron-4
+temperature: true
+limit:
+  context: 4096
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

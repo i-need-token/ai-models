@@ -1,0 +1,17 @@
+id: nemotron-nano-3-30b-a3b
+name: Nemotron Nano 3 30B
+family: nemotron-nano
+temperature: true
+limit:
+  context: 4096
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true
