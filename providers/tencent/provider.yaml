@@ -1,0 +1,6 @@
+id: tencent
+name: Tencent Hunyuan
+url: https://hunyuan.tencent.com
+api_docs: https://cloud.tencent.com/document/product/1729
+apis:
+  openai: https://api.hunyuan.cloud.tencent.com/v1

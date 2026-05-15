@@ -1,0 +1,21 @@
+id: hunyuan-t1-vision
+name: Hunyuan T1 Vision
+family: hunyuan-vision
+temperature: true
+reasoning: true
+attachment: true
+limit:
+  context: 28000
+  output: 20000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 3
+  output: 9
+release_date: 2025-09-16
+last_updated: 2026-05-16

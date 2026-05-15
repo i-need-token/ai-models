@@ -1,0 +1,18 @@
+id: hunyuan-translation
+name: Hunyuan Translation
+family: hunyuan
+temperature: false
+limit:
+  context: 4000
+  output: 4000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1.2
+  output: 3.6
+release_date: 2025-10-14
+last_updated: 2026-05-16

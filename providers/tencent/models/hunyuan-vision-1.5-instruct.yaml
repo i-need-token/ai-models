@@ -1,0 +1,20 @@
+id: hunyuan-vision-1.5-instruct
+name: Tencent HY Vision 1.5 Instruct
+family: hunyuan-vision
+temperature: true
+attachment: true
+limit:
+  context: 24000
+  output: 16000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 3
+  output: 9
+release_date: 2025-12-17
+last_updated: 2026-05-16

@@ -1,0 +1,17 @@
+id: hunyuan-lite
+name: Hunyuan Lite
+family: hunyuan
+temperature: true
+open_weights: true
+limit:
+  context: 250000
+  output: 6000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2024-04-25
+last_updated: 2026-05-16

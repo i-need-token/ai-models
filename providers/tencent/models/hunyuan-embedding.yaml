@@ -1,0 +1,18 @@
+id: hunyuan-embedding
+name: Hunyuan Embedding
+family: hunyuan-embedding
+temperature: false
+limit:
+  context: 32000
+  output: 0
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.7
+  output: 0.7
+release_date: 2024-01-05
+last_updated: 2026-05-16

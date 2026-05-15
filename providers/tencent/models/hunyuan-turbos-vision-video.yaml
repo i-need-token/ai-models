@@ -1,0 +1,21 @@
+id: hunyuan-turbos-vision-video
+name: Hunyuan TurboS Vision Video
+family: hunyuan-vision
+temperature: true
+attachment: true
+limit:
+  context: 24000
+  output: 8000
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 3
+  output: 9
+release_date: 2025-07-28
+last_updated: 2026-05-16

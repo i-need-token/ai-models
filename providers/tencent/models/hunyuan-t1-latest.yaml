@@ -1,0 +1,19 @@
+id: hunyuan-t1-latest
+name: Hunyuan T1
+family: hunyuan
+temperature: true
+reasoning: true
+limit:
+  context: 32000
+  output: 64000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1
+  output: 4
+release_date: 2025-03-21
+last_updated: 2026-05-16

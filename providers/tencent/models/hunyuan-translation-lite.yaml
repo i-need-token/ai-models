@@ -1,0 +1,18 @@
+id: hunyuan-translation-lite
+name: Hunyuan Translation Lite
+family: hunyuan
+temperature: false
+limit:
+  context: 4000
+  output: 4000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1
+  output: 3
+release_date: 2025-06-06
+last_updated: 2026-05-16
