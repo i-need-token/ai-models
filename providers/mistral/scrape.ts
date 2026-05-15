@@ -39,6 +39,10 @@ const HARDCODED_PRICING: Record<string, Pricing> = {
   "ministral-3b": { currency: "USD", input: 0.04, output: 0.04 },
   "ministral-8b": { currency: "USD", input: 0.1, output: 0.1 },
   "pixtral-large": { currency: "USD", input: 2.0, output: 6.0 },
+  devstral: { currency: "USD", input: 0.4, output: 2.0 },
+  "magistral-small": { currency: "USD", input: 0.5, output: 1.5 },
+  "voxtral-mini": { currency: "USD", input: 0.04, output: 0.04 },
+  "voxtral-small": { currency: "USD", input: 0.1, output: 0.3 },
   // Deprecated models
   "mistral-large-2407": { currency: "USD", input: 4.0, output: 12.0 },
   "mixtral-8x22b": { currency: "USD", input: 0.8, output: 1.2 },
@@ -194,6 +198,73 @@ export async function scrape(): Promise<ScrapeResult> {
       modalities: { input: ["text", "image"], output: ["text"] },
       pricing: HARDCODED_PRICING["pixtral-large"] as Pricing,
       release_date: "2024-11-18",
+      last_updated: today,
+    }),
+  );
+
+  // --- Devstral (May 2025) ---
+
+  models.push(
+    defineModel({
+      id: "devstral",
+      name: "Devstral",
+      family: "devstral",
+      temperature: true,
+      tool_call: true,
+      limit: { context: 128000, output: 8192 },
+      modalities: { input: ["text"], output: ["text"] },
+      pricing: HARDCODED_PRICING["devstral"] as Pricing,
+      release_date: "2025-05-15",
+      last_updated: today,
+    }),
+  );
+
+  // --- Magistral Small (June 2025) ---
+
+  models.push(
+    defineModel({
+      id: "magistral-small",
+      name: "Magistral Small",
+      family: "magistral",
+      temperature: true,
+      reasoning: true,
+      tool_call: true,
+      limit: { context: 128000, output: 8192 },
+      modalities: { input: ["text"], output: ["text"] },
+      pricing: HARDCODED_PRICING["magistral-small"] as Pricing,
+      release_date: "2025-06-10",
+      last_updated: today,
+    }),
+  );
+
+  // --- Voxtral (July 2025) ---
+
+  models.push(
+    defineModel({
+      id: "voxtral-mini",
+      name: "Voxtral Mini",
+      family: "voxtral",
+      temperature: true,
+      attachment: true,
+      limit: { context: 128000, output: 4096 },
+      modalities: { input: ["text", "audio"], output: ["text"] },
+      pricing: HARDCODED_PRICING["voxtral-mini"] as Pricing,
+      release_date: "2025-07-01",
+      last_updated: today,
+    }),
+  );
+
+  models.push(
+    defineModel({
+      id: "voxtral-small",
+      name: "Voxtral Small",
+      family: "voxtral",
+      temperature: true,
+      attachment: true,
+      limit: { context: 128000, output: 4096 },
+      modalities: { input: ["text", "audio"], output: ["text"] },
+      pricing: HARDCODED_PRICING["voxtral-small"] as Pricing,
+      release_date: "2025-07-01",
       last_updated: today,
     }),
   );
