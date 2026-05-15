@@ -1,0 +1,6 @@
+id: arcee
+name: Arcee AI
+url: https://arcee.ai
+api_docs: https://docs.arcee.ai
+apis:
+  openai: https://api.arcee.ai/v1
