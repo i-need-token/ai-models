@@ -1,0 +1,26 @@
+id: claude-opus-4-1
+name: Claude Opus 4.1
+family: claude-opus
+temperature: true
+reasoning: true
+tool_call: true
+attachment: true
+structured_output: true
+open_weights: false
+limit:
+  context: 200000
+  output: 32000
+modalities:
+  input:
+    - text
+    - image
+    - pdf
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 15
+  output: 75
+knowledge: 2025-03
+release_date: 2025-04-01
+last_updated: 2026-05-16
