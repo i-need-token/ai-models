@@ -1,0 +1,6 @@
+id: meta
+name: Meta Llama
+url: https://www.llama.com
+api_docs: https://www.llama.com/docs/overview
+apis:
+  openai: https://llama-api.meta.com/v1

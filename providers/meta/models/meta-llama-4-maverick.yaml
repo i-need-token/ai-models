@@ -1,0 +1,21 @@
+id: meta-llama-4-maverick
+name: Llama 4 Maverick
+family: llama
+temperature: true
+tool_call: true
+attachment: true
+limit:
+  context: 1000000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.24
+  output: 0.97
+release_date: 2025-04-05
+last_updated: 2026-05-16
