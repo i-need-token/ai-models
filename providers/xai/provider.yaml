@@ -1,0 +1,6 @@
+id: xai
+name: xAI Grok
+url: https://x.ai
+api_docs: https://docs.x.ai
+apis:
+  openai: https://api.x.ai/v1

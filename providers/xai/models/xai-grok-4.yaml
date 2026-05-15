@@ -1,0 +1,22 @@
+id: xai-grok-4
+name: Grok-4
+family: grok
+temperature: true
+reasoning: true
+tool_call: true
+attachment: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 3
+  output: 15
+release_date: 2025-04-15
+last_updated: 2026-05-16
