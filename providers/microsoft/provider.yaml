@@ -1,0 +1,6 @@
+id: microsoft
+name: Microsoft Phi
+url: https://azure.microsoft.com/en-us/products/phi
+api_docs: https://learn.microsoft.com/en-us/azure/foundry/foundry-models/concepts/models-sold-directly-by-azure?pivots=phi
+apis:
+  openai: https://models.inference.ai.azure.com/v1
