@@ -1,0 +1,20 @@
+id: palmyra-x-003-instruct
+name: Palmyra X 003 Instruct
+family: palmyra
+temperature: true
+tool_call: true
+deprecated: true
+limit:
+  context: 8192
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 7.5
+  output: 22.5
+release_date: 2024-03-01
+last_updated: 2026-05-16

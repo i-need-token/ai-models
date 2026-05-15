@@ -1,0 +1,6 @@
+id: writer
+name: Writer
+url: https://writer.com
+api_docs: https://dev.writer.com
+apis:
+  openai: https://api.writer.com/v1
