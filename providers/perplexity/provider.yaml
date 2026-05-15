@@ -1,0 +1,6 @@
+id: perplexity
+name: Perplexity
+url: https://perplexity.ai
+api_docs: https://docs.perplexity.ai
+apis:
+  openai: https://api.perplexity.ai
