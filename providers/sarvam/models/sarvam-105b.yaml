@@ -1,0 +1,22 @@
+id: sarvam-105b
+name: Sarvam 105B
+family: sarvam-chat
+temperature: true
+reasoning: true
+tool_call: true
+open_weights: true
+limit:
+  context: 128000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.048
+  output: 0.192
+  cache_read: 0.03
+release_date: 2025-07-01
+last_updated: 2026-05-16

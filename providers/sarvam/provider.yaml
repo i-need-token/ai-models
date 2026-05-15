@@ -1,0 +1,6 @@
+id: sarvam
+name: Sarvam AI
+url: https://www.sarvam.ai
+api_docs: https://docs.sarvam.ai
+apis:
+  openai: https://api.sarvam.ai/v1

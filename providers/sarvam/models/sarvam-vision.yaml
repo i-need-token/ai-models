@@ -1,0 +1,19 @@
+id: sarvam-vision
+name: Sarvam Vision
+family: sarvam-vision
+temperature: false
+attachment: true
+open_weights: true
+modalities:
+  input:
+    - text
+    - image
+    - pdf
+  output:
+    - text
+pricing:
+  currency: USD
+  unit: per_request
+  price: 0.006
+release_date: 2025-01-01
+last_updated: 2026-05-16

@@ -1,0 +1,15 @@
+id: saaras-v3
+name: Saaras v3
+family: saaras
+temperature: false
+modalities:
+  input:
+    - audio
+  output:
+    - text
+pricing:
+  currency: USD
+  unit: per_second
+  price: 0.0001
+release_date: 2025-01-01
+last_updated: 2026-05-16
