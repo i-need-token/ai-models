@@ -1,0 +1,19 @@
+id: kimi-latest
+name: Kimi Latest
+family: kimi-latest
+temperature: true
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 4
+  output: 16
+  cache_read: 0.8
+release_date: 2026-05-16
+last_updated: 2026-05-16

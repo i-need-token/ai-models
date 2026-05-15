@@ -1,0 +1,20 @@
+id: moonshot-v1-32k
+name: Moonshot V1 (32K)
+family: moonshot-v1
+temperature: true
+limit:
+  context: 32768
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+deprecated: true
+pricing:
+  currency: CNY
+  input: 24
+  output: 24
+  cache_read: 4.8
+release_date: 2026-05-16
+last_updated: 2026-05-16

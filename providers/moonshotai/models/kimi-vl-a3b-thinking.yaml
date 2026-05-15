@@ -1,0 +1,20 @@
+id: kimi-vl-a3b-thinking
+name: Kimi VL A3B Thinking
+family: kimi-vl
+temperature: true
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 4
+  output: 16
+  cache_read: 0.8
+release_date: 2026-05-16
+last_updated: 2026-05-16
