@@ -1,0 +1,20 @@
+id: mimo-v2-flash
+name: MiMo V2 Flash
+family: mimo
+temperature: true
+tool_call: true
+open_weights: true
+limit:
+  context: 262144
+  output: 65536
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.3
+release_date: 2025-04-01
+last_updated: 2026-05-16

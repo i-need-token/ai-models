@@ -1,0 +1,6 @@
+id: xiaomi
+name: Xiaomi
+url: https://xiaomi.ai
+api_docs: https://xiaomi.ai/docs
+apis:
+  openai: https://api.xiaomi.ai
