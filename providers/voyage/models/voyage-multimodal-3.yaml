@@ -1,0 +1,20 @@
+id: voyage-multimodal-3
+name: Voyage Multimodal 3
+family: voyage-multimodal
+deprecated: true
+limit:
+  context: 32000
+  output: 0
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.12
+  output: 0
+release_date: 2025-01
+last_updated: 2026-05-16

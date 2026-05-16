@@ -1,0 +1,18 @@
+id: rerank-lite-1
+name: Rerank Lite 1
+family: rerank
+deprecated: true
+limit:
+  context: 4000
+  output: 0
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.02
+  output: 0
+release_date: 2024-01
+last_updated: 2026-05-16

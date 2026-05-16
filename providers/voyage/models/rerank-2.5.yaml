@@ -1,0 +1,17 @@
+id: rerank-2.5
+name: Rerank 2.5
+family: rerank
+limit:
+  context: 32000
+  output: 0
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0
+release_date: 2025-03
+last_updated: 2026-05-16

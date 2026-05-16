@@ -1,0 +1,6 @@
+id: voyage
+name: Voyage AI
+url: https://voyageai.com
+api_docs: https://docs.voyageai.com
+apis:
+  openai: https://api.voyageai.com/v1

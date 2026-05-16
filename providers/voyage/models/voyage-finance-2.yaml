@@ -1,0 +1,17 @@
+id: voyage-finance-2
+name: Voyage Finance 2
+family: voyage-finance
+limit:
+  context: 32000
+  output: 0
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.12
+  output: 0
+release_date: 2024-07
+last_updated: 2026-05-16

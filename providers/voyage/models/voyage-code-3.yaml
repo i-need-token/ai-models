@@ -1,0 +1,17 @@
+id: voyage-code-3
+name: Voyage Code 3
+family: voyage-code
+limit:
+  context: 32000
+  output: 0
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.18
+  output: 0
+release_date: 2025-02
+last_updated: 2026-05-16
