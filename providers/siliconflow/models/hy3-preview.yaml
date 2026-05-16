@@ -1,0 +1,19 @@
+id: hy3-preview
+name: Hy3 Preview
+family: hy3
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.066
+  output: 0.26
+  cache_read: 0.029
+release_date: 2026-05-16
+last_updated: 2026-05-16

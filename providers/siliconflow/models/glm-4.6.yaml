@@ -1,0 +1,19 @@
+id: glm-4.6
+name: GLM 4.6
+family: glm
+temperature: true
+limit:
+  context: 204800
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.39
+  output: 1.9
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
