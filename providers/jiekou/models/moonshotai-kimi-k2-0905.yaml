@@ -1,0 +1,19 @@
+id: moonshotai-kimi-k2-0905
+name: moonshotai-kimi-k2-0905 on Jiekou
+family: kimi
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.57
+  output: 2.3
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+open_weights: true

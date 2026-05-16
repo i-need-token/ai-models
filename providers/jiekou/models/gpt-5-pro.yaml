@@ -1,0 +1,19 @@
+id: gpt-5-pro
+name: gpt-5-pro on Jiekou
+family: gpt
+limit:
+  context: 400000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1.1875
+  output: 9.5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

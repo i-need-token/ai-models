@@ -1,0 +1,19 @@
+id: moonshotai-kimi-k2-instruct
+name: moonshotai-kimi-k2-instruct on Jiekou
+family: kimi
+limit:
+  context: 256000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.1103
+  output: 1.1034
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+open_weights: true

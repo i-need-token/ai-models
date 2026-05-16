@@ -1,0 +1,18 @@
+id: qwen-qwen-2.5-72b-instruct
+name: qwen-qwen-2.5-72b-instruct on Jiekou
+family: qwen
+limit:
+  context: 123000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.42
+  output: 1.25
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

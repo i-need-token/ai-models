@@ -1,0 +1,20 @@
+id: claude-opus-4-6
+name: claude-opus-4-6 on Jiekou
+family: claude
+limit:
+  context: 1000000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 2.75
+  output: 13.75
+  cache_read: 0.475
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

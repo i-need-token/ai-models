@@ -1,0 +1,19 @@
+id: qwen-qwen2.5-vl-72b-instruct
+name: qwen-qwen2.5-vl-72b-instruct on Jiekou
+family: qwen
+limit:
+  context: 32000
+  output: 8000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.38
+  output: 0.4
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

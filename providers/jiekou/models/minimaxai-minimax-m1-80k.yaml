@@ -1,0 +1,18 @@
+id: minimaxai-minimax-m1-80k
+name: minimaxai-minimax-m1-80k on Jiekou
+family: minimax
+limit:
+  context: 204800
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1
+  output: 3.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

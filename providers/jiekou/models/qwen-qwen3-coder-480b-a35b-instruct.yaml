@@ -1,0 +1,18 @@
+id: qwen-qwen3-coder-480b-a35b-instruct
+name: qwen-qwen3-coder-480b-a35b-instruct on Jiekou
+family: qwen
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.15
+  output: 0.8
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

@@ -1,0 +1,19 @@
+id: zai-org-glm-4.7-flash
+name: zai-org-glm-4.7-flash on Jiekou
+family: glm
+limit:
+  context: 204800
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.6
+  output: 2.2
+  cache_read: 0.01
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

@@ -1,0 +1,20 @@
+id: o3-mini
+name: o3-mini on Jiekou
+family: gpt
+limit:
+  context: 128000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1.045
+  output: 4.18
+  cache_read: 0.5225
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

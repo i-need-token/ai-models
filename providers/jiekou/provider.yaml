@@ -1,0 +1,6 @@
+id: jiekou
+name: 接口 AI
+url: https://jiekou.ai
+api_docs: https://jiekou.ai/docs
+apis:
+  openai: https://api.jiekou.ai/v1

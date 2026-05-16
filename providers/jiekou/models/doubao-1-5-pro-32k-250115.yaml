@@ -1,0 +1,18 @@
+id: doubao-1-5-pro-32k-250115
+name: doubao-1-5-pro-32k-250115 on Jiekou
+family: doubao
+limit:
+  context: 200000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.11
+  output: 0.275
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

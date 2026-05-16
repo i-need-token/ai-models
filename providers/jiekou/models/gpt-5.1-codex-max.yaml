@@ -1,0 +1,20 @@
+id: gpt-5.1-codex-max
+name: gpt-5.1-codex-max on Jiekou
+family: gpt
+limit:
+  context: 400000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.2375
+  output: 1.9
+  cache_read: 0.1187
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

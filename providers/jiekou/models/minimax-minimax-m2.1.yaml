@@ -1,0 +1,19 @@
+id: minimax-minimax-m2.1
+name: minimax-minimax-m2.1 on Jiekou
+family: minimax
+limit:
+  context: 1000000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.55
+  output: 2.2
+  cache_read: 0.03
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

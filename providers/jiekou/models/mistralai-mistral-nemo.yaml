@@ -1,0 +1,19 @@
+id: mistralai-mistral-nemo
+name: mistralai-mistral-nemo on Jiekou
+family: mistral
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.029
+  output: 0.059
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+open_weights: true

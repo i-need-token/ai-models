@@ -1,0 +1,19 @@
+id: meta-llama-llama-3.3-70b-instruct
+name: meta-llama-llama-3.3-70b-instruct on Jiekou
+family: llama
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.03
+  output: 0.05
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+open_weights: true

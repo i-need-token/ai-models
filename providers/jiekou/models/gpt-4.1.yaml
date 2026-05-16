@@ -1,0 +1,20 @@
+id: gpt-4.1
+name: gpt-4.1 on Jiekou
+family: gpt
+limit:
+  context: 200000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 9.5
+  output: 38
+  cache_read: 0.5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
