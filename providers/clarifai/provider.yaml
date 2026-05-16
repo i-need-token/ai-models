@@ -1,0 +1,6 @@
+id: clarifai
+name: Clarifai
+url: https://clarifai.com
+api_docs: https://docs.clarifai.com
+apis:
+  openai: https://api.clarifai.com/v1

@@ -1,0 +1,20 @@
+id: qwen3-next-80b-a3b-thinking
+name: Qwen3 Next 80B A3B Thinking on Clarifai
+family: qwen3-next
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.09
+  output: 1.08
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+open_weights: true
+reasoning: true
