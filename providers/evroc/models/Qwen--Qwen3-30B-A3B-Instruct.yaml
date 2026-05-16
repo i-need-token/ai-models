@@ -1,0 +1,18 @@
+id: Qwen--Qwen3-30B-A3B-Instruct
+name: Qwen3 30B A3B Instruct
+family: Qwen
+limit:
+  context: 40960
+  output: 40960
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.1
+  output: 0.8
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true

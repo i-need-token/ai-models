@@ -1,0 +1,19 @@
+id: microsoft--Phi-4-multimodal-instruct
+name: Phi-4 Multimodal Instruct
+family: microsoft
+limit:
+  context: 16384
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.1
+  output: 0.4
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true

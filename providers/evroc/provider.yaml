@@ -1,0 +1,6 @@
+id: evroc
+name: evroc
+url: https://evroc.com
+api_docs: https://evroc.com/ai-services/think-api
+apis:
+  openai: https://api.think.evroc.com

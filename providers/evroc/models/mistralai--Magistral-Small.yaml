@@ -1,0 +1,19 @@
+id: mistralai--Magistral-Small
+name: Magistral Small
+family: mistralai
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.5
+  output: 2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+reasoning: true
