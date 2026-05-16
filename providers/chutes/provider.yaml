@@ -1,0 +1,6 @@
+id: chutes
+name: Chutes
+url: https://chutes.ai
+api_docs: https://chutes.ai/docs
+apis:
+  openai: https://llm.chutes.ai/v1
