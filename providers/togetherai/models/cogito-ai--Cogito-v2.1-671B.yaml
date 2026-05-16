@@ -1,0 +1,20 @@
+id: cogito-ai--Cogito-v2.1-671B
+name: Cogito v2.1 671B
+family: cogito
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.25
+  output: 1.25
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

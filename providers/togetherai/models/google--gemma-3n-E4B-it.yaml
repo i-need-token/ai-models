@@ -1,0 +1,19 @@
+id: google--gemma-3n-E4B-it
+name: Gemma 3n E4B Instruct
+family: gemma-3n
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.06
+  output: 0.12
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

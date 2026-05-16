@@ -1,0 +1,6 @@
+id: togetherai
+name: Together AI
+url: https://together.ai
+api_docs: https://docs.together.ai
+apis:
+  openai: https://api.together.xyz/v1
