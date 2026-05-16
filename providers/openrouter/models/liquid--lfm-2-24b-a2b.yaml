@@ -1,0 +1,18 @@
+id: liquid--lfm-2-24b-a2b
+name: "LiquidAI: LFM2-24B-A2B"
+family: lfm
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.03
+  output: 0.12
+release_date: 2026-05-16
+last_updated: 2026-05-16

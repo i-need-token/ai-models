@@ -1,0 +1,21 @@
+id: alibaba--tongyi-deepresearch-30b-a3b
+name: Tongyi DeepResearch 30B A3B
+family: tongyi
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.09
+  output: 0.45
+  cache_read: 0.09
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

@@ -1,0 +1,18 @@
+id: google--gemma-3n-e4b-it
+name: "Google: Gemma 3n 4B"
+family: gemma-3n
+temperature: true
+limit:
+  context: 32768
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.06
+  output: 0.12
+release_date: 2026-05-16
+last_updated: 2026-05-16

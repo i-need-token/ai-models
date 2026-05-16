@@ -1,0 +1,19 @@
+id: ai21--jamba-large-1.7
+name: "AI21: Jamba Large 1.7"
+family: jamba
+temperature: true
+limit:
+  context: 256000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2
+  output: 8
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

@@ -1,0 +1,21 @@
+id: z-ai--glm-4.5-air
+name: "Z.ai: GLM 4.5 Air"
+family: glm
+temperature: true
+limit:
+  context: 131072
+  output: 98304
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.85
+  cache_read: 0.025
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

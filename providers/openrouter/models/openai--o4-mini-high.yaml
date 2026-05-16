@@ -1,0 +1,23 @@
+id: openai--o4-mini-high
+name: "OpenAI: o4 Mini High"
+family: o4
+temperature: true
+limit:
+  context: 200000
+  output: 100000
+modalities:
+  input:
+    - image
+    - text
+    - pdf
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.1
+  output: 4.4
+  cache_read: 0.275
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

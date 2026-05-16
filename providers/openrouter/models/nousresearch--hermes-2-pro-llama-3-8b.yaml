@@ -1,0 +1,18 @@
+id: nousresearch--hermes-2-pro-llama-3-8b
+name: "NousResearch: Hermes 2 Pro - Llama-3 8B"
+family: llama-3
+temperature: true
+limit:
+  context: 8192
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.14
+  output: 0.14
+release_date: 2026-05-16
+last_updated: 2026-05-16

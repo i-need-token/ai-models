@@ -1,0 +1,21 @@
+id: perceptron--perceptron-mk1
+name: "Perceptron: Perceptron Mk1"
+family: perceptron
+temperature: true
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1.5
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

@@ -1,0 +1,21 @@
+id: arcee-ai--trinity-large-thinking
+name: "Arcee AI: Trinity Large Thinking"
+family: trinity
+temperature: true
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.22
+  output: 0.85
+  cache_read: 0.06
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

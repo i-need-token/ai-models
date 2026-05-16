@@ -1,0 +1,22 @@
+id: bytedance-seed--seed-1.6-flash
+name: "ByteDance Seed: Seed 1.6 Flash"
+family: seed
+temperature: true
+limit:
+  context: 262144
+  output: 32768
+modalities:
+  input:
+    - image
+    - text
+    - video
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.075
+  output: 0.3
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

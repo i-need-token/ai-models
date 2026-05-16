@@ -1,0 +1,25 @@
+id: google--gemini-2.0-flash-001
+name: "Google: Gemini 2.0 Flash"
+family: gemini
+temperature: true
+limit:
+  context: 1048576
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+    - pdf
+    - audio
+    - video
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.4
+  cache_read: 0.025
+  cache_write: 0.083333
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

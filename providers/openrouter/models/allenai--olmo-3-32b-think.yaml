@@ -1,0 +1,19 @@
+id: allenai--olmo-3-32b-think
+name: "AllenAI: Olmo 3 32B Think"
+family: olmo
+temperature: true
+limit:
+  context: 65536
+  output: 65536
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.5
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

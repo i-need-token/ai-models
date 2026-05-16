@@ -1,0 +1,18 @@
+id: aion-labs--aion-rp-llama-3.1-8b
+name: "AionLabs: Aion-RP 1.0 (8B)"
+family: llama-3.1
+temperature: true
+limit:
+  context: 32768
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.8
+  output: 1.6
+release_date: 2026-05-16
+last_updated: 2026-05-16

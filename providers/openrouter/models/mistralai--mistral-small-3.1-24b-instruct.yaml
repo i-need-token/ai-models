@@ -1,0 +1,19 @@
+id: mistralai--mistral-small-3.1-24b-instruct
+name: "Mistral: Mistral Small 3.1 24B"
+family: mistral
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.351
+  output: 0.555
+release_date: 2026-05-16
+last_updated: 2026-05-16

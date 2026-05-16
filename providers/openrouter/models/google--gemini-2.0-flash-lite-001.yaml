@@ -1,0 +1,23 @@
+id: google--gemini-2.0-flash-lite-001
+name: "Google: Gemini 2.0 Flash Lite"
+family: gemini
+temperature: true
+limit:
+  context: 1048576
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+    - pdf
+    - audio
+    - video
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.075
+  output: 0.3
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

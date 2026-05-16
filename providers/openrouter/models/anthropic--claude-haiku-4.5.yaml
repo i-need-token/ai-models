@@ -1,0 +1,24 @@
+id: anthropic--claude-haiku-4.5
+name: "Anthropic: Claude Haiku 4.5"
+family: claude
+temperature: true
+limit:
+  context: 200000
+  output: 64000
+modalities:
+  input:
+    - text
+    - image
+    - pdf
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 5
+  cache_read: 0.1
+  cache_write: 1.25
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

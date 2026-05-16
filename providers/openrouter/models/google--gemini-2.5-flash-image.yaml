@@ -1,0 +1,22 @@
+id: google--gemini-2.5-flash-image
+name: "Google: Nano Banana (Gemini 2.5 Flash Image)"
+family: gemini
+temperature: true
+limit:
+  context: 32768
+  output: 32768
+modalities:
+  input:
+    - image
+    - text
+  output:
+    - image
+    - text
+pricing:
+  currency: USD
+  input: 0.3
+  output: 2.5
+  cache_read: 0.03
+  cache_write: 0.083333
+release_date: 2026-05-16
+last_updated: 2026-05-16

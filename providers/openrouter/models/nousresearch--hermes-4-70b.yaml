@@ -1,0 +1,19 @@
+id: nousresearch--hermes-4-70b
+name: "Nous: Hermes 4 70B"
+family: hermes
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.4
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

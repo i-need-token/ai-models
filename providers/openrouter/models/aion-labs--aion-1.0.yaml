@@ -1,0 +1,19 @@
+id: aion-labs--aion-1.0
+name: "AionLabs: Aion-1.0"
+family: aion
+temperature: true
+limit:
+  context: 131072
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 4
+  output: 8
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

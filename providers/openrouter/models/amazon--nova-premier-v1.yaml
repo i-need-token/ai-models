@@ -1,0 +1,21 @@
+id: amazon--nova-premier-v1
+name: "Amazon: Nova Premier 1.0"
+family: nova
+temperature: true
+limit:
+  context: 1000000
+  output: 32000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2.5
+  output: 12.5
+  cache_read: 0.625
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

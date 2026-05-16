@@ -1,0 +1,23 @@
+id: google--gemini-3-pro-image-preview
+name: "Google: Nano Banana Pro (Gemini 3 Pro Image Preview)"
+family: gemini
+temperature: true
+limit:
+  context: 65536
+  output: 32768
+modalities:
+  input:
+    - image
+    - text
+  output:
+    - image
+    - text
+pricing:
+  currency: USD
+  input: 2
+  output: 12
+  cache_read: 0.2
+  cache_write: 0.375
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

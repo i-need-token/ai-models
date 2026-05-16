@@ -1,0 +1,19 @@
+id: deepseek--deepseek-r1-distill-qwen-32b
+name: "DeepSeek: R1 Distill Qwen 32B"
+family: deepseek
+temperature: true
+limit:
+  context: 128000
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.29
+  output: 0.29
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

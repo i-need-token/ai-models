@@ -1,0 +1,19 @@
+id: deepseek--deepseek-r1-distill-llama-70b
+name: "DeepSeek: R1 Distill Llama 70B"
+family: deepseek
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.7
+  output: 0.8
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

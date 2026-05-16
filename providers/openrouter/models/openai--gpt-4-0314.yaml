@@ -1,0 +1,19 @@
+id: openai--gpt-4-0314
+name: "OpenAI: GPT-4 (older v0314)"
+family: gpt-4
+temperature: true
+limit:
+  context: 8191
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 30
+  output: 60
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

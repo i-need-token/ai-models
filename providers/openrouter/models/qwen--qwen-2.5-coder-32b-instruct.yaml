@@ -1,0 +1,18 @@
+id: qwen--qwen-2.5-coder-32b-instruct
+name: Qwen2.5 Coder 32B Instruct
+family: qwen
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.66
+  output: 1
+release_date: 2026-05-16
+last_updated: 2026-05-16

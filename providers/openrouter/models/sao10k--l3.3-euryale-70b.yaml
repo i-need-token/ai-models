@@ -1,0 +1,18 @@
+id: sao10k--l3.3-euryale-70b
+name: "Sao10K: Llama 3.3 Euryale 70B"
+family: o1
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.65
+  output: 0.75
+release_date: 2026-05-16
+last_updated: 2026-05-16

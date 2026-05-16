@@ -1,0 +1,19 @@
+id: thedrummer--skyfall-36b-v2
+name: "TheDrummer: Skyfall 36B V2"
+family: skyfall
+temperature: true
+limit:
+  context: 32768
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.55
+  output: 0.8
+  cache_read: 0.25
+release_date: 2026-05-16
+last_updated: 2026-05-16
