@@ -1,0 +1,6 @@
+id: azure
+name: Azure OpenAI Service
+url: https://azure.microsoft.com/en-us/products/azure-openai-service/
+api_docs: https://learn.microsoft.com/en-us/azure/ai-services/openai/
+apis:
+  openai: https://models.inference.ai.azure.com
