@@ -1,0 +1,6 @@
+id: regolo
+name: Regolo AI
+url: https://regolo.ai
+api_docs: https://regolo.ai/docs
+apis:
+  openai: https://api.regolo.ai/v1

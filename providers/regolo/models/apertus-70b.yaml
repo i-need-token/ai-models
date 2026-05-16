@@ -1,0 +1,20 @@
+id: apertus-70b
+name: apertus-70b
+family: apertus
+temperature: true
+limit:
+  context: 30000
+  output: 30000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.4
+  output: 2.1
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+structured_output: true

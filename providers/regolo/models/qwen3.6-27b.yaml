@@ -1,0 +1,22 @@
+id: qwen3.6-27b
+name: qwen3.6-27b
+family: qwen3.6
+temperature: true
+limit:
+  context: 120000
+  output: 120000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.5
+  output: 2.1
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true
+structured_output: true
