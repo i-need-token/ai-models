@@ -16,5 +16,5 @@ pricing:
   output: 2
   cache_read: 0.04
 release_date: 2025-12-10
-last_updated: 2026-05-16
+last_updated: 2026-05-17
 tool_call: true

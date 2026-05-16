@@ -16,6 +16,6 @@ pricing:
   input: 0.3
   output: 0.7
 release_date: 2025-12-10
-last_updated: 2026-05-16
+last_updated: 2026-05-17
 tool_call: true
 reasoning: true

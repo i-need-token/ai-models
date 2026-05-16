@@ -13,7 +13,7 @@ pricing:
   currency: USD
   input: 0.08
   output: 0.29
-release_date: 2026-05-16
-last_updated: 2026-05-16
+release_date: 2026-05-17
+last_updated: 2026-05-17
 tool_call: true
 open_weights: true

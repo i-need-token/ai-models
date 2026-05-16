@@ -16,6 +16,6 @@ pricing:
   output: 0.8
   cache_read: 0.1
 release_date: 2025-12-31
-last_updated: 2026-05-16
+last_updated: 2026-05-17
 tool_call: true
 structured_output: true
