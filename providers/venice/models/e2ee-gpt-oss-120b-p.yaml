@@ -1,0 +1,19 @@
+id: e2ee-gpt-oss-120b-p
+name: GPT OSS 120B
+family: gpt-oss
+temperature: true
+limit:
+  context: 128000
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.65
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true

@@ -1,0 +1,18 @@
+id: e2ee-venice-uncensored-24b-p
+name: Venice Uncensored 1.1
+family: venice-uncensored
+temperature: true
+limit:
+  context: 32000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.25
+  output: 1.15
+release_date: 2026-05-17
+last_updated: 2026-05-17

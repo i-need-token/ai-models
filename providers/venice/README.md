@@ -10,7 +10,7 @@ Privacy-focused inference platform hosting models from multiple providers (Anthr
 ## Model Selection
 
 - Only text/chat models included (type === "text")
-- E2EE (end-to-end encrypted) models excluded (encrypted variants of existing models)
+- E2EE (end-to-end encrypted) models included as separate entries (prefixed with `e2ee-`)
 - Offline models excluded
 - Models with zero pricing excluded
 

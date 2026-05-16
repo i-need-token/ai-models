@@ -1,0 +1,19 @@
+id: e2ee-glm-4-7-p
+name: GLM 4.7
+family: e2ee-other
+temperature: true
+limit:
+  context: 128000
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.1
+  output: 4.15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true

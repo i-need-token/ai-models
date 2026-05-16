@@ -1,0 +1,22 @@
+id: e2ee-qwen3-5-122b-a10b
+name: Qwen3.5 122B A10B
+family: qwen3.5
+temperature: true
+limit:
+  context: 128000
+  output: 32768
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.5
+  output: 4
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true
+tool_call: true
+attachment: true

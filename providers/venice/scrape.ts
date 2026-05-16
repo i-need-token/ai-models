@@ -23,11 +23,12 @@ const provider = defineProvider({
 // Meta, Mistral, xAI, Moonshot, MiniMax, ZhipuAI/Z.AI, NVIDIA, Arcee,
 // Inception/Mercury, NousResearch) with per-token USD pricing.
 //
+// E2EE models: End-to-end encrypted variants with higher pricing;
+//              included as separate entries (e.g. e2ee-glm-5-1)
 // Pricing: API returns per-1M-token USD values
 // Context lengths: API provides context_length and maxCompletionTokens
 // Capabilities: API provides supportsReasoning, supportsFunctionCalling,
 //               supportsVision, supportsResponseSchema
-// E2EE models: Excluded (encrypted variants of existing models)
 // Model IDs: No "/" in IDs, no flattening needed
 // ---------------------------------------------------------------------------
 
@@ -129,6 +130,8 @@ function deriveFamily(id: string): string {
   if (lower.includes("hermes")) return "hermes";
   // Venice own models
   if (lower.includes("venice-uncensored")) return "venice-uncensored";
+  // E2EE encrypted variants
+  if (lower.startsWith("e2ee-")) return "e2ee-" + deriveFamily(lower.replace("e2ee-", ""));
   return "other";
 }
 
@@ -172,9 +175,6 @@ export async function scrape(): Promise<ScrapeResult> {
   for (const m of apiModels) {
     // Skip non-text models
     if (m.type !== "text") continue;
-
-    // Skip E2EE models (encrypted variants of existing models)
-    if (m.id.startsWith("e2ee-")) continue;
 
     // Skip offline models
     if (m.model_spec.offline) continue;
