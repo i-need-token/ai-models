@@ -1,0 +1,6 @@
+id: google-vertex
+name: Google Vertex AI
+url: https://cloud.google.com/vertex-ai
+api_docs: https://cloud.google.com/vertex-ai/docs
+apis:
+  openai: https://vertex-ai.googleapis.com/v1/openai

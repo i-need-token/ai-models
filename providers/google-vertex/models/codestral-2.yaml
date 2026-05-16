@@ -1,0 +1,19 @@
+id: codestral-2
+name: Codestral 2
+family: codestral
+temperature: true
+limit:
+  context: 256000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.9
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
