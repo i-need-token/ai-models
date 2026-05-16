@@ -1,0 +1,22 @@
+id: Qwen3-Next-80B-A3B-Thinking
+name: Qwen3 Next 80B A3B Thinking
+family: qwen3-next
+temperature: true
+limit:
+  context: 256000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1.2
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+tool_call: true
+structured_output: true
+open_weights: true

@@ -1,0 +1,6 @@
+id: nebius
+name: Nebius Token Factory
+url: https://nebius.com
+api_docs: https://docs.tokenfactory.nebius.com
+apis:
+  openai: https://api.tokenfactory.nebius.com/v1
