@@ -1,0 +1,20 @@
+id: llama-3.2-11b-vision-instruct
+name: Llama 3.2 11B Vision
+family: llama-3.2
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.049
+  output: 0.676
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

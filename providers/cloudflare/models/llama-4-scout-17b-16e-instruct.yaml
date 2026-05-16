@@ -1,0 +1,21 @@
+id: llama-4-scout-17b-16e-instruct
+name: Llama 4 Scout 17Bx16E
+family: llama-4
+temperature: true
+limit:
+  context: 327680
+  output: 131072
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.27
+  output: 0.85
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+open_weights: true

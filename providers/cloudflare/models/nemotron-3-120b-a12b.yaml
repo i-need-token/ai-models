@@ -1,0 +1,21 @@
+id: nemotron-3-120b-a12b
+name: Nemotron 3 120B A12B
+family: nemotron
+temperature: true
+limit:
+  context: 262144
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.5
+  output: 1.5
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+open_weights: true
+reasoning: true

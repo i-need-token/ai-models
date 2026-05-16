@@ -1,0 +1,19 @@
+id: gemma-sea-lion-v4-27b-it
+name: SEA-LION v4 27B IT
+family: sea-lion
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.351
+  output: 0.555
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

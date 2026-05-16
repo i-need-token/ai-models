@@ -1,0 +1,6 @@
+id: cloudflare
+name: Cloudflare Workers AI
+url: https://ai.cloudflare.com
+api_docs: https://developers.cloudflare.com/workers-ai
+apis:
+  openai: https://api.cloudflare.com/client/v4/accounts/{account_id}/ai/v1
