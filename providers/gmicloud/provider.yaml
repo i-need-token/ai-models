@@ -1,0 +1,6 @@
+id: gmicloud
+name: GMI Cloud
+url: https://gmicloud.ai
+api_docs: https://docs.gmicloud.ai
+apis:
+  openai: https://api.gmi-serving.com/v1

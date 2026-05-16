@@ -1,0 +1,19 @@
+id: zai-org--GLM-4.5-Air-FP8
+name: GLM-4.5 Air FP8
+family: zai-org
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 1.1
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

@@ -1,0 +1,19 @@
+id: zai-org--GLM-4.5-FP8
+name: GLM-4.5 FP8
+family: zai-org
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

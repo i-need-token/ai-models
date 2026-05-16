@@ -1,0 +1,19 @@
+id: Qwen--Qwen3-235B-A22B-Instruct-2507-FP8
+name: Qwen3 235B A22B Instruct 2507 FP8
+family: Qwen
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.17
+  output: 1.09
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

@@ -1,0 +1,19 @@
+id: meta-llama--Llama-4-Maverick-17B-128E-Instruct-FP8
+name: Llama 4 Maverick 17B 128E Instruct FP8
+family: llama
+limit:
+  context: 1048576
+  output: 1048576
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.25
+  output: 0.8
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

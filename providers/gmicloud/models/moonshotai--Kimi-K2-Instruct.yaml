@@ -1,0 +1,19 @@
+id: moonshotai--Kimi-K2-Instruct
+name: Kimi K2 Instruct
+family: moonshotai
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 3
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true
