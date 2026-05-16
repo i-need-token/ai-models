@@ -1,0 +1,21 @@
+id: zai-org-glm-4.7-flash
+name: GLM 4.7 Flash
+family: glm-4.7
+temperature: true
+limit:
+  context: 128000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.125
+  output: 0.5
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+tool_call: true
+structured_output: true

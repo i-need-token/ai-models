@@ -1,0 +1,23 @@
+id: grok-4-20-multi-agent
+name: Grok 4.20 Multi-Agent
+family: grok-4.20
+temperature: true
+limit:
+  context: 2000000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.42
+  output: 2.83
+  cache_read: 0.23
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+structured_output: true
+attachment: true

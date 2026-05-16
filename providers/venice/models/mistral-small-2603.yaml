@@ -1,0 +1,23 @@
+id: mistral-small-2603
+name: Mistral Small 4
+family: mistral-small
+temperature: true
+limit:
+  context: 256000
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1875
+  output: 0.75
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+tool_call: true
+structured_output: true
+attachment: true

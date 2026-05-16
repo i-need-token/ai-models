@@ -1,0 +1,21 @@
+id: qwen3-235b-a22b-thinking-2507
+name: Qwen 3 235B A22B Thinking 2507
+family: qwen3
+temperature: true
+limit:
+  context: 128000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.45
+  output: 3.5
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+tool_call: true
+structured_output: true

@@ -1,0 +1,24 @@
+id: qwen3-5-35b-a3b
+name: Qwen 3.5 35B A3B
+family: qwen3.5
+temperature: true
+limit:
+  context: 256000
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.3125
+  output: 1.25
+  cache_read: 0.15625
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+tool_call: true
+structured_output: true
+attachment: true

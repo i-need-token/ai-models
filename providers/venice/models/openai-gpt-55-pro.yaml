@@ -1,0 +1,23 @@
+id: openai-gpt-55-pro
+name: GPT-5.5 Pro
+family: gpt-55
+temperature: true
+limit:
+  context: 1000000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 37.5
+  output: 225
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+tool_call: true
+structured_output: true
+attachment: true

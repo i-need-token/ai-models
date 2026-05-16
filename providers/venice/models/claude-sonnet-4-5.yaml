@@ -1,0 +1,24 @@
+id: claude-sonnet-4-5
+name: Claude Sonnet 4.5
+family: claude-sonnet
+temperature: true
+limit:
+  context: 198000
+  output: 64000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 3.75
+  output: 18.75
+  cache_read: 0.375
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+tool_call: true
+structured_output: true
+attachment: true

@@ -1,0 +1,21 @@
+id: nvidia-nemotron-cascade-2-30b-a3b
+name: Nemotron Cascade 2 30B A3B
+family: nemotron
+temperature: true
+limit:
+  context: 256000
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.14
+  output: 0.8
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+tool_call: true
+structured_output: true

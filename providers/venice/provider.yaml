@@ -1,0 +1,6 @@
+id: venice
+name: Venice AI
+url: https://venice.ai
+api_docs: https://docs.venice.ai
+apis:
+  openai: https://api.venice.ai/api/v1

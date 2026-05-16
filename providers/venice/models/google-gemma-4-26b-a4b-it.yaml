@@ -1,0 +1,23 @@
+id: google-gemma-4-26b-a4b-it
+name: Google Gemma 4 26B A4B Instruct
+family: gemma-4
+temperature: true
+limit:
+  context: 256000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1625
+  output: 0.5
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+tool_call: true
+structured_output: true
+attachment: true
