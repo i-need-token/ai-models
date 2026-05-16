@@ -1,0 +1,20 @@
+id: kimi-k2-5
+name: Kimi K2.5 on Privatemode
+family: kimi
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 1.55
+  output: 7.74
+  cache_read: 0.15
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+open_weights: true

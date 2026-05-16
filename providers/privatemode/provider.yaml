@@ -1,0 +1,6 @@
+id: privatemode
+name: Privatemode AI
+url: https://privatemode.ai
+api_docs: https://privatemode.ai/docs
+apis:
+  openai: https://api.privatemode.ai/v1
