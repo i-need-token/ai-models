@@ -1,7 +1,11 @@
 id: zai-org--GLM-5-TEE
-name: GLM-5-TEE
-family: other
+name: GLM 5
+family: glm
 temperature: true
+pricing:
+  input: 0.95
+  output: 2.55
+  cache_read: 0.475
 limit:
   context: 202752
   output: 65535
@@ -10,13 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.95
-  output: 2.55
-  cache_read: 0.475
-release_date: 2026-05-16
-last_updated: 2026-05-16
+structured_output: true
 tool_call: true
 reasoning: true
-structured_output: true
+release_date: 2026-05-16
+last_updated: 2026-05-16

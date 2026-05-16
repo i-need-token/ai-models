@@ -1,7 +1,11 @@
 id: MiniMaxAI--MiniMax-M2.5-TEE
-name: MiniMax-M2.5-TEE
-family: other
+name: MiniMax M2.5
+family: minimax
 temperature: true
+pricing:
+  input: 0.15
+  output: 1.2
+  cache_read: 0.075
 limit:
   context: 196608
   output: 65536
@@ -10,13 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 1.2
-  cache_read: 0.075
-release_date: 2026-05-16
-last_updated: 2026-05-16
+structured_output: true
 tool_call: true
 reasoning: true
-structured_output: true
+release_date: 2026-05-16
+last_updated: 2026-05-16

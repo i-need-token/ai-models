@@ -1,7 +1,11 @@
 id: Qwen--Qwen3.5-397B-A17B-TEE
-name: Qwen3.5-397B-A17B-TEE
+name: Qwen 3.5 397B
 family: qwen3
 temperature: true
+pricing:
+  input: 0.39
+  output: 2.34
+  cache_read: 0.195
 limit:
   context: 262144
   output: 65536
@@ -11,13 +15,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.39
-  output: 2.34
-  cache_read: 0.195
-release_date: 2026-05-16
-last_updated: 2026-05-16
+structured_output: true
 tool_call: true
 reasoning: true
-structured_output: true
+release_date: 2026-05-16
+last_updated: 2026-05-16

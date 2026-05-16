@@ -220,12 +220,14 @@ export type MdExtractionRule = MdLabelValueRule | MdTableRule | MdListRule | MdS
  *
  * 示例（定价提取）：
  *   { pricing: { input: 5, output: 15 } }
- *   → jsonpath="$.pricing.input"
+ *   → jsonpath="$.pricing.input", fieldName="input"
  */
 export interface ApiFieldRule {
   type: "field";
   /** JSONPath 表达式 */
   jsonpath: string;
+  /** 提取结果的字段名（默认 "value"） */
+  fieldName?: string;
   /** 值转换函数 */
   transform?: Transform;
 }
@@ -402,5 +404,19 @@ export interface DeclarativePipeline {
   filter?: {
     /** 排除模式列表（模型 ID 匹配这些正则的会被排除） */
     excludePatterns: string[];
+  };
+
+  /** 是否支持 temperature 参数（默认 true） */
+  temperature?: boolean;
+
+  /** 是否为开源权重模型（可选，全局设置） */
+  open_weights?: boolean;
+
+  /** 模型 ID 转换规则（可选，如将 "/" 替换为 "--"） */
+  idTransform?: {
+    /** 要替换的字符串 */
+    from: string;
+    /** 替换为的字符串 */
+    to: string;
   };
 }

@@ -411,7 +411,8 @@ function applyApiField(
   if (value !== undefined) {
     const transformed =
       typeof value === "string" && rule.transform ? applyTransform(value, rule.transform) : value;
-    results.push({ value: transformed });
+    const key = rule.fieldName ?? "value";
+    results.push({ [key]: transformed });
   }
 }
 
@@ -437,7 +438,9 @@ function applyApiArray(
           typeof value === "string" && transform ? applyTransform(value, transform) : value;
       }
     }
-    if (Object.keys(row).length > 0) results.push(row);
+    // Store the original API item for subsequent extraction steps
+    row["_original"] = item;
+    if (Object.keys(row).length > 1) results.push(row);
   }
 }
 
@@ -599,11 +602,12 @@ async function discoverModels(
   }
 
   // 将提取结果转换为 DiscoveredModel[]
+  // For API sources, store the _original item so subsequent steps can use it
   const models: DiscoveredModel[] = rawResults
     .map((r) => ({
       id: String(r["value"] ?? r["id"] ?? r["slug"] ?? ""),
       deprecated: r["deprecated"] === true || r["deprecated"] === "true",
-      raw: r,
+      raw: r["_original"] ?? (config.source.type === "api" ? r : r["raw"]),
     }))
     .filter((m) => m.id.length > 0);
 
@@ -624,10 +628,33 @@ async function extractModelData(
   discovered: DiscoveredModel,
   pipeline: DeclarativePipeline,
 ): Promise<Model | null> {
-  const { id, deprecated } = discovered;
+  const { id, deprecated, raw } = discovered;
 
   // 解析 URL 模板变量
   const resolveUrl = (url: string) => url.replace(/\$\{modelId\}/g, id);
+
+  // Helper: extract dimension, using raw data from discovery if source URL matches
+  const extractDim = async (
+    config: {
+      source: SourceInput;
+      rules: HtmlExtractionRule[] | MdExtractionRule[] | ApiExtractionRule[];
+    },
+    resolveUrlFn: (url: string) => string,
+  ): Promise<Record<string, unknown>[]> => {
+    // If the source URL is the same as the discover source, use raw data directly
+    const url = resolveUrlFn(config.source.url);
+    const discoverUrl = pipeline.discover.source.url;
+    if (
+      url === discoverUrl &&
+      config.source.type === "api" &&
+      pipeline.discover.source.type === "api" &&
+      raw != null
+    ) {
+      // Use raw data from discovery instead of re-fetching
+      return extractJson(raw, config.rules as ApiExtractionRule[]);
+    }
+    return extractDimension(config, resolveUrlFn);
+  };
 
   // 并行提取各维度数据
   const [
@@ -638,19 +665,17 @@ async function extractModelData(
     datesResult,
     snapshotsResult,
   ] = await Promise.all([
-    extractDimension(pipeline.extractPricing, resolveUrl),
-    pipeline.extractLimits
-      ? extractDimension(pipeline.extractLimits, resolveUrl)
-      : Promise.resolve([]),
+    extractDim(pipeline.extractPricing, resolveUrl),
+    pipeline.extractLimits ? extractDim(pipeline.extractLimits, resolveUrl) : Promise.resolve([]),
     pipeline.extractModalities
-      ? extractDimension(pipeline.extractModalities, resolveUrl)
+      ? extractDim(pipeline.extractModalities, resolveUrl)
       : Promise.resolve([]),
     pipeline.extractFeatures
-      ? extractDimension(pipeline.extractFeatures, resolveUrl)
+      ? extractDim(pipeline.extractFeatures, resolveUrl)
       : Promise.resolve([]),
-    extractDimension(pipeline.extractDates, resolveUrl),
+    extractDim(pipeline.extractDates, resolveUrl),
     pipeline.extractSnapshots
-      ? extractDimension(pipeline.extractSnapshots, resolveUrl)
+      ? extractDim(pipeline.extractSnapshots, resolveUrl)
       : Promise.resolve([]),
   ]);
 
@@ -662,7 +687,18 @@ async function extractModelData(
   }
 
   // 日期是必须的
-  const dates = buildDates(datesResult);
+  let dates = buildDates(datesResult);
+  if (!dates) {
+    // Fallback: try to extract from raw data's 'created' field
+    const createdTs = (raw as Record<string, unknown>)?.["created"];
+    if (typeof createdTs === "number") {
+      const d = new Date(createdTs * 1000);
+      const dateStr = d.toISOString().split("T")[0];
+      if (dateStr) {
+        dates = { release_date: dateStr, last_updated: dateStr };
+      }
+    }
+  }
   if (!dates) {
     console.warn(`  ${id}: 无日期数据`);
     return null;
@@ -677,25 +713,32 @@ async function extractModelData(
   // 特性
   const features = buildFeatures(featuresResult, pipeline.extractFeatures?.featureMap);
 
+  // Extra fields from raw data
+  const temperature = pipeline.temperature ?? true;
+  const open_weights = pipeline.open_weights ?? undefined;
+
   // 快照
   const snapshots = buildSnapshots(snapshotsResult);
 
-  // 名称和家族
-  const name = applyDeriveRule(id, pipeline.deriveName);
-  const family = applyDeriveRule(id, pipeline.deriveFamily);
-
   // 合并为 Model
+  let modelId = id;
+  if (pipeline.idTransform) {
+    modelId = modelId.replaceAll(pipeline.idTransform.from, pipeline.idTransform.to);
+  }
+
   const model: Model = {
-    id,
-    name,
-    family,
+    id: modelId,
+    name: applyDeriveRule(modelId, pipeline.deriveName),
+    family: applyDeriveRule(modelId, pipeline.deriveFamily),
     ...(deprecated ? { deprecated: true } : {}),
+    temperature,
     pricing,
     ...(limit ? { limit } : {}),
     modalities,
     ...features,
     ...dates,
     ...(snapshots.length > 0 ? { snapshots } : {}),
+    ...(open_weights != null ? { open_weights } : {}),
   };
 
   return model;
@@ -732,6 +775,9 @@ function buildPricing(results: Record<string, unknown>[]): Pricing | null {
   // Token pricing
   if (merged["input"] != null && merged["output"] != null) {
     return {
+      ...(merged["currency"] != null
+        ? { currency: merged["currency"] as "USD" | "CNY" | "EUR" }
+        : {}),
       input: Number(merged["input"]),
       output: Number(merged["output"]),
       ...(merged["cache_read"] != null ? { cache_read: Number(merged["cache_read"]) } : {}),
@@ -816,9 +862,18 @@ function buildFeatures(
   const map = featureMap ?? {};
 
   for (const [key, value] of Object.entries(merged)) {
-    const fieldName = map[key] ?? key;
     if (typeof value === "boolean") {
+      const fieldName = map[key] ?? key;
       features[fieldName] = value;
+    }
+    // Handle arrays of feature strings (e.g., ["tools", "reasoning"])
+    if (Array.isArray(value)) {
+      for (const item of value) {
+        if (typeof item === "string") {
+          const fieldName = map[item] ?? item;
+          features[fieldName] = true;
+        }
+      }
     }
   }
 

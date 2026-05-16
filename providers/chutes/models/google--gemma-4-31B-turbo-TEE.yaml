@@ -1,7 +1,11 @@
 id: google--gemma-4-31B-turbo-TEE
-name: gemma-4-31B-turbo-TEE
+name: Gemma 4
 family: gemma
 temperature: true
+pricing:
+  input: 0.13
+  output: 0.38
+  cache_read: 0.065
 limit:
   context: 131072
   output: 65536
@@ -11,13 +15,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.13
-  output: 0.38
-  cache_read: 0.065
-release_date: 2026-05-16
-last_updated: 2026-05-16
+structured_output: true
 tool_call: true
 reasoning: true
-structured_output: true
+release_date: 2026-05-16
+last_updated: 2026-05-16
