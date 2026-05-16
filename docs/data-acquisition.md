@@ -118,6 +118,111 @@ export async function scrape(): Promise<ScrapeResult> {
 }
 ```
 
+## Pipeline Architecture
+
+### Why Pipelines?
+
+A monolithic `scrape()` function gives AI agents too much freedom — they can hardcode model IDs, fabricate pricing, or hallucinate capabilities. The pipeline architecture prevents this by design through type constraints.
+
+### Two Pipeline Styles
+
+| Style                     | AI defines                                                 | Runtime                                       | Prevention level                                  |
+| ------------------------- | ---------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------- |
+| Execute-function pipeline | Typed step functions (`discover()`, `extractPricing()`, …) | `runPipeline()`                               | Type constraints per step                         |
+| Declarative pipeline      | CSS Selectors / Regex / JSONPath rules only                | `runDeclarativePipeline()` (fixed, immutable) | AI can only define "what to extract", never "how" |
+
+### Execute-Function Pipeline
+
+The original pipeline splits one big function into typed steps. Each step has a constrained output type — `discover()` can only return IDs, `extractPricing()` can only return pricing, etc. The `assemble()` step is a pure merge with zero fabrication space.
+
+```
+discover()          → DiscoveredModel[]        // Only id + deprecated
+extractPricing()    → Map<id, Pricing>         // Only pricing
+extractLimits()     → Map<id, Limit>           // Only context window
+extractModalities() → Map<id, Modalities>      // Only modalities
+extractFeatures()   → Map<id, Features>        // Only capability flags
+extractDates()      → Map<id, Dates>           // Only dates (required)
+deriveName()        → Map<id, string>          // Pure function from id
+deriveFamily()      → Map<id, string>          // Pure function from id
+assemble()          → Model[]                  // Pure merge, zero fabrication
+```
+
+Key constraints:
+
+1. `discover()` only returns `{ id, deprecated }` — impossible to hardcode modalities/pricing
+2. `extractPricing()` only returns `Map<id, Pricing>` — function signature limits output
+3. `assemble()` is a pure merge — no space for fabrication
+4. Each extraction step must declare its source URL (lint-verifiable)
+5. Missing data = omit the field, never use fallback defaults
+
+### Declarative Pipeline
+
+The declarative pipeline goes further: AI can only define **what to extract** (rules), never **how to extract** (arbitrary code). The runtime is fixed and immutable.
+
+Three source types, three rule languages:
+
+| Source type | Rule language | Example                                            |
+| ----------- | ------------- | -------------------------------------------------- |
+| HTML        | CSS Selector  | `label: "Input", valueSelector: "div + div"`       |
+| Markdown    | Regex         | `pattern: /\*\*Input token limit\*\*\s*([\d,]+)/i` |
+| API (JSON)  | JSONPath      | `jsonpath: "$.pricing.input"`                      |
+
+Five extraction modes:
+
+| Mode               | Purpose                            | Example                                        |
+| ------------------ | ---------------------------------- | ---------------------------------------------- |
+| `labelValue`       | Find label, extract adjacent value | "Input token limit" → 1,048,576                |
+| `table`            | Extract structured table data      | Pricing tables with model/input/output columns |
+| `list`             | Extract all matching elements      | Model ID list from `<a>` links                 |
+| `section`          | Extract content within a section   | A specific `<section>` or `## Heading`         |
+| `field` (API only) | Extract a single JSON field        | `$.pricing.input`                              |
+| `array` (API only) | Extract and map a JSON array       | `$.data[*]` with field mappings                |
+
+Value transforms are a fixed set — AI can only choose which one to apply:
+
+```
+parseFloat | parseInt | parseNumber | parsePrice | parseDate |
+parseModality | toLowerCase | toUpperCase | trim | removeCommas | identity
+```
+
+### When to Use Which Style
+
+- **Declarative pipeline**: Preferred for new providers where the data source has a regular, predictable structure (most API-based providers, simple HTML tables).
+- **Execute-function pipeline**: Needed when extraction logic is too complex for declarative rules (e.g., Cohere's `<ModelShowcase>` JSX component requires regex parsing beyond current rule types).
+- **Direct `scrape()` function**: Still supported for backward compatibility; used by most existing providers.
+
+## Provider Types
+
+### Model Producers
+
+Providers that develop and produce their own AI models. They are the **primary source** for model data — their APIs and documentation are authoritative.
+
+Examples: OpenAI, Anthropic, Google, Meta, DeepSeek, Alibaba, Mistral, etc.
+
+### Inference Platforms
+
+Providers that host and serve models produced by others. They are added **after all model producers** are covered. Inference platforms must meet strict criteria:
+
+**Required:**
+
+- Publicly accessible API (no auth required) that returns model list with per-token pricing
+- Per-token pricing (not per-second, per-credit, per-DBU, or other units)
+- Pricing in USD, CNY, or EUR only
+- First-party data source (the platform's own API)
+
+**Rejected categories:**
+
+| Category            | Examples                                                                        | Reason                                         |
+| ------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------- |
+| Router/aggregator   | OpenRouter, NanoGPT, Moark, 302.ai, z.ai                                        | No own pricing — just route to other providers |
+| Auth-required API   | Hyperbolic, Nebius, Replicate                                                   | Can't scrape without credentials               |
+| Non-token pricing   | Replicate (per-second), Databricks (DBU), Snowflake (credits), Venice (credits) | Incompatible pricing model                     |
+| GPU cloud           | SubModel, GMI Cloud, Akash, io.net                                              | Rent GPUs, not per-token inference             |
+| CSR-only, no API    | NanoGPT, most Chinese platforms                                                 | Can't extract data programmatically            |
+| Enterprise/research | Abacus AI, Liquid AI, Inflection AI                                             | No public pricing/API                          |
+| Model hub           | ModelScope, HuggingFace                                                         | Duplicate data from producers                  |
+| Coding tools        | Umans.ai, Morph                                                                 | Not inference platforms                        |
+
 ## Update Workflow
 
 ### Automated Updates (API-based providers)

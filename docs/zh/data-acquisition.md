@@ -118,6 +118,111 @@ export async function scrape(): Promise<ScrapeResult> {
 }
 ```
 
+## Pipeline 架构
+
+### 为什么需要 Pipeline？
+
+单一的 `scrape()` 函数给 AI 代理太多自由度 — 它们可以硬编码模型 ID、编造定价或幻觉出能力标志。Pipeline 架构通过类型约束从根本上防止这些问题。
+
+### 两种 Pipeline 风格
+
+| 风格              | AI 定义的内容                                          | 运行时                                      | 防幻觉级别                                |
+| ----------------- | ------------------------------------------------------ | ------------------------------------------- | ----------------------------------------- |
+| 执行函数 Pipeline | 有类型的步骤函数 (`discover()`, `extractPricing()`, …) | `runPipeline()`                             | 每步骤的类型约束                          |
+| 声明式 Pipeline   | 仅 CSS Selector / Regex / JSONPath 规则                | `runDeclarativePipeline()` (固定、不可修改) | AI 只能定义"提取什么"，不能定义"怎么提取" |
+
+### 执行函数 Pipeline
+
+原始 Pipeline 将一个大函数拆成有类型的步骤。每个步骤的输出类型受约束 — `discover()` 只能返回 ID，`extractPricing()` 只能返回定价，等等。`assemble()` 步骤是纯合并，零编造空间。
+
+```
+discover()          → DiscoveredModel[]        // 只有 id + deprecated
+extractPricing()    → Map<id, Pricing>         // 只有定价
+extractLimits()     → Map<id, Limit>           // 只有上下文窗口
+extractModalities() → Map<id, Modalities>      // 只有模态
+extractFeatures()   → Map<id, Features>        // 只有能力标志
+extractDates()      → Map<id, Dates>           // 只有日期 (必填)
+deriveName()        → Map<id, string>          // 纯函数，从 id 推导
+deriveFamily()      → Map<id, string>          // 纯函数，从 id 推导
+assemble()          → Model[]                  // 纯合并，零编造空间
+```
+
+关键约束：
+
+1. `discover()` 只返回 `{ id, deprecated }` — 不可能硬编码模态/定价
+2. `extractPricing()` 只返回 `Map<id, Pricing>` — 函数签名限制了输出
+3. `assemble()` 是纯合并函数 — 没有编造空间
+4. 每个提取步骤必须声明数据源 URL (lint 可验证)
+5. 缺失数据 = 省略字段，不是 fallback 默认值
+
+### 声明式 Pipeline
+
+声明式 Pipeline 更进一步：AI 只能定义**提取什么**（规则），不能定义**怎么提取**（任意代码）。运行时是固定的、不可修改的。
+
+三种数据源，三种规则语言：
+
+| 数据源     | 规则语言     | 示例                                               |
+| ---------- | ------------ | -------------------------------------------------- |
+| HTML       | CSS Selector | `label: "Input", valueSelector: "div + div"`       |
+| Markdown   | Regex        | `pattern: /\*\*Input token limit\*\*\s*([\d,]+)/i` |
+| API (JSON) | JSONPath     | `jsonpath: "$.pricing.input"`                      |
+
+五种提取模式：
+
+| 模式             | 用途                 | 示例                               |
+| ---------------- | -------------------- | ---------------------------------- |
+| `labelValue`     | 找到标签，提取相邻值 | "Input token limit" → 1,048,576    |
+| `table`          | 提取结构化表格数据   | 有 model/input/output 列的定价表   |
+| `list`           | 提取所有匹配元素     | 从 `<a>` 链接提取模型 ID 列表      |
+| `section`        | 提取某个区域的内容   | 特定的 `<section>` 或 `## Heading` |
+| `field` (仅 API) | 提取单个 JSON 字段   | `$.pricing.input`                  |
+| `array` (仅 API) | 提取并映射 JSON 数组 | `$.data[*]` 加字段映射             |
+
+值转换函数是固定集合 — AI 只能选择使用哪个，不能定义新的：
+
+```
+parseFloat | parseInt | parseNumber | parsePrice | parseDate |
+parseModality | toLowerCase | toUpperCase | trim | removeCommas | identity
+```
+
+### 何时使用哪种风格
+
+- **声明式 Pipeline**：适用于数据源结构规律、可预测的新供应商（大多数基于 API 的供应商、简单的 HTML 表格）。
+- **执行函数 Pipeline**：提取逻辑过于复杂、声明式规则无法处理时使用（如 Cohere 的 `<ModelShowcase>` JSX 组件需要正则解析，超出当前规则类型的能力）。
+- **直接 `scrape()` 函数**：向后兼容，大多数现有供应商使用。
+
+## 供应商类型
+
+### 模型生产商
+
+开发和生产自有 AI 模型的供应商。它们是模型数据的**主要来源** — 其 API 和文档是权威数据源。
+
+示例：OpenAI、Anthropic、Google、Meta、DeepSeek、Alibaba、Mistral 等。
+
+### 推理平台
+
+托管和提供其他供应商模型的平台。在所有模型生产商完成后才添加。推理平台必须满足严格标准：
+
+**必要条件：**
+
+- 公开可访问的 API（无需认证），返回模型列表和按 token 定价
+- 按 token 定价（非按秒、按信用点、按 DBU 或其他单位）
+- 定价仅支持 USD、CNY 或 EUR
+- 第一方数据源（平台自身的 API）
+
+**被拒绝的类别：**
+
+| 类别           | 示例                                                                    | 原因                              |
+| -------------- | ----------------------------------------------------------------------- | --------------------------------- |
+| 路由器/聚合器  | OpenRouter、NanoGPT、Moark、302.ai、z.ai                                | 无自有定价 — 只是路由到其他供应商 |
+| 需认证的 API   | Hyperbolic、Nebius、Replicate                                           | 无法无凭证抓取                    |
+| 非 token 定价  | Replicate (按秒)、Databricks (DBU)、Snowflake (信用点)、Venice (信用点) | 定价模型不兼容                    |
+| GPU 云         | SubModel、GMI Cloud、Akash、io.net                                      | 租用 GPU，非按 token 推理         |
+| 仅 CSR、无 API | NanoGPT、大多数中国平台                                                 | 无法程序化提取数据                |
+| 企业/研究      | Abacus AI、Liquid AI、Inflection AI                                     | 无公开定价/API                    |
+| 模型中心       | ModelScope、HuggingFace                                                 | 重复生产商的数据                  |
+| 编程工具       | Umans.ai、Morph                                                         | 不是推理平台                      |
+
 ## 更新工作流
 
 ### 自动更新 (基于 API 的供应商)

@@ -6,6 +6,14 @@ Lessons learned from building and maintaining AI model catalogs. Each pitfall de
 
 ## Architecture
 
+### Prevent Fabrication by Design, Not Just by Lint
+
+**Pitfall**: Relying on post-hoc lint rules to catch hardcoded data in scrape functions.
+
+**Problems**: Lint rules are advisory — AI agents can bypass them. When a function has the freedom to return arbitrary `Model` objects, nothing prevents hardcoding except a rule that says "don't."
+
+**Principle**: Use type constraints to make fabrication impossible by construction. Pipeline steps with narrow output types (`discover()` → only IDs, `extractPricing()` → only pricing) make it structurally impossible to hardcode unrelated data. Declarative rules go further — AI can only define CSS selectors, regex patterns, and JSONPath expressions, never arbitrary code.
+
 ### Scrape Functions Must Be Pure Data Functions
 
 **Pitfall**: Mixing data fetching, transformation, and file I/O in a single function.
@@ -29,6 +37,30 @@ Lessons learned from building and maintaining AI model catalogs. Each pitfall de
 **Problems**: Third-party data can be outdated, inaccurate, or incomplete. No direct accountability — errors can't be traced to the provider's own documentation.
 
 **Principle**: All data must come from the provider's own API, website, or official documentation. No copying from third-party aggregators.
+
+### Inference Platforms Have Strict Vetting Criteria
+
+**Pitfall**: Adding any platform that serves LLM models without verifying data accessibility and pricing model.
+
+**Problems**: Many platforms look like inference providers but are actually routers (no own pricing), GPU rental services (no per-token pricing), or enterprise platforms (auth required). Adding them wastes effort and produces low-quality data.
+
+**Principle**: Inference platforms must have (1) publicly accessible API with no auth, (2) per-token pricing in USD/CNY/EUR, and (3) first-party data. Routers/aggregators, GPU clouds, credit-based platforms, and auth-required APIs are all rejected.
+
+### Model IDs with "/" Must Be Flattened
+
+**Pitfall**: Using model IDs that contain "/" directly as YAML filenames.
+
+**Problems**: Filesystem ENOENT errors when writing `models/owner/model.yaml` — the "/" creates a subdirectory that doesn't exist.
+
+**Principle**: Replace "/" with "--" in model IDs (e.g., `meta-llama/llama-3.1-8b` → `meta-llama--llama-3.1-8b`). This avoids filesystem path issues while keeping the ID recognizable.
+
+### Floating-Point Pricing Must Be Rounded
+
+**Pitfall**: Converting per-token prices to per-million-token prices produces floating-point noise (e.g., `0.19999999999999998` instead of `0.2`).
+
+**Problems**: YAML files contain ugly floating-point artifacts. Prices appear inaccurate even though the underlying calculation is correct.
+
+**Principle**: When converting per-token to per-M-token, use `Math.round(value * 1e6) / 1e6` to round to 6 decimal places, eliminating floating-point noise.
 
 ## Data Integrity
 
