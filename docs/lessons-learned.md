@@ -277,3 +277,24 @@ Lessons learned from building and maintaining AI model catalogs. Each pitfall de
 **Problems**: It took 9 rounds of CR to find all issues in the Google scraper. Each round found 1-5 issues the previous round missed — regex order, pricing type mismatches, missing model properties, README drift, edge cases in parsing.
 
 **Principle**: After building a scraper, run at least 3 rounds of CR. Keep going until a round finds zero issues. Each round should review the full scraper AND a sample of output YAML files.
+
+## JS Bundle & Router/Aggregator Platforms
+
+### CSR-rendered pricing pages may embed data in JS bundles
+
+When a pricing page is client-side rendered (React/Next.js), the pricing data is often embedded in publicly accessible JavaScript chunks rather than fetched from a separate API. This is a valid first-party data source:
+
+- **nano-gpt**: Pricing data embedded in `30244-*.js` chunk with `inputRate`/`outputRate` per-token values and a profit margin multiplier `R=1.7`. Entries with `/R` suffix store at-cost pricing (at-cost = value / R), but the value before `/R` IS the customer price.
+- **Azure OpenAI**: Pricing page is CSR-rendered; data extracted via browser automation.
+- **Google Vertex AI**: Same as Azure — CSR-rendered pricing page scraped via browser.
+
+**Key insight**: The JS bundle URL can be found by parsing the HTML of the pricing page for `<script src="...">` tags. The bundle URL typically contains a content hash (e.g., `30244-66042ba6af5cbcfb.js`) that changes on each deployment.
+
+### Router/aggregator platforms with per-token pricing are acceptable
+
+Platforms like OpenRouter and nano-gpt are router/aggregators that don't produce their own models, but they DO have their own per-token pricing data accessible from first-party sources:
+
+- **OpenRouter**: Public API (`/api/v1/models`) returns 300+ models with per-token USD pricing.
+- **nano-gpt**: Public API for model list + JS bundle for per-token USD pricing (555 models).
+
+These are treated as inference platforms, not rejected as "just routers", because they provide verifiable first-party per-token pricing data.

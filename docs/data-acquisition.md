@@ -205,23 +205,25 @@ Providers that host and serve models produced by others. They are added **after 
 
 **Required:**
 
-- Publicly accessible API (no auth required) that returns model list with per-token pricing
 - Per-token pricing (not per-second, per-credit, per-DBU, or other units)
 - Pricing in USD, CNY, or EUR only
-- First-party data source (the platform's own API)
+- First-party data source (the platform's own API, website, or embedded JS bundles)
+
+**Accepted router/aggregator platforms:** Some router/aggregator platforms (e.g., OpenRouter, nano-gpt) are accepted because they have their own per-token pricing data accessible from first-party sources (public API or JS bundles). They are treated as inference platforms since they expose per-token USD pricing for hundreds of models.
+
+**Note on data accessibility:** The "publicly accessible API" requirement is relaxed for platforms where pricing data can be extracted from first-party JavaScript bundles embedded in their website. This applies to CSR-rendered pricing pages where the pricing data is embedded in publicly accessible JS chunks (e.g., nano-gpt's pricing JS bundle).
 
 **Rejected categories:**
 
-| Category            | Examples                                                                        | Reason                                         |
-| ------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------- |
-| Router/aggregator   | OpenRouter, NanoGPT, Moark, 302.ai, z.ai                                        | No own pricing — just route to other providers |
-| Auth-required API   | Hyperbolic, Nebius, Replicate                                                   | Can't scrape without credentials               |
-| Non-token pricing   | Replicate (per-second), Databricks (DBU), Snowflake (credits), Venice (credits) | Incompatible pricing model                     |
-| GPU cloud           | SubModel, GMI Cloud, Akash, io.net                                              | Rent GPUs, not per-token inference             |
-| CSR-only, no API    | NanoGPT, most Chinese platforms                                                 | Can't extract data programmatically            |
-| Enterprise/research | Abacus AI, Liquid AI, Inflection AI                                             | No public pricing/API                          |
-| Model hub           | ModelScope, HuggingFace                                                         | Duplicate data from producers                  |
-| Coding tools        | Umans.ai, Morph                                                                 | Not inference platforms                        |
+| Category            | Examples                                                                        | Reason                              |
+| ------------------- | ------------------------------------------------------------------------------- | ----------------------------------- |
+| Auth-required API   | Hyperbolic, Nebius, Replicate                                                   | Can't scrape without credentials    |
+| Non-token pricing   | Replicate (per-second), Databricks (DBU), Snowflake (credits), Venice (credits) | Incompatible pricing model          |
+| GPU cloud           | SubModel, GMI Cloud, Akash, io.net                                              | Rent GPUs, not per-token inference  |
+| CSR-only, no API    | Most Chinese platforms                                                          | Can't extract data programmatically |
+| Enterprise/research | Abacus AI, Liquid AI, Inflection AI                                             | No public pricing/API               |
+| Model hub           | ModelScope, HuggingFace                                                         | Duplicate data from producers       |
+| Coding tools        | Umans.ai, Morph                                                                 | Not inference platforms             |
 
 ## Update Workflow
 

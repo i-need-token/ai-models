@@ -205,23 +205,25 @@ parseModality | toLowerCase | toUpperCase | trim | removeCommas | identity
 
 **必要条件：**
 
-- 公开可访问的 API（无需认证），返回模型列表和按 token 定价
 - 按 token 定价（非按秒、按信用点、按 DBU 或其他单位）
 - 定价仅支持 USD、CNY 或 EUR
-- 第一方数据源（平台自身的 API）
+- 第一方数据源（平台自身的 API、网站或嵌入的 JS 包）
+
+**已接受的路由器/聚合器平台：** 部分路由器/聚合器平台（如 OpenRouter、nano-gpt）被接受，因为它们拥有可从第一方来源（公开 API 或 JS 包）访问的按 token 定价数据。它们被视为推理平台，因为它们为数百个模型提供按 token USD 定价。
+
+**关于数据可访问性的说明：** 对于定价数据可以从嵌入网站的第一方 JavaScript 包中提取的平台，"公开可访问 API" 的要求可以放宽。这适用于 CSR 渲染的定价页面，其中定价数据嵌入在公开可访问的 JS 块中（例如 nano-gpt 的定价 JS 包）。
 
 **被拒绝的类别：**
 
-| 类别           | 示例                                                                    | 原因                              |
-| -------------- | ----------------------------------------------------------------------- | --------------------------------- |
-| 路由器/聚合器  | OpenRouter、NanoGPT、Moark、302.ai、z.ai                                | 无自有定价 — 只是路由到其他供应商 |
-| 需认证的 API   | Hyperbolic、Nebius、Replicate                                           | 无法无凭证抓取                    |
-| 非 token 定价  | Replicate (按秒)、Databricks (DBU)、Snowflake (信用点)、Venice (信用点) | 定价模型不兼容                    |
-| GPU 云         | SubModel、GMI Cloud、Akash、io.net                                      | 租用 GPU，非按 token 推理         |
-| 仅 CSR、无 API | NanoGPT、大多数中国平台                                                 | 无法程序化提取数据                |
-| 企业/研究      | Abacus AI、Liquid AI、Inflection AI                                     | 无公开定价/API                    |
-| 模型中心       | ModelScope、HuggingFace                                                 | 重复生产商的数据                  |
-| 编程工具       | Umans.ai、Morph                                                         | 不是推理平台                      |
+| 类别           | 示例                                                                    | 原因                      |
+| -------------- | ----------------------------------------------------------------------- | ------------------------- |
+| 需认证的 API   | Hyperbolic、Nebius、Replicate                                           | 无法无凭证抓取            |
+| 非 token 定价  | Replicate (按秒)、Databricks (DBU)、Snowflake (信用点)、Venice (信用点) | 定价模型不兼容            |
+| GPU 云         | SubModel、GMI Cloud、Akash、io.net                                      | 租用 GPU，非按 token 推理 |
+| 仅 CSR、无 API | 大多数中国平台                                                          | 无法程序化提取数据        |
+| 企业/研究      | Abacus AI、Liquid AI、Inflection AI                                     | 无公开定价/API            |
+| 模型中心       | ModelScope、HuggingFace                                                 | 重复生产商的数据          |
+| 编程工具       | Umans.ai、Morph                                                         | 不是推理平台              |
 
 ## 更新工作流
 
