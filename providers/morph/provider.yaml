@@ -1,0 +1,6 @@
+id: morph
+name: Morph
+url: https://morphllm.com
+api_docs: https://docs.morphllm.com
+apis:
+  openai: https://api.morphllm.com/v1
