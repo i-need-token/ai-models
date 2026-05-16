@@ -13,7 +13,7 @@ modalities:
 pricing:
   unit: per_mtok
   input: 1.8
-  output: 1.62
+  output: 1.8
 release_date: 2026-05-17
 last_updated: 2026-05-17
 reasoning: true

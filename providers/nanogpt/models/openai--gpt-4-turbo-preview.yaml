@@ -12,8 +12,8 @@ modalities:
     - text
 pricing:
   unit: per_mtok
-  input: 10
-  output: 30
+  input: 5.88
+  output: 17.65
 release_date: 2026-05-17
 last_updated: 2026-05-17
 tool_call: true

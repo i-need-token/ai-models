@@ -55,11 +55,41 @@ async function fetchText(url: string): Promise<string> {
 
 async function findPricingBundleUrl(): Promise<string> {
   const html = await fetchText("https://nano-gpt.com/pricing");
-  const match = html.match(/src="([^"]*30244[^"]*)"/);
-  if (!match || !match[1]) throw new Error("Could not find pricing JS bundle URL");
-  let url = match[1].split("?")[0] as string;
-  if (url.startsWith("/")) url = `https://nano-gpt.com${url}`;
-  return url;
+  // The pricing data chunk number changes over time (was 30244, then 75855).
+  // Instead of hardcoding, find the largest numbered chunk that contains pricing data.
+  // We look for chunks with 5-digit numbers (e.g., 30244, 75855) which are
+  // typically the data bundles.
+  const allChunks = html.match(/src="(\/_next\/static\/chunks\/\d+-[a-f0-9]+\.js[^"]*)"/g);
+  if (!allChunks) throw new Error("Could not find any JS bundle URLs");
+
+  // Try each chunk to find the one with pricing data
+  for (const chunkRef of allChunks) {
+    const urlMatch = chunkRef.match(/src="([^"]+)"/);
+    if (!urlMatch || !urlMatch[1]) continue;
+    let url = urlMatch[1] as string;
+    if (url.startsWith("/")) url = `https://nano-gpt.com${url}`;
+
+    // Only check large numbered chunks (likely data bundles)
+    const numMatch = url.match(/\/([\d]+)-/);
+    if (!numMatch || !numMatch[1]) continue;
+    const chunkNum = parseInt(numMatch[1] as string, 10);
+    if (chunkNum < 10000) continue; // Skip small chunks (framework code)
+
+    try {
+      // Download a sample of the chunk to check for pricing data
+      const sample = await fetchText(url);
+      if (
+        sample.includes("inputRate") &&
+        sample.includes("outputRate") &&
+        sample.includes("default")
+      ) {
+        return url;
+      }
+    } catch {
+      // Skip chunks that fail to download
+    }
+  }
+  throw new Error("Could not find pricing JS bundle URL");
 }
 
 interface PricingEntry {
@@ -76,7 +106,7 @@ function parsePricingBundle(jsContent: string): Record<string, PricingEntry> {
   // Pattern: "model-id":{inputRate:X,outputRate:Y,...}
   // The /R suffix indicates at-cost pricing, but the value before /R
   // IS the customer price. So we do NOT apply the R multiplier.
-  const entryPattern = /"([a-zA-Z0-9_./:-]+)":\{([^}]+)\}/g;
+  const entryPattern = /"([^"]+)":\{([^}]+)\}/g;
   let match: RegExpExecArray | null;
 
   while ((match = entryPattern.exec(jsContent)) !== null) {

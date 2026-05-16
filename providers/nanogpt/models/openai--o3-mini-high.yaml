@@ -1,6 +1,6 @@
-id: Qwen3.5-27B-Writer-V2-Derestricted
-name: Qwen3.5 27B Writer V2 Derestricted
-family: qwen
+id: openai--o3-mini-high
+name: "OpenAI: o3 MINI high"
+family: o-series
 temperature: true
 limit:
   context: 131072
@@ -12,8 +12,8 @@ modalities:
     - text
 pricing:
   unit: per_mtok
-  input: 0.18
-  output: 0.18
+  input: 0.64
+  output: 2.588
 release_date: 2026-05-17
 last_updated: 2026-05-17
-tool_call: true
+reasoning: true
