@@ -1,0 +1,6 @@
+id: 01ai
+name: 01.AI
+url: https://www.01.ai
+api_docs: https://platform.lingyiwanwu.com/docs
+apis:
+  openai: https://api.lingyiwanwu.com/v1
