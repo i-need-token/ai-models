@@ -1,0 +1,21 @@
+id: baidu--ernie-4.5-vl-28b-a3b
+name: ERNIE 4.5 VL 28B A3B
+family: ernie
+temperature: true
+limit:
+  context: 30000
+  output: 8000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.14
+  output: 0.56
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

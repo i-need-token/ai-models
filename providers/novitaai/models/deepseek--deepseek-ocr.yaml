@@ -1,0 +1,19 @@
+id: deepseek--deepseek-ocr
+name: DeepSeek-OCR
+family: deepseek
+temperature: true
+limit:
+  context: 8192
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.03
+  output: 0.03
+release_date: 2026-05-16
+last_updated: 2026-05-16

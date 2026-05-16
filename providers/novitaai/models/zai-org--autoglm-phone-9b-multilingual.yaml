@@ -1,0 +1,19 @@
+id: zai-org--autoglm-phone-9b-multilingual
+name: AutoGLM-Phone-9B-Multilingual
+family: glm
+temperature: true
+limit:
+  context: 65536
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.035
+  output: 0.138
+release_date: 2026-05-16
+last_updated: 2026-05-16

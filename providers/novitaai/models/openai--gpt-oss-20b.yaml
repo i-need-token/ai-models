@@ -1,0 +1,21 @@
+id: openai--gpt-oss-20b
+name: "OpenAI: GPT OSS 20B"
+family: gpt-oss
+temperature: true
+limit:
+  context: 131072
+  output: 32768
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.04
+  output: 0.15
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+structured_output: true

@@ -1,0 +1,19 @@
+id: baidu--ernie-4.5-300b-a47b-paddle
+name: ERNIE 4.5 300B A47B
+family: ernie
+temperature: true
+limit:
+  context: 123000
+  output: 12000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.28
+  output: 1.1
+release_date: 2026-05-16
+last_updated: 2026-05-16
+structured_output: true

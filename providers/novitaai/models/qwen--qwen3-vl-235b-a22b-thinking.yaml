@@ -1,0 +1,22 @@
+id: qwen--qwen3-vl-235b-a22b-thinking
+name: Qwen3 VL 235B A22B Thinking
+family: qwen3
+temperature: true
+limit:
+  context: 131072
+  output: 32768
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.98
+  output: 3.95
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

@@ -1,0 +1,19 @@
+id: deepseek--deepseek-v3-turbo
+name: "DeepSeek V3 (Turbo)\t"
+family: deepseek
+temperature: true
+limit:
+  context: 64000
+  output: 16000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.4
+  output: 1.3
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

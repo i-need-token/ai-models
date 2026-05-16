@@ -1,0 +1,6 @@
+id: novitaai
+name: Novita AI
+url: https://novita.ai
+api_docs: https://docs.novita.ai
+apis:
+  openai: https://api.novita.ai/openai
