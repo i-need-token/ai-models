@@ -1,0 +1,20 @@
+id: llama-3.1-nemotron-ultra-253b-v1
+name: llama-3.1-nemotron-ultra-253b-v1
+family: llama-3
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.537
+  output: 1.61
+release_date: 2025-04-07
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

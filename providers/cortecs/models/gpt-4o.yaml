@@ -1,0 +1,22 @@
+id: gpt-4o
+name: gpt-4o
+family: gpt-4
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 2.387
+  output: 9.547
+  cache_read: 1.194
+release_date: 2024-11-20
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

@@ -1,0 +1,19 @@
+id: mistral-7b-instruct-v0.3
+name: mistral-7b-instruct-v0.3
+family: mistral-7b
+temperature: true
+limit:
+  context: 127000
+  output: 127000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.1
+  output: 0.1
+release_date: 2025-05-26
+last_updated: 2026-05-16
+tool_call: true

@@ -1,0 +1,21 @@
+id: mistral-large-2411
+name: mistral-large-2411
+family: mistral-large
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 1.8
+  output: 5.4
+  cache_read: 0.18
+release_date: 2024-11-18
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

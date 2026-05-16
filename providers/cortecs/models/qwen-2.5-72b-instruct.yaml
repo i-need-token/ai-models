@@ -1,0 +1,20 @@
+id: qwen-2.5-72b-instruct
+name: qwen-2.5-72b-instruct
+family: qwen
+temperature: true
+limit:
+  context: 33000
+  output: 33000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.062
+  output: 0.231
+  cache_read: 0.016
+release_date: 2026-03-25
+last_updated: 2026-05-16
+tool_call: true

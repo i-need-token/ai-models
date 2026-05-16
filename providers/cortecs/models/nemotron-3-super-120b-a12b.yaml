@@ -1,0 +1,21 @@
+id: nemotron-3-super-120b-a12b
+name: nemotron-3-super-120b-a12b
+family: nemotron
+temperature: true
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.266
+  output: 0.799
+  cache_read: 0.067
+release_date: 2026-04-09
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

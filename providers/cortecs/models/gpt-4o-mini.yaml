@@ -1,0 +1,22 @@
+id: gpt-4o-mini
+name: gpt-4o-mini
+family: gpt-4
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.143
+  output: 0.573
+  cache_read: 0.073
+release_date: 2024-07-18
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

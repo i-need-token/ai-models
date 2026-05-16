@@ -1,0 +1,20 @@
+id: llama-3.1-8b-instruct
+name: llama-3.1-8b-instruct
+family: llama-3
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.018
+  output: 0.054
+release_date: 2024-04-09
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

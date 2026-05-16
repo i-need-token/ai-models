@@ -1,0 +1,22 @@
+id: mistral-small-2603
+name: mistral-small-2603
+family: mistral-small
+temperature: true
+limit:
+  context: 256000
+  output: 256000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.128
+  output: 0.51
+  cache_read: 0.013
+release_date: 2026-03-17
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

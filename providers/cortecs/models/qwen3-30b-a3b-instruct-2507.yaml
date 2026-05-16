@@ -1,0 +1,20 @@
+id: qwen3-30b-a3b-instruct-2507
+name: qwen3-30b-a3b-instruct-2507
+family: qwen3
+temperature: true
+limit:
+  context: 262000
+  output: 262000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.089
+  output: 0.268
+release_date: 2025-07-28
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

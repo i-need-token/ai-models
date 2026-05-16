@@ -1,0 +1,20 @@
+id: mistral-nemo-instruct-2407
+name: mistral-nemo-instruct-2407
+family: mistral-nemo
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.13
+  output: 0.13
+  cache_read: 0.013
+release_date: 2024-08-07
+last_updated: 2026-05-16
+tool_call: true

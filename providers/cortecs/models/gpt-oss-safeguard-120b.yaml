@@ -1,0 +1,20 @@
+id: gpt-oss-safeguard-120b
+name: gpt-oss-safeguard-120b
+family: gpt-oss
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.161
+  output: 0.626
+release_date: 2025-12-04
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

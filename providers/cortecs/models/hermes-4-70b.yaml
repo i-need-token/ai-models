@@ -1,0 +1,19 @@
+id: hermes-4-70b
+name: hermes-4-70b
+family: hermes
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.116
+  output: 0.358
+release_date: 2025-08-13
+last_updated: 2026-05-16
+tool_call: true

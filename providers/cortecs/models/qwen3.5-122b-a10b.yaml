@@ -1,0 +1,21 @@
+id: qwen3.5-122b-a10b
+name: qwen3.5-122b-a10b
+family: qwen3.5
+temperature: true
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.444
+  output: 3.106
+  cache_read: 0.111
+release_date: 2026-04-09
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

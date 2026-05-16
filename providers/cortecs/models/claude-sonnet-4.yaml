@@ -1,0 +1,22 @@
+id: claude-sonnet-4
+name: claude-sonnet-4
+family: claude
+temperature: true
+limit:
+  context: 200000
+  output: 200000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 2.601
+  output: 13.01
+  cache_read: 0.26
+release_date: 2025-04-14
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

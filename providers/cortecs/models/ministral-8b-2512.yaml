@@ -1,0 +1,21 @@
+id: ministral-8b-2512
+name: ministral-8b-2512
+family: ministral
+temperature: true
+limit:
+  context: 256000
+  output: 256000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.15
+  output: 0.15
+  cache_read: 0.015
+release_date: 2025-12-03
+last_updated: 2026-05-16
+tool_call: true

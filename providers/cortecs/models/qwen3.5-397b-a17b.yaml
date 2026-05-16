@@ -1,0 +1,20 @@
+id: qwen3.5-397b-a17b
+name: qwen3.5-397b-a17b
+family: qwen3.5
+temperature: true
+limit:
+  context: 250000
+  output: 250000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.6
+  output: 3.6
+release_date: 2026-03-18
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

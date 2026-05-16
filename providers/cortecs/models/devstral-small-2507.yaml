@@ -1,0 +1,20 @@
+id: devstral-small-2507
+name: devstral-small-2507
+family: devstral
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.1
+  output: 0.3
+  cache_read: 0.01
+release_date: 2024-08-07
+last_updated: 2026-05-16
+tool_call: true

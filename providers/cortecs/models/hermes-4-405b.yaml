@@ -1,0 +1,19 @@
+id: hermes-4-405b
+name: hermes-4-405b
+family: hermes
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.894
+  output: 2.683
+release_date: 2024-08-13
+last_updated: 2026-05-16
+tool_call: true

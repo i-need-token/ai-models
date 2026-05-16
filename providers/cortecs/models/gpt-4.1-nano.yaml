@@ -1,0 +1,22 @@
+id: gpt-4.1-nano
+name: gpt-4.1-nano
+family: gpt-4
+temperature: true
+limit:
+  context: 1047576
+  output: 1047576
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.1
+  output: 0.39
+  cache_read: 0.05
+release_date: 2025-04-14
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

@@ -1,0 +1,21 @@
+id: pixtral-large-2502
+name: pixtral-large-2502
+family: pixtral
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 1.789
+  output: 5.366
+release_date: 2025-05-26
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

@@ -1,0 +1,20 @@
+id: llama-4-maverick
+name: llama-4-maverick
+family: llama-4
+temperature: true
+limit:
+  context: 1050000
+  output: 1050000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.124
+  output: 0.603
+  cache_read: 0.03
+release_date: 2025-03-26
+last_updated: 2026-05-16
+tool_call: true

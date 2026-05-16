@@ -1,0 +1,18 @@
+id: codellama-13b-instruct-hf
+name: codellama-13b-instruct-hf
+family: codellama
+temperature: true
+limit:
+  context: 16000
+  output: 16000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.45
+  output: 0.45
+release_date: 2024-03-14
+last_updated: 2026-05-16

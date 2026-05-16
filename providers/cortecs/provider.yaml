@@ -1,0 +1,6 @@
+id: cortecs
+name: Cortecs
+url: https://cortecs.ai
+api_docs: https://docs.cortecs.ai
+apis:
+  openai: https://api.cortecs.ai/v1

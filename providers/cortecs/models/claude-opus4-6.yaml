@@ -1,0 +1,22 @@
+id: claude-opus4-6
+name: claude-opus4-6
+family: claude
+temperature: true
+limit:
+  context: 1000000
+  output: 1000000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 4.769
+  output: 23.843
+  cache_read: 0.477
+release_date: 2026-02-06
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

@@ -1,0 +1,20 @@
+id: intellect-3
+name: intellect-3
+family: intellect
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.179
+  output: 0.984
+release_date: 2025-11-27
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

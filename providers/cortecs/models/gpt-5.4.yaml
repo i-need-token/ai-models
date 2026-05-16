@@ -1,0 +1,22 @@
+id: gpt-5.4
+name: gpt-5.4
+family: gpt-5
+temperature: true
+limit:
+  context: 1050000
+  output: 1050000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 2.601
+  output: 13.872
+  cache_read: 0.217
+release_date: 2026-04-24
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

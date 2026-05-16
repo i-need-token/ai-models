@@ -1,0 +1,22 @@
+id: magistral-medium-2509
+name: magistral-medium-2509
+family: magistral
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 2
+  output: 5
+  cache_read: 0.2
+release_date: 2025-09-18
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

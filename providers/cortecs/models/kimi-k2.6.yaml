@@ -1,0 +1,22 @@
+id: kimi-k2.6
+name: kimi-k2.6
+family: kimi
+temperature: true
+limit:
+  context: 256000
+  output: 256000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.694
+  output: 3.034
+  cache_read: 0.173
+release_date: 2026-04-23
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

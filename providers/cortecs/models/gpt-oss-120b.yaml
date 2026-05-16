@@ -1,0 +1,21 @@
+id: gpt-oss-120b
+name: gpt-oss-120b
+family: gpt-oss
+temperature: true
+limit:
+  context: 131000
+  output: 131000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.035
+  output: 0.177
+  cache_read: 0.009
+release_date: 2025-08-05
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

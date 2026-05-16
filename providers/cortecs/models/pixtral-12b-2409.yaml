@@ -1,0 +1,20 @@
+id: pixtral-12b-2409
+name: pixtral-12b-2409
+family: pixtral
+temperature: true
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.2
+  output: 0.2
+release_date: 2024-11-10
+last_updated: 2026-05-16
+reasoning: true

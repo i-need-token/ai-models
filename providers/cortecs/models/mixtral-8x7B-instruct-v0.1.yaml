@@ -1,0 +1,19 @@
+id: mixtral-8x7B-instruct-v0.1
+name: mixtral-8x7B-instruct-v0.1
+family: mixtral
+temperature: true
+limit:
+  context: 32000
+  output: 32000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.438
+  output: 0.68
+release_date: 2023-12-11
+last_updated: 2026-05-16
+reasoning: true

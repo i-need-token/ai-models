@@ -1,0 +1,20 @@
+id: qwen2.5-vl-72b-instruct
+name: qwen2.5-vl-72b-instruct
+family: qwen2.5
+temperature: true
+limit:
+  context: 32000
+  output: 32000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.224
+  output: 0.671
+release_date: 2025-01-27
+last_updated: 2026-05-16
+reasoning: true

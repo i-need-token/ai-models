@@ -1,0 +1,21 @@
+id: gemma-4-26b-a4b-it
+name: gemma-4-26b-a4b-it
+family: gemma
+temperature: true
+limit:
+  context: 262000
+  output: 262000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.25
+  output: 0.5
+release_date: 2026-05-07
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

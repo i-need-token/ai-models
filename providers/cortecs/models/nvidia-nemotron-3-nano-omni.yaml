@@ -1,0 +1,20 @@
+id: nvidia-nemotron-3-nano-omni
+name: nvidia-nemotron-3-nano-omni
+family: nemotron
+temperature: true
+limit:
+  context: 300000
+  output: 300000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.053
+  output: 0.213
+release_date: 2026-04-29
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true
