@@ -1,0 +1,20 @@
+id: nvidia-nemotron-nano-2-vl
+name: NVIDIA Nemotron Nano 2 VL
+family: nemotron
+temperature: true
+limit:
+  context: 4096
+  output: 4096
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.6
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

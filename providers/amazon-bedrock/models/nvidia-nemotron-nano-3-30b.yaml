@@ -1,0 +1,19 @@
+id: nvidia-nemotron-nano-3-30b
+name: Nemotron Nano 3 30B
+family: nemotron
+temperature: true
+limit:
+  context: 4096
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.06
+  output: 0.24
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

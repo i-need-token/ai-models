@@ -1,0 +1,19 @@
+id: mistral-mixtral-8x7b
+name: Mixtral 8x7B Instruct
+family: mixtral
+temperature: true
+limit:
+  context: 32000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.45
+  output: 0.7
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

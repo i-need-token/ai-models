@@ -1,0 +1,6 @@
+id: amazon-bedrock
+name: Amazon Bedrock
+url: https://aws.amazon.com/bedrock/
+api_docs: https://docs.aws.amazon.com/bedrock/
+apis:
+  openai: https://bedrock-runtime.us-east-1.amazonaws.com/openai
