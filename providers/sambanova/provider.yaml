@@ -1,0 +1,6 @@
+id: sambanova
+name: SambaNova
+url: https://sambanova.ai
+api_docs: https://docs.sambanova.ai
+apis:
+  openai: https://api.sambanova.ai/v1

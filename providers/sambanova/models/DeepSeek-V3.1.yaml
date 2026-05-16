@@ -1,0 +1,20 @@
+id: DeepSeek-V3.1
+name: DeepSeek V3.1
+family: deepseek
+temperature: true
+limit:
+  context: 131072
+  output: 7168
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 3
+  output: 4.5
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+open_weights: true
