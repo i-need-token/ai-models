@@ -1,0 +1,6 @@
+id: textsynth
+name: TextSynth
+url: https://textsynth.com
+api_docs: https://textsynth.com/documentation.html
+apis:
+  openai: https://api.textsynth.com/v1

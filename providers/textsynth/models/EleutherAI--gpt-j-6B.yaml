@@ -1,0 +1,18 @@
+id: EleutherAI--gpt-j-6B
+name: GPT-J 6B
+family: gpt-j
+limit:
+  context: 2048
+  output: 2048
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
