@@ -1,0 +1,6 @@
+id: siliconflow-cn
+name: SiliconFlow CN
+url: https://siliconflow.cn
+api_docs: https://docs.siliconflow.cn
+apis:
+  openai: https://api.siliconflow.cn/v1

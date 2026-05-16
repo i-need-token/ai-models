@@ -1,0 +1,19 @@
+id: qwen3-omni-30b-a3b-instruct
+name: Qwen3 Omni 30B A3B Instruct
+family: qwen3-omni
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.7
+  output: 2.8
+release_date: 2026-05-17
+last_updated: 2026-05-17

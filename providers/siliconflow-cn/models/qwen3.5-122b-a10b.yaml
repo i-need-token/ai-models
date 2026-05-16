@@ -1,0 +1,18 @@
+id: qwen3.5-122b-a10b
+name: Qwen 3.5 122B A10B
+family: qwen3.5
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 2
+  output: 16
+release_date: 2026-05-17
+last_updated: 2026-05-17

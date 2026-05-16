@@ -1,0 +1,18 @@
+id: hunyuan-a13b-instruct
+name: Hunyuan A13B Instruct
+family: hunyuan
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1
+  output: 4
+release_date: 2026-05-17
+last_updated: 2026-05-17
