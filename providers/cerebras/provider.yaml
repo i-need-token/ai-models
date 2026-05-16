@@ -1,0 +1,6 @@
+id: cerebras
+name: Cerebras
+url: https://cerebras.ai
+api_docs: https://docs.cerebras.ai
+apis:
+  openai: https://api.cerebras.ai/v1

@@ -1,0 +1,18 @@
+id: qwen-2.5-32b
+name: Qwen 2.5 32B
+family: qwen
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+open_weights: true
