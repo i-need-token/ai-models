@@ -1,0 +1,18 @@
+id: nemotron3-super
+name: Nemotron 3 Super on Inference.net
+family: nemotron
+limit:
+  context: 4096
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2.5
+  output: 5
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

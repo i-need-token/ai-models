@@ -1,0 +1,19 @@
+id: cliptagger-12b
+name: ClipTagger 12B
+family: cliptagger
+limit:
+  context: 8192
+  output: 8192
+modalities:
+  input:
+    - image
+    - video
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.5
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

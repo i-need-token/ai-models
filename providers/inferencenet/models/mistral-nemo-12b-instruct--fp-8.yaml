@@ -1,0 +1,19 @@
+id: mistral-nemo-12b-instruct--fp-8
+name: Mistral Nemo 12B on Inference.net
+family: mistral
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.0375
+  output: 0.1
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+open_weights: true

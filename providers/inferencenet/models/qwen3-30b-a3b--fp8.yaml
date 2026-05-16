@@ -1,0 +1,19 @@
+id: qwen3-30b-a3b--fp8
+name: Qwen3 30B A3B on Inference.net
+family: qwen3
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.08
+  output: 0.29
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+open_weights: true

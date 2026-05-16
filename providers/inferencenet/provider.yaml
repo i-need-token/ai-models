@@ -1,0 +1,6 @@
+id: inferencenet
+name: Inference.net
+url: https://inference.net
+api_docs: https://inference.net/docs
+apis:
+  openai: https://inference.net/api/v1
