@@ -1,0 +1,19 @@
+id: glm-5-fast
+name: GLM-5 Fast
+family: glm
+temperature: true
+limit:
+  context: 202736
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.1
+  output: 3.6
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

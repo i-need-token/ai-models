@@ -1,0 +1,20 @@
+id: qwen3.5-397b-fast
+name: Qwen3.5 397B Fast
+family: qwen3.5
+temperature: true
+limit:
+  context: 262128
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.69
+  output: 4.14
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+structured_output: true

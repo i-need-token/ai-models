@@ -1,0 +1,6 @@
+id: neuralwatt
+name: NeuralWatt
+url: https://neuralwatt.com
+api_docs: https://neuralwatt.com/docs
+apis:
+  openai: https://api.neuralwatt.com/v1
