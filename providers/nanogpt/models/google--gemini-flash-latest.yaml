@@ -1,0 +1,19 @@
+id: google--gemini-flash-latest
+name: "Google: gemini FLASH latest"
+family: gemini
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.5
+  output: 3
+release_date: 2026-05-16
+last_updated: 2026-05-16

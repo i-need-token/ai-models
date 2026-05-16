@@ -1,0 +1,20 @@
+id: qwen--qwen3-next-80b-a3b-thinking
+name: "Qwen: qwen3 next 80B a3b thinking"
+family: qwen
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.15
+  output: 0.65
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

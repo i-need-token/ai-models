@@ -1,0 +1,19 @@
+id: zai-org--glm-5.1--thinking
+name: "Zai-org: glm 5.1"
+family: glm
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.75
+  output: 2.6
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

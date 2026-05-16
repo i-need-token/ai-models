@@ -1,0 +1,18 @@
+id: liquid--lfm-2-24b-a2b
+name: "Liquid: lfm 2 24B a2b"
+family: lfm
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.03
+  output: 0.12
+release_date: 2026-05-16
+last_updated: 2026-05-16

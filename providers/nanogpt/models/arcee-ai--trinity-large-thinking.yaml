@@ -1,0 +1,19 @@
+id: arcee-ai--trinity-large-thinking
+name: "Arcee-ai: trinity large thinking"
+family: arcee
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.25
+  output: 0.9
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

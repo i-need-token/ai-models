@@ -1,0 +1,18 @@
+id: doubao-seed-2-0-lite-260215
+name: doubao seed 2 0 LITE 260215
+family: doubao
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.0946
+  output: 0.5654
+release_date: 2026-05-16
+last_updated: 2026-05-16

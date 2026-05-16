@@ -1,0 +1,19 @@
+id: holo3-35b-a3b--thinking
+name: holo3 35B a3b
+family: o-series
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.25
+  output: 1.8
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

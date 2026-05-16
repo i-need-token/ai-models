@@ -1,0 +1,18 @@
+id: qvq-max
+name: qvq MAX
+family: other
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 1.26
+  output: 4.77
+release_date: 2026-05-16
+last_updated: 2026-05-16

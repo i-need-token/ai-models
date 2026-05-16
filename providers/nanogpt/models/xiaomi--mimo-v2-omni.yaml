@@ -1,0 +1,20 @@
+id: xiaomi--mimo-v2-omni
+name: "Xiaomi: mimo v2 omni"
+family: mimo
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.4
+  output: 2
+  cache_read: 0.08
+release_date: 2026-05-16
+last_updated: 2026-05-16

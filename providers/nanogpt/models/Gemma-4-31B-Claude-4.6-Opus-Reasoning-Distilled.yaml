@@ -1,0 +1,21 @@
+id: Gemma-4-31B-Claude-4.6-Opus-Reasoning-Distilled
+name: Gemma 4 31B Claude 4.6 Opus Reasoning Distilled
+family: gemma
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.3
+  output: 0.3
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

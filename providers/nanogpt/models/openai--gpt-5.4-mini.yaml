@@ -1,0 +1,21 @@
+id: openai--gpt-5.4-mini
+name: "OpenAI: gpt 5.4 MINI"
+family: gpt-5
+temperature: true
+limit:
+  context: 1048576
+  output: 131072
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.75
+  output: 4.5
+  cache_read: 0.075
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

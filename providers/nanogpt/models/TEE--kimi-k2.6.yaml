@@ -1,0 +1,19 @@
+id: TEE--kimi-k2.6
+name: "TEE: kimi k2.6"
+family: kimi
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 1.5
+  output: 5.25
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

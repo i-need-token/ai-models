@@ -1,0 +1,18 @@
+id: anthropic--claude-sonnet-latest
+name: "Anthropic: claude sonnet latest"
+family: claude-sonnet
+temperature: true
+limit:
+  context: 200000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 3
+  output: 15
+release_date: 2026-05-16
+last_updated: 2026-05-16

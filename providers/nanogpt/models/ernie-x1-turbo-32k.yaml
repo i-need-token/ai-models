@@ -1,0 +1,18 @@
+id: ernie-x1-turbo-32k
+name: ernie x1 TURBO 32k
+family: ernie
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.165
+  output: 0.66
+release_date: 2026-05-16
+last_updated: 2026-05-16

@@ -1,0 +1,18 @@
+id: Steelskull--L3.3-MS-Evayale-70B
+name: "Steelskull: L3.3 MS Evayale 70B"
+family: other
+temperature: true
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: per_mtok
+  input: 0.5
+  output: 0.5
+release_date: 2026-05-16
+last_updated: 2026-05-16
