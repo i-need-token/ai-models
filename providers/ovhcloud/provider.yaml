@@ -1,0 +1,6 @@
+id: ovhcloud
+name: OVHcloud AI Endpoints
+url: https://www.ovhcloud.com/en/public-cloud/ai-endpoints/
+api_docs: https://docs.ovh.com/gb/en/publiccloud/ai/endpoints/
+apis:
+  openai: https://oai.endpoints.kepler.ai.cloud.ovh.net/v1

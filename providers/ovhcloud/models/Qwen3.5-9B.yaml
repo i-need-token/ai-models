@@ -1,0 +1,22 @@
+id: Qwen3.5-9B
+name: Qwen3.5-9B
+family: qwen3.5
+open_weights: true
+temperature: true
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.12
+  output: 0.18
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true
+tool_call: true
+structured_output: true
