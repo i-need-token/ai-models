@@ -1,0 +1,18 @@
+id: klusterai--Meta-Llama-3.1-8B-Instruct-Turbo
+name: Meta Llama 3.1 8B
+family: llama-3.1
+temperature: true
+limit:
+  context: 131000
+  output: 131000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.015
+  output: 0.02
+release_date: 2024-07-24
+last_updated: 2026-05-16
+tool_call: true

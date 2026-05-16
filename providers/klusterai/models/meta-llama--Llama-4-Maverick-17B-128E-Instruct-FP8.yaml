@@ -1,0 +1,19 @@
+id: meta-llama--Llama-4-Maverick-17B-128E-Instruct-FP8
+name: Meta Llama 4 Maverick
+family: llama-4-maverick
+temperature: true
+limit:
+  context: 1048576
+  output: 1048576
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 0.15
+  output: 0.8
+release_date: 2025-04-05
+last_updated: 2026-05-16
+open_weights: true

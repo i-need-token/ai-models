@@ -1,0 +1,19 @@
+id: meta-llama--Llama-4-Scout-17B-16E-Instruct
+name: Meta Llama 4 Scout
+family: llama-4-scout
+temperature: true
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 0.08
+  output: 0.45
+release_date: 2025-04-05
+last_updated: 2026-05-16
+open_weights: true

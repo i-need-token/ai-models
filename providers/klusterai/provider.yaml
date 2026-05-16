@@ -1,0 +1,6 @@
+id: klusterai
+name: Kluster AI
+url: https://kluster.ai
+api_docs: https://docs.kluster.ai
+apis:
+  openai: https://api.kluster.ai/v1

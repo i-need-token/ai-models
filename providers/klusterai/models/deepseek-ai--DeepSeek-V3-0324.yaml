@@ -1,0 +1,19 @@
+id: deepseek-ai--DeepSeek-V3-0324
+name: DeepSeek-V3-0324
+family: deepseek-v3
+temperature: true
+limit:
+  context: 163840
+  output: 163840
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.28
+  output: 1.14
+release_date: 2025-03-24
+last_updated: 2026-05-16
+tool_call: true
+open_weights: true

@@ -1,0 +1,18 @@
+id: mistralai--Magistral-Small-2506
+name: Magistral Small
+family: magistral
+temperature: true
+limit:
+  context: 40960
+  output: 40960
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.1
+  output: 0.3
+release_date: 2025-06-10
+last_updated: 2026-05-16
+open_weights: true
