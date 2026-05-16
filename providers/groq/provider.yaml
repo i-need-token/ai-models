@@ -1,0 +1,6 @@
+id: groq
+name: Groq
+url: https://groq.com
+api_docs: https://console.groq.com/docs
+apis:
+  openai: https://api.groq.com/openai/v1
