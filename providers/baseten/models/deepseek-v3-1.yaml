@@ -1,0 +1,20 @@
+id: deepseek-v3-1
+name: DeepSeek V3.1 on Baseten
+family: deepseek
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.5
+  output: 1.5
+  cache_read: 0.25
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+open_weights: true

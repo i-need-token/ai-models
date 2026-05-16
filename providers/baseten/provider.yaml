@@ -1,0 +1,6 @@
+id: baseten
+name: Baseten
+url: https://baseten.co
+api_docs: https://docs.baseten.co
+apis:
+  openai: https://model-api.baseten.co/v1

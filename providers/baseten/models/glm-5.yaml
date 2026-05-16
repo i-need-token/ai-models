@@ -1,0 +1,20 @@
+id: glm-5
+name: GLM 5 on Baseten
+family: glm
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.95
+  output: 3.15
+  cache_read: 0.2
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+open_weights: true
