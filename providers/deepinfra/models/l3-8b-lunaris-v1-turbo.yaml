@@ -1,0 +1,19 @@
+id: l3-8b-lunaris-v1-turbo
+name: L3 8B Lunaris v1 Turbo
+family: l3-finetune
+temperature: true
+limit:
+  context: 8192
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.04
+  output: 0.05
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true

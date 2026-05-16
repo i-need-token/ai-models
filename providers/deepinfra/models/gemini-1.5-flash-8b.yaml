@@ -1,0 +1,20 @@
+id: gemini-1.5-flash-8b
+name: Gemini 1.5 Flash 8b
+family: gemini
+temperature: true
+limit:
+  context: 1000000
+  output: 1000000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.0375
+  output: 0.15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true

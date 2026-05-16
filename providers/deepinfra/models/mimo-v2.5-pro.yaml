@@ -1,0 +1,21 @@
+id: mimo-v2.5-pro
+name: MiMo V2.5 Pro
+family: mimo
+temperature: true
+limit:
+  context: 1048576
+  output: 1048576
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 3
+  cache_read: 0.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true
