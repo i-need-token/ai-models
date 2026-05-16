@@ -1,0 +1,6 @@
+id: hyperbolic
+name: Hyperbolic
+url: https://hyperbolic.ai
+api_docs: https://docs.hyperbolic.ai
+apis:
+  openai: https://api.hyperbolic.xyz/v1

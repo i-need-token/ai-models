@@ -1,0 +1,18 @@
+id: meta-llama--Llama-3.1-8B-BF16-Base
+name: Llama 3.1 8B BF16 Base
+family: meta-llama
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.1
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true

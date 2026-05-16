@@ -1,0 +1,18 @@
+id: deepseek-ai--DeepSeek-V2.5
+name: DeepSeek V2.5
+family: deepseek
+limit:
+  context: 163840
+  output: 163840
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2
+  output: 2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
