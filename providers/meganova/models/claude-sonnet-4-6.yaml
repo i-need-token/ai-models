@@ -1,0 +1,19 @@
+id: claude-sonnet-4-6
+name: Claude Sonnet 4.6 on MegaNova
+family: claude
+limit:
+  context: 200000
+  output: 16000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2.4
+  output: 12
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

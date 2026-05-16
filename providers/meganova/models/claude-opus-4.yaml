@@ -1,0 +1,19 @@
+id: claude-opus-4
+name: Claude Opus 4 on MegaNova
+family: claude
+limit:
+  context: 200000
+  output: 32000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 12
+  output: 60
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

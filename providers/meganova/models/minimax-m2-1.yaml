@@ -1,0 +1,18 @@
+id: minimax-m2-1
+name: MiniMax M2.1 on MegaNova
+family: minimax
+limit:
+  context: 1048576
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.28
+  output: 1.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

@@ -1,0 +1,18 @@
+id: mimo-v2-5-pro
+name: MiMo V2.5 Pro on MegaNova
+family: mimo
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 3
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

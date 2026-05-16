@@ -1,0 +1,16 @@
+id: manta-mini-1.0
+name: Manta Mini 1.0 on MegaNova
+family: manta
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

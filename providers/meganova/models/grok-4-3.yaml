@@ -1,0 +1,20 @@
+id: grok-4-3
+name: Grok 4.3 on MegaNova
+family: grok
+limit:
+  context: 131072
+  output: 32768
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.25
+  output: 2.5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

@@ -1,0 +1,16 @@
+id: glm-4-7-flash
+name: GLM-4.7 Flash on MegaNova
+family: glm
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

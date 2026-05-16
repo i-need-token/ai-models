@@ -1,0 +1,19 @@
+id: gemma-4-31b
+name: Gemma 4 31B on MegaNova
+family: gemma
+limit:
+  context: 96000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.38
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true

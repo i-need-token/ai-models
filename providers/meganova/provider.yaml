@@ -1,0 +1,6 @@
+id: meganova
+name: MegaNova
+url: https://meganova.ai
+api_docs: https://docs.meganova.ai
+apis:
+  openai: https://api.meganova.ai/v1

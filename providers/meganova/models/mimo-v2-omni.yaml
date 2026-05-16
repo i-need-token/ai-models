@@ -1,0 +1,19 @@
+id: mimo-v2-omni
+name: MiMo V2 Omni on MegaNova
+family: mimo
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

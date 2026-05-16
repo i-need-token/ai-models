@@ -1,0 +1,18 @@
+id: deepseek-v3-1
+name: DeepSeek V3.1 on MegaNova
+family: deepseek
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.19
+  output: 0.79
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

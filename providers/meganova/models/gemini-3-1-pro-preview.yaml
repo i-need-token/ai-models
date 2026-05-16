@@ -1,0 +1,20 @@
+id: gemini-3-1-pro-preview
+name: Gemini 3.1 Pro Preview on MegaNova
+family: gemini
+limit:
+  context: 1048576
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.6
+  output: 9.6
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

@@ -1,0 +1,19 @@
+id: gpt-5-mini
+name: GPT-5 Mini on MegaNova
+family: gpt
+limit:
+  context: 1047576
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 1.6
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

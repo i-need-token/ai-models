@@ -1,0 +1,19 @@
+id: qwen3-6-plus
+name: Qwen3.6 Plus on MegaNova
+family: qwen
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.5
+  output: 3
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
