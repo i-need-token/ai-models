@@ -1,0 +1,6 @@
+id: friendli
+name: FriendliAI
+url: https://friendli.ai
+api_docs: https://docs.friendli.ai
+apis:
+  openai: https://api.friendli.ai/serverless/v1

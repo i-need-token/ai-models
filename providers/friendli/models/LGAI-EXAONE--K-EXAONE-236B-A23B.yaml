@@ -1,0 +1,21 @@
+id: LGAI-EXAONE--K-EXAONE-236B-A23B
+name: K-EXAONE-236B-A23B
+family: exaone
+temperature: true
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.8
+  cache_read: 0.1
+release_date: 2025-12-31
+last_updated: 2026-05-16
+tool_call: true
+structured_output: true
