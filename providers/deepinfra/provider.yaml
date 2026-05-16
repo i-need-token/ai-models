@@ -1,0 +1,6 @@
+id: deepinfra
+name: DeepInfra
+url: https://deepinfra.com
+api_docs: https://docs.deepinfra.com
+apis:
+  openai: https://api.deepinfra.com/v1/openai

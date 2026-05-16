@@ -1,0 +1,6 @@
+id: fireworks
+name: Fireworks AI
+url: https://fireworks.ai
+api_docs: https://docs.fireworks.ai
+apis:
+  openai: https://api.fireworks.ai/inference/v1
