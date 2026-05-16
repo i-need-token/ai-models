@@ -1,0 +1,17 @@
+id: MiniMax-M2.1
+name: MiniMax-M2.1 on 302.AI
+family: minimax-m2.1
+limit:
+  context: 1048576
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.3
+  output: 1.2
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

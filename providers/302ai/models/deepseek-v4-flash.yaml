@@ -1,0 +1,17 @@
+id: deepseek-v4-flash
+name: deepseek-v4-flash on 302.AI
+family: deepseek-v4
+limit:
+  context: 1048576
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.143
+  output: 0.286
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

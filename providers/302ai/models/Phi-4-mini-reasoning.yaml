@@ -1,0 +1,18 @@
+id: Phi-4-mini-reasoning
+name: Phi-4-mini-reasoning on 302.AI
+family: phi
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.1
+  output: 0.5
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true
+reasoning: true

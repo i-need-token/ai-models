@@ -1,0 +1,17 @@
+id: ernie-x1.1-preview
+name: ernie-x1.1-preview on 302.AI
+family: ernie-x1
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.156
+  output: 0.627
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

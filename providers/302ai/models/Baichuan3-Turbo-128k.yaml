@@ -1,0 +1,16 @@
+id: Baichuan3-Turbo-128k
+name: Baichuan3-Turbo-128k on 302.AI
+family: baichuan
+limit:
+  context: 128000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 3.74
+  output: 3.74
+release_date: 2026-05-16
+last_updated: 2026-05-16

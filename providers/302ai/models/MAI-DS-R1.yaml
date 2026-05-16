@@ -1,0 +1,18 @@
+id: MAI-DS-R1
+name: MAI-DS-R1 on 302.AI
+family: mai-ds
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.66
+  output: 2.53
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true
+reasoning: true

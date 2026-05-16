@@ -1,0 +1,17 @@
+id: mistral-large-2411
+name: mistral-large-2411 on 302.AI
+family: mistral-large
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 2.2
+  output: 6.6
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

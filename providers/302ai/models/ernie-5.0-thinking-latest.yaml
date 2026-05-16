@@ -1,0 +1,18 @@
+id: ernie-5.0-thinking-latest
+name: ernie-5.0-thinking-latest on 302.AI
+family: ernie-5
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 0.946
+  output: 1.573
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

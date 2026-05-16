@@ -1,0 +1,17 @@
+id: ministral-3b-2512
+name: ministral-3b-2512 on 302.AI
+family: ministral
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.33
+  output: 0.33
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

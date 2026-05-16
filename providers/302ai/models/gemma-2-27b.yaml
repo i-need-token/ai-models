@@ -1,0 +1,17 @@
+id: gemma-2-27b
+name: gemma-2-27b on 302.AI
+family: gemma
+limit:
+  context: 8192
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.18
+  output: 0.18
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

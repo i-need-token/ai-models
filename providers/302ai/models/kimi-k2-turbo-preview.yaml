@@ -1,0 +1,19 @@
+id: kimi-k2-turbo-preview
+name: kimi-k2-turbo-preview on 302.AI
+family: kimi
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 1.257
+  output: 9.119
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
+reasoning: true

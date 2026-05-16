@@ -1,0 +1,18 @@
+id: claude-3-5-haiku
+name: claude-3-5-haiku on 302.AI
+family: claude
+limit:
+  context: 200000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 0.8
+  output: 4
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

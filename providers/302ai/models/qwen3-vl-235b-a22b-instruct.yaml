@@ -1,0 +1,18 @@
+id: qwen3-vl-235b-a22b-instruct
+name: qwen3-vl-235b-a22b-instruct on 302.AI
+family: qwen-vl
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 0.286
+  output: 1.143
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true

@@ -1,0 +1,17 @@
+id: ernie-4.5-8k-preview
+name: ernie-4.5-8k-preview on 302.AI
+family: ernie-4.5
+limit:
+  context: 8192
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 0.66
+  output: 2.53
+release_date: 2026-05-16
+last_updated: 2026-05-16

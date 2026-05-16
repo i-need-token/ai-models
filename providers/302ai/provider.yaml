@@ -1,0 +1,6 @@
+id: 302ai
+name: 302.AI
+url: https://302.ai
+api_docs: https://302.ai/docs
+apis:
+  openai: https://dash-api.302.ai/v1

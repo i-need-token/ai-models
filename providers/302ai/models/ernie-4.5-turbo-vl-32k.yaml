@@ -1,0 +1,17 @@
+id: ernie-4.5-turbo-vl-32k
+name: ernie-4.5-turbo-vl-32k on 302.AI
+family: ernie-4.5
+limit:
+  context: 32000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 0.495
+  output: 1.43
+release_date: 2026-05-16
+last_updated: 2026-05-16

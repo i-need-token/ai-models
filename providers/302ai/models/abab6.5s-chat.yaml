@@ -1,0 +1,16 @@
+id: abab6.5s-chat
+name: abab6.5s-chat on 302.AI
+family: abab
+limit:
+  context: 1048576
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.154
+  output: 0.154
+release_date: 2026-05-16
+last_updated: 2026-05-16

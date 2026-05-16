@@ -1,0 +1,17 @@
+id: MiniMax-M2.7-highspeed
+name: MiniMax-M2.7-highspeed on 302.AI
+family: minimax-m2.7
+limit:
+  context: 1048576
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.6
+  output: 4.8
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

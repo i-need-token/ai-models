@@ -1,0 +1,16 @@
+id: Baichuan-M2
+name: Baichuan-M2 on 302.AI
+family: baichuan-m2
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.319
+  output: 3.19
+release_date: 2026-05-16
+last_updated: 2026-05-16

@@ -1,0 +1,17 @@
+id: SenseNova-V6-Reasoner
+name: SenseNova-V6-Reasoner on 302.AI
+family: sensenova
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.66
+  output: 2.53
+release_date: 2026-05-16
+last_updated: 2026-05-16
+reasoning: true

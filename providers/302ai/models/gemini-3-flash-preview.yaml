@@ -1,0 +1,18 @@
+id: gemini-3-flash-preview
+name: gemini-3-flash-preview on 302.AI
+family: gemini-3
+limit:
+  context: 1000000
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  input: 0.5
+  output: 3
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true

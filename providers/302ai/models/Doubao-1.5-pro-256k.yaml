@@ -1,0 +1,17 @@
+id: Doubao-1.5-pro-256k
+name: Doubao-1.5-pro-256k on 302.AI
+family: doubao-1.5
+limit:
+  context: 256000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  input: 0.88
+  output: 1.43
+release_date: 2026-05-16
+last_updated: 2026-05-16
+tool_call: true
