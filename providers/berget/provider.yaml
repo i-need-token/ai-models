@@ -1,0 +1,6 @@
+id: berget
+name: Berget
+url: https://berget.ai
+api_docs: https://berget.ai/docs
+apis:
+  openai: https://api.berget.ai/v1
