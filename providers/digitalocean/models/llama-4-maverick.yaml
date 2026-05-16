@@ -1,0 +1,21 @@
+id: llama-4-maverick
+name: Llama 4 Maverick 17B 128E
+family: llama-4
+temperature: true
+limit:
+  context: 1048576
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.25
+  output: 0.87
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true
+tool_call: true

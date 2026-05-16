@@ -1,0 +1,6 @@
+id: digitalocean
+name: DigitalOcean
+url: https://www.digitalocean.com/products/inference
+api_docs: https://docs.digitalocean.com/products/inference/
+apis:
+  openai: https://inference.do.ai/v1

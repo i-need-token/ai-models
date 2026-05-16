@@ -1,0 +1,20 @@
+id: qwen3-coder-flash
+name: Qwen3 Coder Flash
+family: qwen3-coder
+temperature: true
+limit:
+  context: 131072
+  output: 65536
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.45
+  output: 1.7
+release_date: 2026-05-16
+last_updated: 2026-05-16
+open_weights: true
+tool_call: true
