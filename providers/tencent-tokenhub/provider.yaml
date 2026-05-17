@@ -1,0 +1,6 @@
+id: tencent-tokenhub
+name: Tencent Cloud TokenHub
+url: https://cloud.tencent.com/product/tokenhub
+api_docs: https://cloud.tencent.com/document/product/1823
+apis:
+  openai: https://hunyuan.cloud.tencent.com/v1

@@ -1,0 +1,21 @@
+id: glm-5
+name: GLM 5
+family: glm
+temperature: true
+reasoning: true
+tool_call: true
+limit:
+  context: 128000
+  output: 16000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 4
+  output: 18
+  cache_read: 1
+release_date: 2026-04-14
+last_updated: 2026-05-17
