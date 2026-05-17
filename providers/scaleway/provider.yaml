@@ -1,0 +1,6 @@
+id: scaleway
+name: Scaleway
+url: https://www.scaleway.com
+api_docs: https://www.scaleway.com/en/developers/api/generative-apis
+apis:
+  openai: https://api.scaleway.ai/v1

@@ -1,0 +1,20 @@
+id: mistral-small-3.2-24b-instruct-2506
+name: Mistral Small 3.2 24B Instruct 2506
+family: mistral-small
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.15
+  output: 0.35
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

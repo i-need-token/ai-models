@@ -1,0 +1,19 @@
+id: gemma-3-27b-it
+name: Gemma 3 27B IT
+family: gemma
+limit:
+  context: 8192
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 0.25
+  output: 0.5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
