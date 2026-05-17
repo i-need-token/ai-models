@@ -1,0 +1,20 @@
+id: openai--gpt-5.1-2025-11-13
+name: GPT-5.1 2025-11-13
+family: gpt
+limit:
+  context: 400000
+  output: 131072
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.25
+  output: 10
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true
+tool_call: true

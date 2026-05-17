@@ -1,0 +1,19 @@
+id: qwen--qwen3.5-plus
+name: Qwen3.5 Plus
+family: qwen
+limit:
+  context: 1050000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2.4
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

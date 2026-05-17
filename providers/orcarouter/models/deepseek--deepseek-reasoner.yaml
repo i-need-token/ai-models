@@ -1,0 +1,20 @@
+id: deepseek--deepseek-reasoner
+name: DeepSeek Reasoner
+family: deepseek
+limit:
+  context: 1050000
+  output: 1050000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.43
+  output: 0.87
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true
+tool_call: true

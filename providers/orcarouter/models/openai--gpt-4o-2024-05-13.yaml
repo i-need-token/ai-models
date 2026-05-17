@@ -1,0 +1,19 @@
+id: openai--gpt-4o-2024-05-13
+name: GPT-4o 2024-05-13
+family: gpt
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 5
+  output: 15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

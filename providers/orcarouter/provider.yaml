@@ -1,0 +1,6 @@
+id: orcarouter
+name: OrcaRouter
+url: https://www.orcarouter.ai
+api_docs: https://docs.orcarouter.ai
+apis:
+  openai: https://orcarouter.ai/v1

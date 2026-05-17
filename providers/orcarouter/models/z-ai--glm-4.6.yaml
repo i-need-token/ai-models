@@ -1,0 +1,19 @@
+id: z-ai--glm-4.6
+name: GLM 4.6
+family: glm
+limit:
+  context: 200000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

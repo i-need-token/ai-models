@@ -1,0 +1,17 @@
+id: openai--gpt-3.5-turbo-1106
+name: GPT-3.5 Turbo 1106
+family: gpt
+limit:
+  context: 400000
+  output: 400000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 2
+release_date: 2026-05-17
+last_updated: 2026-05-17

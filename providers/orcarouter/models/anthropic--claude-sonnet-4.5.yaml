@@ -1,0 +1,19 @@
+id: anthropic--claude-sonnet-4.5
+name: Claude Sonnet 4.5
+family: claude
+limit:
+  context: 1000000
+  output: 1000000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 3
+  output: 15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

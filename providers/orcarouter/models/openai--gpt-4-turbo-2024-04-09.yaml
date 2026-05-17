@@ -1,0 +1,19 @@
+id: openai--gpt-4-turbo-2024-04-09
+name: GPT-4 Turbo 2024-04-09
+family: gpt
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 10
+  output: 30
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

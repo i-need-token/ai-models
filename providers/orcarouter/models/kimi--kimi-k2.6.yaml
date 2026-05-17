@@ -1,0 +1,20 @@
+id: kimi--kimi-k2.6
+name: Kimi K2.6
+family: kimi
+limit:
+  context: 262100
+  output: 262100
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.95
+  output: 4
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true
+tool_call: true

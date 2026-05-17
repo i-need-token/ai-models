@@ -1,0 +1,19 @@
+id: qwen--qwen3.5-35b-a3b
+name: Qwen3.5 35B A3B
+family: qwen
+limit:
+  context: 32800
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.06
+  output: 0.46
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true

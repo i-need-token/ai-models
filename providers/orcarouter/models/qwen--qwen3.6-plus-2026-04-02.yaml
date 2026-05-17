@@ -1,0 +1,19 @@
+id: qwen--qwen3.6-plus-2026-04-02
+name: Qwen3.6 Plus 2026-04-02
+family: qwen
+limit:
+  context: 1050000
+  output: 1050000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.5
+  output: 3
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
