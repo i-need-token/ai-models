@@ -1,0 +1,6 @@
+id: dinference
+name: DInference
+url: https://dinference.com
+api_docs: https://dinference.com/docs
+apis:
+  openai: https://api.dinference.com/v1
