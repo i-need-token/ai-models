@@ -1,0 +1,20 @@
+id: databricks-gemini-3-1-pro
+name: Gemini 3.1 Pro
+family: gemini-3.1
+limit:
+  context: 128000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2.5
+  output: 15
+  cache_write: 2.5
+  cache_read: 0.25
+release_date: 2026-05-17
+last_updated: 2026-05-17

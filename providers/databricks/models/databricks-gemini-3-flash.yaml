@@ -1,0 +1,20 @@
+id: databricks-gemini-3-flash
+name: Gemini 3 Flash
+family: gemini-3
+limit:
+  context: 128000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.63
+  output: 3.75
+  cache_write: 0.63
+  cache_read: 0.06
+release_date: 2026-05-17
+last_updated: 2026-05-17

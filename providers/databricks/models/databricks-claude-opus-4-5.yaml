@@ -1,0 +1,20 @@
+id: databricks-claude-opus-4-5
+name: Claude Opus 4.5/4.6/4.7
+family: claude-opus
+limit:
+  context: 200000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 5
+  output: 25
+  cache_write: 6.25
+  cache_read: 0.5
+release_date: 2026-05-17
+last_updated: 2026-05-17

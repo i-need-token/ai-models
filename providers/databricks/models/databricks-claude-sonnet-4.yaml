@@ -1,0 +1,20 @@
+id: databricks-claude-sonnet-4
+name: Claude Sonnet 4/4.1
+family: claude-sonnet
+limit:
+  context: 200000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 3
+  output: 15
+  cache_write: 3.75
+  cache_read: 0.3
+release_date: 2026-05-17
+last_updated: 2026-05-17

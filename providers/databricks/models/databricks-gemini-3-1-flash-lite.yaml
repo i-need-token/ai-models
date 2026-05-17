@@ -1,0 +1,20 @@
+id: databricks-gemini-3-1-flash-lite
+name: Gemini 3.1 Flash Lite
+family: gemini-3.1
+limit:
+  context: 128000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.25
+  output: 1.5
+  cache_write: 0.25
+  cache_read: 0.02
+release_date: 2026-05-17
+last_updated: 2026-05-17

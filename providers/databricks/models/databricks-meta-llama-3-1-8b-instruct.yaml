@@ -1,0 +1,19 @@
+id: databricks-meta-llama-3-1-8b-instruct
+name: Llama 3.1 8B Instruct
+family: llama-3.1
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.45
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

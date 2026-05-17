@@ -1,0 +1,19 @@
+id: databricks-qwen3-next-80b-a3b-instruct
+name: Qwen 3 Next 80B A3B Instruct
+family: qwen3-next
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

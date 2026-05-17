@@ -1,0 +1,6 @@
+id: databricks
+name: Databricks
+url: https://www.databricks.com
+api_docs: https://docs.databricks.com/en/machine-learning/model-serving/score-foundation-models.html
+apis:
+  openai: https://databricks-demo.cloud.databricks.com/serving-endpoints
