@@ -1,0 +1,21 @@
+id: zai--glm-5.1
+name: GLM 5.1
+family: glm
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.4
+  output: 4.4
+  cache_read: 0.26
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 200000
+  output: 200000
+open_weights: true
+reasoning: true
+tool_call: true

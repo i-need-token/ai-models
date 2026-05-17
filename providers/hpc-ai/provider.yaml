@@ -1,0 +1,6 @@
+id: hpc-ai
+name: HPC-AI Cloud
+url: https://hpc-ai.com
+api_docs: https://www.hpc-ai.com/doc/docs/Model-APIs/User-Guides/Quickstart/
+apis:
+  openai: https://api.hpc-ai.com/inference/v1

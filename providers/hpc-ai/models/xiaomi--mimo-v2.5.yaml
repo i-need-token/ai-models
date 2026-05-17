@@ -1,0 +1,24 @@
+id: xiaomi--mimo-v2.5
+name: MiMo V2.5
+family: mimo
+modalities:
+  input:
+    - text
+    - image
+    - video
+    - audio
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
+  cache_read: 0.08
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 1048576
+  output: 1048576
+open_weights: true
+reasoning: true
+tool_call: true
