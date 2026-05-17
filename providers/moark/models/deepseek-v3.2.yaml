@@ -1,0 +1,18 @@
+id: deepseek-v3.2
+name: DeepSeek V3.2
+family: deepseek-v3
+temperature: true
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1
+  output: 1
+release_date: 2026-05-17
+last_updated: 2026-05-17

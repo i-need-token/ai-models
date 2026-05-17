@@ -1,0 +1,19 @@
+id: deepseek-r1
+name: DeepSeek R1
+family: deepseek-r1
+temperature: true
+reasoning: true
+limit:
+  context: 65536
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 2.15
+  output: 2.15
+release_date: 2026-05-17
+last_updated: 2026-05-17

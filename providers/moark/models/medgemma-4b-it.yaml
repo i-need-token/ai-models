@@ -1,0 +1,19 @@
+id: medgemma-4b-it
+name: MedGemma 4B IT
+family: other
+temperature: true
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 2
+  output: 2
+release_date: 2026-05-17
+last_updated: 2026-05-17

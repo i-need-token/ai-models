@@ -1,0 +1,18 @@
+id: hunyuan-mt-chimera-7b
+name: Hunyuan MT Chimera 7B
+family: other
+temperature: true
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.3
+  output: 0.3
+release_date: 2026-05-17
+last_updated: 2026-05-17

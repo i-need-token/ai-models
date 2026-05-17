@@ -1,0 +1,17 @@
+id: internvl2.5-78b
+name: InternVL2.5 78B
+family: internvl
+temperature: true
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17

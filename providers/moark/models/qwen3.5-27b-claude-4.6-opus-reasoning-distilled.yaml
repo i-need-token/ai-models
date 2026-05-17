@@ -1,0 +1,19 @@
+id: qwen3.5-27b-claude-4.6-opus-reasoning-distilled
+name: Qwen3.5 27B Claude Opus Distilled
+family: qwen3.5
+temperature: true
+reasoning: true
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1.5
+  output: 1.5
+release_date: 2026-05-17
+last_updated: 2026-05-17

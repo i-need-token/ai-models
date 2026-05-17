@@ -1,0 +1,19 @@
+id: gemma-4-26b-a4b-it
+name: Gemma 4 26B A4B IT
+family: gemma
+temperature: true
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1
+  output: 1
+release_date: 2026-05-17
+last_updated: 2026-05-17

@@ -1,0 +1,18 @@
+id: kat-dev
+name: KAT Dev
+family: kat
+temperature: true
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.75
+  output: 0.75
+release_date: 2026-05-17
+last_updated: 2026-05-17

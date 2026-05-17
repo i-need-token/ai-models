@@ -1,0 +1,16 @@
+id: codegeex4-all-9b
+name: CodeGeeX4 9B
+family: other
+temperature: true
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17

@@ -1,0 +1,16 @@
+id: qwen3-0.6b
+name: Qwen3 0.6B
+family: qwen3
+temperature: true
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17

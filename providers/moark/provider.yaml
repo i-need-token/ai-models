@@ -1,0 +1,6 @@
+id: moark
+name: MoArk AI
+url: https://moark.ai
+api_docs: https://moark.ai/docs
+apis:
+  openai: https://api.moark.ai/v1

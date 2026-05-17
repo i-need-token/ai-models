@@ -1,0 +1,19 @@
+id: fin-r1
+name: Fin R1
+family: fin-r1
+temperature: true
+reasoning: true
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1.5
+  output: 1.5
+release_date: 2026-05-17
+last_updated: 2026-05-17

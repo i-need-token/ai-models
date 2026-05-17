@@ -1,0 +1,19 @@
+id: glm-4.5v
+name: GLM 4.5V
+family: glm-4.5v
+temperature: true
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.86
+  output: 0.86
+release_date: 2026-05-17
+last_updated: 2026-05-17

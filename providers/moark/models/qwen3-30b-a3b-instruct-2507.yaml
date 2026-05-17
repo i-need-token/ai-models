@@ -1,0 +1,18 @@
+id: qwen3-30b-a3b-instruct-2507
+name: Qwen3 30B A3B Instruct 2507
+family: qwen3
+temperature: true
+limit:
+  context: 32768
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.29
+  output: 0.29
+release_date: 2026-05-17
+last_updated: 2026-05-17

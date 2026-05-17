@@ -1,0 +1,19 @@
+id: qwq-32b
+name: QwQ 32B
+family: qwq
+temperature: true
+reasoning: true
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.55
+  output: 0.55
+release_date: 2026-05-17
+last_updated: 2026-05-17
