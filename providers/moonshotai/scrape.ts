@@ -5,17 +5,20 @@ import type { Pricing } from "../../types/index";
 const provider = defineProvider({
   id: "moonshotai",
   name: "Moonshot AI",
-  url: "https://platform.moonshot.cn",
-  api_docs: "https://platform.moonshot.cn/docs",
+  url: "https://platform.kimi.com",
+  api_docs: "https://platform.kimi.com/docs",
   apis: {
     openai: "https://api.moonshot.cn/v1",
   },
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party Mintlify docs accessed 2026-05-15)
-// Source: https://platform.moonshot.cn/docs/api/models-overview.md
-//         https://platform.moonshot.cn/docs/pricing/chat.md
+// Hardcoded model data (from first-party docs accessed 2026-05-16)
+// Source: https://platform.kimi.com/docs/pricing/chat-k26
+//         https://platform.kimi.com/docs/pricing/chat-k25
+//         https://platform.kimi.com/docs/pricing/chat-k2
+//         https://platform.kimi.com/docs/pricing/chat-v1
+//         https://platform.kimi.com/docs/api/models-overview
 // ---------------------------------------------------------------------------
 
 interface ModelInfo {
@@ -24,69 +27,75 @@ interface ModelInfo {
   output: number;
   modalities: { input: ("text" | "image")[]; output: "text"[] };
   deprecated: boolean;
+  reasoning?: boolean;
 }
 
 const MODELS: Record<string, ModelInfo> = {
   // K2.6 series (latest)
   "kimi-k2.6": {
     name: "Kimi K2.6",
-    context: 131072,
+    context: 262144,
     output: 8192,
-    modalities: { input: ["text"], output: ["text"] },
+    modalities: { input: ["text", "image"], output: ["text"] },
     deprecated: false,
-  },
-  "kimi-k2.6-0528": {
-    name: "Kimi K2.6 (0528)",
-    context: 131072,
-    output: 8192,
-    modalities: { input: ["text"], output: ["text"] },
-    deprecated: false,
+    reasoning: true,
   },
   "kimi-k2.6-long": {
     name: "Kimi K2.6 Long",
-    context: 131072,
+    context: 262144,
     output: 65536,
-    modalities: { input: ["text"], output: ["text"] },
+    modalities: { input: ["text", "image"], output: ["text"] },
     deprecated: false,
+    reasoning: true,
   },
 
-  // K2 series
-  "kimi-k2": {
-    name: "Kimi K2",
-    context: 131072,
+  // K2.5 series
+  "kimi-k2.5": {
+    name: "Kimi K2.5",
+    context: 262144,
     output: 8192,
-    modalities: { input: ["text"], output: ["text"] },
+    modalities: { input: ["text", "image"], output: ["text"] },
     deprecated: false,
-  },
-  "kimi-k2-0711": {
-    name: "Kimi K2 (0711)",
-    context: 131072,
-    output: 8192,
-    modalities: { input: ["text"], output: ["text"] },
-    deprecated: false,
-  },
-  "kimi-k2-long": {
-    name: "Kimi K2 Long",
-    context: 131072,
-    output: 65536,
-    modalities: { input: ["text"], output: ["text"] },
-    deprecated: false,
+    reasoning: true,
   },
 
-  // K1.5 series
-  "kimi-k1.5": {
-    name: "Kimi K1.5",
-    context: 131072,
+  // K2 series (retiring May 25, 2026)
+  "kimi-k2-0905-preview": {
+    name: "Kimi K2 (0905 Preview)",
+    context: 262144,
     output: 8192,
     modalities: { input: ["text"], output: ["text"] },
-    deprecated: false,
+    deprecated: true,
   },
-  "kimi-latest": {
-    name: "Kimi Latest",
+  "kimi-k2-0711-preview": {
+    name: "Kimi K2 (0711 Preview)",
     context: 131072,
     output: 8192,
     modalities: { input: ["text"], output: ["text"] },
-    deprecated: false,
+    deprecated: true,
+  },
+  "kimi-k2-turbo-preview": {
+    name: "Kimi K2 Turbo Preview",
+    context: 262144,
+    output: 8192,
+    modalities: { input: ["text"], output: ["text"] },
+    deprecated: true,
+  },
+  "kimi-k2-thinking": {
+    name: "Kimi K2 Thinking",
+    context: 262144,
+    output: 8192,
+    modalities: { input: ["text"], output: ["text"] },
+    deprecated: true,
+    reasoning: true,
+  },
+  "kimi-k2-thinking-turbo": {
+    name: "Kimi K2 Thinking Turbo",
+    context: 262144,
+    output: 8192,
+    modalities: { input: ["text"], output: ["text"] },
+    deprecated: true,
+    reasoning: true,
   },
 
   // Vision series
@@ -96,6 +105,7 @@ const MODELS: Record<string, ModelInfo> = {
     output: 8192,
     modalities: { input: ["text", "image"], output: ["text"] },
     deprecated: false,
+    reasoning: true,
   },
   "kimi-vl-a3b": {
     name: "Kimi VL A3B",
@@ -105,7 +115,7 @@ const MODELS: Record<string, ModelInfo> = {
     deprecated: false,
   },
 
-  // K1 series (deprecated)
+  // V1 series (deprecated)
   "moonshot-v1-8k": {
     name: "Moonshot V1 (8K)",
     context: 8192,
@@ -127,33 +137,60 @@ const MODELS: Record<string, ModelInfo> = {
     modalities: { input: ["text"], output: ["text"] },
     deprecated: true,
   },
+  "moonshot-v1-8k-vision-preview": {
+    name: "Moonshot V1 Vision (8K)",
+    context: 8192,
+    output: 4096,
+    modalities: { input: ["text", "image"], output: ["text"] },
+    deprecated: true,
+  },
+  "moonshot-v1-32k-vision-preview": {
+    name: "Moonshot V1 Vision (32K)",
+    context: 32768,
+    output: 4096,
+    modalities: { input: ["text", "image"], output: ["text"] },
+    deprecated: true,
+  },
+  "moonshot-v1-128k-vision-preview": {
+    name: "Moonshot V1 Vision (128K)",
+    context: 131072,
+    output: 4096,
+    modalities: { input: ["text", "image"], output: ["text"] },
+    deprecated: true,
+  },
 };
 
 // Pricing — CNY per million tokens
-// Source: https://platform.moonshot.cn/docs/pricing/chat.md
+// Source: https://platform.kimi.com/docs/pricing/chat-k26
+//         https://platform.kimi.com/docs/pricing/chat-k25
+//         https://platform.kimi.com/docs/pricing/chat-k2
+//         https://platform.kimi.com/docs/pricing/chat-v1
 const HARDCODED_PRICING: Record<string, Pricing> = {
   // K2.6 series
-  "kimi-k2.6": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
-  "kimi-k2.6-0528": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
-  "kimi-k2.6-long": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
+  "kimi-k2.6": { currency: "CNY", input: 6.5, output: 27, cache_read: 1.1 },
+  "kimi-k2.6-long": { currency: "CNY", input: 6.5, output: 27, cache_read: 1.1 },
 
-  // K2 series
-  "kimi-k2": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
-  "kimi-k2-0711": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
-  "kimi-k2-long": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
+  // K2.5 series
+  "kimi-k2.5": { currency: "CNY", input: 4, output: 21, cache_read: 0.7 },
 
-  // K1.5 series
-  "kimi-k1.5": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
-  "kimi-latest": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
+  // K2 series (retiring May 25, 2026)
+  "kimi-k2-0905-preview": { currency: "CNY", input: 4, output: 16, cache_read: 1 },
+  "kimi-k2-0711-preview": { currency: "CNY", input: 4, output: 16, cache_read: 1 },
+  "kimi-k2-turbo-preview": { currency: "CNY", input: 8, output: 58, cache_read: 1 },
+  "kimi-k2-thinking": { currency: "CNY", input: 4, output: 16, cache_read: 1 },
+  "kimi-k2-thinking-turbo": { currency: "CNY", input: 8, output: 58, cache_read: 1 },
 
   // Vision series
   "kimi-vl-a3b-thinking": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
   "kimi-vl-a3b": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
 
-  // V1 series (deprecated)
-  "moonshot-v1-8k": { currency: "CNY", input: 12, output: 12, cache_read: 2.4 },
-  "moonshot-v1-32k": { currency: "CNY", input: 24, output: 24, cache_read: 4.8 },
-  "moonshot-v1-128k": { currency: "CNY", input: 60, output: 60, cache_read: 12 },
+  // V1 series (deprecated) — no cache_read pricing listed in docs
+  "moonshot-v1-8k": { currency: "CNY", input: 2, output: 10 },
+  "moonshot-v1-32k": { currency: "CNY", input: 5, output: 20 },
+  "moonshot-v1-128k": { currency: "CNY", input: 10, output: 30 },
+  "moonshot-v1-8k-vision-preview": { currency: "CNY", input: 2, output: 10 },
+  "moonshot-v1-32k-vision-preview": { currency: "CNY", input: 5, output: 20 },
+  "moonshot-v1-128k-vision-preview": { currency: "CNY", input: 10, output: 30 },
 };
 
 // ---------------------------------------------------------------------------
@@ -162,9 +199,13 @@ const HARDCODED_PRICING: Record<string, Pricing> = {
 
 function deriveFamily(id: string): string {
   if (id.startsWith("kimi-k2.6")) return "kimi-k2.6";
+  if (id.startsWith("kimi-k2.5")) return "kimi-k2.5";
+  if (id.startsWith("kimi-k2-thinking-turbo")) return "kimi-k2-thinking-turbo";
+  if (id.startsWith("kimi-k2-thinking")) return "kimi-k2-thinking";
+  if (id.startsWith("kimi-k2-turbo")) return "kimi-k2-turbo";
+  if (id.startsWith("kimi-k2-0905")) return "kimi-k2-0905";
+  if (id.startsWith("kimi-k2-0711")) return "kimi-k2-0711";
   if (id.startsWith("kimi-k2")) return "kimi-k2";
-  if (id.startsWith("kimi-k1.5")) return "kimi-k1.5";
-  if (id.startsWith("kimi-latest")) return "kimi-latest";
   if (id.startsWith("kimi-vl")) return "kimi-vl";
   if (id.startsWith("moonshot-v1")) return "moonshot-v1";
   return "moonshotai";
@@ -195,6 +236,7 @@ export async function scrape(): Promise<ScrapeResult> {
         name: info.name,
         family: deriveFamily(id),
         temperature: true,
+        ...(info.reasoning ? { reasoning: true } : {}),
         limit: { context: info.context, output: info.output },
         modalities: info.modalities,
         ...(info.deprecated ? { deprecated: true } : {}),

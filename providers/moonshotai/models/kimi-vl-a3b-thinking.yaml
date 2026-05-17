@@ -2,6 +2,7 @@ id: kimi-vl-a3b-thinking
 name: Kimi VL A3B Thinking
 family: kimi-vl
 temperature: true
+reasoning: true
 limit:
   context: 131072
   output: 8192

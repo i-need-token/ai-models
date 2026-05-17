@@ -1,19 +1,20 @@
-id: kimi-k1.5
-name: Kimi K1.5
-family: kimi-k1.5
+id: kimi-k2-turbo-preview
+name: Kimi K2 Turbo Preview
+family: kimi-k2-turbo
 temperature: true
 limit:
-  context: 131072
+  context: 262144
   output: 8192
 modalities:
   input:
     - text
   output:
     - text
+deprecated: true
 pricing:
   currency: CNY
-  input: 4
-  output: 16
-  cache_read: 0.8
+  input: 8
+  output: 58
+  cache_read: 1
 release_date: 2026-05-17
 last_updated: 2026-05-17

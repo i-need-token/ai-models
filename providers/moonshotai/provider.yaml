@@ -1,6 +1,6 @@
 id: moonshotai
 name: Moonshot AI
-url: https://platform.moonshot.cn
-api_docs: https://platform.moonshot.cn/docs
+url: https://platform.kimi.com
+api_docs: https://platform.kimi.com/docs
 apis:
   openai: https://api.moonshot.cn/v1

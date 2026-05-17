@@ -13,8 +13,7 @@ modalities:
 deprecated: true
 pricing:
   currency: CNY
-  input: 60
-  output: 60
-  cache_read: 12
+  input: 10
+  output: 30
 release_date: 2026-05-17
 last_updated: 2026-05-17

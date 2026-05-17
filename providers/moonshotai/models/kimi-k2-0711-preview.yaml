@@ -1,6 +1,6 @@
-id: kimi-k2.6-0528
-name: Kimi K2.6 (0528)
-family: kimi-k2.6
+id: kimi-k2-0711-preview
+name: Kimi K2 (0711 Preview)
+family: kimi-k2-0711
 temperature: true
 limit:
   context: 131072
@@ -10,10 +10,11 @@ modalities:
     - text
   output:
     - text
+deprecated: true
 pricing:
   currency: CNY
   input: 4
   output: 16
-  cache_read: 0.8
+  cache_read: 1
 release_date: 2026-05-17
 last_updated: 2026-05-17

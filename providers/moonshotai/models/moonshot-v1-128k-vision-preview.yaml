@@ -1,19 +1,20 @@
-id: kimi-k2-long
-name: Kimi K2 Long
-family: kimi-k2
+id: moonshot-v1-128k-vision-preview
+name: Moonshot V1 Vision (128K)
+family: moonshot-v1
 temperature: true
 limit:
   context: 131072
-  output: 65536
+  output: 4096
 modalities:
   input:
     - text
+    - image
   output:
     - text
+deprecated: true
 pricing:
   currency: CNY
-  input: 4
-  output: 16
-  cache_read: 0.8
+  input: 10
+  output: 30
 release_date: 2026-05-17
 last_updated: 2026-05-17
