@@ -1,0 +1,17 @@
+id: bytedance--dola-seed-2-0-lite
+name: ByteDance / Dola-Seed 2.0 Lite
+family: seed
+limit:
+  context: 256000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.325
+  output: 2.6
+release_date: 2026-05-17
+last_updated: 2026-05-17

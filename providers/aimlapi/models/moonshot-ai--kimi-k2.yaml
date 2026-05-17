@@ -1,0 +1,17 @@
+id: moonshot-ai--kimi-k2
+name: Moonshot AI / Kimi K2
+family: kimi
+limit:
+  context: 131000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.195
+  output: 3.25
+release_date: 2026-05-17
+last_updated: 2026-05-17

@@ -1,0 +1,17 @@
+id: deepseek--deepseek-v3-1-terminus
+name: DeepSeek / DeepSeek-V3.1 Terminus
+family: deepseek
+limit:
+  context: 128000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.364
+  output: 0.546
+release_date: 2026-05-17
+last_updated: 2026-05-17

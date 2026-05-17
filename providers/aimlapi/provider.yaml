@@ -1,0 +1,6 @@
+id: aimlapi
+name: AI/ML API
+url: https://aimlapi.com
+api_docs: https://aimlapi.com/ai-ml-api-pricing
+apis:
+  openai: https://api.aimlapi.com/v1

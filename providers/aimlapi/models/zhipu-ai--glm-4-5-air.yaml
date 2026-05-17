@@ -1,0 +1,17 @@
+id: zhipu-ai--glm-4-5-air
+name: Zhipu AI / GLM-4.5 Air
+family: glm
+limit:
+  context: 128000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.26
+  output: 1.43
+release_date: 2026-05-17
+last_updated: 2026-05-17

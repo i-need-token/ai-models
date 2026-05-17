@@ -1,0 +1,17 @@
+id: alibaba-cloud--qwen3-next-80b-a3b-thinking
+name: Alibaba Cloud / Qwen3-Next-80B-A3B Thinking
+family: qwen
+limit:
+  context: 256000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.195
+  output: 1.56
+release_date: 2026-05-17
+last_updated: 2026-05-17

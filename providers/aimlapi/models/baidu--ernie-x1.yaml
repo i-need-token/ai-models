@@ -1,0 +1,17 @@
+id: baidu--ernie-x1
+name: Baidu / ERNIE X1
+family: ernie
+limit:
+  context: 200000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2145
+  output: 0.858
+release_date: 2026-05-17
+last_updated: 2026-05-17

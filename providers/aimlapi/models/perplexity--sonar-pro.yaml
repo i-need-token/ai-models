@@ -1,0 +1,17 @@
+id: perplexity--sonar-pro
+name: Perplexity / Sonar Pro
+family: sonar
+limit:
+  context: 200000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 3.9
+  output: 19.5
+release_date: 2026-05-17
+last_updated: 2026-05-17

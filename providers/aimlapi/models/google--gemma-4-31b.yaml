@@ -1,0 +1,17 @@
+id: google--gemma-4-31b
+name: Google / Gemma 4 31B
+family: gemini
+limit:
+  context: 262000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.5486
+  output: 0.5486
+release_date: 2026-05-17
+last_updated: 2026-05-17

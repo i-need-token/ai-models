@@ -1,0 +1,17 @@
+id: perplexity--sonar
+name: Perplexity / Sonar
+family: sonar
+limit:
+  context: 128000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.3
+  output: 1.3
+release_date: 2026-05-17
+last_updated: 2026-05-17

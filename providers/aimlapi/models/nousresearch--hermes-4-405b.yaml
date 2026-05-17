@@ -1,0 +1,17 @@
+id: nousresearch--hermes-4-405b
+name: NousResearch / Hermes 4 405B
+family: hermes
+limit:
+  context: 131000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.41145
+  output: 1.6458
+release_date: 2026-05-17
+last_updated: 2026-05-17

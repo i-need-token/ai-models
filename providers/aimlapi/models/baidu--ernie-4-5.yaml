@@ -1,0 +1,17 @@
+id: baidu--ernie-4-5
+name: Baidu / ERNIE 4.5
+family: ernie
+limit:
+  context: 131000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.0936
+  output: 0.3718
+release_date: 2026-05-17
+last_updated: 2026-05-17

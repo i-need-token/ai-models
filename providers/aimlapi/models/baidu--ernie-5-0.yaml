@@ -1,0 +1,17 @@
+id: baidu--ernie-5-0
+name: Baidu / ERNIE 5.0
+family: ernie
+limit:
+  context: 128000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.2298
+  output: 2.0449
+release_date: 2026-05-17
+last_updated: 2026-05-17

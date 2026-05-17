@@ -1,0 +1,17 @@
+id: minimax--minimax-m2-5
+name: MiniMax / MiniMax-M2.5
+family: minimax
+limit:
+  context: 1000000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.39
+  output: 1.56
+release_date: 2026-05-17
+last_updated: 2026-05-17

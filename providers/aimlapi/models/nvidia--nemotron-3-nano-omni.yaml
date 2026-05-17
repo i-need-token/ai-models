@@ -1,0 +1,16 @@
+id: nvidia--nemotron-3-nano-omni
+name: NVIDIA / Nemotron 3 Nano Omni
+family: nemotron
+limit:
+  context: 256000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17

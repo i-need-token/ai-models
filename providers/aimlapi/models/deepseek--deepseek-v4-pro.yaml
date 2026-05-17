@@ -1,0 +1,17 @@
+id: deepseek--deepseek-v4-pro
+name: DeepSeek / DeepSeek V4 Pro
+family: deepseek
+limit:
+  context: 1000000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2.262
+  output: 4.524
+release_date: 2026-05-17
+last_updated: 2026-05-17

@@ -1,0 +1,17 @@
+id: deepseek--deepseek-v3-2-speciale
+name: DeepSeek / DeepSeek-V3.2 Speciale
+family: deepseek
+limit:
+  context: 128000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.36855
+  output: 0.56186
+release_date: 2026-05-17
+last_updated: 2026-05-17

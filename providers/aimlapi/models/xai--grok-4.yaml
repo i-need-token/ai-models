@@ -1,0 +1,17 @@
+id: xai--grok-4
+name: xAI / Grok 4
+family: grok
+limit:
+  context: 256000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 7.8
+  output: 39
+release_date: 2026-05-17
+last_updated: 2026-05-17

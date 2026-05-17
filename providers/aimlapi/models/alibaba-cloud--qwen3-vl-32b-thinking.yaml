@@ -1,0 +1,18 @@
+id: alibaba-cloud--qwen3-vl-32b-thinking
+name: Alibaba Cloud / Qwen3 VL 32B Thinking
+family: qwen
+limit:
+  context: 126000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.91
+  output: 10.92
+release_date: 2026-05-17
+last_updated: 2026-05-17

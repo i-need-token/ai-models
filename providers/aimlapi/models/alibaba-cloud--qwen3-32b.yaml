@@ -1,0 +1,17 @@
+id: alibaba-cloud--qwen3-32b
+name: Alibaba Cloud / Qwen3 32B
+family: qwen
+limit:
+  context: 131000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.208
+  output: 0.832
+release_date: 2026-05-17
+last_updated: 2026-05-17
