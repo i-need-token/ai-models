@@ -1,0 +1,18 @@
+id: tencent--hy3-preview
+name: Hy3 Preview
+family: hy3
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 256000
+  output: 256000
+reasoning: true
+tool_call: true
+deprecated: true

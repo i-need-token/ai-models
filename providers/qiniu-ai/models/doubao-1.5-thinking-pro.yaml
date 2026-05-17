@@ -1,0 +1,19 @@
+id: doubao-1.5-thinking-pro
+name: Doubao 1.5 Thinking Pro
+family: doubao-1.5
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 4
+  output: 16
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 128000
+  output: 16000
+reasoning: true
+deprecated: true

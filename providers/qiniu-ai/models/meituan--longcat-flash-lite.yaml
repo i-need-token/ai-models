@@ -1,0 +1,17 @@
+id: meituan--longcat-flash-lite
+name: LongCat Flash Lite
+family: longcat
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 256000
+  output: 256000
+open_weights: true
+tool_call: true

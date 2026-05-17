@@ -1,0 +1,20 @@
+id: deepseek-r1
+name: DeepSeek R1
+family: deepseek-r1
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 4
+  output: 16
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 163840
+  output: 163840
+open_weights: true
+reasoning: true
+tool_call: true

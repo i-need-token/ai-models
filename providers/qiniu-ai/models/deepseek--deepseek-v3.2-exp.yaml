@@ -1,0 +1,20 @@
+id: deepseek--deepseek-v3.2-exp
+name: DeepSeek V3.2 Exp
+family: deepseek-v3.2
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 2
+  output: 3
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 131072
+  output: 131072
+open_weights: true
+reasoning: true
+tool_call: true

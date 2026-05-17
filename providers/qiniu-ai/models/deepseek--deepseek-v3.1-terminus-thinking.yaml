@@ -1,0 +1,19 @@
+id: deepseek--deepseek-v3.1-terminus-thinking
+name: DeepSeek V3.1 Terminus Thinking
+family: deepseek-v3.1
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 4
+  output: 12
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 131072
+  output: 131072
+open_weights: true
+reasoning: true

@@ -1,0 +1,19 @@
+id: minimax--minimax-m2.1
+name: MiniMax M2.1
+family: minimax-m2.1
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 2.1
+  output: 8.4
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 204800
+  output: 204800
+open_weights: true
+tool_call: true

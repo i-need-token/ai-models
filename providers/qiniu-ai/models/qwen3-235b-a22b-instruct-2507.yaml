@@ -1,0 +1,19 @@
+id: qwen3-235b-a22b-instruct-2507
+name: Qwen3 235B A22B Instruct 2507
+family: qwen3-235b
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 2
+  output: 8
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 256000
+  output: 256000
+open_weights: true
+tool_call: true

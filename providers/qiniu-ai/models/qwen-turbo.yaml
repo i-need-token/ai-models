@@ -1,0 +1,19 @@
+id: qwen-turbo
+name: Qwen Turbo
+family: qwen-turbo
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.3
+  output: 1
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 256000
+  output: 256000
+reasoning: true
+tool_call: true

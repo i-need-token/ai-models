@@ -1,0 +1,20 @@
+id: qwen2.5-vl-7b-instruct
+name: Qwen2.5 VL 7B Instruct
+family: qwen2.5-vl
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 2
+  output: 5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 256000
+  output: 256000
+open_weights: true
+tool_call: true

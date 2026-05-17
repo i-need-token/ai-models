@@ -1,0 +1,20 @@
+id: kimi-k2
+name: Kimi K2
+family: kimi-k2
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 4
+  output: 16
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 262144
+  output: 262144
+open_weights: true
+reasoning: true
+tool_call: true

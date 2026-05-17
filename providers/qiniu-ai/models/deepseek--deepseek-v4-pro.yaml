@@ -1,0 +1,20 @@
+id: deepseek--deepseek-v4-pro
+name: DeepSeek V4 Pro
+family: deepseek-v4-pro
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 12
+  output: 24
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 1000000
+  output: 1000000
+open_weights: true
+reasoning: true
+tool_call: true

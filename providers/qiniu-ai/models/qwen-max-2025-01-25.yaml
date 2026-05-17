@@ -1,0 +1,18 @@
+id: qwen-max-2025-01-25
+name: Qwen2.5 Max 2025-01-25
+family: qwen-max
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 2.4
+  output: 9.6
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 256000
+  output: 256000
+tool_call: true

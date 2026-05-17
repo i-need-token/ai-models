@@ -1,0 +1,6 @@
+id: qiniu-ai
+name: Qiniu AI
+url: https://qiniu.com/ai
+api_docs: https://developer.qiniu.com/aitokenapi/12884/how-to-get-api-key
+apis:
+  openai: https://api.qnaigc.com/v1
