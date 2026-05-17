@@ -1,0 +1,20 @@
+id: qwen3.6-27b
+name: Alibaba Qwen3.6-27B
+family: qwen3.6
+temperature: true
+limit:
+  context: 120000
+  output: 120000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true

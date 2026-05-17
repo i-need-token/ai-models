@@ -1,0 +1,18 @@
+id: minimax-m2.7
+name: MiniMax M2.7
+family: minimax-m2
+temperature: true
+limit:
+  context: 128000
+  output: 16000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.75
+release_date: 2026-05-17
+last_updated: 2026-05-17

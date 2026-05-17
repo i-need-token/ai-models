@@ -1,0 +1,19 @@
+id: kimi-k2-instruct-0905
+name: Moonshot AI Kimi K2 Instruct 0905
+family: kimi
+temperature: true
+limit:
+  context: 262144
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

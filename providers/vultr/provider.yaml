@@ -1,0 +1,6 @@
+id: vultr
+name: Vultr Cloud Inference
+url: https://www.vultr.com/products/cloud-inference/
+api_docs: https://docs.vultr.com/cloud-inference
+apis:
+  openai: https://inference.vultr.com/v1

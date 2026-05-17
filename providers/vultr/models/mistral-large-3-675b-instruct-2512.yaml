@@ -1,0 +1,20 @@
+id: mistral-large-3-675b-instruct-2512
+name: Mistral Large 3 675B
+family: mistral-large
+temperature: true
+limit:
+  context: 262144
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

@@ -1,0 +1,20 @@
+id: qwen3-coder-480b-a35b-instruct
+name: Alibaba Qwen3 Coder 480B-A35B Instruct
+family: qwen3-coder
+temperature: true
+limit:
+  context: 256000
+  output: 64000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

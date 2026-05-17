@@ -1,0 +1,21 @@
+id: cosmos-reason-2-2b
+name: NVIDIA Cosmos Reason 2 2B
+family: cosmos
+temperature: true
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+reasoning: true

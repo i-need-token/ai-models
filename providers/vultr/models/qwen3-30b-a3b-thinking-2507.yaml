@@ -1,0 +1,20 @@
+id: qwen3-30b-a3b-thinking-2507
+name: Alibaba Qwen3-30B-A3B Thinking 2507
+family: qwen3
+temperature: true
+limit:
+  context: 256000
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+reasoning: true

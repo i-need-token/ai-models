@@ -1,0 +1,19 @@
+id: gemma-3-1b-it
+name: Google Gemma 3 1B IT
+family: gemma-3
+temperature: true
+limit:
+  context: 8192
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true

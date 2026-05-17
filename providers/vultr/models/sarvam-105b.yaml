@@ -1,0 +1,20 @@
+id: sarvam-105b
+name: Sarvam AI 105B
+family: sarvam
+temperature: true
+limit:
+  context: 128000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+reasoning: true

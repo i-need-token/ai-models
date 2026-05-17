@@ -1,0 +1,22 @@
+id: gemma-4-e4b-it
+name: Google Gemma 4 E4B IT
+family: gemma-4
+temperature: true
+limit:
+  context: 262144
+  output: 131072
+modalities:
+  input:
+    - text
+    - image
+    - video
+    - audio
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
