@@ -1,5 +1,5 @@
 id: mythomax-l2-13b
-name: MythoMax L2 13B
+name: MythoMax L2.13b
 family: mythomax
 temperature: true
 limit:

@@ -1,6 +1,6 @@
 id: deepseek-r1-0528
-name: DeepSeek R1 0528
-family: deepseek
+name: DeepSeek R1.0528
+family: deepseek-r1
 temperature: true
 limit:
   context: 163840
@@ -17,5 +17,6 @@ pricing:
   cache_read: 0.35
 release_date: 2026-05-17
 last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+open_weights: true

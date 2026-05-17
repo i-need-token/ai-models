@@ -1,6 +1,6 @@
 id: deepseek-v4-flash
 name: DeepSeek V4 Flash
-family: deepseek
+family: deepseek-v4
 temperature: true
 limit:
   context: 1048576
@@ -18,4 +18,3 @@ pricing:
 release_date: 2026-05-17
 last_updated: 2026-05-17
 tool_call: true
-reasoning: true

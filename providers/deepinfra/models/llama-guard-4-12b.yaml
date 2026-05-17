@@ -1,5 +1,5 @@
 id: llama-guard-4-12b
-name: Llama Guard 4 12B
+name: Llama Guard 4.12B
 family: llama-guard
 temperature: true
 limit:
@@ -8,6 +8,7 @@ limit:
 modalities:
   input:
     - text
+    - image
   output:
     - text
 pricing:

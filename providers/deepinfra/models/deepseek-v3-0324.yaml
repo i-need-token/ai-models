@@ -1,6 +1,6 @@
 id: deepseek-v3-0324
-name: DeepSeek V3 0324
-family: deepseek
+name: DeepSeek V3.0324
+family: deepseek-v3
 temperature: true
 limit:
   context: 163840

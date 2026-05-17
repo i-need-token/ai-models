@@ -1,9 +1,9 @@
 id: gemini-2.5-flash
 name: Gemini 2.5 Flash
-family: gemini
+family: gemini-2.5
 temperature: true
 limit:
-  context: 999424
+  context: 1000000
   output: 131072
 modalities:
   input:
@@ -17,5 +17,5 @@ pricing:
   output: 2.5
 release_date: 2026-05-17
 last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true

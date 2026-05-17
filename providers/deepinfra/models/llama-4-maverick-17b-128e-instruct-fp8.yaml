@@ -1,5 +1,5 @@
-id: llama-4-maverick-17b-128e
-name: Llama 4 Maverick 17Bx128E
+id: llama-4-maverick-17b-128e-instruct-fp8
+name: Llama 4 Maverick 17B 128E Instruct FP8
 family: llama-4
 temperature: true
 limit:
@@ -8,6 +8,7 @@ limit:
 modalities:
   input:
     - text
+    - image
   output:
     - text
 pricing:

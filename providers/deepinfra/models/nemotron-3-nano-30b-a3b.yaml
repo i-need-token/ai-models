@@ -16,4 +16,5 @@ pricing:
   output: 0.2
 release_date: 2026-05-17
 last_updated: 2026-05-17
+reasoning: true
 open_weights: true

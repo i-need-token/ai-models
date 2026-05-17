@@ -1,5 +1,5 @@
 id: l3.1-70b-euryale-v2.2
-name: L3.1 70B Euryale v2.2
+name: L3.1.70B Euryale V2.2
 family: l3-finetune
 temperature: true
 limit:

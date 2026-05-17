@@ -1,6 +1,6 @@
 id: deepseek-r1-0528-turbo
-name: DeepSeek R1 0528 Turbo
-family: deepseek
+name: DeepSeek R1.0528 Turbo
+family: deepseek-r1
 temperature: true
 limit:
   context: 32768
@@ -17,3 +17,5 @@ pricing:
 release_date: 2026-05-17
 last_updated: 2026-05-17
 reasoning: true
+tool_call: true
+open_weights: true

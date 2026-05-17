@@ -1,9 +1,9 @@
 id: gemini-3.1-flash-lite
 name: Gemini 3.1 Flash Lite
-family: gemini
+family: gemini-3.1
 temperature: true
 limit:
-  context: 999424
+  context: 1000000
   output: 131072
 modalities:
   input:
@@ -17,4 +17,5 @@ pricing:
   output: 1.5
 release_date: 2026-05-17
 last_updated: 2026-05-17
+reasoning: true
 tool_call: true

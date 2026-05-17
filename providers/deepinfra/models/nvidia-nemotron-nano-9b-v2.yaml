@@ -1,5 +1,5 @@
 id: nvidia-nemotron-nano-9b-v2
-name: Nemotron Nano 9B v2
+name: NVIDIA Nemotron Nano 9B V2
 family: nemotron
 temperature: true
 limit:
@@ -16,4 +16,5 @@ pricing:
   output: 0.16
 release_date: 2026-05-17
 last_updated: 2026-05-17
+reasoning: true
 open_weights: true

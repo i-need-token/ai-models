@@ -1,6 +1,6 @@
 id: gemini-1.5-flash
 name: Gemini 1.5 Flash
-family: gemini
+family: gemini-1.5
 temperature: true
 limit:
   context: 1000000
@@ -17,4 +17,4 @@ pricing:
   output: 0.3
 release_date: 2026-05-17
 last_updated: 2026-05-17
-reasoning: true
+tool_call: true

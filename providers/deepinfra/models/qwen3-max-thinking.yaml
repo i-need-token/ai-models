@@ -3,7 +3,7 @@ name: Qwen3 Max Thinking
 family: qwen3-max
 temperature: true
 limit:
-  context: 262144
+  context: 256000
   output: 131072
 modalities:
   input:
@@ -18,4 +18,3 @@ pricing:
 release_date: 2026-05-17
 last_updated: 2026-05-17
 tool_call: true
-reasoning: true

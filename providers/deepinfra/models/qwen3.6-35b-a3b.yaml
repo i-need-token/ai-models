@@ -1,5 +1,5 @@
 id: qwen3.6-35b-a3b
-name: Qwen3.6 35B A3B
+name: Qwen3.6.35B A3B
 family: qwen3.6
 temperature: true
 limit:
@@ -17,5 +17,5 @@ pricing:
   output: 0.95
 release_date: 2026-05-17
 last_updated: 2026-05-17
-open_weights: true
 reasoning: true
+open_weights: true

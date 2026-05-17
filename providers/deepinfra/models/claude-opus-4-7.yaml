@@ -1,9 +1,9 @@
 id: claude-opus-4-7
 name: Claude Opus 4.7
-family: claude
+family: claude-opus
 temperature: true
 limit:
-  context: 999424
+  context: 1000000
   output: 16384
 modalities:
   input:
@@ -17,4 +17,5 @@ pricing:
   output: 25
 release_date: 2026-05-17
 last_updated: 2026-05-17
+reasoning: true
 tool_call: true

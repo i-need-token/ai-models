@@ -1,5 +1,5 @@
 id: l3-8b-lunaris-v1-turbo
-name: L3 8B Lunaris v1 Turbo
+name: L3.8B Lunaris V1 Turbo
 family: l3-finetune
 temperature: true
 limit:

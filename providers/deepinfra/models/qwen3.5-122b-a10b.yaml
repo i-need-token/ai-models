@@ -1,5 +1,5 @@
 id: qwen3.5-122b-a10b
-name: Qwen3.5 122B A10B
+name: Qwen3.5.122B A10B
 family: qwen3.5
 temperature: true
 limit:
@@ -17,5 +17,5 @@ pricing:
   output: 2.4
 release_date: 2026-05-17
 last_updated: 2026-05-17
-open_weights: true
 reasoning: true
+open_weights: true

@@ -1,5 +1,5 @@
 id: qwen3.5-9b
-name: Qwen3.5 9B
+name: Qwen3.5.9B
 family: qwen3.5
 temperature: true
 limit:
@@ -18,4 +18,3 @@ pricing:
 release_date: 2026-05-17
 last_updated: 2026-05-17
 open_weights: true
-reasoning: true

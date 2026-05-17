@@ -1,6 +1,6 @@
 id: deepseek-v3.1
 name: DeepSeek V3.1
-family: deepseek
+family: deepseek-v3.1
 temperature: true
 limit:
   context: 163840
@@ -17,4 +17,5 @@ pricing:
   cache_read: 0.13
 release_date: 2026-05-17
 last_updated: 2026-05-17
+reasoning: true
 tool_call: true

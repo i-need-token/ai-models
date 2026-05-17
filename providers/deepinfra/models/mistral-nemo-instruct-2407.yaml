@@ -1,6 +1,6 @@
 id: mistral-nemo-instruct-2407
 name: Mistral Nemo Instruct 2407
-family: mistral
+family: mistral-nemo
 temperature: true
 limit:
   context: 131072

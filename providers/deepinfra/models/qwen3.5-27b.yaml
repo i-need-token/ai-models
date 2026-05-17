@@ -1,5 +1,5 @@
 id: qwen3.5-27b
-name: Qwen3.5 27B
+name: Qwen3.5.27B
 family: qwen3.5
 temperature: true
 limit:
@@ -17,5 +17,5 @@ pricing:
   output: 2.6
 release_date: 2026-05-17
 last_updated: 2026-05-17
-open_weights: true
 reasoning: true
+open_weights: true

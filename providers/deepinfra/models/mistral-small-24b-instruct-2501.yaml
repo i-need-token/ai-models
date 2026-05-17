@@ -1,6 +1,6 @@
 id: mistral-small-24b-instruct-2501
 name: Mistral Small 24B Instruct 2501
-family: mistral
+family: mistral-small
 temperature: true
 limit:
   context: 32768

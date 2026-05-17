@@ -1,5 +1,5 @@
-id: llama-4-scout-17b-16e
-name: Llama 4 Scout 17Bx16E
+id: llama-4-scout-17b-16e-instruct
+name: Llama 4 Scout 17B 16E Instruct
 family: llama-4
 temperature: true
 limit:
@@ -8,6 +8,7 @@ limit:
 modalities:
   input:
     - text
+    - image
   output:
     - text
 pricing:

@@ -1,5 +1,5 @@
 id: gemma-3-12b-it
-name: Gemma 3 12B IT
+name: Gemma 3.12b It
 family: gemma-3
 temperature: true
 limit:

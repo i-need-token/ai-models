@@ -1,10 +1,10 @@
 id: mistral-small-3.2-24b-instruct-2506
-name: Mistral Small 3.2 24B Instruct 2506
-family: mistral
+name: Mistral Small 3.2.24B Instruct 2506
+family: mistral-small-3.2
 temperature: true
 limit:
-  context: 131072
-  output: 131072
+  context: 128000
+  output: 128000
 modalities:
   input:
     - text

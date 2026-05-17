@@ -3,7 +3,7 @@ name: Qwen3 Max
 family: qwen3-max
 temperature: true
 limit:
-  context: 262144
+  context: 256000
   output: 131072
 modalities:
   input:
