@@ -1,0 +1,18 @@
+id: qwen--qwen3.5-4b-free
+name: Qwen 3.5 4B Free
+family: qwen3.5
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+reasoning: true
+tool_call: true

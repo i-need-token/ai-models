@@ -1,0 +1,6 @@
+id: mixlayer
+name: Mixlayer
+url: https://mixlayer.com
+api_docs: https://docs.mixlayer.com
+apis:
+  openai: https://models.mixlayer.ai/v1
