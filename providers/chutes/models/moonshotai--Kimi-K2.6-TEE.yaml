@@ -19,5 +19,5 @@ modalities:
 structured_output: true
 tool_call: true
 reasoning: true
-release_date: 2026-05-16
-last_updated: 2026-05-16
+release_date: 2026-05-17
+last_updated: 2026-05-17

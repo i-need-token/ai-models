@@ -13,7 +13,7 @@ modalities:
 pricing:
   input: 0.286
   output: 2.86
-release_date: 2026-05-16
-last_updated: 2026-05-16
+release_date: 2026-05-17
+last_updated: 2026-05-17
 open_weights: true
 reasoning: true

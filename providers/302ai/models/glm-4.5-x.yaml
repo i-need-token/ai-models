@@ -12,6 +12,6 @@ modalities:
 pricing:
   input: 1.143
   output: 2.29
-release_date: 2026-05-16
-last_updated: 2026-05-16
+release_date: 2026-05-17
+last_updated: 2026-05-17
 tool_call: true
