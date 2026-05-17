@@ -1,0 +1,22 @@
+id: gemini-robotics-er-1.6-preview
+name: Gemini Robotics ER 1.6 Preview
+family: gemini
+temperature: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 131072
+  output: 65536
+tool_call: true
+reasoning: true
+structured_output: true

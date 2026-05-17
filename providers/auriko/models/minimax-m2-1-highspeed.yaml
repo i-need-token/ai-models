@@ -1,0 +1,22 @@
+id: minimax-m2-1-highspeed
+name: MiniMax M2.1 Highspeed
+family: minimax
+temperature: true
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.4
+  cache_read: 0.03
+  cache_write: 0.375
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 204800
+  output: 204800
+tool_call: true
+reasoning: true

@@ -1,0 +1,19 @@
+id: moonshot-v1-128k
+name: Moonshot V1 128K
+family: moonshot
+temperature: true
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2
+  output: 5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 131072
+  output: 131072
+tool_call: true

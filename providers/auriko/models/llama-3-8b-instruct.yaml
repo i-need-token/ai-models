@@ -1,0 +1,19 @@
+id: llama-3-8b-instruct
+name: Llama 3 8B Instruct
+family: llama
+temperature: true
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.1
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 8192
+  output: 8192
+structured_output: true

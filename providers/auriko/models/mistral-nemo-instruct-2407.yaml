@@ -1,0 +1,18 @@
+id: mistral-nemo-instruct-2407
+name: Mistral Nemo Instruct 2407
+family: mistral
+temperature: true
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.02
+  output: 0.04
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 131072
+  output: 16384

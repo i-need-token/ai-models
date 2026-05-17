@@ -1,0 +1,19 @@
+id: rnj-1-instruct
+name: RNJ-1 Instruct
+family: rnj
+temperature: true
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 32768
+  output: 32768
+tool_call: true

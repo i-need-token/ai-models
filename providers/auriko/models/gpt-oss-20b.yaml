@@ -1,0 +1,21 @@
+id: gpt-oss-20b
+name: GPT-OSS 20B
+family: gpt-oss
+temperature: true
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.07
+  output: 0.3
+  cache_read: 0.04
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 131072
+  output: 131072
+reasoning: true
+structured_output: true

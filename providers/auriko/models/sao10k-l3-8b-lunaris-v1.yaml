@@ -1,0 +1,18 @@
+id: sao10k-l3-8b-lunaris-v1
+name: Sao10K L3 8B Lunaris v1
+family: sao10k
+temperature: true
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.04
+  output: 0.05
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 8192
+  output: 16384

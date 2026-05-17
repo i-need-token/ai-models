@@ -1,0 +1,19 @@
+id: gemma-3n-e4b-it
+name: Gemma 3N E4B Instruct
+family: gemma
+temperature: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.06
+  output: 0.12
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 32768
+  output: 32768

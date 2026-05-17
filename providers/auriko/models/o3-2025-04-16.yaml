@@ -1,0 +1,23 @@
+id: o3-2025-04-16
+name: o3
+family: o3
+temperature: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2
+  output: 8
+  cache_read: 0.5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 200000
+  output: 100000
+tool_call: true
+reasoning: true
+structured_output: true

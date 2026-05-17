@@ -1,0 +1,19 @@
+id: ling-flash-2.0
+name: Ling-flash 2.0
+family: ling
+temperature: true
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.14
+  output: 0.57
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 131000
+  output: 131000
+tool_call: true

@@ -1,0 +1,20 @@
+id: gpt-4o-mini-search-preview-2025-03-11
+name: GPT-4o mini Search Preview
+family: gpt-4
+temperature: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.6
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 128000
+  output: 16384
+structured_output: true

@@ -1,0 +1,18 @@
+id: mythomax-l2-13b
+name: MythoMax L2 13B
+family: mythomax
+temperature: true
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.4
+  output: 0.4
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 4096
+  output: 16384

@@ -1,0 +1,20 @@
+id: qwen-3-vl-32b-instruct
+name: Qwen 3 VL 32B Instruct
+family: qwen
+temperature: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.6
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 262000
+  output: 262000
+tool_call: true

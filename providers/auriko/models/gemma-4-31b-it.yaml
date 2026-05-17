@@ -1,0 +1,20 @@
+id: gemma-4-31b-it
+name: Gemma 4 31B Instruct
+family: gemma
+temperature: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 262144
+  output: 32768
+tool_call: true
+reasoning: true
+structured_output: true

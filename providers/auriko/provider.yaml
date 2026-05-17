@@ -1,0 +1,5 @@
+id: auriko
+name: Auriko
+url: https://auriko.ai
+apis:
+  openai: https://api.auriko.ai/v1

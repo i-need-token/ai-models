@@ -1,0 +1,20 @@
+id: moonshot-v1-8k-vision-preview
+name: Moonshot V1 8K Vision Preview
+family: moonshot
+temperature: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 8192
+  output: 8192
+tool_call: true

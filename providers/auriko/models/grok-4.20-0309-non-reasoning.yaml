@@ -1,0 +1,22 @@
+id: grok-4.20-0309-non-reasoning
+name: Grok 4.20 (Non-Reasoning)
+family: grok
+temperature: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.25
+  output: 2.5
+  cache_read: 0.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 1000000
+  output: 1000000
+tool_call: true
+structured_output: true

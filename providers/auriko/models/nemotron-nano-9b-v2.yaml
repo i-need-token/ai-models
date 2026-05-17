@@ -1,0 +1,19 @@
+id: nemotron-nano-9b-v2
+name: Nemotron Nano 9B v2
+family: nemotron
+temperature: true
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.04
+  output: 0.16
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 131072
+  output: 16384
+reasoning: true

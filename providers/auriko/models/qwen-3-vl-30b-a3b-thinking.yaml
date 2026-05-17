@@ -1,0 +1,21 @@
+id: qwen-3-vl-30b-a3b-thinking
+name: Qwen 3 VL 30B A3B Thinking
+family: qwen
+temperature: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.29
+  output: 1
+release_date: 2026-05-17
+last_updated: 2026-05-17
+limit:
+  context: 262000
+  output: 262000
+tool_call: true
+reasoning: true
