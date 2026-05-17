@@ -1,0 +1,20 @@
+id: novita--zai-org--glm-4.6
+name: Glm 4.6
+family: novita
+limit:
+  context: 204800
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.2
+  cache_read: 0.6
+  cache_write: 2.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

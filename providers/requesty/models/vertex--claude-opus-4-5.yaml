@@ -1,0 +1,22 @@
+id: vertex--claude-opus-4-5
+name: Claude Opus 4 5
+family: claude
+limit:
+  context: 200000
+  output: 64000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 5
+  output: 25
+  cache_read: 0.5
+  cache_write: 6.25
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

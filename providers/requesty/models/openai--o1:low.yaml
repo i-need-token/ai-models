@@ -1,0 +1,22 @@
+id: openai--o1:low
+name: O1:Low
+family: o1
+limit:
+  context: 200000
+  output: 100000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 15
+  output: 60
+  cache_read: 7.5
+  cache_write: 15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

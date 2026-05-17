@@ -1,0 +1,19 @@
+id: perplexity--sonar-pro
+name: Sonar Pro
+family: sonar
+limit:
+  context: 204800
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 3
+  output: 15
+  cache_read: 3
+  cache_write: 3
+release_date: 2026-05-17
+last_updated: 2026-05-17

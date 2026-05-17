@@ -1,0 +1,22 @@
+id: openai-responses--gpt-5-codex
+name: Gpt 5 Codex
+family: gpt-5
+limit:
+  context: 400000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.25
+  output: 10
+  cache_read: 0.125
+  cache_write: 1.25
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

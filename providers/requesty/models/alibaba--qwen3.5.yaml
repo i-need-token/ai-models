@@ -1,0 +1,22 @@
+id: alibaba--qwen3.5
+name: Qwen3.5
+family: qwen
+limit:
+  context: 256000
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.6
+  output: 3.6
+  cache_read: 0.6
+  cache_write: 3.6
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

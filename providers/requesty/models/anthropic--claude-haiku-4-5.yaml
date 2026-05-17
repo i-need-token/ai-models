@@ -1,0 +1,21 @@
+id: anthropic--claude-haiku-4-5
+name: Claude Haiku 4 5
+family: claude
+limit:
+  context: 200000
+  output: 64000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 5
+  cache_read: 0.1
+  cache_write: 1.25
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

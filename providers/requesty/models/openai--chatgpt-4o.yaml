@@ -1,0 +1,21 @@
+id: openai--chatgpt-4o
+name: Chatgpt 4o
+family: chatgpt
+limit:
+  context: 128000
+  output: 16000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 5
+  output: 15
+  cache_read: 5
+  cache_write: 5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

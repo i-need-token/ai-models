@@ -1,0 +1,21 @@
+id: azure--openai-responses--gpt-4.1-mini
+name: Gpt 4.1 Mini
+family: azure
+limit:
+  context: 1047576
+  output: 32768
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.4
+  output: 1.6
+  cache_read: 0.1
+  cache_write: 0.4
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

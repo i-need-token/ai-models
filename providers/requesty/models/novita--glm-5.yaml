@@ -1,0 +1,20 @@
+id: novita--glm-5
+name: GLM 5
+family: novita
+limit:
+  context: 202800
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 3.2
+  cache_read: 0.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

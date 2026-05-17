@@ -1,0 +1,22 @@
+id: openai-responses--gpt-5-pro
+name: Gpt 5 Pro
+family: gpt-5
+limit:
+  context: 400000
+  output: 272000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 15
+  output: 120
+  cache_read: 15
+  cache_write: 120
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

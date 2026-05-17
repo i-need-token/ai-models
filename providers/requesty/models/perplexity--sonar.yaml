@@ -1,0 +1,19 @@
+id: perplexity--sonar
+name: Sonar
+family: sonar
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 1
+  cache_read: 1
+  cache_write: 1
+release_date: 2026-05-17
+last_updated: 2026-05-17

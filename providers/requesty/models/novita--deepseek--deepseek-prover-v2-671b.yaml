@@ -1,0 +1,19 @@
+id: novita--deepseek--deepseek-prover-v2-671b
+name: Deepseek Prover V2 671b
+family: novita
+limit:
+  context: 160000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.7
+  output: 2.5
+  cache_read: 0.7
+  cache_write: 0.7
+release_date: 2026-05-17
+last_updated: 2026-05-17

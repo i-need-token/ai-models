@@ -1,0 +1,19 @@
+id: fireworks--minimax-m2.5
+name: Minimax M2.5
+family: fireworks
+limit:
+  context: 196608
+  output: 24576
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.2
+  cache_read: 0.03
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

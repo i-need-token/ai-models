@@ -1,0 +1,20 @@
+id: alibaba--qwen-turbo
+name: Qwen Turbo
+family: qwen
+limit:
+  context: 1000000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.2
+  cache_read: 0.05
+  cache_write: 0.05
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

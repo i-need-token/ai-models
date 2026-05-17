@@ -1,0 +1,21 @@
+id: azure--gpt-5.2
+name: Gpt 5.2
+family: gpt
+limit:
+  context: 200000
+  output: 100000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.75
+  output: 14
+  cache_read: 0.175
+  cache_write: 14
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

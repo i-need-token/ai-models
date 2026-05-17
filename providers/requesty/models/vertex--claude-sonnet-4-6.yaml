@@ -1,0 +1,22 @@
+id: vertex--claude-sonnet-4-6
+name: Claude Sonnet 4 6
+family: claude
+limit:
+  context: 1000000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 3
+  output: 15
+  cache_read: 0.3
+  cache_write: 3.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

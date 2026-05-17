@@ -1,0 +1,22 @@
+id: moonshot--kimi-k2.6
+name: Kimi K2.6
+family: kimi
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.95
+  output: 4
+  cache_read: 0.16
+  cache_write: 0.96
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

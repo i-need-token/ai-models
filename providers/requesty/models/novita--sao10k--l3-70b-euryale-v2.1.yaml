@@ -1,0 +1,19 @@
+id: novita--sao10k--l3-70b-euryale-v2.1
+name: L3 70b Euryale V2.1
+family: novita
+limit:
+  context: 16000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.48
+  output: 1.48
+  cache_read: 1.48
+  cache_write: 1.48
+release_date: 2026-05-17
+last_updated: 2026-05-17

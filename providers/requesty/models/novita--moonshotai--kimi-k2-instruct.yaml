@@ -1,0 +1,20 @@
+id: novita--moonshotai--kimi-k2-instruct
+name: Kimi K2 Instruct
+family: novita
+limit:
+  context: 131072
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.57
+  output: 2.3
+  cache_read: 0.57
+  cache_write: 0.57
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

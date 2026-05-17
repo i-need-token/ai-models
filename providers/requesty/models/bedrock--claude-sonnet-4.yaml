@@ -1,0 +1,22 @@
+id: bedrock--claude-sonnet-4
+name: Claude Sonnet 4
+family: claude
+limit:
+  context: 200000
+  output: 64000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 3
+  output: 15
+  cache_read: 0.3
+  cache_write: 3.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

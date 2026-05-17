@@ -1,0 +1,5 @@
+id: requesty
+name: Requesty
+url: https://requesty.ai
+apis:
+  openai: https://router.requesty.ai/v1

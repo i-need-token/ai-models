@@ -1,0 +1,20 @@
+id: parasail--parasail-gemma3-27b-it
+name: Parasail Gemma3 27b It
+family: parasail
+limit:
+  context: 128000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.5
+  cache_read: 0.3
+  cache_write: 0.5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
