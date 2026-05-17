@@ -1,10 +1,9 @@
 id: mistralai--codestral-2508
 name: "Mistral: Codestral 2508"
 family: mistral
-temperature: true
 limit:
   context: 256000
-  output: 256000
+  output: 4096
 modalities:
   input:
     - text

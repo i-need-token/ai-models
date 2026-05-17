@@ -1,7 +1,6 @@
 id: openai--gpt-4-turbo-preview
 name: "OpenAI: GPT-4 Turbo Preview"
 family: gpt-4
-temperature: true
 limit:
   context: 128000
   output: 4096

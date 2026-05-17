@@ -1,7 +1,6 @@
 id: mancer--weaver
 name: "Mancer: Weaver (alpha)"
-family: weaver
-temperature: true
+family: mancer
 limit:
   context: 8000
   output: 2000

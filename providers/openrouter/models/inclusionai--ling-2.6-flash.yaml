@@ -1,7 +1,6 @@
 id: inclusionai--ling-2.6-flash
 name: "inclusionAI: Ling-2.6-flash"
-family: ling
-temperature: true
+family: inclusionai
 limit:
   context: 262144
   output: 32768

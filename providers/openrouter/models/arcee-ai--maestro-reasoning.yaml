@@ -1,7 +1,6 @@
 id: arcee-ai--maestro-reasoning
 name: "Arcee AI: Maestro Reasoning"
 family: arcee
-temperature: true
 limit:
   context: 131072
   output: 32000

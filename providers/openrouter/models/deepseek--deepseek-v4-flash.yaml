@@ -1,10 +1,9 @@
 id: deepseek--deepseek-v4-flash
 name: "DeepSeek: DeepSeek V4 Flash"
 family: deepseek
-temperature: true
 limit:
   context: 1048576
-  output: 1048576
+  output: 4096
 modalities:
   input:
     - text

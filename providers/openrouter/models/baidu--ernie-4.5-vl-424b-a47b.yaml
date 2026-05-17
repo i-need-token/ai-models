@@ -1,7 +1,6 @@
 id: baidu--ernie-4.5-vl-424b-a47b
 name: "Baidu: ERNIE 4.5 VL 424B A47B "
-family: ernie
-temperature: true
+family: cobuddy
 limit:
   context: 131072
   output: 16000

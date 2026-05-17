@@ -1,10 +1,9 @@
 id: ibm-granite--granite-4.0-h-micro
 name: "IBM: Granite 4.0 Micro"
-family: granite
-temperature: true
+family: ibm-granite
 limit:
   context: 131000
-  output: 131000
+  output: 4096
 modalities:
   input:
     - text

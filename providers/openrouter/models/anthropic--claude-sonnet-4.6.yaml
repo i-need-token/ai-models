@@ -1,7 +1,6 @@
 id: anthropic--claude-sonnet-4.6
 name: "Anthropic: Claude Sonnet 4.6"
 family: claude
-temperature: true
 limit:
   context: 1000000
   output: 128000

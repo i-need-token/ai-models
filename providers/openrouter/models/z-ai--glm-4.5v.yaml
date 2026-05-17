@@ -1,7 +1,6 @@
 id: z-ai--glm-4.5v
 name: "Z.ai: GLM 4.5V"
 family: glm
-temperature: true
 limit:
   context: 65536
   output: 16384

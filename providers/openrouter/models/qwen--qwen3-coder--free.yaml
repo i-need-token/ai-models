@@ -1,0 +1,15 @@
+id: qwen--qwen3-coder--free
+name: "Qwen: Qwen3 Coder 480B A35B (free)"
+family: qwen
+limit:
+  context: 1048576
+  output: 262000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17

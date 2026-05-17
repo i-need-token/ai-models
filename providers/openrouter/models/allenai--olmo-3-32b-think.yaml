@@ -1,7 +1,6 @@
 id: allenai--olmo-3-32b-think
 name: "AllenAI: Olmo 3 32B Think"
-family: olmo
-temperature: true
+family: allenai
 limit:
   context: 65536
   output: 65536

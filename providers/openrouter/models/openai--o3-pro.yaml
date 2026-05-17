@@ -1,7 +1,6 @@
 id: openai--o3-pro
 name: "OpenAI: o3 Pro"
 family: o3
-temperature: true
 limit:
   context: 200000
   output: 100000

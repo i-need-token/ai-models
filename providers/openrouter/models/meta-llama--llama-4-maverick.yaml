@@ -1,7 +1,6 @@
 id: meta-llama--llama-4-maverick
 name: "Meta: Llama 4 Maverick"
-family: llama-4
-temperature: true
+family: llama
 limit:
   context: 1048576
   output: 16384

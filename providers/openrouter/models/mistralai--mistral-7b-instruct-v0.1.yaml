@@ -1,7 +1,6 @@
 id: mistralai--mistral-7b-instruct-v0.1
 name: "Mistral: Mistral 7B Instruct v0.1"
 family: mistral
-temperature: true
 limit:
   context: 4096
   output: 4096

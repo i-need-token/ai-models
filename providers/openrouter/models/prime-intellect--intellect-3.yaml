@@ -1,7 +1,6 @@
 id: prime-intellect--intellect-3
 name: "Prime Intellect: INTELLECT-3"
-family: intellect
-temperature: true
+family: prime-intellect
 limit:
   context: 131072
   output: 131072

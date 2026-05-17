@@ -1,0 +1,15 @@
+id: nvidia--nemotron-3-super-120b-a12b--free
+name: "NVIDIA: Nemotron 3 Super (free)"
+family: nemotron
+limit:
+  context: 1000000
+  output: 262144
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17

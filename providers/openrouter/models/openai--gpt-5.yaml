@@ -1,7 +1,6 @@
 id: openai--gpt-5
 name: "OpenAI: GPT-5"
-family: gpt-5
-temperature: true
+family: gpt
 limit:
   context: 400000
   output: 128000

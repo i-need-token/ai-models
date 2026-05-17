@@ -1,7 +1,6 @@
 id: z-ai--glm-5v-turbo
 name: "Z.ai: GLM 5V Turbo"
 family: glm
-temperature: true
 limit:
   context: 202752
   output: 131072

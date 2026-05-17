@@ -1,7 +1,6 @@
 id: nvidia--nemotron-3-nano-30b-a3b
 name: "NVIDIA: Nemotron 3 Nano 30B A3B"
 family: nemotron
-temperature: true
 limit:
   context: 262144
   output: 228000

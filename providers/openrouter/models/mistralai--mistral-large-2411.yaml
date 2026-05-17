@@ -1,10 +1,9 @@
 id: mistralai--mistral-large-2411
 name: Mistral Large 2411
 family: mistral
-temperature: true
 limit:
   context: 131072
-  output: 131072
+  output: 4096
 modalities:
   input:
     - text

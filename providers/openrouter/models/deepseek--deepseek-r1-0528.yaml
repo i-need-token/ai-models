@@ -1,7 +1,6 @@
 id: deepseek--deepseek-r1-0528
 name: "DeepSeek: R1 0528"
 family: deepseek
-temperature: true
 limit:
   context: 163840
   output: 32768

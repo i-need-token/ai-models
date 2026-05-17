@@ -1,7 +1,6 @@
 id: arcee-ai--trinity-large-thinking
 name: "Arcee AI: Trinity Large Thinking"
-family: trinity
-temperature: true
+family: arcee
 limit:
   context: 262144
   output: 262144

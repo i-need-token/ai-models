@@ -1,10 +1,9 @@
 id: mistralai--devstral-small
 name: "Mistral: Devstral Small 1.1"
 family: mistral
-temperature: true
 limit:
   context: 131072
-  output: 131072
+  output: 4096
 modalities:
   input:
     - text

@@ -1,7 +1,6 @@
 id: writer--palmyra-x5
 name: "Writer: Palmyra X5"
 family: palmyra
-temperature: true
 limit:
   context: 1040000
   output: 8192

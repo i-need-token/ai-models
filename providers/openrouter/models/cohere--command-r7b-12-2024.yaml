@@ -1,7 +1,6 @@
 id: cohere--command-r7b-12-2024
 name: "Cohere: Command R7B (12-2024)"
 family: command
-temperature: true
 limit:
   context: 128000
   output: 4000

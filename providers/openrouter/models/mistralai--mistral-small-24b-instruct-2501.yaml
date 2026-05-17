@@ -1,7 +1,6 @@
 id: mistralai--mistral-small-24b-instruct-2501
 name: "Mistral: Mistral Small 3"
 family: mistral
-temperature: true
 limit:
   context: 32768
   output: 16384

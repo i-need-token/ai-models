@@ -1,7 +1,6 @@
 id: inception--mercury-2
 name: "Inception: Mercury 2"
-family: mercury
-temperature: true
+family: inception
 limit:
   context: 128000
   output: 50000

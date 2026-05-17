@@ -1,7 +1,6 @@
 id: z-ai--glm-4.7-flash
 name: "Z.ai: GLM 4.7 Flash"
 family: glm
-temperature: true
 limit:
   context: 202752
   output: 16384

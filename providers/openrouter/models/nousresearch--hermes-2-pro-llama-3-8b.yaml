@@ -1,7 +1,6 @@
 id: nousresearch--hermes-2-pro-llama-3-8b
 name: "NousResearch: Hermes 2 Pro - Llama-3 8B"
-family: llama-3
-temperature: true
+family: hermes
 limit:
   context: 8192
   output: 8192

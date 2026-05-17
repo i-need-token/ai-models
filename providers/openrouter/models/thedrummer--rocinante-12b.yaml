@@ -1,7 +1,6 @@
 id: thedrummer--rocinante-12b
 name: "TheDrummer: Rocinante 12B"
-family: rocinante
-temperature: true
+family: thedrummer
 limit:
   context: 32768
   output: 32768

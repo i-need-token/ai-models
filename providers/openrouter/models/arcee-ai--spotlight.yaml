@@ -1,7 +1,6 @@
 id: arcee-ai--spotlight
 name: "Arcee AI: Spotlight"
 family: arcee
-temperature: true
 limit:
   context: 131072
   output: 65537

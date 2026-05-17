@@ -1,7 +1,6 @@
 id: minimax--minimax-01
 name: "MiniMax: MiniMax-01"
 family: minimax
-temperature: true
 limit:
   context: 1000192
   output: 1000192

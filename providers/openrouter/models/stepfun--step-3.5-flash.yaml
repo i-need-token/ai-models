@@ -1,7 +1,6 @@
 id: stepfun--step-3.5-flash
 name: "StepFun: Step 3.5 Flash"
-family: other
-temperature: true
+family: step
 limit:
   context: 262144
   output: 65536

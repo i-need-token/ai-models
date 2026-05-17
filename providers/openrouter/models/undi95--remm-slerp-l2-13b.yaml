@@ -1,7 +1,6 @@
 id: undi95--remm-slerp-l2-13b
 name: ReMM SLERP 13B
-family: remm
-temperature: true
+family: undi95
 limit:
   context: 6144
   output: 4096

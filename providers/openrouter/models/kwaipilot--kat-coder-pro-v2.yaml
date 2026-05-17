@@ -1,7 +1,6 @@
 id: kwaipilot--kat-coder-pro-v2
 name: "Kwaipilot: KAT-Coder-Pro V2"
-family: kat-coder
-temperature: true
+family: kwaipilot
 limit:
   context: 256000
   output: 80000

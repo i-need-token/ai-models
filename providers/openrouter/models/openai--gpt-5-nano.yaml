@@ -1,10 +1,9 @@
 id: openai--gpt-5-nano
 name: "OpenAI: GPT-5 Nano"
-family: gpt-5
-temperature: true
+family: gpt
 limit:
   context: 400000
-  output: 400000
+  output: 4096
 modalities:
   input:
     - text

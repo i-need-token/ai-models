@@ -1,7 +1,6 @@
 id: openai--gpt-5.4-image-2
 name: "OpenAI: GPT-5.4 Image 2"
-family: gpt-5
-temperature: true
+family: gpt
 limit:
   context: 272000
   output: 128000

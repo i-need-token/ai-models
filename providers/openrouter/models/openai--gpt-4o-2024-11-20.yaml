@@ -1,7 +1,6 @@
 id: openai--gpt-4o-2024-11-20
 name: "OpenAI: GPT-4o (2024-11-20)"
 family: gpt-4
-temperature: true
 limit:
   context: 128000
   output: 16384

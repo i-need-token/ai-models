@@ -1,7 +1,6 @@
 id: cohere--command-a
 name: "Cohere: Command A"
 family: command
-temperature: true
 limit:
   context: 256000
   output: 8192

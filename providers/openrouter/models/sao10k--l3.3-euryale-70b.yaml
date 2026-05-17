@@ -1,7 +1,6 @@
 id: sao10k--l3.3-euryale-70b
 name: "Sao10K: Llama 3.3 Euryale 70B"
-family: o1
-temperature: true
+family: l3-finetune
 limit:
   context: 131072
   output: 16384

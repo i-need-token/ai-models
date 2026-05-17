@@ -1,7 +1,6 @@
 id: qwen--qwen3-30b-a3b
 name: "Qwen: Qwen3 30B A3B"
-family: qwen3
-temperature: true
+family: qwen
 limit:
   context: 131072
   output: 20000

@@ -1,7 +1,6 @@
 id: bytedance-seed--seed-2.0-mini
 name: "ByteDance Seed: Seed-2.0-Mini"
-family: seed
-temperature: true
+family: bytedance-seed
 limit:
   context: 262144
   output: 131072

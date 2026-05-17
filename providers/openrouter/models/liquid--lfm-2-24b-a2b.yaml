@@ -1,10 +1,9 @@
 id: liquid--lfm-2-24b-a2b
 name: "LiquidAI: LFM2-24B-A2B"
 family: lfm
-temperature: true
 limit:
   context: 128000
-  output: 128000
+  output: 4096
 modalities:
   input:
     - text

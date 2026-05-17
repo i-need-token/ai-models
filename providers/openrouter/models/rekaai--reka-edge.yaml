@@ -1,7 +1,6 @@
 id: rekaai--reka-edge
 name: Reka Edge
-family: reka
-temperature: true
+family: rekaai
 limit:
   context: 16384
   output: 16384

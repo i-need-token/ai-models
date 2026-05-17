@@ -1,7 +1,6 @@
 id: anthropic--claude-opus-4.7-fast
 name: "Anthropic: Claude Opus 4.7 (Fast)"
 family: claude
-temperature: true
 limit:
   context: 1000000
   output: 128000

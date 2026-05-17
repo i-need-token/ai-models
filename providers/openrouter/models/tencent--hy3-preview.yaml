@@ -1,7 +1,6 @@
 id: tencent--hy3-preview
 name: "Tencent: Hy3 preview"
-family: other
-temperature: true
+family: tencent
 limit:
   context: 262144
   output: 262144

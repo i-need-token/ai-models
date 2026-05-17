@@ -1,7 +1,6 @@
 id: gryphe--mythomax-l2-13b
 name: MythoMax 13B
 family: mythomax
-temperature: true
 limit:
   context: 4096
   output: 4096

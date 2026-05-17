@@ -1,7 +1,6 @@
 id: deepseek--deepseek-v4-pro
 name: "DeepSeek: DeepSeek V4 Pro"
 family: deepseek
-temperature: true
 limit:
   context: 1048576
   output: 384000

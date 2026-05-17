@@ -1,7 +1,6 @@
 id: thedrummer--unslopnemo-12b
 name: "TheDrummer: UnslopNemo 12B"
-family: unslopnemo
-temperature: true
+family: thedrummer
 limit:
   context: 32768
   output: 32768

@@ -1,7 +1,6 @@
 id: openai--gpt-5.2-chat
 name: "OpenAI: GPT-5.2 Chat"
-family: gpt-5
-temperature: true
+family: gpt
 limit:
   context: 128000
   output: 32000

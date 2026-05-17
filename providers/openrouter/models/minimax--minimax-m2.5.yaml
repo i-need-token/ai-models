@@ -1,7 +1,6 @@
 id: minimax--minimax-m2.5
 name: "MiniMax: MiniMax M2.5"
 family: minimax
-temperature: true
 limit:
   context: 204800
   output: 196608

@@ -1,7 +1,6 @@
 id: ibm-granite--granite-4.1-8b
 name: "IBM: Granite 4.1 8B"
-family: granite
-temperature: true
+family: ibm-granite
 limit:
   context: 131072
   output: 131072

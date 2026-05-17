@@ -1,7 +1,6 @@
 id: openai--o1
 name: "OpenAI: o1"
 family: o1
-temperature: true
 limit:
   context: 200000
   output: 100000

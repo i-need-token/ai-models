@@ -1,7 +1,6 @@
 id: openai--gpt-4-turbo
 name: "OpenAI: GPT-4 Turbo"
 family: gpt-4
-temperature: true
 limit:
   context: 128000
   output: 4096

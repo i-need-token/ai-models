@@ -1,7 +1,6 @@
 id: qwen--qwen-plus-2025-07-28
 name: "Qwen: Qwen Plus 0728"
 family: qwen
-temperature: true
 limit:
   context: 1000000
   output: 32768

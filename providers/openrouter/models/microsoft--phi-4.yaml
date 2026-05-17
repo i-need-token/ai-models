@@ -1,7 +1,6 @@
 id: microsoft--phi-4
 name: "Microsoft: Phi 4"
 family: phi
-temperature: true
 limit:
   context: 16384
   output: 16384

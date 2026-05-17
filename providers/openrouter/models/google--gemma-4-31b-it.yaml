@@ -1,7 +1,6 @@
 id: google--gemma-4-31b-it
 name: "Google: Gemma 4 31B"
-family: gemma-4
-temperature: true
+family: gemma
 limit:
   context: 262144
   output: 16384

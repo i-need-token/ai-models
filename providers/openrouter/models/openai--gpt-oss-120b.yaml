@@ -1,7 +1,6 @@
 id: openai--gpt-oss-120b
 name: "OpenAI: gpt-oss-120b"
 family: gpt-oss
-temperature: true
 limit:
   context: 131072
   output: 131072
@@ -13,7 +12,7 @@ modalities:
 pricing:
   currency: USD
   input: 0.039
-  output: 0.18
+  output: 0.19
 release_date: 2026-05-17
 last_updated: 2026-05-17
 tool_call: true

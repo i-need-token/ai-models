@@ -1,7 +1,6 @@
 id: moonshotai--kimi-k2-thinking
 name: "MoonshotAI: Kimi K2 Thinking"
 family: kimi
-temperature: true
 limit:
   context: 262144
   output: 262144

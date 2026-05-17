@@ -1,7 +1,6 @@
 id: qwen--qwen-2.5-7b-instruct
 name: "Qwen: Qwen2.5 7B Instruct"
 family: qwen
-temperature: true
 limit:
   context: 131072
   output: 32768

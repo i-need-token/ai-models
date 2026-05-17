@@ -1,7 +1,6 @@
 id: qwen--qwen3-14b
 name: "Qwen: Qwen3 14B"
-family: qwen3
-temperature: true
+family: qwen
 limit:
   context: 131702
   output: 40960

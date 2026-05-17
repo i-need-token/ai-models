@@ -1,7 +1,6 @@
 id: meta-llama--llama-guard-4-12b
 name: "Meta: Llama Guard 4 12B"
-family: llama-guard
-temperature: true
+family: llama
 limit:
   context: 163840
   output: 16384

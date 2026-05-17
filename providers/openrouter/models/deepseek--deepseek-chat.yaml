@@ -1,7 +1,6 @@
 id: deepseek--deepseek-chat
 name: "DeepSeek: DeepSeek V3"
 family: deepseek
-temperature: true
 limit:
   context: 163840
   output: 16384

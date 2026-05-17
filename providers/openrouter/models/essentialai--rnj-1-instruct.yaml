@@ -1,10 +1,9 @@
 id: essentialai--rnj-1-instruct
 name: "EssentialAI: Rnj 1 Instruct"
-family: rnj
-temperature: true
+family: essentialai
 limit:
   context: 32768
-  output: 32768
+  output: 4096
 modalities:
   input:
     - text

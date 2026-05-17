@@ -1,10 +1,9 @@
 id: mistralai--mistral-medium-3
 name: "Mistral: Mistral Medium 3"
 family: mistral
-temperature: true
 limit:
   context: 131072
-  output: 131072
+  output: 4096
 modalities:
   input:
     - text

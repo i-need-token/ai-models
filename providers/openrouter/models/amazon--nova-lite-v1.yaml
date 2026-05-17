@@ -1,7 +1,6 @@
 id: amazon--nova-lite-v1
 name: "Amazon: Nova Lite 1.0"
-family: nova
-temperature: true
+family: amazon
 limit:
   context: 300000
   output: 5120

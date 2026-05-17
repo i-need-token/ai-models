@@ -1,0 +1,15 @@
+id: nousresearch--hermes-3-llama-3.1-405b--free
+name: "Nous: Hermes 3 405B Instruct (free)"
+family: hermes
+limit:
+  context: 131072
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17

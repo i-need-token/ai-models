@@ -1,10 +1,9 @@
 id: qwen--qwen3-235b-a22b-thinking-2507
 name: "Qwen: Qwen3 235B A22B Thinking 2507"
-family: qwen3
-temperature: true
+family: qwen
 limit:
   context: 262144
-  output: 262144
+  output: 4096
 modalities:
   input:
     - text

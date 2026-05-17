@@ -1,7 +1,6 @@
 id: anthropic--claude-3.5-haiku
 name: "Anthropic: Claude 3.5 Haiku"
 family: claude
-temperature: true
 limit:
   context: 200000
   output: 8192

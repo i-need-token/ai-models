@@ -1,0 +1,15 @@
+id: baidu--cobuddy--free
+name: "Baidu Qianfan: CoBuddy (free)"
+family: cobuddy
+limit:
+  context: 131072
+  output: 65536
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17

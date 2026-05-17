@@ -1,7 +1,6 @@
 id: google--gemma-3-27b-it
 name: "Google: Gemma 3 27B"
-family: gemma-3
-temperature: true
+family: gemma
 limit:
   context: 131072
   output: 16384

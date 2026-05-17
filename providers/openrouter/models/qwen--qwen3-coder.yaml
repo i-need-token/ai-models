@@ -1,7 +1,6 @@
 id: qwen--qwen3-coder
 name: "Qwen: Qwen3 Coder 480B A35B"
-family: qwen-coder
-temperature: true
+family: qwen
 limit:
   context: 1048576
   output: 65536

@@ -1,7 +1,6 @@
 id: alibaba--tongyi-deepresearch-30b-a3b
 name: Tongyi DeepResearch 30B A3B
-family: tongyi
-temperature: true
+family: alibaba
 limit:
   context: 131072
   output: 131072

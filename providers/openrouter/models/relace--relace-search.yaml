@@ -1,7 +1,6 @@
 id: relace--relace-search
 name: "Relace: Relace Search"
 family: relace
-temperature: true
 limit:
   context: 256000
   output: 128000

@@ -1,7 +1,6 @@
 id: nvidia--nemotron-nano-9b-v2
 name: "NVIDIA: Nemotron Nano 9B V2"
 family: nemotron
-temperature: true
 limit:
   context: 131072
   output: 16384

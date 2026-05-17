@@ -1,7 +1,6 @@
 id: meta-llama--llama-4-scout
 name: "Meta: Llama 4 Scout"
-family: llama-4
-temperature: true
+family: llama
 limit:
   context: 10000000
   output: 16384

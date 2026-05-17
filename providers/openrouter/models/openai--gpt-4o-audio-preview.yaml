@@ -1,7 +1,6 @@
 id: openai--gpt-4o-audio-preview
 name: "OpenAI: GPT-4o Audio"
 family: gpt-4
-temperature: true
 limit:
   context: 128000
   output: 16384

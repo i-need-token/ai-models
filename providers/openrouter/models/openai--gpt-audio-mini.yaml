@@ -1,7 +1,6 @@
 id: openai--gpt-audio-mini
 name: "OpenAI: GPT Audio Mini"
 family: gpt
-temperature: true
 limit:
   context: 128000
   output: 16384

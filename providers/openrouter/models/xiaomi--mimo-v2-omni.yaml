@@ -1,7 +1,6 @@
 id: xiaomi--mimo-v2-omni
 name: "Xiaomi: MiMo-V2-Omni"
-family: mimo
-temperature: true
+family: xiaomi
 limit:
   context: 262144
   output: 65536

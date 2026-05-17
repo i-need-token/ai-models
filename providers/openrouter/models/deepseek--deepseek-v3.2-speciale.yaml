@@ -1,7 +1,6 @@
 id: deepseek--deepseek-v3.2-speciale
 name: "DeepSeek: DeepSeek V3.2 Speciale"
 family: deepseek
-temperature: true
 limit:
   context: 163840
   output: 163840

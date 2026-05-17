@@ -1,7 +1,6 @@
 id: openai--gpt-chat-latest
 name: "OpenAI: GPT Chat Latest"
 family: gpt
-temperature: true
 limit:
   context: 400000
   output: 128000

@@ -1,10 +1,9 @@
 id: qwen--qwen2.5-vl-72b-instruct
 name: "Qwen: Qwen2.5 VL 72B Instruct"
-family: qwen2.5
-temperature: true
+family: qwen
 limit:
   context: 131072
-  output: 131072
+  output: 4096
 modalities:
   input:
     - text

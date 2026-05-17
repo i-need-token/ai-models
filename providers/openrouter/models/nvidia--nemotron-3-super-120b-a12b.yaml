@@ -1,10 +1,9 @@
 id: nvidia--nemotron-3-super-120b-a12b
 name: "NVIDIA: Nemotron 3 Super"
 family: nemotron
-temperature: true
 limit:
   context: 1000000
-  output: 1000000
+  output: 16384
 modalities:
   input:
     - text
@@ -12,8 +11,8 @@ modalities:
     - text
 pricing:
   currency: USD
-  input: 0.09
-  output: 0.45
+  input: 0.1
+  output: 0.5
 release_date: 2026-05-17
 last_updated: 2026-05-17
 tool_call: true

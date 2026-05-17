@@ -1,7 +1,6 @@
 id: qwen--qwen3.5-9b
 name: "Qwen: Qwen3.5-9B"
-family: qwen3.5
-temperature: true
+family: qwen
 limit:
   context: 262144
   output: 81920

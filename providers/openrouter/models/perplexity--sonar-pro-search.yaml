@@ -1,7 +1,6 @@
 id: perplexity--sonar-pro-search
 name: "Perplexity: Sonar Pro Search"
 family: sonar
-temperature: true
 limit:
   context: 200000
   output: 8000

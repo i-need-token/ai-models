@@ -1,7 +1,6 @@
 id: nousresearch--hermes-3-llama-3.1-405b
 name: "Nous: Hermes 3 405B Instruct"
-family: llama-3.1
-temperature: true
+family: hermes
 limit:
   context: 131072
   output: 16384

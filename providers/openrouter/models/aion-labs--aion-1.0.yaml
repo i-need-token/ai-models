@@ -1,7 +1,6 @@
 id: aion-labs--aion-1.0
 name: "AionLabs: Aion-1.0"
-family: aion
-temperature: true
+family: aion-labs
 limit:
   context: 131072
   output: 32768

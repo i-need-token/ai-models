@@ -1,7 +1,6 @@
 id: baidu--ernie-4.5-vl-28b-a3b
 name: "Baidu: ERNIE 4.5 VL 28B A3B"
-family: ernie
-temperature: true
+family: cobuddy
 limit:
   context: 131072
   output: 8000

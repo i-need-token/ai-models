@@ -1,7 +1,6 @@
 id: baidu--qianfan-ocr-fast
 name: "Baidu: Qianfan-OCR-Fast"
-family: other
-temperature: true
+family: cobuddy
 limit:
   context: 65536
   output: 28672

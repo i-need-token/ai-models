@@ -1,10 +1,9 @@
 id: sao10k--l3.1-70b-hanami-x1
 name: "Sao10K: Llama 3.1 70B Hanami x1"
-family: o1
-temperature: true
+family: l3-finetune
 limit:
   context: 16000
-  output: 16000
+  output: 4096
 modalities:
   input:
     - text

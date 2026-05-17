@@ -1,7 +1,6 @@
 id: anthropic--claude-opus-4.6
 name: "Anthropic: Claude Opus 4.6"
 family: claude
-temperature: true
 limit:
   context: 1000000
   output: 128000

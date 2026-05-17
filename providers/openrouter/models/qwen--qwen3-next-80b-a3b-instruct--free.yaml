@@ -1,0 +1,15 @@
+id: qwen--qwen3-next-80b-a3b-instruct--free
+name: "Qwen: Qwen3 Next 80B A3B Instruct (free)"
+family: qwen
+limit:
+  context: 262144
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17

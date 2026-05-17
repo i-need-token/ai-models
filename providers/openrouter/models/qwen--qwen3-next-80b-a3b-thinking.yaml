@@ -1,7 +1,6 @@
 id: qwen--qwen3-next-80b-a3b-thinking
 name: "Qwen: Qwen3 Next 80B A3B Thinking"
-family: qwen3-next
-temperature: true
+family: qwen
 limit:
   context: 262144
   output: 32768

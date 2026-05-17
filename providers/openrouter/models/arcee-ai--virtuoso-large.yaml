@@ -1,7 +1,6 @@
 id: arcee-ai--virtuoso-large
 name: "Arcee AI: Virtuoso Large"
 family: arcee
-temperature: true
 limit:
   context: 131072
   output: 64000

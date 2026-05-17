@@ -1,7 +1,6 @@
 id: tencent--hunyuan-a13b-instruct
 name: "Tencent: Hunyuan A13B Instruct"
-family: hunyuan
-temperature: true
+family: tencent
 limit:
   context: 131072
   output: 131072

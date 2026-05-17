@@ -1,7 +1,6 @@
 id: nex-agi--deepseek-v3.1-nex-n1
 name: "Nex AGI: DeepSeek V3.1 Nex N1"
-family: deepseek
-temperature: true
+family: nex-agi
 limit:
   context: 131072
   output: 163840

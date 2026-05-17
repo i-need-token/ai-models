@@ -1,7 +1,6 @@
 id: openai--o4-mini
 name: "OpenAI: o4 Mini"
 family: o4
-temperature: true
 limit:
   context: 200000
   output: 100000

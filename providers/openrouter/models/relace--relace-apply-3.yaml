@@ -1,7 +1,6 @@
 id: relace--relace-apply-3
 name: "Relace: Relace Apply 3"
 family: relace
-temperature: true
 limit:
   context: 256000
   output: 128000

@@ -1,7 +1,6 @@
 id: minimax--minimax-m2-her
 name: "MiniMax: MiniMax M2-her"
 family: minimax
-temperature: true
 limit:
   context: 65536
   output: 2048

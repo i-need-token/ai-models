@@ -1,7 +1,6 @@
 id: qwen--qwen3-max-thinking
 name: "Qwen: Qwen3 Max Thinking"
-family: qwen3-max
-temperature: true
+family: qwen
 limit:
   context: 262144
   output: 32768

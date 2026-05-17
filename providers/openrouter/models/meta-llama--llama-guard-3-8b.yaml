@@ -1,10 +1,9 @@
 id: meta-llama--llama-guard-3-8b
 name: Llama Guard 3 8B
-family: llama-guard
-temperature: true
+family: llama
 limit:
   context: 131072
-  output: 131072
+  output: 4096
 modalities:
   input:
     - text

@@ -1,10 +1,9 @@
 id: nousresearch--hermes-4-70b
 name: "Nous: Hermes 4 70B"
 family: hermes
-temperature: true
 limit:
   context: 131072
-  output: 131072
+  output: 4096
 modalities:
   input:
     - text

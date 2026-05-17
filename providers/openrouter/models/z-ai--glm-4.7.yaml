@@ -1,7 +1,6 @@
 id: z-ai--glm-4.7
 name: "Z.ai: GLM 4.7"
 family: glm
-temperature: true
 limit:
   context: 202752
   output: 131072

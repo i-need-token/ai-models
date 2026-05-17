@@ -1,7 +1,6 @@
 id: minimax--minimax-m1
 name: "MiniMax: MiniMax M1"
 family: minimax
-temperature: true
 limit:
   context: 1000000
   output: 40000

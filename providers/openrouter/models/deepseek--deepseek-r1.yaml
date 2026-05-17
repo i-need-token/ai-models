@@ -1,7 +1,6 @@
 id: deepseek--deepseek-r1
 name: "DeepSeek: R1"
 family: deepseek
-temperature: true
 limit:
   context: 163840
   output: 16000

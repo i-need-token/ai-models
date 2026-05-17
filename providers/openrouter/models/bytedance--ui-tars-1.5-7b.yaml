@@ -1,7 +1,6 @@
 id: bytedance--ui-tars-1.5-7b
 name: "ByteDance: UI-TARS 7B "
-family: ui-tars
-temperature: true
+family: seed
 limit:
   context: 128000
   output: 2048

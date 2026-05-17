@@ -1,7 +1,6 @@
 id: meta-llama--llama-3-70b-instruct
 name: "Meta: Llama 3 70B Instruct"
-family: llama-3
-temperature: true
+family: llama
 limit:
   context: 8192
   output: 8000

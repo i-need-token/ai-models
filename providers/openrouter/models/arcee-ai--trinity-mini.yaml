@@ -1,7 +1,6 @@
 id: arcee-ai--trinity-mini
 name: "Arcee AI: Trinity Mini"
-family: trinity
-temperature: true
+family: arcee
 limit:
   context: 131072
   output: 131072

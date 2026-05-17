@@ -1,7 +1,6 @@
 id: moonshotai--kimi-k2.6
 name: "MoonshotAI: Kimi K2.6"
 family: kimi
-temperature: true
 limit:
   context: 262144
   output: 262142

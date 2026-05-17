@@ -1,7 +1,6 @@
 id: qwen--qwen3-vl-235b-a22b-instruct
 name: "Qwen: Qwen3 VL 235B A22B Instruct"
-family: qwen-vl
-temperature: true
+family: qwen
 limit:
   context: 262144
   output: 16384

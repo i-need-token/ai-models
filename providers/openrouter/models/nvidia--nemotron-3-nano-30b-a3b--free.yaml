@@ -1,0 +1,15 @@
+id: nvidia--nemotron-3-nano-30b-a3b--free
+name: "NVIDIA: Nemotron 3 Nano 30B A3B (free)"
+family: nemotron
+limit:
+  context: 256000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17
