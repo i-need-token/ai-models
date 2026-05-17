@@ -1979,7 +1979,7 @@ const MODELS: Record<string, ModelInfo> = {
     outputModalities: ["text"],
     toolCall: true,
   },
-  "qwen--qwen-plus-2025-07-28:thinking": {
+  "qwen--qwen-plus-2025-07-28--thinking": {
     name: "Qwen: Qwen Plus 0728 (thinking)",
     context: 1000000,
     output: 32768,
@@ -3990,7 +3990,7 @@ const HARDCODED_PRICING: Record<string, Pricing> = {
     output: 0.78,
     cache_write: 0.325,
   },
-  "qwen--qwen-plus-2025-07-28:thinking": {
+  "qwen--qwen-plus-2025-07-28--thinking": {
     currency: "USD",
     input: 0.26,
     output: 0.78,

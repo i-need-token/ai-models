@@ -1,0 +1,6 @@
+id: wafer
+name: Wafer
+url: https://wafer.ai
+api_docs: https://docs.wafer.ai
+apis:
+  openai: https://pass.wafer.ai/v1

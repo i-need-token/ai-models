@@ -1,0 +1,20 @@
+id: GLM-5.1
+name: GLM 5.1
+family: glm
+limit:
+  context: 202752
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.5
+  output: 4.5
+  cache_read: 0.15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true
+tool_call: true

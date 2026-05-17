@@ -1,0 +1,21 @@
+id: Qwen3.5-397B-A17B
+name: Qwen 3.5 397B A17B
+family: qwen3.5
+limit:
+  context: 262144
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.6
+  output: 3.6
+  cache_read: 0.06
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+reasoning: true
+tool_call: true
