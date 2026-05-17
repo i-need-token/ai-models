@@ -1,0 +1,19 @@
+id: moonshotai--kimi-k2-thinking
+name: kimi-k2-thinking
+family: kimi
+limit:
+  context: 262144
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 4
+  output: 16
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true
+tool_call: true

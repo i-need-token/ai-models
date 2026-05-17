@@ -1,0 +1,20 @@
+id: qwen--qwen2.5-vl-72b-instruct
+name: qwen2.5-vl-72b-instruct
+family: qwen
+limit:
+  context: 32000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 4.2
+  output: 4.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

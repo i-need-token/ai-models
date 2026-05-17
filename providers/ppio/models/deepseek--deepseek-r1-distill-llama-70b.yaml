@@ -1,0 +1,20 @@
+id: deepseek--deepseek-r1-distill-llama-70b
+name: deepseek-r1-distill-llama-70b
+family: deepseek
+limit:
+  context: 32000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 5.8
+  output: 5.8
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+reasoning: true
+tool_call: true

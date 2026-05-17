@@ -1,0 +1,17 @@
+id: baidu--ernie-4.5-300b-a47b-paddle
+name: ernie-4.5-300b-a47b-paddle
+family: ernie
+limit:
+  context: 123000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 2
+  output: 7
+release_date: 2026-05-17
+last_updated: 2026-05-17

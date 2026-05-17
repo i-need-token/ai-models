@@ -1,0 +1,20 @@
+id: qwen--qwen3-next-80b-a3b-thinking
+name: qwen3-next-80b-a3b-thinking
+family: qwen
+limit:
+  context: 65536
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1
+  output: 10
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+reasoning: true
+tool_call: true

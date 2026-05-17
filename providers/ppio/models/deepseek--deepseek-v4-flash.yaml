@@ -1,0 +1,20 @@
+id: deepseek--deepseek-v4-flash
+name: deepseek-v4-flash
+family: deepseek
+limit:
+  context: 1048576
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1
+  output: 2
+  cache_read: 0.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

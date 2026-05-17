@@ -1,0 +1,19 @@
+id: qwen--qwen3-coder-next
+name: qwen3-coder-next
+family: qwen
+limit:
+  context: 262144
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1.4
+  output: 10.5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

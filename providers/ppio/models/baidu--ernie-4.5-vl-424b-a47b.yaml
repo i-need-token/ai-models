@@ -1,0 +1,18 @@
+id: baidu--ernie-4.5-vl-424b-a47b
+name: ernie-4.5-vl-424b-a47b
+family: ernie
+limit:
+  context: 123000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 3
+  output: 9
+release_date: 2026-05-17
+last_updated: 2026-05-17

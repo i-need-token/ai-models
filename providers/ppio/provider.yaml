@@ -1,0 +1,6 @@
+id: ppio
+name: PPIO
+url: https://ppio.com
+api_docs: https://docs.ppio.ai
+apis:
+  openai: https://api.ppinfra.com/v1

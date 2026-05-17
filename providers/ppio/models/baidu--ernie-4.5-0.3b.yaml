@@ -1,0 +1,15 @@
+id: baidu--ernie-4.5-0.3b
+name: ernie-4.5-0.3b
+family: ernie
+limit:
+  context: 120000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17

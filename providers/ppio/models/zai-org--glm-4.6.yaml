@@ -1,0 +1,19 @@
+id: zai-org--glm-4.6
+name: glm-4.6
+family: glm
+limit:
+  context: 204800
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 4
+  output: 16
+  cache_read: 0.8
+  cache_write: 0.8
+release_date: 2026-05-17
+last_updated: 2026-05-17

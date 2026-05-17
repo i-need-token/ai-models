@@ -1,0 +1,17 @@
+id: zai-org--autoglm-phone-9b-multilingual
+name: autoglm-phone-9b-multilingual
+family: glm
+limit:
+  context: 65536
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.25
+  output: 1
+release_date: 2026-05-17
+last_updated: 2026-05-17

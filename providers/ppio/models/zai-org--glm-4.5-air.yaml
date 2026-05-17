@@ -1,0 +1,18 @@
+id: zai-org--glm-4.5-air
+name: glm-4.5-air
+family: glm
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1.2
+  output: 2
+  cache_read: 0.24
+release_date: 2026-05-17
+last_updated: 2026-05-17

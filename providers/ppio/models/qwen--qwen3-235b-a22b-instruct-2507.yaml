@@ -1,0 +1,19 @@
+id: qwen--qwen3-235b-a22b-instruct-2507
+name: qwen3-235b-a22b-instruct-2507
+family: qwen
+limit:
+  context: 262144
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1.45
+  output: 5.8
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

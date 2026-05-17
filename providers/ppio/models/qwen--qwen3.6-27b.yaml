@@ -1,0 +1,19 @@
+id: qwen--qwen3.6-27b
+name: qwen3.6-27b
+family: qwen
+limit:
+  context: 262144
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 3
+  output: 18
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

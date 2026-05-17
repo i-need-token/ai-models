@@ -1,0 +1,19 @@
+id: moonshotai--kimi-k2.6
+name: kimi-k2.6
+family: kimi
+limit:
+  context: 262144
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 6.5
+  output: 27
+  cache_read: 1.1
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

@@ -1,0 +1,19 @@
+id: qwen--qwen2.5-7b-instruct
+name: qwen2.5-7b-instruct
+family: qwen
+limit:
+  context: 32000
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 0.35
+  output: 0.35
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

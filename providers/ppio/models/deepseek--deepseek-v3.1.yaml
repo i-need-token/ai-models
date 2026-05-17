@@ -1,0 +1,20 @@
+id: deepseek--deepseek-v3.1
+name: deepseek-v3.1
+family: deepseek
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 4
+  output: 12
+  cache_read: 2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+open_weights: true
+tool_call: true

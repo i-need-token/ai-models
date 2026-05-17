@@ -1,0 +1,18 @@
+id: baidu--ernie-4.5-vl-28b-a3b
+name: ernie-4.5-vl-28b-a3b
+family: ernie
+limit:
+  context: 30000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: CNY
+  input: 1
+  output: 4
+release_date: 2026-05-17
+last_updated: 2026-05-17
