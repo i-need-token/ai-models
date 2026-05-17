@@ -1,0 +1,18 @@
+id: deepseek--DeepSeek-R1
+name: DeepSeek R1
+family: deepseek
+limit:
+  context: 163840
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.8
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true

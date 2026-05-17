@@ -1,0 +1,6 @@
+id: submodel
+name: SubModel
+url: https://submodel.ai
+api_docs: https://submodel.ai/#/document
+apis:
+  openai: https://api.submodel.ai/v1

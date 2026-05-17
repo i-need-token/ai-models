@@ -1,0 +1,17 @@
+id: deepseek--DeepSeek-V3.1
+name: DeepSeek V3.1
+family: deepseek
+limit:
+  context: 163840
+  output: 65536
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.8
+release_date: 2026-05-17
+last_updated: 2026-05-17
