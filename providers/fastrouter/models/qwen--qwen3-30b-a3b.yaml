@@ -1,0 +1,19 @@
+id: qwen--qwen3-30b-a3b
+name: "Qwen: Qwen3 30B A3B"
+family: qwen
+limit:
+  context: 40960
+  output: 40960
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.08
+  output: 0.29
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

@@ -1,0 +1,18 @@
+id: qwen--qwen2.5-vl-32b-instruct
+name: "Qwen: Qwen2.5 VL 32B Instruct"
+family: qwen
+limit:
+  context: 16384
+  output: 4096
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.6
+release_date: 2026-05-17
+last_updated: 2026-05-17

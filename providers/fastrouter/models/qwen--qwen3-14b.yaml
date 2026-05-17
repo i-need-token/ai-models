@@ -1,0 +1,18 @@
+id: qwen--qwen3-14b
+name: "Qwen: Qwen3 14B"
+family: qwen
+limit:
+  context: 40960
+  output: 40960
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.12
+  output: 0.24
+release_date: 2026-05-17
+last_updated: 2026-05-17
+reasoning: true

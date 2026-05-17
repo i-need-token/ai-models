@@ -1,0 +1,18 @@
+id: meta-llama--llama-3.1-8b-instant
+name: "Meta: LLaMA 3.1 8B Instant"
+family: llama
+limit:
+  context: 8192
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.08
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

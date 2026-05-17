@@ -1,0 +1,21 @@
+id: openai--gpt-realtime-1.5
+name: "OpenAI: GPT Realtime 1.5"
+family: gpt-realtime
+limit:
+  context: 32000
+  output: 4096
+modalities:
+  input:
+    - text
+    - audio
+    - image
+  output:
+    - text
+    - audio
+pricing:
+  currency: USD
+  input: 4
+  output: 16
+  cache_read: 0.4
+release_date: 2026-05-17
+last_updated: 2026-05-17

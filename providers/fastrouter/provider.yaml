@@ -1,0 +1,5 @@
+id: fastrouter
+name: FastRouter
+url: https://fastrouter.ai
+apis:
+  openai: https://api.fastrouter.ai/v1

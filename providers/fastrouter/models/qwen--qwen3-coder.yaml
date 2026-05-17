@@ -1,0 +1,18 @@
+id: qwen--qwen3-coder
+name: "Qwen: Qwen3 Coder"
+family: qwen
+limit:
+  context: 262144
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.4
+  output: 1.6
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

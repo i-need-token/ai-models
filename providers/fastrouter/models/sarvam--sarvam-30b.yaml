@@ -1,0 +1,15 @@
+id: sarvam--sarvam-30b
+name: "Sarvam: Sarvam 30B"
+family: sarvam
+limit:
+  context: 128000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  unit: free
+release_date: 2026-05-17
+last_updated: 2026-05-17

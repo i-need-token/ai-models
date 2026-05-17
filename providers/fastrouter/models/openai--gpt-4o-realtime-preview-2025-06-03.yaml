@@ -1,0 +1,20 @@
+id: openai--gpt-4o-realtime-preview-2025-06-03
+name: GPT-4o Realtime Preview (2025-06-03)
+family: gpt-4o
+limit:
+  context: 32000
+  output: 4096
+modalities:
+  input:
+    - text
+    - audio
+  output:
+    - text
+    - audio
+pricing:
+  currency: USD
+  input: 5
+  output: 20
+  cache_read: 2.5
+release_date: 2026-05-17
+last_updated: 2026-05-17
