@@ -1,0 +1,15 @@
+id: groq-llama-3.3-70b-versatile
+name: "Llama: Groq Llama 3.3 70b Versatile"
+family: llama-3.3
+temperature: true
+pricing:
+  currency: USD
+  input: 0.3245
+  output: 0.434506
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

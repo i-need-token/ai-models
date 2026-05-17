@@ -1,0 +1,17 @@
+id: qwen2-vl-7b-instruct
+name: Qwen2 Vl 7b Instruct
+family: qwen2
+temperature: true
+pricing:
+  currency: USD
+  input: 0.14
+  output: 0.35
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text

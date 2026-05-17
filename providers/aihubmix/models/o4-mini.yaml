@@ -1,0 +1,23 @@
+id: o4-mini
+name: "OpenAI: O4 Mini"
+family: o4-mini
+temperature: true
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.2
+  cache_read: 0.1375
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+limit:
+  context: 200000
+  output: 16384
+reasoning: true
+tool_call: true
+structured_output: true

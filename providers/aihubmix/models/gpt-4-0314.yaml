@@ -1,0 +1,15 @@
+id: gpt-4-0314
+name: "OpenAI: Gpt 4 0314"
+family: gpt-4
+temperature: true
+pricing:
+  currency: USD
+  input: 15
+  output: 30
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

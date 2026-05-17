@@ -1,0 +1,15 @@
+id: meta-llama--llama-3.1-405b-instruct--free
+name: Meta Llama/Llama 3.1 405b Instruct/Free
+family: llama-3.1
+temperature: true
+pricing:
+  currency: USD
+  input: 0.01
+  output: 0.01
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

@@ -1,0 +1,15 @@
+id: learnlm-1.5-pro-experimental
+name: "Google: Learnlm 1.5 Pro Experimental"
+family: other
+temperature: true
+pricing:
+  currency: USD
+  input: 0.625
+  output: 2.5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

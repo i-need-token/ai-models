@@ -1,0 +1,15 @@
+id: deepseek-ai--deepseek-r1-distill-llama-8b
+name: Deepseek Ai/Deepseek R1 Distill Llama 8b
+family: deepseek-r1
+temperature: true
+pricing:
+  currency: USD
+  input: 0.005
+  output: 0.005
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

@@ -1,0 +1,15 @@
+id: gemma-7b-it
+name: "Google: Gemma 7b It"
+family: other
+temperature: true
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.05
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

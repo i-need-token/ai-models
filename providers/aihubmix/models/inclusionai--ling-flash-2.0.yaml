@@ -1,0 +1,17 @@
+id: inclusionai--ling-flash-2.0
+name: Inclusionai/Ling Flash 2.0
+family: ling
+temperature: true
+pricing:
+  currency: USD
+  input: 0.068
+  output: 0.272
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+structured_output: true

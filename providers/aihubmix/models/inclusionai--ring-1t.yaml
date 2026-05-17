@@ -1,0 +1,18 @@
+id: inclusionai--ring-1t
+name: Inclusionai/Ring 1t
+family: ring
+temperature: true
+pricing:
+  currency: USD
+  input: 0.274
+  output: 1.096
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true

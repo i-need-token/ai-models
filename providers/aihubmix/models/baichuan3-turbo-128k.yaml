@@ -1,0 +1,15 @@
+id: baichuan3-turbo-128k
+name: Baichuan3 Turbo 128k
+family: baichuan
+temperature: true
+pricing:
+  currency: USD
+  input: 1.9
+  output: 1.9
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

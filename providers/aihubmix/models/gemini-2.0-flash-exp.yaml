@@ -1,0 +1,18 @@
+id: gemini-2.0-flash-exp
+name: "Google: Gemini 2.0 Flash Exp"
+family: gemini-2.0
+temperature: true
+pricing:
+  currency: USD
+  input: 0.01
+  output: 0.04
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+    - video
+    - audio
+  output:
+    - text

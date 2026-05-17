@@ -1,0 +1,15 @@
+id: chatglm_lite
+name: "智谱 ChatGLM: Chatglm_lite"
+family: glm
+temperature: true
+pricing:
+  currency: USD
+  input: 0.1429
+  output: 0.1429
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

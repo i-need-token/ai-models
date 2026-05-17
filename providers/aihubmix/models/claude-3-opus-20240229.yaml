@@ -1,0 +1,15 @@
+id: claude-3-opus-20240229
+name: "Anthropic: Claude 3 Opus 20240229"
+family: claude-opus
+temperature: true
+pricing:
+  currency: USD
+  input: 8.25
+  output: 41.25
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

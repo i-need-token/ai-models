@@ -1,0 +1,15 @@
+id: cerebras-llama-3.3-70b
+name: "Llama: Cerebras Llama 3.3 70b"
+family: llama-3.3
+temperature: true
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.3
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

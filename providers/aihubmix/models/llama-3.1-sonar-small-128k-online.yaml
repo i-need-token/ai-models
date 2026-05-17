@@ -1,0 +1,15 @@
+id: llama-3.1-sonar-small-128k-online
+name: "Perplexity: Llama 3.1 Sonar Small 128k Online"
+family: llama-3.1
+temperature: true
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

@@ -1,0 +1,15 @@
+id: veo-2.0-generate-001
+name: "Google: Veo 2.0 Generate 001"
+family: other
+temperature: true
+pricing:
+  currency: USD
+  input: 1
+  output: 1
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - video
+  output:
+    - text

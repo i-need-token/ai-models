@@ -1,0 +1,22 @@
+id: mimo-v2-omni
+name: "Xiaomi: Mimo V2 Omni"
+family: mimo
+temperature: true
+pricing:
+  currency: USD
+  input: 0.22
+  output: 1.1
+  cache_read: 0.044
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+    - video
+    - audio
+  output:
+    - text
+limit:
+  context: 256000
+  output: 16384

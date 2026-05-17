@@ -1,0 +1,6 @@
+id: aihubmix
+name: AIHubMix
+url: https://aihubmix.com
+api_docs: https://aihubmix.com/docs
+apis:
+  openai: https://api.aihubmix.com/v1

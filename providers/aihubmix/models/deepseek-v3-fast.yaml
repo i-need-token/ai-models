@@ -1,0 +1,20 @@
+id: deepseek-v3-fast
+name: Deepseek V3 Fast
+family: deepseek-v3
+temperature: true
+pricing:
+  currency: USD
+  input: 0.28
+  output: 1.12
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+limit:
+  context: 32000
+  output: 16384
+tool_call: true
+structured_output: true

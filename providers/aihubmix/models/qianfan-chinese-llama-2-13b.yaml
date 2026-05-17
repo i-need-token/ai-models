@@ -1,0 +1,15 @@
+id: qianfan-chinese-llama-2-13b
+name: "Baidu: Qianfan Chinese Llama 2 13b"
+family: llama
+temperature: true
+pricing:
+  currency: USD
+  input: 0.411
+  output: 0.411
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

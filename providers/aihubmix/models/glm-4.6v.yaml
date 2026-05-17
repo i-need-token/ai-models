@@ -1,0 +1,21 @@
+id: glm-4.6v
+name: "Z.AI: Glm 4.6v"
+family: glm-4.6
+temperature: true
+pricing:
+  currency: USD
+  input: 0.0685
+  output: 0.2055
+  cache_read: 0.0137
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text
+limit:
+  context: 128000
+  output: 16384

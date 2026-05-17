@@ -1,0 +1,16 @@
+id: aistudio_gpt-4.1-mini
+name: "OpenAI: Aistudio_gpt 4.1 Mini"
+family: gpt-4.1
+temperature: true
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.8
+  cache_read: 0.05
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

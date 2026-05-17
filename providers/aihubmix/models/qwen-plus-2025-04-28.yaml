@@ -1,0 +1,17 @@
+id: qwen-plus-2025-04-28
+name: Qwen Plus 2025 04 28
+family: qwen
+temperature: true
+pricing:
+  currency: USD
+  input: 0.0563
+  output: 0.563
+  cache_read: 0.01126
+  cache_write: 0.070375
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

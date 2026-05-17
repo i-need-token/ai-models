@@ -1,0 +1,22 @@
+id: gpt-4o-mini-search-preview
+name: "OpenAI: Gpt 4o Mini Search Preview"
+family: gpt-4o
+temperature: true
+pricing:
+  currency: USD
+  input: 0.075
+  output: 0.3
+  cache_read: 0.0375
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+limit:
+  context: 128000
+  output: 16384
+tool_call: true
+structured_output: true

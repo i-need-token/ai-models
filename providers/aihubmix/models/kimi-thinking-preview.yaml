@@ -1,0 +1,15 @@
+id: kimi-thinking-preview
+name: "Moonshot AI: Kimi Thinking Preview"
+family: kimi
+temperature: true
+pricing:
+  currency: USD
+  input: 15
+  output: 15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

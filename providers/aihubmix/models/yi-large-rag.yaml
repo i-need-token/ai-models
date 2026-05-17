@@ -1,0 +1,15 @@
+id: yi-large-rag
+name: "零一万物: Yi Large Rag"
+family: yi
+temperature: true
+pricing:
+  currency: USD
+  input: 2
+  output: 2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

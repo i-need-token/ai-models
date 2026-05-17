@@ -1,0 +1,15 @@
+id: gemini-pro-vision
+name: "Google: Gemini Pro Vision"
+family: gemini
+temperature: true
+pricing:
+  currency: USD
+  input: 0.5
+  output: 0.5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

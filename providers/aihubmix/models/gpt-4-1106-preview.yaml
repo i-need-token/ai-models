@@ -1,0 +1,15 @@
+id: gpt-4-1106-preview
+name: "OpenAI: Gpt 4 1106 Preview"
+family: gpt-4
+temperature: true
+pricing:
+  currency: USD
+  input: 5
+  output: 15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

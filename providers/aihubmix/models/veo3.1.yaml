@@ -1,0 +1,15 @@
+id: veo3.1
+name: "Google: Veo3.1"
+family: o3
+temperature: true
+pricing:
+  currency: USD
+  input: 100
+  output: 100
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

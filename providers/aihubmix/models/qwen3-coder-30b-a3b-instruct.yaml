@@ -1,0 +1,20 @@
+id: qwen3-coder-30b-a3b-instruct
+name: Qwen3 Coder 30b A3b Instruct
+family: qwen3
+temperature: true
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.4
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+limit:
+  context: 2000000
+  output: 16384
+tool_call: true
+structured_output: true

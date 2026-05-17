@@ -1,0 +1,19 @@
+id: qianfan-ocr-fast
+name: "Baidu: Qianfan Ocr Fast"
+family: qianfan
+temperature: true
+pricing:
+  currency: USD
+  input: 0.332
+  output: 1.369168
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+limit:
+  context: 32000
+  output: 16384

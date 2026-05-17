@@ -1,0 +1,16 @@
+id: o3-mini-global
+name: "OpenAI: O3 Mini Global"
+family: o3-mini
+temperature: true
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.2
+  cache_read: 0.275
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

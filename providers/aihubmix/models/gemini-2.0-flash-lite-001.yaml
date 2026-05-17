@@ -1,0 +1,15 @@
+id: gemini-2.0-flash-lite-001
+name: "Google: Gemini 2.0 Flash Lite 001"
+family: gemini-2.0
+temperature: true
+pricing:
+  currency: USD
+  input: 0.038
+  output: 0.152
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

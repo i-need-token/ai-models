@@ -1,0 +1,16 @@
+id: glm-4.5-airx
+name: "ChatGLM: Glm 4.5 Airx"
+family: glm-4.5
+temperature: true
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.255
+  cache_read: 0.11
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

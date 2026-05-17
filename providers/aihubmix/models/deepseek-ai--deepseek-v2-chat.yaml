@@ -1,0 +1,15 @@
+id: deepseek-ai--deepseek-v2-chat
+name: Deepseek Ai/Deepseek V2 Chat
+family: deepseek
+temperature: true
+pricing:
+  currency: USD
+  input: 0.08
+  output: 0.16
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

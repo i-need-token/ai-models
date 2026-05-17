@@ -1,0 +1,19 @@
+id: step-3.5-flash
+name: "StepFun: Step 3.5 Flash"
+family: step
+temperature: true
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+limit:
+  context: 256000
+  output: 16384

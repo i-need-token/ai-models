@@ -1,0 +1,24 @@
+id: anthropic-opus-4-6
+name: Anthropic Opus 4 6
+family: other
+temperature: true
+pricing:
+  currency: USD
+  input: 2.5
+  output: 12.5
+  cache_read: 0.25
+  cache_write: 3.125
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+limit:
+  context: 200000
+  output: 16384
+reasoning: true
+tool_call: true
+structured_output: true

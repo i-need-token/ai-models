@@ -1,0 +1,15 @@
+id: glm-4
+name: "智谱 ChatGLM: Glm 4"
+family: glm-4
+temperature: true
+pricing:
+  currency: USD
+  input: 7.1
+  output: 7.1
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

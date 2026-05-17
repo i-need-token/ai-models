@@ -1,0 +1,16 @@
+id: qwen-turbo
+name: Qwen Turbo
+family: qwen
+temperature: true
+pricing:
+  currency: USD
+  input: 0.023
+  output: 0.046
+  cache_read: 0.0046
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

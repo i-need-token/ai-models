@@ -1,0 +1,15 @@
+id: qianfan-llama-vl-8b
+name: "Baidu: Qianfan Llama Vl 8b"
+family: llama
+temperature: true
+pricing:
+  currency: USD
+  input: 0.137
+  output: 0.3425
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

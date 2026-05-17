@@ -1,0 +1,15 @@
+id: yi-vl-plus
+name: "零一万物: Yi Vl Plus"
+family: yi
+temperature: true
+pricing:
+  currency: USD
+  input: 0.000426
+  output: 0.000426
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

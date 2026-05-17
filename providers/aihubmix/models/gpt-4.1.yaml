@@ -1,0 +1,22 @@
+id: gpt-4.1
+name: "OpenAI: Gpt 4.1"
+family: gpt-4.1
+temperature: true
+pricing:
+  currency: USD
+  input: 1
+  output: 4
+  cache_read: 0.25
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+limit:
+  context: 1047576
+  output: 16384
+tool_call: true
+structured_output: true

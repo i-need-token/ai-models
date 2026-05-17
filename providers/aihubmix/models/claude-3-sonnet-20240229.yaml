@@ -1,0 +1,16 @@
+id: claude-3-sonnet-20240229
+name: "Anthropic: Claude 3 Sonnet 20240229"
+family: claude-sonnet
+temperature: true
+pricing:
+  currency: USD
+  input: 1.65
+  output: 8.25
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text

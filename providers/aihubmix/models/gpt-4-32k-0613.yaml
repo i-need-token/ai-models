@@ -1,0 +1,15 @@
+id: gpt-4-32k-0613
+name: "OpenAI: Gpt 4 32k 0613"
+family: gpt-4
+temperature: true
+pricing:
+  currency: USD
+  input: 30
+  output: 60
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

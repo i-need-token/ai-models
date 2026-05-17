@@ -1,0 +1,15 @@
+id: gpt-3.5-turbo-16k-0613
+name: "OpenAI: Gpt 3.5 Turbo 16k 0613"
+family: gpt-3.5
+temperature: true
+pricing:
+  currency: USD
+  input: 1.5
+  output: 2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

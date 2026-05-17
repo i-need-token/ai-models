@@ -1,0 +1,15 @@
+id: doubao-lite-128k
+name: "字节跳动: Doubao Lite 128k"
+family: doubao
+temperature: true
+pricing:
+  currency: USD
+  input: 0.07
+  output: 0.14
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

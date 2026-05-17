@@ -1,0 +1,15 @@
+id: command-r-plus-08-2024
+name: "Cohere: Command R Plus 08 2024"
+family: command-r-plus
+temperature: true
+pricing:
+  currency: USD
+  input: 1.4
+  output: 5.6
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

@@ -1,0 +1,16 @@
+id: o3-global
+name: "OpenAI: O3 Global"
+family: o3
+temperature: true
+pricing:
+  currency: USD
+  input: 1
+  output: 4
+  cache_read: 0.25
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

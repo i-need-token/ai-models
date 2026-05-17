@@ -1,0 +1,24 @@
+id: gemini-2.5-flash-preview-09-2025
+name: "Google: Gemini 2.5 Flash Preview 09 2025"
+family: gemini-2.5
+temperature: true
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1.2495
+  cache_read: 0.015
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+    - video
+    - audio
+  output:
+    - text
+limit:
+  context: 1048576
+  output: 16384
+tool_call: true
+structured_output: true

@@ -1,0 +1,17 @@
+id: gemini-3-pro-image-preview
+name: "Google: Gemini 3 Pro Image Preview"
+family: gemini-3
+temperature: true
+pricing:
+  currency: USD
+  input: 1
+  output: 6
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true

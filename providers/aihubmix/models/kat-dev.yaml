@@ -1,0 +1,19 @@
+id: kat-dev
+name: "Qwen: Kat Dev"
+family: other
+temperature: true
+pricing:
+  currency: USD
+  input: 0.0685
+  output: 0.274
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+limit:
+  context: 128000
+  output: 16384
+tool_call: true

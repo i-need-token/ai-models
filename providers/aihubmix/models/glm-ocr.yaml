@@ -1,0 +1,18 @@
+id: glm-ocr
+name: "Z.AI: Glm Ocr"
+family: glm
+temperature: true
+pricing:
+  currency: USD
+  input: 0.0141
+  output: 0.0141
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - image
+  output:
+    - text
+limit:
+  context: 32000
+  output: 16384

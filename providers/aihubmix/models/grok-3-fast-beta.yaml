@@ -1,0 +1,15 @@
+id: grok-3-fast-beta
+name: Grok 3 Fast Beta
+family: grok-3
+temperature: true
+pricing:
+  currency: USD
+  input: 2.75
+  output: 13.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

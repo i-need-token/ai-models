@@ -1,0 +1,23 @@
+id: qwen3-max-2026-01-23
+name: Qwen3 Max 2026 01 23
+family: qwen3
+temperature: true
+pricing:
+  currency: USD
+  input: 0.2254
+  output: 0.9016
+  cache_read: 0.04508
+  cache_write: 0.28175
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+limit:
+  context: 252000
+  output: 16384
+reasoning: true
+tool_call: true
+structured_output: true

@@ -1,0 +1,15 @@
+id: meta-llama-3-70b
+name: Meta Llama 3 70b
+family: llama-3
+temperature: true
+pricing:
+  currency: USD
+  input: 2.3975
+  output: 2.3975
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

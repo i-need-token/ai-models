@@ -1,0 +1,18 @@
+id: baidu--ernie-4.5-300b-a47b
+name: Baidu/Ernie 4.5 300b A47b
+family: ernie-4.5
+temperature: true
+pricing:
+  currency: USD
+  input: 0.16
+  output: 0.64
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+tool_call: true
+structured_output: true

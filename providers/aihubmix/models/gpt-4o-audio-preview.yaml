@@ -1,0 +1,19 @@
+id: gpt-4o-audio-preview
+name: "OpenAI: Gpt 4o Audio Preview"
+family: gpt-4o
+temperature: true
+pricing:
+  currency: USD
+  input: 1.25
+  output: 5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - audio
+  output:
+    - text
+limit:
+  context: 128000
+  output: 16384

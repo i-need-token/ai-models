@@ -1,0 +1,17 @@
+id: gme-qwen2-vl-2b-instruct
+name: "Qwen: Gme Qwen2 Vl 2b Instruct"
+family: qwen2
+temperature: true
+pricing:
+  currency: USD
+  input: 0.069
+  output: 0.069
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text

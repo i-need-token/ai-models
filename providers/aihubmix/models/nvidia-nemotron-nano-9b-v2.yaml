@@ -1,0 +1,15 @@
+id: nvidia-nemotron-nano-9b-v2
+name: Nvidia Nemotron Nano 9b V2
+family: nemotron
+temperature: true
+pricing:
+  currency: USD
+  input: 0.022
+  output: 0.088
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

@@ -1,0 +1,16 @@
+id: doubao-pro-32k
+name: "字节跳动: Doubao Pro 32k"
+family: doubao
+temperature: true
+pricing:
+  currency: USD
+  input: 0.07
+  output: 0.175
+  cache_read: 0.014
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

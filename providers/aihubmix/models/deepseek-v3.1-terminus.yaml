@@ -1,0 +1,20 @@
+id: deepseek-v3.1-terminus
+name: Deepseek V3.1 Terminus
+family: deepseek-v3
+temperature: true
+pricing:
+  currency: USD
+  input: 0.28
+  output: 0.84
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+limit:
+  context: 160000
+  output: 16384
+tool_call: true
+structured_output: true

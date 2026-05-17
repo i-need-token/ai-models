@@ -1,0 +1,15 @@
+id: wizardlm--wizardcoder-python-34b-v1.0
+name: "Meta: Wizardlm/Wizardcoder Python 34b V1.0"
+family: wizardlm
+temperature: true
+pricing:
+  currency: USD
+  input: 0.45
+  output: 0.45
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

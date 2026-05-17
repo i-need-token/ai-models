@@ -1,0 +1,19 @@
+id: gemini-2.5-flash-image
+name: "Google: Gemini 2.5 Flash Image"
+family: gemini-2.5
+temperature: true
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1.2495
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+limit:
+  context: 32800
+  output: 16384

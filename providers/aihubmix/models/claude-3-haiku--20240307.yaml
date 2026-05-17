@@ -1,0 +1,16 @@
+id: claude-3-haiku--20240307
+name: "Anthropic: Claude 3 Haiku/20240307"
+family: claude-haiku
+temperature: true
+pricing:
+  currency: USD
+  input: 0.1375
+  output: 0.6875
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text

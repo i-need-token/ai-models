@@ -1,0 +1,18 @@
+id: o1-preview
+name: "OpenAI: O1 Preview"
+family: o1
+temperature: true
+pricing:
+  currency: USD
+  input: 7.5
+  output: 30
+  cache_read: 3.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true

@@ -1,0 +1,15 @@
+id: claude-2
+name: "Anthropic: Claude 2"
+family: claude
+temperature: true
+pricing:
+  currency: USD
+  input: 4.4
+  output: 4.4
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

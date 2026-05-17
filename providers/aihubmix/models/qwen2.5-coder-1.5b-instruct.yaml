@@ -1,0 +1,15 @@
+id: qwen2.5-coder-1.5b-instruct
+name: Qwen2.5 Coder 1.5b Instruct
+family: qwen2.5
+temperature: true
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

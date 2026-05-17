@@ -1,0 +1,15 @@
+id: stepfun-ai--step3
+name: Stepfun Ai/Step3
+family: other
+temperature: true
+pricing:
+  currency: USD
+  input: 0.55
+  output: 1.375
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

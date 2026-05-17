@@ -1,0 +1,16 @@
+id: zai-glm-5-turbo
+name: "Z.AI: Zai Glm 5 Turbo"
+family: glm-5
+temperature: true
+pricing:
+  currency: USD
+  input: 0.6
+  output: 1.9998
+  cache_read: 0.12
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

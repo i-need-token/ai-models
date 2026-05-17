@@ -1,0 +1,15 @@
+id: doubao-1.5-thinking-pro
+name: Doubao 1.5 Thinking Pro
+family: doubao
+temperature: true
+pricing:
+  currency: USD
+  input: 0.31
+  output: 1.24
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

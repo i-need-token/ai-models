@@ -1,0 +1,20 @@
+id: ernie-5.0-thinking-exp
+name: "Baidu: Ernie 5.0 Thinking Exp"
+family: ernie-5.0
+temperature: true
+pricing:
+  currency: USD
+  input: 0.41096
+  output: 1.64384
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+limit:
+  context: 119000
+  output: 16384
+reasoning: true

@@ -1,0 +1,15 @@
+id: thudm--glm-4-32b-0414
+name: "ChatGLM: Thudm/Glm 4 32b 0414"
+family: glm-4
+temperature: true
+pricing:
+  currency: USD
+  input: 0.04
+  output: 0.04
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

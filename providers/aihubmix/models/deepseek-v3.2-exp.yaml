@@ -1,0 +1,21 @@
+id: deepseek-v3.2-exp
+name: Deepseek V3.2 Exp
+family: deepseek-v3
+temperature: true
+pricing:
+  currency: USD
+  input: 0.137
+  output: 0.2055
+  cache_read: 0.0137
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+limit:
+  context: 163000
+  output: 16384
+tool_call: true
+structured_output: true

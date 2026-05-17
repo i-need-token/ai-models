@@ -1,0 +1,16 @@
+id: doubao-1.5-lite-32k
+name: Doubao 1.5 Lite 32k
+family: doubao
+temperature: true
+pricing:
+  currency: USD
+  input: 0.025
+  output: 0.05
+  cache_read: 0.005
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

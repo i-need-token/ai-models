@@ -1,0 +1,15 @@
+id: deepseek-ai--deepseek-llm-67b-chat
+name: Deepseek Ai/Deepseek Llm 67b Chat
+family: deepseek
+temperature: true
+pricing:
+  currency: USD
+  input: 0.08
+  output: 0.08
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

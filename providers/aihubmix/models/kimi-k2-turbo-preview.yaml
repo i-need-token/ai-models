@@ -1,0 +1,21 @@
+id: kimi-k2-turbo-preview
+name: "Moonshot AI: Kimi K2 Turbo Preview"
+family: kimi-k2
+temperature: true
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.4
+  cache_read: 0.15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+limit:
+  context: 262144
+  output: 16384
+tool_call: true
+structured_output: true

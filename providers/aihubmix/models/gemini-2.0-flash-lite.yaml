@@ -1,0 +1,18 @@
+id: gemini-2.0-flash-lite
+name: "Google: Gemini 2.0 Flash Lite"
+family: gemini-2.0
+temperature: true
+pricing:
+  currency: USD
+  input: 0.038
+  output: 0.152
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+    - video
+    - audio
+  output:
+    - text

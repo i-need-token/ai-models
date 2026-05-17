@@ -1,0 +1,15 @@
+id: baichuan3-turbo
+name: Baichuan3 Turbo
+family: baichuan
+temperature: true
+pricing:
+  currency: USD
+  input: 0.95
+  output: 0.95
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text

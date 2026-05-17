@@ -1,0 +1,17 @@
+id: kimi-k2-instruct
+name: "Moonshot AI: Kimi K2 Instruct"
+family: kimi-k2
+temperature: true
+pricing:
+  currency: USD
+  input: 0.27
+  output: 1.08
+release_date: 2026-05-17
+last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+structured_output: true
