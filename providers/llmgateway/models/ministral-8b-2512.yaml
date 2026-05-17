@@ -1,0 +1,19 @@
+id: ministral-8b-2512
+name: Ministral 8B
+family: mistral
+limit:
+  context: 262144
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.15
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

@@ -1,0 +1,21 @@
+id: gemini-3-pro-image-preview
+name: Gemini 3 Pro Image (Preview)
+family: gemini
+limit:
+  context: 65536
+  output: 32768
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+    - image
+pricing:
+  currency: USD
+  input: 2
+  output: 12
+  cache_read: 0.2
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

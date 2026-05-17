@@ -1,0 +1,20 @@
+id: minimax-m2
+name: MiniMax M2
+family: minimax
+limit:
+  context: 196608
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 1
+  cache_read: 0.03
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

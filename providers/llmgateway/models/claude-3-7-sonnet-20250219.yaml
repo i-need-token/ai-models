@@ -1,0 +1,21 @@
+id: claude-3-7-sonnet-20250219
+name: Claude 3.7 Sonnet (2025-02-19)
+family: claude
+limit:
+  context: 200000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 3
+  output: 15
+  cache_read: 0.3
+  cache_write: 3.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

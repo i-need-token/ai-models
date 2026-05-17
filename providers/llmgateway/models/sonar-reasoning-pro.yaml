@@ -1,0 +1,18 @@
+id: sonar-reasoning-pro
+name: Sonar Reasoning Pro
+family: sonar
+limit:
+  context: 128000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2
+  output: 8
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

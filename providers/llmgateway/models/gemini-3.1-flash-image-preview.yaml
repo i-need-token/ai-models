@@ -1,0 +1,20 @@
+id: gemini-3.1-flash-image-preview
+name: Gemini 3.1 Flash Image (Preview)
+family: gemini
+limit:
+  context: 65536
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+    - image
+pricing:
+  currency: USD
+  input: 0.25
+  output: 1.5
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

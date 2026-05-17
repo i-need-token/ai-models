@@ -1,0 +1,18 @@
+id: qwen3-32b-fp8
+name: Qwen3 32B FP8
+family: qwen
+limit:
+  context: 40960
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.45
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

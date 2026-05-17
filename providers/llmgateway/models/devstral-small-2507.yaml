@@ -1,0 +1,18 @@
+id: devstral-small-2507
+name: Devstral Small 1.1
+family: mistral
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.3
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

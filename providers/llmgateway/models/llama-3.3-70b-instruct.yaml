@@ -1,0 +1,18 @@
+id: llama-3.3-70b-instruct
+name: Llama 3.3 70B Instruct
+family: llama
+limit:
+  context: 131072
+  output: 65536
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.4
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

@@ -1,0 +1,18 @@
+id: sonar
+name: Sonar
+family: sonar
+limit:
+  context: 130000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 1
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

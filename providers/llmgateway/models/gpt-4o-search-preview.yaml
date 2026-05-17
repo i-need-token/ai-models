@@ -1,0 +1,18 @@
+id: gpt-4o-search-preview
+name: GPT-4o Search Preview
+family: gpt-4o
+limit:
+  context: 128000
+  output: 16384
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 2.5
+  output: 10
+release_date: 2026-05-17
+last_updated: 2026-05-17

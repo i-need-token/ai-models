@@ -1,0 +1,19 @@
+id: qwen3-coder-flash
+name: Qwen3 Coder Flash
+family: qwen
+limit:
+  context: 1000000
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.5
+  cache_read: 0.06
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true

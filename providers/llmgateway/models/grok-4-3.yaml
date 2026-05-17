@@ -1,0 +1,21 @@
+id: grok-4-3
+name: Grok 4.3
+family: grok
+limit:
+  context: 1000000
+  output: 32768
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1.25
+  output: 2.5
+  cache_read: 0.3125
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

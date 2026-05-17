@@ -1,0 +1,19 @@
+id: gpt-oss-120b
+name: GPT OSS 120B
+family: gpt-oss
+limit:
+  context: 131072
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.75
+release_date: 2026-05-17
+last_updated: 2026-05-17
+tool_call: true
+reasoning: true

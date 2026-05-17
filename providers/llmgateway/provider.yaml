@@ -1,0 +1,6 @@
+id: llmgateway
+name: LLM Gateway
+url: https://llmgateway.io
+api_docs: https://llmgateway.io/docs
+apis:
+  openai: https://api.llmgateway.io/v1
