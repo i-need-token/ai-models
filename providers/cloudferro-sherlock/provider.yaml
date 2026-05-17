@@ -1,0 +1,6 @@
+id: cloudferro-sherlock
+name: CloudFerro Sherlock
+url: https://sherlock.cloudferro.com
+api_docs: https://docs.sherlock.cloudferro.com
+apis:
+  openai: https://api.sherlock.cloudferro.com/v1

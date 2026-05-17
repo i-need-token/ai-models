@@ -1,0 +1,20 @@
+id: mistral-small-24b-instruct-2501
+name: Mistral Small 24B Instruct 2501
+family: mistral
+temperature: true
+limit:
+  context: 32768
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: EUR
+  input: 1.26
+  output: 1.26
+release_date: 2025-06-01
+last_updated: 2026-05-17
+deprecated: true
+tool_call: true
