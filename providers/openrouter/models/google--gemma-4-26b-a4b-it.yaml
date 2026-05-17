@@ -3,7 +3,7 @@ name: "Google: Gemma 4 26B A4B "
 family: gemma
 limit:
   context: 262144
-  output: 16384
+  output: 4096
 modalities:
   input:
     - image
@@ -13,8 +13,8 @@ modalities:
     - text
 pricing:
   currency: USD
-  input: 0.07
-  output: 0.34
+  input: 0.06
+  output: 0.33
 release_date: 2026-05-17
 last_updated: 2026-05-17
 tool_call: true
