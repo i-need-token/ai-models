@@ -1,0 +1,24 @@
+id: anthropic--claude-opus-4-20250514
+name: Claude Opus 4 20250514
+family: claude
+reasoning: true
+temperature: true
+tool_call: true
+structured_output: true
+limit:
+  context: 200000
+  output: 32000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 15
+  output: 75
+  cache_read: 1.5
+  cache_write: 18.75
+release_date: 2026-02-04
+last_updated: 2026-05-17

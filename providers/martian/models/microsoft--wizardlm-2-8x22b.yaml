@@ -1,0 +1,21 @@
+id: microsoft--wizardlm-2-8x22b
+name: Wizardlm 2 8x22b
+family: phi
+reasoning: false
+temperature: true
+tool_call: false
+structured_output: false
+limit:
+  context: 65536
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.62
+  output: 0.62
+release_date: 2026-02-12
+last_updated: 2026-05-17

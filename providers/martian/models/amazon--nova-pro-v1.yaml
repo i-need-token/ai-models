@@ -1,0 +1,22 @@
+id: amazon--nova-pro-v1
+name: Nova Pro V1
+family: nova
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: false
+limit:
+  context: 300000
+  output: 5120
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.8
+  output: 3.2
+release_date: 2026-01-27
+last_updated: 2026-05-17

@@ -1,0 +1,22 @@
+id: deepinfra--deepseek--deepseek-v4-flash
+name: DeepSeek V4 Flash
+family: deepinfra
+reasoning: false
+temperature: true
+tool_call: false
+structured_output: false
+limit:
+  context: 131072
+  output: 384000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.14
+  output: 0.28
+  cache_read: 0.0028
+release_date: 2026-04-28
+last_updated: 2026-05-17

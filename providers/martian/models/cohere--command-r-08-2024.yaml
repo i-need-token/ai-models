@@ -1,0 +1,21 @@
+id: cohere--command-r-08-2024
+name: Command R 08 2024
+family: command-r
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: true
+limit:
+  context: 128000
+  output: 4000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.6
+release_date: 2026-01-21
+last_updated: 2026-05-17

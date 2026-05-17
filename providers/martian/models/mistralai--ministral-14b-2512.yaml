@@ -1,0 +1,22 @@
+id: mistralai--ministral-14b-2512
+name: Ministral 14B 2512
+family: mistral
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: true
+limit:
+  context: 262144
+  output: 0
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.2
+  cache_read: 0.02
+release_date: 2026-03-17
+last_updated: 2026-05-17

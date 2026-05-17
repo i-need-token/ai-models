@@ -1,0 +1,6 @@
+id: martian
+name: Martian
+url: https://withmartian.com
+api_docs: https://docs.withmartian.com
+apis:
+  openai: https://api.withmartian.com/v1

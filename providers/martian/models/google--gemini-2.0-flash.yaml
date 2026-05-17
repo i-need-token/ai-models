@@ -1,0 +1,22 @@
+id: google--gemini-2.0-flash
+name: Gemini 2.0 Flash
+family: gemini
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: true
+limit:
+  context: 1048576
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.4
+release_date: 2026-04-03
+last_updated: 2026-05-17

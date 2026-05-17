@@ -1,0 +1,21 @@
+id: morph--morph-v3-large
+name: Morph V3 Large
+family: morph
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: false
+limit:
+  context: 262144
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.9
+  output: 1.9
+release_date: 2026-01-21
+last_updated: 2026-05-17

@@ -1,0 +1,22 @@
+id: qwen--qwen2.5-vl-72b-instruct
+name: Qwen2.5 Vl 72B Instruct
+family: qwen
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: true
+limit:
+  context: 32000
+  output: 4
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.25
+  output: 0.75
+release_date: 2026-04-17
+last_updated: 2026-05-17

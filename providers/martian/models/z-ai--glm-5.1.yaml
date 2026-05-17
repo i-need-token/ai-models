@@ -1,0 +1,22 @@
+id: z-ai--glm-5.1
+name: GLM 5.1
+family: glm
+reasoning: true
+temperature: true
+tool_call: true
+structured_output: true
+limit:
+  context: 200000
+  output: 200000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.98
+  output: 3.08
+  cache_read: 0.182
+release_date: 2026-05-12
+last_updated: 2026-05-17

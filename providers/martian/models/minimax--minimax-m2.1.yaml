@@ -1,0 +1,22 @@
+id: minimax--minimax-m2.1
+name: Minimax M2.1
+family: minimax
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: false
+limit:
+  context: 204800
+  output: 196608
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.29
+  output: 0.95
+  cache_read: 0.03
+release_date: 2026-04-16
+last_updated: 2026-05-17

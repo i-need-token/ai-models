@@ -1,0 +1,21 @@
+id: openai--gpt-4-turbo
+name: GPT 4 Turbo
+family: gpt-4
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: true
+limit:
+  context: 128000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 10
+  output: 30
+release_date: 2026-01-15
+last_updated: 2026-05-17

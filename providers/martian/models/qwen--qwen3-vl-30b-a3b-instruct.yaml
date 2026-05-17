@@ -1,0 +1,22 @@
+id: qwen--qwen3-vl-30b-a3b-instruct
+name: Qwen3 Vl 30B A3b Instruct
+family: qwen
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: true
+limit:
+  context: 131072
+  output: 32768
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.52
+release_date: 2026-02-13
+last_updated: 2026-05-17

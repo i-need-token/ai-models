@@ -1,0 +1,21 @@
+id: qwen--qwen3-235b-a22b
+name: Qwen3 235B A22b
+family: qwen
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: true
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.455
+  output: 1.82
+release_date: 2026-02-21
+last_updated: 2026-05-17

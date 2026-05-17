@@ -1,0 +1,22 @@
+id: xiaomi--mimo-v2-flash
+name: MiMo V2 Flash
+family: mimo
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: false
+limit:
+  context: 262144
+  output: 65536
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.3
+  cache_read: 0.01
+release_date: 2026-05-12
+last_updated: 2026-05-17

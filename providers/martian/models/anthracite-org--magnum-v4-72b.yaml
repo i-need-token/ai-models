@@ -1,0 +1,21 @@
+id: anthracite-org--magnum-v4-72b
+name: Magnum V4 72B
+family: anthracite
+reasoning: false
+temperature: true
+tool_call: false
+structured_output: false
+limit:
+  context: 32768
+  output: 2048
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 3
+  output: 5
+release_date: 2025-10-21
+last_updated: 2026-05-17

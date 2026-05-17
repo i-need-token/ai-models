@@ -1,0 +1,21 @@
+id: deepinfra--z-ai--glm-4.6
+name: GLM 4.6
+family: deepinfra
+reasoning: false
+temperature: true
+tool_call: false
+structured_output: false
+limit:
+  context: 200000
+  output: 204800
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.39
+  output: 1.9
+release_date: 2026-03-05
+last_updated: 2026-05-17

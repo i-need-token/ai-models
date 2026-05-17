@@ -1,0 +1,22 @@
+id: deepinfra--deepseek--deepseek-v3.2
+name: DeepSeek V3.2
+family: deepinfra
+reasoning: false
+temperature: true
+tool_call: false
+structured_output: false
+limit:
+  context: 160000
+  output: 65536
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.252
+  output: 0.378
+  cache_read: 0.0252
+release_date: 2026-04-28
+last_updated: 2026-05-17

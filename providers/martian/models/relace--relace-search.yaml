@@ -1,0 +1,21 @@
+id: relace--relace-search
+name: Relace Search
+family: relace
+reasoning: false
+temperature: true
+tool_call: false
+structured_output: false
+limit:
+  context: 256000
+  output: 128000
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 3
+release_date: 2026-01-21
+last_updated: 2026-05-17

@@ -1,0 +1,22 @@
+id: mistralai--mistral-medium-3.1
+name: Mistral Medium 3.1
+family: mistral-medium
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: true
+limit:
+  context: 131072
+  output: 2
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
+  cache_read: 0.04
+release_date: 2026-03-17
+last_updated: 2026-05-17

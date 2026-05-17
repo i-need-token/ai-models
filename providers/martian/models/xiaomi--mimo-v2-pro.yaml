@@ -1,0 +1,22 @@
+id: xiaomi--mimo-v2-pro
+name: MiMo V2 Pro
+family: mimo
+reasoning: false
+temperature: true
+tool_call: true
+structured_output: false
+limit:
+  context: 1048576
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+pricing:
+  currency: USD
+  input: 1
+  output: 3
+  cache_read: 0.2
+release_date: 2026-03-25
+last_updated: 2026-05-17
