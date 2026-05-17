@@ -5,7 +5,7 @@ temperature: true
 open_weights: true
 limit:
   context: 256000
-  output: 256000
+  output: 4096
 modalities:
   input:
     - text
