@@ -44,8 +44,8 @@ Moonshot AI (月之暗面) is a Chinese AI company that produces the Kimi series
 
 | Model                | Context | Input (¥/Mtok) | Output (¥/Mtok) | Cache Read |
 | -------------------- | ------- | -------------- | --------------- | ---------- |
-| kimi-vl-a3b-thinking | 128K    | ¥4.00          | ¥16.00          | ¥0.80      |
-| kimi-vl-a3b          | 128K    | ¥4.00          | ¥16.00          | ¥0.80      |
+| kimi-vl-a3b-thinking | 128K    | ¥4.00          | ¥21.00          | ¥0.70      |
+| kimi-vl-a3b          | 128K    | ¥4.00          | ¥21.00          | ¥0.70      |
 
 ### Moonshot V1 (Deprecated)
 
@@ -69,3 +69,4 @@ Moonshot AI (月之暗面) is a Chinese AI company that produces the Kimi series
 - Moonshot V1 Vision models support image input with same pricing as text-only V1
 - Moonshot V1 does not list cache_read pricing in docs — omitted
 - Turbo variants offer faster inference (60-100 tokens/sec) at higher cost
+- Kimi VL models use the same pricing as K2.5 series (confirmed from docs)

@@ -14,7 +14,7 @@ modalities:
 pricing:
   currency: CNY
   input: 4
-  output: 16
-  cache_read: 0.8
+  output: 21
+  cache_read: 0.7
 release_date: 2026-05-17
 last_updated: 2026-05-17

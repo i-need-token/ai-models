@@ -181,8 +181,8 @@ const HARDCODED_PRICING: Record<string, Pricing> = {
   "kimi-k2-thinking-turbo": { currency: "CNY", input: 8, output: 58, cache_read: 1 },
 
   // Vision series
-  "kimi-vl-a3b-thinking": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
-  "kimi-vl-a3b": { currency: "CNY", input: 4, output: 16, cache_read: 0.8 },
+  "kimi-vl-a3b-thinking": { currency: "CNY", input: 4, output: 21, cache_read: 0.7 },
+  "kimi-vl-a3b": { currency: "CNY", input: 4, output: 21, cache_read: 0.7 },
 
   // V1 series (deprecated) — no cache_read pricing listed in docs
   "moonshot-v1-8k": { currency: "CNY", input: 2, output: 10 },
