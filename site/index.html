@@ -724,6 +724,7 @@
       <button class="export-btn" id="compareBtn" onclick="showCompare()" style="display: none">
         ⚖️ Compare (<span id="compareCount">0</span>)
       </button>
+      <button class="export-btn" onclick="shareView()" title="Share this view">🔗 Share</button>
       <button class="export-btn" onclick="exportCSV()" title="Export filtered results as CSV">
         ⬇ Export CSV
       </button>
@@ -1612,6 +1613,17 @@
 
       function closeCompare() {
         document.getElementById("compareModal").style.display = "none";
+      }
+
+      // Share current view
+      function shareView() {
+        const url = new URL(window.location);
+        const text = "AI Models Catalog — " + filtered.length + " models";
+        if (navigator.share) {
+          navigator.share({ title: text, url: url.toString() });
+        } else {
+          navigator.clipboard.writeText(url.toString()).then(() => showToast("Link copied!"));
+        }
       }
 
       // Export filtered results
