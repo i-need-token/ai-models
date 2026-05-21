@@ -59,6 +59,7 @@ Curated standalone pages targeting high-volume search queries. All cross-linked 
 - [`site/cheapest-ai-models.html`](site/cheapest-ai-models.html) — Cheapest AI Models (cheapest overall, TC, reasoning, vision, 128K+, per provider)
 - [`site/tool-calling-models-comparison.html`](site/tool-calling-models-comparison.html) — Tool Calling Models Comparison (flagship, cheapest, free, open weights, TC+reasoning, TC+vision, TC+large context)
 - [`site/ai-model-pricing-calculator.html`](site/ai-model-pricing-calculator.html) — AI Model Pricing Calculator (interactive cost calculator, quick comparison, cheapest tables)
+- [`site/best-ai-models-for-image-generation.html`](site/best-ai-models-for-image-generation.html) — Best AI Models for Image Generation (DALL·E, Imagen, GPT-5 Image, Midjourney, cheapest, free, open-weight)
 
 ## Key Design Decisions
 
