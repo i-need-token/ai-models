@@ -406,3 +406,4 @@ npx tsx scripts/export-csv.ts
 - Structured Output Models Comparison: site/structured-output-models-comparison.html
 - Open Source AI Models: site/open-source-ai-models.html
 - Multimodal AI Models: site/multimodal-ai-models.html
+- State of AI Models 2025: site/state-of-ai-models.html

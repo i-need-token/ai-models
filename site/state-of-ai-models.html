@@ -1,0 +1,725 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>State of AI Models 2025 — Data-Driven Report | AI Models Catalog</title>
+    <meta
+      name="description"
+      content="Data-driven report on the AI model landscape in 2025: 4,587 models across 95 providers, pricing trends, capability analysis, context window growth, and open-source adoption."
+    />
+    <link rel="canonical" href="https://i-need-token.github.io/ai-models/state-of-ai-models.html" />
+    <meta property="og:title" content="State of AI Models 2025 — Data-Driven Report" />
+    <meta
+      property="og:description"
+      content="4,587 models, 95 providers, 81 free models: a data-driven analysis of the AI model landscape in 2025."
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/catalog-screenshot.png"
+    />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="577" />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/catalog-screenshot.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "State of AI Models 2025",
+        "description": "Data-driven report on the AI model landscape: 4,587 models across 95 providers",
+        "author": { "@type": "Organization", "name": "AI Models Catalog" },
+        "publisher": { "@type": "Organization", "name": "AI Models Catalog" },
+        "datePublished": "2025-05-21",
+        "url": "https://i-need-token.github.io/ai-models/state-of-ai-models.html"
+      }
+    </script>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --text: #1a1a2e;
+        --text-secondary: #555;
+        --accent: #e94560;
+        --card-bg: #f8f9fa;
+        --border: #e0e0e0;
+        --hero-bg: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0f0c29;
+          --text: #e0e0e0;
+          --text-secondary: #aaa;
+          --accent: #e94560;
+          --card-bg: #1a1a2e;
+          --border: #333;
+          --hero-bg: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        }
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.7;
+      }
+      .hero {
+        background: var(--hero-bg);
+        color: #fff;
+        padding: 60px 20px;
+        text-align: center;
+      }
+      .hero h1 {
+        font-size: 2.2em;
+        margin-bottom: 12px;
+      }
+      .hero p {
+        font-size: 1.1em;
+        opacity: 0.9;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 30px 20px;
+      }
+      h2 {
+        color: var(--accent);
+        margin: 40px 0 16px;
+        font-size: 1.5em;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 8px;
+      }
+      h3 {
+        margin: 24px 0 12px;
+        font-size: 1.2em;
+      }
+      p {
+        margin: 12px 0;
+        color: var(--text-secondary);
+      }
+      .stat-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin: 24px 0;
+      }
+      .stat-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+      }
+      .stat-card .number {
+        font-size: 2em;
+        font-weight: 800;
+        color: var(--accent);
+      }
+      .stat-card .label {
+        font-size: 0.85em;
+        color: var(--text-secondary);
+        margin-top: 4px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 0.9em;
+      }
+      th,
+      td {
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+      th {
+        background: var(--card-bg);
+        font-weight: 600;
+      }
+      tr:hover {
+        background: var(--card-bg);
+      }
+      .bar-chart {
+        margin: 16px 0;
+      }
+      .bar-row {
+        display: flex;
+        align-items: center;
+        margin: 6px 0;
+      }
+      .bar-label {
+        width: 140px;
+        font-size: 0.85em;
+        text-align: right;
+        padding-right: 12px;
+        color: var(--text-secondary);
+      }
+      .bar-fill {
+        height: 24px;
+        background: var(--accent);
+        border-radius: 4px;
+        min-width: 2px;
+        transition: width 0.3s;
+      }
+      .bar-value {
+        margin-left: 8px;
+        font-size: 0.85em;
+        font-weight: 600;
+      }
+      .insight {
+        background: var(--card-bg);
+        border-left: 4px solid var(--accent);
+        padding: 16px 20px;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+      }
+      .insight strong {
+        color: var(--accent);
+      }
+      .related-pages {
+        margin: 40px 0;
+        padding: 20px 0;
+        border-top: 1px solid var(--border);
+      }
+      .related-pages a {
+        display: inline-block;
+        margin: 4px 8px 4px 0;
+        padding: 6px 14px;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        text-decoration: none;
+        color: var(--text);
+        font-size: 0.85em;
+      }
+      .related-pages a:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      footer {
+        text-align: center;
+        padding: 30px;
+        color: var(--text-secondary);
+        font-size: 0.85em;
+        border-top: 1px solid var(--border);
+        margin-top: 40px;
+      }
+      footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 1.6em;
+        }
+        .stat-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .bar-label {
+          width: 100px;
+          font-size: 0.75em;
+        }
+        table {
+          font-size: 0.8em;
+        }
+        th,
+        td {
+          padding: 6px 8px;
+        }
+      }
+      @media (max-width: 480px) {
+        .stat-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .hero {
+          padding: 40px 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <h1>📊 State of AI Models 2025</h1>
+      <p>
+        A data-driven analysis of 4,587 AI models across 95 providers — pricing trends, capability
+        adoption, context window growth, and the rise of open-source AI.
+      </p>
+    </div>
+    <div class="container">
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="number">4,587</div>
+          <div class="label">Total Models</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">95</div>
+          <div class="label">Providers</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">81</div>
+          <div class="label">Free Models</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">527</div>
+          <div class="label">Open-Weight</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">2,350</div>
+          <div class="label">Tool Calling</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">1,306</div>
+          <div class="label">Reasoning</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">1,487</div>
+          <div class="label">Vision</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">2,195</div>
+          <div class="label">128K+ Context</div>
+        </div>
+      </div>
+
+      <h2>1. Provider Landscape</h2>
+      <p>
+        The AI model ecosystem spans 95 providers, from tech giants to specialized startups. The top
+        15 providers account for the majority of models:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Provider</th>
+            <th>Models</th>
+            <th>Notable Models</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>OpenRouter</td>
+            <td>415</td>
+            <td>Aggregator — routes to 100+ models</td>
+          </tr>
+          <tr>
+            <td>Google</td>
+            <td>261</td>
+            <td>Gemini 2.5 Pro/Flash, Gemma 3</td>
+          </tr>
+          <tr>
+            <td>Requesty</td>
+            <td>234</td>
+            <td>Aggregator — unified API</td>
+          </tr>
+          <tr>
+            <td>Cohere</td>
+            <td>197</td>
+            <td>Command R+, Embed v3</td>
+          </tr>
+          <tr>
+            <td>xAI</td>
+            <td>193</td>
+            <td>Grok 3, Grok 3 Mini</td>
+          </tr>
+          <tr>
+            <td>DeepSeek</td>
+            <td>184</td>
+            <td>DeepSeek R1, V3</td>
+          </tr>
+          <tr>
+            <td>Meta</td>
+            <td>163</td>
+            <td>Llama 4 Maverick/Scout</td>
+          </tr>
+          <tr>
+            <td>Mistral</td>
+            <td>155</td>
+            <td>Mistral Large, Codestral</td>
+          </tr>
+          <tr>
+            <td>Alibaba (Qwen)</td>
+            <td>139</td>
+            <td>Qwen3-235B, QwQ</td>
+          </tr>
+          <tr>
+            <td>Anthropic</td>
+            <td>121</td>
+            <td>Claude Sonnet 4, Opus 4</td>
+          </tr>
+          <tr>
+            <td>OpenAI</td>
+            <td>115</td>
+            <td>GPT-4.1, o3, o4-mini</td>
+          </tr>
+          <tr>
+            <td>Microsoft</td>
+            <td>99</td>
+            <td>Phi-4, Florence 2</td>
+          </tr>
+          <tr>
+            <td>Amazon</td>
+            <td>96</td>
+            <td>Nova Pro, Titan</td>
+          </tr>
+          <tr>
+            <td>NVIDIA</td>
+            <td>87</td>
+            <td>Nemotron, Llama Nemotron</td>
+          </tr>
+          <tr>
+            <td>01.ai</td>
+            <td>83</td>
+            <td>Yi-Lightning, Yi-VL</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="insight">
+        <strong>Key Insight:</strong> Aggregators (OpenRouter, Requesty) offer the widest selection
+        but may duplicate models available from first-party providers. For the best pricing, go
+        direct to the source.
+      </div>
+
+      <h2>2. Pricing Distribution</h2>
+      <p>
+        AI model pricing varies dramatically — from completely free to over $15 per million input
+        tokens. Here is the breakdown of the 4,587 models:
+      </p>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label">Free</div>
+          <div class="bar-fill" style="width: 81px"></div>
+          <div class="bar-value">81 models</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">&lt; $0.50/M</div>
+          <div class="bar-fill" style="width: 450px"></div>
+          <div class="bar-value">~1,800 models</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">$0.50–5/M</div>
+          <div class="bar-fill" style="width: 350px"></div>
+          <div class="bar-value">~1,400 models</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">&gt; $5/M</div>
+          <div class="bar-fill" style="width: 120px"></div>
+          <div class="bar-value">~480 models</div>
+        </div>
+      </div>
+      <div class="insight">
+        <strong>Key Insight:</strong> The median input price for tool-calling models is $0.50/M
+        tokens, while reasoning models median is $0.80/M. Vision-capable models average $1.50/M —
+        still affordable for most production use cases.
+      </div>
+
+      <h2>3. Capability Adoption</h2>
+      <p>
+        Modern AI models increasingly support advanced capabilities beyond basic text generation:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>Models</th>
+            <th>% of Total</th>
+            <th>Avg Input $/M</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tool Calling</td>
+            <td>2,350</td>
+            <td>51.2%</td>
+            <td>$1.50</td>
+          </tr>
+          <tr>
+            <td>Reasoning</td>
+            <td>1,306</td>
+            <td>28.5%</td>
+            <td>$2.10</td>
+          </tr>
+          <tr>
+            <td>Structured Output</td>
+            <td>829</td>
+            <td>18.1%</td>
+            <td>$1.80</td>
+          </tr>
+          <tr>
+            <td>Vision (Image Input)</td>
+            <td>1,487</td>
+            <td>32.4%</td>
+            <td>$1.50</td>
+          </tr>
+          <tr>
+            <td>Open Weights</td>
+            <td>527</td>
+            <td>11.5%</td>
+            <td>Free or low-cost</td>
+          </tr>
+          <tr>
+            <td>Image Generation</td>
+            <td>28</td>
+            <td>0.6%</td>
+            <td>$3.00+</td>
+          </tr>
+          <tr>
+            <td>Audio Input</td>
+            <td>118</td>
+            <td>2.6%</td>
+            <td>$2.50+</td>
+          </tr>
+          <tr>
+            <td>Audio Output</td>
+            <td>34</td>
+            <td>0.7%</td>
+            <td>$3.00+</td>
+          </tr>
+          <tr>
+            <td>Video Input</td>
+            <td>167</td>
+            <td>3.6%</td>
+            <td>$2.00+</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="insight">
+        <strong>Key Insight:</strong> Over half of all models now support tool calling — it has
+        become table stakes for production AI. Reasoning capabilities are growing fast, with 1,306
+        models (28.5%) supporting extended thinking.
+      </div>
+
+      <h2>4. Context Window Revolution</h2>
+      <p>
+        Context windows have grown exponentially. The average context window across all models is
+        now approximately 200K tokens:
+      </p>
+      <div class="bar-chart">
+        <div class="bar-row">
+          <div class="bar-label">&lt; 32K</div>
+          <div class="bar-fill" style="width: 200px"></div>
+          <div class="bar-value">~800 models</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">32K–128K</div>
+          <div class="bar-fill" style="width: 250px"></div>
+          <div class="bar-value">~1,000 models</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">128K–1M</div>
+          <div class="bar-fill" style="width: 500px"></div>
+          <div class="bar-value">~2,195 models</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">1M+</div>
+          <div class="bar-fill" style="width: 80px"></div>
+          <div class="bar-value">~30 models</div>
+        </div>
+      </div>
+      <h3>Largest Context Windows</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Context</th>
+            <th>Provider</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Google Gemini 2.5 Pro</td>
+            <td>1,048,576</td>
+            <td>Google</td>
+          </tr>
+          <tr>
+            <td>Google Gemini 2.5 Flash</td>
+            <td>1,048,576</td>
+            <td>Google</td>
+          </tr>
+          <tr>
+            <td>Meta Llama 4 Scout</td>
+            <td>10,000,000</td>
+            <td>Meta</td>
+          </tr>
+          <tr>
+            <td>Meta Llama 4 Maverick</td>
+            <td>1,048,576</td>
+            <td>Meta</td>
+          </tr>
+          <tr>
+            <td>Google Gemma 3 27B</td>
+            <td>131,072</td>
+            <td>Google</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="insight">
+        <strong>Key Insight:</strong> 128K+ context is now the norm — 2,195 models (47.8%) support
+        it. Meta's Llama 4 Scout leads with a 10M token window, making entire codebases and books
+        processable in a single prompt.
+      </div>
+
+      <h2>5. The Rise of Free &amp; Open-Source AI</h2>
+      <p>
+        81 models are completely free to use, and 527 have open weights. Here are the most capable
+        free models:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Context</th>
+            <th>Capabilities</th>
+            <th>Provider</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Google Gemini 2.5 Flash</td>
+            <td>1M</td>
+            <td>TC, Reasoning, Vision, SO</td>
+            <td>Google</td>
+          </tr>
+          <tr>
+            <td>DeepSeek R1</td>
+            <td>128K</td>
+            <td>Reasoning, TC</td>
+            <td>DeepSeek</td>
+          </tr>
+          <tr>
+            <td>Meta Llama 4 Maverick</td>
+            <td>1M</td>
+            <td>TC, Vision</td>
+            <td>Meta</td>
+          </tr>
+          <tr>
+            <td>Alibaba Qwen3-235B</td>
+            <td>128K</td>
+            <td>TC, Reasoning, SO</td>
+            <td>Alibaba</td>
+          </tr>
+          <tr>
+            <td>Google Gemma 3 27B</td>
+            <td>131K</td>
+            <td>Vision, TC</td>
+            <td>Google</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="insight">
+        <strong>Key Insight:</strong> Free models now rival paid ones in capability. Google Gemini
+        2.5 Flash (free tier) offers 1M context, tool calling, reasoning, and vision — making it
+        viable for production use at zero cost.
+      </div>
+
+      <h2>6. Best Value Models by Use Case</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Use Case</th>
+            <th>Best Free</th>
+            <th>Best Paid (Cheapest)</th>
+            <th>Best Overall</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>General Chat</td>
+            <td>Gemini 2.5 Flash</td>
+            <td>DeepSeek V3 ($0.07/$0.28)</td>
+            <td>Claude Sonnet 4</td>
+          </tr>
+          <tr>
+            <td>Coding</td>
+            <td>DeepSeek R1</td>
+            <td>DeepSeek V3 ($0.07/$0.28)</td>
+            <td>Claude Sonnet 4</td>
+          </tr>
+          <tr>
+            <td>AI Agents</td>
+            <td>Gemini 2.5 Flash</td>
+            <td>Grok 3 Mini ($0.30/$0.50)</td>
+            <td>Claude Sonnet 4</td>
+          </tr>
+          <tr>
+            <td>Reasoning</td>
+            <td>DeepSeek R1</td>
+            <td>Grok 3 Mini ($0.30/$0.50)</td>
+            <td>o3</td>
+          </tr>
+          <tr>
+            <td>Vision</td>
+            <td>Gemini 2.5 Flash</td>
+            <td>Gemma 3 4B (free)</td>
+            <td>Gemini 2.5 Pro</td>
+          </tr>
+          <tr>
+            <td>Large Context</td>
+            <td>Llama 4 Scout (10M)</td>
+            <td>Gemini 2.5 Flash ($0.15/$0.60)</td>
+            <td>Gemini 2.5 Pro</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>7. Key Trends &amp; Predictions</h2>
+      <div class="insight">
+        <strong>Trend 1: Agentic AI is the new default.</strong> 51% of models support tool calling,
+        and 1,080 models are classified as "agentic" (tool_call + chat). Expect this to reach 80%+
+        by 2026.
+      </div>
+      <div class="insight">
+        <strong>Trend 2: Context windows are commoditized.</strong> 128K context is now standard.
+        1M+ context models are growing, with Google and Meta leading. Expect 10M+ to become common
+        by 2026.
+      </div>
+      <div class="insight">
+        <strong>Trend 3: Free tiers are production-ready.</strong> 81 free models with capabilities
+        like tool calling and reasoning mean that cost is no longer a barrier to entry for AI
+        development.
+      </div>
+      <div class="insight">
+        <strong>Trend 4: Multimodal is mainstream.</strong> 1,548 models support more than text
+        input. Vision (1,487 models) is nearly universal among flagship models. Audio and video are
+        the next frontiers.
+      </div>
+      <div class="insight">
+        <strong>Trend 5: Open weights are accelerating.</strong> 527 open-weight models exist, with
+        Meta's Llama 4 and Alibaba's Qwen3 leading. Expect open-source to match proprietary
+        capabilities within 6 months.
+      </div>
+
+      <div class="related-pages">
+        <strong>Explore More:</strong>
+        <a href="best-ai-models.html">Best AI Models</a>
+        <a href="free-ai-models.html">Free AI Models</a>
+        <a href="llm-pricing.html">LLM Pricing</a>
+        <a href="openai-alternatives.html">OpenAI Alternatives</a>
+        <a href="context-window-comparison.html">Context Windows</a>
+        <a href="reasoning-models-comparison.html">Reasoning Models</a>
+        <a href="tool-calling-models-comparison.html">Tool Calling</a>
+        <a href="cheapest-ai-models.html">Cheapest Models</a>
+        <a href="open-source-ai-models.html">Open Source</a>
+        <a href="multimodal-ai-models.html">Multimodal</a>
+        <a href="best-ai-models-for-coding.html">Coding Models</a>
+        <a href="best-ai-models-for-agents.html">Agent Models</a>
+        <a href="ai-model-pricing-calculator.html">Price Calculator</a>
+        <a href="index.html">Interactive Catalog</a>
+      </div>
+    </div>
+    <footer>
+      <p>
+        Data from
+        <a href="https://github.com/i-need-token/ai-models">AI Models Catalog</a>
+        — 4,587 models across 95 providers. Updated continuously.
+      </p>
+    </footer>
+  </body>
+</html>
