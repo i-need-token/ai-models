@@ -232,12 +232,16 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 
 ## Documentation
 
-| Document                                                | Description                               |
-| ------------------------------------------------------- | ----------------------------------------- |
-| [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data      |
-| [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog |
-| [数据采集（中文）](docs/zh/data-acquisition.md)         | 数据采集指南                              |
-| [设计原则与陷阱（中文）](docs/zh/lessons-learned.md)    | 经验教训                                  |
+| Document                                                | Description                                                    |
+| ------------------------------------------------------- | -------------------------------------------------------------- |
+| [Model Comparison](docs/model-comparison.md)            | Compare flagship, cost-effective, free, and open-weight models |
+| [Provider Overview](docs/providers.md)                  | All 95 providers organized by type and market                  |
+| [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data                           |
+| [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog                      |
+| [模型对比（中文）](docs/zh/model-comparison.md)         | 旗舰、高性价比、免费和开源模型对比                             |
+| [提供商概览（中文）](docs/zh/providers.md)              | 95 个提供商按类型和市场分类                                    |
+| [数据采集（中文）](docs/zh/data-acquisition.md)         | 数据采集指南                                                   |
+| [设计原则与陷阱（中文）](docs/zh/lessons-learned.md)    | 经验教训                                                       |
 
 ## Design Principles
 
