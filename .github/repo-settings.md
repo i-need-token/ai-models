@@ -44,3 +44,5 @@ Add these topics to the repository (Settings → General → Topics):
 - ai-model-catalog
 - structured-data
 - npm-package
+- huggingface
+- github-action
