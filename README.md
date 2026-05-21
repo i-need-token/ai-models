@@ -42,6 +42,7 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 ## Contents
 
 - [Quick Compare](#quick-compare)
+- [🏆 Model Picks](#-model-picks)
 - [Use Cases](#use-cases)
 - [Quick Numbers](#quick-numbers)
 - [Example Model](#example-model)
