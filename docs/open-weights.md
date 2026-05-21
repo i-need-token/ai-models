@@ -1,3 +1,5 @@
+**English** | [中文](./zh/open-weights.md)
+
 # Open-Weight AI Models
 
 513 models in this catalog are open-weight — you can download the weights and run them on your own infrastructure. This page highlights the most capable and widely available open-weight models.

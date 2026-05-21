@@ -1,3 +1,5 @@
+**English** | [中文](./zh/reasoning-models.md)
+
 # AI Reasoning Models
 
 1,306 models in this catalog support reasoning (chain-of-thought / extended thinking). This page highlights the most capable and cost-effective reasoning models available.
