@@ -35,3 +35,12 @@ Add these topics to the repository (Settings → General → Topics):
 - zod
 - open-weights
 - context-window
+- tool-calling
+- function-calling
+- ai-agents
+- reasoning-models
+- vision-models
+- free-ai-models
+- ai-model-catalog
+- structured-data
+- npm-package
