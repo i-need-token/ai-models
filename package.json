@@ -50,6 +50,7 @@
     "open-weights",
     "openai",
     "prompt-caching",
+    "provider-comparison",
     "qwen",
     "reasoning-models",
     "structured-output",

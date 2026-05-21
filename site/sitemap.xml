@@ -121,6 +121,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/provider-comparison</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://i-need-token.github.io/ai-models/docs/providers</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
