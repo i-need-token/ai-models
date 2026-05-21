@@ -29,6 +29,17 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 | 🤖 **Machine-readable YAML**            | TypeScript types + Zod validation = programmatic access with confidence   |
 | 🔄 **Automated sync**                   | Scrape scripts pull fresh data from provider APIs                         |
 
+## Use Cases
+
+| Use Case                       | How This Catalog Helps                                                    |
+| ------------------------------ | ------------------------------------------------------------------------- |
+| 💰 **Find the cheapest model** | [Pricing comparison](docs/pricing-comparison.md) across 95 providers      |
+| 🔎 **Pick the right model**    | [Model comparison](docs/model-comparison.md) by capability, context, cost |
+| 🔌 **Build an API gateway**    | Structured pricing + modality data for routing decisions                  |
+| 📊 **Track the AI landscape**  | 2,712 models with release dates, deprecation status                       |
+| 🤖 **Power an AI tool**        | TypeScript types + Zod validation = type-safe access                      |
+| 🌍 **Find local/EU providers** | [Provider overview](docs/providers.md) with market segmentation           |
+
 ## Quick Numbers
 
 | Metric                      | Count |
