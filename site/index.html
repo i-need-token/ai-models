@@ -273,6 +273,11 @@
         background: rgba(63, 185, 80, 0.15);
         color: var(--green);
       }
+      .tag-new {
+        background: rgba(240, 136, 62, 0.15);
+        color: #f0883e;
+        font-weight: 700;
+      }
       .tag-ow {
         background: rgba(188, 140, 255, 0.15);
         color: var(--purple);
@@ -1113,6 +1118,10 @@
         const tbody = document.getElementById("tbody");
         const rows = filtered.slice(start, end).map((m, i) => {
           const tags = [];
+          const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+          const releaseDate = m.release_date ? new Date(m.release_date).getTime() : 0;
+          if (releaseDate && releaseDate > thirtyDaysAgo)
+            tags.push('<span class="tag tag-new">New</span>');
           if (m.pricing && (m.pricing.input === 0 || m.pricing.unit === "free"))
             tags.push('<span class="tag tag-free">Free</span>');
           if (m.open_weights) tags.push('<span class="tag tag-ow">Open</span>');
