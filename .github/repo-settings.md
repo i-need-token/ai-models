@@ -17,6 +17,7 @@ Add these topics to the repository (Settings → General → Topics):
 - large-language-model
 - ai-catalog
 - model-pricing
+- ai-pricing
 - openai
 - anthropic
 - gemini
@@ -32,3 +33,5 @@ Add these topics to the repository (Settings → General → Topics):
 - yaml
 - machine-readable
 - zod
+- open-weights
+- context-window
