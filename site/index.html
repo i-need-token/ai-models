@@ -500,6 +500,31 @@
         cursor: pointer;
         accent-color: var(--accent);
       }
+      .copy-code-section {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid var(--border);
+      }
+      .copy-code-label {
+        font-size: 12px;
+        color: var(--text-secondary);
+        margin-bottom: 6px;
+      }
+      .copy-code-btn {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 4px 12px;
+        cursor: pointer;
+        font-size: 12px;
+        color: var(--text);
+        margin-right: 6px;
+        transition: border-color 0.15s;
+      }
+      .copy-code-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
       .modal-close {
         position: absolute;
         top: 12px;
@@ -1151,11 +1176,99 @@
         if (m.deprecated) caps.push(tag("tag-reason", "⚠️ Deprecated"));
         document.getElementById("modalCaps").innerHTML = caps.join(" ");
 
+        // Copy as code section
+        const copySection = document.createElement("div");
+        copySection.className = "copy-code-section";
+        copySection.innerHTML =
+          '<div class="copy-code-label">Copy as code:</div>' +
+          "<button class=\"copy-code-btn\" onclick=\"copyAsCode('python', '" +
+          m.id +
+          "')\">Python</button>" +
+          "<button class=\"copy-code-btn\" onclick=\"copyAsCode('js', '" +
+          m.id +
+          "')\">JavaScript</button>" +
+          "<button class=\"copy-code-btn\" onclick=\"copyAsCode('curl', '" +
+          m.id +
+          "')\">curl</button>";
+        document.getElementById("modalCaps").appendChild(copySection);
+
         document.getElementById("modalOverlay").classList.add("open");
       }
 
       function closeModal() {
         document.getElementById("modalOverlay").classList.remove("open");
+      }
+
+      function copyAsCode(lang, modelId) {
+        const m = models.find((x) => x.id === modelId);
+        if (!m) return;
+        const ctx = (m.limit && m.limit.context) || "?";
+        const inpPrice =
+          m.pricing && m.pricing.unit === "free" ? "0" : (m.pricing && m.pricing.input) || "?";
+        const outPrice =
+          m.pricing && m.pricing.unit === "free" ? "0" : (m.pricing && m.pricing.output) || "?";
+        let code = "";
+        if (lang === "python") {
+          code =
+            "# " +
+            m.id +
+            " (" +
+            m.provider +
+            ")\n" +
+            "# Context: " +
+            ctx +
+            " tokens\n" +
+            "# Input: $" +
+            inpPrice +
+            "/1M, Output: $" +
+            outPrice +
+            "/1M\n" +
+            'model_id = "' +
+            m.id +
+            '"\n' +
+            "context = " +
+            ctx +
+            "\n" +
+            'pricing = {"input": ' +
+            inpPrice +
+            ', "output": ' +
+            outPrice +
+            "}";
+        } else if (lang === "js") {
+          code =
+            "// " +
+            m.id +
+            " (" +
+            m.provider +
+            ")\n" +
+            "const model = {\n" +
+            '  id: "' +
+            m.id +
+            '",\n' +
+            '  provider: "' +
+            m.provider +
+            '",\n' +
+            "  context: " +
+            ctx +
+            ",\n" +
+            "  pricing: { input: " +
+            inpPrice +
+            ", output: " +
+            outPrice +
+            " }\n" +
+            "};";
+        } else if (lang === "curl") {
+          code =
+            "# Fetch " +
+            m.id +
+            " metadata\n" +
+            "curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '.models[] | select(.id==\"" +
+            m.id +
+            "\")'";
+        }
+        navigator.clipboard
+          .writeText(code)
+          .then(() => showToast("Copied " + lang + " code for " + m.id));
       }
 
       function field(label, value) {
