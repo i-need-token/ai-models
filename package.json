@@ -103,7 +103,7 @@
   },
   "dependencies": {
     "linkedom": "^0.18.12",
-    "yaml": "^2.7.0",
+    "yaml": "^2.9.0",
     "zod": "^3.24.0"
   },
   "devDependencies": {
