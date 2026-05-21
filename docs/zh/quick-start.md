@@ -54,6 +54,29 @@
 
 ## 我想编程使用数据
 
+### npm 包
+
+```bash
+npm install ai-models
+```
+
+```typescript
+import catalog from "ai-models"; // 4,587 个模型 JSON
+import type { Model } from "ai-models"; // TypeScript 类型
+```
+
+### 下载数据文件
+
+```bash
+# JSON — 完整元数据（2.3 MB）
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+
+# CSV — 适合 Excel/Google Sheets 的表格（560 KB）
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
+```
+
+### 从源码
+
 ```bash
 # 安装依赖
 npm install

@@ -54,6 +54,29 @@ Find the right AI model for your needs in 30 seconds.
 
 ## I want to use the data programmatically
 
+### npm package
+
+```bash
+npm install ai-models
+```
+
+```typescript
+import catalog from "ai-models"; // 4,587 models as JSON
+import type { Model } from "ai-models"; // TypeScript types
+```
+
+### Download data files
+
+```bash
+# JSON — full metadata (2.3 MB)
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+
+# CSV — flat table for Excel/Google Sheets (560 KB)
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
+```
+
+### From source
+
 ```bash
 # Install dependencies
 npm install
