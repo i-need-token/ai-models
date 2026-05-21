@@ -1,0 +1,14 @@
+# Default reviewers for all changes
+* @liushuai
+
+# Provider data changes
+providers/ @liushuai
+
+# Type definitions
+types/ @liushuai
+
+# CI/CD workflows
+.github/workflows/ @liushuai
+
+# Documentation
+docs/ @liushuai
