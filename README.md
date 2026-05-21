@@ -539,14 +539,17 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Alternatives
 
-| Project                                                  | Scope                       | Data Source      | Format            | Auto-Update | Free    |
-| -------------------------------------------------------- | --------------------------- | ---------------- | ----------------- | ----------- | ------- |
-| **This catalog**                                         | 95 providers, 4,587+ models | First-party APIs | YAML + JSON + CSV | Weekly CI   | ✅      |
-| [OpenRouter models](https://openrouter.ai/models)        | OpenRouter only             | OpenRouter API   | Web UI            | ✅          | ✅      |
-| [Artificial Analysis](https://artificialanalysis.ai/)    | ~30 providers               | Mixed            | Web UI            | ✅          | Partial |
-| [Helicone models](https://helicone.ai/models)            | ~20 providers               | Mixed            | Web UI            | ✅          | Partial |
-| [BerriAI/litellm](https://github.com/BerriAI/litellm)    | 100+ providers              | Community        | Python config     | ✅          | ✅      |
-| [openai/models](https://github.com/openai/openai-python) | OpenAI only                 | OpenAI API       | Python SDK        | ✅          | ✅      |
+| Project                                                                   | Scope                       | Data Source      | Format            | Auto-Update | Free    |
+| ------------------------------------------------------------------------- | --------------------------- | ---------------- | ----------------- | ----------- | ------- |
+| **This catalog**                                                          | 95 providers, 4,587+ models | First-party APIs | YAML + JSON + CSV | Weekly CI   | ✅      |
+| [Artificial Analysis](https://artificialanalysis.ai/)                     | ~30 providers               | Mixed            | Web UI            | ✅          | Partial |
+| [LLM Price](https://llmprice.com/)                                        | ~25 providers               | Mixed            | Web UI            | ✅          | ✅      |
+| [OpenRouter models](https://openrouter.ai/models)                         | OpenRouter only             | OpenRouter API   | Web UI            | ✅          | ✅      |
+| [Helicone models](https://helicone.ai/models)                             | ~20 providers               | Mixed            | Web UI            | ✅          | Partial |
+| [BerriAI/litellm](https://github.com/BerriAI/litellm)                     | 100+ providers              | Community        | Python config     | ✅          | ✅      |
+| [dariubs/awesome-ai-models](https://github.com/dariubs/awesome-ai-models) | ~20 providers               | Manual           | Markdown list     | ❌          | ✅      |
+| [Vellum AI](https://www.vellum.ai/)                                       | ~15 providers               | Mixed            | Web UI + API      | ✅          | Partial |
+| [openai/models](https://github.com/openai/openai-python)                  | OpenAI only                 | OpenAI API       | Python SDK        | ✅          | ✅      |
 
 **Key differentiators of this catalog:**
 
