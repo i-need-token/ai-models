@@ -28,7 +28,7 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 > 💡 **Try it now** — fetch model data in one command:
 >
 > ```bash
-> curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{len(d["models"])} models across {len(set(m["provider"] for m in d["models"]))} providers')"
+> curl -sL https://github.com/i-need-token/ai-models/releases/latest/download/models.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{len(d["models"])} models across {len(set(m["provider"] for m in d["models"]))} providers')"
 > ```
 
 ## 🖥️ Interactive Catalog
@@ -357,7 +357,7 @@ Available in JSON and CSV formats from [GitHub Releases](https://github.com/i-ne
 
 ```bash
 # JSON — full metadata (2.3 MB)
-curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+curl -sLO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
 
 # CSV — flat table for Excel/Google Sheets (560 KB)
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
@@ -382,7 +382,7 @@ print(len(catalog['models']))  # 4587
 
 ```bash
 # Quick stats with jq
-curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '.models | length'
+curl -sL https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '.models | length'
 ```
 
 See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScript and Python.
