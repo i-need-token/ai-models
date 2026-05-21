@@ -32,7 +32,22 @@
     "type": "git",
     "url": "git+https://github.com/i-need-token/ai-models.git"
   },
+  "files": [
+    "dist/",
+    "types/",
+    "providers/",
+    "LICENSE"
+  ],
   "type": "module",
+  "main": "dist/models.json",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/models.json"
+    },
+    "./models.json": "./dist/models.json"
+  },
   "scripts": {
     "sync": "npx tsx scripts/sync.ts",
     "validate": "npx tsx scripts/validate.ts",
@@ -43,7 +58,9 @@
     "lint": "oxlint",
     "typecheck": "tsc --noEmit",
     "check": "npm run fmt:check && npm run lint && npm run typecheck",
-    "prepare": "husky"
+    "prepare": "husky",
+    "build": "tsc -p tsconfig.build.json && npx tsx scripts/compile.ts",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "linkedom": "^0.18.12",
