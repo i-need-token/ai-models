@@ -610,7 +610,16 @@ Want to contribute? Check out [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 - 📋 [Changelog](CHANGELOG.md) — what's new in each release
 - 🔒 [Security Policy](SECURITY.md) — reporting vulnerabilities
 
-## Star History
+## Project Timeline
+
+| Date    | Milestone                                                   |
+| ------- | ----------------------------------------------------------- |
+| 2026-05 | 🚀 Public launch — 4,587 models, 95 providers, 66 docs      |
+| 2026-05 | 📊 Interactive catalog live at GitHub Pages                 |
+| 2026-05 | 📦 npm package, CSV export, GitHub Action                   |
+| 2026-05 | 🌐 Bilingual docs — 33 EN + 33 ZH pages                     |
+| 2026-05 | 🤖 1,080 agentic models, 2,350 tool-calling models          |
+| Future  | 📈 More providers, REST API, historical pricing, benchmarks |
 
 [![Star History Chart](https://api.star-history.com/svg?repos=i-need-token/ai-models&type=Date)](https://star-history.com/#i-need-token/ai-models&Date)
 
