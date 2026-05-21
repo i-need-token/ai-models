@@ -514,6 +514,17 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 - **Bilingual docs** — 24 English + 24 Chinese documentation pages
 - **Open data** — all model data is open and programmatically accessible
 
+## Ecosystem & Integrations
+
+| Integration             | Description                 | Link                                                                                                     |
+| ----------------------- | --------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **npm package**         | Install models.json via npm | [`npm install ai-models`](https://www.npmjs.com/package/ai-models)                                       |
+| **jsDelivr CDN**        | Fetch models.json from CDN  | [cdn.jsdelivr.net/npm/ai-models](https://cdn.jsdelivr.net/npm/ai-models@latest/models.json)              |
+| **GitHub Action**       | Use in CI/CD workflows      | [action.yml](action.yml)                                                                                 |
+| **Hugging Face**        | Dataset on HF Hub           | [huggingface.co/datasets/i-need-token/ai-models](https://huggingface.co/datasets/i-need-token/ai-models) |
+| **CSV download**        | Import into Excel/Sheets    | [GitHub Releases](https://github.com/i-need-token/ai-models/releases)                                    |
+| **Interactive catalog** | Search, sort, filter models | [i-need-token.github.io/ai-models](https://i-need-token.github.io/ai-models/)                            |
+
 ## Roadmap
 
 - 🔜 **More providers** — continuously adding new AI model providers
