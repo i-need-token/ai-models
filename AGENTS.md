@@ -27,6 +27,7 @@ A structured catalog of AI model providers and their models, stored as YAML file
 - [`docs/cached-pricing.md`](docs/cached-pricing.md) — Models with prompt caching, 50-90% input cost savings ([中文](docs/zh/cached-pricing.md))
 - [`docs/data-schema.md`](docs/data-schema.md) — Data schema reference ([中文](docs/zh/data-schema.md))
 - [`docs/quick-start.md`](docs/quick-start.md) — Quick start guide ([中文](docs/zh/quick-start.md))
+- [`docs/model-selection.md`](docs/model-selection.md) — Model selection guide: free, best value, large context ([中文](docs/zh/model-selection.md))
 - [`docs/api.md`](docs/api.md) — API & programmatic access ([中文](docs/zh/api.md))
 - [`docs/code-examples.md`](docs/code-examples.md) — code examples in multiple languages ([中文](docs/zh/code-examples.md))
 - [`docs/faq.md`](docs/faq.md) — frequently asked questions ([中文](docs/zh/faq.md))
