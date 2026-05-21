@@ -80,6 +80,8 @@ resp, err := http.Get("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json
 | `models.csv`  | CSV  | ~560 KB | Excel、Google Sheets、数据分析 |
 | `stats.json`  | JSON | ~1 KB   | 目录统计摘要                   |
 
+也可在 [Hugging Face Datasets](https://huggingface.co/datasets/i-need-token/ai-models) 上获取，方便机器学习社区使用。
+
 ```bash
 # 下载 JSON（完整元数据）
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
