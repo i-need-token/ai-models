@@ -489,6 +489,26 @@ Contributions are welcome! Whether it's adding a new provider, fixing data, or i
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
+## Alternatives
+
+| Project                                                  | Scope                       | Data Source      | Format            | Auto-Update | Free    |
+| -------------------------------------------------------- | --------------------------- | ---------------- | ----------------- | ----------- | ------- |
+| **This catalog**                                         | 95 providers, 4,587+ models | First-party APIs | YAML + JSON + CSV | Weekly CI   | ✅      |
+| [OpenRouter models](https://openrouter.ai/models)        | OpenRouter only             | OpenRouter API   | Web UI            | ✅          | ✅      |
+| [Artificial Analysis](https://artificialanalysis.ai/)    | ~30 providers               | Mixed            | Web UI            | ✅          | Partial |
+| [Helicone models](https://helicone.ai/models)            | ~20 providers               | Mixed            | Web UI            | ✅          | Partial |
+| [BerriAI/litellm](https://github.com/BerriAI/litellm)    | 100+ providers              | Community        | Python config     | ✅          | ✅      |
+| [openai/models](https://github.com/openai/openai-python) | OpenAI only                 | OpenAI API       | Python SDK        | ✅          | ✅      |
+
+**Key differentiators of this catalog:**
+
+- **First-party data only** — scraped directly from provider APIs, not aggregated from third parties
+- **Machine-readable YAML** — structured data with Zod validation, not just a web UI
+- **Multiple access formats** — npm, CDN, CSV, GitHub Action, Hugging Face dataset
+- **Comprehensive metadata** — pricing, context windows, modalities, capabilities, snapshots
+- **Bilingual docs** — 24 English + 24 Chinese documentation pages
+- **Open data** — all model data is open and programmatically accessible
+
 ## Roadmap
 
 - 🔜 **More providers** — continuously adding new AI model providers
