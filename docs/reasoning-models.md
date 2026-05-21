@@ -95,6 +95,7 @@ Models that can reason about images — ideal for visual analysis:
 - [Structured Output](structured-output.md) — 829 JSON-mode models
 - [Free AI Models](free-models.md) — 81 free models, some with reasoning
 - [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching
+- [OpenAI Alternatives](openai-alternatives.md) — GPT-4 class alternatives with reasoning
 
 ---
 

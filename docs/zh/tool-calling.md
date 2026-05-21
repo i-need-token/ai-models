@@ -94,6 +94,7 @@
 - [结构化输出](structured-output.md) — 829 个 JSON 模式模型
 - [推理模型](reasoning-models.md) — 1,306 个支持推理的模型
 - [缓存定价](cached-pricing.md) — 1,374 个支持提示缓存的模型
+- [OpenAI 替代方案](openai-alternatives.md) — GPT-4/GPT-3.5 工具调用替代
 
 ---
 

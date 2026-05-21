@@ -117,6 +117,7 @@ Groq 为部分模型提供免费层：
 - [缓存定价](cached-pricing.md) — 1,374 个支持提示缓存的模型
 - [工具调用模型](tool-calling.md) — 2,350 个支持工具调用的模型
 - [推理模型](reasoning-models.md) — 1,306 个支持推理的模型
+- [OpenAI 替代方案](openai-alternatives.md) — 免费 GPT-4 替代
 
 ---
 

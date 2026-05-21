@@ -93,6 +93,7 @@ These providers offer OpenAI-compatible APIs — minimal code changes needed:
 - [Chat Models](chat-models.md) — 2,350 models with tool calling
 - [Agentic Models](agentic-models.md) — 1,080 models with tool calling + reasoning
 - [API Reference](api.md) — programmatic access to model data
+- [OpenAI Alternatives](openai-alternatives.md) — GPT-4/GPT-3.5 alternatives with pricing
 
 ---
 

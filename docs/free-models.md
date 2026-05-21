@@ -117,6 +117,7 @@ Groq offers free tier for some models with rate limits:
 - [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching
 - [Tool Calling Models](tool-calling.md) — 2,350 models with tool calling
 - [Reasoning Models](reasoning-models.md) — 1,306 models with reasoning
+- [OpenAI Alternatives](openai-alternatives.md) — free GPT-4 alternatives
 
 ---
 

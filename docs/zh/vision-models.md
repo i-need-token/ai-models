@@ -93,6 +93,7 @@
 - [视频模型](video-models.md) — 167 个视频输入/输出模型
 - [模态矩阵](modality-matrix.md) — 所有模态一览
 - [免费 AI 模型](free-models.md) — 81 个免费模型，部分支持视觉
+- [OpenAI 替代方案](openai-alternatives.md) — GPT-4 级别视觉替代
 
 ---
 

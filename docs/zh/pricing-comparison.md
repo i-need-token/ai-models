@@ -127,6 +127,7 @@
 - [免费 AI 模型](free-models.md) — 81 个免费模型
 - [上下文窗口对比](context-windows.md) — 最大上下文窗口
 - [提供商概览](providers.md) — 95 个提供商
+- [OpenAI 替代方案](openai-alternatives.md) — 最便宜的 GPT-4 替代
 
 ---
 

@@ -95,6 +95,7 @@
 - [结构化输出](structured-output.md) — 829 个 JSON 模式模型
 - [免费 AI 模型](free-models.md) — 81 个免费模型，部分支持推理
 - [缓存定价](cached-pricing.md) — 1,374 个支持提示缓存的模型
+- [OpenAI 替代方案](openai-alternatives.md) — GPT-4 级别推理替代
 
 ---
 

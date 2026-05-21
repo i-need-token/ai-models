@@ -93,6 +93,7 @@
 - [聊天模型](chat-models.md) — 2,350 个支持工具调用的聊天模型
 - [智能体模型](agentic-models.md) — 1,080 个具备工具调用 + 推理能力的模型
 - [API 参考](api.md) — 编程访问模型数据
+- [OpenAI 替代方案](openai-alternatives.md) — GPT-4/GPT-3.5 定价替代
 
 ---
 

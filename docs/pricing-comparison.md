@@ -127,6 +127,7 @@ The absolute cheapest per-token models across all providers.
 - [Free AI Models](free-models.md) — 81 free models
 - [Context Window Comparison](context-windows.md) — largest context windows
 - [Provider Overview](providers.md) — all 95 providers
+- [OpenAI Alternatives](openai-alternatives.md) — cheapest GPT-4 alternatives
 
 ---
 
