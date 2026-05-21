@@ -724,6 +724,14 @@
         <button class="filter-btn" data-filter="image_output">🖼️ Image Gen</button>
         <button class="filter-btn" data-filter="audio_input">🎤 Audio In</button>
         <button class="filter-btn" data-filter="video_input">📹 Video In</button>
+        <button class="filter-btn" data-filter="deprecated">⚠️ Deprecated</button>
+        <button
+          class="filter-btn"
+          data-filter="trending"
+          style="background: rgba(240, 136, 62, 0.1); border-color: rgba(240, 136, 62, 0.3)"
+        >
+          🔥 Trending
+        </button>
       </div>
       <div class="result-count" id="resultCount"></div>
       <button class="export-btn" id="compareBtn" onclick="showCompare()" style="display: none">
@@ -1106,6 +1114,14 @@
             if (f === "reasoning" && !m.reasoning) return false;
             if (f === "tool_call" && !m.tool_call) return false;
             if (f === "structured_output" && !m.structured_output) return false;
+            if (f === "deprecated" && !m.deprecated) return false;
+            if (f === "trending")
+              return (
+                m.tool_call &&
+                m.reasoning &&
+                m.release_date &&
+                new Date(m.release_date).getTime() > Date.now() - 90 * 24 * 60 * 60 * 1000
+              );
           }
           return true;
         });
