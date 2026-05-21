@@ -16,6 +16,7 @@ A structured catalog of AI model providers and their models, stored as YAML file
 - [`docs/reasoning-models.md`](docs/reasoning-models.md) — 1,306 reasoning models ([中文](docs/zh/reasoning-models.md))
 - [`docs/tool-calling.md`](docs/tool-calling.md) — 2,350 tool-calling models ([中文](docs/zh/tool-calling.md))
 - [`docs/vision-models.md`](docs/vision-models.md) — 1,487 vision models ([中文](docs/zh/vision-models.md))
+- [`docs/video-models.md`](docs/video-models.md) — 167 video models ([中文](docs/zh/video-models.md))
 - [`docs/image-generation.md`](docs/image-generation.md) — 28 image generation models ([中文](docs/zh/image-generation.md))
 - [`docs/structured-output.md`](docs/structured-output.md) — 829 structured output models ([中文](docs/zh/structured-output.md))
 - [`docs/modality-matrix.md`](docs/modality-matrix.md) — Model capabilities matrix ([中文](docs/zh/modality-matrix.md))
