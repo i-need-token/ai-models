@@ -30,6 +30,17 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 | 🤖 **Machine-readable YAML**            | TypeScript types + Zod validation = programmatic access with confidence   |
 | 🔄 **Automated sync**                   | Scrape scripts pull fresh data from provider APIs                         |
 
+## Contents
+
+- [Use Cases](#use-cases)
+- [Quick Numbers](#quick-numbers)
+- [Example Model](#example-model)
+- [Programmatic Usage](#programmatic-usage)
+- [Documentation](#documentation)
+- [Provider Showcase](#provider-showcase)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Use Cases
 
 | Use Case                       | How This Catalog Helps                                                    |
@@ -277,6 +288,16 @@ Contributions are welcome! Whether it's adding a new provider, fixing data, or i
 5. Submit a pull request
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+## Who's Using This?
+
+Built something with this catalog? [Open a PR](https://github.com/i-need-token/ai-models/edit/main/README.md) to add your project!
+
+<!-- Add your project below -->
+
+| Project             | Description               |
+| ------------------- | ------------------------- |
+| _Your project here_ | _How you use the catalog_ |
 
 ## License
 

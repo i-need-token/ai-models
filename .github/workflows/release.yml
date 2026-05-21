@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate
+        run: npx tsx scripts/validate.ts
+
+      - name: Compile models.json
+        run: npx tsx scripts/compile.ts
+
+      - name: Compute stats
+        run: npx tsx scripts/stats.ts json > stats.json
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/models.json
+            stats.json
+          body: |
+            ## AI Models Catalog Release
+
+            **Compiled data file:** `models.json` — all 4,587 models from 95 providers in a single JSON file.
+
+            **Usage:**
+            ```bash
+            # Download the compiled JSON
+            curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+
+            # Use in JavaScript
+            const catalog = require("./models.json");
+            console.log(catalog.stats);
+            ```
+          generate-release-notes: true
