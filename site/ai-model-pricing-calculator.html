@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Model Pricing Calculator — LLM Cost Calculator (2025) | AI Models Catalog</title>
+    <meta
+      name="description"
+      content="Calculate your AI/LLM costs. Compare pricing for GPT-4o, Claude, Gemini, DeepSeek and 4,587+ models. Monthly cost estimator with token usage calculator."
+    />
+    <meta
+      name="keywords"
+      content="AI pricing calculator, LLM cost calculator, AI model pricing, GPT-4 cost, Claude pricing, Gemini pricing, token cost calculator, API cost estimator"
+    />
+    <link
+      rel="canonical"
+      href="https://i-need-token.github.io/ai-models/ai-model-pricing-calculator.html"
+    />
+    <meta property="og:title" content="AI Model Pricing Calculator — LLM Cost Calculator (2025)" />
+    <meta
+      property="og:description"
+      content="Calculate your AI/LLM costs. Compare pricing for 4,587+ models."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://i-need-token.github.io/ai-models/ai-model-pricing-calculator.html"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Model Pricing Calculator — LLM Cost Calculator (2025)" />
+    <meta
+      name="twitter:description"
+      content="Calculate your AI/LLM costs. Compare pricing for 4,587+ models."
+    />
+    <style>
+      :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --border: #30363d;
+        --text: #e6edf3;
+        --text2: #8b949e;
+        --accent: #58a6ff;
+        --green: #3fb950;
+        --orange: #f0883e;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          -apple-system,
+          BlinkMacSystemFont,
+          Segoe UI,
+          Helvetica,
+          Arial,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+        padding: 20px;
+        max-width: 960px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+      h1 {
+        font-size: 2rem;
+        margin-top: 40px;
+      }
+      h2 {
+        font-size: 1.4rem;
+        color: var(--accent);
+        margin-top: 40px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 8px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 14px;
+      }
+      th {
+        background: var(--surface);
+        padding: 8px 12px;
+        text-align: left;
+        border-bottom: 2px solid var(--border);
+        color: var(--text2);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      td {
+        padding: 6px 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      tr:hover td {
+        background: var(--surface);
+      }
+      .cta {
+        display: inline-block;
+        background: linear-gradient(135deg, #f0883e, #db6d28);
+        color: #fff;
+        padding: 10px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        margin: 16px 4px;
+      }
+      .cta:hover {
+        opacity: 0.9;
+      }
+      .stat {
+        display: inline-block;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 20px;
+        margin: 4px;
+        text-align: center;
+      }
+      .stat b {
+        display: block;
+        font-size: 1.5rem;
+        color: var(--accent);
+      }
+      .stat small {
+        color: var(--text2);
+      }
+      .calc-box {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 20px 0;
+      }
+      .calc-box label {
+        display: block;
+        color: var(--text2);
+        font-size: 13px;
+        margin-bottom: 4px;
+        margin-top: 12px;
+      }
+      .calc-box select,
+      .calc-box input {
+        width: 100%;
+        padding: 8px 12px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        color: var(--text);
+        font-size: 14px;
+      }
+      .calc-box select:focus,
+      .calc-box input:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
+      .result {
+        background: rgba(63, 185, 80, 0.08);
+        border: 1px solid rgba(63, 185, 80, 0.2);
+        border-radius: 8px;
+        padding: 16px;
+        margin-top: 16px;
+        text-align: center;
+      }
+      .result .cost {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--green);
+      }
+      .compare-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+        margin: 16px 0;
+      }
+      .compare-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+      }
+      .compare-card .name {
+        font-weight: 600;
+      }
+      .compare-card .price {
+        color: var(--green);
+        font-size: 1.2rem;
+        font-weight: 700;
+      }
+      .compare-card .detail {
+        color: var(--text2);
+        font-size: 12px;
+      }
+      footer {
+        margin-top: 60px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+        color: var(--text2);
+        font-size: 13px;
+      }
+      footer a {
+        color: var(--accent);
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "AI Model Pricing Calculator — LLM Cost Calculator (2025)",
+        "description": "Calculate your AI/LLM costs. Compare pricing for GPT-4o, Claude, Gemini, DeepSeek and 4,587+ models.",
+        "author": { "@type": "Organization", "name": "AI Models Catalog" },
+        "datePublished": "2025-05-21",
+        "dateModified": "2025-05-21"
+      }
+    </script>
+  </head>
+  <body>
+    <h1>💰 AI Model Pricing Calculator (2025)</h1>
+    <p>
+      Calculate your monthly AI costs. Compare pricing for <b>4,587+ models</b> across
+      <b>95 providers</b>. Real-time cost estimation based on your token usage.
+    </p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0">
+      <div class="stat"><b>4,587+</b><small>Models</small></div>
+      <div class="stat"><b>95</b><small>Providers</small></div>
+      <div class="stat"><b>81</b><small>Free Models</small></div>
+      <div class="stat"><b>1,374</b><small>With Cache Pricing</small></div>
+    </div>
+
+    <a class="cta" href="https://i-need-token.github.io/ai-models/">🔍 Interactive Catalog</a>
+    <a
+      class="cta"
+      href="https://github.com/i-need-token/ai-models"
+      style="background: linear-gradient(135deg, #58a6ff, #388bfd)"
+      >⭐ Star on GitHub</a
+    >
+
+    <h2>🧮 Cost Calculator</h2>
+    <div class="calc-box">
+      <label for="model">Select Model</label>
+      <select id="model" onchange="calculate()">
+        <option value="">-- Choose a model --</option>
+        <option value="2.5,10" data-name="gpt-4o" data-ctx="128000">
+          gpt-4o (openai) — $2.5/$10 per 1M tokens
+        </option>
+        <option value="0.15,0.6" data-name="gpt-4o-mini" data-ctx="128000">
+          gpt-4o-mini (openai) — $0.15/$0.6 per 1M tokens
+        </option>
+        <option value="2,8" data-name="gpt-4.1" data-ctx="1047576">
+          gpt-4.1 (openai) — $2/$8 per 1M tokens
+        </option>
+        <option value="0.4,1.6" data-name="gpt-4.1-mini" data-ctx="1047576">
+          gpt-4.1-mini (openai) — $0.4/$1.6 per 1M tokens
+        </option>
+        <option value="10,40" data-name="o3" data-ctx="200000">
+          o3 (openai) — $10/$40 per 1M tokens
+        </option>
+        <option value="1.1,4.4" data-name="o4-mini" data-ctx="200000">
+          o4-mini (openai) — $1.1/$4.4 per 1M tokens
+        </option>
+        <option value="1.25,10" data-name="gemini-2.5-pro" data-ctx="1000000">
+          gemini-2.5-pro (google) — $1.25/$10 per 1M tokens
+        </option>
+        <option value="0.3,2.5" data-name="gemini-2.5-flash" data-ctx="1000000">
+          gemini-2.5-flash (google) — $0.3/$2.5 per 1M tokens
+        </option>
+        <option value="0.1,0.4" data-name="gemini-2.0-flash" data-ctx="1048576">
+          gemini-2.0-flash (google) — $0.1/$0.4 per 1M tokens
+        </option>
+        <option value="0.14,0.28" data-name="deepseek-chat" data-ctx="1000000">
+          deepseek-chat (deepseek) — $0.14/$0.28 per 1M tokens
+        </option>
+        <option value="1.35,5.4" data-name="deepseek-r1" data-ctx="65536">
+          deepseek-r1 (deepseek) — $1.35/$5.4 per 1M tokens
+        </option>
+        <option value="0.25,0.87" data-name="llama-4-maverick" data-ctx="1048576">
+          llama-4-maverick (meta) — $0.25/$0.87 per 1M tokens
+        </option>
+        <option value="0.25,0.7" data-name="llama-4-scout" data-ctx="1048576">
+          llama-4-scout (meta) — $0.25/$0.7 per 1M tokens
+        </option>
+        <option value="2,8" data-name="qwen3-235b-a22b" data-ctx="0">
+          qwen3-235b-a22b (alibaba) — $2/$8 per 1M tokens
+        </option>
+      </select>
+
+      <label for="inputTokens">Monthly Input Tokens (millions)</label>
+      <input type="number" id="inputTokens" value="1" min="0" step="0.1" oninput="calculate()" />
+
+      <label for="outputTokens">Monthly Output Tokens (millions)</label>
+      <input type="number" id="outputTokens" value="0.5" min="0" step="0.1" oninput="calculate()" />
+
+      <div class="result" id="result" style="display: none">
+        <div>Monthly Cost</div>
+        <div class="cost" id="cost">$0.00</div>
+        <div id="breakdown" style="color: var(--text2); font-size: 13px; margin-top: 8px"></div>
+      </div>
+    </div>
+
+    <script>
+      function calculate() {
+        var sel = document.getElementById("model");
+        var opt = sel.options[sel.selectedIndex];
+        if (!opt.value) {
+          document.getElementById("result").style.display = "none";
+          return;
+        }
+        var parts = opt.value.split(",");
+        var inputPrice = parseFloat(parts[0]);
+        var outputPrice = parseFloat(parts[1]);
+        var inputM = parseFloat(document.getElementById("inputTokens").value) || 0;
+        var outputM = parseFloat(document.getElementById("outputTokens").value) || 0;
+        var inputCost = inputM * inputPrice;
+        var outputCost = outputM * outputPrice;
+        var total = inputCost + outputCost;
+        document.getElementById("cost").textContent = "$" + total.toFixed(2);
+        document.getElementById("breakdown").textContent =
+          "Input: $" + inputCost.toFixed(2) + " + Output: $" + outputCost.toFixed(2);
+        document.getElementById("result").style.display = "block";
+      }
+    </script>
+
+    <h2>📊 Quick Cost Comparison</h2>
+    <p>Monthly cost for 1M input + 0.5M output tokens across popular models.</p>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <div class="name">gpt-4o</div>
+        <div class="price">$7.50/mo</div>
+        <div class="detail">$2.5 in / $10 out per 1M</div>
+      </div>
+      <div class="compare-card">
+        <div class="name">gpt-4o-mini</div>
+        <div class="price">$0.45/mo</div>
+        <div class="detail">$0.15 in / $0.6 out per 1M</div>
+      </div>
+      <div class="compare-card">
+        <div class="name">gpt-4.1</div>
+        <div class="price">$6.00/mo</div>
+        <div class="detail">$2 in / $8 out per 1M</div>
+      </div>
+      <div class="compare-card">
+        <div class="name">gpt-4.1-mini</div>
+        <div class="price">$1.20/mo</div>
+        <div class="detail">$0.4 in / $1.6 out per 1M</div>
+      </div>
+      <div class="compare-card">
+        <div class="name">o3</div>
+        <div class="price">$30.00/mo</div>
+        <div class="detail">$10 in / $40 out per 1M</div>
+      </div>
+      <div class="compare-card">
+        <div class="name">o4-mini</div>
+        <div class="price">$3.30/mo</div>
+        <div class="detail">$1.1 in / $4.4 out per 1M</div>
+      </div>
+      <div class="compare-card">
+        <div class="name">gemini-2.5-pro</div>
+        <div class="price">$6.25/mo</div>
+        <div class="detail">$1.25 in / $10 out per 1M</div>
+      </div>
+      <div class="compare-card">
+        <div class="name">gemini-2.5-flash</div>
+        <div class="price">$1.55/mo</div>
+        <div class="detail">$0.3 in / $2.5 out per 1M</div>
+      </div>
+      <div class="compare-card">
+        <div class="name">gemini-2.0-flash</div>
+        <div class="price">$0.30/mo</div>
+        <div class="detail">$0.1 in / $0.4 out per 1M</div>
+      </div>
+      <div class="compare-card">
+        <div class="name">deepseek-chat</div>
+        <div class="price">$0.28/mo</div>
+        <div class="detail">$0.14 in / $0.28 out per 1M</div>
+      </div>
+      <div class="compare-card">
+        <div class="name">deepseek-r1</div>
+        <div class="price">$4.05/mo</div>
+        <div class="detail">$1.35 in / $5.4 out per 1M</div>
+      </div>
+      <div class="compare-card">
+        <div class="name">llama-4-maverick</div>
+        <div class="price">$0.69/mo</div>
+        <div class="detail">$0.25 in / $0.87 out per 1M</div>
+      </div>
+    </div>
+
+    <h2>💵 Cheapest Models Overall</h2>
+    <table>
+      <tr>
+        <th>Model</th>
+        <th>Provider</th>
+        <th>Input $/1M</th>
+        <th>Output $/1M</th>
+        <th>Context</th>
+      </tr>
+      <tr>
+        <td><b>openai--gpt-image-1-mini</b></td>
+        <td>aimlapi</td>
+        <td>$0.007</td>
+        <td>$0.676</td>
+        <td>?</td>
+      </tr>
+      <tr>
+        <td><b>mistralai--Mistral-Nemo-Instruct-2407</b></td>
+        <td>klusterai</td>
+        <td>$0.008</td>
+        <td>$0.001</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-0.8b</b></td>
+        <td>deepinfra</td>
+        <td>$0.01</td>
+        <td>$0.05</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>ling-2.6-flash</b></td>
+        <td>inclusionai</td>
+        <td>$0.01</td>
+        <td>$0.03</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>bdc-coder</b></td>
+        <td>inferencenet</td>
+        <td>$0.01</td>
+        <td>$0.01</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>openai--gpt-image-1-model</b></td>
+        <td>aimlapi</td>
+        <td>$0.012</td>
+        <td>$0.175</td>
+        <td>?</td>
+      </tr>
+      <tr>
+        <td><b>klusterai--Meta-Llama-3.1-8B-Instruct-Turbo</b></td>
+        <td>klusterai</td>
+        <td>$0.015</td>
+        <td>$0.02</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>granite-4.0-h-micro</b></td>
+        <td>cloudflare</td>
+        <td>$0.017</td>
+        <td>$0.112</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>meta-llama-3.1-8b-instruct-turbo</b></td>
+        <td>deepinfra</td>
+        <td>$0.02</td>
+        <td>$0.03</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>meta-llama-3.1-8b-instruct</b></td>
+        <td>deepinfra</td>
+        <td>$0.02</td>
+        <td>$0.05</td>
+        <td>131K</td>
+      </tr>
+    </table>
+
+    <h2>🔧 Cheapest with Tool Calling</h2>
+    <table>
+      <tr>
+        <th>Model</th>
+        <th>Provider</th>
+        <th>Input $/1M</th>
+        <th>Output $/1M</th>
+        <th>Context</th>
+      </tr>
+      <tr>
+        <td><b>ling-2.6-flash</b></td>
+        <td>inclusionai</td>
+        <td>$0.01</td>
+        <td>$0.03</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>bdc-coder</b></td>
+        <td>inferencenet</td>
+        <td>$0.01</td>
+        <td>$0.01</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>klusterai--Meta-Llama-3.1-8B-Instruct-Turbo</b></td>
+        <td>klusterai</td>
+        <td>$0.015</td>
+        <td>$0.02</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>granite-4.0-h-micro</b></td>
+        <td>cloudflare</td>
+        <td>$0.017</td>
+        <td>$0.112</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>llama-3.1-8b-instruct--fp-16</b></td>
+        <td>inferencenet</td>
+        <td>$0.02</td>
+        <td>$0.03</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>schematron-3b</b></td>
+        <td>inferencenet</td>
+        <td>$0.02</td>
+        <td>$0.05</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>schematron-v3</b></td>
+        <td>inferencenet</td>
+        <td>$0.02</td>
+        <td>$0.05</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>gpt-oss-20b</b></td>
+        <td>inferencenet</td>
+        <td>$0.03</td>
+        <td>$0.15</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>schematron-v2-turbo</b></td>
+        <td>inferencenet</td>
+        <td>$0.03</td>
+        <td>$0.15</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>openai--gpt-oss-20b</b></td>
+        <td>neuralwatt</td>
+        <td>$0.03</td>
+        <td>$0.16</td>
+        <td>?</td>
+      </tr>
+    </table>
+
+    <h2>🧠 Cheapest with Reasoning</h2>
+    <table>
+      <tr>
+        <th>Model</th>
+        <th>Provider</th>
+        <th>Input $/1M</th>
+        <th>Output $/1M</th>
+        <th>Context</th>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-0.8b</b></td>
+        <td>deepinfra</td>
+        <td>$0.01</td>
+        <td>$0.05</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-2b</b></td>
+        <td>deepinfra</td>
+        <td>$0.02</td>
+        <td>$0.1</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>gpt-oss-20b</b></td>
+        <td>deepinfra</td>
+        <td>$0.03</td>
+        <td>$0.14</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-4b</b></td>
+        <td>deepinfra</td>
+        <td>$0.03</td>
+        <td>$0.15</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>openai--gpt-oss-20b</b></td>
+        <td>neuralwatt</td>
+        <td>$0.03</td>
+        <td>$0.16</td>
+        <td>?</td>
+      </tr>
+      <tr>
+        <td><b>qwen--qwen3-4b-fp8</b></td>
+        <td>novitaai</td>
+        <td>$0.03</td>
+        <td>$0.03</td>
+        <td>128K</td>
+      </tr>
+      <tr>
+        <td><b>gpt-oss-120b</b></td>
+        <td>deepinfra</td>
+        <td>$0.039</td>
+        <td>$0.19</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>nvidia-nemotron-nano-9b-v2</b></td>
+        <td>deepinfra</td>
+        <td>$0.04</td>
+        <td>$0.16</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>openai--gpt-oss-20b</b></td>
+        <td>novitaai</td>
+        <td>$0.04</td>
+        <td>$0.15</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>nemotron-3-nano-30b-a3b</b></td>
+        <td>deepinfra</td>
+        <td>$0.05</td>
+        <td>$0.2</td>
+        <td>262K</td>
+      </tr>
+    </table>
+
+    <h2>👁️ Cheapest with Vision</h2>
+    <table>
+      <tr>
+        <th>Model</th>
+        <th>Provider</th>
+        <th>Input $/1M</th>
+        <th>Output $/1M</th>
+        <th>Context</th>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-0.8b</b></td>
+        <td>deepinfra</td>
+        <td>$0.01</td>
+        <td>$0.05</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-2b</b></td>
+        <td>deepinfra</td>
+        <td>$0.02</td>
+        <td>$0.1</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>paddlepaddle--paddleocr-vl</b></td>
+        <td>novitaai</td>
+        <td>$0.02</td>
+        <td>$0.02</td>
+        <td>16K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-4b</b></td>
+        <td>deepinfra</td>
+        <td>$0.03</td>
+        <td>$0.15</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>deepseek--deepseek-ocr-2</b></td>
+        <td>novitaai</td>
+        <td>$0.03</td>
+        <td>$0.03</td>
+        <td>8K</td>
+      </tr>
+      <tr>
+        <td><b>deepseek--deepseek-ocr</b></td>
+        <td>novitaai</td>
+        <td>$0.03</td>
+        <td>$0.03</td>
+        <td>8K</td>
+      </tr>
+      <tr>
+        <td><b>reka-edge-2</b></td>
+        <td>reka</td>
+        <td>$0.03</td>
+        <td>$0.1</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>zai-org--autoglm-phone-9b-multilingual</b></td>
+        <td>novitaai</td>
+        <td>$0.035</td>
+        <td>$0.138</td>
+        <td>65K</td>
+      </tr>
+      <tr>
+        <td><b>gemini-1.5-flash-8b</b></td>
+        <td>deepinfra</td>
+        <td>$0.0375</td>
+        <td>$0.15</td>
+        <td>1M</td>
+      </tr>
+      <tr>
+        <td><b>google-gemma-3-4b</b></td>
+        <td>amazon-bedrock</td>
+        <td>$0.04</td>
+        <td>$0.08</td>
+        <td>131K</td>
+      </tr>
+    </table>
+
+    <h2>💡 How to Reduce Your AI Costs</h2>
+    <ul>
+      <li>
+        <b>Use smaller models for simple tasks</b> — GPT-4o Mini is 60x cheaper than GPT-4o for
+        basic tasks
+      </li>
+      <li>
+        <b>Enable prompt caching</b> — 1,374 models offer cache pricing (typically 50% off cached
+        input tokens)
+      </li>
+      <li>
+        <b>Choose open-weight models</b> — 527 models you can self-host for fixed infrastructure
+        costs
+      </li>
+      <li>
+        <b>Try free models for prototyping</b> — 81 models at zero cost before committing to paid
+        APIs
+      </li>
+      <li>
+        <b>Compare across providers</b> — same model (e.g., Llama 4) may cost differently on Groq
+        vs. Together vs. Fireworks
+      </li>
+      <li>
+        <b>Use the interactive catalog</b> —
+        <a href="https://i-need-token.github.io/ai-models/"
+          >filter by capability and sort by price</a
+        >
+      </li>
+    </ul>
+
+    <h2>📊 Methodology</h2>
+    <p>
+      All pricing data is sourced from <b>first-party provider APIs</b>. Prices are per million
+      tokens (1M = 1,000,000 tokens). Aggregator providers are excluded from ranking tables to avoid
+      duplicate models. Cache pricing is shown separately where available.
+    </p>
+
+    <h2>🔗 More Resources</h2>
+    <ul>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/">Interactive Catalog</a> — search,
+        filter, compare all models
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/llm-pricing.html"
+          >LLM Pricing Comparison</a
+        >
+        — detailed pricing tables
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/cheapest-ai-models.html"
+          >Cheapest AI Models</a
+        >
+        — lowest price LLMs
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/free-ai-models.html">Free AI Models</a> —
+        81 models at zero cost
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/best-ai-models.html">Best AI Models</a> —
+        curated by use case
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/best-ai-models-for-coding.html"
+          >Best AI Models for Coding</a
+        >
+        — code-focused comparison
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/best-ai-models-for-agents.html"
+          >Best AI Models for Agents</a
+        >
+        — agentic model comparison
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/tool-calling-models-comparison.html"
+          >Tool Calling Models Comparison</a
+        >
+        — function calling LLMs
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/reasoning-models-comparison.html"
+          >Reasoning Models Comparison</a
+        >
+        — o1, R1, Claude, Gemini
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/openai-alternatives.html"
+          >OpenAI Alternatives</a
+        >
+        — 95 providers compared
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/ai-models-by-provider.html"
+          >AI Models by Provider</a
+        >
+        — browse by provider
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/context-window-comparison.html"
+          >Context Window Comparison</a
+        >
+        — largest context LLMs
+      </li>
+      <li>
+        <a href="https://github.com/i-need-token/ai-models">GitHub Repository</a> — star, fork,
+        contribute
+      </li>
+    </ul>
+
+    <footer>
+      <p>
+        Data from <a href="https://github.com/i-need-token/ai-models">AI Models Catalog</a> — 4,587
+        models, 95 providers, first-party data.
+      </p>
+      <p>
+        Last updated: 2025-05-21.
+        <a href="https://github.com/i-need-token/ai-models">View on GitHub</a>
+      </p>
+    </footer>
+  </body>
+</html>
