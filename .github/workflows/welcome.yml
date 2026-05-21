@@ -1,0 +1,57 @@
+name: Welcome New Contributor
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Welcome first-time contributors
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const isIssue = context.eventName === 'issues';
+            const author = isIssue
+              ? context.payload.issue.user.login
+              : context.payload.pull_request.user.login;
+
+            // Check if this is a first-time contributor
+            const { data: issues } = await github.rest.search.issuesAndPullRequests({
+              q: `author:${author} repo:${context.repo.owner}/${context.repo.repo} is:issue`,
+              per_page: 1,
+            });
+            const { data: prs } = await github.rest.search.issuesAndPullRequests({
+              q: `author:${author} repo:${context.repo.owner}/${context.repo.repo} is:pr`,
+              per_page: 1,
+            });
+
+            const totalContributions = issues.total_count + prs.total_count;
+            if (totalContributions > 1) return;
+
+            const message = isIssue
+              ? `👋 Welcome @${author}! Thanks for opening your first issue. We'll take a look soon.\n\n💡 Tip: Check out our [contributing guide](https://github.com/i-need-token/ai-models/blob/main/CONTRIBUTING.md) for ways to get involved.`
+              : `👋 Welcome @${author}! Thanks for your first pull request! We appreciate your contribution.\n\n🔍 A maintainer will review your PR shortly. In the meantime, make sure the CI checks pass.`;
+
+            if (isIssue) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: message,
+              });
+            } else {
+              await github.rest.pulls.createReviewComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                body: message,
+              });
+            }
