@@ -401,3 +401,8 @@ npx tsx scripts/export-csv.ts
 - Cheapest AI Models: site/cheapest-ai-models.html
 - Tool Calling Models Comparison: site/tool-calling-models-comparison.html
 - AI Model Pricing Calculator: site/ai-model-pricing-calculator.html
+- Best AI Models for Image Generation: site/best-ai-models-for-image-generation.html
+- Best AI Models for Vision: site/best-ai-models-for-vision.html
+- Structured Output Models Comparison: site/structured-output-models-comparison.html
+- Open Source AI Models: site/open-source-ai-models.html
+- Multimodal AI Models: site/multimodal-ai-models.html

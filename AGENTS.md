@@ -62,6 +62,8 @@ Curated standalone pages targeting high-volume search queries. All cross-linked 
 - [`site/best-ai-models-for-image-generation.html`](site/best-ai-models-for-image-generation.html) — Best AI Models for Image Generation (DALL·E, Imagen, GPT-5 Image, Midjourney, cheapest, free, open-weight)
 - [`site/best-ai-models-for-vision.html`](site/best-ai-models-for-vision.html) — Best AI Models for Vision (GPT-4o, Claude, Gemini, 1,487 vision models, cheapest, free, vision+tool_call, vision+large context)
 - [`site/structured-output-models-comparison.html`](site/structured-output-models-comparison.html) — Structured Output Models Comparison (829 structured output models, JSON mode, SO+tool_call, SO+reasoning, cheapest, free)
+- [`site/open-source-ai-models.html`](site/open-source-ai-models.html) — Open Source AI Models (527 open-weight models, free, tool calling, reasoning, vision, large context)
+- [`site/multimodal-ai-models.html`](site/multimodal-ai-models.html) — Multimodal AI Models (1,548 vision/audio/image models, modality breakdown, flagship, free)
 
 ## Key Design Decisions
 
