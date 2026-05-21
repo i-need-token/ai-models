@@ -490,33 +490,42 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 
 **中文文档：**
 
-| 文档                                            | 描述                                             |
-| ----------------------------------------------- | ------------------------------------------------ |
-| [工具调用模型](docs/zh/tool-calling.md)         | 2,350 个工具调用模型 — 最便宜、最大上下文、免费  |
-| [视觉模型](docs/zh/vision-models.md)            | 1,487 个视觉模型 — 最便宜、最大上下文、开源权重  |
-| [快速入门](docs/zh/quick-start.md)              | 30 秒内找到适合的模型                            |
-| [图像生成](docs/zh/image-generation.md)         | 28 个图像生成模型 — DALL·E、Imagen、GPT-5 Image  |
-| [音频模型](docs/zh/audio-models.md)             | 118 个音频输入 + 34 个音频输出模型               |
-| [视频模型](docs/zh/video-models.md)             | 167 个视频输入 + 4 个视频输出模型                |
-| [API 与编程访问](docs/zh/api.md)                | 下载 models.json，JS/Python 代码示例             |
-| [代码示例](docs/zh/code-examples.md)            | TypeScript、Python、Go、Rust、jq 实用示例        |
-| [常见问题](docs/zh/faq.md)                      | 关于目录、数据和贡献的常见问题                   |
-| [结构化输出](docs/zh/structured-output.md)      | 829 个 JSON 模式模型 — 最便宜、免费、带工具调用  |
-| [模型对比](docs/zh/model-comparison.md)         | 旗舰、高性价比、免费和开源模型对比               |
-| [定价对比](docs/zh/pricing-comparison.md)       | 各提供商和平台定价并排对比                       |
-| [缓存定价](docs/zh/cached-pricing.md)           | 1,374 个支持提示缓存的模型 — 输入成本节省 50-90% |
-| [模态矩阵](docs/zh/modality-matrix.md)          | 视觉、图像生成、音频、视频 — 各模型支持什么      |
-| [上下文窗口对比](docs/zh/context-windows.md)    | 最大上下文窗口，各层级最佳性价比                 |
-| [大上下文模型](docs/zh/large-context-models.md) | 2,195 个 128K+ 上下文模型 — 397 个 1M+           |
-| [小型/边缘模型](docs/zh/small-models.md)        | 1,153 个 10B 参数以下模型，适合端侧部署          |
-| [提供商对比](docs/zh/provider-comparison.md)    | 按模型数量、能力、定价对比前 30 个提供商         |
-| [免费 AI 模型](docs/zh/free-models.md)          | 81 个免费模型 — 工具调用、推理、视觉零成本       |
-| [开源权重模型](docs/zh/open-weights.md)         | 513 个开源权重模型 — 自有基础设施运行            |
-| [提供商概览](docs/zh/providers.md)              | 95 个提供商按类型和市场分类                      |
-| [推理模型](docs/zh/reasoning-models.md)         | 1,306 个推理模型 — 链式思维和扩展思考            |
-| [数据 Schema 参考](docs/zh/data-schema.md)      | 完整 YAML Schema — 模型、定价、快照、提供商      |
-| [数据采集](docs/zh/data-acquisition.md)         | 数据采集指南                                     |
-| [设计原则与陷阱](docs/zh/lessons-learned.md)    | 经验教训                                         |
+| 文档                                              | 描述                                             |
+| ------------------------------------------------- | ------------------------------------------------ |
+| [工具调用模型](docs/zh/tool-calling.md)           | 2,350 个工具调用模型 — 最便宜、最大上下文、免费  |
+| [视觉模型](docs/zh/vision-models.md)              | 1,487 个视觉模型 — 最便宜、最大上下文、开源权重  |
+| [快速入门](docs/zh/quick-start.md)                | 30 秒内找到适合的模型                            |
+| [图像生成](docs/zh/image-generation.md)           | 28 个图像生成模型 — DALL·E、Imagen、GPT-5 Image  |
+| [音频模型](docs/zh/audio-models.md)               | 118 个音频输入 + 34 个音频输出模型               |
+| [视频模型](docs/zh/video-models.md)               | 167 个视频输入 + 4 个视频输出模型                |
+| [API 与编程访问](docs/zh/api.md)                  | 下载 models.json，JS/Python 代码示例             |
+| [代码示例](docs/zh/code-examples.md)              | TypeScript、Python、Go、Rust、jq 实用示例        |
+| [常见问题](docs/zh/faq.md)                        | 关于目录、数据和贡献的常见问题                   |
+| [结构化输出](docs/zh/structured-output.md)        | 829 个 JSON 模式模型 — 最便宜、免费、带工具调用  |
+| [模型对比](docs/zh/model-comparison.md)           | 旗舰、高性价比、免费和开源模型对比               |
+| [定价对比](docs/zh/pricing-comparison.md)         | 各提供商和平台定价并排对比                       |
+| [缓存定价](docs/zh/cached-pricing.md)             | 1,374 个支持提示缓存的模型 — 输入成本节省 50-90% |
+| [模态矩阵](docs/zh/modality-matrix.md)            | 视觉、图像生成、音频、视频 — 各模型支持什么      |
+| [上下文窗口对比](docs/zh/context-windows.md)      | 最大上下文窗口，各层级最佳性价比                 |
+| [大上下文模型](docs/zh/large-context-models.md)   | 2,195 个 128K+ 上下文模型 — 397 个 1M+           |
+| [小型/边缘模型](docs/zh/small-models.md)          | 1,153 个 10B 参数以下模型，适合端侧部署          |
+| [提供商对比](docs/zh/provider-comparison.md)      | 按模型数量、能力、定价对比前 30 个提供商         |
+| [免费 AI 模型](docs/zh/free-models.md)            | 81 个免费模型 — 工具调用、推理、视觉零成本       |
+| [开源权重模型](docs/zh/open-weights.md)           | 513 个开源权重模型 — 自有基础设施运行            |
+| [提供商概览](docs/zh/providers.md)                | 95 个提供商按类型和市场分类                      |
+| [推理模型](docs/zh/reasoning-models.md)           | 1,306 个推理模型 — 链式思维和扩展思考            |
+| [数据 Schema 参考](docs/zh/data-schema.md)        | 完整 YAML Schema — 模型、定价、快照、提供商      |
+| [数据采集](docs/zh/data-acquisition.md)           | 数据采集指南                                     |
+| [设计原则与陷阱](docs/zh/lessons-learned.md)      | 经验教训                                         |
+| [智能体模型](docs/zh/agentic-models.md)           | 1,080 个工具调用+推理模型，用于 AI 智能体        |
+| [代码模型](docs/zh/code-models.md)                | 189 个代码模型：生成、审查、调试                 |
+| [OpenAI 替代方案](docs/zh/openai-alternatives.md) | GPT-4/GPT-3.5 替代方案：定价、免费选项、兼容性   |
+| [聊天模型](docs/zh/chat-models.md)                | 2,350 个带工具调用的聊天模型                     |
+| [多模态模型](docs/zh/multimodal-models.md)        | 1,519 个支持图像/音频/视频输入的模型             |
+| [嵌入模型](docs/zh/embedding-models.md)           | 5 个嵌入模型用于搜索、RAG、相似度                |
+| [模型选择指南](docs/zh/model-selection.md)        | 决策框架：免费、最佳性价比、大上下文模型         |
+| [迁移指南](docs/zh/migration-guide.md)            | 切换提供商：定价、API 兼容性、检查清单           |
+| [术语表](docs/zh/glossary.md)                     | AI 模型术语的关键词和定义                        |
 
 ## Design Principles
 
