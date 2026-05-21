@@ -337,6 +337,56 @@
       .help-grid span {
         color: var(--text-secondary);
       }
+      .star-nudge {
+        display: none;
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 900;
+        animation: slideUp 0.3s ease;
+      }
+      .star-nudge-content {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        min-width: 200px;
+      }
+      .star-nudge-close {
+        position: absolute;
+        top: 8px;
+        right: 12px;
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .star-nudge-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, #f0883e, #db6d28);
+        color: #fff;
+        padding: 8px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+      }
+      .star-nudge-btn:hover {
+        opacity: 0.9;
+      }
+      @keyframes slideUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
       .toast {
         position: fixed;
         bottom: 20px;
@@ -896,6 +946,23 @@
         </div>
       </div>
     </div>
+    <div class="star-nudge" id="starNudge">
+      <div class="star-nudge-content">
+        <button class="star-nudge-close" onclick="dismissNudge()">&times;</button>
+        <div style="font-size: 24px; margin-bottom: 8px">⭐</div>
+        <div style="font-weight: 600; margin-bottom: 4px">Finding this useful?</div>
+        <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px">
+          Star the repo to help others discover it
+        </div>
+        <a
+          href="https://github.com/i-need-token/ai-models"
+          target="_blank"
+          class="star-nudge-btn"
+          onclick="dismissNudge()"
+          >Star on GitHub</a
+        >
+      </div>
+    </div>
     <div class="toast" id="toast"></div>
     <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
       <div class="modal" onclick="event.stopPropagation()">
@@ -1419,6 +1486,11 @@
           .then(() => showToast("Copied " + lang + " code for " + m.id));
       }
 
+      function dismissNudge() {
+        document.getElementById("starNudge").style.display = "none";
+        sessionStorage.setItem("starNudgeDismissed", "1");
+      }
+
       function field(label, value) {
         return (
           '<div class="modal-field"><div class="label">' +
@@ -1855,6 +1927,15 @@
           }
           currentPage = 1;
           render();
+
+          // Star nudge: show after 30s, only once per session
+          if (!sessionStorage.getItem("starNudgeDismissed")) {
+            setTimeout(() => {
+              if (!sessionStorage.getItem("starNudgeDismissed")) {
+                document.getElementById("starNudge").style.display = "block";
+              }
+            }, 30000);
+          }
         });
       });
     </script>
