@@ -306,6 +306,40 @@
         color: var(--text-secondary);
         font-size: 12px;
       }
+      .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 16px 0;
+        flex-wrap: wrap;
+      }
+      .pagination button {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .pagination button:hover:not(:disabled) {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .pagination button:disabled {
+        opacity: 0.4;
+        cursor: default;
+      }
+      .pagination button.active {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+      }
+      .pagination .page-info {
+        color: var(--text-secondary);
+        font-size: 13px;
+      }
       kbd {
         background: var(--surface);
         border: 1px solid var(--border);
@@ -388,6 +422,7 @@
           <tbody id="tbody"></tbody>
         </table>
       </div>
+      <div class="pagination" id="pagination"></div>
       <div class="footer">
         <a href="https://github.com/i-need-token/ai-models">⭐ Star on GitHub</a> ·
         <a href="https://github.com/i-need-token/ai-models/releases/latest/download/models.json"
@@ -462,12 +497,13 @@
     <div class="toast" id="toast"></div>
 
     <script>
-      const MAX_ROWS = 500;
+      const PER_PAGE = 100;
       let models = [];
       let filtered = [];
       let activeFilters = new Set();
       let sortCol = "id";
       let sortAsc = true;
+      let currentPage = 1;
 
       // Theme
       function toggleTheme() {
@@ -639,15 +675,19 @@
           return sortAsc ? va - vb : vb - va;
         });
 
+        // Pagination
+        const totalPages = Math.ceil(filtered.length / PER_PAGE);
+        if (currentPage > totalPages) currentPage = totalPages || 1;
+        const start = (currentPage - 1) * PER_PAGE;
+        const end = Math.min(start + PER_PAGE, filtered.length);
+
         // Result count
-        const showing = Math.min(filtered.length, MAX_ROWS);
         document.getElementById("resultCount").textContent =
-          `Showing ${showing.toLocaleString()} of ${filtered.length.toLocaleString()} models` +
-          (filtered.length > MAX_ROWS ? ` (first ${MAX_ROWS} — use filters to narrow)` : "");
+          `Showing ${start + 1}–${end} of ${filtered.length.toLocaleString()} models`;
 
         // Render table
         const tbody = document.getElementById("tbody");
-        const rows = filtered.slice(0, MAX_ROWS).map((m) => {
+        const rows = filtered.slice(start, end).map((m) => {
           const tags = [];
           if (m.pricing && (m.pricing.input === 0 || m.pricing.unit === "free"))
             tags.push('<span class="tag tag-free">Free</span>');
@@ -690,6 +730,35 @@
         </tr>`;
         });
         tbody.innerHTML = rows.join("");
+
+        // Render pagination
+        const pag = document.getElementById("pagination");
+        if (totalPages <= 1) {
+          pag.innerHTML = "";
+          return;
+        }
+        let pagHtml = `<button onclick="goPage(1)" ${currentPage === 1 ? "disabled" : ""}>«</button>`;
+        pagHtml += `<button onclick="goPage(${currentPage - 1})" ${currentPage === 1 ? "disabled" : ""}>‹</button>`;
+
+        const maxButtons = 7;
+        let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+        let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+        if (endPage - startPage < maxButtons - 1) startPage = Math.max(1, endPage - maxButtons + 1);
+
+        for (let p = startPage; p <= endPage; p++) {
+          pagHtml += `<button onclick="goPage(${p})" class="${p === currentPage ? "active" : ""}">${p}</button>`;
+        }
+        pagHtml += `<button onclick="goPage(${currentPage + 1})" ${currentPage === totalPages ? "disabled" : ""}>›</button>`;
+        pagHtml += `<button onclick="goPage(${totalPages})" ${currentPage === totalPages ? "disabled" : ""}>»</button>`;
+        pagHtml += `<span class="page-info">Page ${currentPage} of ${totalPages}</span>`;
+        pag.innerHTML = pagHtml;
+      }
+
+      function goPage(p) {
+        const totalPages = Math.ceil(filtered.length / PER_PAGE);
+        currentPage = Math.max(1, Math.min(p, totalPages));
+        render();
+        document.querySelector(".table-wrap").scrollTop = 0;
       }
 
       function esc(s) {
@@ -699,8 +768,14 @@
       }
 
       // Events
-      document.getElementById("search").addEventListener("input", render);
-      document.getElementById("providerFilter").addEventListener("change", render);
+      document.getElementById("search").addEventListener("input", () => {
+        currentPage = 1;
+        render();
+      });
+      document.getElementById("providerFilter").addEventListener("change", () => {
+        currentPage = 1;
+        render();
+      });
       document.getElementById("sortBy").addEventListener("change", (e) => {
         const v = e.target.value;
         if (v === sortCol) sortAsc = !sortAsc;
@@ -708,6 +783,7 @@
           sortCol = v;
           sortAsc = v === "id" || v === "provider";
         }
+        currentPage = 1;
         render();
       });
 
@@ -723,6 +799,7 @@
           // Update sort arrows
           document.querySelectorAll("th .sort-arrow").forEach((a) => (a.textContent = ""));
           th.querySelector(".sort-arrow").textContent = sortAsc ? "▲" : "▼";
+          currentPage = 1;
           render();
         });
       });
@@ -738,6 +815,7 @@
             activeFilters.add(f);
             btn.classList.add("active");
           }
+          currentPage = 1;
           render();
         });
       });
