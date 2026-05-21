@@ -457,6 +457,49 @@
         overflow-y: auto;
         position: relative;
       }
+      .compare-modal {
+        max-width: 900px;
+        width: 95vw;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+      .compare-content {
+        overflow-x: auto;
+      }
+      .compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .compare-table th {
+        background: var(--surface);
+        padding: 8px 12px;
+        text-align: left;
+        border-bottom: 2px solid var(--border);
+        white-space: nowrap;
+        color: var(--text-secondary);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      .compare-table td {
+        padding: 6px 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      .compare-table tr:hover td {
+        background: var(--surface);
+      }
+      .compare-table .model-name {
+        font-weight: 600;
+        color: var(--accent);
+      }
+      .compare-table .best {
+        background: rgba(63, 185, 80, 0.1);
+        font-weight: 600;
+      }
+      .compare-checkbox {
+        cursor: pointer;
+        accent-color: var(--accent);
+      }
       .modal-close {
         position: absolute;
         top: 12px;
@@ -618,6 +661,9 @@
         <button class="filter-btn" data-filter="video_input">📹 Video In</button>
       </div>
       <div class="result-count" id="resultCount"></div>
+      <button class="export-btn" id="compareBtn" onclick="showCompare()" style="display: none">
+        ⚖️ Compare (<span id="compareCount">0</span>)
+      </button>
       <button class="export-btn" onclick="exportCSV()" title="Export filtered results as CSV">
         ⬇ Export CSV
       </button>
@@ -709,6 +755,38 @@
         <a href="https://github.com/i-need-token/ai-models/blob/main/docs/embedding-models.md"
           >Embeddings</a
         >
+      </div>
+    </div>
+    <div
+      class="modal-overlay"
+      id="compareModal"
+      onclick="if (event.target === this) closeCompare();"
+    >
+      <div class="modal compare-modal">
+        <div
+          class="modal-header"
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+          "
+        >
+          <h2 style="margin: 0">⚖️ Model Comparison</h2>
+          <button
+            onclick="closeCompare()"
+            style="
+              background: none;
+              border: none;
+              color: var(--text-secondary);
+              font-size: 20px;
+              cursor: pointer;
+            "
+          >
+            ✕
+          </button>
+        </div>
+        <div class="compare-content" id="compareContent"></div>
       </div>
     </div>
     <div class="toast" id="toast"></div>
@@ -961,7 +1039,9 @@
                 : "—";
 
           const idx = start + i;
+          const checked = selectedModels.has(m.id) ? "checked" : "";
           return `<tr>
+          <td><input type="checkbox" class="compare-checkbox" data-id="${m.id}" ${checked} onchange="toggleCompare(this.dataset.id)"></td>
           <td class="model-id" onclick="showDetail(${idx})" title="Click for details">${esc(m.id)}</td>
           <td class="provider">${esc(m.provider)}</td>
           <td class="ctx">${ctx}</td>
@@ -1239,6 +1319,118 @@
           `💰 Cheapest: <span class="price">${cheapest.id}</span> ($${cheapest.monthly.toFixed(2)}/mo) · ` +
           `Median: <span class="price">${median.id}</span> ($${median.monthly.toFixed(2)}/mo) · ` +
           `Most expensive: <span class="price">${mostExpensive.id}</span> ($${mostExpensive.monthly.toFixed(2)}/mo)`;
+      }
+
+      // === Model Comparison ===
+      const selectedModels = new Set();
+
+      function toggleCompare(id) {
+        if (selectedModels.has(id)) {
+          selectedModels.delete(id);
+        } else if (selectedModels.size < 3) {
+          selectedModels.add(id);
+        }
+        const btn = document.getElementById("compareBtn");
+        const cnt = document.getElementById("compareCount");
+        if (selectedModels.size >= 2) {
+          btn.style.display = "inline-block";
+          cnt.textContent = selectedModels.size;
+        } else {
+          btn.style.display = "none";
+        }
+        document.querySelectorAll(".compare-checkbox").forEach((cb) => {
+          cb.checked = selectedModels.has(cb.dataset.id);
+        });
+      }
+
+      function showCompare() {
+        const compareModels = models.filter((m) => selectedModels.has(m.id));
+        if (compareModels.length < 2) return;
+
+        const fields = [
+          { key: "provider", label: "Provider" },
+          { key: "pricing.input", label: "Input $/M", best: "lowest" },
+          { key: "pricing.output", label: "Output $/M", best: "lowest" },
+          { key: "pricing.cache_read", label: "Cache Read $/M", best: "lowest" },
+          { key: "limit.context", label: "Context", best: "highest" },
+          { key: "limit.output", label: "Max Output", best: "highest" },
+          { key: "tool_call", label: "Tool Call" },
+          { key: "reasoning", label: "Reasoning" },
+          { key: "structured_output", label: "Structured" },
+          { key: "open_weights", label: "Open Weights" },
+          { key: "code", label: "Code" },
+        ];
+
+        function getVal(obj, path) {
+          return path.split(".").reduce((o, k) => o && o[k], obj);
+        }
+
+        function fmtVal(val, m, key) {
+          if (key.startsWith("pricing.")) {
+            if (m.pricing && m.pricing.unit === "free") return "Free";
+            return val != null ? "$" + val : "N/A";
+          }
+          if (key.startsWith("limit.")) {
+            if (!val) return "N/A";
+            return val >= 1000000 ? val / 1000000 + "M" : val / 1000 + "K";
+          }
+          if (typeof val === "boolean") return val ? "✅" : "❌";
+          return val || "N/A";
+        }
+
+        const bestValues = {};
+        fields.forEach((f) => {
+          if (f.best) {
+            const vals = compareModels
+              .map((m) => getVal(m, f.key))
+              .filter((v) => v != null && v !== true && v !== false);
+            if (vals.length)
+              bestValues[f.key] = f.best === "lowest" ? Math.min(...vals) : Math.max(...vals);
+          }
+        });
+
+        let table = '<table class="compare-table"><thead><tr><th></th>';
+        compareModels.forEach((m) => {
+          table += '<th class="model-name">' + m.id + "</th>";
+        });
+        table += "</tr></thead><tbody>";
+
+        fields.forEach((f) => {
+          table += "<tr><th>" + f.label + "</th>";
+          compareModels.forEach((m) => {
+            const val = getVal(m, f.key);
+            const formatted = fmtVal(val, m, f.key);
+            const isBest = f.best && val != null && val === bestValues[f.key];
+            table += "<td" + (isBest ? ' class="best"' : "") + ">" + formatted + "</td>";
+          });
+          table += "</tr>";
+        });
+
+        table += "<tr><th>Input Mods</th>";
+        compareModels.forEach((m) => {
+          table +=
+            "<td>" +
+            (m.modalities && m.modalities.input ? m.modalities.input.join(", ") : "text") +
+            "</td>";
+        });
+        table += "</tr>";
+
+        table += "<tr><th>Output Mods</th>";
+        compareModels.forEach((m) => {
+          table +=
+            "<td>" +
+            (m.modalities && m.modalities.output ? m.modalities.output.join(", ") : "text") +
+            "</td>";
+        });
+        table += "</tr>";
+
+        table += "</tbody></table>";
+        document.getElementById("compareContent").innerHTML = table;
+        document.getElementById("compareModal").style.display = "flex";
+      }
+
+      function closeCompare() {
+        document.getElementById("compareModal").style.display = "none";
       }
 
       // Export filtered results
