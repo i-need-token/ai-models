@@ -2,7 +2,7 @@
 name: Data Update
 about: Report outdated model data that needs updating
 title: "[Data] "
-labels: data
+labels: data, good first issue
 ---
 
 ## Provider
