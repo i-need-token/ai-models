@@ -26,7 +26,7 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 > 💡 **Try it now** — fetch model data in one command:
 >
 > ```bash
-> curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{len(d)} models across {len(set(m["provider"] for m in d))} providers')"
+> curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{len(d["models"])} models across {len(set(m["provider"] for m in d["models"]))} providers')"
 > ```
 
 ## Why This Catalog?
@@ -383,7 +383,7 @@ print(len(catalog))  # 4587
 Once the npm package is published, you can also use [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models):
 
 ```bash
-curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '. | length'
+curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '.models | length'
 ```
 
 See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScript and Python.
