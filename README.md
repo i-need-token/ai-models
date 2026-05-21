@@ -297,6 +297,12 @@ print(len(catalog["models"]))  # 4587
 
 See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScript and Python.
 
+### Use as GitHub Action
+
+Fetch catalog data directly in your CI workflows:
+
+true
+
 ## Project Structure
 
 ```
