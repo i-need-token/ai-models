@@ -60,6 +60,7 @@ Curated standalone pages targeting high-volume search queries. All cross-linked 
 - [`site/tool-calling-models-comparison.html`](site/tool-calling-models-comparison.html) — Tool Calling Models Comparison (flagship, cheapest, free, open weights, TC+reasoning, TC+vision, TC+large context)
 - [`site/ai-model-pricing-calculator.html`](site/ai-model-pricing-calculator.html) — AI Model Pricing Calculator (interactive cost calculator, quick comparison, cheapest tables)
 - [`site/best-ai-models-for-image-generation.html`](site/best-ai-models-for-image-generation.html) — Best AI Models for Image Generation (DALL·E, Imagen, GPT-5 Image, Midjourney, cheapest, free, open-weight)
+- [`site/best-ai-models-for-vision.html`](site/best-ai-models-for-vision.html) — Best AI Models for Vision (GPT-4o, Claude, Gemini, 1,487 vision models, cheapest, free, vision+tool_call, vision+large context)
 
 ## Key Design Decisions
 
