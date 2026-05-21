@@ -383,7 +383,7 @@ print(len(catalog))  # 4587
 Once the npm package is published, you can also use [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models):
 
 ```bash
-curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '. | length'
+curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '. | length'
 ```
 
 See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScript and Python.

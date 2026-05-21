@@ -26,13 +26,13 @@ Data is synced weekly via automated CI workflows. Provider APIs are scraped on a
 
 There are several ways:
 
-| Method                                                   | Use Case                       |
-| -------------------------------------------------------- | ------------------------------ |
-| `npm install ai-models`                                  | TypeScript/JavaScript projects |
-| `curl cdn.jsdelivr.net/npm/ai-models@latest/models.json` | Quick access from any language |
-| GitHub Action                                            | CI/CD pipelines                |
-| CSV download                                             | Excel, data analysis           |
-| Hugging Face dataset                                     | ML workflows                   |
+| Method                                                                                | Use Case                       |
+| ------------------------------------------------------------------------------------- | ------------------------------ |
+| `npm install ai-models`                                                               | TypeScript/JavaScript projects |
+| `curl https://github.com/i-need-token/ai-models/releases/latest/download/models.json` | Quick access from any language |
+| GitHub Action                                                                         | CI/CD pipelines                |
+| CSV download                                                                          | Excel, data analysis           |
+| Hugging Face dataset                                                                  | ML workflows                   |
 
 See [Quick Start](quick-start.md) for detailed instructions.
 

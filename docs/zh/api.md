@@ -33,31 +33,31 @@ const affordable = catalog.models.filter((m) => m.tool_call && m.pricing.input <
 ```html
 <!-- 在任何 HTML 页面中使用 -->
 <script type="module">
-  const catalog = await fetch("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").then(
-    (r) => r.json(),
-  );
+  const catalog = await fetch(
+    "https://github.com/i-need-token/ai-models/releases/latest/download/models.json",
+  ).then((r) => r.json());
   console.log(catalog.models.length); // 4,587
 </script>
 ```
 
 ```bash
 # 直接 curl（始终最新）
-curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
+curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '.models | length'
 
 # 锁定特定版本
-curl -s https://cdn.jsdelivr.net/npm/ai-models@0.1.0/models.json | jq '.stats'
+curl -s https://github.com/i-need-token/ai-models/releases/download/v0.1.0/models.json | jq '.stats'
 ```
 
 ```python
 # Python — 无需 pip install
 import urllib.request, json
-catalog = json.loads(urllib.request.urlopen("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").read())
+catalog = json.loads(urllib.request.urlopen("https://github.com/i-need-token/ai-models/releases/latest/download/models.json").read())
 print(len(catalog["models"]))  # 4587
 ```
 
 ```go
 // Go — 无需依赖
-resp, err := http.Get("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json")
+resp, err := http.Get("https://github.com/i-need-token/ai-models/releases/latest/download/models.json")
 ```
 
 ### CDN 与 GitHub Releases 对比

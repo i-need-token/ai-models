@@ -26,13 +26,13 @@ AI Models Catalog 是一个结构化的 YAML 目录，收录了 95+ 个 AI 提�
 
 有多种方式：
 
-| 方式                                                     | 适用场景                   |
-| -------------------------------------------------------- | -------------------------- |
-| `npm install ai-models`                                  | TypeScript/JavaScript 项目 |
-| `curl cdn.jsdelivr.net/npm/ai-models@latest/models.json` | 任何语言的快速访问         |
-| GitHub Action                                            | CI/CD 流水线               |
-| CSV 下载                                                 | Excel、数据分析            |
-| Hugging Face 数据集                                      | ML 工作流                  |
+| 方式                                                                                  | 适用场景                   |
+| ------------------------------------------------------------------------------------- | -------------------------- |
+| `npm install ai-models`                                                               | TypeScript/JavaScript 项目 |
+| `curl https://github.com/i-need-token/ai-models/releases/latest/download/models.json` | 任何语言的快速访问         |
+| GitHub Action                                                                         | CI/CD 流水线               |
+| CSV 下载                                                                              | Excel、数据分析            |
+| Hugging Face 数据集                                                                   | ML 工作流                  |
 
 详见[快速入门](quick-start.md)。
 

@@ -18,7 +18,7 @@ curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/mode
 
 ```bash
 # 始终最新，可在浏览器中使用
-curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
+curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '.models | length'
 ```
 
 ## TypeScript / JavaScript

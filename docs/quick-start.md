@@ -83,14 +83,14 @@ The compiled JSON is available via [jsDelivr CDN](https://www.jsdelivr.com/packa
 
 ```bash
 # Always up-to-date, CORS-enabled, works in browsers
-curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
+curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '.models | length'
 ```
 
 ```html
 <script type="module">
-  const catalog = await fetch("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").then(
-    (r) => r.json(),
-  );
+  const catalog = await fetch(
+    "https://github.com/i-need-token/ai-models/releases/latest/download/models.json",
+  ).then((r) => r.json());
   console.log(catalog.models.length);
 </script>
 ```

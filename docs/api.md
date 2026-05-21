@@ -33,31 +33,31 @@ The compiled JSON is available via [jsDelivr CDN](https://www.jsdelivr.com/packa
 ```html
 <!-- Use in any HTML page -->
 <script type="module">
-  const catalog = await fetch("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").then(
-    (r) => r.json(),
-  );
+  const catalog = await fetch(
+    "https://github.com/i-need-token/ai-models/releases/latest/download/models.json",
+  ).then((r) => r.json());
   console.log(catalog.models.length); // 4,587
 </script>
 ```
 
 ```bash
 # Direct curl (always up-to-date)
-curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
+curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '.models | length'
 
 # Pin to a specific version
-curl -s https://cdn.jsdelivr.net/npm/ai-models@0.1.0/models.json | jq '.stats'
+curl -s https://github.com/i-need-token/ai-models/releases/download/v0.1.0/models.json | jq '.stats'
 ```
 
 ```python
 # Python — no pip install needed
 import urllib.request, json
-catalog = json.loads(urllib.request.urlopen("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").read())
+catalog = json.loads(urllib.request.urlopen("https://github.com/i-need-token/ai-models/releases/latest/download/models.json").read())
 print(len(catalog["models"]))  # 4587
 ```
 
 ```go
 // Go — no dependencies needed
-resp, err := http.Get("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json")
+resp, err := http.Get("https://github.com/i-need-token/ai-models/releases/latest/download/models.json")
 ```
 
 ### CDN vs GitHub Releases

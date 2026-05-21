@@ -18,7 +18,7 @@ Or use the [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models) (no do
 
 ```bash
 # Always up-to-date, works in browsers
-curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
+curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '.models | length'
 ```
 
 ## TypeScript / JavaScript
