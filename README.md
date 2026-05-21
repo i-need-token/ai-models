@@ -10,6 +10,7 @@
 [![Models](https://img.shields.io/badge/Models-4%2C587-green.svg)](providers/)
 [![Providers](https://img.shields.io/badge/Providers-95-orange.svg)](providers/)
 [![CI](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml/badge.svg)](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml)
+[![Star History](https://api.star-history.com/svg?repos=i-need-token/ai-models&type=Date)](https://star-history.com/#i-need-token/ai-models&Date)
 
 </div>
 
