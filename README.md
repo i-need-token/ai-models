@@ -282,6 +282,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | Document | Description |
 | [Tool Calling Models](docs/tool-calling.md) | 2,350 tool-calling models — cheapest, largest context, free |
 | [Vision Models](docs/vision-models.md) | 1,487 vision models — cheapest, largest context, open-weight |
+| [Image Generation](docs/image-generation.md) | 28 image generation models — DALL·E, Imagen, GPT-5 Image |
 | ------------------------------------------------------- | --------------------------------------------------------------- |
 | [Quick Start Guide](docs/quick-start.md) | Find the right model in 30 seconds |
 | [API & Programmatic Access](docs/api.md) | Download models.json, code examples in JS/Python |
@@ -304,6 +305,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | -------------------------------------------- | ------------------------------------------- |
 | [视觉模型](docs/zh/vision-models.md) | 1,487 个视觉模型 — 最便宜、最大上下文、开源权重 |
 | [快速入门](docs/zh/quick-start.md) | 30 秒内找到适合的模型 |
+| [图像生成](docs/zh/image-generation.md) | 28 个图像生成模型 — DALL·E、Imagen、GPT-5 Image |
 | [API 与编程访问](docs/zh/api.md) | 下载 models.json，JS/Python 代码示例 |
 | [模型对比](docs/zh/model-comparison.md) | 旗舰、高性价比、免费和开源模型对比 |
 | [定价对比](docs/zh/pricing-comparison.md) | 各提供商和平台定价并排对比 |
