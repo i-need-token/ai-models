@@ -35,16 +35,17 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 | --------------------------- | ----: |
 | Providers                   |    95 |
 | Model files                 | 4,682 |
-| Unique model IDs            | 2,804 |
+| Unique model IDs            | 2,807 |
 | Model families              |   441 |
 | Reasoning models            | 1,306 |
-| Tool-calling models         | 2,347 |
+| Tool-calling models         | 2,350 |
 | Open-weight models          |   527 |
 | Free models                 |    81 |
-| Vision (image input) models | 1,488 |
-| Image output models         |    84 |
-| Audio input models          |   148 |
-| Video input models          |   171 |
+| Vision (image input) models | 1,487 |
+| Image output models         |    28 |
+| Audio input models          |   118 |
+| Audio output models         |    34 |
+| Video input models          |   167 |
 
 ## Data at a Glance
 
