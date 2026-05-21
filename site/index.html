@@ -925,6 +925,8 @@
       })();
 
       // Keyboard shortcut
+      let activeRow = -1;
+
       document.addEventListener("keydown", (e) => {
         if (e.key === "/" && document.activeElement !== document.getElementById("search")) {
           e.preventDefault();
@@ -932,9 +934,49 @@
         }
         if (e.key === "Escape") {
           document.getElementById("search").blur();
-          closeModal();
+          closeDetail();
+          closeCompare();
+          closeHelp();
+          activeRow = -1;
+          highlightRow(-1);
+        }
+        if (e.key === "?") {
+          toggleHelp();
+        }
+        // j/k navigation (only when search is not focused)
+        if (document.activeElement === document.getElementById("search")) return;
+        const rows = document.querySelectorAll("#tbody tr");
+        if (e.key === "j" || e.key === "ArrowDown") {
+          e.preventDefault();
+          activeRow = Math.min(activeRow + 1, rows.length - 1);
+          highlightRow(activeRow);
+        }
+        if (e.key === "k" || e.key === "ArrowUp") {
+          e.preventDefault();
+          activeRow = Math.max(activeRow - 1, 0);
+          highlightRow(activeRow);
+        }
+        if (e.key === "Enter" && activeRow >= 0 && activeRow < rows.length) {
+          showDetail(activeRow + (currentPage - 1) * PER_PAGE);
+        }
+        if (e.key === "c" && activeRow >= 0 && activeRow < rows.length) {
+          const cb = rows[activeRow].querySelector(".compare-checkbox");
+          if (cb) {
+            cb.checked = !cb.checked;
+            toggleCompare(cb.dataset.id);
+          }
         }
       });
+
+      function highlightRow(idx) {
+        document.querySelectorAll("#tbody tr").forEach((r, i) => {
+          r.classList.toggle("active-row", i === idx);
+        });
+        if (idx >= 0) {
+          const rows = document.querySelectorAll("#tbody tr");
+          if (rows[idx]) rows[idx].scrollIntoView({ block: "nearest" });
+        }
+      }
 
       // Toast
       function showToast(msg) {
