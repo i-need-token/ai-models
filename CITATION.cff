@@ -18,6 +18,17 @@ keywords:
   - yaml
   - structured-data
   - open-data
+  - tool-calling
+  - reasoning-models
+  - vision-models
+  - open-weights
+  - context-window
+  - structured-output
+  - image-generation
+  - free-models
+  - github-action
+  - cdn
+  - huggingface
 license: MIT
 version: 0.1.0
 date-released: "2026-05-21"
