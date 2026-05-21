@@ -1,48 +1,109 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#0f0c29"/>
-      <stop offset="50%" style="stop-color:#302b63"/>
-      <stop offset="100%" style="stop-color:#24243e"/>
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
     </linearGradient>
     <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#667eea"/>
-      <stop offset="100%" style="stop-color:#764ba2"/>
+      <stop offset="0%" style="stop-color:#58a6ff"/>
+      <stop offset="50%" style="stop-color:#bc8cff"/>
+      <stop offset="100%" style="stop-color:#f778ba"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2332"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
     </linearGradient>
   </defs>
-
+  
   <!-- Background -->
   <rect width="1280" height="640" fill="url(#bg)"/>
-
-  <!-- Accent bar -->
-  <rect x="0" y="0" width="1280" height="6" fill="url(#accent)"/>
-
+  
+  <!-- Subtle grid pattern -->
+  <g opacity="0.05">
+    <line x1="0" y1="0" x2="1280" y2="640" stroke="#58a6ff" stroke-width="0.5"/>
+    <line x1="1280" y1="0" x2="0" y2="640" stroke="#58a6ff" stroke-width="0.5"/>
+    <line x1="640" y1="0" x2="640" y2="640" stroke="#58a6ff" stroke-width="0.5"/>
+    <line x1="0" y1="320" x2="1280" y2="320" stroke="#58a6ff" stroke-width="0.5"/>
+    <circle cx="640" cy="320" r="200" fill="none" stroke="#58a6ff" stroke-width="0.5"/>
+    <circle cx="640" cy="320" r="300" fill="none" stroke="#58a6ff" stroke-width="0.5"/>
+  </g>
+  
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1280" height="4" fill="url(#accent)"/>
+  
   <!-- Title -->
-  <text x="640" y="180" text-anchor="middle" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700">AI Models Catalog</text>
-
+  <text x="80" y="120" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="56" font-weight="700" fill="#e6edf3">AI Models Catalog</text>
+  
   <!-- Subtitle -->
-  <text x="640" y="240" text-anchor="middle" fill="#a0a0c0" font-family="system-ui, -apple-system, sans-serif" font-size="28">Structured YAML · First-Party Data · TypeScript Types</text>
-
-  <!-- Stats -->
-  <text x="320" y="360" text-anchor="middle" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700">4,587</text>
-  <text x="320" y="400" text-anchor="middle" fill="#a0a0c0" font-family="system-ui, -apple-system, sans-serif" font-size="22">Models</text>
-
-  <text x="640" y="360" text-anchor="middle" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700">95</text>
-  <text x="640" y="400" text-anchor="middle" fill="#a0a0c0" font-family="system-ui, -apple-system, sans-serif" font-size="22">Providers</text>
-
-  <text x="960" y="360" text-anchor="middle" fill="#ffffff" font-family="system-ui, -apple-system, sans-serif" font-size="56" font-weight="700">1,306</text>
-  <text x="960" y="400" text-anchor="middle" fill="#a0a0c0" font-family="system-ui, -apple-system, sans-serif" font-size="22">Reasoning</text>
-
-  <!-- Divider -->
-  <line x1="440" y1="440" x2="840" y2="440" stroke="#667eea" stroke-width="2" opacity="0.5"/>
-
-  <!-- Capabilities -->
-  <text x="640" y="490" text-anchor="middle" fill="#a0a0c0" font-family="system-ui, -apple-system, sans-serif" font-size="20">Pricing · Context Windows · Modalities · Tool Calling · Open Weights</text>
-
-  <!-- Install -->
-  <rect x="440" y="520" width="400" height="44" rx="8" fill="#1a1a3e" stroke="#667eea" stroke-width="1"/>
-  <text x="640" y="548" text-anchor="middle" fill="#667eea" font-family="monospace" font-size="18">npm install ai-models</text>
-
-  <!-- Bottom accent -->
-  <rect x="0" y="634" width="1280" height="6" fill="url(#accent)"/>
+  <text x="80" y="170" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="24" fill="#8b949e">Structured YAML catalog of AI model metadata — pricing, context windows, capabilities</text>
+  
+  <!-- Stats cards -->
+  <g transform="translate(80, 220)">
+    <!-- Card 1: Models -->
+    <rect x="0" y="0" width="260" height="120" rx="12" fill="url(#card1)" stroke="#30363d" stroke-width="1"/>
+    <text x="20" y="40" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" fill="#8b949e">MODELS</text>
+    <text x="20" y="90" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="48" font-weight="700" fill="#58a6ff">4,587</text>
+    
+    <!-- Card 2: Providers -->
+    <rect x="280" y="0" width="260" height="120" rx="12" fill="url(#card1)" stroke="#30363d" stroke-width="1"/>
+    <text x="300" y="40" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" fill="#8b949e">PROVIDERS</text>
+    <text x="300" y="90" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="48" font-weight="700" fill="#bc8cff">95</text>
+    
+    <!-- Card 3: Free -->
+    <rect x="560" y="0" width="260" height="120" rx="12" fill="url(#card1)" stroke="#30363d" stroke-width="1"/>
+    <text x="580" y="40" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" fill="#8b949e">FREE MODELS</text>
+    <text x="580" y="90" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="48" font-weight="700" fill="#3fb950">81</text>
+    
+    <!-- Card 4: Open Weights -->
+    <rect x="840" y="0" width="260" height="120" rx="12" fill="url(#card1)" stroke="#30363d" stroke-width="1"/>
+    <text x="860" y="40" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" fill="#8b949e">OPEN WEIGHTS</text>
+    <text x="860" y="90" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="48" font-weight="700" fill="#f0883e">527</text>
+  </g>
+  
+  <!-- Capability badges -->
+  <g transform="translate(80, 400)">
+    <rect x="0" y="0" width="auto" height="36" rx="18" fill="#1a2332" stroke="#58a6ff" stroke-width="1"/>
+    <text x="16" y="24" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" fill="#58a6ff">🔧 2,350 Tool Calling</text>
+    
+    <rect x="200" y="0" width="auto" height="36" rx="18" fill="#1a2332" stroke="#bc8cff" stroke-width="1"/>
+    <text x="216" y="24" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" fill="#bc8cff">🧠 1,306 Reasoning</text>
+    
+    <rect x="410" y="0" width="auto" height="36" rx="18" fill="#1a2332" stroke="#3fb950" stroke-width="1"/>
+    <text x="426" y="24" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" fill="#3fb950">👁️ 1,487 Vision</text>
+    
+    <rect x="600" y="0" width="auto" height="36" rx="18" fill="#1a2332" stroke="#f0883e" stroke-width="1"/>
+    <text x="616" y="24" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" fill="#f0883e">📋 829 Structured Output</text>
+    
+    <rect x="830" y="0" width="auto" height="36" rx="18" fill="#1a2332" stroke="#f778ba" stroke-width="1"/>
+    <text x="846" y="24" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" fill="#f778ba">🤖 1,080 Agentic</text>
+  </g>
+  
+  <!-- Bottom section -->
+  <g transform="translate(80, 500)">
+    <text x="0" y="0" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="16" fill="#8b949e">First-party data · TypeScript types · Zod validation · Auto-scraped</text>
+    
+    <!-- Data format badges -->
+    <g transform="translate(0, 30)">
+      <rect x="0" y="0" width="70" height="28" rx="6" fill="#1a2332" stroke="#30363d"/>
+      <text x="10" y="19" font-family="monospace" font-size="13" fill="#8b949e">YAML</text>
+      
+      <rect x="80" y="0" width="70" height="28" rx="6" fill="#1a2332" stroke="#30363d"/>
+      <text x="90" y="19" font-family="monospace" font-size="13" fill="#8b949e">JSON</text>
+      
+      <rect x="160" y="0" width="60" height="28" rx="6" fill="#1a2332" stroke="#30363d"/>
+      <text x="170" y="19" font-family="monospace" font-size="13" fill="#8b949e">CSV</text>
+      
+      <rect x="230" y="0" width="70" height="28" rx="6" fill="#1a2332" stroke="#30363d"/>
+      <text x="240" y="19" font-family="monospace" font-size="13" fill="#8b949e">npm</text>
+      
+      <rect x="310" y="0" width="100" height="28" rx="6" fill="#1a2332" stroke="#30363d"/>
+      <text x="320" y="19" font-family="monospace" font-size="13" fill="#8b949e">GitHub Action</text>
+    </g>
+  </g>
+  
+  <!-- GitHub corner -->
+  <text x="1100" y="580" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif" font-size="16" fill="#8b949e">github.com/i-need-token/ai-models</text>
+  
+  <!-- Bottom accent bar -->
+  <rect x="0" y="636" width="1280" height="4" fill="url(#accent)"/>
 </svg>
