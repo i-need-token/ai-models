@@ -7,10 +7,9 @@
 95 providers · 4,587 model files · 2,712 unique model IDs · First-party data only
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Models](https://img.shields.io/badge/Models-4%2C587-green.svg)](providers/)
-[![Providers](https://img.shields.io/badge/Providers-95-orange.svg)](providers/)
-[![CI](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml/badge.svg)](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml)
-[![Star History](https://api.star-history.com/svg?repos=i-need-token/ai-models&type=Date)](https://star-history.com/#i-need-token/ai-models&Date)
+[![Models](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/i-need-token/ai-models/main/.github/badges/models.json)](providers/)
+[![Providers](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/i-need-token/ai-models/main/.github/badges/providers.json)](providers/)
+[![CI](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml/badge.svg)](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml)[![Star History](https://api.star-history.com/svg?repos=i-need-token/ai-models&type=Date)](https://star-history.com/#i-need-token/ai-models&Date)
 
 </div>
 
