@@ -18,7 +18,7 @@
 
 Machine-readable YAML catalog of every major AI model provider and their models — pricing, context windows, modalities, capabilities, and more. All data sourced from first-party APIs and official documentation, never third-party aggregators.
 
-**[Compare models →](docs/model-comparison.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)**
+**[Quick start →](docs/quick-start.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)**
 
 ## Why This Catalog?
 
@@ -243,6 +243,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 
 | Document                                                | Description                                                    |
 | ------------------------------------------------------- | -------------------------------------------------------------- |
+| [Quick Start Guide](docs/quick-start.md)                | Find the right model in 30 seconds                             |
 | [Model Comparison](docs/model-comparison.md)            | Compare flagship, cost-effective, free, and open-weight models |
 | [Pricing Comparison](docs/pricing-comparison.md)        | Side-by-side pricing across providers and platforms            |
 | [Provider Overview](docs/providers.md)                  | All 95 providers organized by type and market                  |
