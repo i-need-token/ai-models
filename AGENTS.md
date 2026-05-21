@@ -27,6 +27,7 @@ A structured catalog of AI model providers and their models, stored as YAML file
 - [`docs/api.md`](docs/api.md) — API & programmatic access ([中文](docs/zh/api.md))
 - [`docs/code-examples.md`](docs/code-examples.md) — code examples in multiple languages ([中文](docs/zh/code-examples.md))
 - [`docs/faq.md`](docs/faq.md) — frequently asked questions ([中文](docs/zh/faq.md))
+- [`docs/glossary.md`](docs/glossary.md) — key terms and definitions ([中文](docs/zh/glossary.md))
 
 ## Key Design Decisions
 
