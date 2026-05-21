@@ -200,6 +200,12 @@ npx tsx scripts/sync.ts
 
 # Validate all YAML files
 npx tsx scripts/validate.ts
+
+# Compute catalog statistics
+npx tsx scripts/stats.ts
+
+# Compile to a single models.json
+npx tsx scripts/compile.ts
 ```
 
 ### Use Programmatically
@@ -218,6 +224,15 @@ console.log(model.limit); // { context: 1047576, output: 32768 }
 console.log(model.modalities); // { input: ["text", "image"], output: ["text"] }
 ```
 
+### Download Compiled JSON
+
+```bash
+# Latest release
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+```
+
+See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScript and Python.
+
 ## Project Structure
 
 ```
@@ -235,10 +250,10 @@ console.log(model.modalities); // { input: ["text", "image"], output: ["text"] }
 ├── scripts/             # CLI tools
 │   ├── sync.ts              # Orchestration: scrape → write YAML
 │   ├── validate.ts          # Validate all YAML against schemas
+│   ├── stats.ts             # Compute catalog statistics
+│   ├── compile.ts           # Compile to dist/models.json
 │   └── lib/                 # Shared utilities
 └── docs/                # Documentation (English + 中文)
-    ├── data-acquisition.md
-    └── lessons-learned.md
 ```
 
 ## Adding a New Provider
@@ -254,24 +269,30 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 ## Documentation
 
 | Document                                                | Description                                                    |
-| ------------------------------------------------------- | -------------------------------------------------------------- | --- | ---------------------------------- |
+| ------------------------------------------------------- | -------------------------------------------------------------- |
 | [Quick Start Guide](docs/quick-start.md)                | Find the right model in 30 seconds                             |
-| [API & Programmatic Access](docs/api.md)                | Download models.json, code examples in JS/Python               |     | Find the right model in 30 seconds |
+| [API & Programmatic Access](docs/api.md)                | Download models.json, code examples in JS/Python               |
 | [Model Comparison](docs/model-comparison.md)            | Compare flagship, cost-effective, free, and open-weight models |
 | [Pricing Comparison](docs/pricing-comparison.md)        | Side-by-side pricing across providers and platforms            |
+| [Modality Matrix](docs/modality-matrix.md)              | Vision, image gen, audio, video — which models support what    |
 | [Provider Overview](docs/providers.md)                  | All 95 providers organized by type and market                  |
 | [Data Schema Reference](docs/data-schema.md)            | Complete YAML schema — model, pricing, snapshot, provider      |
 | [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data                           |
-| [API & Programmatic Access](docs/api.md)                | Download models.json, code examples in JS/Python               |
-| [Modality Matrix](docs/modality-matrix.md)              | Vision, image gen, audio, video — which models support what    |
 | [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog                      |
-| [模型对比（中文）](docs/zh/model-comparison.md)         | 旗舰、高性价比、免费和开源模型对比                             |
-| [定价对比（中文）](docs/zh/pricing-comparison.md)       | 各提供商和平台定价并排对比                                     |
-| [提供商概览（中文）](docs/zh/providers.md)              | 95 个提供商按类型和市场分类                                    |
-| [数据 Schema 参考（中文）](docs/zh/data-schema.md)      | 完整 YAML Schema — 模型、定价、快照、提供商                    |
-| [数据采集（中文）](docs/zh/data-acquisition.md)         | 数据采集指南                                                   |
-| [API 与编程访问（中文）](docs/zh/api.md)                | 下载 models.json，JS/Python 代码示例                           |
-| [设计原则与陷阱（中文）](docs/zh/lessons-learned.md)    | 经验教训                                                       |
+
+**中文文档：**
+
+| 文档                                         | 描述                                        |
+| -------------------------------------------- | ------------------------------------------- |
+| [快速入门](docs/zh/quick-start.md)           | 30 秒内找到适合的模型                       |
+| [API 与编程访问](docs/zh/api.md)             | 下载 models.json，JS/Python 代码示例        |
+| [模型对比](docs/zh/model-comparison.md)      | 旗舰、高性价比、免费和开源模型对比          |
+| [定价对比](docs/zh/pricing-comparison.md)    | 各提供商和平台定价并排对比                  |
+| [模态矩阵](docs/zh/modality-matrix.md)       | 视觉、图像生成、音频、视频 — 各模型支持什么 |
+| [提供商概览](docs/zh/providers.md)           | 95 个提供商按类型和市场分类                 |
+| [数据 Schema 参考](docs/zh/data-schema.md)   | 完整 YAML Schema — 模型、定价、快照、提供商 |
+| [数据采集](docs/zh/data-acquisition.md)      | 数据采集指南                                |
+| [设计原则与陷阱](docs/zh/lessons-learned.md) | 经验教训                                    |
 
 ## Design Principles
 
