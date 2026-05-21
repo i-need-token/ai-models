@@ -185,6 +185,17 @@ last_updated: "2026-05-18"
 
 No installation needed — just browse `providers/<provider>/models/` for YAML files. Every file is human-readable.
 
+### Install from npm
+
+```bash
+npm install ai-models
+```
+
+```typescript
+import catalog from "ai-models"; // 4,587 models as JSON
+import type { Model } from "ai-models"; // TypeScript types
+```
+
 ### Install & Sync
 
 ```bash
