@@ -378,6 +378,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [API & Programmatic Access](docs/api.md)                            | Download models.json, code examples in JS/Python                |
 | [Code Examples](docs/code-examples.md)                              | Practical examples in TypeScript, Python, Go, Rust, jq          |
 | [FAQ](docs/faq.md)                                                  | Common questions about the catalog, data, and contributing      |
+| [Glossary](docs/glossary.md)                                        | Key terms and definitions for AI model terminology              |
 | [Model Comparison](docs/model-comparison.md)                        | Compare flagship, cost-effective, free, and open-weight models  |
 | [Pricing Comparison](docs/pricing-comparison.md)                    | Side-by-side pricing across providers and platforms             |
 | [Modality Matrix](docs/modality-matrix.md)                          | Vision, image gen, audio, video — which models support what     |
