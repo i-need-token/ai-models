@@ -369,6 +369,14 @@ Contributions are welcome! Whether it's adding a new provider, fixing data, or i
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
+## Roadmap
+
+- 🔜 **More providers** — continuously adding new AI model providers
+- 🔜 **REST API** — hosted API for querying the catalog
+- 🔜 **Historical pricing** — track pricing changes over time
+- 🔜 **Model benchmarks** — integrate performance benchmarks from standard benchmarks
+- 🔜 **Community scrapers** — enable community-contributed scrape scripts with automated validation
+
 ## Who's Using This?
 
 Built something with this catalog? [Open a PR](https://github.com/i-need-token/ai-models/edit/main/README.md) to add your project!
