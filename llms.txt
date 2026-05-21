@@ -29,6 +29,16 @@ import catalog from "ai-models"; // 4,587 models as JSON
 import type { Model } from "ai-models"; // TypeScript types
 ```
 
+## Download
+
+```bash
+# JSON — full metadata (2.3 MB)
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+
+# CSV — flat table for Excel/Google Sheets (560 KB)
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
+```
+
 ## Data Format
 
 Each model is a single YAML file at `providers/<provider>/models/<model-id>.yaml`:
