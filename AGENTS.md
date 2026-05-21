@@ -25,6 +25,7 @@ A structured catalog of AI model providers and their models, stored as YAML file
 - [`docs/data-schema.md`](docs/data-schema.md) — Data schema reference ([中文](docs/zh/data-schema.md))
 - [`docs/quick-start.md`](docs/quick-start.md) — Quick start guide ([中文](docs/zh/quick-start.md))
 - [`docs/api.md`](docs/api.md) — API & programmatic access ([中文](docs/zh/api.md))
+- [`docs/code-examples.md`](docs/code-examples.md) — code examples in multiple languages ([中文](docs/zh/code-examples.md))
 
 ## Key Design Decisions
 

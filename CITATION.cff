@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this catalog in your research, please cite it as below."
+title: "AI Models Catalog"
+type: dataset
+authors:
+  - given-names: "i-need-token"
+repository-code: "https://github.com/i-need-token/ai-models"
+url: "https://github.com/i-need-token/ai-models"
+abstract: >
+  A structured YAML catalog of 4,587 AI models across 95 providers,
+  including pricing, context windows, modalities, and capabilities.
+  All data sourced from first-party APIs and official documentation.
+keywords:
+  - ai-models
+  - llm
+  - pricing
+  - model-catalog
+  - yaml
+  - structured-data
+  - open-data
+license: MIT
+version: 0.1.0
+date-released: "2026-05-21"

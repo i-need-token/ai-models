@@ -312,6 +312,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [Structured Output](docs/structured-output.md)          | 829 JSON-mode models — cheapest, free, with tool calling        |
 | [Quick Start Guide](docs/quick-start.md)                | Find the right model in 30 seconds                              |
 | [API & Programmatic Access](docs/api.md)                | Download models.json, code examples in JS/Python                |
+| [Code Examples](docs/code-examples.md)                  | Practical examples in TypeScript, Python, Go, Rust, jq          |
 | [Model Comparison](docs/model-comparison.md)            | Compare flagship, cost-effective, free, and open-weight models  |
 | [Pricing Comparison](docs/pricing-comparison.md)        | Side-by-side pricing across providers and platforms             |
 | [Modality Matrix](docs/modality-matrix.md)              | Vision, image gen, audio, video — which models support what     |
@@ -333,6 +334,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [快速入门](docs/zh/quick-start.md)           | 30 秒内找到适合的模型                           |
 | [图像生成](docs/zh/image-generation.md)      | 28 个图像生成模型 — DALL·E、Imagen、GPT-5 Image |
 | [API 与编程访问](docs/zh/api.md)             | 下载 models.json，JS/Python 代码示例            |
+| [代码示例](docs/zh/code-examples.md)         | TypeScript、Python、Go、Rust、jq 实用示例       |
 | [结构化输出](docs/zh/structured-output.md)   | 829 个 JSON 模式模型 — 最便宜、免费、带工具调用 |
 | [模型对比](docs/zh/model-comparison.md)      | 旗舰、高性价比、免费和开源模型对比              |
 | [定价对比](docs/zh/pricing-comparison.md)    | 各提供商和平台定价并排对比                      |
