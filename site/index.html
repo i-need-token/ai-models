@@ -776,6 +776,43 @@
           display: none;
         }
       }
+      .picker-inputs {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      .picker-inputs label {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 0.85em;
+        color: var(--text-secondary);
+      }
+      .picker-inputs select {
+        padding: 6px 8px;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        background: var(--bg);
+        color: var(--text);
+      }
+      .picker-result {
+        font-size: 0.9em;
+        line-height: 1.8;
+      }
+      .pick-item {
+        padding: 6px 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .pick-item:last-child {
+        border-bottom: none;
+      }
+      .pick-rank {
+        display: inline-block;
+        width: 24px;
+        font-weight: 700;
+        color: var(--accent);
+      }
     </style>
   </head>
   <body>
@@ -838,274 +875,322 @@
           /></label>
         </div>
         <div class="calc-result" id="calcResult"></div>
-      </div>
-      <div class="controls">
-        <input
-          type="text"
-          id="search"
-          placeholder="Search models, providers, families… (press /)"
-          autocomplete="off"
-        />
-        <select id="providerFilter">
-          <option value="">All providers</option>
-        </select>
-        <select id="sortBy">
-          <option value="id">Sort: Model ID</option>
-          <option value="provider">Sort: Provider</option>
-          <option value="context">Sort: Context ↓</option>
-          <option value="input_price">Sort: Price ↓</option>
-        </select>
-      </div>
-      <div class="filter-bar">
-        <button class="filter-btn" data-filter="free">🆓 Free</button>
-        <button class="filter-btn" data-filter="open_weights">🔓 Open Weights</button>
-        <button class="filter-btn" data-filter="reasoning">🧠 Reasoning</button>
-        <button class="filter-btn" data-filter="tool_call">🔧 Tool Call</button>
-        <button class="filter-btn" data-filter="structured_output">📋 Structured Output</button>
-        <button class="filter-btn" data-filter="vision">👁️ Vision</button>
-        <button class="filter-btn" data-filter="image_output">🖼️ Image Gen</button>
-        <button class="filter-btn" data-filter="audio_input">🎤 Audio In</button>
-        <button class="filter-btn" data-filter="video_input">📹 Video In</button>
-        <button class="filter-btn" data-filter="audio_output">🔊 Audio Out</button>
-        <button class="filter-btn" data-filter="deprecated">⚠️ Deprecated</button>
-        <button
-          class="filter-btn"
-          data-filter="trending"
-          style="background: rgba(240, 136, 62, 0.1); border-color: rgba(240, 136, 62, 0.3)"
-        >
-          🔥 Trending
-        </button>
-      </div>
-      <div class="result-count" id="resultCount"></div>
-      <button class="export-btn" id="compareBtn" onclick="showCompare()" style="display: none">
-        ⚖️ Compare (<span id="compareCount">0</span>)
-      </button>
-      <button class="export-btn" onclick="shareView()" title="Share this view">🔗 Share</button>
-      <button class="export-btn" onclick="exportCSV()" title="Export filtered results as CSV">
-        ⬇ Export CSV
-      </button>
-      <button class="export-btn" onclick="exportJSON()" title="Export filtered results as JSON">
-        ⬇ Export JSON
-      </button>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th data-col="id">Model <span class="sort-arrow"></span></th>
-              <th data-col="provider">Provider <span class="sort-arrow"></span></th>
-              <th data-col="context">Context <span class="sort-arrow"></span></th>
-              <th data-col="input_price">Input $/M <span class="sort-arrow"></span></th>
-              <th data-col="output_price">Output $/M <span class="sort-arrow"></span></th>
-              <th>Capabilities</th>
-            </tr>
-          </thead>
-          <tbody id="tbody"></tbody>
-        </table>
-      </div>
-      <div
-        style="
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-          gap: 8px;
-        "
-      >
-        <div class="pagination" id="pagination"></div>
-        <div class="per-page-select">
-          <label for="perPageSelect">Per page:</label>
-          <select id="perPageSelect" onchange="changePerPage(this.value)">
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100" selected>100</option>
-            <option value="200">200</option>
-            <option value="500">500</option>
+        <div class="calculator" id="picker" style="display: none">
+          <div class="calc-header">
+            <span>🎯 Model Picker</span>
+            <button
+              onclick="togglePicker()"
+              style="
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                cursor: pointer;
+                font-size: 16px;
+              "
+            >
+              ✕
+            </button>
+          </div>
+          <div class="picker-inputs">
+            <label
+              >Task
+              <select id="pickerTask" onchange="updatePicker()">
+                <option value="chat">General Chat</option>
+                <option value="code">Coding</option>
+                <option value="agent">AI Agents</option>
+                <option value="reasoning">Reasoning</option>
+                <option value="vision">Vision</option>
+                <option value="cheap">Cheapest</option>
+                <option value="free">Free</option>
+                <option value="large">Large Context</option>
+              </select></label
+            >
+            <label
+              >Budget
+              <select id="pickerBudget" onchange="updatePicker()">
+                <option value="any">Any</option>
+                <option value="free">Free</option>
+                <option value="low">Under $1/M</option>
+                <option value="mid">$1-5/M</option>
+                <option value="high">$5+/M</option>
+              </select></label
+            >
+          </div>
+          <div class="picker-result" id="pickerResult"></div>
+        </div>
+        <div class="controls">
+          <input
+            type="text"
+            id="search"
+            placeholder="Search models, providers, families… (press /)"
+            autocomplete="off"
+          />
+          <select id="providerFilter">
+            <option value="">All providers</option>
+          </select>
+          <select id="familyFilter">
+            <option value="">All families</option>
+          </select>
+          <select id="sortBy">
+            <option value="id">Sort: Model ID</option>
+            <option value="provider">Sort: Provider</option>
+            <option value="context">Sort: Context ↓</option>
+            <option value="input_price">Sort: Price ↓</option>
           </select>
         </div>
+        <div class="filter-bar">
+          <button class="filter-btn" data-filter="free">🆓 Free</button>
+          <button class="filter-btn" data-filter="open_weights">🔓 Open Weights</button>
+          <button class="filter-btn" data-filter="reasoning">🧠 Reasoning</button>
+          <button class="filter-btn" data-filter="tool_call">🔧 Tool Call</button>
+          <button class="filter-btn" data-filter="structured_output">📋 Structured Output</button>
+          <button class="filter-btn" data-filter="vision">👁️ Vision</button>
+          <button class="filter-btn" data-filter="image_output">🖼️ Image Gen</button>
+          <button class="filter-btn" data-filter="audio_input">🎤 Audio In</button>
+          <button class="filter-btn" data-filter="video_input">📹 Video In</button>
+          <button class="filter-btn" data-filter="audio_output">🔊 Audio Out</button>
+          <button class="filter-btn" data-filter="deprecated">⚠️ Deprecated</button>
+          <button
+            class="filter-btn"
+            data-filter="trending"
+            style="background: rgba(240, 136, 62, 0.1); border-color: rgba(240, 136, 62, 0.3)"
+          >
+            🔥 Trending
+          </button>
+        </div>
+        <div class="result-count" id="resultCount"></div>
+        <button class="export-btn" id="compareBtn" onclick="showCompare()" style="display: none">
+          ⚖️ Compare (<span id="compareCount">0</span>)
+        </button>
+        <button class="export-btn" onclick="shareView()" title="Share this view">🔗 Share</button>
+        <button class="export-btn" onclick="exportCSV()" title="Export filtered results as CSV">
+          ⬇ Export CSV
+        </button>
+        <button class="export-btn" onclick="exportJSON()" title="Export filtered results as JSON">
+          ⬇ Export JSON
+        </button>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th data-col="id">Model <span class="sort-arrow"></span></th>
+                <th data-col="provider">Provider <span class="sort-arrow"></span></th>
+                <th data-col="context">Context <span class="sort-arrow"></span></th>
+                <th data-col="input_price">Input $/M <span class="sort-arrow"></span></th>
+                <th data-col="output_price">Output $/M <span class="sort-arrow"></span></th>
+                <th>Capabilities</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+          "
+        >
+          <div class="pagination" id="pagination"></div>
+          <div class="per-page-select">
+            <label for="perPageSelect">Per page:</label>
+            <select id="perPageSelect" onchange="changePerPage(this.value)">
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="100" selected>100</option>
+              <option value="200">200</option>
+              <option value="500">500</option>
+            </select>
+          </div>
+        </div>
+        <div class="footer">
+          <a href="https://github.com/i-need-token/ai-models">⭐ Star on GitHub</a> ·
+          <a href="https://github.com/i-need-token/ai-models/releases/latest/download/models.json"
+            >JSON</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/action.yml">GitHub Action</a>
+          · <a href="https://www.npmjs.com/package/ai-models">npm</a> ·
+          <a href="https://huggingface.co/datasets/i-need-token/ai-models">Hugging Face</a>
+          <br />
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/quick-start.md"
+            >Quick Start</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/model-selection.md"
+            >Model Selection</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/free-models.md"
+            >Free Models</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/tool-calling.md"
+            >Tool Calling</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/reasoning-models.md"
+            >Reasoning</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/agentic-models.md"
+            >Agentic Models</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/code-models.md"
+            >Code Models</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/pricing-comparison.md"
+            >Pricing</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/cached-pricing.md"
+            >Cached Pricing</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/context-windows.md"
+            >Context Windows</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/vision-models.md"
+            >Vision</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/api.md">API</a>
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/faq.md">FAQ</a>
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/chat-models.md"
+            >Chat Models</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/multimodal-models.md"
+            >Multimodal</a
+          >
+          ·
+          <a href="https://github.com/i-need-token/ai-models/blob/main/docs/embedding-models.md"
+            >Embeddings</a
+          >
+          <br />
+          <a href="https://i-need-token.github.io/ai-models/best-ai-models.html"
+            >🏆 Best AI Models</a
+          >
+          ·
+          <a href="https://i-need-token.github.io/ai-models/free-ai-models.html">🆓 Free Models</a>
+          ·
+          <a href="https://i-need-token.github.io/ai-models/llm-pricing.html">💰 LLM Pricing</a>
+          ·
+          <a href="https://i-need-token.github.io/ai-models/openai-alternatives.html"
+            >🔄 OpenAI Alternatives</a
+          >
+          ·
+          <a href="https://i-need-token.github.io/ai-models/tool-calling-models-comparison.html"
+            >🔧 Tool Calling Models</a
+          >
+          ·
+          <a href="https://i-need-token.github.io/ai-models/ai-model-pricing-calculator.html"
+            >💰 Pricing Calculator</a
+          >
+        </div>
+        ·
+        <a href="https://i-need-token.github.io/ai-models/best-ai-models-for-vision.html"
+          >👁️ Vision</a
+        >
       </div>
-      <div class="footer">
-        <a href="https://github.com/i-need-token/ai-models">⭐ Star on GitHub</a> ·
-        <a href="https://github.com/i-need-token/ai-models/releases/latest/download/models.json"
-          >JSON</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/action.yml">GitHub Action</a> ·
-        <a href="https://www.npmjs.com/package/ai-models">npm</a> ·
-        <a href="https://huggingface.co/datasets/i-need-token/ai-models">Hugging Face</a>
-        <br />
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/quick-start.md"
-          >Quick Start</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/model-selection.md"
-          >Model Selection</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/free-models.md"
-          >Free Models</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/tool-calling.md"
-          >Tool Calling</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/reasoning-models.md"
-          >Reasoning</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/agentic-models.md"
-          >Agentic Models</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/code-models.md"
-          >Code Models</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/pricing-comparison.md"
-          >Pricing</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/cached-pricing.md"
-          >Cached Pricing</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/context-windows.md"
-          >Context Windows</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/vision-models.md"
-          >Vision</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/api.md">API</a>
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/faq.md">FAQ</a>
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/chat-models.md"
-          >Chat Models</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/multimodal-models.md"
-          >Multimodal</a
-        >
-        ·
-        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/embedding-models.md"
-          >Embeddings</a
-        >
-        <br />
-        <a href="https://i-need-token.github.io/ai-models/best-ai-models.html">🏆 Best AI Models</a>
-        ·
-        <a href="https://i-need-token.github.io/ai-models/free-ai-models.html">🆓 Free Models</a>
-        ·
-        <a href="https://i-need-token.github.io/ai-models/llm-pricing.html">💰 LLM Pricing</a>
-        ·
-        <a href="https://i-need-token.github.io/ai-models/openai-alternatives.html"
-          >🔄 OpenAI Alternatives</a
-        >
-        ·
-        <a href="https://i-need-token.github.io/ai-models/tool-calling-models-comparison.html"
-          >🔧 Tool Calling Models</a
-        >
-        ·
-        <a href="https://i-need-token.github.io/ai-models/ai-model-pricing-calculator.html"
-          >💰 Pricing Calculator</a
-        >
-      </div>
-      ·
-      <a href="https://i-need-token.github.io/ai-models/best-ai-models-for-vision.html"
-        >👁️ Vision</a
+      <div
+        class="modal-overlay"
+        id="compareModal"
+        onclick="if (event.target === this) closeCompare();"
       >
-    </div>
-    <div
-      class="modal-overlay"
-      id="compareModal"
-      onclick="if (event.target === this) closeCompare();"
-    >
-      <div class="modal compare-modal">
-        <div
-          class="modal-header"
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-          "
-        >
-          <h2 style="margin: 0">⚖️ Model Comparison</h2>
-          <button
-            onclick="closeCompare()"
+        <div class="modal compare-modal">
+          <div
+            class="modal-header"
             style="
-              background: none;
-              border: none;
-              color: var(--text-secondary);
-              font-size: 20px;
-              cursor: pointer;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 16px;
             "
           >
-            ✕
-          </button>
+            <h2 style="margin: 0">⚖️ Model Comparison</h2>
+            <button
+              onclick="closeCompare()"
+              style="
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                font-size: 20px;
+                cursor: pointer;
+              "
+            >
+              ✕
+            </button>
+          </div>
+          <div class="compare-content" id="compareContent"></div>
         </div>
-        <div class="compare-content" id="compareContent"></div>
       </div>
-    </div>
-    <div class="help-overlay" id="helpOverlay" onclick="if (event.target === this) closeHelp();">
-      <div class="help-panel">
-        <div
-          style="
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-          "
-        >
-          <h3 style="margin: 0">⌨️ Keyboard Shortcuts</h3>
-          <button
-            onclick="closeHelp()"
+      <div class="help-overlay" id="helpOverlay" onclick="if (event.target === this) closeHelp();">
+        <div class="help-panel">
+          <div
             style="
-              background: none;
-              border: none;
-              color: var(--text-secondary);
-              font-size: 18px;
-              cursor: pointer;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 12px;
             "
           >
-            ✕
-          </button>
-        </div>
-        <div class="help-grid">
-          <kbd>/</kbd><span>Focus search</span> <kbd>Esc</kbd
-          ><span>Close modal / clear search</span> <kbd>?</kbd><span>Show this help</span>
-          <kbd>←</kbd><span>Previous page</span> <kbd>→</kbd><span>Next page</span> <kbd>j</kbd
-          ><span>Next row</span> <kbd>k</kbd><span>Previous row</span> <kbd>Enter</kbd
-          ><span>Open model detail</span> <kbd>c</kbd><span>Toggle compare checkbox</span>
+            <h3 style="margin: 0">⌨️ Keyboard Shortcuts</h3>
+            <button
+              onclick="closeHelp()"
+              style="
+                background: none;
+                border: none;
+                color: var(--text-secondary);
+                font-size: 18px;
+                cursor: pointer;
+              "
+            >
+              ✕
+            </button>
+          </div>
+          <div class="help-grid">
+            <kbd>/</kbd><span>Focus search</span> <kbd>Esc</kbd
+            ><span>Close modal / clear search</span> <kbd>?</kbd><span>Show this help</span>
+            <kbd>←</kbd><span>Previous page</span> <kbd>→</kbd><span>Next page</span> <kbd>j</kbd
+            ><span>Next row</span> <kbd>k</kbd><span>Previous row</span> <kbd>Enter</kbd
+            ><span>Open model detail</span> <kbd>c</kbd><span>Toggle compare checkbox</span>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="star-nudge" id="starNudge">
-      <div class="star-nudge-content">
-        <button class="star-nudge-close" onclick="dismissNudge()">&times;</button>
-        <div style="font-size: 24px; margin-bottom: 8px">⭐</div>
-        <div style="font-weight: 600; margin-bottom: 4px">Finding this useful?</div>
-        <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px">
-          Star the repo to help others discover it
+      <div class="star-nudge" id="starNudge">
+        <div class="star-nudge-content">
+          <button class="star-nudge-close" onclick="dismissNudge()">&times;</button>
+          <div style="font-size: 24px; margin-bottom: 8px">⭐</div>
+          <div style="font-weight: 600; margin-bottom: 4px">Finding this useful?</div>
+          <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px">
+            Star the repo to help others discover it
+          </div>
+          <a
+            href="https://github.com/i-need-token/ai-models"
+            target="_blank"
+            class="star-nudge-btn"
+            onclick="dismissNudge()"
+            >Star on GitHub</a
+          >
         </div>
-        <a
-          href="https://github.com/i-need-token/ai-models"
-          target="_blank"
-          class="star-nudge-btn"
-          onclick="dismissNudge()"
-          >Star on GitHub</a
-        >
       </div>
-    </div>
-    <div class="toast" id="toast"></div>
-    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
-      <div class="modal" onclick="event.stopPropagation()">
-        <button class="modal-close" onclick="closeModal()">✕</button>
-        <h2 id="modalTitle"></h2>
-        <div class="modal-provider" id="modalProvider"></div>
-        <div class="modal-grid" id="modalGrid"></div>
-        <div class="modal-caps" id="modalCaps"></div>
+      <div class="toast" id="toast"></div>
+      <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+        <div class="modal" onclick="event.stopPropagation()">
+          <button class="modal-close" onclick="closeModal()">✕</button>
+          <h2 id="modalTitle"></h2>
+          <div class="modal-provider" id="modalProvider"></div>
+          <div class="modal-grid" id="modalGrid"></div>
+          <div class="modal-caps" id="modalCaps"></div>
+        </div>
       </div>
     </div>
 
