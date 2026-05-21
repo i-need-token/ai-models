@@ -21,6 +21,12 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 
 **[Quick start →](docs/quick-start.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)** · **[🔍 Search models →](https://i-need-token.github.io/ai-models/)** · **[Download CSV →](https://github.com/i-need-token/ai-models/releases/latest/download/models.csv)** · **[CDN access →](https://cdn.jsdelivr.net/npm/ai-models@latest/models.json)**
 
+> 💡 **Try it now** — fetch model data in one command:
+>
+> ```bash
+> curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{len(d)} models across {len(set(m["provider"] for m in d))} providers')"
+> ```
+
 ## Why This Catalog?
 
 |                                         |                                                                           |
