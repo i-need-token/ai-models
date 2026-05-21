@@ -37,6 +37,7 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 - [Quick Numbers](#quick-numbers)
 - [Example Model](#example-model)
 - [Programmatic Usage](#programmatic-usage)
+- [GitHub Action](#use-as-github-action)
 - [Documentation](#documentation)
 - [Provider Showcase](#provider-showcase)
 - [Contributing](#contributing)
