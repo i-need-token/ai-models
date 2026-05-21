@@ -31,6 +31,12 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 > curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{len(d["models"])} models across {len(set(m["provider"] for m in d["models"]))} providers')"
 > ```
 
+## 🖥️ Interactive Catalog
+
+[![AI Models Catalog — Interactive model comparison tool](docs/images/catalog-screenshot.png)](https://i-need-token.github.io/ai-models/)
+
+**[Try it live →](https://i-need-token.github.io/ai-models/)** — Search, filter, compare 4,587+ models with 25+ features including dark/light theme, keyboard shortcuts, price calculator, and model picker wizard.
+
 ## Why This Catalog?
 
 |                                         |                                                                           |
