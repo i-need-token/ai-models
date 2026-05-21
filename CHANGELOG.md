@@ -2,7 +2,7 @@
 
 All notable changes to the AI Models Catalog.
 
-## 2025-05
+## 2026-05
 
 ### Added
 
