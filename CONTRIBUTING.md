@@ -132,6 +132,20 @@ npm run typecheck
 npm run check
 ```
 
+## Good First Issues
+
+New contributors welcome! These tasks are beginner-friendly and don't require deep knowledge of the codebase:
+
+| Task                       | How                                                                                                                 | Difficulty |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------- |
+| Fix incorrect model data   | Find the model YAML in `providers/<id>/models/`, correct it, run `npx tsx scripts/validate.ts`                      | Easy       |
+| Add a provider README      | Create `providers/<id>/README.md` describing the data source and scraping strategy (see existing examples)          | Easy       |
+| Update outdated pricing    | Re-run `npx tsx providers/<id>/scrape.ts` and review the diff                                                       | Easy       |
+| Add missing model features | Add `tool_call`, `structured_output`, `reasoning`, etc. to model YAML files where the provider docs confirm support | Easy       |
+| Translate a doc to Chinese | Copy an English doc from `docs/` to `docs/zh/` and translate                                                        | Medium     |
+
+Look for issues labeled [`good first issue`](https://github.com/i-need-token/ai-models/labels/good%20first%20issue) or [`help wanted`](https://github.com/i-need-token/ai-models/labels/help%20wanted).
+
 ## Reporting Issues
 
 - **Incorrect model data** — open an issue with the provider name, model ID, and what's wrong
