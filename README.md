@@ -39,6 +39,7 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 - [Documentation](#documentation)
 - [Provider Showcase](#provider-showcase)
 - [Contributing](#contributing)
+- [Who's Using This](#whos-using-this)
 - [License](#license)
 
 ## Use Cases
@@ -253,19 +254,22 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 ## Documentation
 
 | Document                                                | Description                                                    |
-| ------------------------------------------------------- | -------------------------------------------------------------- |
+| ------------------------------------------------------- | -------------------------------------------------------------- | --- | ---------------------------------- |
 | [Quick Start Guide](docs/quick-start.md)                | Find the right model in 30 seconds                             |
+| [API & Programmatic Access](docs/api.md)                | Download models.json, code examples in JS/Python               |     | Find the right model in 30 seconds |
 | [Model Comparison](docs/model-comparison.md)            | Compare flagship, cost-effective, free, and open-weight models |
 | [Pricing Comparison](docs/pricing-comparison.md)        | Side-by-side pricing across providers and platforms            |
 | [Provider Overview](docs/providers.md)                  | All 95 providers organized by type and market                  |
 | [Data Schema Reference](docs/data-schema.md)            | Complete YAML schema — model, pricing, snapshot, provider      |
 | [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data                           |
+| [API & Programmatic Access](docs/api.md)                | Download models.json, code examples in JS/Python               |
 | [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog                      |
 | [模型对比（中文）](docs/zh/model-comparison.md)         | 旗舰、高性价比、免费和开源模型对比                             |
 | [定价对比（中文）](docs/zh/pricing-comparison.md)       | 各提供商和平台定价并排对比                                     |
 | [提供商概览（中文）](docs/zh/providers.md)              | 95 个提供商按类型和市场分类                                    |
 | [数据 Schema 参考（中文）](docs/zh/data-schema.md)      | 完整 YAML Schema — 模型、定价、快照、提供商                    |
 | [数据采集（中文）](docs/zh/data-acquisition.md)         | 数据采集指南                                                   |
+| [API 与编程访问（中文）](docs/zh/api.md)                | 下载 models.json，JS/Python 代码示例                           |
 | [设计原则与陷阱（中文）](docs/zh/lessons-learned.md)    | 经验教训                                                       |
 
 ## Design Principles
