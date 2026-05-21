@@ -4,7 +4,7 @@
 
 **The most comprehensive structured catalog of AI models on GitHub**
 
-95 providers · 4,682 models · 2,804 unique model IDs · First-party data only
+95 providers · 4,682 models · 2,807 unique model IDs · First-party data only
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Models](https://img.shields.io/badge/Models-4%2C682-green.svg)](providers/)
@@ -17,7 +17,7 @@
 
 Machine-readable YAML catalog of every major AI model provider and their models — pricing, context windows, modalities, capabilities, and more. All data sourced from first-party APIs and official documentation, never third-party aggregators.
 
-**[Compare models →](docs/model-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)**
+**[Compare models →](docs/model-comparison.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)**
 
 ## Why This Catalog?
 
@@ -52,30 +52,23 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 Each model is a single YAML file with structured metadata:
 
 ```yaml
-id: gpt-4o
-name: GPT-4o
-family: gpt-4o
-reasoning: true
+id: gpt-4.1
+name: GPT-4.1
+family: gpt-4.1
 tool_call: true
-attachment: true
 structured_output: true
 pricing:
-  input: 2.5 # USD per million tokens
-  output: 10
-  cache_read: 1.25
+  input: 2.0 # USD per million tokens
+  output: 8.0
+  cache_read: 0.5
 limit:
-  context: 128000 # tokens
-  output: 16384
+  context: 1047576 # tokens (~1M)
+  output: 32768
 modalities:
   input: [text, image]
   output: [text]
-knowledge: "2023-10"
-release_date: "2024-05-13"
-last_updated: "2024-08-06"
-snapshots:
-  - id: gpt-4o-2024-08-06
-  - id: gpt-4o-2024-05-13
-    deprecated: true
+release_date: "2026-05-18"
+last_updated: "2026-05-18"
 ```
 
 ### Pricing Types
@@ -193,11 +186,11 @@ import { parse } from "yaml";
 import { readFileSync } from "fs";
 
 // Load and validate a model
-const raw = readFileSync("providers/openai/models/gpt-4o.yaml", "utf-8");
+const raw = readFileSync("providers/openai/models/gpt-4.1.yaml", "utf-8");
 const model = ModelSchema.parse(parse(raw));
 
-console.log(model.pricing); // { input: 2.5, output: 10, cache_read: 1.25 }
-console.log(model.limit); // { context: 128000, output: 16384 }
+console.log(model.pricing); // { input: 2, output: 8, cache_read: 0.5 }
+console.log(model.limit); // { context: 1047576, output: 32768 }
 console.log(model.modalities); // { input: ["text", "image"], output: ["text"] }
 ```
 
@@ -239,11 +232,13 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | Document                                                | Description                                                    |
 | ------------------------------------------------------- | -------------------------------------------------------------- |
 | [Model Comparison](docs/model-comparison.md)            | Compare flagship, cost-effective, free, and open-weight models |
+| [Pricing Comparison](docs/pricing-comparison.md)        | Side-by-side pricing across providers and platforms            |
 | [Provider Overview](docs/providers.md)                  | All 95 providers organized by type and market                  |
 | [Data Schema Reference](docs/data-schema.md)            | Complete YAML schema — model, pricing, snapshot, provider      |
 | [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data                           |
 | [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog                      |
 | [模型对比（中文）](docs/zh/model-comparison.md)         | 旗舰、高性价比、免费和开源模型对比                             |
+| [定价对比（中文）](docs/zh/pricing-comparison.md)       | 各提供商和平台定价并排对比                                     |
 | [提供商概览（中文）](docs/zh/providers.md)              | 95 个提供商按类型和市场分类                                    |
 | [数据 Schema 参考（中文）](docs/zh/data-schema.md)      | 完整 YAML Schema — 模型、定价、快照、提供商                    |
 | [数据采集（中文）](docs/zh/data-acquisition.md)         | 数据采集指南                                                   |
