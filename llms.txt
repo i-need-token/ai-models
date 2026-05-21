@@ -388,3 +388,16 @@ npx tsx scripts/sync.ts           # all providers
 # Export to CSV
 npx tsx scripts/export-csv.ts
 ```
+## SEO Comparison Pages
+- Best AI Models: site/best-ai-models.html
+- Free AI Models: site/free-ai-models.html
+- LLM Pricing: site/llm-pricing.html
+- OpenAI Alternatives: site/openai-alternatives.html
+- AI Models by Provider: site/ai-models-by-provider.html
+- Context Window Comparison: site/context-window-comparison.html
+- Best AI Models for Coding: site/best-ai-models-for-coding.html
+- Best AI Models for Agents: site/best-ai-models-for-agents.html
+- Reasoning Models Comparison: site/reasoning-models-comparison.html
+- Cheapest AI Models: site/cheapest-ai-models.html
+- Tool Calling Models Comparison: site/tool-calling-models-comparison.html
+- AI Model Pricing Calculator: site/ai-model-pricing-calculator.html

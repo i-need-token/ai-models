@@ -43,6 +43,23 @@ A structured catalog of AI model providers and their models, stored as YAML file
 - [`docs/faq.md`](docs/faq.md) — frequently asked questions ([中文](docs/zh/faq.md))
 - [`docs/glossary.md`](docs/glossary.md) — key terms and definitions ([中文](docs/zh/glossary.md))
 
+## SEO Comparison Pages
+
+Curated standalone pages targeting high-volume search queries. All cross-linked with JSON-LD Article schema and OpenGraph/Twitter meta tags.
+
+- [`site/best-ai-models.html`](site/best-ai-models.html) — Best AI Models in 2025 (curated picks, quick compare)
+- [`site/free-ai-models.html`](site/free-ai-models.html) — Free AI Models (81 models, zero cost)
+- [`site/llm-pricing.html`](site/llm-pricing.html) — LLM Pricing Comparison (95 providers, cheapest per tier)
+- [`site/openai-alternatives.html`](site/openai-alternatives.html) — OpenAI Alternatives (95 providers, flagship comparison)
+- [`site/ai-models-by-provider.html`](site/ai-models-by-provider.html) — AI Models by Provider (95 providers, 20 detailed sections)
+- [`site/context-window-comparison.html`](site/context-window-comparison.html) — Context Window Comparison (7 context tiers, cheapest per tier)
+- [`site/best-ai-models-for-coding.html`](site/best-ai-models-for-coding.html) — Best AI Models for Coding (flagship, value, free, open-weight, large context, agentic)
+- [`site/best-ai-models-for-agents.html`](site/best-ai-models-for-agents.html) — Best AI Models for Agents (full-stack agentic, TC+reasoning, cheapest TC, free TC)
+- [`site/reasoning-models-comparison.html`](site/reasoning-models-comparison.html) — Reasoning Models Comparison (flagship head-to-head, cheapest, free, open weights, reasoning+TC)
+- [`site/cheapest-ai-models.html`](site/cheapest-ai-models.html) — Cheapest AI Models (cheapest overall, TC, reasoning, vision, 128K+, per provider)
+- [`site/tool-calling-models-comparison.html`](site/tool-calling-models-comparison.html) — Tool Calling Models Comparison (flagship, cheapest, free, open weights, TC+reasoning, TC+vision, TC+large context)
+- [`site/ai-model-pricing-calculator.html`](site/ai-model-pricing-calculator.html) — AI Model Pricing Calculator (interactive cost calculator, quick comparison, cheapest tables)
+
 ## Key Design Decisions
 
 - **YAML as the single source format** — flat, self-contained, no inheritance syntax in YAML
