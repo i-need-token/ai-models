@@ -10,6 +10,9 @@ A structured catalog of AI model providers and their models, stored as YAML file
 - [`types/schemas.ts`](types/schemas.ts) — Zod runtime validation schemas
 - [`docs/data-acquisition.md`](docs/data-acquisition.md) — How we acquire and update model data ([中文](docs/zh/data-acquisition.md))
 - [`docs/lessons-learned.md`](docs/lessons-learned.md) — Design principles and pitfalls ([中文](docs/zh/lessons-learned.md))
+- [`docs/providers.md`](docs/providers.md) — Provider overview by type and market ([中文](docs/zh/providers.md))
+- [`docs/model-comparison.md`](docs/model-comparison.md) — Model comparison tables ([中文](docs/zh/model-comparison.md))
+- [`docs/data-schema.md`](docs/data-schema.md) — Data schema reference ([中文](docs/zh/data-schema.md))
 
 ## Key Design Decisions
 
