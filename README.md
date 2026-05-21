@@ -299,9 +299,26 @@ See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScri
 
 ### Use as GitHub Action
 
-Fetch catalog data directly in your CI workflows:
+```yaml
+- uses: i-need-token/ai-models@main
+  id: catalog
 
-true
+- name: Use catalog data
+  run: |
+    echo "Models: ${{ steps.catalog.outputs.model-count }}"
+    echo "Providers: ${{ steps.catalog.outputs.provider-count }}"
+```
+
+Filter models with [JMESPath](https://jmespath.org/):
+
+```yaml
+- uses: i-need-token/ai-models@main
+  id: tool-models
+  with:
+    filter: "models[?tool_call==`true`]" # only tool-calling models
+```
+
+See [`action.yml`](action.yml) for all inputs and outputs.
 
 ## Project Structure
 
