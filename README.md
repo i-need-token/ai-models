@@ -15,6 +15,8 @@
 
 </div>
 
+> ⭐ **If this catalog helps you choose the right model, please star this repo — it helps others discover it!**
+
 ---
 
 Machine-readable YAML catalog of every major AI model provider and their models — pricing, context windows, modalities, capabilities, and more. All data sourced from first-party APIs and official documentation, never third-party aggregators.
