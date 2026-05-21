@@ -569,6 +569,18 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 | **Interactive catalog**  | Search, filter, compare, price calculator, model picker | [i-need-token.github.io/ai-models](https://i-need-token.github.io/ai-models/)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
 | **SEO comparison pages** | 12 curated comparison pages for discoverability         | [Best Models](https://i-need-token.github.io/ai-models/best-ai-models.html), [Free Models](https://i-need-token.github.io/ai-models/free-ai-models.html), [Pricing](https://i-need-token.github.io/ai-models/llm-pricing.html), [OpenAI Alt](https://i-need-token.github.io/ai-models/openai-alternatives.html), [By Provider](https://i-need-token.github.io/ai-models/ai-models-by-provider.html), [Context](https://i-need-token.github.io/ai-models/context-window-comparison.html), [Coding](https://i-need-token.github.io/ai-models/best-ai-models-for-coding.html), [Agents](https://i-need-token.github.io/ai-models/best-ai-models-for-agents.html), [Reasoning](https://i-need-token.github.io/ai-models/reasoning-models-comparison.html), [Cheapest](https://i-need-token.github.io/ai-models/cheapest-ai-models.html), [Tool Calling](https://i-need-token.github.io/ai-models/tool-calling-models-comparison.html), [Pricing Calc](https://i-need-token.github.io/ai-models/ai-model-pricing-calculator.html) |
 
+## What's New
+
+### v0.2.0 (May 2025)
+
+- **12 SEO comparison pages** — Best Models, Free Models, LLM Pricing, OpenAI Alternatives, By Provider, Context Windows, Coding, Agents, Reasoning, Cheapest, Tool Calling, Pricing Calculator
+- **Interactive catalog** — 25+ features including dark/light theme, keyboard shortcuts, model detail modal, price calculator, model picker wizard, copy as code, share button, j/k vim navigation
+- **95 providers** — comprehensive coverage of all major AI providers
+- **4,587+ models** — with pricing, context windows, modalities, and capabilities
+- **GitHub Action v2** — version, format, and output-dir inputs
+- **npm package** — `npm install ai-models`
+- **68 docs** — 34 EN + 34 ZH, all bilingual, all cross-linked
+
 ## Roadmap
 
 - [x] ~~Embedding models documentation~~ → [docs/embedding-models.md](docs/embedding-models.md)
