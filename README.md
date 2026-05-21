@@ -110,25 +110,25 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 
 ## Use Cases
 
-| Use Case                       | How This Catalog Helps                                                                                                  |
-| ------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
-| 💰 **Find the cheapest model** | [Pricing comparison](docs/pricing-comparison.md) across 95 providers                                                    |
-| 🔎 **Pick the right model**    | [Model comparison](docs/model-comparison.md) by capability, context, cost                                               |
-| 🔍 **Search & filter models**  | [Interactive catalog](https://i-need-token.github.io/ai-models/) — search, sort, filter, price calculator, model picker |
-| 🔌 **Build an API gateway**    | Structured pricing + modality data for routing decisions                                                                |
-| 📊 **Track the AI landscape**  | 2,712 models with release dates, deprecation status                                                                     |
-| 🤖 **Power an AI tool**        | TypeScript types + Zod validation = type-safe access                                                                    |
-| 🌍 **Find local/EU providers** | [Provider overview](docs/providers.md) with market segmentation                                                         |
-| 🎯 **Choose the right model**  | [Model selection guide](docs/model-selection.md) — decision framework                                                   |
-| 💸 **Optimize API costs**      | [Cached pricing](docs/cached-pricing.md) — 1,374 models with 50-90% savings                                             |
-| 🧪 **Prototype for free**      | [Free models](docs/free-models.md) — 81 models at zero cost                                                             |
-| 💬 **Build chat apps**         | [Chat models](docs/chat-models.md) — 2,350 models with tool calling                                                     |
-| 🖼️ **Process images/audio**    | [Multimodal models](docs/multimodal-models.md) — 1,519 models with vision/audio/video                                   |
-| 🔎 **Power semantic search**   | [Embedding models](docs/embedding-models.md) — vector search & RAG                                                      |
-| 🤖 **Build AI agents**         | [Agentic models](docs/agentic-models.md) — 1,080 models with tool_call + reasoning                                      |
-| 💻 **Generate & review code**  | [Code models](docs/code-models.md) — 189 code-focused models                                                            |
-| 🎙️ **Add voice/speech**        | [Audio models](docs/audio-models.md) — 118 audio input + 34 audio output                                                |
-| 🔄 **Switch from OpenAI**      | [OpenAI alternatives](docs/openai-alternatives.md) — pricing, free options, compat                                      |
+| Use Case                       | How This Catalog Helps                                                                                                                     |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| 💰 **Find the cheapest model** | [Pricing comparison](docs/pricing-comparison.md) across 95 providers                                                                       |
+| 🔎 **Pick the right model**    | [Model comparison](docs/model-comparison.md) by capability, context, cost                                                                  |
+| 🔍 **Search & compare models** | [Interactive catalog](https://i-need-token.github.io/ai-models/) — search, filter, price calculator, model picker, side-by-side comparison |
+| 🔌 **Build an API gateway**    | Structured pricing + modality data for routing decisions                                                                                   |
+| 📊 **Track the AI landscape**  | 2,712 models with release dates, deprecation status                                                                                        |
+| 🤖 **Power an AI tool**        | TypeScript types + Zod validation = type-safe access                                                                                       |
+| 🌍 **Find local/EU providers** | [Provider overview](docs/providers.md) with market segmentation                                                                            |
+| 🎯 **Choose the right model**  | [Model selection guide](docs/model-selection.md) — decision framework                                                                      |
+| 💸 **Optimize API costs**      | [Cached pricing](docs/cached-pricing.md) — 1,374 models with 50-90% savings                                                                |
+| 🧪 **Prototype for free**      | [Free models](docs/free-models.md) — 81 models at zero cost                                                                                |
+| 💬 **Build chat apps**         | [Chat models](docs/chat-models.md) — 2,350 models with tool calling                                                                        |
+| 🖼️ **Process images/audio**    | [Multimodal models](docs/multimodal-models.md) — 1,519 models with vision/audio/video                                                      |
+| 🔎 **Power semantic search**   | [Embedding models](docs/embedding-models.md) — vector search & RAG                                                                         |
+| 🤖 **Build AI agents**         | [Agentic models](docs/agentic-models.md) — 1,080 models with tool_call + reasoning                                                         |
+| 💻 **Generate & review code**  | [Code models](docs/code-models.md) — 189 code-focused models                                                                               |
+| 🎙️ **Add voice/speech**        | [Audio models](docs/audio-models.md) — 118 audio input + 34 audio output                                                                   |
+| 🔄 **Switch from OpenAI**      | [OpenAI alternatives](docs/openai-alternatives.md) — pricing, free options, compat                                                         |
 
 ## Quick Numbers
 
@@ -559,14 +559,14 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Ecosystem & Integrations
 
-| Integration             | Description                                    | Link                                                                                                     |
-| ----------------------- | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| **npm package**         | Install models.json via npm                    | [`npm install ai-models`](https://www.npmjs.com/package/ai-models)                                       |
-| **jsDelivr CDN**        | Fetch models.json from CDN                     | [cdn.jsdelivr.net/npm/ai-models](https://cdn.jsdelivr.net/npm/ai-models@latest/models.json)              |
-| **GitHub Action**       | Use in CI/CD workflows                         | [action.yml](action.yml)                                                                                 |
-| **Hugging Face**        | Dataset on HF Hub                              | [huggingface.co/datasets/i-need-token/ai-models](https://huggingface.co/datasets/i-need-token/ai-models) |
-| **CSV download**        | Import into Excel/Sheets                       | [GitHub Releases](https://github.com/i-need-token/ai-models/releases)                                    |
-| **Interactive catalog** | Search, filter, price calculator, model picker | [i-need-token.github.io/ai-models](https://i-need-token.github.io/ai-models/)                            |
+| Integration             | Description                                             | Link                                                                                                     |
+| ----------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **npm package**         | Install models.json via npm                             | [`npm install ai-models`](https://www.npmjs.com/package/ai-models)                                       |
+| **jsDelivr CDN**        | Fetch models.json from CDN                              | [cdn.jsdelivr.net/npm/ai-models](https://cdn.jsdelivr.net/npm/ai-models@latest/models.json)              |
+| **GitHub Action**       | Use in CI/CD workflows                                  | [action.yml](action.yml)                                                                                 |
+| **Hugging Face**        | Dataset on HF Hub                                       | [huggingface.co/datasets/i-need-token/ai-models](https://huggingface.co/datasets/i-need-token/ai-models) |
+| **CSV download**        | Import into Excel/Sheets                                | [GitHub Releases](https://github.com/i-need-token/ai-models/releases)                                    |
+| **Interactive catalog** | Search, filter, compare, price calculator, model picker | [i-need-token.github.io/ai-models](https://i-need-token.github.io/ai-models/)                            |
 
 ## Roadmap
 
