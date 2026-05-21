@@ -411,6 +411,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [Vision Models](docs/vision-models.md)                              | 1,487 vision models — cheapest, largest context, open-weight    |
 | [Image Generation](docs/image-generation.md)                        | 28 image generation models — DALL·E, Imagen, GPT-5 Image        |
 | [Audio Models](docs/audio-models.md)                                | 118 audio input + 34 audio output models                        |
+| [Video Models](docs/video-models.md)                                | 167 video input + 4 video output models                         |
 | [Structured Output](docs/structured-output.md)                      | 829 JSON-mode models — cheapest, free, with tool calling        |
 | [🔍 Interactive Catalog](https://i-need-token.github.io/ai-models/) | Search, sort, and filter all 4,587 models in your browser       |
 | [Quick Start Guide](docs/quick-start.md)                            | Find the right model in 30 seconds                              |
@@ -420,6 +421,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [Glossary](docs/glossary.md)                                        | Key terms and definitions for AI model terminology              |
 | [Model Comparison](docs/model-comparison.md)                        | Compare flagship, cost-effective, free, and open-weight models  |
 | [Pricing Comparison](docs/pricing-comparison.md)                    | Side-by-side pricing across providers and platforms             |
+| [Cached Pricing](docs/cached-pricing.md)                            | 1,353 models with prompt caching — 50-90% input cost savings    |
 | [Modality Matrix](docs/modality-matrix.md)                          | Vision, image gen, audio, video — which models support what     |
 | [Context Window Comparison](docs/context-windows.md)                | Largest context windows, best value per tier                    |
 | [Free AI Models](docs/free-models.md)                               | 81 free models — tool calling, reasoning, vision at no cost     |
@@ -432,28 +434,30 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 
 **中文文档：**
 
-| 文档                                         | 描述                                            |
-| -------------------------------------------- | ----------------------------------------------- |
-| [工具调用模型](docs/zh/tool-calling.md)      | 2,350 个工具调用模型 — 最便宜、最大上下文、免费 |
-| [视觉模型](docs/zh/vision-models.md)         | 1,487 个视觉模型 — 最便宜、最大上下文、开源权重 |
-| [快速入门](docs/zh/quick-start.md)           | 30 秒内找到适合的模型                           |
-| [图像生成](docs/zh/image-generation.md)      | 28 个图像生成模型 — DALL·E、Imagen、GPT-5 Image |
-| [音频模型](docs/zh/audio-models.md)          | 118 个音频输入 + 34 个音频输出模型              |
-| [API 与编程访问](docs/zh/api.md)             | 下载 models.json，JS/Python 代码示例            |
-| [代码示例](docs/zh/code-examples.md)         | TypeScript、Python、Go、Rust、jq 实用示例       |
-| [常见问题](docs/zh/faq.md)                   | 关于目录、数据和贡献的常见问题                  |
-| [结构化输出](docs/zh/structured-output.md)   | 829 个 JSON 模式模型 — 最便宜、免费、带工具调用 |
-| [模型对比](docs/zh/model-comparison.md)      | 旗舰、高性价比、免费和开源模型对比              |
-| [定价对比](docs/zh/pricing-comparison.md)    | 各提供商和平台定价并排对比                      |
-| [模态矩阵](docs/zh/modality-matrix.md)       | 视觉、图像生成、音频、视频 — 各模型支持什么     |
-| [上下文窗口对比](docs/zh/context-windows.md) | 最大上下文窗口，各层级最佳性价比                |
-| [免费 AI 模型](docs/zh/free-models.md)       | 81 个免费模型 — 工具调用、推理、视觉零成本      |
-| [开源权重模型](docs/zh/open-weights.md)      | 513 个开源权重模型 — 自有基础设施运行           |
-| [提供商概览](docs/zh/providers.md)           | 95 个提供商按类型和市场分类                     |
-| [推理模型](docs/zh/reasoning-models.md)      | 1,306 个推理模型 — 链式思维和扩展思考           |
-| [数据 Schema 参考](docs/zh/data-schema.md)   | 完整 YAML Schema — 模型、定价、快照、提供商     |
-| [数据采集](docs/zh/data-acquisition.md)      | 数据采集指南                                    |
-| [设计原则与陷阱](docs/zh/lessons-learned.md) | 经验教训                                        |
+| 文档                                         | 描述                                             |
+| -------------------------------------------- | ------------------------------------------------ |
+| [工具调用模型](docs/zh/tool-calling.md)      | 2,350 个工具调用模型 — 最便宜、最大上下文、免费  |
+| [视觉模型](docs/zh/vision-models.md)         | 1,487 个视觉模型 — 最便宜、最大上下文、开源权重  |
+| [快速入门](docs/zh/quick-start.md)           | 30 秒内找到适合的模型                            |
+| [图像生成](docs/zh/image-generation.md)      | 28 个图像生成模型 — DALL·E、Imagen、GPT-5 Image  |
+| [音频模型](docs/zh/audio-models.md)          | 118 个音频输入 + 34 个音频输出模型               |
+| [视频模型](docs/zh/video-models.md)          | 167 个视频输入 + 4 个视频输出模型                |
+| [API 与编程访问](docs/zh/api.md)             | 下载 models.json，JS/Python 代码示例             |
+| [代码示例](docs/zh/code-examples.md)         | TypeScript、Python、Go、Rust、jq 实用示例        |
+| [常见问题](docs/zh/faq.md)                   | 关于目录、数据和贡献的常见问题                   |
+| [结构化输出](docs/zh/structured-output.md)   | 829 个 JSON 模式模型 — 最便宜、免费、带工具调用  |
+| [模型对比](docs/zh/model-comparison.md)      | 旗舰、高性价比、免费和开源模型对比               |
+| [定价对比](docs/zh/pricing-comparison.md)    | 各提供商和平台定价并排对比                       |
+| [缓存定价](docs/zh/cached-pricing.md)        | 1,353 个支持提示缓存的模型 — 输入成本节省 50-90% |
+| [模态矩阵](docs/zh/modality-matrix.md)       | 视觉、图像生成、音频、视频 — 各模型支持什么      |
+| [上下文窗口对比](docs/zh/context-windows.md) | 最大上下文窗口，各层级最佳性价比                 |
+| [免费 AI 模型](docs/zh/free-models.md)       | 81 个免费模型 — 工具调用、推理、视觉零成本       |
+| [开源权重模型](docs/zh/open-weights.md)      | 513 个开源权重模型 — 自有基础设施运行            |
+| [提供商概览](docs/zh/providers.md)           | 95 个提供商按类型和市场分类                      |
+| [推理模型](docs/zh/reasoning-models.md)      | 1,306 个推理模型 — 链式思维和扩展思考            |
+| [数据 Schema 参考](docs/zh/data-schema.md)   | 完整 YAML Schema — 模型、定价、快照、提供商      |
+| [数据采集](docs/zh/data-acquisition.md)      | 数据采集指南                                     |
+| [设计原则与陷阱](docs/zh/lessons-learned.md) | 经验教训                                         |
 
 ## Design Principles
 
