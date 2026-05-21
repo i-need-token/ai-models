@@ -21,7 +21,7 @@
 
 Machine-readable YAML catalog of every major AI model provider and their models — pricing, context windows, modalities, capabilities, and more. All data sourced from first-party APIs and official documentation, never third-party aggregators.
 
-**[Quick start →](docs/quick-start.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)** · **[🔍 Search models →](https://i-need-token.github.io/ai-models/)** · **[Download CSV →](https://github.com/i-need-token/ai-models/releases/latest/download/models.csv)** · **[CDN access →](https://cdn.jsdelivr.net/npm/ai-models@latest/models.json)**
+**[Quick start →](docs/quick-start.md)** · **[Choose a model →](docs/model-selection.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[🔍 Search →](https://i-need-token.github.io/ai-models/)** · **[Download CSV →](https://github.com/i-need-token/ai-models/releases/latest/download/models.csv)** · **[CDN →](https://cdn.jsdelivr.net/npm/ai-models@latest/models.json)**
 
 > 💡 **Try it now** — fetch model data in one command:
 >
