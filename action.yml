@@ -1,0 +1,57 @@
+name: "AI Models Catalog"
+description: "Fetch model data from the AI Models Catalog for use in your workflows"
+branding:
+  icon: database
+  color: purple
+inputs:
+  format:
+    description: "Output format — json or csv"
+    required: false
+    default: "json"
+  filter:
+    description: "JMESPath filter expression (e.g. 'models[?tool_call==`true`]')"
+    required: false
+    default: ""
+outputs:
+  data:
+    description: "The fetched model data"
+    value: ${{ steps.fetch.outputs.data }}
+  model-count:
+    description: "Number of models in the catalog"
+    value: ${{ steps.fetch.outputs.model_count }}
+  provider-count:
+    description: "Number of providers in the catalog"
+    value: ${{ steps.fetch.outputs.provider_count }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Fetch catalog
+      id: fetch
+      shell: bash
+      run: |
+        if [ "${{ inputs.format }}" = "csv" ]; then
+          URL="https://github.com/i-need-token/ai-models/releases/latest/download/models.csv"
+          curl -sL "$URL" -o models.csv
+          echo "data<<EOF" >> "$GITHUB_OUTPUT"
+          cat models.csv >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          COUNT=$(tail -n +2 models.csv | wc -l | tr -d ' ')
+          echo "model_count=$COUNT" >> "$GITHUB_OUTPUT"
+          echo "provider_count=0" >> "$GITHUB_OUTPUT"
+        else
+          URL="https://cdn.jsdelivr.net/npm/ai-models@latest/models.json"
+          curl -sL "$URL" -o models.json
+          if [ -n "${{ inputs.filter }}" ]; then
+            DATA=$(jq -c '${{ inputs.filter }}' models.json)
+          else
+            DATA=$(cat models.json)
+          fi
+          echo "data<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$DATA" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+          MC=$(jq '.models | length' models.json)
+          PC=$(jq '.stats.providers' models.json)
+          echo "model_count=$MC" >> "$GITHUB_OUTPUT"
+          echo "provider_count=$PC" >> "$GITHUB_OUTPUT"
+        fi
