@@ -545,6 +545,9 @@ Thanks to everyone who has contributed to this catalog!
 
 Want to contribute? Check out [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
+- 📋 [Changelog](CHANGELOG.md) — what's new in each release
+- 🔒 [Security Policy](SECURITY.md) — reporting vulnerabilities
+
 ## License
 
 [MIT](LICENSE)
