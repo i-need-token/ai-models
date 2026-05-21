@@ -95,6 +95,26 @@ release_date: "2026-05-18"
 last_updated: "2026-05-18"
 ```
 
+<details>
+<summary>Same model as JSON (from <code>models.json</code>)</summary>
+
+```json
+{
+  "id": "gpt-4.1",
+  "name": "GPT-4.1",
+  "family": "gpt-4.1",
+  "tool_call": true,
+  "structured_output": true,
+  "pricing": { "input": 2.0, "output": 8.0, "cache_read": 0.5 },
+  "limit": { "context": 1047576, "output": 32768 },
+  "modalities": { "input": ["text", "image"], "output": ["text"] },
+  "release_date": "2026-05-18",
+  "last_updated": "2026-05-18"
+}
+```
+
+</details>
+
 ### Pricing Types
 
 | Type           | When                      | Example                         |
