@@ -1,0 +1,52 @@
+# AI Models Catalog
+
+> Structured YAML catalog of 4,587 AI models across 95 providers — pricing, context windows, modalities, capabilities. First-party data only.
+
+## What is this?
+
+A machine-readable YAML catalog of every major AI model provider and their models. Every data point comes from the provider's own API or documentation, never third-party aggregators.
+
+## Key Stats
+
+- 95 providers
+- 4,587 model files
+- 2,712 unique model IDs
+- 441 model families
+- 1,306 reasoning models
+- 2,350 tool-calling models
+- 527 open-weight models
+- 81 free models
+- 1,487 vision models
+
+## Data Format
+
+Each model is a single YAML file at `providers/<provider>/models/<model-id>.yaml`:
+
+```yaml
+id: gpt-4.1
+name: GPT-4.1
+family: gpt-4.1
+tool_call: true
+structured_output: true
+pricing:
+  input: 2.0
+  output: 8.0
+  cache_read: 0.5
+limit:
+  context: 1047576
+  output: 32768
+modalities:
+  input: [text, image]
+  output: [text]
+```
+
+## Documentation
+
+- [Model Comparison](docs/model-comparison.md) — flagship, cost-effective, free, open-weight
+- [Pricing Comparison](docs/pricing-comparison.md) — side-by-side pricing across providers
+- [Provider Overview](docs/providers.md) — all providers by type and market
+- [Data Schema Reference](docs/data-schema.md) — complete YAML schema
+
+## Covered Providers
+
+OpenAI, Anthropic, Google, Meta, DeepSeek, Alibaba Cloud, Mistral, xAI, Cohere, NVIDIA, IBM, Microsoft, Amazon Bedrock, Azure OpenAI, Google Vertex AI, OpenRouter, Together AI, Fireworks AI, Groq, Cerebras, DeepInfra, and 75+ more.
