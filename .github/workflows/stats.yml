@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: "0 0 * * 0" # weekly on Sunday
 
+permissions:
+  contents: write
+
 jobs:
   stats:
     runs-on: ubuntu-latest
@@ -35,6 +38,9 @@ jobs:
           cat > .github/badges/providers.json << EOF
           {"schemaVersion":1,"label":"providers","message":"$PROVIDERS","color":"blue"}
           EOF
+
+      - name: Format badges
+        run: npx oxfmt --write .github/badges/*.json
 
       - name: Commit badges
         run: |
