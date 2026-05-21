@@ -4,6 +4,8 @@ Thank you for your interest in contributing! This guide covers everything you ne
 
 ## Quick Start
 
+> 💡 **Try the [Interactive Catalog](https://i-need-token.github.io/ai-models/)** — search, sort, and filter all 4,587 models in your browser.
+
 1. Fork the repository
 2. Create your feature branch: `git checkout -b feature/my-provider`
 3. Make your changes
