@@ -21,12 +21,12 @@
 
 Machine-readable YAML catalog of every major AI model provider and their models — pricing, context windows, modalities, capabilities, and more. All data sourced from first-party APIs and official documentation, never third-party aggregators.
 
-**[Quick start →](docs/quick-start.md)** · **[Choose a model →](docs/model-selection.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[🔍 Search →](https://i-need-token.github.io/ai-models/)** · **[Download CSV →](https://github.com/i-need-token/ai-models/releases/latest/download/models.csv)** · **[CDN →](https://cdn.jsdelivr.net/npm/ai-models@latest/models.json)**
+**[Quick start →](docs/quick-start.md)** · **[Choose a model →](docs/model-selection.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[🔍 Search →](https://i-need-token.github.io/ai-models/)** · **[Download CSV →](https://github.com/i-need-token/ai-models/releases/latest/download/models.csv)** · **[JSON →](https://github.com/i-need-token/ai-models/releases/latest/download/models.json)**
 
 > 💡 **Try it now** — fetch model data in one command:
 >
 > ```bash
-> curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{len(d)} models across {len(set(m["provider"] for m in d))} providers')"
+> curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{len(d)} models across {len(set(m["provider"] for m in d))} providers')"
 > ```
 
 ## Why This Catalog?
@@ -351,30 +351,39 @@ curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/mode
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
 ```
 
-### CDN Access (no install)
+### Direct Download (no install)
 
-The compiled JSON is available via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models) — no download or install needed:
+The compiled JSON is always available from [GitHub Releases](https://github.com/i-need-token/ai-models/releases):
+
+```bash
+# Download latest models.json
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+
+# Download latest models.csv (for Excel/Sheets)
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
+```
 
 ```html
 <!-- Use in any HTML page -->
 <script type="module">
-  const catalog = await fetch("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").then(
-    (r) => r.json(),
-  );
-  console.log(catalog.models.length); // 4,587
+  const catalog = await fetch(
+    "https://github.com/i-need-token/ai-models/releases/latest/download/models.json",
+  ).then((r) => r.json());
+  console.log(catalog.length); // 4,587
 </script>
-```
-
-```bash
-# Direct curl (always up-to-date)
-curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
 ```
 
 ```python
 # Python — no pip install needed
 import urllib.request, json
-catalog = json.loads(urllib.request.urlopen("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").read())
-print(len(catalog["models"]))  # 4587
+catalog = json.loads(urllib.request.urlopen("https://github.com/i-need-token/ai-models/releases/latest/download/models.json").read())
+print(len(catalog))  # 4587
+```
+
+Once the npm package is published, you can also use [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models):
+
+```bash
+curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '. | length'
 ```
 
 See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScript and Python.
