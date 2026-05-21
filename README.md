@@ -267,7 +267,9 @@ curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/mode
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
 ```
 
-See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScript and Python.## Project Structure
+See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScript and Python.
+
+## Project Structure
 
 ```
 ├── providers/           # 95 provider directories
