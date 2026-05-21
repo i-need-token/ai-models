@@ -8,3 +8,4 @@ dist/
 models.csv
 stats.json
 social-preview.png
+site/models.json

@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - "site/**"
+      - "providers/**"
+      - "scripts/compile.ts"
       - ".github/workflows/pages.yml"
   workflow_dispatch:
 
@@ -29,6 +31,10 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Compile models.json
+        run: npx tsx scripts/compile.ts
+      - name: Copy data to site
+        run: cp dist/models.json site/models.json
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
