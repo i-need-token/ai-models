@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Multimodal AI Models — 1,548 Vision, Audio & Image Models Compared | AI Models Catalog
+    </title>
+    <meta
+      name="description"
+      content="Compare 1,548 multimodal AI models — vision (1,487), audio input (118), image generation (28), audio output (34), and video understanding (167). Pricing, context windows, and capabilities."
+    />
+    <meta
+      name="keywords"
+      content="multimodal AI models, vision language models, audio AI models, image generation models, video understanding AI, text to image, text to audio, multimodal LLM"
+    />
+    <link
+      rel="canonical"
+      href="https://i-need-token.github.io/ai-models/multimodal-ai-models.html"
+    />
+    <meta
+      property="og:title"
+      content="Multimodal AI Models — 1,548 Vision, Audio & Image Models Compared"
+    />
+    <meta
+      property="og:description"
+      content="Compare 1,548 multimodal AI models — vision, audio, image generation, and video understanding. Pricing, context windows, and capabilities."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://i-need-token.github.io/ai-models/multimodal-ai-models.html"
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/catalog-screenshot.png"
+    />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="640" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/catalog-screenshot.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Multimodal AI Models — 1,548 Vision, Audio & Image Models Compared",
+        "description": "Compare 1,548 multimodal AI models — vision, audio, image generation, and video understanding.",
+        "author": { "@type": "Organization", "name": "AI Models Catalog" },
+        "publisher": { "@type": "Organization", "name": "AI Models Catalog" },
+        "url": "https://i-need-token.github.io/ai-models/multimodal-ai-models.html",
+        "datePublished": "2025-05-21",
+        "dateModified": "2025-05-21"
+      }
+    </script>
+    <style>
+      :root {
+        --bg: #fff;
+        --text: #1a1a2e;
+        --accent: #e17055;
+        --accent2: #6c5ce7;
+        --border: #e0e0e0;
+        --card-bg: #f8f9fa;
+        --code-bg: #f1f3f5;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1a1a2e;
+          --text: #e0e0e0;
+          --accent: #fab1a0;
+          --accent2: #a29bfe;
+          --border: #333;
+          --card-bg: #16213e;
+          --code-bg: #0f3460;
+        }
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      header {
+        background: linear-gradient(135deg, #e17055, #6c5ce7);
+        color: #fff;
+        padding: 60px 0 40px;
+        text-align: center;
+      }
+      header h1 {
+        font-size: 2.2em;
+        margin-bottom: 10px;
+      }
+      header p {
+        font-size: 1.15em;
+        opacity: 0.95;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .stats-bar {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        margin-top: 25px;
+        flex-wrap: wrap;
+      }
+      .stat {
+        text-align: center;
+      }
+      .stat .num {
+        font-size: 2em;
+        font-weight: 800;
+      }
+      .stat .label {
+        font-size: 0.85em;
+        opacity: 0.9;
+      }
+      h2 {
+        color: var(--accent);
+        margin: 40px 0 15px;
+        font-size: 1.6em;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 8px;
+      }
+      h3 {
+        color: var(--accent2);
+        margin: 25px 0 10px;
+        font-size: 1.2em;
+      }
+      p,
+      li {
+        margin: 8px 0;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        font-size: 0.9em;
+      }
+      th,
+      td {
+        border: 1px solid var(--border);
+        padding: 8px 12px;
+        text-align: left;
+      }
+      th {
+        background: var(--accent);
+        color: #fff;
+        font-weight: 600;
+      }
+      tr:nth-child(even) {
+        background: var(--card-bg);
+      }
+      td code {
+        background: var(--code-bg);
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-size: 0.88em;
+      }
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 15px 0;
+      }
+      .cta {
+        display: inline-block;
+        background: linear-gradient(135deg, #e17055, #6c5ce7);
+        color: #fff;
+        padding: 12px 28px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        margin: 10px 5px;
+      }
+      .cta:hover {
+        opacity: 0.9;
+        transform: translateY(-1px);
+      }
+      .modality-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 15px 0;
+      }
+      .modality-card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 15px;
+        text-align: center;
+      }
+      .modality-card .icon {
+        font-size: 2em;
+      }
+      .modality-card .count {
+        font-size: 1.5em;
+        font-weight: 800;
+        color: var(--accent);
+      }
+      .modality-card .name {
+        font-size: 0.9em;
+      }
+      footer {
+        text-align: center;
+        padding: 30px;
+        border-top: 1px solid var(--border);
+        margin-top: 40px;
+        font-size: 0.9em;
+      }
+      footer a {
+        color: var(--accent);
+      }
+      .toc {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+      }
+      .toc a {
+        color: var(--accent2);
+        text-decoration: none;
+      }
+      .toc a:hover {
+        text-decoration: underline;
+      }
+      .related-pages {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 12px;
+        margin: 20px 0;
+      }
+      .related-pages a {
+        display: block;
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 12px;
+        text-decoration: none;
+        color: var(--text);
+        font-size: 0.9em;
+      }
+      .related-pages a:hover {
+        border-color: var(--accent);
+      }
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 1.5em;
+        }
+        .stats-bar {
+          gap: 15px;
+        }
+        table {
+          font-size: 0.8em;
+        }
+        th,
+        td {
+          padding: 6px 8px;
+        }
+      }
+      @media (max-width: 480px) {
+        header {
+          padding: 30px 0 20px;
+        }
+        header h1 {
+          font-size: 1.2em;
+        }
+        .stat .num {
+          font-size: 1.5em;
+        }
+        .modality-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <h1>🎨 Multimodal AI Models</h1>
+        <p>
+          1,548 models that see, hear, speak, and create — compared with pricing, context windows,
+          and capabilities
+        </p>
+        <div class="stats-bar">
+          <div class="stat">
+            <div class="num">1,548</div>
+            <div class="label">Multimodal Models</div>
+          </div>
+          <div class="stat">
+            <div class="num">1,487</div>
+            <div class="label">Vision</div>
+          </div>
+          <div class="stat">
+            <div class="num">118</div>
+            <div class="label">Audio Input</div>
+          </div>
+          <div class="stat">
+            <div class="num">34</div>
+            <div class="label">Audio Output</div>
+          </div>
+          <div class="stat">
+            <div class="num">28</div>
+            <div class="label">Image Output</div>
+          </div>
+          <div class="stat">
+            <div class="num">167</div>
+            <div class="label">Video Input</div>
+          </div>
+        </div>
+        <a class="cta" href="https://i-need-token.github.io/ai-models/">🔍 Interactive Catalog</a>
+        <a class="cta" href="https://github.com/i-need-token/ai-models">⭐ Star on GitHub</a>
+      </div>
+    </header>
+    <div class="container">
+      <div class="toc">
+        <strong>Contents</strong>
+        <ol>
+          <li><a href="#modalities">Modality Breakdown</a></li>
+          <li><a href="#flagship">Flagship Multimodal Models</a></li>
+          <li><a href="#vision">Vision Models (Image Input)</a></li>
+          <li><a href="#audio-in">Audio Input Models</a></li>
+          <li><a href="#image-gen">Image Generation Models</a></li>
+          <li><a href="#audio-out">Audio Output Models</a></li>
+          <li><a href="#video">Video Understanding Models</a></li>
+          <li><a href="#choosing">Choosing the Right Multimodal Model</a></li>
+        </ol>
+      </div>
+
+      <h2 id="modalities">📊 Modality Breakdown</h2>
+      <div class="modality-grid">
+        <div class="modality-card">
+          <div class="icon">👁️</div>
+          <div class="count">1,487</div>
+          <div class="name">Vision (Image Input)</div>
+        </div>
+        <div class="modality-card">
+          <div class="icon">🎬</div>
+          <div class="count">167</div>
+          <div class="name">Video Input</div>
+        </div>
+        <div class="modality-card">
+          <div class="icon">🎤</div>
+          <div class="count">118</div>
+          <div class="name">Audio Input</div>
+        </div>
+        <div class="modality-card">
+          <div class="icon">📄</div>
+          <div class="count">141</div>
+          <div class="name">PDF Input</div>
+        </div>
+        <div class="modality-card">
+          <div class="icon">🖼️</div>
+          <div class="count">28</div>
+          <div class="name">Image Output</div>
+        </div>
+        <div class="modality-card">
+          <div class="icon">🔊</div>
+          <div class="count">34</div>
+          <div class="name">Audio Output</div>
+        </div>
+        <div class="modality-card">
+          <div class="icon">🎥</div>
+          <div class="count">4</div>
+          <div class="name">Video Output</div>
+        </div>
+      </div>
+
+      <h2 id="flagship">🏆 Flagship Multimodal Models</h2>
+      <p>The most capable multimodal models across all providers:</p>
+      <table>
+        <tr>
+          <th>Model</th>
+          <th>Provider</th>
+          <th>Context</th>
+          <th>Input</th>
+          <th>Output</th>
+          <th>Tool Call</th>
+          <th>Price (in/out per 1M)</th>
+        </tr>
+        <tr>
+          <td><code>gpt-4o</code></td>
+          <td>OpenAI</td>
+          <td>128K</td>
+          <td>text, image</td>
+          <td>text</td>
+          <td>✓</td>
+          <td>$2.50/$10</td>
+        </tr>
+        <tr>
+          <td><code>gpt-4.1</code></td>
+          <td>OpenAI</td>
+          <td>1M</td>
+          <td>text, image</td>
+          <td>text</td>
+          <td>✓</td>
+          <td>$2/$8</td>
+        </tr>
+        <tr>
+          <td><code>claude-sonnet-4</code></td>
+          <td>Anthropic</td>
+          <td>200K</td>
+          <td>text, image</td>
+          <td>text</td>
+          <td>✓</td>
+          <td>$3/$15</td>
+        </tr>
+        <tr>
+          <td><code>gemini-2.5-pro</code></td>
+          <td>Google</td>
+          <td>1M</td>
+          <td>text, image, audio, video</td>
+          <td>text</td>
+          <td>✓</td>
+          <td>$1.25/$10</td>
+        </tr>
+        <tr>
+          <td><code>gemini-2.5-flash</code></td>
+          <td>Google</td>
+          <td>1M</td>
+          <td>text, image, audio, video</td>
+          <td>text</td>
+          <td>✓</td>
+          <td>$0.15/$0.60</td>
+        </tr>
+        <tr>
+          <td><code>llama-4-maverick</code></td>
+          <td>Meta</td>
+          <td>1M</td>
+          <td>text, image</td>
+          <td>text</td>
+          <td>✓</td>
+          <td>Varies</td>
+        </tr>
+        <tr>
+          <td><code>qwen3-235b-a22b</code></td>
+          <td>Alibaba</td>
+          <td>128K</td>
+          <td>text, image</td>
+          <td>text</td>
+          <td>✓</td>
+          <td>Varies</td>
+        </tr>
+      </table>
+
+      <h2 id="vision">👁️ Vision Models (Image Input)</h2>
+      <p>
+        1,487 models can accept images as input alongside text. These are the most common type of
+        multimodal model:
+      </p>
+      <div class="card">
+        <h3>Best Vision Models by Use Case</h3>
+        <ul>
+          <li>
+            <strong>Document analysis:</strong> Gemini 2.5 Pro (1M context, PDF + image support),
+            GPT-4.1
+          </li>
+          <li><strong>Visual Q&A:</strong> Claude Sonnet 4, GPT-4o, Llama 4 Maverick</li>
+          <li><strong>Code from screenshots:</strong> GPT-4o, Claude Sonnet 4, Gemini 2.5 Pro</li>
+          <li>
+            <strong>Medical imaging:</strong> Specialized models available through various providers
+          </li>
+          <li>
+            <strong>Free vision models:</strong> Gemma 3 (1B–27B), Qwen3 series, Llama 4 Maverick
+          </li>
+        </ul>
+      </div>
+      <p>→ <a href="best-ai-models-for-vision.html">See all 1,487 vision models compared</a></p>
+
+      <h2 id="audio-in">🎤 Audio Input Models</h2>
+      <p>
+        118 models can process audio input — for transcription, voice analysis, and audio
+        understanding:
+      </p>
+      <table>
+        <tr>
+          <th>Model</th>
+          <th>Provider</th>
+          <th>Audio Capabilities</th>
+          <th>Context</th>
+        </tr>
+        <tr>
+          <td><code>gemini-2.5-pro</code></td>
+          <td>Google</td>
+          <td>Audio understanding + transcription</td>
+          <td>1M</td>
+        </tr>
+        <tr>
+          <td><code>gemini-2.5-flash</code></td>
+          <td>Google</td>
+          <td>Audio understanding + transcription</td>
+          <td>1M</td>
+        </tr>
+        <tr>
+          <td><code>gpt-4o-audio-preview</code></td>
+          <td>OpenAI</td>
+          <td>Audio input + output</td>
+          <td>128K</td>
+        </tr>
+        <tr>
+          <td><code>claude-sonnet-4</code></td>
+          <td>Anthropic</td>
+          <td>Audio transcription</td>
+          <td>200K</td>
+        </tr>
+      </table>
+
+      <h2 id="image-gen">🖼️ Image Generation Models</h2>
+      <p>
+        28 models can generate images from text descriptions. This is a rapidly growing category:
+      </p>
+      <table>
+        <tr>
+          <th>Model</th>
+          <th>Provider</th>
+          <th>Capabilities</th>
+        </tr>
+        <tr>
+          <td><code>gpt-image-1</code></td>
+          <td>OpenAI</td>
+          <td>Text-to-image, image editing</td>
+        </tr>
+        <tr>
+          <td><code>dall-e-3</code></td>
+          <td>OpenAI</td>
+          <td>Text-to-image generation</td>
+        </tr>
+        <tr>
+          <td><code>flux-1.1-pro</code></td>
+          <td>Black Forest Labs</td>
+          <td>High-quality text-to-image</td>
+        </tr>
+        <tr>
+          <td><code>stable-diffusion-3.5</code></td>
+          <td>Stability AI</td>
+          <td>Open-weight text-to-image</td>
+        </tr>
+      </table>
+      <p>
+        → <a href="best-ai-models-for-image-generation.html">See all 28 image generation models</a>
+      </p>
+
+      <h2 id="audio-out">🔊 Audio Output Models</h2>
+      <p>
+        34 models can generate audio output — for text-to-speech, voice cloning, and audio
+        generation:
+      </p>
+      <div class="card">
+        <h3>Key Audio Output Models</h3>
+        <ul>
+          <li>
+            <strong>GPT-4o Audio Preview:</strong> Natural conversation with voice input and output
+          </li>
+          <li><strong>Gemini 2.5 Flash:</strong> Audio understanding with text response</li>
+          <li>
+            <strong>Specialized TTS models:</strong> Available through various providers for
+            production voice applications
+          </li>
+        </ul>
+      </div>
+
+      <h2 id="video">🎬 Video Understanding Models</h2>
+      <p>
+        167 models can process video input — for video analysis, summarization, and content
+        understanding:
+      </p>
+      <div class="card">
+        <h3>Top Video Understanding Models</h3>
+        <ul>
+          <li>
+            <strong>Gemini 2.5 Pro/Flash:</strong> Native video input with 1M context, process up to
+            1 hour of video
+          </li>
+          <li><strong>GPT-4o:</strong> Video frame extraction and analysis</li>
+          <li><strong>Qwen3 series:</strong> Video understanding across model sizes</li>
+        </ul>
+      </div>
+
+      <h2 id="choosing">🤔 Choosing the Right Multimodal Model</h2>
+      <div class="card">
+        <h3>Decision Framework</h3>
+        <ul>
+          <li>
+            <strong>Image understanding only?</strong> → <code>gemma-3-27b-it</code> (free) or
+            <code>gpt-4o</code>
+          </li>
+          <li>
+            <strong>Need audio + vision?</strong> → <code>gemini-2.5-flash</code> (cheapest
+            multimodal) or <code>gemini-2.5-pro</code>
+          </li>
+          <li>
+            <strong>Generate images?</strong> → <code>gpt-image-1</code> or
+            <code>flux-1.1-pro</code>
+          </li>
+          <li>
+            <strong>Video analysis?</strong> → <code>gemini-2.5-pro</code> (best video
+            understanding)
+          </li>
+          <li>
+            <strong>Need tool calling + vision?</strong> → <code>llama-4-maverick</code> or
+            <code>claude-sonnet-4</code>
+          </li>
+          <li>
+            <strong>Budget-conscious?</strong> → <code>gemini-2.5-flash</code> ($0.15/$0.60 per 1M
+            tokens)
+          </li>
+          <li>
+            <strong>Need free API?</strong> → <code>gemma-3-27b-it</code> (Google, free) or
+            <code>qwen3-32b</code> (Alibaba, free)
+          </li>
+        </ul>
+      </div>
+
+      <h2>🔗 Related Comparisons</h2>
+      <div class="related-pages">
+        <a href="best-ai-models-for-vision.html">👁️ Best AI Models for Vision (1,487 models)</a>
+        <a href="best-ai-models-for-image-generation.html"
+          >🖼️ Image Generation Models (28 models)</a
+        >
+        <a href="open-source-ai-models.html">🔓 Open Source AI Models (527 models)</a>
+        <a href="free-ai-models.html">🆓 Free AI Models (81 models)</a>
+        <a href="reasoning-models-comparison.html">🧠 Reasoning Models (1,306 models)</a>
+        <a href="tool-calling-models-comparison.html">🔧 Tool Calling Models (2,350 models)</a>
+        <a href="context-window-comparison.html">📏 Context Window Comparison</a>
+        <a href="cheapest-ai-models.html">💰 Cheapest AI Models</a>
+        <a href="best-ai-models.html">⭐ Best AI Models in 2025</a>
+        <a href="ai-model-pricing-calculator.html">🧮 AI Model Pricing Calculator</a>
+        <a href="openai-alternatives.html">🔄 OpenAI Alternatives</a>
+      </div>
+    </div>
+    <footer>
+      <p>
+        Data from <a href="https://github.com/i-need-token/ai-models">AI Models Catalog</a> — 95
+        providers, 4,587+ models. Updated automatically.
+      </p>
+      <p>
+        <a href="https://i-need-token.github.io/ai-models/">Interactive Catalog</a> ·
+        <a href="https://github.com/i-need-token/ai-models">GitHub</a> ·
+        <a href="best-ai-models.html">Best AI Models</a> ·
+        <a href="free-ai-models.html">Free Models</a>
+      </p>
+    </footer>
+  </body>
+</html>
