@@ -268,20 +268,21 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 
 ## Documentation
 
-| Document                                                | Description                                                    |
-| ------------------------------------------------------- | -------------------------------------------------------------- |
-| [Quick Start Guide](docs/quick-start.md)                | Find the right model in 30 seconds                             |
-| [API & Programmatic Access](docs/api.md)                | Download models.json, code examples in JS/Python               |
-| [Model Comparison](docs/model-comparison.md)            | Compare flagship, cost-effective, free, and open-weight models |
-| [Pricing Comparison](docs/pricing-comparison.md)        | Side-by-side pricing across providers and platforms            |
-| [Modality Matrix](docs/modality-matrix.md)              | Vision, image gen, audio, video — which models support what    |
-| [Context Window Comparison](docs/context-windows.md)    | Largest context windows, best value per tier                   |
-| [Free AI Models](docs/free-models.md)                   | 81 free models — tool calling, reasoning, vision at no cost    |
-| [Open-Weight Models](docs/open-weights.md)              | 513 open-weight models — run on your own infrastructure        |
-| [Provider Overview](docs/providers.md)                  | All 95 providers organized by type and market                  |
-| [Data Schema Reference](docs/data-schema.md)            | Complete YAML schema — model, pricing, snapshot, provider      |
-| [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data                           |
-| [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog                      |
+| Document                                                | Description                                                     |
+| ------------------------------------------------------- | --------------------------------------------------------------- |
+| [Quick Start Guide](docs/quick-start.md)                | Find the right model in 30 seconds                              |
+| [API & Programmatic Access](docs/api.md)                | Download models.json, code examples in JS/Python                |
+| [Model Comparison](docs/model-comparison.md)            | Compare flagship, cost-effective, free, and open-weight models  |
+| [Pricing Comparison](docs/pricing-comparison.md)        | Side-by-side pricing across providers and platforms             |
+| [Modality Matrix](docs/modality-matrix.md)              | Vision, image gen, audio, video — which models support what     |
+| [Context Window Comparison](docs/context-windows.md)    | Largest context windows, best value per tier                    |
+| [Free AI Models](docs/free-models.md)                   | 81 free models — tool calling, reasoning, vision at no cost     |
+| [Open-Weight Models](docs/open-weights.md)              | 513 open-weight models — run on your own infrastructure         |
+| [Reasoning Models](docs/reasoning-models.md)            | 1,306 reasoning models — chain-of-thought and extended thinking |
+| [Provider Overview](docs/providers.md)                  | All 95 providers organized by type and market                   |
+| [Data Schema Reference](docs/data-schema.md)            | Complete YAML schema — model, pricing, snapshot, provider       |
+| [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data                            |
+| [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog                       |
 
 **中文文档：**
 
@@ -296,6 +297,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [免费 AI 模型](docs/zh/free-models.md)       | 81 个免费模型 — 工具调用、推理、视觉零成本  |
 | [开源权重模型](docs/zh/open-weights.md)      | 513 个开源权重模型 — 自有基础设施运行       |
 | [提供商概览](docs/zh/providers.md)           | 95 个提供商按类型和市场分类                 |
+| [推理模型](docs/zh/reasoning-models.md)      | 1,306 个推理模型 — 链式思维和扩展思考       |
 | [数据 Schema 参考](docs/zh/data-schema.md)   | 完整 YAML Schema — 模型、定价、快照、提供商 |
 | [数据采集](docs/zh/data-acquisition.md)      | 数据采集指南                                |
 | [设计原则与陷阱](docs/zh/lessons-learned.md) | 经验教训                                    |
