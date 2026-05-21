@@ -327,6 +327,7 @@ by_context = sorted(
 - [Tool Calling Models](docs/tool-calling.md) — 2,350 tool-calling models
 - [Vision Models](docs/vision-models.md) — 1,487 vision models
 - [Image Generation](docs/image-generation.md) — 28 image generation models
+- [Audio Models](docs/audio-models.md) — 118 audio input + 34 audio output models
 - [Structured Output](docs/structured-output.md) — 829 JSON-mode models
 - [Modality Matrix](docs/modality-matrix.md) — vision, image gen, audio, video
 - [Provider Overview](docs/providers.md) — all 95 providers by type and market
