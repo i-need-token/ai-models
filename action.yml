@@ -1,57 +1,67 @@
 name: "AI Models Catalog"
-description: "Fetch model data from the AI Models Catalog for use in your workflows"
+description: "Download AI model metadata (pricing, context windows, capabilities) from the AI Models Catalog"
+author: "i-need-token"
 branding:
-  icon: database
-  color: purple
+  icon: "database"
+  color: "blue"
+
 inputs:
+  version:
+    description: "Release version to download (latest, or a specific tag like v0.1.0)"
+    required: false
+    default: "latest"
   format:
-    description: "Output format — json or csv"
+    description: "Output format: json or csv"
     required: false
     default: "json"
-  filter:
-    description: "JMESPath filter expression (e.g. 'models[?tool_call==`true`]')"
+  output-dir:
+    description: "Directory to save the downloaded file"
     required: false
-    default: ""
+    default: "ai-models"
+
 outputs:
-  data:
-    description: "The fetched model data"
-    value: ${{ steps.fetch.outputs.data }}
   model-count:
     description: "Number of models in the catalog"
-    value: ${{ steps.fetch.outputs.model_count }}
   provider-count:
     description: "Number of providers in the catalog"
-    value: ${{ steps.fetch.outputs.provider_count }}
+  file-path:
+    description: "Path to the downloaded file"
 
 runs:
   using: "composite"
   steps:
-    - name: Fetch catalog
-      id: fetch
-      shell: bash
+    - shell: bash
       run: |
-        if [ "${{ inputs.format }}" = "csv" ]; then
-          URL="https://github.com/i-need-token/ai-models/releases/latest/download/models.csv"
-          curl -sL "$URL" -o models.csv
-          echo "data<<EOF" >> "$GITHUB_OUTPUT"
-          cat models.csv >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
-          COUNT=$(tail -n +2 models.csv | wc -l | tr -d ' ')
-          echo "model_count=$COUNT" >> "$GITHUB_OUTPUT"
-          echo "provider_count=0" >> "$GITHUB_OUTPUT"
+        VERSION="${{ inputs.version }}"
+        FORMAT="${{ inputs.format }}"
+        OUTPUT_DIR="${{ inputs.output-dir }}"
+        BASE_URL="https://github.com/i-need-token/ai-models/releases"
+
+        mkdir -p "$OUTPUT_DIR"
+
+        if [ "$VERSION" = "latest" ]; then
+          DOWNLOAD_URL="$BASE_URL/latest/download/models.$FORMAT"
         else
-          URL="https://cdn.jsdelivr.net/npm/ai-models@latest/models.json"
-          curl -sL "$URL" -o models.json
-          if [ -n "${{ inputs.filter }}" ]; then
-            DATA=$(jq -c '${{ inputs.filter }}' models.json)
-          else
-            DATA=$(cat models.json)
-          fi
-          echo "data<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$DATA" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
-          MC=$(jq '.models | length' models.json)
-          PC=$(jq '.stats.providers' models.json)
-          echo "model_count=$MC" >> "$GITHUB_OUTPUT"
-          echo "provider_count=$PC" >> "$GITHUB_OUTPUT"
+          DOWNLOAD_URL="$BASE_URL/download/$VERSION/models.$FORMAT"
         fi
+
+        echo "📥 Downloading models.$FORMAT from $DOWNLOAD_URL"
+        HTTP_CODE=$(curl -sL -w "%{http_code}" -o "$OUTPUT_DIR/models.$FORMAT" "$DOWNLOAD_URL")
+
+        if [ "$HTTP_CODE" -ne 200 ]; then
+          echo "❌ Failed to download (HTTP $HTTP_CODE)"
+          exit 1
+        fi
+
+        FILE_SIZE=$(wc -c < "$OUTPUT_DIR/models.$FORMAT" | tr -d ' ')
+        echo "✅ Downloaded models.$FORMAT ($FILE_SIZE bytes)"
+
+        if [ "$FORMAT" = "json" ]; then
+          MODEL_COUNT=$(python3 -c "import json; d=json.load(open('$OUTPUT_DIR/models.json')); print(len(d.get('models', d)))" 2>/dev/null || echo "0")
+          PROVIDER_COUNT=$(python3 -c "import json; d=json.load(open('$OUTPUT_DIR/models.json')); print(len(d.get('providers', [])))" 2>/dev/null || echo "0")
+          echo "📊 $MODEL_COUNT models from $PROVIDER_COUNT providers"
+          echo "model-count=$MODEL_COUNT" >> $GITHUB_OUTPUT
+          echo "provider-count=$PROVIDER_COUNT" >> $GITHUB_OUTPUT
+        fi
+
+        echo "file-path=$OUTPUT_DIR/models.$FORMAT" >> $GITHUB_OUTPUT
