@@ -1,0 +1,36 @@
+# Source files (not needed in npm package)
+scripts/
+.github/
+site/
+docs/
+*.ts
+!types/**/*.ts
+
+# Config files
+tsconfig.json
+tsconfig.build.json
+.husky/
+.claude/
+.pi/
+
+# Generated / temp files
+*.tsbuildinfo
+models.csv
+stats.json
+social-preview.svg
+
+# Dev dependencies
+node_modules/
+
+# Misc
+.gitignore
+AGENTS.md
+CHANGELOG.md
+CODE_OF_CONDUCT.md
+CONTRIBUTING.md
+SECURITY.md
+CITATION.cff
+schema.json
+llms.txt
+llms-full.txt
+action.yml
