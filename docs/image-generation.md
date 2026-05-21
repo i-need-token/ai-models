@@ -56,3 +56,11 @@
 - **GPT-5 Image Mini** offers the best combination of reasoning + generation + large context
 - **Amazon Nova 2.0 Omni** is the only model that generates images from audio and video input
 - Most image generation models accept both text and image input (for editing/reference)
+
+## Related Documentation
+
+- [Vision Models](vision-models.md) — 1,487 vision models
+- [Video Models](video-models.md) — 167 video input/output models
+- [Modality Matrix](modality-matrix.md) — all modalities at a glance
+- [Model Selection Guide](model-selection.md) — decision framework
+- [Free AI Models](free-models.md) — 81 free models

@@ -92,3 +92,11 @@
 | Gemini 2.5 Pro | Google    | 文本、图像、音频、视频 |
 | Claude Opus 4  | Anthropic | 文本、图像、音频       |
 | Qwen2-Audio    | 阿里云    | 文本、图像、音频       |
+
+## 相关文档
+
+- [视觉模型](vision-models.md) — 1,487 个视觉模型
+- [音频模型](audio-models.md) — 118 个音频输入 + 34 个音频输出模型
+- [视频模型](video-models.md) — 167 个视频输入/输出模型
+- [图像生成](image-generation.md) — 28 个图像生成模型
+- [模型选择指南](model-selection.md) — 决策框架

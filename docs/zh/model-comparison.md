@@ -95,3 +95,11 @@
 ---
 
 **注意**：所有定价和能力数据来自第一方来源。推理平台价格可能不同。查看 `providers/<id>/models/` 获取最新数据。
+
+## 相关文档
+
+- [模型选择指南](model-selection.md) — 选择模型的决策框架
+- [定价对比](pricing-comparison.md) — 各提供商定价并排对比
+- [免费 AI 模型](free-models.md) — 81 个免费模型
+- [开源权重模型](open-weights.md) — 527 个可自行运行的模型
+- [上下文窗口对比](context-windows.md) — 最大上下文窗口

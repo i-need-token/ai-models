@@ -207,3 +207,11 @@ npx tsx scripts/validate.ts openai
 ```
 
 The validation uses `ModelSchema` from [`types/schemas.ts`](../types/schemas.ts), which mirrors the TypeScript types exactly. Any YAML file that doesn't conform to the schema will produce a validation error with the specific field path and issue.
+
+## Related Documentation
+
+- [Data Acquisition](data-acquisition.md) — how we acquire and update data
+- [API & Programmatic Access](api.md) — npm, CDN, CSV access
+- [Code Examples](code-examples.md) — practical code examples
+- [Design Principles](lessons-learned.md) — lessons learned
+- [FAQ](faq.md) — common questions

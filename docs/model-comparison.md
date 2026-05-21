@@ -95,3 +95,11 @@ Models with publicly available weights for self-hosting.
 ---
 
 **Note**: All pricing and capability data is from first-party sources. Prices may vary on inference platforms. Check `providers/<id>/models/` for the most current data.
+
+## Related Documentation
+
+- [Model Selection Guide](model-selection.md) — decision framework for choosing models
+- [Pricing Comparison](pricing-comparison.md) — side-by-side pricing across providers
+- [Free AI Models](free-models.md) — 81 free models
+- [Open-Weight Models](open-weights.md) — 527 models you can run yourself
+- [Context Window Comparison](context-windows.md) — largest context windows

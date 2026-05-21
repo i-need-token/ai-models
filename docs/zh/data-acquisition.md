@@ -256,3 +256,11 @@ parseModality | toLowerCase | toUpperCase | trim | removeCommas | identity
 2. 直接更新 YAML 文件
 3. 将 `last_updated` 设为当前日期
 4. 用 `npm run validate` 验证
+
+## 相关文档
+
+- [数据模式](data-schema.md) — 完整 YAML 模式参考
+- [设计原则](lessons-learned.md) — 经验教训
+- [提供商概览](providers.md) — 95 个提供商
+- [常见问题](faq.md) — 常见问题
+- [贡献指南](https://github.com/i-need-token/ai-models/blob/main/CONTRIBUTING.md) — 如何贡献

@@ -104,3 +104,11 @@ Absolutely! You can:
 ---
 
 More questions? [Open an issue](https://github.com/i-need-token/ai-models/issues/new) or start a [discussion](https://github.com/i-need-token/ai-models/discussions).
+
+## Related Documentation
+
+- [Quick Start](quick-start.md) — find the right model in 30 seconds
+- [API & Programmatic Access](api.md) — npm, CDN, CSV access
+- [Glossary](glossary.md) — key terms and definitions
+- [Data Schema](data-schema.md) — complete YAML schema
+- [Model Selection Guide](model-selection.md) — decision framework

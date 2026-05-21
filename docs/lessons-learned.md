@@ -298,3 +298,11 @@ Platforms like OpenRouter and nano-gpt are router/aggregators that don't produce
 - **nano-gpt**: Public API for model list + JS bundle for per-token USD pricing (555 models).
 
 These are treated as inference platforms, not rejected as "just routers", because they provide verifiable first-party per-token pricing data.
+
+## Related Documentation
+
+- [Data Acquisition](data-acquisition.md) — how we acquire and update data
+- [Data Schema](data-schema.md) — complete YAML schema reference
+- [Provider Overview](providers.md) — all 95 providers
+- [FAQ](faq.md) — common questions
+- [Contributing](https://github.com/i-need-token/ai-models/blob/main/CONTRIBUTING.md) — how to contribute

@@ -56,3 +56,11 @@
 - **GPT-5 Image Mini** 提供推理 + 生成 + 大上下文的最佳组合
 - **Amazon Nova 2.0 Omni** 是唯一可以从音频和视频输入生成图像的模型
 - 大多数图像生成模型同时接受文本和图像输入（用于编辑/参考）
+
+## 相关文档
+
+- [视觉模型](vision-models.md) — 1,487 个视觉模型
+- [视频模型](video-models.md) — 167 个视频输入/输出模型
+- [模态矩阵](modality-matrix.md) — 所有模态一览
+- [模型选择指南](model-selection.md) — 决策框架
+- [免费 AI 模型](free-models.md) — 81 个免费模型

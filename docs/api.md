@@ -208,3 +208,11 @@ npx tsx scripts/compile.ts
 npx tsx scripts/sync.ts openai    # single provider
 npx tsx scripts/sync.ts           # all providers
 ```
+
+## Related Documentation
+
+- [Quick Start](quick-start.md) — find the right model in 30 seconds
+- [Code Examples](code-examples.md) — TypeScript, Python, Go, Rust, jq
+- [Data Schema](data-schema.md) — complete YAML schema reference
+- [FAQ](faq.md) — common questions
+- [Model Selection Guide](model-selection.md) — decision framework

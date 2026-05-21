@@ -69,3 +69,11 @@ AI Models Catalog 中使用的术语快速参考。
 ---
 
 详见[数据 Schema 参考](data-schema.md)获取完整的 YAML 字段规范。
+
+## 相关文档
+
+- [常见问题](faq.md) — 常见问题
+- [数据模式](data-schema.md) — 完整 YAML 模式参考
+- [快速入门](quick-start.md) — 30 秒内找到适合的模型
+- [模型对比](model-comparison.md) — 模型对比
+- [模态矩阵](modality-matrix.md) — 所有模态一览

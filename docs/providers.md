@@ -158,3 +158,11 @@ Providers with EUR pricing, serving the European market.
 | Privatemode AI        | `privatemode`         |      5 |
 | Regolo                | `regolo`              |      — |
 | Scaleway              | `scaleway`            |     13 |
+
+## Related Documentation
+
+- [Model Comparison](model-comparison.md) — flagship, cost-effective, free models
+- [Pricing Comparison](pricing-comparison.md) — side-by-side pricing
+- [Open-Weight Models](open-weights.md) — 527 models you can run yourself
+- [Free AI Models](free-models.md) — 81 free models
+- [Data Schema](data-schema.md) — complete YAML schema

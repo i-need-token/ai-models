@@ -357,3 +357,11 @@ const results = findModels({
   maxOutputPrice: 5,
 });
 ```
+
+## Related Documentation
+
+- [API & Programmatic Access](api.md) — npm, CDN, CSV, GitHub Action
+- [Quick Start](quick-start.md) — find the right model in 30 seconds
+- [Data Schema](data-schema.md) — complete YAML schema reference
+- [FAQ](faq.md) — common questions
+- [Glossary](glossary.md) — key terms and definitions

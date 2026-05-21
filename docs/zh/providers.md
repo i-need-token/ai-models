@@ -158,3 +158,11 @@
 | Privatemode AI        | `privatemode`         |      5 |
 | Regolo                | `regolo`              |      — |
 | Scaleway              | `scaleway`            |     13 |
+
+## 相关文档
+
+- [模型对比](model-comparison.md) — 旗舰、高性价比、免费模型
+- [定价对比](pricing-comparison.md) — 定价并排对比
+- [开源权重模型](open-weights.md) — 527 个可自行运行的模型
+- [免费 AI 模型](free-models.md) — 81 个免费模型
+- [数据模式](data-schema.md) — 完整 YAML 模式

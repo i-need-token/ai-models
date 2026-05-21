@@ -256,3 +256,11 @@ Providers that host and serve models produced by others. They are added **after 
 2. Updates the YAML file directly
 3. Sets `last_updated` to current date
 4. Validates with `npm run validate`
+
+## Related Documentation
+
+- [Data Schema](data-schema.md) — complete YAML schema reference
+- [Design Principles](lessons-learned.md) — lessons learned
+- [Provider Overview](providers.md) — all 95 providers
+- [FAQ](faq.md) — common questions
+- [Contributing](https://github.com/i-need-token/ai-models/blob/main/CONTRIBUTING.md) — how to contribute

@@ -92,3 +92,11 @@ Models that accept text + at least 2 additional input modalities:
 | Gemini 2.5 Pro | Google        | text, image, audio, video |
 | Claude Opus 4  | Anthropic     | text, image, audio        |
 | Qwen2-Audio    | Alibaba Cloud | text, image, audio        |
+
+## Related Documentation
+
+- [Vision Models](vision-models.md) — 1,487 vision models
+- [Audio Models](audio-models.md) — 118 audio input + 34 audio output models
+- [Video Models](video-models.md) — 167 video input/output models
+- [Image Generation](image-generation.md) — 28 image generation models
+- [Model Selection Guide](model-selection.md) — decision framework

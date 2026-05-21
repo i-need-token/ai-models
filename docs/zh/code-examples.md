@@ -357,3 +357,11 @@ const results = findModels({
   maxOutputPrice: 5,
 });
 ```
+
+## 相关文档
+
+- [API 与编程访问](api.md) — npm、CDN、CSV、GitHub Action
+- [快速入门](quick-start.md) — 30 秒内找到适合的模型
+- [数据模式](data-schema.md) — 完整 YAML 模式参考
+- [常见问题](faq.md) — 常见问题
+- [术语表](glossary.md) — 关键术语和定义

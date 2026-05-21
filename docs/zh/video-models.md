@@ -200,3 +200,11 @@
 ---
 
 数据来源于 [AI Models Catalog](https://github.com/i-need-token/ai-models) — 结构化 YAML，包含 95 个提供商 4,587+ 模型的定价、上下文窗口和能力信息。
+
+## 相关文档
+
+- [音频模型](audio-models.md) — 118 个音频输入 + 34 个音频输出模型
+- [视觉模型](vision-models.md) — 1,487 个视觉模型
+- [图像生成](image-generation.md) — 28 个图像生成模型
+- [模态矩阵](modality-matrix.md) — 所有模态一览
+- [模型选择指南](model-selection.md) — 决策框架

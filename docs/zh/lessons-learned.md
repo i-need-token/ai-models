@@ -290,3 +290,11 @@
 - **nano-gpt**：公开 API 获取模型列表 + JS 包获取按 token USD 定价（555 个模型）。
 
 这些平台被视为推理平台，而非被拒绝为“只是路由器”，因为它们提供可验证的第一方按 token 定价数据。
+
+## 相关文档
+
+- [数据获取](data-acquisition.md) — 如何获取和更新数据
+- [数据模式](data-schema.md) — 完整 YAML 模式参考
+- [提供商概览](providers.md) — 95 个提供商
+- [常见问题](faq.md) — 常见问题
+- [贡献指南](https://github.com/i-need-token/ai-models/blob/main/CONTRIBUTING.md) — 如何贡献

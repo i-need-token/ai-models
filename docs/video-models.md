@@ -200,3 +200,11 @@ AI models that support video input or output, sourced from the [AI Models Catalo
 ---
 
 Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.
+
+## Related Documentation
+
+- [Audio Models](audio-models.md) — 118 audio input + 34 audio output models
+- [Vision Models](vision-models.md) — 1,487 vision models
+- [Image Generation](image-generation.md) — 28 image generation models
+- [Modality Matrix](modality-matrix.md) — all modalities at a glance
+- [Model Selection Guide](model-selection.md) — decision framework

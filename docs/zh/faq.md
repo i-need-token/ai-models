@@ -104,3 +104,11 @@ npx ajv validate -s schema.json -d providers/openai/models/gpt-4o.yaml
 ---
 
 更多问题？[提交 issue](https://github.com/i-need-token/ai-models/issues/new) 或发起[讨论](https://github.com/i-need-token/ai-models/discussions)。
+
+## 相关文档
+
+- [快速入门](quick-start.md) — 30 秒内找到适合的模型
+- [API 与编程访问](api.md) — npm、CDN、CSV 访问
+- [术语表](glossary.md) — 关键术语和定义
+- [数据模式](data-schema.md) — 完整 YAML 模式
+- [模型选择指南](model-selection.md) — 决策框架

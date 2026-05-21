@@ -208,3 +208,11 @@ npx tsx scripts/compile.ts
 npx tsx scripts/sync.ts openai    # 单个提供商
 npx tsx scripts/sync.ts           # 所有提供商
 ```
+
+## 相关文档
+
+- [快速入门](quick-start.md) — 30 秒内找到适合的模型
+- [代码示例](code-examples.md) — TypeScript、Python、Go、Rust、jq
+- [数据模式](data-schema.md) — 完整 YAML 模式参考
+- [常见问题](faq.md) — 常见问题
+- [模型选择指南](model-selection.md) — 决策框架

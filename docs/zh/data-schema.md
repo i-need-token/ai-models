@@ -207,3 +207,11 @@ npx tsx scripts/validate.ts openai
 ```
 
 校验使用 [`types/schemas.ts`](../../types/schemas.ts) 中的 `ModelSchema`，与 TypeScript 类型完全对应。任何不符合 schema 的 YAML 文件将产生校验错误，包含具体的字段路径和问题。
+
+## 相关文档
+
+- [数据获取](data-acquisition.md) — 如何获取和更新数据
+- [API 与编程访问](api.md) — npm、CDN、CSV 访问
+- [代码示例](code-examples.md) — 实用代码示例
+- [设计原则](lessons-learned.md) — 经验教训
+- [常见问题](faq.md) — 常见问题
