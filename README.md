@@ -125,6 +125,10 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 | 💬 **Build chat apps**         | [Chat models](docs/chat-models.md) — 2,350 models with tool calling                     |
 | 🖼️ **Process images/audio**    | [Multimodal models](docs/multimodal-models.md) — 1,519 models with vision/audio/video   |
 | 🔎 **Power semantic search**   | [Embedding models](docs/embedding-models.md) — vector search & RAG                      |
+| 🤖 **Build AI agents**         | [Agentic models](docs/agentic-models.md) — 1,080 models with tool_call + reasoning      |
+| 💻 **Generate & review code**  | [Code models](docs/code-models.md) — 189 code-focused models                            |
+| 🎙️ **Add voice/speech**        | [Audio models](docs/audio-models.md) — 118 audio input + 34 audio output                |
+| 🔄 **Switch from OpenAI**      | [OpenAI alternatives](docs/openai-alternatives.md) — pricing, free options, compat      |
 
 ## Quick Numbers
 
