@@ -17,7 +17,7 @@
 
 Machine-readable YAML catalog of every major AI model provider and their models — pricing, context windows, modalities, capabilities, and more. All data sourced from first-party APIs and official documentation, never third-party aggregators.
 
-**[Quick start →](docs/quick-start.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)**
+**[Quick start →](docs/quick-start.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md) · **[Download CSV →](https://github.com/i-need-token/ai-models/releases/latest/download/models.csv)\*\*
 
 ## Why This Catalog?
 
