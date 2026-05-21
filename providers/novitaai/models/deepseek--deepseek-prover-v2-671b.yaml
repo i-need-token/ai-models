@@ -1,7 +1,10 @@
 id: deepseek--deepseek-prover-v2-671b
-name: Deepseek Prover V2 671B
+name: Deepseek Prover V2 671b
 family: deepseek
-temperature: true
+pricing:
+  currency: USD
+  input: 0.7
+  output: 2.5
 limit:
   context: 160000
   output: 160000
@@ -10,9 +13,4 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.7
-  output: 2.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

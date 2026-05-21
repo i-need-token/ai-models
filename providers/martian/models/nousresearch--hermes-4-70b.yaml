@@ -1,21 +1,14 @@
 id: nousresearch--hermes-4-70b
-name: Hermes 4 70B
-family: nous
-reasoning: false
-temperature: true
-tool_call: false
-structured_output: false
-limit:
-  context: 131072
-  output: 0
+name: Hermes 4 70b
+family: nousresearch
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.4
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.13
-  output: 0.4
 release_date: 2026-02-21
-last_updated: 2026-05-17
+last_updated: 2026-02-21

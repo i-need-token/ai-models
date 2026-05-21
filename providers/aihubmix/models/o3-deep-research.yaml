@@ -1,16 +1,14 @@
 id: o3-deep-research
-name: "OpenAI: O3 Deep Research"
-family: o3
-temperature: true
+name: O3 Deep Research
+family: o
 pricing:
   currency: USD
   input: 5
   output: 20
   cache_read: 1.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

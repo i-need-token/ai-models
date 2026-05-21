@@ -1,18 +1,14 @@
 id: llama-3.1-nemotron-ultra-253b
-name: Llama 3.1 Nemotron Ultra 253B
+name: Llama 3.1 Nemotron Ultra 253b
 family: llama
-limit:
-  context: 128000
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.6
+  output: 1.8
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.6
-  output: 1.8
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

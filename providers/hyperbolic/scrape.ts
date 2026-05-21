@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "hyperbolic",
@@ -13,187 +21,141 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-16)
-//
-// Source: https://www.hyperbolic.ai/inference (SSR HTML)
-// Hyperbolic is an inference platform hosting open-source models with
-// per-token USD pricing. The pricing is a single rate per M tokens,
-// meaning the same rate applies to both input and output.
-//
-// The public inference page shows 11 text-to-text models.
-// The app.hyperbolic.ai/models page (requires login) shows 25+ models
-// including newer models (Qwen3-Coder-480B, DeepSeek-R1-0528, etc.)
-// but those require authentication to access.
-//
-// Note: Hyperbolic's pricing is a single flat rate per M tokens,
-// not separate input/output rates. We represent this as input == output.
+// Raw data types (from Hyperbolic API)
 // ---------------------------------------------------------------------------
 
-interface ModelInfo {
-  name: string;
-  context: number;
-  output: number;
-  openWeights?: boolean;
+interface HyperbolicModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
-const MODELS: Record<string, ModelInfo> = {
-  // --- Qwen ---
-  "Qwen--Qwen2-VL-72B-Instruct": {
-    name: "Qwen2 VL 72B Instruct",
-    context: 32768,
-    output: 32768,
-    openWeights: true,
-  },
-  "Qwen--Qwen2.5-Coder-32B": {
-    name: "Qwen2.5 Coder 32B",
-    context: 32768,
-    output: 32768,
-    openWeights: true,
-  },
-  "Qwen--Qwen2.5-72B-Instruct": {
-    name: "Qwen2.5 72B Instruct",
-    context: 32768,
-    output: 32768,
-    openWeights: true,
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<HyperbolicModel[]> {
+  const response = await fetch("https://api.hyperbolic.xyz/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Hyperbolic models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: HyperbolicModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.hyperbolic.xyz/v1/models",
+      type: "api",
+      description: "Hyperbolic /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
   },
 
-  // --- DeepSeek ---
-  "deepseek-ai--DeepSeek-V2.5": {
-    name: "DeepSeek V2.5",
-    context: 163840,
-    output: 163840,
-    openWeights: true,
+  extractPricing: {
+    source: {
+      url: "https://api.hyperbolic.xyz/v1/models",
+      type: "api",
+      description: "Hyperbolic API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
   },
 
-  // --- Meta Llama ---
-  "meta-llama--Llama-3.2-3B": {
-    name: "Llama 3.2 3B",
-    context: 131072,
-    output: 131072,
-    openWeights: true,
-  },
-  "meta-llama--Llama-3-70B": {
-    name: "Llama 3 70B",
-    context: 8192,
-    output: 8192,
-    openWeights: true,
-  },
-  "meta-llama--Llama-3.1-405B": {
-    name: "Llama 3.1 405B",
-    context: 131072,
-    output: 131072,
-    openWeights: true,
-  },
-  "meta-llama--Llama-3.1-70B": {
-    name: "Llama 3.1 70B",
-    context: 131072,
-    output: 131072,
-    openWeights: true,
-  },
-  "meta-llama--Llama-3.1-8B": {
-    name: "Llama 3.1 8B",
-    context: 131072,
-    output: 131072,
-    openWeights: true,
-  },
-  "meta-llama--Llama-3.1-8B-BF16-Base": {
-    name: "Llama 3.1 8B BF16 Base",
-    context: 131072,
-    output: 131072,
-    openWeights: true,
+  extractLimits: {
+    source: {
+      url: "https://api.hyperbolic.xyz/v1/models",
+      type: "api",
+      description: "Hyperbolic API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
   },
 
-  // --- NousResearch ---
-  "NousResearch--Hermes-3-70B": {
-    name: "Hermes 3 70B",
-    context: 131072,
-    output: 131072,
-    openWeights: true,
+  extractModalities: {
+    source: {
+      url: "https://api.hyperbolic.xyz/v1/models",
+      type: "api",
+      description: "Hyperbolic API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.hyperbolic.xyz/v1/models",
+      type: "api",
+      description: "Hyperbolic API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.hyperbolic.xyz/v1/models",
+      type: "api",
+      description: "Hyperbolic API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as HyperbolicModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /qwen/i, family: "qwen" },
+        { pattern: /mistral/i, family: "mistral" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
   },
 };
-
-// ---------------------------------------------------------------------------
-// Pricing (USD per million tokens)
-//
-// Source: https://www.hyperbolic.ai/inference (SSR HTML, accessed 2026-05-16)
-//
-// Note: Hyperbolic shows a single flat rate per M tokens.
-// We represent this as input == output (same rate for both).
-// ---------------------------------------------------------------------------
-
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  "Qwen--Qwen2-VL-72B-Instruct": { currency: "USD", input: 0.4, output: 0.4 },
-  "Qwen--Qwen2.5-Coder-32B": { currency: "USD", input: 0.2, output: 0.2 },
-  "Qwen--Qwen2.5-72B-Instruct": { currency: "USD", input: 0.4, output: 0.4 },
-  "deepseek-ai--DeepSeek-V2.5": { currency: "USD", input: 2.0, output: 2.0 },
-  "meta-llama--Llama-3.2-3B": { currency: "USD", input: 0.1, output: 0.1 },
-  "meta-llama--Llama-3-70B": { currency: "USD", input: 0.4, output: 0.4 },
-  "meta-llama--Llama-3.1-405B": { currency: "USD", input: 4.0, output: 4.0 },
-  "meta-llama--Llama-3.1-70B": { currency: "USD", input: 0.4, output: 0.4 },
-  "meta-llama--Llama-3.1-8B": { currency: "USD", input: 0.1, output: 0.1 },
-  "meta-llama--Llama-3.1-8B-BF16-Base": { currency: "USD", input: 0.1, output: 0.1 },
-  "NousResearch--Hermes-3-70B": { currency: "USD", input: 0.4, output: 0.4 },
-};
-
-// ---------------------------------------------------------------------------
-// Family derivation
-// ---------------------------------------------------------------------------
-
-function deriveFamily(id: string): string {
-  if (id.includes("qwen2-vl")) return "qwen-vl";
-  if (id.includes("qwen2.5-coder")) return "qwen-coder";
-  if (id.includes("qwen")) return "qwen";
-  if (id.includes("deepseek")) return "deepseek";
-  if (id.includes("llama-3.2")) return "llama-3.2";
-  if (id.includes("llama-3.1-405b")) return "llama-3.1-405b";
-  if (id.includes("llama-3.1-70b")) return "llama-3.1-70b";
-  if (id.includes("llama-3.1-8b")) return "llama-3.1-8b";
-  if (id.includes("llama-3")) return "llama-3";
-  if (id.includes("hermes")) return "hermes";
-  return id.split("--")[0] as string;
-}
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  for (const [id, info] of Object.entries(MODELS)) {
-    const pricing = HARDCODED_PRICING[id];
-    if (!pricing) {
-      console.warn(`  Hyperbolic: skipping ${id} — no pricing`);
-      continue;
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id,
-      name: info.name,
-      family: deriveFamily(id),
-      limit: { context: info.context, output: info.output },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (info.openWeights) modelDef.open_weights = true;
-
-    models.push(defineModel(modelDef));
-  }
-
+  const models = await runPipeline(pipeline);
   console.log(`  Hyperbolic: ${models.length} models`);
-
   return { provider, models };
 }

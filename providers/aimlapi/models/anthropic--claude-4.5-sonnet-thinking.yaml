@@ -1,0 +1,16 @@
+id: anthropic--claude-4.5-sonnet-thinking
+name: Anthropic / Claude 4.5 Sonnet Thinking
+family: anthropic
+pricing:
+  currency: USD
+  input: 3.9
+  output: 19.5
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

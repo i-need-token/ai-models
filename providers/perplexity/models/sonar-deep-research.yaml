@@ -1,9 +1,10 @@
 id: sonar-deep-research
 name: Sonar Deep Research
 family: sonar
-temperature: true
-reasoning: true
-tool_call: true
+pricing:
+  currency: USD
+  input: 2
+  output: 8
 limit:
   context: 128000
   output: 8192
@@ -12,9 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 2
-  output: 8
+reasoning: true
+temperature: true
+tool_call: true
 release_date: 2025-02-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

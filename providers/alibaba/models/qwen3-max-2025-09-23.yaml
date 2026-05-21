@@ -1,13 +1,10 @@
 id: qwen3-max-2025-09-23
 name: Qwen 3 Max
-family: qwen3
+family: qwen
 pricing:
   currency: CNY
   input: 6
   output: 24
-limit:
-  context: 256000
-  output: 8000
 modalities:
   input:
     - text

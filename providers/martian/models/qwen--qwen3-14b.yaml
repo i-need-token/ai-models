@@ -1,21 +1,14 @@
 id: qwen--qwen3-14b
-name: Qwen3 14B
+name: Qwen3 14b
 family: qwen
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 131702
-  output: 40960
+pricing:
+  currency: USD
+  input: 0.06
+  output: 0.24
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.06
-  output: 0.24
 release_date: 2026-04-28
-last_updated: 2026-05-17
+last_updated: 2026-04-28

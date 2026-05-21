@@ -1,20 +1,17 @@
 id: deepinfra--qwen--qwen3-32b
-name: Qwen3 32B
-family: qwen
-limit:
-  context: 40000
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Qwen3 32b
+family: deepinfra
 pricing:
   currency: USD
   input: 0.1
   output: 0.3
   cache_read: 0.1
   cache_write: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2025-04-29
+last_updated: 2025-04-29

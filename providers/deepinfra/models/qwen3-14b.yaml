@@ -1,7 +1,10 @@
 id: qwen3-14b
-name: Qwen3.14B
-family: qwen3
-temperature: true
+name: Qwen3.14b
+family: qwen
+pricing:
+  currency: USD
+  input: 0.12
+  output: 0.24
 limit:
   context: 40960
   output: 40960
@@ -10,12 +13,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.12
-  output: 0.24
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
-tool_call: true
-open_weights: true
+last_updated: 2026-05-20

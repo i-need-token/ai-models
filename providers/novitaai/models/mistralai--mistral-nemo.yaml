@@ -1,7 +1,10 @@
 id: mistralai--mistral-nemo
 name: Mistral Nemo
 family: mistral
-temperature: true
+pricing:
+  currency: USD
+  input: 0.04
+  output: 0.17
 limit:
   context: 60288
   output: 16000
@@ -10,10 +13,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.04
-  output: 0.17
-release_date: 2026-05-17
-last_updated: 2026-05-17
 structured_output: true
+last_updated: 2026-05-20

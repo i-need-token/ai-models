@@ -1,7 +1,10 @@
 id: inclusionai--ling-2.6-flash
-name: Ling-2.6-flash
-family: ling
-temperature: true
+name: Ling 2.6 Flash
+family: inclusionai
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.3
 limit:
   context: 262144
   output: 32768
@@ -10,11 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
 structured_output: true
+last_updated: 2026-05-20

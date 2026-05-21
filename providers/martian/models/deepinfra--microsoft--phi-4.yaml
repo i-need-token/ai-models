@@ -1,21 +1,14 @@
 id: deepinfra--microsoft--phi-4
 name: Phi 4
-family: deepinfra
-reasoning: false
-temperature: true
-tool_call: false
-structured_output: false
-limit:
-  context: 16384
-  output: 16384
+family: phi
+pricing:
+  currency: USD
+  input: 0.065
+  output: 0.14
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.065
-  output: 0.14
 release_date: 2026-04-28
-last_updated: 2026-05-17
+last_updated: 2026-04-28

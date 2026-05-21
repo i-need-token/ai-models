@@ -1,19 +1,13 @@
 id: nex-agi--deepseek-v3.1-nex-n1
 name: "Nex-agi: deepseek v3.1 nex n1"
 family: deepseek
-temperature: true
-limit:
-  context: 163840
-  output: 131072
+pricing:
+  currency: USD
+  input: 0.28
+  output: 0.42
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.28
-  output: 0.42
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

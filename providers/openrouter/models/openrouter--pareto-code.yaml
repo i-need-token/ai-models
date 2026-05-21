@@ -1,0 +1,14 @@
+id: openrouter--pareto-code
+name: Pareto Code
+family: openrouter
+pricing:
+  currency: USD
+  input: -1000000
+  output: -1000000
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-04-21
+last_updated: 2026-04-21

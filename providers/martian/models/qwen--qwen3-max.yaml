@@ -1,23 +1,16 @@
 id: qwen--qwen3-max
 name: Qwen3 Max
 family: qwen
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 262100
-  output: 32768
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.78
   output: 3.9
   cache_read: 0.156
   cache_write: 0.975
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-04-17
-last_updated: 2026-05-17
+last_updated: 2026-04-17

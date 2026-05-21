@@ -1,21 +1,16 @@
 id: kimi-k2.5-fast
 name: Kimi K2.5 Fast
 family: kimi
-temperature: true
-limit:
-  context: 262128
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.52
+  output: 2.59
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.52
-  output: 2.59
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
 structured_output: true
+last_updated: 2026-05-20

@@ -1,0 +1,16 @@
+id: nexusflow--nexusraven-13b
+name: Nexusflow / Nexusraven 13b
+family: nexusflow
+pricing:
+  currency: USD
+  input: 0.0315
+  output: 0.315
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

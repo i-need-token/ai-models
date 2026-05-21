@@ -1,15 +1,13 @@
 id: grok-2-1212
 name: Grok 2 1212
-family: grok-2
-temperature: true
+family: grok
 pricing:
   currency: USD
   input: 0.9
   output: 4.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

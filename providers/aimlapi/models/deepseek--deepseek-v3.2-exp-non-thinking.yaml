@@ -1,0 +1,19 @@
+id: deepseek--deepseek-v3.2-exp-non-thinking
+name: Deepseek / Deepseek V3.2 Exp Non Thinking
+family: deepseek
+pricing:
+  currency: USD
+  input: 0.364
+  output: 0.546
+limit:
+  context: 128000
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: true
+tool_call: true
+structured_output: true
+last_updated: 2026-05-19

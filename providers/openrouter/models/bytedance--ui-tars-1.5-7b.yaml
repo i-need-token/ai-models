@@ -1,6 +1,11 @@
 id: bytedance--ui-tars-1.5-7b
-name: "ByteDance: UI-TARS 7B "
-family: seed
+name: Ui Tars 1.5 7b
+family: bytedance
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.2
+  cache_read: 0.1
 limit:
   context: 128000
   output: 2048
@@ -10,10 +15,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.2
-  cache_read: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-07-23
+last_updated: 2025-07-23

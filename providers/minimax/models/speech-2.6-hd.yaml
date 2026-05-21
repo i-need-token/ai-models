@@ -1,15 +1,15 @@
 id: speech-2.6-hd
 name: Speech 2.6 HD
 family: minimax-speech
-temperature: false
+pricing:
+  currency: CNY
+  unit: per_request
+  price: 3.5
 modalities:
   input:
     - text
   output:
     - audio
-pricing:
-  currency: CNY
-  unit: per_request
-  price: 3.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+release_date: 2026-05-18
+last_updated: 2026-05-18

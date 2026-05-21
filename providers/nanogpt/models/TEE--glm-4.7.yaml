@@ -1,18 +1,13 @@
 id: TEE--glm-4.7
 name: "TEE: glm 4.7"
 family: glm
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.85
+  output: 3.3
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.85
-  output: 3.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

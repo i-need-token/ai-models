@@ -1,15 +1,13 @@
 id: text-davinci-003
-name: "OpenAI: Text Davinci 003"
-family: other
-temperature: true
+name: Text Davinci 003
+family: text
 pricing:
   currency: USD
   input: 10
   output: 10
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

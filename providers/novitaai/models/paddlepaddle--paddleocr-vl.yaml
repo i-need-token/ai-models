@@ -1,7 +1,10 @@
 id: paddlepaddle--paddleocr-vl
-name: PaddleOCR-VL
-family: paddleocr
-temperature: true
+name: Paddleocr Vl
+family: paddlepaddle
+pricing:
+  currency: USD
+  input: 0.02
+  output: 0.02
 limit:
   context: 16384
   output: 16384
@@ -11,9 +14,4 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.02
-  output: 0.02
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

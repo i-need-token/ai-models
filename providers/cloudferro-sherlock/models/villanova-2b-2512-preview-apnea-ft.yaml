@@ -1,7 +1,10 @@
 id: villanova-2b-2512-preview-apnea-ft
 name: Villanova 2B 2512 Preview Apnea FT
 family: villanova
-temperature: true
+pricing:
+  currency: EUR
+  input: 0.33
+  output: 0.33
 limit:
   context: 8192
   output: 4096
@@ -10,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.33
-  output: 0.33
-release_date: 2025-06-01
-last_updated: 2026-05-17
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

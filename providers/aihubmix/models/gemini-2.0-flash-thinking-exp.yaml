@@ -1,15 +1,13 @@
 id: gemini-2.0-flash-thinking-exp
-name: "Google: Gemini 2.0 Flash Thinking Exp"
-family: gemini-2.0
-temperature: true
+name: Gemini 2.0 Flash Thinking Exp
+family: gemini
 pricing:
   currency: USD
   input: 0.038
   output: 0.152
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

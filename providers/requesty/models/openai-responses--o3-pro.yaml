@@ -1,6 +1,12 @@
 id: openai-responses--o3-pro
 name: O3 Pro
-family: o3
+family: o
+pricing:
+  currency: USD
+  input: 20
+  output: 80
+  cache_read: 20
+  cache_write: 20
 limit:
   context: 200000
   output: 100000
@@ -10,13 +16,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 20
-  output: 80
-  cache_read: 20
-  cache_write: 20
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-06-11
+last_updated: 2025-06-11

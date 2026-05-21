@@ -1,20 +1,17 @@
 id: novita--deepseek--deepseek-r1
 name: Deepseek R1
 family: novita
-limit:
-  context: 64000
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 4
   output: 4
   cache_read: 4
   cache_write: 4
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2025-01-31
+last_updated: 2025-01-31

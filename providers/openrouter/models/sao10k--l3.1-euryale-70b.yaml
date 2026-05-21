@@ -1,6 +1,10 @@
 id: sao10k--l3.1-euryale-70b
-name: "Sao10K: Llama 3.1 Euryale 70B v2.2"
-family: l3-finetune
+name: L3.1 Euryale 70b
+family: sao10k
+pricing:
+  currency: USD
+  input: 0.85
+  output: 0.85
 limit:
   context: 131072
   output: 16384
@@ -9,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.85
-  output: 0.85
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2024-08-28
+last_updated: 2024-08-28

@@ -1,18 +1,13 @@
 id: kwaipilot--kat-coder-pro-v2
 name: "Kwaipilot: kat coder PRO v2"
-family: other
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: kwaipilot/kat
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.2
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.3
-  output: 1.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

@@ -1,18 +1,16 @@
 id: qwen3-next-80b-a3b-instruct
-name: Qwen3 Next 80B A3B Instruct
-family: qwen3-next
-temperature: true
+name: Qwen3 Next 80b A3b Instruct
+family: qwen
+pricing:
+  currency: USD
+  input: 0.09
+  output: 1.1
 limit:
   context: 262144
-  output: 131072
+  output: 262144
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.09
-  output: 1.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

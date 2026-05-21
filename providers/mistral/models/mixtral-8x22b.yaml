@@ -1,8 +1,11 @@
 id: mixtral-8x22b
 name: Mixtral 8x22B
 family: mixtral
-temperature: true
-tool_call: true
+deprecated: true
+pricing:
+  currency: USD
+  input: 0.8
+  output: 1.2
 limit:
   context: 64000
   output: 4096
@@ -11,10 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.8
-  output: 1.2
+temperature: true
+tool_call: true
 release_date: 2024-04-10
-last_updated: 2026-05-17
-deprecated: true
+last_updated: 2026-05-18

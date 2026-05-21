@@ -3,4 +3,4 @@ name: Google
 url: https://ai.google.dev
 api_docs: https://ai.google.dev/gemini-api/docs
 apis:
-  google: https://generativelanguage.googleapis.com
+  openai: https://generativelanguage.googleapis.com/v1beta/openai

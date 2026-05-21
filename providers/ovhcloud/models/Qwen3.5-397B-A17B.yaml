@@ -1,0 +1,17 @@
+id: Qwen3.5-397B-A17B
+name: Qwen3.5 397B A17B
+family: qwen
+pricing:
+  currency: USD
+  input: 0.71
+  output: 4.25
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-05-18
+last_updated: 2026-05-18

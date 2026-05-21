@@ -1,8 +1,10 @@
 id: baichuan-m2-plus
 name: Baichuan M2 Plus
 family: baichuan-m
-temperature: true
-attachment: true
+pricing:
+  currency: CNY
+  input: 10
+  output: 30
 limit:
   context: 32768
   output: 8192
@@ -11,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 10
-  output: 30
+temperature: true
+attachment: true
 release_date: 2025-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

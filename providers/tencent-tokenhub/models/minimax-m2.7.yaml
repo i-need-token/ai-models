@@ -1,9 +1,11 @@
 id: minimax-m2.7
 name: MiniMax M2.7
 family: minimax
-temperature: true
-reasoning: true
-tool_call: true
+pricing:
+  currency: CNY
+  input: 2.1
+  output: 8.4
+  cache_read: 0.42
 limit:
   context: 128000
   output: 16000
@@ -12,10 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 2.1
-  output: 8.4
-  cache_read: 0.42
+reasoning: true
+temperature: true
+tool_call: true
 release_date: 2026-04-21
-last_updated: 2026-05-17
+last_updated: 2026-05-18

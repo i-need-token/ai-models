@@ -1,15 +1,13 @@
 id: qwen2.5-math-1.5b-instruct
 name: Qwen2.5 Math 1.5b Instruct
-family: qwen2.5
-temperature: true
+family: qwen
 pricing:
   currency: USD
   input: 0.1
   output: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

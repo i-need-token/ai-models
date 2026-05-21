@@ -1,6 +1,10 @@
 id: openai--gpt-3.5-turbo-1106
-name: "OpenAI: GPT-3.5 Turbo 16k (older v1106)"
-family: gpt-3.5
+name: Gpt 3.5 Turbo 1106
+family: gpt
+pricing:
+  currency: USD
+  input: 1
+  output: 2
 limit:
   context: 16385
   output: 4096
@@ -9,10 +13,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

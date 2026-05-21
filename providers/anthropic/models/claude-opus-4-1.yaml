@@ -1,12 +1,10 @@
 id: claude-opus-4-1
 name: Claude Opus 4.1
 family: claude-opus
-temperature: true
-reasoning: true
-tool_call: true
-attachment: true
-structured_output: true
-open_weights: false
+pricing:
+  currency: USD
+  input: 15
+  output: 75
 limit:
   context: 200000
   output: 32000
@@ -17,10 +15,10 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 15
-  output: 75
-knowledge: 2025-03
+reasoning: true
+temperature: true
+tool_call: true
+attachment: true
+structured_output: true
 release_date: 2025-04-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

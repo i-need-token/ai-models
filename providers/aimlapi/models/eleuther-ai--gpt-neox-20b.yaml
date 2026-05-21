@@ -1,0 +1,16 @@
+id: eleuther-ai--gpt-neox-20b
+name: Eleuther Ai / Gpt Neox 20b
+family: eleuther
+pricing:
+  currency: USD
+  input: 0.315
+  output: 0.315
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

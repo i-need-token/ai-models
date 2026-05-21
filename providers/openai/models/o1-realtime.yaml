@@ -1,0 +1,22 @@
+id: o1-realtime
+name: o1 Realtime
+family: o1
+pricing:
+  currency: USD
+  input: 15
+  output: 60
+limit:
+  context: 200000
+  output: 32768
+modalities:
+  input:
+    - text
+    - audio
+  output:
+    - text
+    - audio
+reasoning: true
+temperature: false
+tool_call: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

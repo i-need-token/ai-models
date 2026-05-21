@@ -1,24 +1,16 @@
 id: anthropic--claude-sonnet-4-5-20250929
-name: Claude Sonnet 4.5 20250929
-family: claude
-reasoning: true
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 200000
-  output: 64000
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
+name: Claude Sonnet 4 5 20250929
+family: claude-sonnet
 pricing:
   currency: USD
   input: 3
   output: 15
   cache_read: 0.3
   cache_write: 3.75
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-02-04
-last_updated: 2026-05-17
+last_updated: 2026-02-04

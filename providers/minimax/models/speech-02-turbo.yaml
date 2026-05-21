@@ -1,15 +1,15 @@
 id: speech-02-turbo
 name: Speech 02 Turbo
 family: minimax-speech
-temperature: false
+pricing:
+  currency: CNY
+  unit: per_request
+  price: 2
 modalities:
   input:
     - text
   output:
     - audio
-pricing:
-  currency: CNY
-  unit: per_request
-  price: 2
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+release_date: 2026-05-18
+last_updated: 2026-05-18

@@ -1,6 +1,10 @@
 id: arcee-ai--virtuoso-large
-name: "Arcee AI: Virtuoso Large"
-family: arcee
+name: Virtuoso Large
+family: arcee-ai
+pricing:
+  currency: USD
+  input: 0.75
+  output: 1.2
 limit:
   context: 131072
   output: 64000
@@ -9,10 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.75
-  output: 1.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-05-06
+last_updated: 2025-05-06

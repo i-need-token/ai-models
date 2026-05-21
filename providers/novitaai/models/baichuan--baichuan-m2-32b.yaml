@@ -1,7 +1,10 @@
 id: baichuan--baichuan-m2-32b
-name: BaiChuan M2 32B
+name: Baichuan M2 32b
 family: baichuan
-temperature: true
+pricing:
+  currency: USD
+  input: 0.07
+  output: 0.07
 limit:
   context: 131072
   output: 131072
@@ -10,9 +13,4 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.07
-  output: 0.07
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

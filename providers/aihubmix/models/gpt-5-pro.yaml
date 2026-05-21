@@ -1,22 +1,17 @@
 id: gpt-5-pro
-name: "OpenAI: Gpt 5 Pro"
-family: gpt-5
-temperature: true
+name: Gpt 5 Pro
+family: gpt
 pricing:
   currency: USD
   input: 7.5
   output: 60
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
-limit:
-  context: 400000
-  output: 16384
 reasoning: true
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

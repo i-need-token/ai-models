@@ -1,20 +1,16 @@
 id: mistral-large-2402
 name: mistral-large-2402
 family: mistral-large
-temperature: true
-limit:
-  context: 32000
-  output: 32000
+pricing:
+  currency: EUR
+  input: 3.846
+  output: 11.627
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: EUR
-  input: 3.846
-  output: 11.627
-release_date: 2025-05-26
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-05-26
+last_updated: 2025-05-26

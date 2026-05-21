@@ -1,9 +1,11 @@
 id: gpt-4.1-nano
-name: GPT-4.1 nano
-family: gpt
-tool_call: true
-structured_output: true
-deprecated: true
+name: GPT-4.1 Nano
+family: gpt-4.1
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.4
+  cache_read: 0.025
 limit:
   context: 1047576
   output: 32768
@@ -13,12 +15,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  input: 0.1
-  output: 0.4
-  cache_read: 0.025
-release_date: 2025-04-14
-last_updated: 2025-04-14
-snapshots:
-  - id: gpt-4.1-nano-2025-04-14
-    deprecated: true
+temperature: true
+tool_call: true
+structured_output: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

@@ -1,21 +1,13 @@
 id: gemini-2.5-flash-preview-05-20--thinking
-name: gemini 2.5 FLASH preview 05 20
+name: "Gemini-2.5-flash-preview-05-20: thinking"
 family: gemini
-temperature: true
-limit:
-  context: 1048576
-  output: 65536
+pricing:
+  currency: USD
+  input: 0.15
+  output: 3.5
 modalities:
   input:
     - text
-    - image
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.15
-  output: 3.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
-reasoning: true
+last_updated: 2026-05-20

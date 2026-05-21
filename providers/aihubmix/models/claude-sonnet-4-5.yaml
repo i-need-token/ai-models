@@ -1,24 +1,19 @@
 id: claude-sonnet-4-5
-name: "Anthropic: Claude Sonnet 4 5"
+name: Claude Sonnet 4 5
 family: claude-sonnet
-temperature: true
 pricing:
   currency: USD
   input: 1.65
   output: 8.25
   cache_read: 0.165
   cache_write: 2.0625
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
-limit:
-  context: 1000000
-  output: 16384
 reasoning: true
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

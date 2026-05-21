@@ -1,18 +1,13 @@
 id: zai-org--glm-4.5
 name: "Zai-org: glm 4.5"
 family: glm
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.3
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.3
-  output: 1.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

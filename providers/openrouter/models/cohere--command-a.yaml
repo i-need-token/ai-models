@@ -1,6 +1,10 @@
 id: cohere--command-a
-name: "Cohere: Command A"
+name: Command A
 family: command
+pricing:
+  currency: USD
+  input: 2.5
+  output: 10
 limit:
   context: 256000
   output: 8192
@@ -9,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 2.5
-  output: 10
-release_date: 2026-05-17
-last_updated: 2026-05-17
+structured_output: true
+release_date: 2025-03-14
+last_updated: 2025-03-14

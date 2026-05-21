@@ -1,20 +1,17 @@
 id: document-ocr
 name: Document OCR
 family: document-ocr
-temperature: false
-attachment: true
-limit:
-  context: 30
-  output: 0
+pricing:
+  currency: USD
+  unit: per_request
+  price: 0.0015
 modalities:
   input:
     - image
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  unit: per_request
-  price: 0.0015
+temperature: true
+attachment: true
 release_date: 2023-04-10
-last_updated: 2026-05-17
+last_updated: 2026-05-18

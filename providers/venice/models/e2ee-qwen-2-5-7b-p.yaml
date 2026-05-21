@@ -1,7 +1,10 @@
 id: e2ee-qwen-2-5-7b-p
-name: Qwen 2.5 7B
-family: e2ee-other
-temperature: true
+name: e2ee-qwen-2-5-7b-p
+family: qwen
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.13
 limit:
   context: 32000
   output: 4096
@@ -10,9 +13,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.05
-  output: 0.13
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2026-03-18
+last_updated: 2026-03-18

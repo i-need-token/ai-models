@@ -1,0 +1,19 @@
+id: gemma-4-31b-it-turbo
+name: Gemma 4 31b It Turbo
+family: gemma
+pricing:
+  currency: USD
+  input: 0.12
+  output: 0.37
+limit:
+  context: 262144
+  output: 16384
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+structured_output: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

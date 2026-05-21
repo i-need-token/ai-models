@@ -1,9 +1,10 @@
 id: reka-edge-2
 name: Reka Edge 2
 family: reka-edge
-temperature: true
-attachment: true
-open_weights: true
+pricing:
+  currency: USD
+  input: 0.03
+  output: 0.1
 limit:
   context: 131072
   output: 8192
@@ -13,9 +14,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.03
-  output: 0.1
+temperature: true
+attachment: true
+open_weights: true
 release_date: 2025-01-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

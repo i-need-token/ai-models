@@ -1,9 +1,10 @@
 id: microsoft-phi-4-mini-multimodal
 name: Phi-4 Mini Multimodal
 family: phi
-temperature: true
-tool_call: true
-attachment: true
+pricing:
+  currency: USD
+  input: 0.08
+  output: 0.32
 limit:
   context: 128000
   output: 4096
@@ -14,9 +15,8 @@ modalities:
     - audio
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.08
-  output: 0.32
+temperature: true
+tool_call: true
+attachment: true
 release_date: 2025-02-26
-last_updated: 2026-05-17
+last_updated: 2026-05-18

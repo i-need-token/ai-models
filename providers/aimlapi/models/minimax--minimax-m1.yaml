@@ -1,17 +1,19 @@
 id: minimax--minimax-m1
-name: MiniMax / MiniMax M1
+name: Minimax / Minimax M1
 family: minimax
+pricing:
+  currency: USD
+  input: 1.69
+  output: 2.86
 limit:
   context: 1000000
-  output: 8192
+  output: 40960
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.69
-  output: 2.86
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: true
+tool_call: true
+structured_output: true
+last_updated: 2026-05-19

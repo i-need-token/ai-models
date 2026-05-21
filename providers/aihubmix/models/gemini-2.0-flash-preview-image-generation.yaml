@@ -1,16 +1,14 @@
 id: gemini-2.0-flash-preview-image-generation
-name: "Google: Gemini 2.0 Flash Preview Image Generation"
-family: gemini-2.0
-temperature: true
+name: Gemini 2.0 Flash Preview Image Generation
+family: gemini
 pricing:
   currency: USD
   input: 0.05
   output: 0.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
+last_updated: 2026-05-19

@@ -1,0 +1,16 @@
+id: google--gemini-3.1-flash-image-nano-banana-2
+name: Google / Gemini 3.1 Flash Image Nano Banana 2
+family: google
+pricing:
+  currency: USD
+  input: 0.325
+  output: 78
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

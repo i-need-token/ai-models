@@ -1,18 +1,13 @@
 id: chutesai--Mistral-Small-3.2-24B-Instruct-2506
 name: "Chutesai: Mistral Small 3.2 24B Instruct 2506"
 family: mistral
-temperature: true
-limit:
-  context: 32768
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.4
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.2
-  output: 0.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

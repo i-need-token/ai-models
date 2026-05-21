@@ -1,6 +1,11 @@
 id: openai--gpt-5
-name: "OpenAI: GPT-5"
-family: gpt-5
+name: Gpt 5
+family: gpt
+pricing:
+  currency: USD
+  input: 1.25
+  output: 10
+  cache_read: 0.125
 limit:
   context: 400000
   output: 128000
@@ -10,11 +15,5 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.25
-  output: 10
-  cache_read: 0.125
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

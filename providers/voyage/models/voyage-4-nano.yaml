@@ -1,16 +1,14 @@
 id: voyage-4-nano
 name: Voyage 4 Nano
 family: voyage-4
-open_weights: true
-limit:
-  context: 32000
-  output: 0
+pricing:
+  unit: free
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: free
+temperature: true
+open_weights: true
 release_date: 2025-05
-last_updated: 2026-05-17
+last_updated: 2026-05-18

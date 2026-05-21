@@ -1,6 +1,11 @@
 id: inceptron--glm-5.1
 name: Glm 5.1
 family: inceptron
+pricing:
+  currency: USD
+  input: 1.4
+  output: 4.4
+  cache_read: 0.26
 limit:
   context: 202752
   output: 202752
@@ -9,11 +14,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.4
-  output: 4.4
-  cache_read: 0.26
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2026-04-29
+last_updated: 2026-04-29

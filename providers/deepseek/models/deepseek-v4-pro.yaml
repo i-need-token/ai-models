@@ -1,6 +1,6 @@
 id: deepseek-v4-pro
 name: DeepSeek V4 Pro
-family: deepseek-v4
+family: deepseek
 pricing:
   input: 0.435
   output: 0.87

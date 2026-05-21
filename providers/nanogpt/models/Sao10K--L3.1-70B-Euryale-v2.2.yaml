@@ -1,19 +1,13 @@
 id: Sao10K--L3.1-70B-Euryale-v2.2
 name: "Sao10K: L3.1 70B Euryale v2.2"
-family: o-series
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: o
+pricing:
+  currency: USD
+  input: 0.18
+  output: 0.21
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.18
-  output: 0.21
-release_date: 2026-05-17
-last_updated: 2026-05-17
-reasoning: true
+last_updated: 2026-05-20

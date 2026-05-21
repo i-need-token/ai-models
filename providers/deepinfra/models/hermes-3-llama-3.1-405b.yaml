@@ -1,7 +1,10 @@
 id: hermes-3-llama-3.1-405b
-name: Hermes 3 Llama 3.1.405B
-family: llama-3.1
-temperature: true
+name: Hermes 3 Llama 3.1.405b
+family: llama
+pricing:
+  currency: USD
+  input: 1
+  output: 1
 limit:
   context: 131072
   output: 131072
@@ -10,11 +13,4 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
-open_weights: true
+last_updated: 2026-05-20

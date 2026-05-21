@@ -1,18 +1,13 @@
 id: learnlm-1.5-pro-experimental
 name: learnlm 1.5 PRO experimental
-family: other
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: learnlm
+pricing:
+  currency: USD
+  input: 2.06
+  output: 6.18
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 2.06
-  output: 6.18
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

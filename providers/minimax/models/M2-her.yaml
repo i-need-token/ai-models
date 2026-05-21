@@ -1,7 +1,10 @@
 id: M2-her
 name: MiniMax M2-Her
 family: minimax-m2-her
-temperature: true
+pricing:
+  currency: CNY
+  input: 2.1
+  output: 8.4
 limit:
   context: 64000
   output: 64000
@@ -10,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 2.1
-  output: 8.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

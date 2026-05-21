@@ -1,0 +1,16 @@
+id: baidu--ernie-4.5-vl
+name: Baidu / Ernie 4.5 Vl
+family: baidu
+pricing:
+  currency: USD
+  input: 0.6435
+  output: 1.859
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

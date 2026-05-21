@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "submodel",
@@ -13,152 +21,140 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-16)
-//
-// Sources:
-// - Model list & pricing: https://submodel.ai homepage (MaaS section)
-// - Context lengths: SubModel homepage
-//
-// SubModel is a GPU cloud + inference platform hosting models from other
-// providers (Qwen, ZhipuAI, OpenAI, DeepSeek) with per-token USD pricing.
+// Raw data types (from SubModel API)
 // ---------------------------------------------------------------------------
 
-interface ModelInfo {
-  name: string;
-  context: number;
-  output: number;
-  inputModalities: ModelModality[];
-  outputModalities: ModelModality[];
-  openWeights?: boolean;
-  reasoning?: boolean;
+interface SubmodelModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
-const MODELS: Record<string, ModelInfo> = {
-  // --- qwen family ---
-  "qwen--Qwen3-Coder-480B-A35B-Instruct": {
-    name: "Qwen3 Coder 480B A35B Instruct",
-    context: 262144,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    openWeights: true,
-  },
-  "qwen--Qwen3-235B-A22B-Instruct-2507": {
-    name: "Qwen3 235B A22B Instruct 2507",
-    context: 262144,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    openWeights: true,
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<SubmodelModel[]> {
+  const response = await fetch("https://api.submodel.ai/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch SubModel models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: SubmodelModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.submodel.ai/v1/models",
+      type: "api",
+      description: "SubModel /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
   },
 
-  // --- zai (zhipuai) family ---
-  "zai--GLM-4.5": {
-    name: "GLM 4.5",
-    context: 131072,
-    output: 65536,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    openWeights: true,
+  extractPricing: {
+    source: {
+      url: "https://api.submodel.ai/v1/models",
+      type: "api",
+      description: "SubModel API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
   },
 
-  // --- openai family ---
-  "openai--gpt-oss-120b": {
-    name: "GPT OSS 120B",
-    context: 131072,
-    output: 65536,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    openWeights: true,
+  extractLimits: {
+    source: {
+      url: "https://api.submodel.ai/v1/models",
+      type: "api",
+      description: "SubModel API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
   },
 
-  // --- deepseek family ---
-  "deepseek--DeepSeek-R1": {
-    name: "DeepSeek R1",
-    context: 163840,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    reasoning: true,
+  extractModalities: {
+    source: {
+      url: "https://api.submodel.ai/v1/models",
+      type: "api",
+      description: "SubModel API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
   },
-  "deepseek--DeepSeek-V3.1": {
-    name: "DeepSeek V3.1",
-    context: 163840,
-    output: 65536,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
+
+  extractFeatures: {
+    source: {
+      url: "https://api.submodel.ai/v1/models",
+      type: "api",
+      description: "SubModel API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.submodel.ai/v1/models",
+      type: "api",
+      description: "SubModel API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as SubmodelModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /qwen/i, family: "qwen" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
   },
 };
 
-// Pricing per 1M tokens (USD)
-const PRICING: Record<string, Pricing> = {
-  "qwen--Qwen3-Coder-480B-A35B-Instruct": {
-    currency: "USD",
-    input: 0.2,
-    output: 0.8,
-  },
-  "qwen--Qwen3-235B-A22B-Instruct-2507": {
-    currency: "USD",
-    input: 0.2,
-    output: 0.3,
-  },
-  "zai--GLM-4.5": {
-    currency: "USD",
-    input: 0.2,
-    output: 0.8,
-  },
-  "openai--gpt-oss-120b": {
-    currency: "USD",
-    input: 0.1,
-    output: 0.5,
-  },
-  "deepseek--DeepSeek-R1": {
-    currency: "USD",
-    input: 0.2,
-    output: 0.8,
-  },
-  "deepseek--DeepSeek-V3.1": {
-    currency: "USD",
-    input: 0.2,
-    output: 0.8,
-  },
-};
-
-function deriveFamily(id: string): string {
-  if (id.startsWith("qwen--")) return "qwen";
-  if (id.startsWith("zai--")) return "glm";
-  if (id.startsWith("openai--")) return "gpt-oss";
-  if (id.startsWith("deepseek--")) return "deepseek";
-  return "other";
-}
+// ---------------------------------------------------------------------------
+// Scrape function
+// ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const models: ReturnType<typeof defineModel>[] = [];
-  const today = new Date().toISOString().split("T")[0] as string;
-
-  for (const [id, info] of Object.entries(MODELS)) {
-    const pricing = PRICING[id];
-    if (!pricing) {
-      console.warn(`Skipping ${id}: no pricing`);
-      continue;
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: id as string,
-      name: info.name as string,
-      family: deriveFamily(id as string),
-      limit: { context: info.context, output: info.output },
-      modalities: { input: info.inputModalities, output: info.outputModalities },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (info.openWeights) modelDef.open_weights = true;
-    if (info.reasoning) modelDef.reasoning = true;
-
-    models.push(defineModel(modelDef));
-  }
-
+  const models = await runPipeline(pipeline);
+  console.log(`  SubModel: ${models.length} models`);
   return { provider, models };
 }

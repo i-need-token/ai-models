@@ -1,6 +1,12 @@
 id: openai-responses--gpt-5.4-nano
 name: Gpt 5.4 Nano
-family: gpt-5
+family: gpt
+pricing:
+  currency: USD
+  input: 0.2
+  output: 1.25
+  cache_read: 0.02
+  cache_write: 1.25
 limit:
   context: 400000
   output: 128000
@@ -10,13 +16,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.2
-  output: 1.25
-  cache_read: 0.02
-  cache_write: 1.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-03-18
+last_updated: 2026-03-18

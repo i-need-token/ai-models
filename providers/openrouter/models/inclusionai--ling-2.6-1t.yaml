@@ -1,6 +1,11 @@
 id: inclusionai--ling-2.6-1t
-name: "inclusionAI: Ling-2.6-1T"
+name: Ling 2.6 1t
 family: inclusionai
+pricing:
+  currency: USD
+  input: 0.3
+  output: 2.5
+  cache_read: 0.06
 limit:
   context: 262144
   output: 32768
@@ -9,11 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 2.5
-  cache_read: 0.06
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2026-04-23
+last_updated: 2026-04-23

@@ -1,21 +1,14 @@
 id: mistralai--mistral-medium-3-5
-name: Mistral Medium 3.5
-family: mistral-medium
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 262144
-  output: 7
+name: Mistral Medium 3 5
+family: mistral
+pricing:
+  currency: USD
+  input: 1.5
+  output: 7.5
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.5
-  output: 7.5
 release_date: 2026-05-12
-last_updated: 2026-05-17
+last_updated: 2026-05-12

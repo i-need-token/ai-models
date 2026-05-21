@@ -1,15 +1,13 @@
 id: qwen-turbo-2025-04-28
 name: Qwen Turbo 2025 04 28
 family: qwen
-temperature: true
 pricing:
   currency: USD
   input: 0.023
   output: 0.046
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

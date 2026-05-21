@@ -1,6 +1,12 @@
 id: openai--gpt-4o-mini
 name: Gpt 4o Mini
-family: gpt-4o
+family: gpt
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.6
+  cache_read: 0.075
+  cache_write: 0.15
 limit:
   context: 128000
   output: 16384
@@ -10,12 +16,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.6
-  cache_read: 0.075
-  cache_write: 0.15
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2024-07-18
+last_updated: 2024-07-18

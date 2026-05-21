@@ -1,7 +1,11 @@
 id: minimax-m25
-name: MiniMax M2.5
-family: minimax-m2
-temperature: true
+name: minimax-m25
+family: minimax
+pricing:
+  currency: USD
+  input: 0.34
+  output: 1.19
+  cache_read: 0.04
 limit:
   context: 198000
   output: 32768
@@ -10,12 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.34
-  output: 1.19
-  cache_read: 0.04
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
 tool_call: true
+release_date: 2026-02-12
+last_updated: 2026-02-12

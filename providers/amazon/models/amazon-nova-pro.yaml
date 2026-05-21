@@ -1,9 +1,10 @@
 id: amazon-nova-pro
 name: Amazon Nova Pro
 family: nova
-temperature: true
-tool_call: true
-attachment: true
+pricing:
+  currency: USD
+  input: 0.8
+  output: 3.2
 limit:
   context: 300000
   output: 10000
@@ -14,9 +15,8 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.8
-  output: 3.2
+temperature: true
+tool_call: true
+attachment: true
 release_date: 2024-12-03
-last_updated: 2026-05-17
+last_updated: 2026-05-18

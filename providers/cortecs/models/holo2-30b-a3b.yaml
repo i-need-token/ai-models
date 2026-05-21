@@ -1,21 +1,17 @@
 id: holo2-30b-a3b
 name: holo2-30b-a3b
-family: holo
-temperature: true
-limit:
-  context: 22000
-  output: 22000
+family: holo2
+pricing:
+  currency: EUR
+  input: 0.3
+  output: 0.7
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.3
-  output: 0.7
-release_date: 2025-12-10
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-12-10
+last_updated: 2025-12-10

@@ -1,0 +1,17 @@
+id: imagen-3.0-fast-generate
+name: Imagen 3.0 Fast
+family: imagen-3
+deprecated: true
+pricing:
+  currency: USD
+  unit: per_image
+  price: 0.02
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - image
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

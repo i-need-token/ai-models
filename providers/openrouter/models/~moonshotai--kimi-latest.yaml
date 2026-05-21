@@ -1,0 +1,22 @@
+id: ~moonshotai--kimi-latest
+name: Kimi Latest
+family: ~moonshotai
+pricing:
+  currency: USD
+  input: 0.73
+  output: 3.49
+  cache_read: 0.25
+limit:
+  context: 262144
+  output: 262142
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-04-28
+last_updated: 2026-04-28

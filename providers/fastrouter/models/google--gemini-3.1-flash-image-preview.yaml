@@ -1,6 +1,10 @@
 id: google--gemini-3.1-flash-image-preview
-name: "Google: Nano Banana 2 (Gemini 3.1 Flash Image Preview)"
+name: Gemini 3.1 Flash Image Preview
 family: gemini
+pricing:
+  currency: USD
+  input: 0.25
+  output: 1.5
 limit:
   context: 65536
   output: 65536
@@ -11,10 +15,5 @@ modalities:
   output:
     - image
     - text
-pricing:
-  currency: USD
-  input: 0.25
-  output: 1.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+last_updated: 2026-05-20

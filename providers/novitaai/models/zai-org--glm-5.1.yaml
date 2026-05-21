@@ -1,7 +1,10 @@
 id: zai-org--glm-5.1
-name: GLM-5.1
+name: Glm 5.1
 family: glm
-temperature: true
+pricing:
+  currency: USD
+  input: 1.38
+  output: 4.4
 limit:
   context: 204800
   output: 131072
@@ -10,12 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.38
-  output: 4.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+last_updated: 2026-05-20

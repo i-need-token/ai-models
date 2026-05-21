@@ -1,234 +1,160 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "morph",
   name: "Morph",
-  url: "https://morphllm.com",
-  api_docs: "https://docs.morphllm.com",
+  url: "https://morph.ai",
+  api_docs: "https://docs.morph.ai",
   apis: {
-    openai: "https://api.morphllm.com/v1",
+    openai: "https://api.morph.ai/v1",
   },
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-16)
-//
-// Sources:
-// - Pricing: https://morphllm.com/pricing (SSR page, extracted from HTML)
-// - Model IDs: Morph pricing page + docs
-// - Context lengths: Morph pricing page
-//
-// Morph is a model producer that builds specialized models for code editing,
-// search, routing, and context management. They also host open-source models
-// on their infrastructure with custom kernels.
+// Raw data types (from Morph API)
 // ---------------------------------------------------------------------------
 
-interface ModelInfo {
-  name: string;
-  context: number;
-  output: number;
-  inputModalities: ModelModality[];
-  outputModalities: ModelModality[];
-  toolCall?: boolean;
-  openWeights?: boolean;
-  reasoning?: boolean;
+interface MorphModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
 // ---------------------------------------------------------------------------
-// Specialized Models (Morph's own models)
+// Helpers
 // ---------------------------------------------------------------------------
 
-const SPECIALIZED_MODELS: Record<string, ModelInfo> = {
-  // --- Fast Apply family ---
-  "morph-v3-fast": {
-    name: "Morph v3 Fast",
-    context: 262144,
-    output: 262144,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-  },
-  "morph-v3-large": {
-    name: "Morph v3 Large",
-    context: 262144,
-    output: 262144,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-  },
-
-  // --- Compaction ---
-  "morph-compact": {
-    name: "Morph Compact",
-    context: 1048576,
-    output: 1048576,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-  },
-
-  // --- Router ---
-  "morph-router": {
-    name: "Morph Router",
-    context: 0,
-    output: 0,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-  },
-};
-
-// ---------------------------------------------------------------------------
-// General Models (open-source models on Morph infrastructure)
-// ---------------------------------------------------------------------------
-
-const GENERAL_MODELS: Record<string, ModelInfo> = {
-  "morph-qwen35-397b": {
-    name: "Qwen 3.5 397B on Morph",
-    context: 262144,
-    output: 262144,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
-  "morph-qwen36-27b": {
-    name: "Qwen 3.6 27B on Morph",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
-  "morph-minimax27-230b": {
-    name: "MiniMax M2.7 230B on Morph",
-    context: 200000,
-    output: 200000,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
-};
-
-// ---------------------------------------------------------------------------
-// Pricing (USD per million tokens, unless otherwise noted)
-//
-// Source: https://morphllm.com/pricing (extracted from SSR HTML 2026-05-16)
-//
-// Specialized Models:
-//   morph-v3-fast:  $0.8/M input, $1.2/M output
-//   morph-v3-large: $0.9/M input, $1.9/M output
-//   morph-compact:  $0.2/M input, $0.5/M output
-//   morph-router:   $0.005/request
-//
-// General Models:
-//   morph-qwen35-397b:    $0.48/M input, $3.5/M output
-//   morph-qwen36-27b:     $0.498/M input, $2.4/M output
-//   morph-minimax27-230b: $0.279/M input, $1.2/M output
-//
-// Note: morph-warp-grep-v2 is priced per 100K queries ($0.8/100K), not
-// per-token — excluded from this catalog.
-// ---------------------------------------------------------------------------
-
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  // Specialized models — USD per million tokens
-  "morph-v3-fast": { currency: "USD", input: 0.8, output: 1.2 },
-  "morph-v3-large": { currency: "USD", input: 0.9, output: 1.9 },
-  "morph-compact": { currency: "USD", input: 0.2, output: 0.5 },
-
-  // Router — USD per request
-  "morph-router": { currency: "USD", unit: "per_request", price: 0.005 },
-
-  // General models — USD per million tokens
-  "morph-qwen35-397b": { currency: "USD", input: 0.48, output: 3.5 },
-  "morph-qwen36-27b": { currency: "USD", input: 0.498, output: 2.4 },
-  "morph-minimax27-230b": { currency: "USD", input: 0.279, output: 1.2 },
-};
-
-// ---------------------------------------------------------------------------
-// Family derivation
-// ---------------------------------------------------------------------------
-
-function deriveFamily(id: string): string {
-  if (id.includes("morph-v3")) return "morph-v3";
-  if (id.includes("morph-compact")) return "morph-compact";
-  if (id.includes("morph-router")) return "morph-router";
-  if (id.includes("morph-qwen")) return "morph-qwen";
-  if (id.includes("morph-minimax")) return "morph-minimax";
-  return "morph";
+async function fetchModels(): Promise<MorphModel[]> {
+  const response = await fetch("https://api.morph.ai/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Morph models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: MorphModel[] };
+  return data.data;
 }
 
 // ---------------------------------------------------------------------------
-// Date helper
+// Pipeline definition
 // ---------------------------------------------------------------------------
 
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.morph.ai/v1/models",
+      type: "api",
+      description: "Morph /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://api.morph.ai/v1/models",
+      type: "api",
+      description: "Morph API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.morph.ai/v1/models",
+      type: "api",
+      description: "Morph API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://api.morph.ai/v1/models",
+      type: "api",
+      description: "Morph API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.morph.ai/v1/models",
+      type: "api",
+      description: "Morph API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.morph.ai/v1/models",
+      type: "api",
+      description: "Morph API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as MorphModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /morph/i, family: "morph" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /qwen/i, family: "qwen" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // Process specialized models
-  for (const [id, info] of Object.entries(SPECIALIZED_MODELS)) {
-    const pricing = HARDCODED_PRICING[id];
-    if (!pricing) {
-      console.warn(`  Morph: skipping ${id} — no pricing`);
-      continue;
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id,
-      name: info.name,
-      family: deriveFamily(id),
-      limit: { context: info.context, output: info.output },
-      modalities: { input: info.inputModalities, output: info.outputModalities },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (info.toolCall) modelDef.tool_call = true;
-    if (info.openWeights) modelDef.open_weights = true;
-    if (info.reasoning) modelDef.reasoning = true;
-
-    models.push(defineModel(modelDef));
-  }
-
-  // Process general models
-  for (const [id, info] of Object.entries(GENERAL_MODELS)) {
-    const pricing = HARDCODED_PRICING[id];
-    if (!pricing) {
-      console.warn(`  Morph: skipping ${id} — no pricing`);
-      continue;
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id,
-      name: info.name,
-      family: deriveFamily(id),
-      limit: { context: info.context, output: info.output },
-      modalities: { input: info.inputModalities, output: info.outputModalities },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (info.toolCall) modelDef.tool_call = true;
-    if (info.openWeights) modelDef.open_weights = true;
-
-    models.push(defineModel(modelDef));
-  }
-
+  const models = await runPipeline(pipeline);
   console.log(`  Morph: ${models.length} models`);
-
   return { provider, models };
 }

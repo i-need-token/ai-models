@@ -1,7 +1,10 @@
 id: e2ee-qwen3-vl-30b-a3b-p
-name: Qwen3 VL 30B A3B
-family: qwen-vl
-temperature: true
+name: e2ee-qwen3-vl-30b-a3b-p
+family: qwen
+pricing:
+  currency: USD
+  input: 0.25
+  output: 0.9
 limit:
   context: 128000
   output: 4096
@@ -11,11 +14,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.25
-  output: 0.9
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
 attachment: true
+release_date: 2026-03-18
+last_updated: 2026-03-18

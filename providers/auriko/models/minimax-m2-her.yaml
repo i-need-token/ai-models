@@ -1,18 +1,17 @@
 id: minimax-m2-her
-name: MiniMax M2 Her
+name: Minimax M2 Her
 family: minimax
-temperature: true
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.2
+limit:
+  context: 64000
+  output: 2048
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 1.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 64000
-  output: 2048
+release_date: 2026-04-27
+last_updated: 2026-04-27

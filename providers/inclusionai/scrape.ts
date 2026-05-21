@@ -1,108 +1,159 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "inclusionai",
-  name: "InclusionAI",
-  url: "https://inclusionai.com",
-  api_docs: "https://inclusionai.com/docs",
+  name: "Inclusion AI",
+  url: "https://inclusion.ai",
+  api_docs: "https://docs.inclusion.ai",
   apis: {
-    openai: "https://api.inclusionai.com/v1",
+    openai: "https://api.inclusion.ai/v1",
   },
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Model specs & pricing: OpenRouter API https://openrouter.ai/api/v1/models
-//   (inclusionai/* models — context windows, max output, modalities, USD pricing)
-// - Model descriptions: OpenRouter model descriptions
-//
-// InclusionAI produces the Ling (instant/instruct) and Ring (thinking/reasoning)
-// families of MoE models, designed for real-world agent workflows.
-// The inclusionai.com website and API are unreachable from this network.
-// Data sourced from OpenRouter which mirrors InclusionAI's specifications.
+// Raw data types (from Inclusion AI API)
 // ---------------------------------------------------------------------------
 
-// Pricing (USD per 1M tokens) — from OpenRouter
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  "ling-2.6-1t": { currency: "USD", input: 0.3, output: 2.5 },
-  "ling-2.6-flash": { currency: "USD", input: 0.01, output: 0.03 },
-  "ring-2.6-1t": { currency: "USD", input: 0.07, output: 0.62 },
-};
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+interface InclusionAIModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<InclusionAIModel[]> {
+  const response = await fetch("https://api.inclusion.ai/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Inclusion AI models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: InclusionAIModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.inclusion.ai/v1/models",
+      type: "api",
+      description: "Inclusion AI /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://api.inclusion.ai/v1/models",
+      type: "api",
+      description: "Inclusion AI API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.inclusion.ai/v1/models",
+      type: "api",
+      description: "Inclusion AI API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://api.inclusion.ai/v1/models",
+      type: "api",
+      description: "Inclusion AI API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.inclusion.ai/v1/models",
+      type: "api",
+      description: "Inclusion AI API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.inclusion.ai/v1/models",
+      type: "api",
+      description: "Inclusion AI API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as InclusionAIModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /booklish/i, family: "booklish" },
+        { pattern: /yi/i, family: "yi" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // --- Ling 2.6 1T (trillion-parameter flagship, fast execution) ---
-
-  models.push(
-    defineModel({
-      id: "ling-2.6-1t",
-      name: "Ling 2.6 1T",
-      family: "ling",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 262144, output: 32768 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["ling-2.6-1t"] as Pricing,
-      release_date: "2025-04-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Ling 2.6 Flash (104B MoE, 7.4B active, ultra-fast) ---
-
-  models.push(
-    defineModel({
-      id: "ling-2.6-flash",
-      name: "Ling 2.6 Flash",
-      family: "ling",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 262144, output: 32768 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["ling-2.6-flash"] as Pricing,
-      release_date: "2025-04-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Ring 2.6 1T (trillion-parameter thinking model, 63B active) ---
-
-  models.push(
-    defineModel({
-      id: "ring-2.6-1t",
-      name: "Ring 2.6 1T",
-      family: "ring",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      limit: { context: 262144, output: 65536 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["ring-2.6-1t"] as Pricing,
-      release_date: "2025-04-01",
-      last_updated: today,
-    }),
-  );
-
-  console.log(`  InclusionAI: ${models.length} models`);
-
+  const models = await runPipeline(pipeline);
+  console.log(`  Inclusion AI: ${models.length} models`);
   return { provider, models };
 }

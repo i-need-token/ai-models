@@ -1,7 +1,10 @@
 id: meta-llama--llama-3-8b-instruct
-name: Llama 3 8B Instruct
-family: llama-3
-temperature: true
+name: Llama 3 8b Instruct
+family: llama
+pricing:
+  currency: USD
+  input: 0.04
+  output: 0.04
 limit:
   context: 8192
   output: 8192
@@ -10,10 +13,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.04
-  output: 0.04
-release_date: 2026-05-17
-last_updated: 2026-05-17
 structured_output: true
+last_updated: 2026-05-20

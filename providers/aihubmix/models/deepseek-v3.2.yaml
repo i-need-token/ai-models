@@ -1,22 +1,17 @@
 id: deepseek-v3.2
 name: Deepseek V3.2
-family: deepseek-v3
-temperature: true
+family: deepseek
 pricing:
   currency: USD
   input: 0.151
   output: 0.2265
   cache_read: 0.0151
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
-limit:
-  context: 128000
-  output: 16384
 reasoning: true
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

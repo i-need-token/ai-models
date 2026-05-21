@@ -1,9 +1,10 @@
 id: trinity-large-preview
 name: Trinity Large Preview
 family: trinity
-temperature: true
-tool_call: true
-open_weights: true
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.45
 limit:
   context: 131000
   output: 8192
@@ -12,9 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.45
+temperature: true
+tool_call: true
+open_weights: true
 release_date: 2025-05-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

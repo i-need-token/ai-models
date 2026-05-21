@@ -1,21 +1,14 @@
 id: deepcogito--cogito-v2.1-671b
-name: Cogito V2.1 671B
+name: Cogito V2.1 671b
 family: deepcogito
-reasoning: false
-temperature: true
-tool_call: false
-structured_output: false
-limit:
-  context: 128000
-  output: 1
+pricing:
+  currency: USD
+  input: 1.25
+  output: 1.25
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.25
-  output: 1.25
 release_date: 2026-01-21
-last_updated: 2026-05-17
+last_updated: 2026-01-21

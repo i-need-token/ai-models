@@ -1,20 +1,14 @@
 id: x-ai--grok-4.3
 name: "xAI: grok 4.3"
 family: grok
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 1.25
+  output: 2.5
+  cache_read: 0.2
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 1.25
-  output: 2.5
-  cache_read: 0.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

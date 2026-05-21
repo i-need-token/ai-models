@@ -1,6 +1,11 @@
 id: inclusionai--ling-2.6-flash
-name: "inclusionAI: Ling-2.6-flash"
+name: Ling 2.6 Flash
 family: inclusionai
+pricing:
+  currency: USD
+  input: 0.01
+  output: 0.03
+  cache_read: 0.002
 limit:
   context: 262144
   output: 32768
@@ -9,11 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.01
-  output: 0.03
-  cache_read: 0.002
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2026-04-22
+last_updated: 2026-04-22

@@ -1,21 +1,16 @@
 id: bytedance-seed--seed-oss-36b-instruct
-name: "Doubao: Bytedance Seed/Seed Oss 36b Instruct"
+name: Bytedance Seed/Seed Oss 36b Instruct
 family: seed-oss
-temperature: true
 pricing:
   currency: USD
   input: 0.1
   output: 0.267
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
-limit:
-  context: 256000
-  output: 16384
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

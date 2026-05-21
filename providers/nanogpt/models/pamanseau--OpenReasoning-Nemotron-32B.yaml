@@ -1,19 +1,13 @@
 id: pamanseau--OpenReasoning-Nemotron-32B
 name: "Pamanseau: OpenReasoning Nemotron 32B"
-family: other
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: pamanseau/OpenReasoning
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.4
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.1
-  output: 0.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
-reasoning: true
+last_updated: 2026-05-20

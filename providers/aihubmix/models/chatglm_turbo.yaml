@@ -1,15 +1,13 @@
 id: chatglm_turbo
-name: "智谱 ChatGLM: Chatglm_turbo"
+name: Chatglm_turbo
 family: glm
-temperature: true
 pricing:
   currency: USD
   input: 0.3572
   output: 0.3572
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

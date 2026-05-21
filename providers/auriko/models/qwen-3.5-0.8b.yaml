@@ -1,21 +1,20 @@
 id: qwen-3.5-0.8b
-name: Qwen 3.5 0.8B
+name: Qwen 3.5 0.8b
 family: qwen
-temperature: true
+pricing:
+  currency: USD
+  input: 0.01
+  output: 0.05
+limit:
+  context: 262144
+  output: 81920
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.01
-  output: 0.05
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 262144
-  output: 81920
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

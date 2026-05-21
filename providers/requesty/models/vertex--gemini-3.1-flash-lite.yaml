@@ -1,6 +1,12 @@
 id: vertex--gemini-3.1-flash-lite
 name: Gemini 3.1 Flash Lite
-family: gemini
+family: vertex
+pricing:
+  currency: USD
+  input: 0.25
+  output: 1.5
+  cache_read: 0.025
+  cache_write: 0.08333
 limit:
   context: 1048576
   output: 65535
@@ -10,12 +16,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.25
-  output: 1.5
-  cache_read: 0.025
-  cache_write: 0.08333
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2026-05-08
+last_updated: 2026-05-08

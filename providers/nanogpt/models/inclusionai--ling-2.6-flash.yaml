@@ -1,18 +1,13 @@
 id: inclusionai--ling-2.6-flash
 name: "InclusionAI: ling 2.6 FLASH"
-family: other
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: inclusionai/ling
+pricing:
+  currency: USD
+  input: 0.08
+  output: 0.24
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.08
-  output: 0.24
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

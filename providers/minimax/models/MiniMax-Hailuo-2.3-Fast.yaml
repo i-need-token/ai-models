@@ -1,16 +1,16 @@
 id: MiniMax-Hailuo-2.3-Fast
 name: MiniMax Hailuo 2.3 Fast
 family: minimax-hailuo
-temperature: false
+pricing:
+  currency: CNY
+  unit: per_request
+  price: 1.35
 modalities:
   input:
     - text
     - image
   output:
     - video
-pricing:
-  currency: CNY
-  unit: per_request
-  price: 1.35
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+release_date: 2026-05-18
+last_updated: 2026-05-18

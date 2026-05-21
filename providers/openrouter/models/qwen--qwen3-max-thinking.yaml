@@ -1,6 +1,10 @@
 id: qwen--qwen3-max-thinking
-name: "Qwen: Qwen3 Max Thinking"
+name: Qwen3 Max Thinking
 family: qwen
+pricing:
+  currency: USD
+  input: 0.78
+  output: 3.9
 limit:
   context: 262144
   output: 32768
@@ -9,11 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.78
-  output: 3.9
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-02-10
+last_updated: 2026-02-10

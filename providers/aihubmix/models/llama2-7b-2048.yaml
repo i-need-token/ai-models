@@ -1,15 +1,13 @@
 id: llama2-7b-2048
-name: "Meta: Llama2 7b 2048"
-family: llama-2
-temperature: true
+name: Llama2 7b 2048
+family: llama
 pricing:
   currency: USD
   input: 0.05
   output: 0.05
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

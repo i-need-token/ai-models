@@ -1,20 +1,16 @@
 id: qwen3-vl-flash
-name: Qwen3 VL Flash
+name: Qwen3 Vl Flash
 family: qwen
-limit:
-  context: 262144
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.4
+  cache_read: 0.01
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.05
-  output: 0.4
-  cache_read: 0.01
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

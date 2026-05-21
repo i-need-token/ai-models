@@ -1,0 +1,16 @@
+id: black-forest-labs--flux.2-max
+name: Black Forest Labs / Flux.2 Max
+family: black
+pricing:
+  currency: USD
+  input: 0.091
+  output: 0.039
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

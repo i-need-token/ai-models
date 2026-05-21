@@ -1,7 +1,11 @@
 id: aion-2.0
 name: Aion 2.0
 family: aion-2.0
-temperature: true
+pricing:
+  currency: USD
+  input: 0.7999999999999999
+  output: 1.5999999999999999
+  cache_read: 0.19999999999999998
 limit:
   context: 131072
   output: 32768
@@ -10,9 +14,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.8
-  output: 1.6
-release_date: 2025-01
-last_updated: 2026-05-17
+reasoning: true
+release_date: 2025-12-21
+last_updated: 2025-12-21

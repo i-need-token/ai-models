@@ -1,0 +1,15 @@
+id: lyria-2.0
+name: Lyria 2.0
+family: lyria-2
+pricing:
+  currency: USD
+  unit: per_request
+  price: 0.05
+modalities:
+  input:
+    - text
+  output:
+    - audio
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

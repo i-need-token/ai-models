@@ -1,8 +1,10 @@
 id: virtuoso-large
 name: Virtuoso Large
 family: virtuoso
-temperature: true
-tool_call: true
+pricing:
+  currency: USD
+  input: 0.75
+  output: 1.2
 limit:
   context: 131072
   output: 64000
@@ -11,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.75
-  output: 1.2
+temperature: true
+tool_call: true
 release_date: 2025-04-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

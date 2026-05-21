@@ -1,20 +1,13 @@
 id: deepseek-ai--DeepSeek-V3.1--thinking
-name: "DeepSeek: DeepSeek V3.1"
+name: "DeepSeek: DeepSeek V3.1  thinking"
 family: deepseek
-temperature: true
-limit:
-  context: 163840
-  output: 131072
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.7
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.2
-  output: 0.7
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
-reasoning: true
+last_updated: 2026-05-20

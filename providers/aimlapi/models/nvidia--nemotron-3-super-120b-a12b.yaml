@@ -1,17 +1,16 @@
 id: nvidia--nemotron-3-super-120b-a12b
-name: NVIDIA / Nemotron 3 Super 120B-A12B
-family: nemotron
-limit:
-  context: 1000000
-  output: 16384
+name: Nvidia / Nemotron 3 Super 120b A12b
+family: nvidia
+pricing:
+  currency: USD
+  input: 0.117
+  output: 0.585
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.117
-  output: 0.585
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

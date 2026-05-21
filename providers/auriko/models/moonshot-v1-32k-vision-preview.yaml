@@ -1,20 +1,19 @@
 id: moonshot-v1-32k-vision-preview
-name: Moonshot V1 32K Vision Preview
+name: Moonshot V1 32k Vision Preview
 family: moonshot
-temperature: true
+pricing:
+  currency: USD
+  input: 1
+  output: 3
+limit:
+  context: 32768
+  output: 32768
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 3
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 32768
-  output: 32768
 tool_call: true
+release_date: 2026-05-07
+last_updated: 2026-05-07

@@ -1,23 +1,22 @@
 id: kimi-k2.6
 name: Kimi K2.6
 family: kimi
-temperature: true
+pricing:
+  currency: USD
+  input: 0.95
+  output: 4
+  cache_read: 0.16
+limit:
+  context: 262144
+  output: 262144
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.95
-  output: 4
-  cache_read: 0.16
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 262144
-  output: 262144
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+release_date: 2026-05-07
+last_updated: 2026-05-07

@@ -1,8 +1,11 @@
 id: deepseek-v4-flash
 name: DeepSeek V4 Flash
 family: deepseek
-temperature: true
-tool_call: true
+pricing:
+  currency: CNY
+  input: 1
+  output: 2
+  cache_read: 0.2
 limit:
   context: 1000000
   output: 16000
@@ -11,10 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 1
-  output: 2
-  cache_read: 0.2
+temperature: true
+tool_call: true
 release_date: 2026-05-16
-last_updated: 2026-05-17
+last_updated: 2026-05-18

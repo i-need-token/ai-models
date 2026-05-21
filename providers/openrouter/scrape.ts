@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { ModelModality, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing, ModelModality } from "../../types/index";
 
 const provider = defineProvider({
   id: "openrouter",
@@ -13,56 +21,61 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Dynamic model data (from OpenRouter public API)
-//
-// Sources:
-// - Model list & pricing: https://openrouter.ai/api/v1/models (public API)
-// - Context lengths: OpenRouter API context_length field
-// - Modalities: OpenRouter API architecture.modality field
-// - Max output tokens: OpenRouter API top_provider.max_completion_tokens
-//
-// OpenRouter is an inference platform and model router hosting models from
-// 50+ providers with its own per-token pricing. Pricing shown is
-// OpenRouter's per-1M-token rate (USD), which includes their markup.
-// Some models have prompt caching pricing (cache_read/cache_write).
-//
-// Model IDs use "--" instead of "/" to avoid filesystem issues
-// (OpenRouter API uses "provider/model" format).
-// Free variants (:free suffix) are included with FreePricing.
-// OpenRouter's own routing models (auto, bodybuilder, free, owl-alpha,
-// pareto-code) are excluded as they are not distinct models.
-// Models with tilde-prefix (~latest, ~exp) are excluded as routing aliases.
+// Raw data types (from OpenRouter API)
 // ---------------------------------------------------------------------------
+
+interface OpenRouterPricing {
+  prompt: string;
+  completion: string;
+  request: string;
+  image: string;
+  input_cache_read: string;
+  input_cache_write: string;
+  web_search: string;
+}
+
+interface OpenRouterArchitecture {
+  modality: string;
+  tokenizer: string;
+  instruct_type: string | null;
+  input_modalities: string[];
+  output_modalities: string[];
+}
+
+interface OpenRouterTopProvider {
+  context_length: number;
+  max_completion_tokens: number | null;
+  is_moderated: boolean;
+}
 
 interface OpenRouterModel {
   id: string;
   name: string;
+  description: string;
   context_length: number;
-  architecture: {
-    modality: string;
-    input_modalities: string[];
-    output_modalities: string[];
-  };
-  pricing: {
-    prompt: string;
-    completion: string;
-    input_cache_read?: string;
-    input_cache_write?: string;
-  };
-  top_provider: {
-    context_length: number;
-    max_completion_tokens: number | null;
-  };
+  architecture: OpenRouterArchitecture;
+  pricing: OpenRouterPricing;
+  top_provider: OpenRouterTopProvider;
   supported_parameters: string[];
+  created: number;
+  object: string;
 }
 
-const SKIP_IDS = new Set([
-  "openrouter/auto",
-  "openrouter/bodybuilder",
-  "openrouter/free",
-  "openrouter/owl-alpha",
-  "openrouter/pareto-code",
-]);
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+const SKIP_IDS = new Set(["openrouter/auto", "openrouter/flavor-of-the-week"]);
+
+const NON_LLM_OUTPUTS = new Set(["image", "video", "audio", "classification", "vector"]);
+
+function isLLMModel(modality: string): boolean {
+  if (!modality.includes("->text")) return false;
+  for (const nonLLM of NON_LLM_OUTPUTS) {
+    if (modality.includes(`->${nonLLM}`)) return false;
+  }
+  return true;
+}
 
 function parseModality(mod: string): ModelModality {
   const lower = mod.toLowerCase();
@@ -74,193 +87,248 @@ function parseModality(mod: string): ModelModality {
   return "text";
 }
 
-function parseModalities(
-  _modalityStr: string,
-  inputMods: string[],
-  outputMods: string[],
-): { input: ModelModality[]; output: ModelModality[] } {
-  // Use explicit modality arrays if available
-  const input = (inputMods.length > 0 ? inputMods : ["text"]).map(parseModality);
-  const output = (outputMods.length > 0 ? outputMods : ["text"]).map(parseModality);
-  return { input, output };
-}
-
-function deriveFamily(id: string): string {
-  const parts = id.split("/");
-  if (parts.length < 2) return "other";
-  const provider = parts[0] as string;
-  const model = parts[1] as string;
-
-  if (provider === "anthropic") return "claude";
-  if (provider === "openai") {
-    if (model.startsWith("gpt-4")) return "gpt-4";
-    if (model.startsWith("gpt-4o")) return "gpt-4o";
-    if (model.startsWith("gpt-3.5")) return "gpt-3.5";
-    if (model.startsWith("o1")) return "o1";
-    if (model.startsWith("o3")) return "o3";
-    if (model.startsWith("o4")) return "o4";
-    if (model.startsWith("gpt-oss")) return "gpt-oss";
-    return "gpt";
-  }
-  if (provider === "google") {
-    if (model.startsWith("gemini")) return "gemini";
-    if (model.startsWith("gemma")) return "gemma";
-    return "google";
-  }
-  if (provider === "meta-llama") return "llama";
-  if (provider === "deepseek") return "deepseek";
-  if (provider === "mistralai") return "mistral";
-  if (provider === "qwen") return "qwen";
-  if (provider === "nvidia") return "nemotron";
-  if (provider === "microsoft") return "phi";
-  if (provider === "cohere") return "command";
-  if (provider === "01-ai") return "yi";
-  if (provider === "perplexity") return "sonar";
-  if (provider === "x-ai") return "grok";
-  if (provider === "z-ai") return "glm";
-  if (provider === "moonshotai") return "kimi";
-  if (provider === "minimax") return "minimax";
-  if (provider === "stepfun") return "step";
-  if (provider === "nousresearch") return "hermes";
-  if (provider === "bytedance") return "seed";
-  if (provider === "xiaomimimo") return "mimo";
-  if (provider === "liquid") return "lfm";
-  if (provider === "poolside") return "laguna";
-  if (provider === "baidu") return "cobuddy";
-  if (provider === "arcee-ai") return "arcee";
-  if (provider === "cognitivecomputations") return "dolphin";
-  if (provider === "sao10k") return "l3-finetune";
-  if (provider === "gryphe") return "mythomax";
-  if (provider === "inception") return "inception";
-  if (provider === "reka") return "reka";
-  if (provider === "upstage") return "solar";
-  if (provider === "writer") return "palmyra";
-  if (provider === "voyage") return "voyage";
-  if (provider === "sarvam") return "sarvam";
-  if (provider === "aion") return "aion";
-  if (provider === "evroc") return "evroc";
-  if (provider === "scaleway") return "scaleway";
-  if (provider === "friendli") return "friendli";
-  if (provider === "ibm") return "granite";
-  return provider;
-}
-
 function toPerMTokens(perTokenStr: string): number {
   const perToken = parseFloat(perTokenStr);
-  if (perToken === 0) return 0;
+  if (perToken === 0 || isNaN(perToken)) return 0;
   const perMTokens = perToken * 1e6;
   return Math.round(perMTokens * 1e6) / 1e6;
 }
 
-export async function scrape(): Promise<ScrapeResult> {
+async function fetchModels(): Promise<OpenRouterModel[]> {
   const response = await fetch("https://openrouter.ai/api/v1/models");
   if (!response.ok) {
     throw new Error(`Failed to fetch OpenRouter models: ${response.status}`);
   }
   const data = (await response.json()) as { data: OpenRouterModel[] };
-  const apiModels = data.data;
+  return data.data;
+}
 
-  const models: ReturnType<typeof defineModel>[] = [];
-  const today = new Date().toISOString().split("T")[0] as string;
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
 
-  for (const m of apiModels) {
-    const id = m.id;
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://openrouter.ai/api/v1/models",
+      type: "api",
+      description:
+        "OpenRouter models API — returns 400+ models with pricing, context, capabilities, modalities",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      const discovered: DiscoveredModel[] = [];
 
-    // Skip routing models
-    if (SKIP_IDS.has(id)) continue;
+      for (const m of apiModels) {
+        if (SKIP_IDS.has(m.id)) continue;
+        if (!isLLMModel(m.architecture.modality)) continue;
 
-    // Skip tilde-prefix routing aliases
-    if (id.startsWith("~")) continue;
+        const promptPrice = parseFloat(m.pricing.prompt);
+        const completionPrice = parseFloat(m.pricing.completion);
+        if (isNaN(promptPrice) || isNaN(completionPrice)) continue;
 
-    // Flatten ID for filesystem
-    const flatId = id.replace("/", "--").replace(":", "--");
-
-    // Parse pricing
-    const promptPrice = parseFloat(m.pricing.prompt);
-    const completionPrice = parseFloat(m.pricing.completion);
-
-    // Skip models with no pricing
-    if (isNaN(promptPrice) || isNaN(completionPrice)) continue;
-
-    // Free models
-    if (promptPrice === 0 && completionPrice === 0) {
-      const modelDef: Parameters<typeof defineModel>[0] = {
-        id: flatId,
-        name: m.name,
-        family: deriveFamily(id),
-        limit: {
-          context: m.context_length,
-          output: m.top_provider.max_completion_tokens ?? 4096,
-        },
-        modalities: parseModalities(
-          m.architecture.modality,
-          m.architecture.input_modalities,
-          m.architecture.output_modalities,
-        ),
-        pricing: { unit: "free" },
-        release_date: today,
-        last_updated: today,
-      };
-
-      models.push(defineModel(modelDef));
-      continue;
-    }
-
-    // Paid models
-    const pricing: Pricing = {
-      currency: "USD",
-      input: toPerMTokens(m.pricing.prompt),
-      output: toPerMTokens(m.pricing.completion),
-    };
-
-    // Add cache_read if present and non-zero
-    if (m.pricing.input_cache_read) {
-      const cacheRead = toPerMTokens(m.pricing.input_cache_read);
-      if (cacheRead > 0) {
-        pricing.cache_read = cacheRead;
+        const flatId = m.id.replace(/\//g, "--").replace(/:/g, "--").toLowerCase();
+        discovered.push({ id: flatId, raw: m });
       }
-    }
 
-    // Add cache_write if present and non-zero
-    if (m.pricing.input_cache_write) {
-      const cacheWrite = toPerMTokens(m.pricing.input_cache_write);
-      if (cacheWrite > 0) {
-        pricing.cache_write = cacheWrite;
+      return discovered;
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://openrouter.ai/api/v1/models",
+      type: "api",
+      description: "Pricing from OpenRouter API — per-token USD pricing converted to per-million",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      const pricingMap = new Map<string, Pricing>();
+
+      for (const m of models) {
+        const raw = m.raw as OpenRouterModel;
+        if (!raw) continue;
+
+        const promptPrice = toPerMTokens(raw.pricing.prompt);
+        const completionPrice = toPerMTokens(raw.pricing.completion);
+
+        if (promptPrice === 0 && completionPrice === 0) {
+          pricingMap.set(m.id, { unit: "free" });
+        } else {
+          const p: Pricing = {
+            currency: "USD",
+            input: promptPrice,
+            output: completionPrice,
+          };
+
+          const cacheRead = toPerMTokens(raw.pricing.input_cache_read);
+          if (cacheRead > 0) p.cache_read = cacheRead;
+
+          const cacheWrite = toPerMTokens(raw.pricing.input_cache_write);
+          if (cacheWrite > 0) p.cache_write = cacheWrite;
+
+          pricingMap.set(m.id, p);
+        }
       }
-    }
 
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: flatId,
-      name: m.name,
-      family: deriveFamily(id),
-      limit: {
-        context: m.context_length,
-        output: m.top_provider.max_completion_tokens ?? 4096,
-      },
-      modalities: parseModalities(
-        m.architecture.modality,
-        m.architecture.input_modalities,
-        m.architecture.output_modalities,
-      ),
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
+      return pricingMap;
+    },
+  },
 
-    // Check supported parameters for capabilities
-    const params = m.supported_parameters;
-    if (params.includes("tools") || params.includes("tool_choice")) {
-      modelDef.tool_call = true;
-    }
-    if (params.includes("include_reasoning") || params.includes("reasoning")) {
-      modelDef.reasoning = true;
-    }
+  extractDates: {
+    source: {
+      url: "https://openrouter.ai/api/v1/models",
+      type: "api",
+      description: "Dates from OpenRouter API — created timestamp field",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
 
-    models.push(defineModel(modelDef));
-  }
+      for (const m of models) {
+        const raw = m.raw as OpenRouterModel;
+        if (!raw || !raw.created) continue;
 
-  console.log(`  OpenRouter: fetched ${apiModels.length} models from API`);
-  console.log(`  OpenRouter: ${models.length} valid models`);
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
 
+      return datesMap;
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://openrouter.ai/api/v1/models",
+      type: "api",
+      description: "Context window and max output from OpenRouter API",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      const limitsMap = new Map<string, ExtractedLimit>();
+
+      for (const m of models) {
+        const raw = m.raw as OpenRouterModel;
+        if (!raw) continue;
+
+        if (raw.context_length > 0) {
+          const maxCompletion = raw.top_provider.max_completion_tokens;
+          limitsMap.set(m.id, {
+            context: raw.context_length,
+            ...(maxCompletion != null && maxCompletion > 0 ? { output: maxCompletion } : {}),
+          });
+        }
+      }
+
+      return limitsMap;
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://openrouter.ai/api/v1/models",
+      type: "api",
+      description: "Modalities from OpenRouter API — input_modalities and output_modalities arrays",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      const modalitiesMap = new Map<string, ExtractedModalities>();
+
+      for (const m of models) {
+        const raw = m.raw as OpenRouterModel;
+        if (!raw) continue;
+
+        const input = (
+          raw.architecture.input_modalities.length > 0
+            ? raw.architecture.input_modalities
+            : ["text"]
+        ).map(parseModality);
+        const output = (
+          raw.architecture.output_modalities.length > 0
+            ? raw.architecture.output_modalities
+            : ["text"]
+        ).map(parseModality);
+
+        modalitiesMap.set(m.id, { input, output });
+      }
+
+      return modalitiesMap;
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://openrouter.ai/api/v1/models",
+      type: "api",
+      description: "Features from OpenRouter API — supported_parameters (tools, reasoning)",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      const featuresMap = new Map<string, ExtractedFeatures>();
+
+      for (const m of models) {
+        const raw = m.raw as OpenRouterModel;
+        if (!raw) continue;
+
+        const features: ExtractedFeatures = {};
+        const params = raw.supported_parameters;
+
+        if (params.includes("tools") || params.includes("tool_choice")) features.tool_call = true;
+        if (params.includes("include_reasoning") || params.includes("reasoning"))
+          features.reasoning = true;
+        if (params.includes("response_format")) features.structured_output = true;
+
+        featuresMap.set(m.id, features);
+      }
+
+      return featuresMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      let name = modelId.replace(/--/g, "/").split("/").pop() || modelId;
+      name = name.replace(/-/g, " ").replace(/\b([a-z])/g, (c) => c.toUpperCase());
+      return name;
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const parts = modelId.split("--");
+      if (parts.length < 2) return modelId.split("-")[0] ?? modelId;
+      const prov = parts[0] as string;
+      const model = (parts[1] as string).toLowerCase();
+
+      if (prov === "anthropic") return "claude";
+      if (prov === "openai") {
+        if (model.startsWith("gpt-4o") || model.startsWith("gpt-4") || model.startsWith("gpt-5"))
+          return "gpt";
+        if (model.startsWith("o3") || model.startsWith("o4")) return "o";
+        return "gpt";
+      }
+      if (prov === "google") {
+        if (model.startsWith("gemini")) return "gemini";
+        if (model.startsWith("gemma")) return "gemma";
+        return "google";
+      }
+      if (prov === "meta-llama") return "llama";
+      if (prov === "deepseek" || prov === "deepseek-ai") return "deepseek";
+      if (prov === "mistralai") return "mistral";
+      if (prov === "qwen") return "qwen";
+      if (prov === "nvidia") return "nemotron";
+      if (prov === "microsoft") return "phi";
+      if (prov === "cohere") return "command";
+      if (prov === "perplexity") return "sonar";
+      if (prov === "x-ai") return "grok";
+      if (prov === "z-ai") return "glm";
+      if (prov === "01-ai") return "yi";
+      return prov;
+    },
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Main scrape function
+// ---------------------------------------------------------------------------
+
+export async function scrape(): Promise<ScrapeResult> {
+  const models = await runPipeline(pipeline);
   return { provider, models };
 }

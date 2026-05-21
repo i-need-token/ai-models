@@ -1,6 +1,10 @@
 id: amazon--nova-lite-v1
-name: "Amazon: Nova Lite 1.0"
+name: Nova Lite V1
 family: amazon
+pricing:
+  currency: USD
+  input: 0.06
+  output: 0.24
 limit:
   context: 300000
   output: 5120
@@ -10,10 +14,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.06
-  output: 0.24
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2024-12-06
+last_updated: 2024-12-06

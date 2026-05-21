@@ -1,18 +1,16 @@
 id: arcee-ai--trinity-large-preview
-name: "Arcee AI: Trinity Large Preview"
-family: arcee
-limit:
-  context: 131000
-  output: 4096
+name: Trinity Large Preview
+family: arcee-ai
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.45
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.45
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2026-01-28
+last_updated: 2026-01-28

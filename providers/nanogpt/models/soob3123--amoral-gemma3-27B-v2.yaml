@@ -1,18 +1,13 @@
 id: soob3123--amoral-gemma3-27B-v2
 name: "Soob3123: amoral gemma3 27B v2"
 family: gemma
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.3
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.3
-  output: 0.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

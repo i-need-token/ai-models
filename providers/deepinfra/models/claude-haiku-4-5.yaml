@@ -1,21 +1,18 @@
 id: claude-haiku-4-5
 name: Claude Haiku 4.5
 family: claude-haiku
-temperature: true
+pricing:
+  currency: USD
+  input: 1
+  output: 5
 limit:
   context: 200000
-  output: 8192
+  output: 200000
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
-tool_call: true
+last_updated: 2026-05-20

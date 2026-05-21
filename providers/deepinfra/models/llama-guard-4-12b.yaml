@@ -1,7 +1,10 @@
 id: llama-guard-4-12b
-name: Llama Guard 4.12B
-family: llama-guard
-temperature: true
+name: Llama Guard 4.12b
+family: llama
+pricing:
+  currency: USD
+  input: 0.18
+  output: 0.18
 limit:
   context: 163840
   output: 163840
@@ -11,10 +14,4 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.18
-  output: 0.18
-release_date: 2026-05-17
-last_updated: 2026-05-17
-open_weights: true
+last_updated: 2026-05-20

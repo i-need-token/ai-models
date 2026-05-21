@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "wafer",
@@ -8,109 +16,145 @@ const provider = defineProvider({
   url: "https://wafer.ai",
   api_docs: "https://docs.wafer.ai",
   apis: {
-    openai: "https://pass.wafer.ai/v1",
+    openai: "https://api.wafer.ai/v1",
   },
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-16)
-//
-// Sources:
-// - Model list & context: https://docs.wafer.ai/wafer-pass.md
-// - Pricing: https://wafer.ai homepage (serverless per-token rates)
-//   + https://docs.wafer.ai/wafer-pass.md (overage pricing = per-token rates)
-//
-// Wafer is an inference optimization platform hosting open-source models
-// with per-token USD pricing. Cache-read tokens billed at 10% of input.
-//
-// Wafer Pass subscription includes free requests within plan limits;
-// overage is billed at per-token rates shown below.
+// Raw data types (from Wafer API)
 // ---------------------------------------------------------------------------
 
-interface ModelInfo {
-  name: string;
-  context: number;
-  output: number;
-  inputModalities: ModelModality[];
-  outputModalities: ModelModality[];
-  openWeights?: boolean;
-  reasoning?: boolean;
-  toolCall?: boolean;
+interface WaferModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
-const MODELS: Record<string, ModelInfo> = {
-  "Qwen3.5-397B-A17B": {
-    name: "Qwen 3.5 397B A17B",
-    context: 262144,
-    output: 32768,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<WaferModel[]> {
+  const response = await fetch("https://api.wafer.ai/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Wafer models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: WaferModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.wafer.ai/v1/models",
+      type: "api",
+      description: "Wafer /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
   },
-  "GLM-5.1": {
-    name: "GLM 5.1",
-    context: 202752,
-    output: 32768,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    reasoning: true,
-    toolCall: true,
+
+  extractPricing: {
+    source: {
+      url: "https://api.wafer.ai/v1/models",
+      type: "api",
+      description: "Wafer API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.wafer.ai/v1/models",
+      type: "api",
+      description: "Wafer API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://api.wafer.ai/v1/models",
+      type: "api",
+      description: "Wafer API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.wafer.ai/v1/models",
+      type: "api",
+      description: "Wafer API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.wafer.ai/v1/models",
+      type: "api",
+      description: "Wafer API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as WaferModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /qwen/i, family: "qwen" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
   },
 };
 
-// Pricing per 1M tokens (USD) — serverless/overage rates
-// Cache-read tokens billed at 10% of input price
-const PRICING: Record<string, Pricing> = {
-  "Qwen3.5-397B-A17B": {
-    currency: "USD",
-    input: 0.6,
-    output: 3.6,
-    cache_read: 0.06,
-  },
-  "GLM-5.1": {
-    currency: "USD",
-    input: 1.5,
-    output: 4.5,
-    cache_read: 0.15,
-  },
-};
-
-function deriveFamily(id: string): string {
-  if (id.startsWith("Qwen")) return "qwen3.5";
-  if (id.startsWith("GLM")) return "glm";
-  return "other";
-}
+// ---------------------------------------------------------------------------
+// Scrape function
+// ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const models: ReturnType<typeof defineModel>[] = [];
-  const today = new Date().toISOString().split("T")[0] as string;
-
-  for (const [id, info] of Object.entries(MODELS)) {
-    const pricing = PRICING[id];
-    if (!pricing) {
-      console.warn(`  Wafer: skipping ${id} — no pricing`);
-      continue;
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: id as string,
-      name: info.name as string,
-      family: deriveFamily(id as string),
-      limit: { context: info.context, output: info.output },
-      modalities: { input: info.inputModalities, output: info.outputModalities },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (info.openWeights) modelDef.open_weights = true;
-    if (info.reasoning) modelDef.reasoning = true;
-    if (info.toolCall) modelDef.tool_call = true;
-
-    models.push(defineModel(modelDef));
-  }
-
+  const models = await runPipeline(pipeline);
+  console.log(`  Wafer: ${models.length} models`);
   return { provider, models };
 }

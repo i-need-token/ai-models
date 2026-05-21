@@ -1,6 +1,12 @@
 id: deepinfra--zai-org--glm-4.5-air
-name: GLM 4.5 Air
+name: Glm 4.5 Air
 family: deepinfra
+pricing:
+  currency: USD
+  input: 0.2
+  output: 1.1
+  cache_read: 0.2
+  cache_write: 1.1
 limit:
   context: 131072
   output: 4096
@@ -9,12 +15,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.2
-  output: 1.1
-  cache_read: 0.2
-  cache_write: 1.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-07-31
+last_updated: 2025-07-31

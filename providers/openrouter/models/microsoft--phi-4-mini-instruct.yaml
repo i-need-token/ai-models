@@ -1,6 +1,11 @@
 id: microsoft--phi-4-mini-instruct
-name: "Microsoft: Phi 4 Mini Instruct"
+name: Phi 4 Mini Instruct
 family: phi
+pricing:
+  currency: USD
+  input: 0.08
+  output: 0.35
+  cache_read: 0.08
 limit:
   context: 131072
   output: 128000
@@ -9,10 +14,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.08
-  output: 0.35
-  cache_read: 0.08
-release_date: 2026-05-17
-last_updated: 2026-05-17
+structured_output: true
+release_date: 2025-10-18
+last_updated: 2025-10-18

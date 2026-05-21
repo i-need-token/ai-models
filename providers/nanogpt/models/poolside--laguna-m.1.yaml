@@ -1,18 +1,13 @@
 id: poolside--laguna-m.1
 name: "Poolside: laguna m.1"
-family: other
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: poolside/laguna
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.3
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.1
-  output: 0.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

@@ -1,6 +1,12 @@
 id: vertex--gemini-3.1-pro-preview:flex
 name: Gemini 3.1 Pro Preview:Flex
-family: gemini
+family: vertex
+pricing:
+  currency: USD
+  input: 1
+  output: 6
+  cache_read: 0.1
+  cache_write: 2.75
 limit:
   context: 1048576
   output: 65535
@@ -10,13 +16,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 6
-  cache_read: 0.1
-  cache_write: 2.75
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-02-20
+last_updated: 2026-02-20

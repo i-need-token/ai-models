@@ -63,8 +63,8 @@ export interface Model {
 
   /** Training data cutoff (YYYY-MM-DD or YYYY-MM) */
   knowledge?: string;
-  /** Model release date (YYYY-MM-DD or YYYY-MM) */
-  release_date: string;
+  /** Model release date (YYYY-MM-DD or YYYY-MM) — omitted if unknown */
+  release_date?: string;
   /** Last data update date (YYYY-MM-DD or YYYY-MM) */
   last_updated: string;
 

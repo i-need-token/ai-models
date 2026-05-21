@@ -1,6 +1,12 @@
 id: google--gemini-2.5-pro
-name: "Google: Gemini 2.5 Pro"
+name: Gemini 2.5 Pro
 family: gemini
+pricing:
+  currency: USD
+  input: 1.25
+  output: 10
+  cache_read: 0.31
+  cache_write: 1.625
 limit:
   context: 1048576
   output: 65535
@@ -11,13 +17,6 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.25
-  output: 10
-  cache_read: 0.31
-  cache_write: 1.625
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+last_updated: 2026-05-20

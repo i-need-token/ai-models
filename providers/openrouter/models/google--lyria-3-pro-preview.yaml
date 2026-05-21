@@ -1,6 +1,8 @@
 id: google--lyria-3-pro-preview
-name: "Google: Lyria 3 Pro Preview"
+name: Lyria 3 Pro Preview
 family: google
+pricing:
+  unit: free
 limit:
   context: 1048576
   output: 65536
@@ -11,7 +13,6 @@ modalities:
   output:
     - text
     - audio
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
+structured_output: true
+release_date: 2026-03-31
+last_updated: 2026-03-31

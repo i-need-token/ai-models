@@ -1,18 +1,14 @@
 id: codestral-2508
-name: Codestral
-family: mistral
-limit:
-  context: 256000
-  output: 256000
+name: Codestral 2508
+family: codestral
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.9
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 0.9
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

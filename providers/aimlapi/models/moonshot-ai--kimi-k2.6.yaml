@@ -1,0 +1,16 @@
+id: moonshot-ai--kimi-k2.6
+name: Moonshot Ai / Kimi K2.6
+family: moonshot
+pricing:
+  currency: USD
+  input: 0.208
+  output: 5.2
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

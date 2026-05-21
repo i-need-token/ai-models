@@ -1,7 +1,10 @@
 id: deepseek--deepseek-v4-flash
 name: Deepseek V4 Flash
 family: deepseek
-temperature: true
+pricing:
+  currency: USD
+  input: 0.14
+  output: 0.28
 limit:
   context: 1048576
   output: 393216
@@ -10,12 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.14
-  output: 0.28
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+last_updated: 2026-05-20

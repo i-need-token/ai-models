@@ -1,20 +1,16 @@
 id: qwen-2.5-7b-instruct
-name: Qwen 2.5 7B Instruct
+name: Qwen 2.5 7b Instruct
 family: qwen
-temperature: true
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.3
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 0.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 32768
-  output: 32768
 tool_call: true
 structured_output: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

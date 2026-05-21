@@ -1,20 +1,18 @@
 id: deepseek-v3-0324
-name: DeepSeek V3.0324
-family: deepseek-v3
-temperature: true
-limit:
-  context: 163840
-  output: 131072
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Deepseek V3.0324
+family: deepseek
 pricing:
   currency: USD
   input: 0.2
   output: 0.77
   cache_read: 0.135
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+limit:
+  context: 163840
+  output: 163840
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: true
+last_updated: 2026-05-20

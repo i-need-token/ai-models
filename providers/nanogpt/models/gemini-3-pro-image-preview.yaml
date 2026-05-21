@@ -1,20 +1,13 @@
 id: gemini-3-pro-image-preview
 name: gemini 3 PRO image preview
 family: gemini
-temperature: true
-limit:
-  context: 1048576
-  output: 16384
+pricing:
+  currency: USD
+  input: 2
+  output: 12
 modalities:
   input:
     - text
-    - image
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 2
-  output: 12
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

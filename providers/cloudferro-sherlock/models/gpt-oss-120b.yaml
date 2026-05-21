@@ -1,7 +1,10 @@
 id: gpt-oss-120b
 name: GPT-OSS 120B
 family: gpt-oss
-temperature: true
+pricing:
+  currency: EUR
+  input: 2.44
+  output: 2.44
 limit:
   context: 131072
   output: 32768
@@ -10,11 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: EUR
-  input: 2.44
-  output: 2.44
-release_date: 2025-06-01
-last_updated: 2026-05-17
+temperature: true
 tool_call: true
 structured_output: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

@@ -1,22 +1,14 @@
 id: openai--gpt-4o-search-preview
-name: GPT 4o Search Preview
-family: gpt-4o
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 128000
-  output: 16384
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
+name: Gpt 4o Search Preview
+family: gpt
 pricing:
   currency: USD
   input: 2.5
   output: 10
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-01-15
-last_updated: 2026-05-17
+last_updated: 2026-01-15

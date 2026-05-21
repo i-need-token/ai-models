@@ -1,18 +1,16 @@
 id: alibaba-cloud--qwen3-vl-plus
-name: Alibaba Cloud / Qwen3 VL Plus
-family: qwen
-limit:
-  context: 262000
-  output: 8192
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
+name: Alibaba Cloud / Qwen3 Vl Plus
+family: alibaba
 pricing:
   currency: USD
   input: 0.26
   output: 2.08
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

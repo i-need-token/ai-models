@@ -1,17 +1,20 @@
 id: openai--gpt-5-nano
-name: OpenAI / GPT-5 Nano
-family: gpt
-limit:
-  context: 400000
-  output: 16384
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Openai / Gpt 5 Nano
+family: openai
 pricing:
   currency: USD
   input: 0.065
   output: 0.52
-release_date: 2026-05-17
-last_updated: 2026-05-17
+limit:
+  context: 400000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+temperature: false
+tool_call: true
+structured_output: true
+last_updated: 2026-05-19

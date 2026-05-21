@@ -1,15 +1,13 @@
 id: tencent--hunyuan-mt-7b
-name: "Hunyuan: Tencent/Hunyuan Mt 7b"
+name: Tencent/Hunyuan Mt 7b
 family: hunyuan
-temperature: true
 pricing:
   currency: USD
   input: 0.1
   output: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

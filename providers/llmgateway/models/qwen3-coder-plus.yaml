@@ -1,18 +1,16 @@
 id: qwen3-coder-plus
 name: Qwen3 Coder Plus
 family: qwen
-limit:
-  context: 1000000
-  output: 16384
+pricing:
+  currency: USD
+  input: 6
+  output: 60
+  cache_read: 1.2
+  cache_write: 7.5
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 6
-  output: 60
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

@@ -1,6 +1,12 @@
 id: google--gemini-3.1-flash-lite-preview
-name: "Google: Gemini 3.1 Flash Lite Preview"
+name: Gemini 3.1 Flash Lite Preview
 family: gemini
+pricing:
+  currency: USD
+  input: 0.25
+  output: 1.5
+  cache_read: 0.025
+  cache_write: 0.083333
 limit:
   context: 1048576
   output: 65536
@@ -13,13 +19,8 @@ modalities:
     - audio
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.25
-  output: 1.5
-  cache_read: 0.025
-  cache_write: 0.083333
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-03-03
+last_updated: 2026-03-03

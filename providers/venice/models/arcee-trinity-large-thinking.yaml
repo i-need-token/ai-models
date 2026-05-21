@@ -1,7 +1,11 @@
 id: arcee-trinity-large-thinking
-name: Trinity Large Thinking
+name: arcee-trinity-large-thinking
 family: arcee
-temperature: true
+pricing:
+  currency: USD
+  input: 0.3125
+  output: 1.125
+  cache_read: 0.075
 limit:
   context: 256000
   output: 65536
@@ -10,13 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3125
-  output: 1.125
-  cache_read: 0.075
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
 tool_call: true
 structured_output: true
+release_date: 2026-04-02
+last_updated: 2026-04-02

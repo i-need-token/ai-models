@@ -1,15 +1,13 @@
 id: meta-llama-3-8b
 name: Meta Llama 3 8b
-family: llama-3
-temperature: true
+family: llama
 pricing:
   currency: USD
   input: 0.274
   output: 0.274
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

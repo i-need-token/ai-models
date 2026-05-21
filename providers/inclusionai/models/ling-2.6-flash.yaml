@@ -1,8 +1,10 @@
 id: ling-2.6-flash
 name: Ling 2.6 Flash
 family: ling
-temperature: true
-tool_call: true
+pricing:
+  currency: USD
+  input: 0.01
+  output: 0.03
 limit:
   context: 262144
   output: 32768
@@ -11,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.01
-  output: 0.03
+temperature: true
+tool_call: true
 release_date: 2025-04-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

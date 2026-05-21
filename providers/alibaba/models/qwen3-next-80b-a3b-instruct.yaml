@@ -1,13 +1,10 @@
 id: qwen3-next-80b-a3b-instruct
 name: Qwen 3 Next 80B-A3B Instruct
-family: qwen3
+family: qwen
 pricing:
   currency: CNY
   input: 1
   output: 4
-limit:
-  context: 256000
-  output: 8000
 modalities:
   input:
     - text
@@ -16,6 +13,4 @@ modalities:
 reasoning: true
 tool_call: true
 structured_output: true
-open_weights: true
-release_date: 2025-06
-last_updated: 2025-06
+last_updated: 2026-05-19

@@ -1,6 +1,11 @@
 id: deepseek--deepseek-r1-0528
-name: "DeepSeek: R1 0528"
+name: Deepseek R1 0528
 family: deepseek
+pricing:
+  currency: USD
+  input: 0.5
+  output: 2.15
+  cache_read: 0.35
 limit:
   context: 163840
   output: 32768
@@ -9,12 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.5
-  output: 2.15
-  cache_read: 0.35
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-05-29
+last_updated: 2025-05-29

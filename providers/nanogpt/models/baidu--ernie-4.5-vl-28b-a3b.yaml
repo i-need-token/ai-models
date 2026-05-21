@@ -1,19 +1,13 @@
 id: baidu--ernie-4.5-vl-28b-a3b
 name: "Baidu: ernie 4.5 VL 28B a3b"
 family: ernie
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.14
+  output: 0.56
 modalities:
   input:
     - text
-    - image
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.14
-  output: 0.56
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

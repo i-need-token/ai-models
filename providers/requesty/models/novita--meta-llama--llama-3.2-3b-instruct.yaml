@@ -1,20 +1,17 @@
 id: novita--meta-llama--llama-3.2-3b-instruct
 name: Llama 3.2 3b Instruct
 family: novita
-limit:
-  context: 32768
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.03
   output: 0.05
   cache_read: 0.03
   cache_write: 0.03
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2025-02-07
+last_updated: 2025-02-07

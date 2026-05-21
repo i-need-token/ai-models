@@ -1,6 +1,8 @@
 id: deepseek--deepseek-v4-flash--free
-name: "DeepSeek: DeepSeek V4 Flash (free)"
+name: Free
 family: deepseek
+pricing:
+  unit: free
 limit:
   context: 1048576
   output: 384000
@@ -9,7 +11,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
+reasoning: true
+tool_call: true
+release_date: 2026-04-24
+last_updated: 2026-04-24

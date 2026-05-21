@@ -1,22 +1,15 @@
 id: deepinfra--deepseek--deepseek-r1-0528
-name: DeepSeek R1 0528
-family: deepinfra
-reasoning: true
-temperature: true
-tool_call: false
-structured_output: false
-limit:
-  context: 131072
-  output: 32768
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Deepseek R1 0528
+family: deepseek
 pricing:
   currency: USD
   input: 0.5
   output: 2.15
   cache_read: 0.35
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-04-28
-last_updated: 2026-05-17
+last_updated: 2026-04-28

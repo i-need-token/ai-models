@@ -1,0 +1,16 @@
+id: gemma-3-1b-it
+name: Gemma 3 1B IT
+family: gemma-3
+pricing:
+  unit: free
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

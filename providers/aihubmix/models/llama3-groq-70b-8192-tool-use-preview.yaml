@@ -1,15 +1,13 @@
 id: llama3-groq-70b-8192-tool-use-preview
-name: "Meta: Llama3 Groq 70b 8192 Tool Use Preview"
+name: Llama3 Groq 70b 8192 Tool Use Preview
 family: llama
-temperature: true
 pricing:
   currency: USD
   input: 0.000445
   output: 0.000445
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

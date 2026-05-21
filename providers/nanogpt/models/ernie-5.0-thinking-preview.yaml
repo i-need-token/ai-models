@@ -1,19 +1,13 @@
 id: ernie-5.0-thinking-preview
 name: ernie 5.0 thinking preview
 family: ernie
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 1
+  output: 3.5
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 1
-  output: 3.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
-reasoning: true
+last_updated: 2026-05-20

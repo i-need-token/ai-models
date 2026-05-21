@@ -1,20 +1,14 @@
 id: ernie-5.1--thinking
-name: ernie 5.1
+name: "Ernie-5.1: thinking"
 family: ernie
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.75
+  output: 3
+  cache_read: 0.75
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.75
-  output: 3
-  cache_read: 0.75
-release_date: 2026-05-17
-last_updated: 2026-05-17
-reasoning: true
+last_updated: 2026-05-20

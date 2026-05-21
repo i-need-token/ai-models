@@ -1,6 +1,11 @@
 id: fireworks--glm-5
 name: Glm 5
 family: fireworks
+pricing:
+  currency: USD
+  input: 1
+  output: 3.2
+  cache_read: 0.2
 limit:
   context: 202752
   output: 25344
@@ -9,11 +14,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 3.2
-  cache_read: 0.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2026-04-02
+last_updated: 2026-04-02

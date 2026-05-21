@@ -1,18 +1,13 @@
 id: ernie-4.5-turbo-128k
 name: ernie 4.5 TURBO 128k
 family: ernie
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.132
+  output: 0.55
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.132
-  output: 0.55
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

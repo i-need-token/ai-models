@@ -1,18 +1,13 @@
 id: Salesforce--Llama-xLAM-2-70b-fc-r
 name: "Salesforce: Llama xLAM 2 70B fc r"
 family: llama
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 2.5
+  output: 2.5
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 2.5
-  output: 2.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

@@ -1,19 +1,16 @@
 id: together--meta-llama--llamaguard-2-8b
-name: LlamaGuard 2 8b
-family: llama
-limit:
-  context: 8192
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Llamaguard 2 8b
+family: together
 pricing:
   currency: USD
   input: 0.2
   output: 0.2
   cache_read: 0.2
   cache_write: 0.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2025-01-31
+last_updated: 2025-01-31

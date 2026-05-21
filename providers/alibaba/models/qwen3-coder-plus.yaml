@@ -1,13 +1,10 @@
 id: qwen3-coder-plus
 name: Qwen 3 Coder Plus
-family: qwen3-coder
+family: qwen-coder
 pricing:
   currency: CNY
   input: 4
   output: 16
-limit:
-  context: 1000000
-  output: 64000
 modalities:
   input:
     - text
@@ -16,5 +13,4 @@ modalities:
 reasoning: true
 tool_call: true
 structured_output: true
-release_date: 2025-09
-last_updated: 2025-09
+last_updated: 2026-05-19

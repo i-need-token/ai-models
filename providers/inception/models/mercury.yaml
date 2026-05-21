@@ -1,9 +1,11 @@
 id: mercury
 name: Mercury
 family: mercury
-temperature: true
-tool_call: true
-structured_output: true
+pricing:
+  currency: USD
+  input: 0.25
+  output: 0.75
+  cache_read: 0.024999999999999998
 limit:
   context: 128000
   output: 32000
@@ -12,9 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.25
-  output: 0.75
-release_date: 2025-02-01
-last_updated: 2026-05-17
+temperature: true
+tool_call: true
+structured_output: true
+release_date: 2025-04-01
+last_updated: 2025-04-01

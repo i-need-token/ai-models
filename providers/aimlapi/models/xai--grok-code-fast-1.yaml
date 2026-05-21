@@ -1,17 +1,19 @@
 id: xai--grok-code-fast-1
-name: xAI / Grok Code Fast 1
-family: grok
+name: Xai / Grok Code Fast 1
+family: xai
+pricing:
+  currency: USD
+  input: 0.26
+  output: 1.95
 limit:
   context: 256000
-  output: 8192
+  output: 255000
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.26
-  output: 1.95
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: true
+tool_call: true
+structured_output: true
+last_updated: 2026-05-19

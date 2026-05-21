@@ -1,6 +1,12 @@
 id: parasail--parasail-kimi-k2-instruct
 name: Parasail Kimi K2 Instruct
 family: parasail
+pricing:
+  currency: USD
+  input: 0.99
+  output: 2.99
+  cache_read: 0.99
+  cache_write: 2.99
 limit:
   context: 131072
   output: 16384
@@ -9,12 +15,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.99
-  output: 2.99
-  cache_read: 0.99
-  cache_write: 2.99
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-08-19
+last_updated: 2025-08-19

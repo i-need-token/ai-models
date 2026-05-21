@@ -1,15 +1,13 @@
 id: grok-3-beta
 name: Grok 3 Beta
-family: grok-3
-temperature: true
+family: grok
 pricing:
   currency: USD
   input: 1.5
   output: 7.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

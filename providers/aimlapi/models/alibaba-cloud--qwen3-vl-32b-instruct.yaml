@@ -1,18 +1,16 @@
 id: alibaba-cloud--qwen3-vl-32b-instruct
-name: Alibaba Cloud / Qwen3 VL 32B Instruct
-family: qwen
-limit:
-  context: 126000
-  output: 8192
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
+name: Alibaba Cloud / Qwen3 Vl 32b Instruct
+family: alibaba
 pricing:
   currency: USD
   input: 0.91
   output: 3.64
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

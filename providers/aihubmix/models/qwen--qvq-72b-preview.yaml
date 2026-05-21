@@ -1,15 +1,13 @@
 id: qwen--qvq-72b-preview
 name: Qwen/Qvq 72b Preview
 family: qwen
-temperature: true
 pricing:
   currency: USD
   input: 0.6
   output: 0.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

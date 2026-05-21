@@ -1,6 +1,11 @@
 id: xiaomi--mimo-v2-omni
-name: "Xiaomi: MiMo-V2-Omni"
+name: Mimo V2 Omni
 family: xiaomi
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
+  cache_read: 0.08
 limit:
   context: 262144
   output: 65536
@@ -12,12 +17,8 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 2
-  cache_read: 0.08
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-03-19
+last_updated: 2026-03-19

@@ -1,7 +1,10 @@
 id: gryphe--mythomax-l2-13b
-name: Mythomax L2 13B
-family: mythomax
-temperature: true
+name: Mythomax L2 13b
+family: gryphe
+pricing:
+  currency: USD
+  input: 0.09
+  output: 0.09
 limit:
   context: 4096
   output: 3200
@@ -10,9 +13,4 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.09
-  output: 0.09
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

@@ -1,7 +1,10 @@
 id: qwen--qwen-mt-plus
-name: Qwen MT Plus
+name: Qwen Mt Plus
 family: qwen
-temperature: true
+pricing:
+  currency: USD
+  input: 0.25
+  output: 0.75
 limit:
   context: 16384
   output: 8192
@@ -10,9 +13,4 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.25
-  output: 0.75
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

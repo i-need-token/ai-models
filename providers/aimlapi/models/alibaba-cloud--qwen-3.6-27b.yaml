@@ -1,0 +1,16 @@
+id: alibaba-cloud--qwen-3.6-27b
+name: Alibaba Cloud / Qwen 3.6 27b
+family: alibaba
+pricing:
+  currency: USD
+  input: 0.78
+  output: 4.68
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

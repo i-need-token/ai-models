@@ -1,15 +1,13 @@
 id: command-r-08-2024
-name: "Cohere: Command R 08 2024"
+name: Command R 08 2024
 family: command-r
-temperature: true
 pricing:
   currency: USD
   input: 0.1
   output: 0.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

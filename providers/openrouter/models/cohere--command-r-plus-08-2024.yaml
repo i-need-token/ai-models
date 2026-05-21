@@ -1,6 +1,10 @@
 id: cohere--command-r-plus-08-2024
-name: "Cohere: Command R+ (08-2024)"
+name: Command R Plus 08 2024
 family: command
+pricing:
+  currency: USD
+  input: 2.5
+  output: 10
 limit:
   context: 128000
   output: 4000
@@ -9,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 2.5
-  output: 10
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2024-08-30
+last_updated: 2024-08-30

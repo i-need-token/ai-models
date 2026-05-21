@@ -1,17 +1,14 @@
 id: google--gemma-3n-e4b-it
-name: "Google: Gemma 3n 4B"
+name: Gemma 3n E4b It
 family: gemma
-limit:
-  context: 32768
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.06
+  output: 0.12
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.06
-  output: 0.12
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-05-21
+last_updated: 2025-05-21

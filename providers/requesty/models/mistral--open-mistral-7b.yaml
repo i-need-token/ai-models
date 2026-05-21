@@ -1,20 +1,17 @@
 id: mistral--open-mistral-7b
 name: Open Mistral 7b
 family: mistral
-limit:
-  context: 32768
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.25
   output: 0.25
   cache_read: 0.25
   cache_write: 0.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2024-02-25
+last_updated: 2024-02-25

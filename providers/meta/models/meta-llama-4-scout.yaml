@@ -1,9 +1,10 @@
 id: meta-llama-4-scout
 name: Llama 4 Scout
 family: llama
-temperature: true
-tool_call: true
-attachment: true
+pricing:
+  currency: USD
+  input: 0.17
+  output: 0.66
 limit:
   context: 10000000
   output: 16384
@@ -13,9 +14,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.17
-  output: 0.66
+temperature: true
+tool_call: true
+attachment: true
 release_date: 2025-04-05
-last_updated: 2026-05-17
+last_updated: 2026-05-18

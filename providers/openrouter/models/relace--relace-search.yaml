@@ -1,6 +1,10 @@
 id: relace--relace-search
-name: "Relace: Relace Search"
+name: Relace Search
 family: relace
+pricing:
+  currency: USD
+  input: 1
+  output: 3
 limit:
   context: 256000
   output: 128000
@@ -9,10 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 3
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-12-09
+last_updated: 2025-12-09

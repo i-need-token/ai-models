@@ -1,7 +1,10 @@
 id: qwen3-5-9b
-name: Qwen 3.5 9B
-family: qwen3.5
-temperature: true
+name: qwen3-5-9b
+family: qwen
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.15
 limit:
   context: 256000
   output: 32768
@@ -11,13 +14,9 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.15
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
 tool_call: true
-structured_output: true
 attachment: true
+structured_output: true
+release_date: 2026-03-05
+last_updated: 2026-03-05

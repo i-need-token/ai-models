@@ -1,22 +1,18 @@
 id: claude-haiku-4-5
 name: claude-haiku-4-5
 family: claude
-temperature: true
-limit:
-  context: 200000
-  output: 200000
+pricing:
+  currency: EUR
+  input: 0.894
+  output: 4.472
+  cache_read: 0.089
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.894
-  output: 4.472
-  cache_read: 0.089
-release_date: 2025-10-16
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-10-16
+last_updated: 2025-10-16

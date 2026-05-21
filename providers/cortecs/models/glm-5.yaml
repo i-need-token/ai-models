@@ -1,21 +1,17 @@
 id: glm-5
 name: glm-5
 family: glm
-temperature: true
-limit:
-  context: 202752
-  output: 202752
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: EUR
   input: 0.887
   output: 2.84
   cache_read: 0.222
-release_date: 2026-03-26
-last_updated: 2026-05-17
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+release_date: 2026-03-26
+last_updated: 2026-03-26

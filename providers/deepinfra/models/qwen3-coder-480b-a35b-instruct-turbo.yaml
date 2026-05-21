@@ -1,20 +1,18 @@
 id: qwen3-coder-480b-a35b-instruct-turbo
-name: Qwen3 Coder 480B A35B Instruct Turbo
+name: Qwen3 Coder 480b A35b Instruct Turbo
 family: qwen-coder
-temperature: true
-limit:
-  context: 262144
-  output: 131072
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.3
   output: 1
   cache_read: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: true
+last_updated: 2026-05-20

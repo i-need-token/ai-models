@@ -1,15 +1,13 @@
 id: thudm--glm-z1-9b-0414
-name: "ChatGLM: Thudm/Glm Z1 9b 0414"
+name: Thudm/Glm Z1 9b 0414
 family: glm
-temperature: true
 pricing:
   currency: USD
   input: 0.025
   output: 0.025
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

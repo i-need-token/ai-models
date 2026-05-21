@@ -1,21 +1,16 @@
 id: ernie-4.5
-name: "Baidu: Ernie 4.5"
-family: ernie-4.5
-temperature: true
+name: Ernie 4.5
+family: ernie
 pricing:
   currency: USD
   input: 0.034
   output: 0.136
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
-limit:
-  context: 160000
-  output: 16384
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

@@ -1,7 +1,10 @@
 id: mistral-small-3-2-24b-instruct
-name: Mistral Small 3.2 24B Instruct
+name: mistral-small-3-2-24b-instruct
 family: mistral-small
-temperature: true
+pricing:
+  currency: USD
+  input: 0.09375
+  output: 0.25
 limit:
   context: 256000
   output: 16384
@@ -10,11 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.09375
-  output: 0.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
 structured_output: true
+release_date: 2026-01-15
+last_updated: 2026-01-15

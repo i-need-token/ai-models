@@ -1,7 +1,10 @@
 id: gpt-oss-20b
 name: GPT-OSS 20B
 family: gpt-oss
-open_weights: true
+pricing:
+  currency: USD
+  input: 0.07
+  output: 0.25
 limit:
   context: 131072
   output: 33000
@@ -10,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.07
-  output: 0.25
+temperature: true
+open_weights: true
 release_date: 2025-08-26
-last_updated: 2026-05-17
+last_updated: 2026-05-18

@@ -1,6 +1,10 @@
 id: together--kimi k2.5
 name: Kimi K2.5
 family: together
+pricing:
+  currency: USD
+  input: 0.5
+  output: 2.8
 limit:
   context: 262100
   output: 131072
@@ -10,10 +14,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.5
-  output: 2.8
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2026-03-31
+last_updated: 2026-03-31

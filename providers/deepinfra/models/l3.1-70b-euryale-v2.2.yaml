@@ -1,7 +1,10 @@
 id: l3.1-70b-euryale-v2.2
-name: L3.1.70B Euryale V2.2
-family: l3-finetune
-temperature: true
+name: L3.1.70b Euryale V2.2
+family: l3.1
+pricing:
+  currency: USD
+  input: 0.85
+  output: 0.85
 limit:
   context: 131072
   output: 131072
@@ -10,10 +13,4 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.85
-  output: 0.85
-release_date: 2026-05-17
-last_updated: 2026-05-17
-open_weights: true
+last_updated: 2026-05-20

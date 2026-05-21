@@ -1,15 +1,16 @@
 id: dall-e-2
-name: Dall E 2
+name: DALL·E 2
 family: dall-e
 deprecated: true
+pricing:
+  currency: USD
+  unit: per_image
+  price: 0.016
 modalities:
   input:
     - text
   output:
-    - text
     - image
-pricing:
-  unit: per_image
-  price: 0.016
-release_date: unknown
-last_updated: unknown
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

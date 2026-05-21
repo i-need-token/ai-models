@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing, ModelModality } from "../../types/index";
 
 const provider = defineProvider({
   id: "klusterai",
@@ -13,16 +21,7 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Dynamic scrape from Kluster AI API
-//
-// Source: https://api.kluster.ai/v1/models (first-party, no auth required)
-//
-// Kluster AI is an inference platform hosting models from Mistral, DeepSeek,
-// Qwen, Meta, Google, and their own klusterai turbo models, with USD per-token pricing.
-//
-// Pricing: API returns per-million-token values in USD (realtime pricing)
-// Context lengths: API provides context_length and output_length
-// Model IDs: API returns "provider/model" format; "/" is flattened to "--"
+// Raw data types (from Kluster AI API)
 // ---------------------------------------------------------------------------
 
 interface KlusterModel {
@@ -63,119 +62,266 @@ interface KlusterModel {
 }
 
 // ---------------------------------------------------------------------------
-// Family derivation
+// API fetch helper
 // ---------------------------------------------------------------------------
 
-function deriveFamily(id: string): string {
-  if (id.includes("Magistral")) return "magistral";
-  if (id.includes("Mistral-Small")) return "mistral-small";
-  if (id.includes("Mistral-Nemo")) return "mistral-nemo";
-  if (id.includes("DeepSeek-R1")) return "deepseek-r1";
-  if (id.includes("DeepSeek-V3")) return "deepseek-v3";
-  if (id.includes("Qwen3-235B")) return "qwen3";
-  if (id.includes("Qwen2.5-VL")) return "qwen2.5-vl";
-  if (id.includes("Llama-4-Maverick")) return "llama-4-maverick";
-  if (id.includes("Llama-4-Scout")) return "llama-4-scout";
-  if (id.includes("Llama-3.3")) return "llama-3.3";
-  if (id.includes("Llama-3.1")) return "llama-3.1";
-  if (id.includes("gemma")) return "gemma";
-  return "other";
-}
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function timestampToDate(ts: number): string {
-  const d = new Date(ts);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-}
-
-function getCurrentDate(): string {
-  return timestampToDate(Date.now());
-}
-
-// ---------------------------------------------------------------------------
-// Scrape function
-// ---------------------------------------------------------------------------
-
-export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // Fetch model list from Kluster AI API
+async function fetchModels(): Promise<KlusterModel[]> {
   const response = await fetch("https://api.kluster.ai/v1/models");
   if (!response.ok) {
     throw new Error(`Failed to fetch Kluster AI models: ${response.status}`);
   }
-
   const data = (await response.json()) as { data: KlusterModel[] };
-  const apiModels = data.data;
+  return data.data;
+}
 
-  for (const m of apiModels) {
-    // Only process chat models (skip verify, embeddings, and deleted models)
-    if (m.model_purpose === "verify" || m.model_purpose === "embeddings") continue;
-    if (m.deleted || m.status !== "existing") continue;
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
 
-    const flatId = m.id.replace(/\//g, "--");
+const pipeline: ScrapePipeline = {
+  // -----------------------------------------------------------------------
+  // Step 1: Discover models from API
+  // -----------------------------------------------------------------------
+  discover: {
+    source: {
+      url: "https://api.kluster.ai/v1/models",
+      type: "api",
+      description:
+        "Kluster AI models API — returns model list with pricing, context, capabilities, modalities",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      const discovered: DiscoveredModel[] = [];
 
-    // Use realtime pricing (per million tokens, USD)
-    const realtimePricing = m.pricing.realtime;
-    const pricing: Pricing = {
-      input: realtimePricing.input,
-      output: realtimePricing.output,
-    };
+      for (const m of apiModels) {
+        // Only process chat models (skip verify, embeddings, and deleted models)
+        if (m.model_purpose === "verify" || m.model_purpose === "embeddings") continue;
+        if (m.deleted || m.status !== "existing") continue;
 
-    // Determine modalities
-    const isMultimodal = m.model_purpose === "multimodal";
-    const inputModalities: ModelModality[] = isMultimodal ? ["text", "image"] : ["text"];
-    const outputModalities: ModelModality[] = ["text"];
+        const flatId = m.id.replace(/\//g, "--");
 
-    // Use release_date if available, otherwise created timestamp, otherwise today
-    let releaseDate: string;
-    if (m.release_date && m.release_date > 0) {
-      releaseDate = timestampToDate(m.release_date);
-    } else if (m.created && m.created > 0) {
-      releaseDate = timestampToDate(m.created);
-    } else {
-      releaseDate = today;
-    }
+        discovered.push({
+          id: flatId,
+          raw: m,
+        });
+      }
 
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: flatId,
-      name: m.name || m.id,
-      family: deriveFamily(m.id),
-      temperature: true,
-      limit: {
-        context: m.context_length,
-        output: m.output_length > 0 ? m.output_length : m.context_length,
-      },
-      modalities: {
-        input: inputModalities,
-        output: outputModalities,
-      },
-      pricing,
-      release_date: releaseDate,
-      last_updated: today,
-    };
+      return discovered;
+    },
+  },
 
-    // Tool calling
-    if (m.tools_supported) modelDef.tool_call = true;
+  // -----------------------------------------------------------------------
+  // Step 2: Extract pricing from API
+  // -----------------------------------------------------------------------
+  extractPricing: {
+    source: {
+      url: "https://api.kluster.ai/v1/models",
+      type: "api",
+      description: "Pricing from Kluster AI API — realtime per-million-token USD pricing",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      const pricingMap = new Map<string, Pricing>();
 
-    // Reasoning
-    if (m.reasoning_model === "yes" || m.reasoning_model === "optional") {
-      modelDef.reasoning = true;
-    }
+      for (const m of models) {
+        const raw = m.raw as KlusterModel;
+        if (!raw) continue;
 
-    // Open weights for open-source models
-    if (m.owned_by !== "klusterai" && m.model_purpose !== "verify") {
-      modelDef.open_weights = true;
-    }
+        const realtimePricing = raw.pricing.realtime;
+        pricingMap.set(m.id, {
+          currency: "USD",
+          input: realtimePricing.input,
+          output: realtimePricing.output,
+        });
+      }
 
-    models.push(defineModel(modelDef));
-  }
+      return pricingMap;
+    },
+  },
 
-  console.log(`  Kluster AI: ${models.length} models`);
+  // -----------------------------------------------------------------------
+  // Step 3: Extract dates from API (release_date / created fields)
+  // -----------------------------------------------------------------------
+  extractDates: {
+    source: {
+      url: "https://api.kluster.ai/v1/models",
+      type: "api",
+      description: "Dates from Kluster AI API — release_date and created timestamp fields",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
 
-  return { provider, models };
+      for (const m of models) {
+        const raw = m.raw as KlusterModel;
+        if (!raw) continue;
+
+        // Use release_date if available, otherwise created timestamp
+        let releaseDate: string;
+        if (raw.release_date && raw.release_date > 0) {
+          const d = new Date(raw.release_date);
+          releaseDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        } else if (raw.created && raw.created > 0) {
+          const d = new Date(raw.created);
+          releaseDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        } else {
+          // No date data available — omit rather than fabricate
+          continue;
+        }
+
+        datesMap.set(m.id, {
+          release_date: releaseDate,
+          last_updated: releaseDate,
+        });
+      }
+
+      return datesMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 4: Extract limits from API
+  // -----------------------------------------------------------------------
+  extractLimits: {
+    source: {
+      url: "https://api.kluster.ai/v1/models",
+      type: "api",
+      description:
+        "Context window and max output from Kluster AI API — context_length and output_length",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      const limitsMap = new Map<string, ExtractedLimit>();
+
+      for (const m of models) {
+        const raw = m.raw as KlusterModel;
+        if (!raw) continue;
+
+        if (raw.context_length > 0) {
+          limitsMap.set(m.id, {
+            context: raw.context_length,
+            ...(raw.output_length > 0 ? { output: raw.output_length } : {}),
+          });
+        }
+      }
+
+      return limitsMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 5: Extract modalities from API
+  // -----------------------------------------------------------------------
+  extractModalities: {
+    source: {
+      url: "https://api.kluster.ai/v1/models",
+      type: "api",
+      description:
+        "Modalities from Kluster AI API — model_purpose field determines multimodal support",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      const modalitiesMap = new Map<string, ExtractedModalities>();
+
+      for (const m of models) {
+        const raw = m.raw as KlusterModel;
+        if (!raw) continue;
+
+        const isMultimodal = raw.model_purpose === "multimodal";
+        const inputModalities: ModelModality[] = isMultimodal ? ["text", "image"] : ["text"];
+
+        modalitiesMap.set(m.id, {
+          input: inputModalities,
+        });
+      }
+
+      return modalitiesMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 6: Extract features from API
+  // -----------------------------------------------------------------------
+  extractFeatures: {
+    source: {
+      url: "https://api.kluster.ai/v1/models",
+      type: "api",
+      description:
+        "Features from Kluster AI API — tools_supported, reasoning_model, owned_by fields",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      const featuresMap = new Map<string, ExtractedFeatures>();
+
+      for (const m of models) {
+        const raw = m.raw as KlusterModel;
+        if (!raw) continue;
+
+        const features: ExtractedFeatures = {};
+
+        if (raw.tools_supported) features.tool_call = true;
+        if (raw.reasoning_model === "yes" || raw.reasoning_model === "optional") {
+          features.reasoning = true;
+        }
+        if (raw.owned_by !== "klusterai" && raw.model_purpose !== "verify") {
+          features.open_weights = true;
+        }
+
+        featuresMap.set(m.id, features);
+      }
+
+      return featuresMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 7: Derive name from model ID
+  // -----------------------------------------------------------------------
+  deriveName: {
+    execute: (modelId: string): string => {
+      // Kluster AI model IDs are like "provider/Model-Name"
+      // After flattening: "provider--Model-Name"
+      let name = modelId.replace(/--/g, "/").split("/").pop() || modelId;
+
+      // Smart formatting: capitalize words, handle version numbers
+      name = name
+        .replace(/-/g, " ")
+        .replace(/\b(\d+\.\d+)\b/g, "$1") // keep version numbers like 3.1
+        .replace(/\b(\d+b)\b/gi, "$1") // keep size suffixes like 70B
+        .replace(/\b([a-z])/g, (c) => c.toUpperCase());
+
+      return name;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 8: Derive family from model ID
+  // -----------------------------------------------------------------------
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const familyRules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /Magistral/i, family: "magistral" },
+        { pattern: /Mistral-Small/i, family: "mistral-small" },
+        { pattern: /Mistral-Nemo/i, family: "mistral-nemo" },
+        { pattern: /DeepSeek/i, family: "deepseek" },
+        { pattern: /Qwen/i, family: "qwen" },
+        { pattern: /Llama/i, family: "llama" },
+        { pattern: /gemma/i, family: "gemma" },
+      ];
+
+      for (const { pattern, family } of familyRules) {
+        if (pattern.test(modelId)) return family;
+      }
+
+      return modelId.split("-")[0] ?? modelId;
+    },
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Main scrape function
+// ---------------------------------------------------------------------------
+
+export async function scrape(): Promise<ScrapeResult> {
+  const models = await runPipeline(pipeline);
+
+  return {
+    provider,
+    models,
+  };
 }

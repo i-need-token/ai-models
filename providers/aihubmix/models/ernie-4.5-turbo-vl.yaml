@@ -1,21 +1,16 @@
 id: ernie-4.5-turbo-vl
-name: "Baidu: Ernie 4.5 Turbo Vl"
-family: ernie-4.5
-temperature: true
+name: Ernie 4.5 Turbo Vl
+family: ernie
 pricing:
   currency: USD
   input: 0.2
   output: 0.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
-limit:
-  context: 139000
-  output: 16384
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

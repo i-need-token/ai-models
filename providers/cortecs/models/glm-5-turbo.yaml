@@ -1,21 +1,17 @@
 id: glm-5-turbo
 name: glm-5-turbo
 family: glm
-temperature: true
-limit:
-  context: 202752
-  output: 202752
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: EUR
   input: 1.065
   output: 3.55
   cache_read: 0.266
-release_date: 2026-05-12
-last_updated: 2026-05-17
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+release_date: 2026-05-12
+last_updated: 2026-05-12

@@ -1,13 +1,10 @@
 id: veo-3.1-generate-preview
-name: "Google: Veo 3.1 Generate Preview"
-family: other
-temperature: true
+name: Veo 3.1 Generate Preview
+family: veo
 pricing:
   currency: USD
   input: 1
   output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
@@ -15,3 +12,4 @@ modalities:
     - video
   output:
     - text
+last_updated: 2026-05-19

@@ -1,10 +1,11 @@
 id: o4-mini
-name: o4 mini
-family: o
-reasoning: true
-tool_call: true
-structured_output: true
-deprecated: true
+name: o4 Mini
+family: o4
+pricing:
+  currency: USD
+  input: 1.1
+  output: 4.4
+  cache_read: 0.275
 limit:
   context: 200000
   output: 100000
@@ -14,12 +15,9 @@ modalities:
     - image
   output:
     - text
-pricing:
-  input: 1.1
-  output: 4.4
-  cache_read: 0.275
-release_date: 2025-04-16
-last_updated: 2025-04-16
-snapshots:
-  - id: o4-mini-2025-04-16
-    deprecated: true
+reasoning: true
+temperature: false
+tool_call: true
+structured_output: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

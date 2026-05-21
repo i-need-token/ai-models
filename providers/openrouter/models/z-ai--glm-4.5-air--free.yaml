@@ -1,6 +1,8 @@
 id: z-ai--glm-4.5-air--free
-name: "Z.ai: GLM 4.5 Air (free)"
+name: Free
 family: glm
+pricing:
+  unit: free
 limit:
   context: 131072
   output: 96000
@@ -9,7 +11,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
+reasoning: true
+tool_call: true
+release_date: 2025-07-26
+last_updated: 2025-07-26

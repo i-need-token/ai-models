@@ -1,7 +1,11 @@
 id: glm-4.6
-name: GLM 4.6
+name: Glm 4.6
 family: glm
-temperature: true
+pricing:
+  currency: USD
+  input: 0.43
+  output: 1.74
+  cache_read: 0.08
 limit:
   context: 202752
   output: 202752
@@ -10,11 +14,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.43
-  output: 1.74
-  cache_read: 0.08
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+temperature: true
+last_updated: 2026-05-20

@@ -1,20 +1,16 @@
 id: minimax-m2.7
-name: MiniMax M2.7
+name: Minimax M2.7
 family: minimax
-limit:
-  context: 204800
-  output: 196608
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.3
   output: 1.2
   cache_read: 0.06
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+last_updated: 2026-05-20

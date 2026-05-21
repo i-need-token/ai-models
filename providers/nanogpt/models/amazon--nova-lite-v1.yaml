@@ -1,18 +1,13 @@
 id: amazon--nova-lite-v1
 name: "Amazon: nova LITE v1"
 family: nova
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.035
+  output: 0.14
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.035
-  output: 0.14
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

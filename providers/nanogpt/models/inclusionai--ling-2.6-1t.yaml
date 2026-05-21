@@ -1,19 +1,14 @@
 id: inclusionai--ling-2.6-1t
 name: "InclusionAI: ling 2.6 1t"
-family: other
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: inclusionai/ling
+pricing:
+  currency: USD
+  input: 0.3
+  output: 2.5
+  cache_read: 0.06
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.3
-  output: 2.5
-  cache_read: 0.06
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

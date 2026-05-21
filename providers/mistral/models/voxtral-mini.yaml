@@ -1,8 +1,10 @@
 id: voxtral-mini
 name: Voxtral Mini
 family: voxtral
-temperature: true
-attachment: true
+pricing:
+  currency: USD
+  input: 0.04
+  output: 0.04
 limit:
   context: 128000
   output: 4096
@@ -12,9 +14,7 @@ modalities:
     - audio
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.04
-  output: 0.04
+temperature: true
+attachment: true
 release_date: 2025-07-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

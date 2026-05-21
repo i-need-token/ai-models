@@ -1,7 +1,11 @@
 id: claude-sonnet-4-6
-name: Claude Sonnet 4.6
+name: claude-sonnet-4-6
 family: claude-sonnet
-temperature: true
+pricing:
+  currency: USD
+  input: 3.6
+  output: 18
+  cache_read: 0.36
 limit:
   context: 1000000
   output: 64000
@@ -11,14 +15,9 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 3.6
-  output: 18
-  cache_read: 0.36
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
 tool_call: true
-structured_output: true
 attachment: true
+structured_output: true
+release_date: 2026-02-17
+last_updated: 2026-02-17

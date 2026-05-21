@@ -1,7 +1,10 @@
 id: baichuan3-turbo-128k
 name: Baichuan3 Turbo 128K
 family: baichuan3
-temperature: true
+pricing:
+  currency: CNY
+  input: 24
+  output: 24
 limit:
   context: 131072
   output: 8192
@@ -10,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 24
-  output: 24
+temperature: true
 release_date: 2024-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

@@ -1,19 +1,16 @@
 id: qwen-flash
 name: Qwen Flash
 family: qwen
-limit:
-  context: 1000000
-  output: 8000
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.05
   output: 0.4
   cache_read: 0.01
-release_date: 2026-05-17
-last_updated: 2026-05-17
+  cache_write: 0.0625
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+last_updated: 2026-05-20

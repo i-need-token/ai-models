@@ -1,20 +1,16 @@
 id: grok-4
 name: Grok 4
 family: grok
-limit:
-  context: 256000
-  output: 16384
+pricing:
+  currency: USD
+  input: 3
+  output: 15
+  cache_read: 0.75
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 3
-  output: 15
-  cache_read: 0.75
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

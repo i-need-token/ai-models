@@ -1,6 +1,8 @@
 id: minimax--minimax-m2.5--free
-name: "MiniMax: MiniMax M2.5 (free)"
+name: Free
 family: minimax
+pricing:
+  unit: free
 limit:
   context: 204800
   output: 8192
@@ -9,7 +11,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-02-12
+last_updated: 2026-02-12

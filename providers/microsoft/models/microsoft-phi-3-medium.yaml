@@ -1,7 +1,11 @@
 id: microsoft-phi-3-medium
 name: Phi-3 Medium
 family: phi
-temperature: true
+deprecated: true
+pricing:
+  currency: USD
+  input: 0.17
+  output: 0.68
 limit:
   context: 128000
   output: 4096
@@ -10,10 +14,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.17
-  output: 0.68
+temperature: true
 release_date: 2024-04-22
-last_updated: 2026-05-17
-deprecated: true
+last_updated: 2026-05-18

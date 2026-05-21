@@ -1,0 +1,16 @@
+id: openai--gpt-image-1.5
+name: Openai / Gpt Image 1.5
+family: openai
+pricing:
+  currency: USD
+  input: 6.5
+  output: 10.4
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

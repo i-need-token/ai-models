@@ -1,7 +1,10 @@
 id: meta-llama--llama-4-maverick-17b-128e-instruct-fp8
-name: Llama 4 Maverick Instruct
-family: llama-4
-temperature: true
+name: Llama 4 Maverick 17b 128e Instruct Fp8
+family: llama
+pricing:
+  currency: USD
+  input: 0.27
+  output: 0.85
 limit:
   context: 1048576
   output: 8192
@@ -11,10 +14,5 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.27
-  output: 0.85
-release_date: 2026-05-17
-last_updated: 2026-05-17
 structured_output: true
+last_updated: 2026-05-20

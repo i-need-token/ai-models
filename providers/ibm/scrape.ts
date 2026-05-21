@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "ibm",
@@ -13,120 +21,143 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Model specs & pricing: OpenRouter API https://openrouter.ai/api/v1/models
-//   (ibm-granite/* models — context windows, max output, USD pricing)
-// - Model variants: IBM Granite documentation https://www.ibm.com/granite/docs/models
-//   (granite-4.1-3b, granite-4.1-8b, granite-4.1-30b variants)
-// - Model descriptions: OpenRouter + IBM Granite docs
-//
-// IBM Granite is an open-weight model family (Apache 2.0 license).
-// IBM's watsonx.ai platform hosts these models but requires authentication.
-// Pricing is from OpenRouter which mirrors IBM's specifications.
+// Raw data types (from IBM watsonx.ai API)
 // ---------------------------------------------------------------------------
 
-// Pricing (USD per 1M tokens) — from OpenRouter
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  "granite-4.0-h-micro": { currency: "USD", input: 0.02, output: 0.11 },
-  "granite-4.1-3b-instruct": { currency: "USD", input: 0.02, output: 0.11 },
-  "granite-4.1-8b-instruct": { currency: "USD", input: 0.05, output: 0.1 },
-  "granite-4.1-30b-instruct": { currency: "USD", input: 0.2, output: 0.6 },
-};
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+interface IbmModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<IbmModel[]> {
+  const response = await fetch("https://us-south.ml.cloud.ibm.com/ml/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch IBM models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: IbmModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://us-south.ml.cloud.ibm.com/ml/v1/models",
+      type: "api",
+      description: "IBM watsonx.ai /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      const seen = new Set<string>();
+      const discovered: DiscoveredModel[] = [];
+
+      for (const m of apiModels) {
+        // Strip "ibm/" prefix if present
+        const slug = m.id.startsWith("ibm/") ? m.id.slice(4) : m.id;
+        if (!seen.has(slug)) {
+          seen.add(slug);
+          discovered.push({ id: slug, raw: m });
+        }
+      }
+
+      return discovered;
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://us-south.ml.cloud.ibm.com/ml/v1/models",
+      type: "api",
+      description: "IBM API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://us-south.ml.cloud.ibm.com/ml/v1/models",
+      type: "api",
+      description: "IBM API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://us-south.ml.cloud.ibm.com/ml/v1/models",
+      type: "api",
+      description: "IBM API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://us-south.ml.cloud.ibm.com/ml/v1/models",
+      type: "api",
+      description: "IBM API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://us-south.ml.cloud.ibm.com/ml/v1/models",
+      type: "api",
+      description: "IBM API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as IbmModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (_modelId: string): string => {
+      return "granite";
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // --- Granite 4.0 H Micro (3B params, compact edge model) ---
-
-  models.push(
-    defineModel({
-      id: "granite-4.0-h-micro",
-      name: "Granite 4.0 Micro",
-      family: "granite",
-      temperature: true,
-      tool_call: true,
-      open_weights: true,
-      limit: { context: 131000, output: 8192 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["granite-4.0-h-micro"] as Pricing,
-      release_date: "2025-01-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Granite 4.1 3B Instruct (compact, edge deployment) ---
-
-  models.push(
-    defineModel({
-      id: "granite-4.1-3b-instruct",
-      name: "Granite 4.1 3B Instruct",
-      family: "granite",
-      temperature: true,
-      tool_call: true,
-      open_weights: true,
-      limit: { context: 131072, output: 8192 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["granite-4.1-3b-instruct"] as Pricing,
-      release_date: "2025-06-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Granite 4.1 8B Instruct (general-purpose enterprise) ---
-
-  models.push(
-    defineModel({
-      id: "granite-4.1-8b-instruct",
-      name: "Granite 4.1 8B Instruct",
-      family: "granite",
-      temperature: true,
-      tool_call: true,
-      structured_output: true,
-      open_weights: true,
-      limit: { context: 131072, output: 131072 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["granite-4.1-8b-instruct"] as Pricing,
-      release_date: "2025-06-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Granite 4.1 30B Instruct (complex reasoning, specialized tasks) ---
-
-  models.push(
-    defineModel({
-      id: "granite-4.1-30b-instruct",
-      name: "Granite 4.1 30B Instruct",
-      family: "granite",
-      temperature: true,
-      tool_call: true,
-      structured_output: true,
-      open_weights: true,
-      limit: { context: 131072, output: 32768 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["granite-4.1-30b-instruct"] as Pricing,
-      release_date: "2025-06-01",
-      last_updated: today,
-    }),
-  );
-
+  const models = await runPipeline(pipeline);
   console.log(`  IBM Granite: ${models.length} models`);
-
   return { provider, models };
 }

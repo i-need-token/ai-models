@@ -1,8 +1,8 @@
 id: spotlight
 name: Spotlight
 family: spotlight
-temperature: true
-attachment: true
+pricing:
+  unit: free
 limit:
   context: 131072
   output: 65536
@@ -12,9 +12,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.18
-  output: 0.18
+temperature: true
+attachment: true
 release_date: 2025-04-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

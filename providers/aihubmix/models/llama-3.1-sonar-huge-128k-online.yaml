@@ -1,15 +1,13 @@
 id: llama-3.1-sonar-huge-128k-online
-name: "Perplexity: Llama 3.1 Sonar Huge 128k Online"
-family: llama-3.1
-temperature: true
+name: Llama 3.1 Sonar Huge 128k Online
+family: llama
 pricing:
   currency: USD
   input: 2.8
   output: 2.8
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

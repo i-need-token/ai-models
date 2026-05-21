@@ -1,6 +1,11 @@
 id: z-ai--glm-5v-turbo
-name: "Z.ai: GLM 5V Turbo"
+name: Glm 5v Turbo
 family: glm
+pricing:
+  currency: USD
+  input: 1.2
+  output: 4
+  cache_read: 0.24
 limit:
   context: 202752
   output: 131072
@@ -11,12 +16,8 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.2
-  output: 4
-  cache_read: 0.24
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-04-02
+last_updated: 2026-04-02

@@ -1,21 +1,17 @@
 id: Qwen--Qwen3.5-397B-A17B-FP8
-name: Qwen3.5 397B
-family: qwen3.5
-temperature: true
-limit:
-  context: 262128
-  output: 16384
+name: Qwen3.5 397B A17B FP8
+family: qwen
+pricing:
+  currency: USD
+  input: 0.69
+  output: 4.14
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.69
-  output: 4.14
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+release_date: 2026-05-20
+last_updated: 2026-05-20

@@ -1,15 +1,12 @@
 id: liquid--lfm-2.5-1.2b-instruct--free
-name: "LiquidAI: LFM2.5-1.2B-Instruct (free)"
-family: lfm
-limit:
-  context: 32768
-  output: 4096
+name: Free
+family: liquid
+pricing:
+  unit: free
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2026-01-21
+last_updated: 2026-01-21

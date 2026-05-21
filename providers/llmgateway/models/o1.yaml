@@ -1,21 +1,17 @@
 id: o1
-name: o1
-family: o1
-limit:
-  context: 200000
-  output: 100000
+name: O1
+family: o
+pricing:
+  currency: USD
+  input: 15
+  output: 60
+  cache_read: 7.5
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 15
-  output: 60
-  cache_read: 7.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+last_updated: 2026-05-20

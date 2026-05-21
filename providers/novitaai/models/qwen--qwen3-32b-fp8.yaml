@@ -1,7 +1,10 @@
 id: qwen--qwen3-32b-fp8
-name: Qwen3 32B
-family: qwen3
-temperature: true
+name: Qwen3 32b Fp8
+family: qwen
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.45
 limit:
   context: 40960
   output: 20000
@@ -10,10 +13,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.45
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+last_updated: 2026-05-20

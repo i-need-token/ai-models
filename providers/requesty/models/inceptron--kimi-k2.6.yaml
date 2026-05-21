@@ -1,6 +1,11 @@
 id: inceptron--kimi-k2.6
 name: Kimi K2.6
 family: inceptron
+pricing:
+  currency: USD
+  input: 0.8
+  output: 3.5
+  cache_read: 0.2
 limit:
   context: 262144
   output: 262144
@@ -10,12 +15,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.8
-  output: 3.5
-  cache_read: 0.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-04-29
+last_updated: 2026-04-29

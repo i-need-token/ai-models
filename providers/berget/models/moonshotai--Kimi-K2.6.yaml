@@ -1,21 +1,17 @@
 id: moonshotai--Kimi-K2.6
-name: Kimi-K2.6
+name: Kimi K2.6
 family: kimi
-temperature: true
-limit:
-  context: 262144
-  output: 262144
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: EUR
   input: 0.75
   output: 3.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
 tool_call: true
-reasoning: true
 structured_output: true
+release_date: 2026-05-07
+last_updated: 2026-05-07

@@ -1,21 +1,17 @@
 id: o4-mini
-name: o4 Mini
-family: o4
-limit:
-  context: 200000
-  output: 16384
+name: O4 Mini
+family: o
+pricing:
+  currency: USD
+  input: 1.1
+  output: 4.4
+  cache_read: 0.275
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.1
-  output: 4.4
-  cache_read: 0.275
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+last_updated: 2026-05-20

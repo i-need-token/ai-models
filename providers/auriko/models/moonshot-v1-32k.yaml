@@ -1,19 +1,18 @@
 id: moonshot-v1-32k
-name: Moonshot V1 32K
+name: Moonshot V1 32k
 family: moonshot
-temperature: true
+pricing:
+  currency: USD
+  input: 1
+  output: 3
+limit:
+  context: 32768
+  output: 32768
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 3
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 32768
-  output: 32768
 tool_call: true
+release_date: 2026-05-07
+last_updated: 2026-05-07

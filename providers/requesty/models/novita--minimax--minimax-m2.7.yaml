@@ -1,6 +1,12 @@
 id: novita--minimax--minimax-m2.7
 name: Minimax M2.7
 family: novita
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.2
+  cache_read: 0.06
+  cache_write: 1.2
 limit:
   context: 200000
   output: 128000
@@ -10,13 +16,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 1.2
-  cache_read: 0.06
-  cache_write: 1.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-03-19
+last_updated: 2026-03-19

@@ -1,22 +1,18 @@
 id: qwen3-vl-235b-a22b
 name: qwen3-vl-235b-a22b
-family: qwen3
-temperature: true
-limit:
-  context: 131000
-  output: 131000
+family: qwen
+pricing:
+  currency: EUR
+  input: 0.186
+  output: 1.686
+  cache_read: 0.047
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.186
-  output: 1.686
-  cache_read: 0.047
-release_date: 2026-01-13
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-01-13
+last_updated: 2026-01-13

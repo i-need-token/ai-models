@@ -1,0 +1,16 @@
+id: mistral-ai--mixtral-8x22b
+name: Mistral Ai / Mixtral 8x22b
+family: mistral
+pricing:
+  currency: USD
+  input: 1.26
+  output: 1.26
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

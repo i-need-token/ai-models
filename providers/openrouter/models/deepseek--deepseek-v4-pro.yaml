@@ -1,6 +1,11 @@
 id: deepseek--deepseek-v4-pro
-name: "DeepSeek: DeepSeek V4 Pro"
+name: Deepseek V4 Pro
 family: deepseek
+pricing:
+  currency: USD
+  input: 0.435
+  output: 0.87
+  cache_read: 0.003625
 limit:
   context: 1048576
   output: 384000
@@ -9,12 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.435
-  output: 0.87
-  cache_read: 0.003625
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-04-24
+last_updated: 2026-04-24

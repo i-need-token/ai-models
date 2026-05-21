@@ -1,20 +1,13 @@
 id: moonshotai--kimi-k2-thinking
 name: "MoonshotAI: kimi k2 thinking"
 family: kimi
-temperature: true
-limit:
-  context: 131072
-  output: 131072
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.2
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.3
-  output: 1.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
-reasoning: true
+last_updated: 2026-05-20

@@ -1,21 +1,14 @@
 id: deepinfra--openai--gpt-oss-20b
-name: GPT Oss 20B
-family: deepinfra
-reasoning: false
-temperature: true
-tool_call: false
-structured_output: false
-limit:
-  context: 30000
-  output: 131072
+name: Gpt Oss 20b
+family: gpt-oss
+pricing:
+  currency: USD
+  input: 0.03
+  output: 0.14
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.03
-  output: 0.14
 release_date: 2026-04-28
-last_updated: 2026-05-17
+last_updated: 2026-04-28

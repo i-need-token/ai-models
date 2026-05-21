@@ -1,9 +1,10 @@
 id: mimo-v2-pro
 name: MiMo V2 Pro
 family: mimo
-temperature: true
-reasoning: true
-tool_call: true
+pricing:
+  currency: USD
+  input: 1
+  output: 3
 limit:
   context: 1048576
   output: 131072
@@ -12,9 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 3
+reasoning: true
+temperature: true
+tool_call: true
 release_date: 2025-06-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

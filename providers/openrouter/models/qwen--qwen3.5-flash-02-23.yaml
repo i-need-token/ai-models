@@ -1,6 +1,11 @@
 id: qwen--qwen3.5-flash-02-23
-name: "Qwen: Qwen3.5-Flash"
+name: Qwen3.5 Flash 02 23
 family: qwen
+pricing:
+  currency: USD
+  input: 0.065
+  output: 0.26
+  cache_write: 0.08125
 limit:
   context: 1000000
   output: 65536
@@ -11,12 +16,8 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.065
-  output: 0.26
-  cache_write: 0.08125
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-02-26
+last_updated: 2026-02-26

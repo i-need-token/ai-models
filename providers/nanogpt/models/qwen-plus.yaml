@@ -1,18 +1,13 @@
 id: qwen-plus
 name: qwen plus
 family: qwen
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.2115
+  output: 0.6354
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.2115
-  output: 0.6354
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

@@ -1,6 +1,11 @@
 id: deepseek--deepseek-chat-v3-0324
-name: "DeepSeek: DeepSeek V3 0324"
+name: Deepseek Chat V3 0324
 family: deepseek
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.77
+  cache_read: 0.135
 limit:
   context: 163840
   output: 16384
@@ -9,11 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.2
-  output: 0.77
-  cache_read: 0.135
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-03-24
+last_updated: 2025-03-24

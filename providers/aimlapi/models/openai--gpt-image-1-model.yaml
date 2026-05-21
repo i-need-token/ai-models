@@ -1,0 +1,16 @@
+id: openai--gpt-image-1-model
+name: Openai / Gpt Image 1 Model
+family: openai
+pricing:
+  currency: USD
+  input: 0.012
+  output: 0.175
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

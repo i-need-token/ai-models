@@ -1,22 +1,18 @@
 id: gpt-5.1
 name: gpt-5.1
-family: gpt-5
-temperature: true
-limit:
-  context: 400000
-  output: 400000
+family: gpt
+pricing:
+  currency: EUR
+  input: 1.234
+  output: 9.838
+  cache_read: 0.14
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: EUR
-  input: 1.234
-  output: 9.838
-  cache_read: 0.14
-release_date: 2025-11-15
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-11-15
+last_updated: 2025-11-15

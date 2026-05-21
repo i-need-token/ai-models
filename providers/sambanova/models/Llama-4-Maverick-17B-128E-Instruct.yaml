@@ -1,7 +1,10 @@
 id: Llama-4-Maverick-17B-128E-Instruct
 name: Llama 4 Maverick 17Bx128E
 family: llama-4
-temperature: true
+pricing:
+  currency: USD
+  input: 0.63
+  output: 1.7999999999999998
 limit:
   context: 131072
   output: 4096
@@ -10,11 +13,4 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.63
-  output: 1.8
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
-open_weights: true
+last_updated: 2026-05-20

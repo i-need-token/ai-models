@@ -1,15 +1,13 @@
 id: sonar
-name: "Perplexity: Sonar"
+name: Sonar
 family: sonar
-temperature: true
 pricing:
   currency: USD
   input: 0.8
   output: 0.8
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

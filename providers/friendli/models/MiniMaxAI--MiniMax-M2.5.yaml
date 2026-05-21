@@ -1,7 +1,11 @@
 id: MiniMaxAI--MiniMax-M2.5
-name: MiniMax-M2.5
+name: MiniMax M2.5
 family: minimax
-temperature: true
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.2
+  cache_read: 0.06
 limit:
   context: 196608
   output: 196608
@@ -10,12 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 1.2
-  cache_read: 0.06
-release_date: 2026-02-19
-last_updated: 2026-05-17
 tool_call: true
 structured_output: true
+release_date: 2026-02-19
+last_updated: 2026-02-19

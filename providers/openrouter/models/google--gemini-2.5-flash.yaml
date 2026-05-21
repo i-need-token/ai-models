@@ -1,6 +1,12 @@
 id: google--gemini-2.5-flash
-name: "Google: Gemini 2.5 Flash"
+name: Gemini 2.5 Flash
 family: gemini
+pricing:
+  currency: USD
+  input: 0.3
+  output: 2.5
+  cache_read: 0.03
+  cache_write: 0.083333
 limit:
   context: 1048576
   output: 65535
@@ -13,13 +19,8 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 2.5
-  cache_read: 0.03
-  cache_write: 0.083333
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-06-17
+last_updated: 2025-06-17

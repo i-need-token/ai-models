@@ -1,0 +1,24 @@
+id: ~anthropic--claude-haiku-latest
+name: Claude Haiku Latest
+family: ~anthropic
+pricing:
+  currency: USD
+  input: 1
+  output: 5
+  cache_read: 0.1
+  cache_write: 1.25
+limit:
+  context: 200000
+  output: 64000
+modalities:
+  input:
+    - text
+    - image
+    - pdf
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-04-28
+last_updated: 2026-04-28

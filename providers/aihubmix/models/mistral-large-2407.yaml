@@ -1,15 +1,13 @@
 id: mistral-large-2407
 name: Mistral Large 2407
 family: mistral-large
-temperature: true
 pricing:
   currency: USD
   input: 1.5
   output: 4.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

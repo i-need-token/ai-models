@@ -1,20 +1,16 @@
 id: gemma-3-12b-it
 name: Gemma 3 12B IT
 family: gemma
-temperature: true
+pricing:
+  currency: USD
+  input: 0.35
+  output: 0.59
 limit:
   context: 131072
   output: 131072
 modalities:
   input:
     - text
-    - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.35
-  output: 0.59
-release_date: 2026-05-17
-last_updated: 2026-05-17
-open_weights: true
+last_updated: 2026-05-20

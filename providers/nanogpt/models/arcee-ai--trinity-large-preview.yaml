@@ -1,18 +1,13 @@
 id: arcee-ai--trinity-large-preview
 name: "Arcee-ai: trinity large preview"
 family: arcee
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.25
+  output: 1
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.25
-  output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

@@ -1,18 +1,13 @@
 id: perceptron--perceptron-mk1
 name: "Perceptron: perceptron mk1"
 family: perceptron
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1.5
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.15
-  output: 1.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

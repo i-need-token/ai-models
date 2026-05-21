@@ -1,9 +1,11 @@
 id: kimi-k2.6
 name: Kimi K2.6
 family: kimi
-temperature: true
-attachment: true
-tool_call: true
+pricing:
+  currency: CNY
+  input: 6.5
+  output: 27
+  cache_read: 1.1
 limit:
   context: 128000
   output: 16000
@@ -13,10 +15,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: CNY
-  input: 6.5
-  output: 27
-  cache_read: 1.1
+temperature: true
+tool_call: true
+attachment: true
 release_date: 2026-05-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

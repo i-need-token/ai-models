@@ -1,13 +1,10 @@
 id: qwen3-coder-30b-a3b-instruct
 name: Qwen 3 Coder 30B-A3B Instruct
-family: qwen3-coder
+family: qwen-coder
 pricing:
   currency: CNY
   input: 1.5
   output: 6
-limit:
-  context: 256000
-  output: 64000
 modalities:
   input:
     - text
@@ -16,6 +13,4 @@ modalities:
 reasoning: true
 tool_call: true
 structured_output: true
-open_weights: true
-release_date: 2025-09
-last_updated: 2025-09
+last_updated: 2026-05-19

@@ -1,22 +1,15 @@
 id: qwen--qwen3-30b-a3b-thinking-2507
-name: Qwen3 30B A3b Thinking 2507
+name: Qwen3 30b A3b Thinking 2507
 family: qwen
-reasoning: true
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 131072
-  output: 131072
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.08
   output: 0.4
   cache_read: 0.08
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-03-25
-last_updated: 2026-05-17
+last_updated: 2026-03-25

@@ -1,6 +1,10 @@
 id: google--gemma-4-31b-it
-name: "Google: Gemma 4 31B"
+name: Gemma 4 31b It
 family: gemma
+pricing:
+  currency: USD
+  input: 0.12
+  output: 0.37
 limit:
   context: 262144
   output: 16384
@@ -11,11 +15,8 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.12
-  output: 0.37
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-04-03
+last_updated: 2026-04-03

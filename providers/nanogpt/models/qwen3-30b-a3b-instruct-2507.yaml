@@ -1,19 +1,13 @@
 id: qwen3-30b-a3b-instruct-2507
 name: qwen3 30B a3b instruct 2507
 family: qwen
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.5
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.2
-  output: 0.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

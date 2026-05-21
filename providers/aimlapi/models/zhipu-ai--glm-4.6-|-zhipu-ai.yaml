@@ -1,0 +1,16 @@
+id: zhipu-ai--glm-4.6-|-zhipu-ai
+name: Zhipu Ai / Glm 4.6 | Zhipu Ai
+family: zhipu
+pricing:
+  currency: USD
+  input: 0.78
+  output: 2.86
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

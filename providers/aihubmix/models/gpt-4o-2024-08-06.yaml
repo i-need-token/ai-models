@@ -1,16 +1,14 @@
 id: gpt-4o-2024-08-06
-name: "OpenAI: Gpt 4o 2024 08 06"
-family: gpt-4o
-temperature: true
+name: Gpt 4o 2024 08 06
+family: gpt
 pricing:
   currency: USD
   input: 1.25
   output: 5
   cache_read: 0.625
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

@@ -1,7 +1,11 @@
 id: seed-1.8
 name: Seed 1.8
 family: seed
-temperature: true
+pricing:
+  currency: USD
+  input: 0.25
+  output: 2
+  cache_read: 0.05
 limit:
   context: 256000
   output: 256000
@@ -11,11 +15,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.25
-  output: 2
-  cache_read: 0.05
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+temperature: true
+last_updated: 2026-05-20

@@ -1,20 +1,13 @@
 id: openai--gpt-5.4-pro
 name: "OpenAI: gpt 5.4 PRO"
-family: gpt-5
-temperature: true
-limit:
-  context: 128000
-  output: 16384
+family: gpt
+pricing:
+  currency: USD
+  input: 30
+  output: 180
 modalities:
   input:
     - text
-    - image
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 30
-  output: 180
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

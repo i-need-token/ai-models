@@ -1,21 +1,16 @@
 id: qwen3.6-35b-fast
-name: Qwen3.6 35B Fast
-family: qwen3.6
-temperature: true
-limit:
-  context: 131056
-  output: 16384
+name: Qwen3.6 35b Fast
+family: qwen
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.1
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.05
-  output: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
 structured_output: true
+last_updated: 2026-05-20

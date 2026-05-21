@@ -1,6 +1,12 @@
 id: zai--glm-4.7
-name: GLM 4.7
+name: Glm 4.7
 family: glm
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.2
+  cache_read: 0.11
+  cache_write: 0.6
 limit:
   context: 200000
   output: 128000
@@ -9,13 +15,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.6
-  output: 2.2
-  cache_read: 0.11
-  cache_write: 0.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-12-16
+last_updated: 2025-12-16

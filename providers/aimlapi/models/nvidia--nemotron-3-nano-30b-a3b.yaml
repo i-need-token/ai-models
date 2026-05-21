@@ -1,17 +1,16 @@
 id: nvidia--nemotron-3-nano-30b-a3b
-name: NVIDIA / Nemotron 3 Nano 30B A3B
-family: nemotron
-limit:
-  context: 262000
-  output: 16384
+name: Nvidia / Nemotron 3 Nano 30b A3b
+family: nvidia
+pricing:
+  currency: USD
+  input: 0.065
+  output: 0.26
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.065
-  output: 0.26
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

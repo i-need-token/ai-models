@@ -1,6 +1,10 @@
 id: openai--o1-pro
-name: "OpenAI: o1-pro"
-family: o1
+name: O1 Pro
+family: gpt
+pricing:
+  currency: USD
+  input: 150
+  output: 600
 limit:
   context: 200000
   output: 100000
@@ -11,10 +15,7 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 150
-  output: 600
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+structured_output: true
+release_date: 2025-03-20
+last_updated: 2025-03-20

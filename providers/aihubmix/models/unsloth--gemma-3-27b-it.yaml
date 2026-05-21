@@ -1,15 +1,13 @@
 id: unsloth--gemma-3-27b-it
-name: "Google: Unsloth/Gemma 3 27b It"
-family: other
-temperature: true
+name: Unsloth/Gemma 3 27b It
+family: unsloth/gemma
 pricing:
   currency: USD
   input: 0.11
   output: 0.11
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

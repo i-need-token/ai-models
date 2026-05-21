@@ -1,6 +1,12 @@
 id: parasail--parasail-qwen3-235b-a22b-instruct-2507
 name: Parasail Qwen3 235b A22b Instruct 2507
 family: parasail
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.85
+  cache_read: 0.15
+  cache_write: 0.85
 limit:
   context: 262144
   output: 8192
@@ -9,12 +15,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.85
-  cache_read: 0.15
-  cache_write: 0.85
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-07-22
+last_updated: 2025-07-22

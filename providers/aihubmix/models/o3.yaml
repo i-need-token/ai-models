@@ -1,23 +1,18 @@
 id: o3
-name: "OpenAI: O3"
-family: o3
-temperature: true
+name: O3
+family: o
 pricing:
   currency: USD
   input: 1
   output: 4
   cache_read: 0.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
-limit:
-  context: 200000
-  output: 16384
 reasoning: true
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

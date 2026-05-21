@@ -1,0 +1,16 @@
+id: replit--replit-code-v1-3b
+name: Replit / Replit Code V1 3b
+family: replit
+pricing:
+  currency: USD
+  input: 0.105
+  output: 0.105
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

@@ -1,7 +1,10 @@
 id: openai-gpt-4o-2024-11-20
-name: GPT-4o
-family: gpt-4o
-temperature: true
+name: openai-gpt-4o-2024-11-20
+family: gpt
+pricing:
+  currency: USD
+  input: 3.125
+  output: 12.5
 limit:
   context: 128000
   output: 16384
@@ -11,12 +14,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 3.125
-  output: 12.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
-structured_output: true
 attachment: true
+structured_output: true
+release_date: 2026-02-28
+last_updated: 2026-02-28

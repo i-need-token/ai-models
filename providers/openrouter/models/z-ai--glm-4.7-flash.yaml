@@ -1,6 +1,11 @@
 id: z-ai--glm-4.7-flash
-name: "Z.ai: GLM 4.7 Flash"
+name: Glm 4.7 Flash
 family: glm
+pricing:
+  currency: USD
+  input: 0.06
+  output: 0.4
+  cache_read: 0.01
 limit:
   context: 202752
   output: 16384
@@ -9,12 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.06
-  output: 0.4
-  cache_read: 0.01
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-01-19
+last_updated: 2026-01-19

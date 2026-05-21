@@ -1,6 +1,10 @@
 id: alibaba--qwen3-max
 name: Qwen3 Max
 family: qwen
+pricing:
+  currency: USD
+  input: 0.861
+  output: 3.441
 limit:
   context: 262144
   output: 65536
@@ -10,10 +14,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.861
-  output: 3.441
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-09-11
+last_updated: 2025-09-11

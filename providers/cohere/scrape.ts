@@ -180,76 +180,32 @@ async function discoverRawModels(): Promise<RawModelInfo[]> {
 // Pricing extraction — parse <ModelShowcase> JSX from individual model .md pages
 // ---------------------------------------------------------------------------
 
-/** Model doc page slugs (derived from model IDs) */
-const MODEL_DOC_SLUGS: Record<string, string> = {
-  "command-a-03-2025": "command-a",
-  "command-r7b-12-2024": "command-r7b",
-  "command-a-translate-08-2025": "command-a-translate",
-  "command-a-reasoning-08-2025": "command-a-reasoning",
-  "command-a-vision-07-2025": "command-a-vision",
-  "command-r-plus-08-2024": "command-r-plus",
-  "command-r-08-2024": "command-r",
-  "command-r-plus-04-2024": "command-r-plus",
-  "command-r-03-2024": "command-r",
-  "command-r-plus": "command-r-plus",
-  "command-r": "command-r",
-  "command-light": "command-light",
-  command: "command",
-  "embed-v4.0": "embed-v4",
-  "embed-english-v3.0": "embed-english-v3",
-  "embed-english-light-v3.0": "embed-english-light-v3",
-  "embed-multilingual-v3.0": "embed-multilingual-v3",
-  "embed-multilingual-light-v3.0": "embed-multilingual-light-v3",
-  "rerank-v4.0-pro": "rerank-v4",
-  "rerank-v4.0-fast": "rerank-v4",
-  "rerank-v3.5": "rerank-v3-5",
-  "rerank-english-v3.0": "rerank-english-v3",
-  "rerank-multilingual-v3.0": "rerank-multilingual-v3",
-  "cohere-transcribe-03-2026": "transcribe",
-  "tiny-aya-global": "tiny-aya",
-  "tiny-aya-earth": "tiny-aya",
-  "tiny-aya-fire": "tiny-aya",
-  "tiny-aya-water": "tiny-aya",
-  "c4ai-aya-expanse-32b": "aya-expanse",
-  "c4ai-aya-vision-32b": "aya-vision",
-};
-
-/** Pricing data extracted from cohere.com/pricing (Sanity CMS, first-party source) */
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  // Command models — priced per million tokens
-  "command-a-03-2025": { input: 2.5, output: 10.0 },
-  "command-r7b-12-2024": { input: 0.0375, output: 0.15 },
-  "command-a-translate-08-2025": { input: 2.5, output: 10.0 },
-  "command-a-reasoning-08-2025": { input: 2.5, output: 10.0 },
-  "command-a-vision-07-2025": { input: 2.5, output: 10.0 },
-  "command-r-plus-08-2024": { input: 2.5, output: 10.0 },
-  "command-r-08-2024": { input: 0.5, output: 2.0 },
-  "command-r-plus-04-2024": { input: 2.5, output: 10.0 },
-  "command-r-03-2024": { input: 0.5, output: 2.0 },
-  "command-light": { input: 0.5, output: 2.0 },
-  command: { input: 1.0, output: 2.0 },
-  // Embed models — priced per million tokens
-  "embed-v4.0": { input: 0.02, output: 0.02 },
-  "embed-english-v3.0": { input: 0.02, output: 0.02 },
-  "embed-english-light-v3.0": { input: 0.02, output: 0.02 },
-  "embed-multilingual-v3.0": { input: 0.02, output: 0.02 },
-  "embed-multilingual-light-v3.0": { input: 0.02, output: 0.02 },
-  // Rerank models — priced per search query (per_request)
-  "rerank-v4.0-pro": { unit: "per_request", price: 0.002 },
-  "rerank-v4.0-fast": { unit: "per_request", price: 0.002 },
-  "rerank-v3.5": { unit: "per_request", price: 0.002 },
-  "rerank-english-v3.0": { unit: "per_request", price: 0.002 },
-  "rerank-multilingual-v3.0": { unit: "per_request", price: 0.002 },
-  // Audio — priced per second
-  "cohere-transcribe-03-2026": { unit: "per_second", price: 0.006 },
-  // Aya models
-  "tiny-aya-global": { input: 0.0375, output: 0.15 },
-  "tiny-aya-earth": { input: 0.0375, output: 0.15 },
-  "tiny-aya-fire": { input: 0.0375, output: 0.15 },
-  "tiny-aya-water": { input: 0.0375, output: 0.15 },
-  "c4ai-aya-expanse-32b": { input: 0.15, output: 0.6 },
-  "c4ai-aya-vision-32b": { input: 0.15, output: 0.6 },
-};
+/** Derive doc page slug from model ID — regex-based instead of static lookup */
+function deriveDocSlug(modelId: string): string | null {
+  // Strip date suffixes like "-03-2025", "-08-2024", "-12-2024"
+  let slug = modelId.replace(/-\d{2}-\d{4}$/, "");
+  // Special mappings
+  const specialSlugs: Record<string, string> = {
+    "embed-v4.0": "embed-v4",
+    "embed-english-v3.0": "embed-english-v3",
+    "embed-english-light-v3.0": "embed-english-light-v3",
+    "embed-multilingual-v3.0": "embed-multilingual-v3",
+    "embed-multilingual-light-v3.0": "embed-multilingual-light-v3",
+    "rerank-v4.0-pro": "rerank-v4",
+    "rerank-v4.0-fast": "rerank-v4",
+    "rerank-v3.5": "rerank-v3-5",
+    "rerank-english-v3.0": "rerank-english-v3",
+    "rerank-multilingual-v3.0": "rerank-multilingual-v3",
+    "cohere-transcribe": "transcribe",
+  };
+  if (specialSlugs[slug]) return specialSlugs[slug];
+  // Tiny Aya variants
+  if (slug.startsWith("tiny-aya-")) return "tiny-aya";
+  // c4ai models
+  if (slug.startsWith("c4ai-aya-expanse")) return "aya-expanse";
+  if (slug.startsWith("c4ai-aya-vision")) return "aya-vision";
+  return slug;
+}
 
 /** Fetch pricing from a model's .md doc page by parsing <ModelShowcase> JSX */
 async function fetchPricingFromDoc(slug: string): Promise<Pricing | null> {
@@ -318,25 +274,16 @@ const pipeline: ScrapePipeline = {
     execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
       const pricingMap = new Map<string, Pricing>();
 
-      // First, use hardcoded pricing (from cohere.com/pricing Sanity CMS data)
-      for (const m of models) {
-        const hardcoded = HARDCODED_PRICING[m.id];
-        if (hardcoded) {
-          pricingMap.set(m.id, hardcoded);
-        }
-      }
-
-      // Then, try to fetch pricing from doc pages for any remaining models
-      const remaining = models.filter((m) => !pricingMap.has(m.id));
+      // First, try to fetch pricing from doc pages
       const CONCURRENCY = 3;
-      for (let i = 0; i < remaining.length; i += CONCURRENCY) {
-        const batch = remaining.slice(i, i + CONCURRENCY);
+      for (let i = 0; i < models.length; i += CONCURRENCY) {
+        const batch = models.slice(i, i + CONCURRENCY);
         const results = await Promise.allSettled(
           batch.map(async (m) => {
-            const slug = MODEL_DOC_SLUGS[m.id];
+            const slug = deriveDocSlug(m.id);
             if (!slug) return { id: m.id, pricing: null as Pricing | null };
-            const pricing = await fetchPricingFromDoc(slug);
-            return { id: m.id, pricing };
+            const docPricing = await fetchPricingFromDoc(slug);
+            return { id: m.id, pricing: docPricing };
           }),
         );
 
@@ -362,29 +309,21 @@ const pipeline: ScrapePipeline = {
     },
     execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
       const datesMap = new Map<string, ExtractedDates>();
-      const today = new Date().toISOString().slice(0, 10);
 
       for (const m of models) {
         // Extract date from model ID pattern: xxx-MM-YYYY or xxx-YYYY
         const dateMatch = m.id.match(/-(\d{2})-(\d{4})$/);
-        let releaseDate: string;
-        let lastUpdated: string;
 
         if (dateMatch?.[1] && dateMatch?.[2]) {
           const month = dateMatch[1];
           const year = dateMatch[2];
-          releaseDate = `${year}-${month}`;
-          lastUpdated = `${year}-${month}`;
-        } else {
-          // Fallback: use current date
-          releaseDate = today;
-          lastUpdated = today;
+          const date = `${year}-${month}`;
+          datesMap.set(m.id, {
+            release_date: date,
+            last_updated: date,
+          });
         }
-
-        datesMap.set(m.id, {
-          release_date: releaseDate,
-          last_updated: lastUpdated,
-        });
+        // If no date extractable from ID, omit — runtime will try raw.created fallback
       }
 
       return datesMap;
@@ -413,7 +352,10 @@ const pipeline: ScrapePipeline = {
 
         // For embed/rerank models, output may be absent — use context only
         if (context) {
-          limitsMap.set(m.id, { context, output: output ?? 0 });
+          limitsMap.set(m.id, {
+            context,
+            ...(output ? { output } : {}),
+          });
         }
       }
 
@@ -438,12 +380,9 @@ const pipeline: ScrapePipeline = {
         if (!raw) continue;
 
         const inputModalities = parseModalityString(raw.modalityStr);
-        // All Cohere models output text
-        const outputModalities: ModelModality[] = ["text"];
 
         modalitiesMap.set(m.id, {
           input: inputModalities,
-          output: outputModalities,
         });
       }
 
@@ -463,29 +402,8 @@ const pipeline: ScrapePipeline = {
     execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
       const featuresMap = new Map<string, ExtractedFeatures>();
 
-      for (const m of models) {
-        const raw = m.raw as RawModelInfo | undefined;
-        const features: ExtractedFeatures = {};
-
-        // Command models support tool use
-        if (raw?.section === "command") {
-          features.tool_call = true;
-          features.structured_output = true;
-        }
-
-        // Reasoning model
-        if (m.id.includes("reasoning")) {
-          features.reasoning = true;
-        }
-
-        // Vision model
-        if (m.id.includes("vision")) {
-          features.attachment = true;
-        }
-
-        if (Object.keys(features).length > 0) {
-          featuresMap.set(m.id, features);
-        }
+      for (const _m of models) {
+        // Features not available from data sources — omitted
       }
 
       return featuresMap;
@@ -547,7 +465,6 @@ const pipeline: ScrapePipeline = {
     execute: (modelId: string): string => {
       const rules: Array<{ pattern: RegExp; family: string }> = [
         { pattern: /^command-a/, family: "command-a" },
-        { pattern: /^command-r7b/, family: "command-r7b" },
         { pattern: /^command-r-plus/, family: "command-r-plus" },
         { pattern: /^command-r/, family: "command-r" },
         { pattern: /^command-light/, family: "command-light" },

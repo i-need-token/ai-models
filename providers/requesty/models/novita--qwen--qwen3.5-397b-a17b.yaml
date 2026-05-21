@@ -1,6 +1,12 @@
 id: novita--qwen--qwen3.5-397b-a17b
 name: Qwen3.5 397b A17b
 family: novita
+pricing:
+  currency: USD
+  input: 0.6
+  output: 3.6
+  cache_read: 0.6
+  cache_write: 3.6
 limit:
   context: 262144
   output: 65536
@@ -10,13 +16,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.6
-  output: 3.6
-  cache_read: 0.6
-  cache_write: 3.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-11-29
+last_updated: 2025-11-29

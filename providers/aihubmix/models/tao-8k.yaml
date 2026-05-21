@@ -1,15 +1,13 @@
 id: tao-8k
-name: "Baidu: Tao 8k"
-family: other
-temperature: true
+name: Tao 8k
+family: tao
 pricing:
   currency: USD
   input: 0.034
   output: 0.034
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

@@ -1,22 +1,15 @@
 id: qwen--qwen3-8b
-name: Qwen3 8B
+name: Qwen3 8b
 family: qwen
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 131072
-  output: 8192
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.05
   output: 0.4
   cache_read: 0.05
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-03-05
-last_updated: 2026-05-17
+last_updated: 2026-03-05

@@ -1,0 +1,16 @@
+id: alibaba-cloud--qwen3.5-omni-flash
+name: Alibaba Cloud / Qwen3.5 Omni Flash
+family: alibaba
+pricing:
+  currency: USD
+  input: 0.52
+  output: 2.86
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

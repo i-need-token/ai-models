@@ -1,19 +1,15 @@
 id: llama-4-scout-17b-instruct
-name: Llama 4 Scout 17B Instruct
+name: Llama 4 Scout 17b Instruct
 family: llama
-limit:
-  context: 131072
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.17
+  output: 0.66
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.17
-  output: 0.66
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

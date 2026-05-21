@@ -1,19 +1,13 @@
 id: alibaba--qwen3.6-27b
 name: "Alibaba: qwen3.6 27B"
 family: qwen
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.6
+  output: 3.6
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.6
-  output: 3.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

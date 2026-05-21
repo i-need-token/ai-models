@@ -1,7 +1,8 @@
 id: qwen--qwen3-omni-30b-a3b-thinking
-name: Qwen3 Omni 30B A3B Thinking
-family: qwen3
-temperature: true
+name: Qwen3 Omni 30b A3b Thinking
+family: qwen
+pricing:
+  unit: free
 limit:
   context: 65536
   output: 16384
@@ -13,10 +14,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+last_updated: 2026-05-20

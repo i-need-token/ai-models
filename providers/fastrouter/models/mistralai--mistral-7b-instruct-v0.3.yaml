@@ -1,6 +1,10 @@
 id: mistralai--mistral-7b-instruct-v0.3
-name: "Mistral: Mistral 7B Instruct v0.3"
+name: Mistral 7b Instruct V0.3
 family: mistral
+pricing:
+  currency: USD
+  input: 0.028
+  output: 0.054
 limit:
   context: 32768
   output: 16384
@@ -9,9 +13,4 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.028
-  output: 0.054
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

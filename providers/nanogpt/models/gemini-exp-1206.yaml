@@ -1,19 +1,13 @@
 id: gemini-exp-1206
 name: gemini exp 1206
 family: gemini
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.74
+  output: 2.94
 modalities:
   input:
     - text
-    - image
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.74
-  output: 2.94
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

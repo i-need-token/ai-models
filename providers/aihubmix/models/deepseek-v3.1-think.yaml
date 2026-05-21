@@ -1,21 +1,16 @@
 id: deepseek-v3.1-think
 name: Deepseek V3.1 Think
-family: deepseek-v3
-temperature: true
+family: deepseek
 pricing:
   currency: USD
   input: 0.28
   output: 0.84
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
-limit:
-  context: 128000
-  output: 16384
 reasoning: true
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

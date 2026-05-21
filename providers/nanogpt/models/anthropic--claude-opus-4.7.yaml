@@ -1,18 +1,13 @@
 id: anthropic--claude-opus-4.7
 name: "Anthropic: claude opus 4.7"
 family: claude-opus
-temperature: true
-limit:
-  context: 200000
-  output: 128000
+pricing:
+  currency: USD
+  input: 2.94
+  output: 14.71
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 2.94
-  output: 14.71
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

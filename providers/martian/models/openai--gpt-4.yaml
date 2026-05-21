@@ -1,21 +1,14 @@
 id: openai--gpt-4
-name: GPT 4
-family: gpt-4
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 8200
-  output: 4096
+name: Gpt 4
+family: gpt
+pricing:
+  currency: USD
+  input: 30
+  output: 60
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 30
-  output: 60
 release_date: 2026-04-16
-last_updated: 2026-05-17
+last_updated: 2026-04-16

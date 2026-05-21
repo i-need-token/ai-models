@@ -1,7 +1,10 @@
 id: google-gemma-4-31b-it
-name: Google Gemma 4 31B Instruct
-family: gemma-4
-temperature: true
+name: google-gemma-4-31b-it
+family: gemma
+pricing:
+  currency: USD
+  input: 0.175
+  output: 0.5
 limit:
   context: 256000
   output: 8192
@@ -11,13 +14,9 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.175
-  output: 0.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
 tool_call: true
-structured_output: true
 attachment: true
+structured_output: true
+release_date: 2026-04-03
+last_updated: 2026-04-03

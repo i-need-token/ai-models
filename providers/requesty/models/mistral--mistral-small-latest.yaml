@@ -1,22 +1,19 @@
 id: mistral--mistral-small-latest
 name: Mistral Small Latest
 family: mistral
-limit:
-  context: 256000
-  output: 4096
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.15
   output: 0.6
   cache_read: 0.15
   cache_write: 0.15
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
 reasoning: true
+tool_call: true
+release_date: 2026-03-19
+last_updated: 2026-03-19

@@ -1,21 +1,19 @@
 id: mistralai--mistral-small-2603
-name: "Mistral: Mistral Small 4"
+name: Mistral Small 2603
 family: mistral
-limit:
-  context: 262144
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.6
+  cache_read: 0.015
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.6
-  cache_read: 0.015
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-03-17
+last_updated: 2026-03-17

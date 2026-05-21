@@ -1,15 +1,13 @@
 id: gemini-exp-1121
-name: "Google: Gemini Exp 1121"
+name: Gemini Exp 1121
 family: gemini
-temperature: true
 pricing:
   currency: USD
   input: 0.625
   output: 2.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

@@ -1,6 +1,10 @@
 id: x-ai--grok-4.1-fast
-name: "xAI: Grok 4.1 Fast"
+name: Grok 4.1 Fast
 family: grok
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.5
 limit:
   context: 2000000
   output: 30000
@@ -10,10 +14,5 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.2
-  output: 0.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

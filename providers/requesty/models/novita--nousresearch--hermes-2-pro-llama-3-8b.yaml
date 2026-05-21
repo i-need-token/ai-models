@@ -1,19 +1,16 @@
 id: novita--nousresearch--hermes-2-pro-llama-3-8b
 name: Hermes 2 Pro Llama 3 8b
 family: novita
-limit:
-  context: 8192
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.14
   output: 0.14
   cache_read: 0.14
   cache_write: 0.14
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2025-02-07
+last_updated: 2025-02-07

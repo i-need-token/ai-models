@@ -1,20 +1,18 @@
 id: upstage--solar-pro-3
-name: "Upstage: Solar Pro 3"
-family: solar
-limit:
-  context: 128000
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Solar Pro 3
+family: upstage
 pricing:
   currency: USD
   input: 0.15
   output: 0.6
   cache_read: 0.015
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-01-27
+last_updated: 2026-01-27

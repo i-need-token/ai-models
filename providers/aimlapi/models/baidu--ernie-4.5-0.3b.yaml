@@ -1,0 +1,17 @@
+id: baidu--ernie-4.5-0.3b
+name: Baidu / Ernie 4.5 0.3b
+family: baidu
+pricing:
+  unit: free
+limit:
+  context: 120000
+  output: 120000
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: true
+tool_call: true
+structured_output: true
+last_updated: 2026-05-19

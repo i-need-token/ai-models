@@ -1,0 +1,19 @@
+id: gpt-4-32k
+name: GPT-4 32K
+family: gpt-4
+deprecated: true
+pricing:
+  currency: USD
+  input: 60
+  output: 120
+limit:
+  context: 32768
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

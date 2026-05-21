@@ -1,15 +1,13 @@
 id: groq-llama-4-maverick-17b-128e-instruct
-name: "Llama: Groq Llama 4 Maverick 17b 128e Instruct"
-family: llama-4
-temperature: true
+name: Groq Llama 4 Maverick 17b 128e Instruct
+family: llama
 pricing:
   currency: USD
   input: 0.11
   output: 0.33
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

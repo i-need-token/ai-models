@@ -1,0 +1,16 @@
+id: deepseek--deepseek‑v3.2‑exp-thinking
+name: Deepseek / Deepseek‑V3.2‑Exp Thinking
+family: deepseek
+pricing:
+  currency: USD
+  input: 0.364
+  output: 0.546
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

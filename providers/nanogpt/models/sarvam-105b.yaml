@@ -1,19 +1,14 @@
 id: sarvam-105b
 name: sarvam 105B
-family: other
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: sarvam
+pricing:
+  currency: USD
+  input: 0.045
+  output: 0.177
+  cache_read: 0.028
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.045
-  output: 0.177
-  cache_read: 0.028
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

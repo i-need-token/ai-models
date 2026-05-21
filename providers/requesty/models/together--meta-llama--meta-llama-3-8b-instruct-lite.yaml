@@ -1,19 +1,16 @@
 id: together--meta-llama--meta-llama-3-8b-instruct-lite
-name: Meta Llama 3 8B Instruct Lite
-family: llama
-limit:
-  context: 8192
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Meta Llama 3 8b Instruct Lite
+family: together
 pricing:
   currency: USD
   input: 0.1
   output: 0.1
   cache_read: 0.1
   cache_write: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2025-01-31
+last_updated: 2025-01-31

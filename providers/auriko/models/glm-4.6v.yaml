@@ -1,22 +1,21 @@
 id: glm-4.6v
-name: GLM-4.6V
+name: Glm 4.6v
 family: glm
-temperature: true
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.9
+  cache_read: 0.05
+limit:
+  context: 128000
+  output: 32768
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 0.9
-  cache_read: 0.05
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 128000
-  output: 32768
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

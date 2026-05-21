@@ -1,0 +1,16 @@
+id: alibaba-cloud--qwen3.6-max-preview
+name: Alibaba Cloud / Qwen3.6 Max Preview
+family: alibaba
+pricing:
+  currency: USD
+  input: 1.69
+  output: 10.14
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

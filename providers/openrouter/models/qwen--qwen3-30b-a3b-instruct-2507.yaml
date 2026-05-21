@@ -1,6 +1,10 @@
 id: qwen--qwen3-30b-a3b-instruct-2507
-name: "Qwen: Qwen3 30B A3B Instruct 2507"
+name: Qwen3 30b A3b Instruct 2507
 family: qwen
+pricing:
+  currency: USD
+  input: 0.09
+  output: 0.3
 limit:
   context: 262144
   output: 262144
@@ -9,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.09
-  output: 0.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-07-30
+last_updated: 2025-07-30

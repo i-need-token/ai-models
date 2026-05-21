@@ -1,6 +1,11 @@
 id: deepseek--deepseek-v3.1-terminus
-name: "DeepSeek: DeepSeek V3.1 Terminus"
+name: Deepseek V3.1 Terminus
 family: deepseek
+pricing:
+  currency: USD
+  input: 0.27
+  output: 0.95
+  cache_read: 0.13
 limit:
   context: 163840
   output: 32768
@@ -9,12 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.27
-  output: 0.95
-  cache_read: 0.13
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-09-22
+last_updated: 2025-09-22

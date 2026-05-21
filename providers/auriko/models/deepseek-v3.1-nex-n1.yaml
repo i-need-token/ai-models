@@ -1,19 +1,18 @@
 id: deepseek-v3.1-nex-n1
-name: DeepSeek V3.1 Nex N1
+name: Deepseek V3.1 Nex N1
 family: deepseek
-temperature: true
+pricing:
+  currency: USD
+  input: 0.27
+  output: 1
+limit:
+  context: 131000
+  output: 164000
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.27
-  output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 131000
-  output: 164000
 tool_call: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

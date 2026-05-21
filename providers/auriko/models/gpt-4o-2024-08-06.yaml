@@ -1,22 +1,21 @@
 id: gpt-4o-2024-08-06
-name: GPT-4o
-family: gpt-4
-temperature: true
+name: Gpt 4o 2024 08 06
+family: gpt
+pricing:
+  currency: USD
+  input: 2.5
+  output: 10
+  cache_read: 1.25
+limit:
+  context: 128000
+  output: 16384
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 2.5
-  output: 10
-  cache_read: 1.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 128000
-  output: 16384
 tool_call: true
 structured_output: true
+release_date: 2026-05-12
+last_updated: 2026-05-12

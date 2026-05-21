@@ -1,15 +1,13 @@
 id: grok-3-mini-beta
 name: Grok 3 Mini Beta
-family: grok-3
-temperature: true
+family: grok
 pricing:
   currency: USD
   input: 0.165
   output: 0.27555
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

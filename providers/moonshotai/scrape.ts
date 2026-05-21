@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
 import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "moonshotai",
@@ -13,241 +21,139 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party docs accessed 2026-05-16)
-// Source: https://platform.kimi.com/docs/pricing/chat-k26
-//         https://platform.kimi.com/docs/pricing/chat-k25
-//         https://platform.kimi.com/docs/pricing/chat-k2
-//         https://platform.kimi.com/docs/pricing/chat-v1
-//         https://platform.kimi.com/docs/api/models-overview
+// Raw data types (from Moonshot AI API)
 // ---------------------------------------------------------------------------
 
-interface ModelInfo {
-  name: string;
-  context: number;
-  output: number;
-  modalities: { input: ("text" | "image")[]; output: "text"[] };
-  deprecated: boolean;
-  reasoning?: boolean;
+interface MoonshotaiModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
-const MODELS: Record<string, ModelInfo> = {
-  // K2.6 series (latest)
-  "kimi-k2.6": {
-    name: "Kimi K2.6",
-    context: 262144,
-    output: 8192,
-    modalities: { input: ["text", "image"], output: ["text"] },
-    deprecated: false,
-    reasoning: true,
-  },
-  "kimi-k2.6-long": {
-    name: "Kimi K2.6 Long",
-    context: 262144,
-    output: 65536,
-    modalities: { input: ["text", "image"], output: ["text"] },
-    deprecated: false,
-    reasoning: true,
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<MoonshotaiModel[]> {
+  const response = await fetch("https://api.moonshot.cn/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Moonshot AI models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: MoonshotaiModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.moonshot.cn/v1/models",
+      type: "api",
+      description: "Moonshot AI /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
   },
 
-  // K2.5 series
-  "kimi-k2.5": {
-    name: "Kimi K2.5",
-    context: 262144,
-    output: 8192,
-    modalities: { input: ["text", "image"], output: ["text"] },
-    deprecated: false,
-    reasoning: true,
+  extractPricing: {
+    source: {
+      url: "https://api.moonshot.cn/v1/models",
+      type: "api",
+      description: "Moonshot AI API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
   },
 
-  // K2 series (retiring May 25, 2026)
-  "kimi-k2-0905-preview": {
-    name: "Kimi K2 (0905 Preview)",
-    context: 262144,
-    output: 8192,
-    modalities: { input: ["text"], output: ["text"] },
-    deprecated: true,
-  },
-  "kimi-k2-0711-preview": {
-    name: "Kimi K2 (0711 Preview)",
-    context: 131072,
-    output: 8192,
-    modalities: { input: ["text"], output: ["text"] },
-    deprecated: true,
-  },
-  "kimi-k2-turbo-preview": {
-    name: "Kimi K2 Turbo Preview",
-    context: 262144,
-    output: 8192,
-    modalities: { input: ["text"], output: ["text"] },
-    deprecated: true,
-  },
-  "kimi-k2-thinking": {
-    name: "Kimi K2 Thinking",
-    context: 262144,
-    output: 8192,
-    modalities: { input: ["text"], output: ["text"] },
-    deprecated: true,
-    reasoning: true,
-  },
-  "kimi-k2-thinking-turbo": {
-    name: "Kimi K2 Thinking Turbo",
-    context: 262144,
-    output: 8192,
-    modalities: { input: ["text"], output: ["text"] },
-    deprecated: true,
-    reasoning: true,
+  extractLimits: {
+    source: {
+      url: "https://api.moonshot.cn/v1/models",
+      type: "api",
+      description: "Moonshot AI API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
   },
 
-  // Vision series
-  "kimi-vl-a3b-thinking": {
-    name: "Kimi VL A3B Thinking",
-    context: 131072,
-    output: 8192,
-    modalities: { input: ["text", "image"], output: ["text"] },
-    deprecated: false,
-    reasoning: true,
-  },
-  "kimi-vl-a3b": {
-    name: "Kimi VL A3B",
-    context: 131072,
-    output: 8192,
-    modalities: { input: ["text", "image"], output: ["text"] },
-    deprecated: false,
+  extractModalities: {
+    source: {
+      url: "https://api.moonshot.cn/v1/models",
+      type: "api",
+      description: "Moonshot AI API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
   },
 
-  // V1 series (deprecated)
-  "moonshot-v1-8k": {
-    name: "Moonshot V1 (8K)",
-    context: 8192,
-    output: 4096,
-    modalities: { input: ["text"], output: ["text"] },
-    deprecated: true,
+  extractFeatures: {
+    source: {
+      url: "https://api.moonshot.cn/v1/models",
+      type: "api",
+      description: "Moonshot AI API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
   },
-  "moonshot-v1-32k": {
-    name: "Moonshot V1 (32K)",
-    context: 32768,
-    output: 4096,
-    modalities: { input: ["text"], output: ["text"] },
-    deprecated: true,
+
+  extractDates: {
+    source: {
+      url: "https://api.moonshot.cn/v1/models",
+      type: "api",
+      description: "Moonshot AI API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as MoonshotaiModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
   },
-  "moonshot-v1-128k": {
-    name: "Moonshot V1 (128K)",
-    context: 131072,
-    output: 4096,
-    modalities: { input: ["text"], output: ["text"] },
-    deprecated: true,
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
   },
-  "moonshot-v1-8k-vision-preview": {
-    name: "Moonshot V1 Vision (8K)",
-    context: 8192,
-    output: 4096,
-    modalities: { input: ["text", "image"], output: ["text"] },
-    deprecated: true,
-  },
-  "moonshot-v1-32k-vision-preview": {
-    name: "Moonshot V1 Vision (32K)",
-    context: 32768,
-    output: 4096,
-    modalities: { input: ["text", "image"], output: ["text"] },
-    deprecated: true,
-  },
-  "moonshot-v1-128k-vision-preview": {
-    name: "Moonshot V1 Vision (128K)",
-    context: 131072,
-    output: 4096,
-    modalities: { input: ["text", "image"], output: ["text"] },
-    deprecated: true,
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /moonshot/i, family: "moonshot" },
+        { pattern: /kimi/i, family: "kimi" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
   },
 };
-
-// Pricing — CNY per million tokens
-// Source: https://platform.kimi.com/docs/pricing/chat-k26
-//         https://platform.kimi.com/docs/pricing/chat-k25
-//         https://platform.kimi.com/docs/pricing/chat-k2
-//         https://platform.kimi.com/docs/pricing/chat-v1
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  // K2.6 series
-  "kimi-k2.6": { currency: "CNY", input: 6.5, output: 27, cache_read: 1.1 },
-  "kimi-k2.6-long": { currency: "CNY", input: 6.5, output: 27, cache_read: 1.1 },
-
-  // K2.5 series
-  "kimi-k2.5": { currency: "CNY", input: 4, output: 21, cache_read: 0.7 },
-
-  // K2 series (retiring May 25, 2026)
-  "kimi-k2-0905-preview": { currency: "CNY", input: 4, output: 16, cache_read: 1 },
-  "kimi-k2-0711-preview": { currency: "CNY", input: 4, output: 16, cache_read: 1 },
-  "kimi-k2-turbo-preview": { currency: "CNY", input: 8, output: 58, cache_read: 1 },
-  "kimi-k2-thinking": { currency: "CNY", input: 4, output: 16, cache_read: 1 },
-  "kimi-k2-thinking-turbo": { currency: "CNY", input: 8, output: 58, cache_read: 1 },
-
-  // Vision series
-  "kimi-vl-a3b-thinking": { currency: "CNY", input: 4, output: 21, cache_read: 0.7 },
-  "kimi-vl-a3b": { currency: "CNY", input: 4, output: 21, cache_read: 0.7 },
-
-  // V1 series (deprecated) — no cache_read pricing listed in docs
-  "moonshot-v1-8k": { currency: "CNY", input: 2, output: 10 },
-  "moonshot-v1-32k": { currency: "CNY", input: 5, output: 20 },
-  "moonshot-v1-128k": { currency: "CNY", input: 10, output: 30 },
-  "moonshot-v1-8k-vision-preview": { currency: "CNY", input: 2, output: 10 },
-  "moonshot-v1-32k-vision-preview": { currency: "CNY", input: 5, output: 20 },
-  "moonshot-v1-128k-vision-preview": { currency: "CNY", input: 10, output: 30 },
-};
-
-// ---------------------------------------------------------------------------
-// Family derivation
-// ---------------------------------------------------------------------------
-
-function deriveFamily(id: string): string {
-  if (id.startsWith("kimi-k2.6")) return "kimi-k2.6";
-  if (id.startsWith("kimi-k2.5")) return "kimi-k2.5";
-  if (id.startsWith("kimi-k2-thinking-turbo")) return "kimi-k2-thinking-turbo";
-  if (id.startsWith("kimi-k2-thinking")) return "kimi-k2-thinking";
-  if (id.startsWith("kimi-k2-turbo")) return "kimi-k2-turbo";
-  if (id.startsWith("kimi-k2-0905")) return "kimi-k2-0905";
-  if (id.startsWith("kimi-k2-0711")) return "kimi-k2-0711";
-  if (id.startsWith("kimi-k2")) return "kimi-k2";
-  if (id.startsWith("kimi-vl")) return "kimi-vl";
-  if (id.startsWith("moonshot-v1")) return "moonshot-v1";
-  return "moonshotai";
-}
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models = [];
-
-  for (const [id, info] of Object.entries(MODELS)) {
-    const pricing = HARDCODED_PRICING[id] ?? { unit: "free" };
-    models.push(
-      defineModel({
-        id,
-        name: info.name,
-        family: deriveFamily(id),
-        temperature: true,
-        ...(info.reasoning ? { reasoning: true } : {}),
-        limit: { context: info.context, output: info.output },
-        modalities: info.modalities,
-        ...(info.deprecated ? { deprecated: true } : {}),
-        pricing,
-        release_date: today,
-        last_updated: today,
-      }),
-    );
-  }
-
+  const models = await runPipeline(pipeline);
   console.log(`  Moonshot AI: ${models.length} models`);
-
   return { provider, models };
 }

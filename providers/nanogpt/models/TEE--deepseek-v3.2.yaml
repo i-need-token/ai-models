@@ -1,19 +1,13 @@
 id: TEE--deepseek-v3.2
 name: "TEE: deepseek v3.2"
 family: deepseek
-temperature: true
-limit:
-  context: 163840
-  output: 131072
+pricing:
+  currency: USD
+  input: 0.5
+  output: 1
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.5
-  output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

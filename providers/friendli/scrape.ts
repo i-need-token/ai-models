@@ -1,6 +1,13 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing } from "../../types/index";
 
 const provider = defineProvider({
   id: "friendli",
@@ -13,16 +20,7 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Dynamic scrape from FriendliAI Serverless API
-//
-// Source: https://api.friendli.ai/serverless/v1/models (no auth required)
-//
-// FriendliAI is an inference platform hosting models from other providers
-// (Meta, Qwen/Alibaba, Zhipu AI, MiniMax, DeepSeek, LG AI EXAONE)
-// with per-token USD pricing.
-//
-// Pricing: input/output fields = USD per million tokens
-// Model IDs: API returns "provider/model" format; "/" is flattened to "--"
+// Raw data types (from FriendliAI API)
 // ---------------------------------------------------------------------------
 
 interface FriendliModel {
@@ -53,91 +51,219 @@ interface FriendliModel {
 }
 
 // ---------------------------------------------------------------------------
-// Family derivation
+// API fetch helper
 // ---------------------------------------------------------------------------
 
-function deriveFamily(id: string): string {
-  const lower = id.toLowerCase();
-  if (lower.includes("deepseek")) return "deepseek";
-  if (lower.includes("qwen3")) return "qwen3";
-  if (lower.includes("qwen")) return "qwen";
-  if (lower.includes("llama-4")) return "llama-4";
-  if (lower.includes("llama-3")) return "llama-3";
-  if (lower.includes("glm")) return "glm";
-  if (lower.includes("minimax")) return "minimax";
-  if (lower.includes("exaone")) return "exaone";
-  return "other";
-}
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
-
-function timestampToDate(ts: number): string {
-  const d = new Date(ts * 1000);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-}
-
-// ---------------------------------------------------------------------------
-// Scrape function
-// ---------------------------------------------------------------------------
-
-export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
+async function fetchModels(): Promise<FriendliModel[]> {
   const response = await fetch("https://api.friendli.ai/serverless/v1/models");
   if (!response.ok) {
     throw new Error(`Failed to fetch FriendliAI models: ${response.status}`);
   }
-
   const data = (await response.json()) as { data: FriendliModel[] };
-  const apiModels = data.data;
+  return data.data;
+}
 
-  for (const m of apiModels) {
-    // Flatten "/" to "--" in model ID
-    const flatId = m.id.replace(/\//g, "--");
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
 
-    const pricing: Pricing = {
-      currency: "USD",
-      input: m.pricing.input,
-      output: m.pricing.output,
-    };
+const pipeline: ScrapePipeline = {
+  // -----------------------------------------------------------------------
+  // Step 1: Discover models from API
+  // -----------------------------------------------------------------------
+  discover: {
+    source: {
+      url: "https://api.friendli.ai/serverless/v1/models",
+      type: "api",
+      description:
+        "FriendliAI Serverless models API — returns model list with pricing, context, capabilities",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      const discovered: DiscoveredModel[] = [];
 
-    // Add cache_read pricing if available
-    if (m.pricing.input_cache_read !== undefined && m.pricing.input_cache_read > 0) {
-      (pricing as { cache_read?: number }).cache_read =
-        Math.round(m.pricing.input_cache_read * 1e6) / 1e6;
-    }
+      for (const m of apiModels) {
+        const flatId = m.id.replace(/\//g, "--");
+        discovered.push({
+          id: flatId,
+          raw: m,
+        });
+      }
 
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: flatId,
-      name: m.name.split("/").pop() || m.name,
-      family: deriveFamily(flatId),
-      temperature: true,
-      limit: { context: m.context_length, output: m.max_completion_tokens },
-      modalities: {
-        input: ["text"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing,
-      release_date: m.created > 0 ? timestampToDate(m.created) : today,
-      last_updated: today,
-    };
+      return discovered;
+    },
+  },
 
-    const func = m.functionality;
-    if (func.tool_call) modelDef.tool_call = true;
-    if (func.structured_output) modelDef.structured_output = true;
+  // -----------------------------------------------------------------------
+  // Step 2: Extract pricing from API
+  // -----------------------------------------------------------------------
+  extractPricing: {
+    source: {
+      url: "https://api.friendli.ai/serverless/v1/models",
+      type: "api",
+      description: "Pricing from FriendliAI API — per-million-token USD pricing with cache_read",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      const pricingMap = new Map<string, Pricing>();
 
-    models.push(defineModel(modelDef));
-  }
+      for (const m of models) {
+        const raw = m.raw as FriendliModel;
+        if (!raw) continue;
 
-  console.log(`  FriendliAI: ${models.length} models`);
+        const p: Pricing = {
+          currency: "USD",
+          input: raw.pricing.input,
+          output: raw.pricing.output,
+        };
 
-  return { provider, models };
+        if (raw.pricing.input_cache_read !== undefined && raw.pricing.input_cache_read > 0) {
+          p.cache_read = Math.round(raw.pricing.input_cache_read * 1e6) / 1e6;
+        }
+
+        pricingMap.set(m.id, p);
+      }
+
+      return pricingMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 3: Extract dates from API (created timestamp)
+  // -----------------------------------------------------------------------
+  extractDates: {
+    source: {
+      url: "https://api.friendli.ai/serverless/v1/models",
+      type: "api",
+      description: "Dates from FriendliAI API — created timestamp field (Unix epoch seconds)",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as FriendliModel;
+        if (!raw) continue;
+
+        if (raw.created > 0) {
+          const d = new Date(raw.created * 1000);
+          const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+          datesMap.set(m.id, {
+            release_date: dateStr,
+            last_updated: dateStr,
+          });
+        }
+      }
+
+      return datesMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 4: Extract limits from API
+  // -----------------------------------------------------------------------
+  extractLimits: {
+    source: {
+      url: "https://api.friendli.ai/serverless/v1/models",
+      type: "api",
+      description:
+        "Context window and max output from FriendliAI API — context_length and max_completion_tokens",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      const limitsMap = new Map<string, ExtractedLimit>();
+
+      for (const m of models) {
+        const raw = m.raw as FriendliModel;
+        if (!raw) continue;
+
+        if (raw.context_length > 0) {
+          limitsMap.set(m.id, {
+            context: raw.context_length,
+            output: raw.max_completion_tokens,
+          });
+        }
+      }
+
+      return limitsMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 5: Extract features from API
+  // -----------------------------------------------------------------------
+  extractFeatures: {
+    source: {
+      url: "https://api.friendli.ai/serverless/v1/models",
+      type: "api",
+      description: "Features from FriendliAI API — tool_call and structured_output capabilities",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      const featuresMap = new Map<string, ExtractedFeatures>();
+
+      for (const m of models) {
+        const raw = m.raw as FriendliModel;
+        if (!raw) continue;
+
+        const func = raw.functionality;
+        const features: ExtractedFeatures = {};
+
+        if (func.tool_call) features.tool_call = true;
+        if (func.structured_output) features.structured_output = true;
+
+        featuresMap.set(m.id, features);
+      }
+
+      return featuresMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 6: Derive name from model ID
+  // -----------------------------------------------------------------------
+  deriveName: {
+    execute: (modelId: string): string => {
+      // FriendliAI model IDs are like "provider/model-name"
+      // After flattening: "provider--model-name"
+      let name = modelId.replace(/--/g, "/").split("/").pop() || modelId;
+
+      // Smart formatting
+      name = name.replace(/-/g, " ").replace(/\b([a-z])/g, (c) => c.toUpperCase());
+
+      return name;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 7: Derive family from model ID
+  // -----------------------------------------------------------------------
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const familyRules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /qwen/i, family: "qwen" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /glm/i, family: "glm" },
+        { pattern: /minimax/i, family: "minimax" },
+        { pattern: /exaone/i, family: "exaone" },
+      ];
+
+      for (const { pattern, family } of familyRules) {
+        if (pattern.test(lower)) return family;
+      }
+
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Main scrape function
+// ---------------------------------------------------------------------------
+
+export async function scrape(): Promise<ScrapeResult> {
+  const models = await runPipeline(pipeline);
+
+  return {
+    provider,
+    models,
+  };
 }

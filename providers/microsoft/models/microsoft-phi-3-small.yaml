@@ -1,7 +1,11 @@
 id: microsoft-phi-3-small
 name: Phi-3 Small
 family: phi
-temperature: true
+deprecated: true
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.6
 limit:
   context: 128000
   output: 4096
@@ -10,10 +14,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.6
+temperature: true
 release_date: 2024-04-22
-last_updated: 2026-05-17
-deprecated: true
+last_updated: 2026-05-18

@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "xai",
@@ -13,156 +21,138 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Model IDs: GitHub Models API https://models.github.ai/v1/models
-// - Pricing: Azure Retail Prices API
-//   https://prices.azure.com/api/retail/prices?productName=Azure%20Grok%20Models
-// - Model specs: Microsoft Foundry docs (Azure-hosted Grok models)
-//
-// xAI Grok models, produced by xAI. Available via Azure Foundry and
-// the xAI API (docs.x.ai currently unreachable from this network).
-// Pricing is in USD per 1M tokens (Azure global standard, eastus region).
+// Raw data types (from xAI Grok API)
 // ---------------------------------------------------------------------------
 
-// Pricing (USD per 1M tokens) — from Azure Retail Prices API (global standard)
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  "xai-grok-3": { currency: "USD", input: 3.0, output: 15.0 },
-  "xai-grok-3-mini": { currency: "USD", input: 0.25, output: 1.27 },
-  "xai-grok-4": { currency: "USD", input: 3.0, output: 15.0 },
-  "xai-grok-4-fast": { currency: "USD", input: 0.2, output: 0.5 },
-  "xai-grok-4.1": { currency: "USD", input: 0.2, output: 0.5 },
-  "xai-grok-4.2": { currency: "USD", input: 2.0, output: 6.0 },
-};
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+interface XaiModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<XaiModel[]> {
+  const response = await fetch("https://api.x.ai/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch xAI Grok models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: XaiModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.x.ai/v1/models",
+      type: "api",
+      description: "xAI Grok /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://api.x.ai/v1/models",
+      type: "api",
+      description: "xAI Grok API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.x.ai/v1/models",
+      type: "api",
+      description: "xAI Grok API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://api.x.ai/v1/models",
+      type: "api",
+      description: "xAI Grok API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.x.ai/v1/models",
+      type: "api",
+      description: "xAI Grok API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.x.ai/v1/models",
+      type: "api",
+      description: "xAI Grok API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as XaiModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /grok/i, family: "grok" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // --- Grok-3 (December 2024) ---
-
-  models.push(
-    defineModel({
-      id: "xai-grok-3",
-      name: "Grok-3",
-      family: "grok",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      limit: { context: 131072, output: 131072 },
-      modalities: { input: ["text", "image"], output: ["text"] },
-      pricing: HARDCODED_PRICING["xai-grok-3"] as Pricing,
-      release_date: "2024-12-14",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "xai-grok-3-mini",
-      name: "Grok-3 Mini",
-      family: "grok",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      limit: { context: 131072, output: 131072 },
-      modalities: { input: ["text", "image"], output: ["text"] },
-      pricing: HARDCODED_PRICING["xai-grok-3-mini"] as Pricing,
-      release_date: "2024-12-14",
-      last_updated: today,
-    }),
-  );
-
-  // --- Grok-4 (April 2025) ---
-
-  models.push(
-    defineModel({
-      id: "xai-grok-4",
-      name: "Grok-4",
-      family: "grok",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      limit: { context: 131072, output: 131072 },
-      modalities: { input: ["text", "image"], output: ["text"] },
-      pricing: HARDCODED_PRICING["xai-grok-4"] as Pricing,
-      release_date: "2025-04-15",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "xai-grok-4-fast",
-      name: "Grok-4 Fast",
-      family: "grok",
-      temperature: true,
-      tool_call: true,
-      attachment: true,
-      limit: { context: 131072, output: 131072 },
-      modalities: { input: ["text", "image"], output: ["text"] },
-      pricing: HARDCODED_PRICING["xai-grok-4-fast"] as Pricing,
-      release_date: "2025-04-15",
-      last_updated: today,
-    }),
-  );
-
-  // --- Grok-4.1 (May 2025) ---
-
-  models.push(
-    defineModel({
-      id: "xai-grok-4.1",
-      name: "Grok-4.1",
-      family: "grok",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      limit: { context: 131072, output: 131072 },
-      modalities: { input: ["text", "image"], output: ["text"] },
-      pricing: HARDCODED_PRICING["xai-grok-4.1"] as Pricing,
-      release_date: "2025-05-15",
-      last_updated: today,
-    }),
-  );
-
-  // --- Grok-4.2 (May 2025) ---
-
-  models.push(
-    defineModel({
-      id: "xai-grok-4.2",
-      name: "Grok-4.2",
-      family: "grok",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      limit: { context: 131072, output: 131072 },
-      modalities: { input: ["text", "image"], output: ["text"] },
-      pricing: HARDCODED_PRICING["xai-grok-4.2"] as Pricing,
-      release_date: "2025-05-15",
-      last_updated: today,
-    }),
-  );
-
+  const models = await runPipeline(pipeline);
   console.log(`  xAI Grok: ${models.length} models`);
-
   return { provider, models };
 }

@@ -1,6 +1,10 @@
 id: openai--gpt-5.2-pro
-name: "OpenAI: GPT-5.2 Pro"
+name: Gpt 5.2 Pro
 family: gpt
+pricing:
+  currency: USD
+  input: 21
+  output: 168
 limit:
   context: 400000
   output: 128000
@@ -11,11 +15,8 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 21
-  output: 168
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-12-11
+last_updated: 2025-12-11

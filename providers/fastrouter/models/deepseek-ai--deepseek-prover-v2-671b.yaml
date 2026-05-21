@@ -1,17 +1,13 @@
 id: deepseek-ai--deepseek-prover-v2-671b
-name: "DeepSeek: DeepSeek Prover V2"
+name: Deepseek Prover V2 671b
 family: deepseek
-limit:
-  context: 131072
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.5
+  output: 2.18
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.5
-  output: 2.18
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

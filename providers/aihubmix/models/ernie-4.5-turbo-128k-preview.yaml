@@ -1,13 +1,10 @@
 id: ernie-4.5-turbo-128k-preview
-name: "Baidu: Ernie 4.5 Turbo 128k Preview"
-family: ernie-4.5
-temperature: true
+name: Ernie 4.5 Turbo 128k Preview
+family: ernie
 pricing:
   currency: USD
   input: 0.054
   output: 0.216
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
@@ -16,3 +13,4 @@ modalities:
     - text
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

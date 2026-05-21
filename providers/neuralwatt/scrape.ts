@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing, ModelModality } from "../../types/index";
 
 const provider = defineProvider({
   id: "neuralwatt",
@@ -13,20 +21,7 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Dynamic scrape from NeuralWatt API
-//
-// Source: https://api.neuralwatt.com/v1/models (first-party, no auth required)
-//
-// NeuralWatt is an inference platform hosting models from other providers
-// (Zhipu AI, Moonshot AI, Qwen/Alibaba, MiniMax, OpenAI, Mistral)
-// with its own per-token pricing.
-//
-// Pricing: input_per_million / output_per_million = USD per million tokens
-// Model IDs: API returns "provider/model" format; "/" is flattened to "--"
-// to avoid filesystem issues.
-//
-// The "-fast" variants are the same base models with reasoning/thinking
-// disabled for lower latency.
+// Raw data types (from NeuralWatt API)
 // ---------------------------------------------------------------------------
 
 interface NeuralWattModel {
@@ -69,107 +64,268 @@ interface NeuralWattModel {
 }
 
 // ---------------------------------------------------------------------------
-// Modality mapping
+// API fetch helper
 // ---------------------------------------------------------------------------
 
-function mapInputModalities(meta: NeuralWattModel["metadata"]): ModelModality[] {
-  const result: ModelModality[] = ["text"];
-  if (meta.capabilities.vision) {
-    result.push("image");
-  }
-  return result;
-}
-
-function mapOutputModalities(_meta: NeuralWattModel["metadata"]): ModelModality[] {
-  return ["text"];
-}
-
-// ---------------------------------------------------------------------------
-// Family derivation
-// ---------------------------------------------------------------------------
-
-function deriveFamily(id: string): string {
-  const lower = id.toLowerCase();
-  if (lower.includes("glm")) return "glm";
-  if (lower.includes("kimi")) return "kimi";
-  if (lower.includes("qwen3-coder") || lower.includes("qwen3-coder")) return "qwen-coder";
-  if (lower.includes("qwen3.6")) return "qwen3.6";
-  if (lower.includes("qwen3.5")) return "qwen3.5";
-  if (lower.includes("qwen")) return "qwen";
-  if (lower.includes("minimax")) return "minimax";
-  if (lower.includes("gpt-oss")) return "gpt-oss";
-  if (lower.includes("devstral")) return "devstral";
-  return "other";
-}
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
-
-// ---------------------------------------------------------------------------
-// Scrape function
-// ---------------------------------------------------------------------------
-
-export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // Fetch model list from NeuralWatt API
+async function fetchModels(): Promise<NeuralWattModel[]> {
   const response = await fetch("https://api.neuralwatt.com/v1/models");
   if (!response.ok) {
     throw new Error(`Failed to fetch NeuralWatt models: ${response.status}`);
   }
-
   const data = (await response.json()) as { data: NeuralWattModel[] };
-  const apiModels = data.data;
+  return data.data;
+}
 
-  for (const m of apiModels) {
-    const meta = m.metadata;
-    if (!meta) continue;
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
 
-    // Skip deprecated models
-    if (meta.deprecated) continue;
+const pipeline: ScrapePipeline = {
+  // -----------------------------------------------------------------------
+  // Step 1: Discover models from API
+  // -----------------------------------------------------------------------
+  discover: {
+    source: {
+      url: "https://api.neuralwatt.com/v1/models",
+      type: "api",
+      description:
+        "NeuralWatt models API — returns model list with pricing, context, capabilities, modalities",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      const discovered: DiscoveredModel[] = [];
 
-    // Flatten "/" to "--" in model ID to avoid filesystem issues
-    const flatId = m.id.replace(/\//g, "--");
+      for (const m of apiModels) {
+        const meta = m.metadata;
+        if (!meta) continue;
 
-    const pricing: Pricing = {
-      currency: "USD",
-      input: meta.pricing.input_per_million,
-      output: meta.pricing.output_per_million,
-    };
+        // Skip deprecated models
+        if (meta.deprecated) continue;
 
-    const ctxLen = meta.limits.max_context_length || m.max_model_len || 0;
-    const maxOut = meta.limits.max_output_tokens || Math.min(ctxLen, 16384);
+        const flatId = m.id.replace(/\//g, "--");
 
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: flatId,
-      name: meta.display_name || m.id,
-      family: deriveFamily(flatId),
-      temperature: true,
-      limit: { context: ctxLen, output: maxOut },
-      modalities: {
-        input: mapInputModalities(meta),
-        output: mapOutputModalities(meta),
-      },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
+        discovered.push({
+          id: flatId,
+          raw: m,
+        });
+      }
 
-    if (meta.capabilities.tools) modelDef.tool_call = true;
-    if (meta.capabilities.reasoning) modelDef.reasoning = true;
-    if (meta.capabilities.json_mode) modelDef.structured_output = true;
+      return discovered;
+    },
+  },
 
-    models.push(defineModel(modelDef));
-  }
+  // -----------------------------------------------------------------------
+  // Step 2: Extract pricing from API
+  // -----------------------------------------------------------------------
+  extractPricing: {
+    source: {
+      url: "https://api.neuralwatt.com/v1/models",
+      type: "api",
+      description: "Pricing from NeuralWatt API — per-million-token USD pricing with cache pricing",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      const pricingMap = new Map<string, Pricing>();
 
-  console.log(`  NeuralWatt: ${models.length} models`);
+      for (const m of models) {
+        const raw = m.raw as NeuralWattModel;
+        if (!raw) continue;
 
-  return { provider, models };
+        const meta = raw.metadata;
+        const p: Pricing = {
+          currency: "USD",
+          input: meta.pricing.input_per_million,
+          output: meta.pricing.output_per_million,
+        };
+
+        if (
+          meta.pricing.cached_input_per_million !== null &&
+          meta.pricing.cached_input_per_million > 0
+        ) {
+          p.cache_read = meta.pricing.cached_input_per_million;
+        }
+
+        pricingMap.set(m.id, p);
+      }
+
+      return pricingMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 3: Extract dates from API (created timestamp)
+  // -----------------------------------------------------------------------
+  extractDates: {
+    source: {
+      url: "https://api.neuralwatt.com/v1/models",
+      type: "api",
+      description: "Dates from NeuralWatt API — created timestamp field",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as NeuralWattModel;
+        if (!raw) continue;
+
+        if (raw.created && raw.created > 0) {
+          // created is in seconds (like OpenAI API), convert to milliseconds
+          const d = new Date(raw.created * 1000);
+          const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+          datesMap.set(m.id, {
+            release_date: dateStr,
+            last_updated: dateStr,
+          });
+        }
+      }
+
+      return datesMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 4: Extract limits from API
+  // -----------------------------------------------------------------------
+  extractLimits: {
+    source: {
+      url: "https://api.neuralwatt.com/v1/models",
+      type: "api",
+      description:
+        "Context window and max output from NeuralWatt API — max_context_length and max_output_tokens",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      const limitsMap = new Map<string, ExtractedLimit>();
+
+      for (const m of models) {
+        const raw = m.raw as NeuralWattModel;
+        if (!raw) continue;
+
+        const meta = raw.metadata;
+        const ctxLen = meta.limits.max_context_length || raw.max_model_len || 0;
+        const maxOut = meta.limits.max_output_tokens || 0;
+
+        if (ctxLen > 0) {
+          limitsMap.set(m.id, {
+            context: ctxLen,
+            ...(maxOut > 0 ? { output: maxOut } : {}),
+          });
+        }
+      }
+
+      return limitsMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 5: Extract modalities from API
+  // -----------------------------------------------------------------------
+  extractModalities: {
+    source: {
+      url: "https://api.neuralwatt.com/v1/models",
+      type: "api",
+      description: "Modalities from NeuralWatt API — vision capability determines image input",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      const modalitiesMap = new Map<string, ExtractedModalities>();
+
+      for (const m of models) {
+        const raw = m.raw as NeuralWattModel;
+        if (!raw) continue;
+
+        const meta = raw.metadata;
+        const inputModalities: ModelModality[] = ["text"];
+        if (meta.capabilities.vision) {
+          inputModalities.push("image");
+        }
+
+        modalitiesMap.set(m.id, {
+          input: inputModalities,
+        });
+      }
+
+      return modalitiesMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 6: Extract features from API
+  // -----------------------------------------------------------------------
+  extractFeatures: {
+    source: {
+      url: "https://api.neuralwatt.com/v1/models",
+      type: "api",
+      description: "Features from NeuralWatt API — tools, reasoning, json_mode capabilities",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      const featuresMap = new Map<string, ExtractedFeatures>();
+
+      for (const m of models) {
+        const raw = m.raw as NeuralWattModel;
+        if (!raw) continue;
+
+        const meta = raw.metadata;
+        const features: ExtractedFeatures = {};
+
+        if (meta.capabilities.tools) features.tool_call = true;
+        if (meta.capabilities.reasoning) features.reasoning = true;
+        if (meta.capabilities.json_mode) features.structured_output = true;
+
+        featuresMap.set(m.id, features);
+      }
+
+      return featuresMap;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 7: Derive name from model ID
+  // -----------------------------------------------------------------------
+  deriveName: {
+    execute: (modelId: string): string => {
+      // NeuralWatt model IDs are like "provider/model-name"
+      // After flattening: "provider--model-name"
+      let name = modelId.replace(/--/g, "/").split("/").pop() || modelId;
+
+      // Smart formatting
+      name = name.replace(/-/g, " ").replace(/\b([a-z])/g, (c) => c.toUpperCase());
+
+      return name;
+    },
+  },
+
+  // -----------------------------------------------------------------------
+  // Step 8: Derive family from model ID
+  // -----------------------------------------------------------------------
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const familyRules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /glm/i, family: "glm" },
+        { pattern: /kimi/i, family: "kimi" },
+        { pattern: /qwen3-coder/i, family: "qwen-coder" },
+        { pattern: /qwen/i, family: "qwen" },
+        { pattern: /minimax/i, family: "minimax" },
+        { pattern: /gpt-oss/i, family: "gpt-oss" },
+        { pattern: /devstral/i, family: "devstral" },
+      ];
+
+      for (const { pattern, family } of familyRules) {
+        if (pattern.test(lower)) return family;
+      }
+
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Main scrape function
+// ---------------------------------------------------------------------------
+
+export async function scrape(): Promise<ScrapeResult> {
+  const models = await runPipeline(pipeline);
+
+  return {
+    provider,
+    models,
+  };
 }

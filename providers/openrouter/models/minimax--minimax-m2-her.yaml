@@ -1,6 +1,11 @@
 id: minimax--minimax-m2-her
-name: "MiniMax: MiniMax M2-her"
+name: Minimax M2 Her
 family: minimax
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.2
+  cache_read: 0.03
 limit:
   context: 65536
   output: 2048
@@ -9,10 +14,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 1.2
-  cache_read: 0.03
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2026-01-23
+last_updated: 2026-01-23

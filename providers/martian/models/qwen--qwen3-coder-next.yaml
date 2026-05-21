@@ -1,22 +1,15 @@
 id: qwen--qwen3-coder-next
 name: Qwen3 Coder Next
 family: qwen
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 262144
-  output: 262144
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.11
   output: 0.8
   cache_read: 0.07
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-05-12
-last_updated: 2026-05-17
+last_updated: 2026-05-12

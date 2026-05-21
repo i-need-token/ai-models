@@ -1,22 +1,18 @@
 id: Qwen--Qwen3.6-35B-A3B
-name: Qwen3.6 35B
-family: qwen3.6
-temperature: true
-limit:
-  context: 131056
-  output: 16384
+name: Qwen3.6 35B A3B
+family: qwen
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.1
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.05
-  output: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+release_date: 2026-05-20
+last_updated: 2026-05-20

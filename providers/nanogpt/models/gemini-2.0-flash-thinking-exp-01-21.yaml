@@ -1,21 +1,13 @@
 id: gemini-2.0-flash-thinking-exp-01-21
 name: gemini 2.0 FLASH thinking exp 01 21
 family: gemini
-temperature: true
-limit:
-  context: 1048576
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.18
+  output: 0.59
 modalities:
   input:
     - text
-    - image
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.18
-  output: 0.59
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
-reasoning: true
+last_updated: 2026-05-20

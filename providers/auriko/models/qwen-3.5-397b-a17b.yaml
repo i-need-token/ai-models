@@ -1,21 +1,17 @@
 id: qwen-3.5-397b-a17b
-name: Qwen 3.5 397B A17B
+name: Qwen 3.5 397b A17b
 family: qwen
-temperature: true
+pricing:
+  currency: USD
+  input: 0.6
+  output: 3.6
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.6
-  output: 3.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 262144
-  output: 262144
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

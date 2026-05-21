@@ -1,18 +1,13 @@
 id: cognitivecomputations--dolphin-2.9.2-qwen2-72b
 name: "Cognitivecomputations: dolphin 2.9.2 qwen2 72B"
 family: qwen
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.18
+  output: 0.18
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.18
-  output: 0.18
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

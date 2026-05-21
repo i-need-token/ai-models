@@ -1,0 +1,17 @@
+id: gemma-3-12b-it
+name: gemma-3-12b-it
+family: gemma
+pricing:
+  currency: EUR
+  input: 0.2
+  output: 0.35
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

@@ -1,6 +1,10 @@
 id: undi95--remm-slerp-l2-13b
-name: ReMM SLERP 13B
+name: Remm Slerp L2 13b
 family: undi95
+pricing:
+  currency: USD
+  input: 0.45
+  output: 0.65
 limit:
   context: 6144
   output: 4096
@@ -9,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.45
-  output: 0.65
-release_date: 2026-05-17
-last_updated: 2026-05-17
+structured_output: true
+release_date: 2023-07-22
+last_updated: 2023-07-22

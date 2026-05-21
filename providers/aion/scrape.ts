@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  DiscoveredModel,
+  DataSource,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/pipeline";
 
 const provider = defineProvider({
   id: "aion",
@@ -13,121 +21,181 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Model specs & pricing: Aion Labs docs
-//   https://docs.aionlabs.ai/models (browser-verified CSR page)
-//   https://docs.aionlabs.ai/pricing (browser-verified CSR page)
-//
-// Pricing is in USD per 1M tokens with separate input/output rates.
+// API types — Aion Labs models endpoint
 // ---------------------------------------------------------------------------
 
-// Pricing (USD per 1M tokens) — from pricing page
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  "aion-1.0-mini": { currency: "USD", input: 0.7, output: 1.4 },
-  "aion-1.0": { currency: "USD", input: 4, output: 8 },
-  "aion-2.0": { currency: "USD", input: 0.8, output: 1.6 },
-  "aion-2.5": { currency: "USD", input: 1, output: 3 },
-  "aion-rp-llama-3.1-8b": { currency: "USD", input: 0.8, output: 1.6 },
+interface AionModel {
+  id: string;
+  date: string;
+  name: string;
+  description: string;
+  context_length: number;
+  max_completion_tokens: number;
+  reasoning: boolean;
+  is_moderated: boolean;
+  architecture: {
+    modality: string;
+  };
+  pricing: {
+    prompt: string;
+    completion: string;
+    input_cache_read?: string;
+  };
+  expires_at: string | null;
+  replacement_model_id: string | null;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline steps
+// ---------------------------------------------------------------------------
+
+const API_URL = "https://api.aionlabs.ai/v1/models";
+const apiSource: DataSource = {
+  url: API_URL,
+  type: "api",
+  description: "Aion Labs models API with pricing, context, modalities, reasoning, and dates",
 };
 
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
+// Step 1: Discover models
+const discover = {
+  source: apiSource,
+  execute: async (): Promise<DiscoveredModel[]> => {
+    const resp = await fetch(API_URL);
+    if (!resp.ok) throw new Error(`Failed to fetch ${API_URL}: ${resp.status}`);
+    const data = (await resp.json()) as { models: AionModel[] };
+    return data.models.map((m) => ({
+      id: m.id.replace("aion-labs/", ""), // Strip namespace prefix
+      raw: m,
+    }));
+  },
+};
 
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
+// Step 2: Extract pricing — per-token pricing from API, convert to per-M-token
+const extractPricing = {
+  source: apiSource,
+  execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+    const map = new Map<string, Pricing>();
+    for (const dm of models) {
+      const raw = dm.raw as AionModel;
+      const prompt = parseFloat(raw.pricing.prompt);
+      const completion = parseFloat(raw.pricing.completion);
+      const cacheRead = raw.pricing.input_cache_read ? parseFloat(raw.pricing.input_cache_read) : 0;
+      // API gives per-token pricing; convert to per-million-token (multiply by 1M)
+      map.set(dm.id, {
+        currency: "USD",
+        input: prompt * 1_000_000,
+        output: completion * 1_000_000,
+        ...(cacheRead > 0 ? { cache_read: cacheRead * 1_000_000 } : {}),
+      });
+    }
+    return map;
+  },
+};
+
+// Step 3: Extract limits — context_length and max_completion_tokens from API
+const extractLimits = {
+  source: apiSource,
+  execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+    const map = new Map<string, ExtractedLimit>();
+    for (const dm of models) {
+      const raw = dm.raw as AionModel;
+      map.set(dm.id, {
+        context: raw.context_length,
+        output: raw.max_completion_tokens,
+      });
+    }
+    return map;
+  },
+};
+
+// Step 4: Extract modalities — from architecture.modality field
+const extractModalities = {
+  source: apiSource,
+  execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+    const map = new Map<string, ExtractedModalities>();
+    for (const dm of models) {
+      const raw = dm.raw as AionModel;
+      // Parse modality string like "text->text" or "text+image->text"
+      const modality = raw.architecture.modality;
+      const inputPart = modality.split("->")[0] ?? "text";
+      const hasImage = inputPart.includes("image");
+      map.set(dm.id, {
+        input: hasImage ? ["text", "image"] : ["text"],
+      });
+    }
+    return map;
+  },
+};
+
+// Step 5: Extract features — reasoning from API, temperature for all
+const extractFeatures = {
+  source: apiSource,
+  execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+    const map = new Map<string, ExtractedFeatures>();
+    for (const dm of models) {
+      const raw = dm.raw as AionModel;
+      map.set(dm.id, {
+        reasoning: raw.reasoning,
+      });
+    }
+    return map;
+  },
+};
+
+// Step 6: Extract dates — date field from API
+const extractDates = {
+  source: apiSource,
+  execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+    const map = new Map<string, ExtractedDates>();
+    for (const dm of models) {
+      const raw = dm.raw as AionModel;
+      // API provides date in YYYY-MM-DD format
+      const releaseDate = raw.date;
+      map.set(dm.id, {
+        release_date: releaseDate,
+        last_updated: releaseDate,
+      });
+    }
+    return map;
+  },
+};
+
+// Step 7: Derive name from model ID
+const deriveName = {
+  execute: (modelId: string): string => {
+    if (modelId === "aion-1.0-mini") return "Aion 1.0 Mini";
+    if (modelId === "aion-1.0") return "Aion 1.0";
+    if (modelId === "aion-2.0") return "Aion 2.0";
+    if (modelId === "aion-2.5") return "Aion 2.5";
+    if (modelId === "aion-rp-llama-3.1-8b") return "Aion RP Llama 3.1 8B";
+    // Generic fallback
+    return modelId.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  },
+};
+
+// Step 8: Derive family from model ID
+const deriveFamily = {
+  execute: (modelId: string): string => {
+    if (modelId.startsWith("aion-rp")) return "aion-rp";
+    return "aion";
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // --- Aion 1.0 Mini (128K, cost-efficient) ---
-
-  models.push(
-    defineModel({
-      id: "aion-1.0-mini",
-      name: "Aion 1.0 Mini",
-      family: "aion-1.0",
-      temperature: true,
-      limit: { context: 131072, output: 32768 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["aion-1.0-mini"] as Pricing,
-      release_date: "2024-06",
-      last_updated: today,
-    }),
-  );
-
-  // --- Aion 1.0 (128K, flagship) ---
-
-  models.push(
-    defineModel({
-      id: "aion-1.0",
-      name: "Aion 1.0",
-      family: "aion-1.0",
-      temperature: true,
-      limit: { context: 131072, output: 32768 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["aion-1.0"] as Pricing,
-      release_date: "2024-06",
-      last_updated: today,
-    }),
-  );
-
-  // --- Aion 2.0 (128K, improved efficiency) ---
-
-  models.push(
-    defineModel({
-      id: "aion-2.0",
-      name: "Aion 2.0",
-      family: "aion-2.0",
-      temperature: true,
-      limit: { context: 131072, output: 32768 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["aion-2.0"] as Pricing,
-      release_date: "2025-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Aion 2.5 (128K, latest) ---
-
-  models.push(
-    defineModel({
-      id: "aion-2.5",
-      name: "Aion 2.5",
-      family: "aion-2.5",
-      temperature: true,
-      limit: { context: 131072, output: 32768 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["aion-2.5"] as Pricing,
-      release_date: "2025-04",
-      last_updated: today,
-    }),
-  );
-
-  // --- Aion RP Llama 3.1 8B (32K, roleplay fine-tune of Llama 3.1 8B) ---
-
-  models.push(
-    defineModel({
-      id: "aion-rp-llama-3.1-8b",
-      name: "Aion RP Llama 3.1 8B",
-      family: "aion-rp",
-      temperature: true,
-      limit: { context: 32768, output: 32768 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["aion-rp-llama-3.1-8b"] as Pricing,
-      release_date: "2024-09",
-      last_updated: today,
-    }),
-  );
+  const models = await runPipeline({
+    discover,
+    extractPricing,
+    extractLimits,
+    extractModalities,
+    extractFeatures,
+    extractDates,
+    deriveName,
+    deriveFamily,
+  });
 
   console.log(`  Aion Labs: ${models.length} models`);
 

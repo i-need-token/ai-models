@@ -1,21 +1,17 @@
 id: llama-3.3-70b-instruct
 name: llama-3.3-70b-instruct
-family: llama-3
-temperature: true
-limit:
-  context: 131000
-  output: 131000
-modalities:
-  input:
-    - text
-  output:
-    - text
+family: llama
 pricing:
   currency: EUR
   input: 0.089
   output: 0.275
   cache_read: 0.023
-release_date: 2024-12-10
-last_updated: 2026-05-17
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+release_date: 2024-12-10
+last_updated: 2024-12-10

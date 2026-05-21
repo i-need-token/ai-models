@@ -1,7 +1,10 @@
 id: Meta-Llama-3.3-70B-Instruct
 name: Llama 3.3 70B
 family: llama-3.3
-temperature: true
+pricing:
+  currency: USD
+  input: 0.6
+  output: 1.2
 limit:
   context: 131072
   output: 3072
@@ -10,11 +13,4 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.6
-  output: 1.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
-open_weights: true
+last_updated: 2026-05-20

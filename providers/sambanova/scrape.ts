@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  DiscoveredModel,
+  DataSource,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/pipeline";
 
 const provider = defineProvider({
   id: "sambanova",
@@ -13,188 +21,155 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Model list & pricing: https://api.sambanova.ai/v1/models (OpenAI-compatible API)
-// - Context lengths & max output: same API response
-// - Pricing is per-token in the API; converted to per-million-token (USD)
-//
-// SambaNova is an inference platform hosting models from other providers
-// (DeepSeek, Meta, MiniMax, Google, OpenAI) with its own per-token pricing.
-//
-// Notes:
-// - DeepSeek-V3.2 has a 32K context limit (not 128K like other models)
-// - DeepSeek-V3.1 and V3.2 have limited max_completion_tokens (7168)
-// - Llama-4-Maverick has limited max_completion_tokens (4096)
-// - Meta-Llama-3.3-70B has limited max_completion_tokens (3072)
-// - MiniMax-M2.5 has 163840 context, MiniMax-M2.7 has 196608 context
+// API types
 // ---------------------------------------------------------------------------
 
-interface ModelInfo {
-  name: string;
-  context: number;
-  output: number;
-  inputModalities: ModelModality[];
-  outputModalities: ModelModality[];
-  toolCall?: boolean;
-  openWeights?: boolean;
-  reasoning?: boolean;
+interface SambaNovaModel {
+  id: string;
+  context_length: number;
+  max_completion_tokens: number;
+  object: string;
+  owned_by: string;
+  pricing: {
+    prompt: string;
+    completion: string;
+  };
+  sn_metadata: Record<string, unknown>;
 }
 
-const MODELS: Record<string, ModelInfo> = {
-  // --- DeepSeek family ---
-  "DeepSeek-V3.1": {
-    name: "DeepSeek V3.1",
-    context: 131072,
-    output: 7168,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
-  "DeepSeek-V3.2": {
-    name: "DeepSeek V3.2",
-    context: 32768,
-    output: 7168,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
+// ---------------------------------------------------------------------------
+// Feature inference rules — regex-based instead of static sets
+// ---------------------------------------------------------------------------
 
-  // --- Meta Llama family ---
-  "Llama-4-Maverick-17B-128E-Instruct": {
-    name: "Llama 4 Maverick 17Bx128E",
-    context: 131072,
-    output: 4096,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
-  "Meta-Llama-3.3-70B-Instruct": {
-    name: "Llama 3.3 70B",
-    context: 131072,
-    output: 3072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
+// ---------------------------------------------------------------------------
+// Pipeline steps
+// ---------------------------------------------------------------------------
 
-  // --- MiniMax family ---
-  "MiniMax-M2.5": {
-    name: "MiniMax M2.5",
-    context: 163840,
-    output: 32768,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
-  "MiniMax-M2.7": {
-    name: "MiniMax M2.7",
-    context: 196608,
-    output: 196608,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
+const API_URL = "https://api.sambanova.ai/v1/models";
+const apiSource: DataSource = {
+  url: API_URL,
+  type: "api",
+  description: "SambaNova OpenAI-compatible models API with pricing and context limits",
+};
 
-  // --- Google Gemma family ---
-  "gemma-3-12b-it": {
-    name: "Gemma 3 12B IT",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text", "image"],
-    outputModalities: ["text"],
-    toolCall: false,
-    openWeights: true,
-  },
-
-  // --- OpenAI GPT-OSS family ---
-  "gpt-oss-120b": {
-    name: "GPT OSS 120B",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
+// Step 1: Discover models
+const discover = {
+  source: apiSource,
+  execute: async (): Promise<DiscoveredModel[]> => {
+    const resp = await fetch(API_URL);
+    if (!resp.ok) throw new Error(`Failed to fetch ${API_URL}: ${resp.status}`);
+    const data = (await resp.json()) as { data: SambaNovaModel[] };
+    return data.data.map((m) => ({
+      id: m.id,
+      raw: m,
+    }));
   },
 };
 
-// ---------------------------------------------------------------------------
-// Pricing (USD per million tokens)
-//
-// Source: https://api.sambanova.ai/v1/models — pricing field (per-token, converted to per-M-token)
-// ---------------------------------------------------------------------------
-
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  "DeepSeek-V3.1": { currency: "USD", input: 3.0, output: 4.5 },
-  "DeepSeek-V3.2": { currency: "USD", input: 3.0, output: 4.5 },
-  "Llama-4-Maverick-17B-128E-Instruct": { currency: "USD", input: 0.63, output: 1.8 },
-  "Meta-Llama-3.3-70B-Instruct": { currency: "USD", input: 0.6, output: 1.2 },
-  "MiniMax-M2.5": { currency: "USD", input: 0.3, output: 1.2 },
-  "MiniMax-M2.7": { currency: "USD", input: 0.6, output: 2.4 },
-  "gemma-3-12b-it": { currency: "USD", input: 0.35, output: 0.59 },
-  "gpt-oss-120b": { currency: "USD", input: 0.22, output: 0.59 },
+// Step 2: Extract pricing — per-token pricing from API, convert to per-M-token
+const extractPricing = {
+  source: apiSource,
+  execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+    const map = new Map<string, Pricing>();
+    for (const dm of models) {
+      const raw = dm.raw as SambaNovaModel;
+      const prompt = parseFloat(raw.pricing.prompt);
+      const completion = parseFloat(raw.pricing.completion);
+      // API gives per-token pricing; convert to per-million-token (multiply by 1M)
+      map.set(dm.id, {
+        currency: "USD",
+        input: prompt * 1_000_000,
+        output: completion * 1_000_000,
+      });
+    }
+    return map;
+  },
 };
 
-// ---------------------------------------------------------------------------
-// Family derivation
-// ---------------------------------------------------------------------------
+// Step 3: Extract limits — context_length and max_completion_tokens from API
+const extractLimits = {
+  source: apiSource,
+  execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+    const map = new Map<string, ExtractedLimit>();
+    for (const dm of models) {
+      const raw = dm.raw as SambaNovaModel;
+      map.set(dm.id, {
+        context: raw.context_length,
+        output: raw.max_completion_tokens,
+      });
+    }
+    return map;
+  },
+};
 
-function deriveFamily(id: string): string {
-  if (id.includes("DeepSeek")) return "deepseek";
-  if (id.includes("Llama-4")) return "llama-4";
-  if (id.includes("Llama-3.3") || id.includes("Meta-Llama")) return "llama-3.3";
-  if (id.includes("MiniMax")) return "minimax";
-  if (id.includes("gemma")) return "gemma";
-  if (id.includes("gpt-oss")) return "gpt-oss";
-  return "other";
-}
+// Step 4: Extract modalities — not available from API, omitted
+const extractModalities = {
+  source: apiSource,
+  execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+    return new Map<string, ExtractedModalities>();
+  },
+};
 
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
+// Step 5: Extract features — not available from API, omitted
+const extractFeatures = {
+  source: apiSource,
+  execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+    return new Map<string, ExtractedFeatures>();
+  },
+};
 
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
+// Step 6: Extract dates — no date info from API, omit rather than hallucinate
+const extractDates = {
+  source: apiSource,
+  execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+    return new Map<string, ExtractedDates>();
+  },
+};
+
+// Step 7: Derive name from model ID
+const deriveName = {
+  execute: (modelId: string): string => {
+    // Handle known patterns
+    if (modelId === "DeepSeek-V3.1") return "DeepSeek V3.1";
+    if (modelId === "DeepSeek-V3.2") return "DeepSeek V3.2";
+    if (modelId === "Llama-4-Maverick-17B-128E-Instruct") return "Llama 4 Maverick 17Bx128E";
+    if (modelId === "Meta-Llama-3.3-70B-Instruct") return "Llama 3.3 70B";
+    if (modelId === "MiniMax-M2.5") return "MiniMax M2.5";
+    if (modelId === "MiniMax-M2.7") return "MiniMax M2.7";
+    if (modelId === "gemma-3-12b-it") return "Gemma 3 12B IT";
+    if (modelId === "gpt-oss-120b") return "GPT OSS 120B";
+    // Generic fallback: replace hyphens with spaces, capitalize words
+    return modelId.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+  },
+};
+
+// Step 8: Derive family from model ID
+const deriveFamily = {
+  execute: (modelId: string): string => {
+    if (modelId.includes("DeepSeek")) return "deepseek";
+    if (modelId.includes("Llama")) return "llama";
+    if (modelId.includes("MiniMax")) return "minimax";
+    if (modelId.includes("gemma")) return "gemma";
+    if (modelId.includes("gpt-oss")) return "gpt-oss";
+    return modelId.split("-")[0] ?? modelId;
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  for (const [id, info] of Object.entries(MODELS)) {
-    const pricing = HARDCODED_PRICING[id] ?? { unit: "free" };
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id,
-      name: info.name,
-      family: deriveFamily(id),
-      temperature: true,
-      limit: { context: info.context, output: info.output },
-      modalities: { input: info.inputModalities, output: info.outputModalities },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (info.toolCall) modelDef.tool_call = true;
-    if (info.openWeights) modelDef.open_weights = true;
-    if (info.reasoning) modelDef.reasoning = true;
-
-    models.push(defineModel(modelDef));
-  }
+  const models = await runPipeline({
+    discover,
+    extractPricing,
+    extractLimits,
+    extractModalities,
+    extractFeatures,
+    extractDates,
+    deriveName,
+    deriveFamily,
+  });
 
   console.log(`  SambaNova: ${models.length} models`);
 

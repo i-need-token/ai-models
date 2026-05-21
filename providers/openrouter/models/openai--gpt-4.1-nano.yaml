@@ -1,6 +1,11 @@
 id: openai--gpt-4.1-nano
-name: "OpenAI: GPT-4.1 Nano"
-family: gpt-4
+name: Gpt 4.1 Nano
+family: gpt
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.4
+  cache_read: 0.025
 limit:
   context: 1047576
   output: 32768
@@ -11,11 +16,7 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.4
-  cache_read: 0.025
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-04-15
+last_updated: 2025-04-15

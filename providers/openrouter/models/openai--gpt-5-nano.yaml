@@ -1,9 +1,11 @@
 id: openai--gpt-5-nano
-name: "OpenAI: GPT-5 Nano"
+name: Gpt 5 Nano
 family: gpt
-limit:
-  context: 400000
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.4
+  cache_read: 0.01
 modalities:
   input:
     - text
@@ -11,12 +13,8 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.05
-  output: 0.4
-  cache_read: 0.01
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-08-08
+last_updated: 2025-08-08

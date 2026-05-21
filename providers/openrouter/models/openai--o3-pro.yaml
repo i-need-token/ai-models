@@ -1,6 +1,10 @@
 id: openai--o3-pro
-name: "OpenAI: o3 Pro"
-family: o3
+name: O3 Pro
+family: o
+pricing:
+  currency: USD
+  input: 20
+  output: 80
 limit:
   context: 200000
   output: 100000
@@ -11,11 +15,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 20
-  output: 80
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-06-11
+last_updated: 2025-06-11

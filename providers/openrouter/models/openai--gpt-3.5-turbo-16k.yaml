@@ -1,6 +1,10 @@
 id: openai--gpt-3.5-turbo-16k
-name: "OpenAI: GPT-3.5 Turbo 16k"
-family: gpt-3.5
+name: Gpt 3.5 Turbo 16k
+family: gpt
+pricing:
+  currency: USD
+  input: 3
+  output: 4
 limit:
   context: 16385
   output: 4096
@@ -9,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 3
-  output: 4
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2023-08-28
+last_updated: 2023-08-28

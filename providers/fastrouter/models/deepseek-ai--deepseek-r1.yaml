@@ -1,6 +1,10 @@
 id: deepseek-ai--deepseek-r1
-name: "DeepSeek: R1"
+name: Deepseek R1
 family: deepseek
+pricing:
+  currency: USD
+  input: 0.5
+  output: 2.18
 limit:
   context: 163840
   output: 163840
@@ -9,11 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.5
-  output: 2.18
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+last_updated: 2026-05-20

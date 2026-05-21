@@ -1,9 +1,10 @@
 id: palmyra-x4
 name: Palmyra X4
 family: palmyra
-temperature: true
-reasoning: true
-tool_call: true
+pricing:
+  currency: USD
+  input: 2.5
+  output: 10
 limit:
   context: 128000
   output: 16384
@@ -12,9 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 2.5
-  output: 10
+reasoning: true
+temperature: true
+tool_call: true
 release_date: 2025-06-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

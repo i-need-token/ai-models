@@ -1,6 +1,10 @@
 id: nex-agi--deepseek-v3.1-nex-n1
-name: "Nex AGI: DeepSeek V3.1 Nex N1"
+name: Deepseek V3.1 Nex N1
 family: nex-agi
+pricing:
+  currency: USD
+  input: 0.135
+  output: 0.5
 limit:
   context: 131072
   output: 163840
@@ -9,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.135
-  output: 0.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-12-08
+last_updated: 2025-12-08

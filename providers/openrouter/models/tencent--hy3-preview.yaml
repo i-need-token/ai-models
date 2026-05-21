@@ -1,6 +1,11 @@
 id: tencent--hy3-preview
-name: "Tencent: Hy3 preview"
+name: Hy3 Preview
 family: tencent
+pricing:
+  currency: USD
+  input: 0.066
+  output: 0.26
+  cache_read: 0.029
 limit:
   context: 262144
   output: 262144
@@ -9,12 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.066
-  output: 0.26
-  cache_read: 0.029
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-04-23
+last_updated: 2026-04-23

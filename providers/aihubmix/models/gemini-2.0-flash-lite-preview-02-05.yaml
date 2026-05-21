@@ -1,15 +1,13 @@
 id: gemini-2.0-flash-lite-preview-02-05
-name: "Google: Gemini 2.0 Flash Lite Preview 02 05"
-family: gemini-2.0
-temperature: true
+name: Gemini 2.0 Flash Lite Preview 02 05
+family: gemini
 pricing:
   currency: USD
   input: 0.0375
   output: 0.15
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

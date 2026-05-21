@@ -1,8 +1,10 @@
 id: Mistral-7B-Instruct-v0.3
-name: Mistral-7B-Instruct-v0.3
+name: Mistral 7B Instruct V0.3
 family: mistral
-open_weights: true
-temperature: true
+pricing:
+  currency: USD
+  input: 0.11
+  output: 0.11
 limit:
   context: 65536
   output: 65536
@@ -11,9 +13,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.11
-  output: 0.11
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-04-01
+last_updated: 2025-04-01

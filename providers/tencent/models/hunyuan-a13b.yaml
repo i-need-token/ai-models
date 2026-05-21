@@ -1,9 +1,10 @@
 id: hunyuan-a13b
 name: Hunyuan A13B
 family: hunyuan
-temperature: true
-reasoning: true
-open_weights: true
+pricing:
+  currency: CNY
+  input: 0.5
+  output: 2
 limit:
   context: 224000
   output: 32000
@@ -12,9 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 0.5
-  output: 2
+reasoning: true
+temperature: true
+open_weights: true
 release_date: 2025-06-25
-last_updated: 2026-05-17
+last_updated: 2026-05-18

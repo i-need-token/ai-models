@@ -1,15 +1,13 @@
 id: moonshotai--moonlight-16b-a3b-instruct
-name: "Moonshot AI: Moonshotai/Moonlight 16b A3b Instruct"
-family: moonshot
-temperature: true
+name: Moonshotai/Moonlight 16b A3b Instruct
+family: moonshotai/moonlight
 pricing:
   currency: USD
   input: 0.1
   output: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

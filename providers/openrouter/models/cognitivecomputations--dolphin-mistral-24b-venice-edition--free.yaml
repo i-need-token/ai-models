@@ -1,15 +1,13 @@
 id: cognitivecomputations--dolphin-mistral-24b-venice-edition--free
-name: "Venice: Uncensored (free)"
-family: dolphin
-limit:
-  context: 32768
-  output: 4096
+name: Free
+family: cognitivecomputations
+pricing:
+  unit: free
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
+structured_output: true
+release_date: 2025-07-10
+last_updated: 2025-07-10

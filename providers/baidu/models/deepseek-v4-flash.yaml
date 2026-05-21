@@ -1,0 +1,22 @@
+id: deepseek-v4-flash
+name: Deepseek V4 Flash
+family: deepseek
+pricing:
+  currency: USD
+  input: 0.126
+  output: 0.252
+  cache_read: 0.0252
+limit:
+  context: 1048576
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+temperature: true
+tool_call: true
+structured_output: true
+release_date: 2026-04-28
+last_updated: 2026-04-28

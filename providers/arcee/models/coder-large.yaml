@@ -1,8 +1,10 @@
 id: coder-large
 name: Coder Large
 family: arcee-coder
-temperature: true
-tool_call: true
+pricing:
+  currency: USD
+  input: 0.5
+  output: 0.8
 limit:
   context: 32768
   output: 8192
@@ -11,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.5
-  output: 0.8
+temperature: true
+tool_call: true
 release_date: 2025-02-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

@@ -1,7 +1,11 @@
 id: mistral-7b
 name: Mistral 7B
 family: mistral
-temperature: true
+deprecated: true
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.2
 limit:
   context: 32000
   output: 4096
@@ -10,10 +14,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.2
+temperature: true
 release_date: 2023-09-27
-last_updated: 2026-05-17
-deprecated: true
+last_updated: 2026-05-18

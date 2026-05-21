@@ -1,18 +1,13 @@
 id: nvidia--Llama-3_3-Nemotron-Super-49B-v1_5
 name: "NVIDIA: Llama 3 3 Nemotron Super 49B v1 5"
 family: llama
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.25
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.05
-  output: 0.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

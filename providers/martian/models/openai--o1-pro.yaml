@@ -1,21 +1,14 @@
 id: openai--o1-pro
 name: O1 Pro
-family: o1
-reasoning: true
-temperature: true
-tool_call: false
-structured_output: true
-limit:
-  context: 200000
-  output: 100000
+family: o
+pricing:
+  currency: USD
+  input: 150
+  output: 600
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 150
-  output: 600
 release_date: 2026-01-21
-last_updated: 2026-05-17
+last_updated: 2026-01-21

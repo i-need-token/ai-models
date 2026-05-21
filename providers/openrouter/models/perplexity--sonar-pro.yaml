@@ -1,6 +1,10 @@
 id: perplexity--sonar-pro
-name: "Perplexity: Sonar Pro"
+name: Sonar Pro
 family: sonar
+pricing:
+  currency: USD
+  input: 3
+  output: 15
 limit:
   context: 200000
   output: 8000
@@ -10,9 +14,5 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 3
-  output: 15
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-03-07
+last_updated: 2025-03-07

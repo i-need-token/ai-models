@@ -1,6 +1,10 @@
 id: moonshotai--kimi-k2
-name: "MoonshotAI: Kimi K2 0711"
-family: kimi
+name: Kimi K2
+family: moonshotai
+pricing:
+  currency: USD
+  input: 0.57
+  output: 2.3
 limit:
   context: 131072
   output: 32768
@@ -9,10 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.57
-  output: 2.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-07-12
+last_updated: 2025-07-12

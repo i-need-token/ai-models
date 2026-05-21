@@ -1,19 +1,13 @@
 id: qwen3-max-2026-01-23
 name: qwen3 MAX 2026 01 23
 family: qwen
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.6354
+  output: 3.177
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.6354
-  output: 3.177
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

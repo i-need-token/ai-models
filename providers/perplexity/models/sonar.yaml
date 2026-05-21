@@ -1,8 +1,10 @@
 id: sonar
 name: Sonar
 family: sonar
-temperature: true
-tool_call: true
+pricing:
+  currency: USD
+  input: 1
+  output: 1
 limit:
   context: 127072
   output: 8192
@@ -11,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 1
+temperature: true
+tool_call: true
 release_date: 2024-01-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

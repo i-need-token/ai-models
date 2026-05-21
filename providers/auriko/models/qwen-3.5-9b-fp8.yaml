@@ -1,21 +1,17 @@
 id: qwen-3.5-9b-fp8
-name: Qwen 3.5 9B FP8
+name: Qwen 3.5 9b Fp8
 family: qwen
-temperature: true
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.15
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.15
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 262144
-  output: 262144
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

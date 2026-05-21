@@ -1,9 +1,10 @@
 id: hunyuan-2.0-thinking
 name: Tencent HY 2.0 Think
 family: hunyuan
-temperature: true
-reasoning: true
-tool_call: true
+pricing:
+  currency: CNY
+  input: 3.975
+  output: 15.9
 limit:
   context: 128000
   output: 64000
@@ -12,9 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 3.975
-  output: 15.9
+reasoning: true
+temperature: true
+tool_call: true
 release_date: 2025-11-09
-last_updated: 2026-05-17
+last_updated: 2026-05-18

@@ -1,22 +1,15 @@
 id: deepinfra--z-ai--glm-4.7-flash
-name: GLM 4.7 Flash
-family: deepinfra
-reasoning: false
-temperature: true
-tool_call: false
-structured_output: false
-limit:
-  context: 200000
-  output: 16384
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Glm 4.7 Flash
+family: glm
 pricing:
   currency: USD
   input: 0.06
   output: 0.4
   cache_read: 0.01
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-04-28
-last_updated: 2026-05-17
+last_updated: 2026-04-28

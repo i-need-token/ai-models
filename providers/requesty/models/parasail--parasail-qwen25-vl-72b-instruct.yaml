@@ -1,6 +1,12 @@
 id: parasail--parasail-qwen25-vl-72b-instruct
 name: Parasail Qwen25 Vl 72b Instruct
 family: parasail
+pricing:
+  currency: USD
+  input: 0.7
+  output: 0.7
+  cache_read: 0.7
+  cache_write: 0.7
 limit:
   context: 32768
   output: 8192
@@ -10,12 +16,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.7
-  output: 0.7
-  cache_read: 0.7
-  cache_write: 0.7
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-02-07
+last_updated: 2025-02-07

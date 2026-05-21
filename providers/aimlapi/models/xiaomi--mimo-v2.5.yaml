@@ -1,0 +1,16 @@
+id: xiaomi--mimo-v2.5
+name: Xiaomi / Mimo V2.5
+family: xiaomi
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

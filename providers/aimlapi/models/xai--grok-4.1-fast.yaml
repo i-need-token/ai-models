@@ -1,0 +1,16 @@
+id: xai--grok-4.1-fast
+name: Xai / Grok 4.1 Fast
+family: xai
+pricing:
+  currency: USD
+  input: 0.26
+  output: 0.65
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

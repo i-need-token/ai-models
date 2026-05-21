@@ -1,21 +1,17 @@
 id: qwen3-235b-a22b-instruct-2507
 name: qwen3-235b-a22b-instruct-2507
-family: qwen3
-temperature: true
-limit:
-  context: 131000
-  output: 131000
-modalities:
-  input:
-    - text
-  output:
-    - text
+family: qwen
 pricing:
   currency: EUR
   input: 0.062
   output: 0.408
   cache_read: 0.016
-release_date: 2025-04-28
-last_updated: 2026-05-17
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+release_date: 2025-04-28
+last_updated: 2025-04-28

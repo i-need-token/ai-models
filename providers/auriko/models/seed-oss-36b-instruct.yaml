@@ -1,19 +1,18 @@
 id: seed-oss-36b-instruct
-name: Seed-OSS 36B Instruct
+name: Seed Oss 36b Instruct
 family: seed
-temperature: true
+pricing:
+  currency: USD
+  input: 0.21
+  output: 0.57
+limit:
+  context: 262000
+  output: 262000
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.21
-  output: 0.57
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 262000
-  output: 262000
 tool_call: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

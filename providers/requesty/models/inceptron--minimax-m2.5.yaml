@@ -1,6 +1,11 @@
 id: inceptron--minimax-m2.5
 name: Minimax M2.5
 family: inceptron
+pricing:
+  currency: USD
+  input: 0.28
+  output: 1.1
+  cache_read: 0.03
 limit:
   context: 196608
   output: 196608
@@ -9,12 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.28
-  output: 1.1
-  cache_read: 0.03
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-04-29
+last_updated: 2026-04-29

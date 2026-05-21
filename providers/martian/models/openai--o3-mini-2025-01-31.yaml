@@ -1,22 +1,15 @@
 id: openai--o3-mini-2025-01-31
 name: O3 Mini 2025 01 31
-family: o3
-reasoning: true
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 200000
-  output: 100000
-modalities:
-  input:
-    - text
-  output:
-    - text
+family: o
 pricing:
   currency: USD
   input: 1.1
   output: 4.4
   cache_read: 0.55
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-03-17
-last_updated: 2026-05-17
+last_updated: 2026-03-17

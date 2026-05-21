@@ -4,7 +4,6 @@ import type {
   ScrapePipeline,
   DiscoveredModel,
   ExtractedLimit,
-  ExtractedModalities,
   ExtractedFeatures,
   ExtractedDates,
 } from "../../scripts/lib/index";
@@ -450,37 +449,29 @@ const pipeline: ScrapePipeline = {
     execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
       const datesMap = new Map<string, ExtractedDates>();
       const releaseDates = await fetchReleaseDates();
-      const today = new Date().toISOString().slice(0, 10);
 
       for (const m of models) {
         const raw = m.raw as RawModelInfo | undefined;
         const releaseInfo = releaseDates.get(m.id);
 
-        let releaseDate: string;
-        let lastUpdated: string;
-
         if (releaseInfo) {
-          releaseDate = releaseInfo.date;
-          lastUpdated = releaseInfo.date;
+          datesMap.set(m.id, {
+            release_date: releaseInfo.date,
+            last_updated: releaseInfo.date,
+          });
         } else if (raw?.version) {
           // Try to extract date from version string
           const dateMatch = raw.version.match(/(\d{4})-(\d{2})/);
           if (dateMatch?.[1] && dateMatch?.[2]) {
-            releaseDate = `${dateMatch[1]}-${dateMatch[2]}`;
-            lastUpdated = `${dateMatch[1]}-${dateMatch[2]}`;
-          } else {
-            releaseDate = today;
-            lastUpdated = today;
+            const date = `${dateMatch[1]}-${dateMatch[2]}`;
+            datesMap.set(m.id, {
+              release_date: date,
+              last_updated: date,
+            });
           }
-        } else {
-          releaseDate = today;
-          lastUpdated = today;
+          // If no date extractable, omit — runtime will try raw.created fallback
         }
-
-        datesMap.set(m.id, {
-          release_date: releaseDate,
-          last_updated: lastUpdated,
-        });
+        // If no date data available at all, omit — runtime will try raw.created fallback
       }
 
       return datesMap;
@@ -508,7 +499,10 @@ const pipeline: ScrapePipeline = {
         const outputNum = parseTokenCount(raw.outputStr.replace(/^MAXIMUM:\s*/i, ""));
 
         if (context) {
-          limitsMap.set(m.id, { context, output: outputNum ?? 0 });
+          limitsMap.set(m.id, {
+            context,
+            ...(outputNum ? { output: outputNum } : {}),
+          });
         }
       }
 
@@ -517,32 +511,11 @@ const pipeline: ScrapePipeline = {
   },
 
   // -----------------------------------------------------------------------
-  // Step 5: Extract modalities
+  // Step 5: Extract features
   // -----------------------------------------------------------------------
-  extractModalities: {
-    source: {
-      url: PRICING_URL,
-      type: "ssr",
-      description: "All DeepSeek models are text-in/text-out",
-    },
-    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
-      const modalitiesMap = new Map<string, ExtractedModalities>();
+  // Note: extractModalities removed — pricing page doesn't provide modality data.
+  // Pipeline will use default { input: ["text"], output: ["text"] }
 
-      for (const m of models) {
-        // All DeepSeek API models are text-in/text-out
-        modalitiesMap.set(m.id, {
-          input: ["text"],
-          output: ["text"],
-        });
-      }
-
-      return modalitiesMap;
-    },
-  },
-
-  // -----------------------------------------------------------------------
-  // Step 6: Extract features
-  // -----------------------------------------------------------------------
   extractFeatures: {
     source: {
       url: PRICING_URL,
@@ -606,8 +579,8 @@ const pipeline: ScrapePipeline = {
   deriveFamily: {
     execute: (modelId: string): string => {
       const rules: Array<{ pattern: RegExp; family: string }> = [
-        { pattern: /^deepseek-v4-flash$/, family: "deepseek-v4" },
-        { pattern: /^deepseek-v4-pro$/, family: "deepseek-v4" },
+        { pattern: /^deepseek-v4-flash$/, family: "deepseek" },
+        { pattern: /^deepseek-v4-pro$/, family: "deepseek" },
         { pattern: /^deepseek-chat$/, family: "deepseek-chat" },
         { pattern: /^deepseek-reasoner$/, family: "deepseek-reasoner" },
       ];

@@ -1,15 +1,13 @@
 id: google--gemma-2-27b-it
 name: Google/Gemma 2 27b It
-family: other
-temperature: true
+family: google/gemma
 pricing:
   currency: USD
   input: 0.4
   output: 0.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

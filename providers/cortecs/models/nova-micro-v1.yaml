@@ -1,21 +1,17 @@
 id: nova-micro-v1
 name: nova-micro-v1
 family: nova
-temperature: true
-limit:
-  context: 128000
-  output: 128000
+pricing:
+  currency: EUR
+  input: 0.036
+  output: 0.143
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.036
-  output: 0.143
-release_date: 2025-04-14
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-04-14
+last_updated: 2025-04-14

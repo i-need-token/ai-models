@@ -1,21 +1,14 @@
 id: sao10k--l3.1-70b-hanami-x1
-name: L3.1 70B Hanami X1
-family: sao10k
-reasoning: true
-temperature: true
-tool_call: false
-structured_output: false
-limit:
-  context: 16000
+name: L3.1 70b Hanami X1
+family: o
+pricing:
+  currency: USD
+  input: 3
   output: 3
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 3
-  output: 3
 release_date: 2026-01-21
-last_updated: 2026-05-17
+last_updated: 2026-01-21

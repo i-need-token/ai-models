@@ -1,14 +1,11 @@
 id: qwen3-max-preview
 name: Qwen3 Max Preview
-family: qwen3
-temperature: true
+family: qwen
 pricing:
   currency: USD
   input: 0.423
   output: 1.692
   cache_read: 0.0846
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
@@ -17,3 +14,4 @@ modalities:
     - text
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

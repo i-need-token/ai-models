@@ -1,6 +1,10 @@
 id: moonshotai--kimi-k2-thinking
-name: "MoonshotAI: Kimi K2 Thinking"
-family: kimi
+name: Kimi K2 Thinking
+family: moonshotai
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.5
 limit:
   context: 262144
   output: 262144
@@ -9,11 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.6
-  output: 2.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-11-06
+last_updated: 2025-11-06

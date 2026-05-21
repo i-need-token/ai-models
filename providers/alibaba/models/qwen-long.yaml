@@ -5,9 +5,6 @@ pricing:
   currency: CNY
   input: 0.5
   output: 2
-limit:
-  context: 10000000
-  output: 6000
 modalities:
   input:
     - text
@@ -16,5 +13,4 @@ modalities:
 reasoning: true
 tool_call: true
 structured_output: true
-release_date: 2024-06
-last_updated: 2024-06
+last_updated: 2026-05-19

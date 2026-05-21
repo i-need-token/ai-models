@@ -1,20 +1,18 @@
 id: mistralai--codestral-2508
-name: "Mistral: Codestral 2508"
+name: Codestral 2508
 family: mistral
-limit:
-  context: 256000
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.9
+  cache_read: 0.03
 modalities:
   input:
     - text
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 0.9
-  cache_read: 0.03
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-08-02
+last_updated: 2025-08-02

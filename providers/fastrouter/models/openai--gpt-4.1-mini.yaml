@@ -1,6 +1,11 @@
 id: openai--gpt-4.1-mini
-name: "OpenAI: GPT-4.1 Mini"
-family: gpt-4
+name: Gpt 4.1 Mini
+family: gpt
+pricing:
+  currency: USD
+  input: 0.4
+  output: 1.6
+  cache_read: 0.1
 limit:
   context: 1047576
   output: 32768
@@ -11,11 +16,5 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 1.6
-  cache_read: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

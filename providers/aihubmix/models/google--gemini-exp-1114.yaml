@@ -1,15 +1,13 @@
 id: google--gemini-exp-1114
 name: Google/Gemini Exp 1114
 family: gemini
-temperature: true
 pricing:
   currency: USD
   input: 0.625
   output: 2.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

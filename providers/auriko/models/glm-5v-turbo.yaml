@@ -1,22 +1,21 @@
 id: glm-5v-turbo
-name: GLM-5V-Turbo
+name: Glm 5v Turbo
 family: glm
-temperature: true
+pricing:
+  currency: USD
+  input: 1.2
+  output: 4
+  cache_read: 0.24
+limit:
+  context: 200000
+  output: 131072
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.2
-  output: 4
-  cache_read: 0.24
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 200000
-  output: 131072
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

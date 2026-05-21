@@ -1,20 +1,18 @@
 id: mistralai--devstral-medium
-name: "Mistral: Devstral Medium"
+name: Devstral Medium
 family: mistral
-limit:
-  context: 131072
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
+  cache_read: 0.04
 modalities:
   input:
     - text
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 2
-  cache_read: 0.04
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-07-10
+last_updated: 2025-07-10

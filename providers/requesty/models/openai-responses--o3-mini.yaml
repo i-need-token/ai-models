@@ -1,6 +1,12 @@
 id: openai-responses--o3-mini
 name: O3 Mini
-family: o3
+family: o
+pricing:
+  currency: USD
+  input: 1.1
+  output: 4.4
+  cache_read: 0.55
+  cache_write: 1.1
 limit:
   context: 200000
   output: 100000
@@ -9,13 +15,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.1
-  output: 4.4
-  cache_read: 0.55
-  cache_write: 1.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-02-01
+last_updated: 2025-02-01

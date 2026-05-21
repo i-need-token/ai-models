@@ -1,7 +1,11 @@
 id: minimax-m27
-name: MiniMax M2.7
-family: minimax-m2
-temperature: true
+name: minimax-m27
+family: minimax
+pricing:
+  currency: USD
+  input: 0.375
+  output: 1.5
+  cache_read: 0.075
 limit:
   context: 198000
   output: 32768
@@ -10,12 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.375
-  output: 1.5
-  cache_read: 0.075
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
 tool_call: true
+release_date: 2026-03-18
+last_updated: 2026-03-18

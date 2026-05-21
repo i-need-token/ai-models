@@ -1,6 +1,12 @@
 id: anthropic--claude-opus-4.6-fast
-name: "Anthropic: Claude Opus 4.6 (Fast)"
+name: Claude Opus 4.6 Fast
 family: claude
+pricing:
+  currency: USD
+  input: 30
+  output: 150
+  cache_read: 3
+  cache_write: 37.5
 limit:
   context: 1000000
   output: 128000
@@ -11,13 +17,8 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 30
-  output: 150
-  cache_read: 3
-  cache_write: 37.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-04-08
+last_updated: 2026-04-08

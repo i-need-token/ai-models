@@ -1,15 +1,15 @@
 id: dall-e-3
-name: Dall E 3
+name: DALL·E 3
 family: dall-e
-deprecated: true
+pricing:
+  currency: USD
+  unit: per_image
+  price: 0.04
 modalities:
   input:
     - text
   output:
-    - text
     - image
-pricing:
-  unit: per_image
-  price: 0.04
-release_date: unknown
-last_updated: unknown
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

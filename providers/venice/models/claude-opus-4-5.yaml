@@ -1,7 +1,11 @@
 id: claude-opus-4-5
-name: Claude Opus 4.5
+name: claude-opus-4-5
 family: claude-opus
-temperature: true
+pricing:
+  currency: USD
+  input: 6
+  output: 30
+  cache_read: 0.6
 limit:
   context: 198000
   output: 32768
@@ -11,14 +15,9 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 6
-  output: 30
-  cache_read: 0.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
 tool_call: true
-structured_output: true
 attachment: true
+structured_output: true
+release_date: 2025-12-06
+last_updated: 2025-12-06

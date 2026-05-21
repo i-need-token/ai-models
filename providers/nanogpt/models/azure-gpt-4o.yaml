@@ -1,20 +1,13 @@
 id: azure-gpt-4o
 name: azure gpt 4o
-family: gpt-4
-temperature: true
-limit:
-  context: 128000
-  output: 16384
+family: gpt
+pricing:
+  currency: USD
+  input: 1.47
+  output: 5.88
 modalities:
   input:
     - text
-    - image
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 1.47
-  output: 5.88
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

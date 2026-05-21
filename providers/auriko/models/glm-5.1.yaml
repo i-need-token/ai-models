@@ -1,21 +1,17 @@
 id: glm-5.1
-name: GLM-5.1
+name: Glm 5.1
 family: glm
-temperature: true
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 1.4
   output: 4.4
   cache_read: 0.26
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 202752
-  output: 202752
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+release_date: 2026-05-15
+last_updated: 2026-05-15

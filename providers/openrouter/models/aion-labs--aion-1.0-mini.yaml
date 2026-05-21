@@ -1,6 +1,10 @@
 id: aion-labs--aion-1.0-mini
-name: "AionLabs: Aion-1.0-Mini"
+name: Aion 1.0 Mini
 family: aion-labs
+pricing:
+  currency: USD
+  input: 0.7
+  output: 1.4
 limit:
   context: 131072
   output: 32768
@@ -9,10 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.7
-  output: 1.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+release_date: 2025-02-05
+last_updated: 2025-02-05

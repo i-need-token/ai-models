@@ -1,6 +1,10 @@
 id: baidu--ernie-4.5-300b-a47b
-name: "Baidu: ERNIE 4.5 300B A47B "
-family: cobuddy
+name: Ernie 4.5 300b A47b
+family: baidu
+pricing:
+  currency: USD
+  input: 0.28
+  output: 1.1
 limit:
   context: 131072
   output: 12000
@@ -9,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.28
-  output: 1.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
+structured_output: true
+release_date: 2025-07-01
+last_updated: 2025-07-01

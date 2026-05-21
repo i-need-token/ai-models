@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing, ModelModality } from "../../types/index";
 
 const provider = defineProvider({
   id: "venice",
@@ -13,23 +21,7 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Dynamic scrape from Venice AI API
-//
-// Source: https://api.venice.ai/api/v1/models
-//         (first-party, no auth required)
-//
-// Venice AI is a privacy-focused inference platform hosting models from
-// multiple providers (Anthropic, OpenAI, Google, DeepSeek, Qwen/Alibaba,
-// Meta, Mistral, xAI, Moonshot, MiniMax, ZhipuAI/Z.AI, NVIDIA, Arcee,
-// Inception/Mercury, NousResearch) with per-token USD pricing.
-//
-// E2EE models: End-to-end encrypted variants with higher pricing;
-//              included as separate entries (e.g. e2ee-glm-5-1)
-// Pricing: API returns per-1M-token USD values
-// Context lengths: API provides context_length and maxCompletionTokens
-// Capabilities: API provides supportsReasoning, supportsFunctionCalling,
-//               supportsVision, supportsResponseSchema
-// Model IDs: No "/" in IDs, no flattening needed
+// Raw data types (from Venice AI API)
 // ---------------------------------------------------------------------------
 
 interface VenicePricing {
@@ -69,166 +61,206 @@ interface VeniceModel {
 }
 
 // ---------------------------------------------------------------------------
-// Family derivation
+// API fetch helper
 // ---------------------------------------------------------------------------
 
-function deriveFamily(id: string): string {
-  const lower = id.toLowerCase();
-  // Claude family
-  if (lower.includes("claude-opus")) return "claude-opus";
-  if (lower.includes("claude-sonnet")) return "claude-sonnet";
-  // GPT family
-  if (lower.includes("gpt-55")) return "gpt-55";
-  if (lower.includes("gpt-54")) return "gpt-54";
-  if (lower.includes("gpt-53")) return "gpt-53";
-  if (lower.includes("gpt-52")) return "gpt-52";
-  if (lower.includes("gpt-4o")) return "gpt-4o";
-  if (lower.includes("gpt-oss")) return "gpt-oss";
-  // Gemini/Gemma family
-  if (lower.includes("gemini-3-1")) return "gemini-3.1";
-  if (lower.includes("gemini-3")) return "gemini-3";
-  if (lower.includes("gemma-4")) return "gemma-4";
-  if (lower.includes("gemma-3")) return "gemma-3";
-  // DeepSeek family
-  if (lower.includes("deepseek-v4")) return "deepseek-v4";
-  if (lower.includes("deepseek-v3")) return "deepseek-v3";
-  // Qwen family
-  if (lower.includes("qwen3-coder")) return "qwen-coder";
-  if (lower.includes("qwen3-vl")) return "qwen-vl";
-  if (lower.includes("qwen3-5")) return "qwen3.5";
-  if (lower.includes("qwen3-6")) return "qwen3.6";
-  if (lower.includes("qwen3")) return "qwen3";
-  if (lower.includes("qwen-3-6")) return "qwen3.6";
-  // GLM/ZhipuAI family
-  if (lower.includes("glm-5-1") || lower.includes("glm-5.1")) return "glm-5.1";
-  if (lower.includes("glm-5v")) return "glm-5v";
-  if (lower.includes("glm-5")) return "glm-5";
-  if (lower.includes("glm-4.7")) return "glm-4.7";
-  if (lower.includes("glm-4.6")) return "glm-4.6";
-  // Grok/xAI family
-  if (lower.includes("grok-4-20")) return "grok-4.20";
-  if (lower.includes("grok-4-3")) return "grok-4.3";
-  if (lower.includes("grok-4")) return "grok-4";
-  // Mistral family
-  if (lower.includes("mistral-small")) return "mistral-small";
-  // Llama family
-  if (lower.includes("llama-3.3")) return "llama-3.3";
-  if (lower.includes("llama-3.2")) return "llama-3.2";
-  // Kimi/Moonshot family
-  if (lower.includes("kimi-k2")) return "kimi-k2";
-  // MiniMax family
-  if (lower.includes("minimax-m2")) return "minimax-m2";
-  // Nemotron/NVIDIA family
-  if (lower.includes("nemotron")) return "nemotron";
-  // Mercury/Inception family
-  if (lower.includes("mercury")) return "mercury";
-  // Arcee family
-  if (lower.includes("arcee")) return "arcee";
-  // Aion family
-  if (lower.includes("aion")) return "aion";
-  // Hermes/NousResearch family
-  if (lower.includes("hermes")) return "hermes";
-  // Venice own models
-  if (lower.includes("venice-uncensored")) return "venice-uncensored";
-  // E2EE encrypted variants
-  if (lower.startsWith("e2ee-")) return "e2ee-" + deriveFamily(lower.replace("e2ee-", ""));
-  return "other";
-}
-
-// ---------------------------------------------------------------------------
-// Name derivation
-// ---------------------------------------------------------------------------
-
-function deriveName(id: string, specName: string): string {
-  // Use the spec name if available and meaningful
-  if (specName && specName !== id) return specName;
-  // Otherwise use the ID
-  return id;
-}
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
-
-// ---------------------------------------------------------------------------
-// Scrape function
-// ---------------------------------------------------------------------------
-
-export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // Fetch model list from Venice AI API
+async function fetchModels(): Promise<VeniceModel[]> {
   const response = await fetch("https://api.venice.ai/api/v1/models");
   if (!response.ok) {
     throw new Error(`Failed to fetch Venice models: ${response.status}`);
   }
-
   const data = (await response.json()) as { data: VeniceModel[] };
-  const apiModels = data.data;
+  return data.data;
+}
 
-  for (const m of apiModels) {
-    // Skip non-text models
-    if (m.type !== "text") continue;
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
 
-    // Skip offline models
-    if (m.model_spec.offline) continue;
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.venice.ai/api/v1/models",
+      type: "api",
+      description:
+        "Venice AI models API — returns model list with pricing, context, capabilities, modalities",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      const discovered: DiscoveredModel[] = [];
 
-    const spec = m.model_spec;
-    const caps = spec.capabilities;
-    const pricing = spec.pricing;
+      for (const m of apiModels) {
+        if (m.type !== "text") continue;
+        if (m.model_spec.offline) continue;
+        const pricing = m.model_spec.pricing;
+        if (pricing.input.usd === 0 && pricing.output.usd === 0) continue;
 
-    // Skip models with zero pricing
-    if (pricing.input.usd === 0 && pricing.output.usd === 0) continue;
+        discovered.push({ id: m.id, raw: m });
+      }
 
-    const ctxLen = m.context_length;
-    const maxOut = spec.maxCompletionTokens;
+      return discovered;
+    },
+  },
 
-    // Build pricing object
-    const tokenPricing: Pricing = {
-      currency: "USD",
-      input: pricing.input.usd,
-      output: pricing.output.usd,
-    };
+  extractPricing: {
+    source: {
+      url: "https://api.venice.ai/api/v1/models",
+      type: "api",
+      description: "Pricing from Venice AI API — per-1M-token USD pricing with cache_input",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      const pricingMap = new Map<string, Pricing>();
+      for (const m of models) {
+        const raw = m.raw as VeniceModel;
+        if (!raw) continue;
+        const p: Pricing = {
+          currency: "USD",
+          input: raw.model_spec.pricing.input.usd,
+          output: raw.model_spec.pricing.output.usd,
+        };
+        if (raw.model_spec.pricing.cache_input && raw.model_spec.pricing.cache_input.usd > 0) {
+          p.cache_read = raw.model_spec.pricing.cache_input.usd;
+        }
+        pricingMap.set(m.id, p);
+      }
+      return pricingMap;
+    },
+  },
 
-    // Add cache_read if available and non-zero
-    if (pricing.cache_input && pricing.cache_input.usd > 0) {
-      tokenPricing.cache_read = pricing.cache_input.usd;
-    }
+  extractDates: {
+    source: {
+      url: "https://api.venice.ai/api/v1/models",
+      type: "api",
+      description: "Dates from Venice AI API — created timestamp field",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+      for (const m of models) {
+        const raw = m.raw as VeniceModel;
+        if (!raw || !raw.created) continue;
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+      return datesMap;
+    },
+  },
 
-    // Build modalities
-    const inputModalities: ModelModality[] = ["text"];
-    if (caps.supportsVision) inputModalities.push("image");
+  extractLimits: {
+    source: {
+      url: "https://api.venice.ai/api/v1/models",
+      type: "api",
+      description: "Context window and max output from Venice AI API",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      const limitsMap = new Map<string, ExtractedLimit>();
+      for (const m of models) {
+        const raw = m.raw as VeniceModel;
+        if (!raw) continue;
+        if (raw.context_length > 0) {
+          limitsMap.set(m.id, {
+            context: raw.context_length,
+            output: raw.model_spec.maxCompletionTokens,
+          });
+        }
+      }
+      return limitsMap;
+    },
+  },
 
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: m.id,
-      name: deriveName(m.id, spec.name),
-      family: deriveFamily(m.id),
-      temperature: true,
-      limit: { context: ctxLen, output: maxOut },
-      modalities: {
-        input: inputModalities,
-        output: ["text"],
-      },
-      pricing: tokenPricing,
-      release_date: today,
-      last_updated: today,
-    };
+  extractModalities: {
+    source: {
+      url: "https://api.venice.ai/api/v1/models",
+      type: "api",
+      description: "Modalities from Venice AI API — vision capability determines image input",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      const modalitiesMap = new Map<string, ExtractedModalities>();
+      for (const m of models) {
+        const raw = m.raw as VeniceModel;
+        if (!raw) continue;
+        const inputModalities: ModelModality[] = ["text"];
+        if (raw.model_spec.capabilities.supportsVision) inputModalities.push("image");
+        modalitiesMap.set(m.id, { input: inputModalities });
+      }
+      return modalitiesMap;
+    },
+  },
 
-    if (caps.supportsReasoning) modelDef.reasoning = true;
-    if (caps.supportsFunctionCalling) modelDef.tool_call = true;
-    if (caps.supportsResponseSchema) modelDef.structured_output = true;
-    if (caps.supportsVision) modelDef.attachment = true;
+  extractFeatures: {
+    source: {
+      url: "https://api.venice.ai/api/v1/models",
+      type: "api",
+      description:
+        "Features from Venice AI API — reasoning, function calling, response schema, vision",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      const featuresMap = new Map<string, ExtractedFeatures>();
+      for (const m of models) {
+        const raw = m.raw as VeniceModel;
+        if (!raw) continue;
+        const caps = raw.model_spec.capabilities;
+        const features: ExtractedFeatures = {};
+        if (caps.supportsReasoning) features.reasoning = true;
+        if (caps.supportsFunctionCalling) features.tool_call = true;
+        if (caps.supportsResponseSchema) features.structured_output = true;
+        if (caps.supportsVision) features.attachment = true;
+        featuresMap.set(m.id, features);
+      }
+      return featuresMap;
+    },
+  },
 
-    models.push(defineModel(modelDef));
-  }
+  deriveName: {
+    execute: (modelId: string): string => {
+      // Venice model names are already human-readable
+      return modelId;
+    },
+  },
 
-  console.log(`  Venice: ${models.length} models`);
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /claude-opus/i, family: "claude-opus" },
+        { pattern: /claude-sonnet/i, family: "claude-sonnet" },
+        { pattern: /gpt-oss/i, family: "gpt-oss" },
+        { pattern: /gpt/i, family: "gpt" },
+        { pattern: /gemini/i, family: "gemini" },
+        { pattern: /gemma/i, family: "gemma" },
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /qwen-coder/i, family: "qwen-coder" },
+        { pattern: /qwen-vl/i, family: "qwen-vl" },
+        { pattern: /qwen/i, family: "qwen" },
+        { pattern: /glm/i, family: "glm" },
+        { pattern: /grok/i, family: "grok" },
+        { pattern: /mistral-small/i, family: "mistral-small" },
+        { pattern: /mistral/i, family: "mistral" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /kimi/i, family: "kimi" },
+        { pattern: /minimax/i, family: "minimax" },
+        { pattern: /nemotron/i, family: "nemotron" },
+        { pattern: /mercury/i, family: "mercury" },
+        { pattern: /arcee/i, family: "arcee" },
+        { pattern: /aion/i, family: "aion" },
+        { pattern: /hermes/i, family: "hermes" },
+        { pattern: /venice-uncensored/i, family: "venice-uncensored" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      if (lower.startsWith("e2ee-"))
+        return "e2ee-" + pipeline.deriveFamily.execute(lower.replace("e2ee-", ""));
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
 
+// ---------------------------------------------------------------------------
+// Main scrape function
+// ---------------------------------------------------------------------------
+
+export async function scrape(): Promise<ScrapeResult> {
+  const models = await runPipeline(pipeline);
   return { provider, models };
 }

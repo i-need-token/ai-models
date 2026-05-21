@@ -1,13 +1,10 @@
 id: qwen--qwq-32b
 name: Qwen/Qwq 32b
-family: qwq
-temperature: true
+family: qwen
 pricing:
   currency: USD
   input: 0.07
   output: 0.28
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
@@ -15,3 +12,4 @@ modalities:
     - text
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

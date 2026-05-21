@@ -1,8 +1,10 @@
 id: mistral-medium
 name: Mistral Medium
 family: mistral
-temperature: true
-tool_call: true
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
 limit:
   context: 128000
   output: 8192
@@ -11,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 2
+temperature: true
+tool_call: true
 release_date: 2025-05-07
-last_updated: 2026-05-17
+last_updated: 2026-05-18

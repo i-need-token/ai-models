@@ -1,7 +1,10 @@
 id: openai--gpt-oss-120b
-name: OpenAI GPT OSS 120B
-family: gpt-oss
-temperature: true
+name: Gpt Oss 120b
+family: openai
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.25
 limit:
   context: 131072
   output: 32768
@@ -11,12 +14,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.05
-  output: 0.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+last_updated: 2026-05-20

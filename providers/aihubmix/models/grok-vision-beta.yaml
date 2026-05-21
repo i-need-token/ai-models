@@ -1,16 +1,14 @@
 id: grok-vision-beta
 name: Grok Vision Beta
 family: grok
-temperature: true
 pricing:
   currency: USD
   input: 2.8
   output: 8.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
+last_updated: 2026-05-19

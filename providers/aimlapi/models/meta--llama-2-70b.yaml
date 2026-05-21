@@ -1,0 +1,16 @@
+id: meta--llama-2-70b
+name: Meta / Llama 2 70b
+family: meta
+pricing:
+  currency: USD
+  input: 0.945
+  output: 0.945
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

@@ -1,6 +1,12 @@
 id: alibaba--qwen3-coder-flash
 name: Qwen3 Coder Flash
 family: qwen
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.5
+  cache_read: 0.08
+  cache_write: 0.3
 limit:
   context: 1048576
   output: 65536
@@ -10,12 +16,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 1.5
-  cache_read: 0.08
-  cache_write: 0.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-07-24
+last_updated: 2025-07-24

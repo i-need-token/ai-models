@@ -1,15 +1,13 @@
 id: deepseek-ai--deepseek-r1-zero
 name: Deepseek Ai/Deepseek R1 Zero
-family: deepseek-r1
-temperature: true
+family: deepseek
 pricing:
   currency: USD
   input: 1.1
   output: 1.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

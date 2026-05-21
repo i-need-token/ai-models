@@ -1,8 +1,10 @@
 id: Llama-3.1-8B-Instruct
-name: Llama-3.1-8B-Instruct
-family: llama-3.1
-open_weights: true
-temperature: true
+name: Llama 3.1 8B Instruct
+family: llama
+pricing:
+  currency: USD
+  input: 0.11
+  output: 0.11
 limit:
   context: 131072
   output: 131072
@@ -11,9 +13,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.11
-  output: 0.11
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-06-11
+last_updated: 2025-06-11

@@ -1,7 +1,10 @@
 id: minimax-m2.5
 name: MiniMax M2.5
 family: minimax
-temperature: true
+pricing:
+  currency: EUR
+  input: 0.26
+  output: 1.04
 limit:
   context: 1000000
   output: 65536
@@ -10,11 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.26
-  output: 1.04
-release_date: 2025-06-01
-last_updated: 2026-05-17
+temperature: true
 tool_call: true
 structured_output: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

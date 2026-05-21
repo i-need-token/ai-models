@@ -1,18 +1,14 @@
 id: lfm2-24b-a2b
-name: LFM2 24B A2B
+name: Lfm2 24b A2b
 family: lfm
-temperature: true
+pricing:
+  currency: USD
+  input: 0.03
+  output: 0.12
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.03
-  output: 0.12
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 32768
-  output: 32768
+release_date: 2026-05-19
+last_updated: 2026-05-19

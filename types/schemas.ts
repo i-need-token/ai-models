@@ -105,7 +105,7 @@ export const ModelSchema = z.object({
   limit: LimitSchema.optional(),
   modalities: ModalitiesSchema,
   knowledge: z.string().optional(),
-  release_date: z.string(),
+  release_date: z.string().optional(),
   last_updated: z.string(),
   snapshots: z.array(SnapshotSchema).optional(),
 });

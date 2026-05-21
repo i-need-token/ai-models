@@ -1,6 +1,10 @@
 id: amazon--nova-2-lite-v1
-name: "Amazon: Nova 2 Lite"
+name: Nova 2 Lite V1
 family: amazon
+pricing:
+  currency: USD
+  input: 0.3
+  output: 2.5
 limit:
   context: 1000000
   output: 65535
@@ -12,11 +16,7 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 2.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-12-03
+last_updated: 2025-12-03

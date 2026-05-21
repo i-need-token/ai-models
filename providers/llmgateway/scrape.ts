@@ -1,8 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { ModelModality, Pricing } from "../../types/index";
-import * as fs from "fs";
-import * as path from "path";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing, ModelModality } from "../../types/index";
 
 const provider = defineProvider({
   id: "llmgateway",
@@ -15,25 +21,7 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Dynamic model data (from LLM Gateway public API)
-//
-// Sources:
-// - Model list & pricing: https://api.llmgateway.io/v1/models (public API)
-// - Context lengths: LLM Gateway API context_length field
-// - Modalities: LLM Gateway API architecture.input_modalities / output_modalities
-// - Max output tokens: catalog lookup from existing provider YAML files
-// - Cache pricing: LLM Gateway API pricing.input_cache_read / input_cache_write
-//
-// LLM Gateway is an inference platform and model router hosting models from
-// 16+ providers with per-token pricing. Pricing shown is LLM Gateway's
-// per-1M-token rate (USD), which is pass-through (0% markup).
-// Some models have prompt caching pricing (cache_read/cache_write).
-//
-// Model IDs are flat (no provider/ prefix) and lowercased for filesystem
-// consistency. The "custom" and "auto" routing models are excluded.
-// Deactivated models are excluded. Non-LLM models (embedding-only,
-// image-only, video-only) are excluded. Image generation models with
-// only per-request pricing (no per-token) are excluded.
+// Raw data types (from LLM Gateway API)
 // ---------------------------------------------------------------------------
 
 interface LLMGatewayModel {
@@ -66,11 +54,7 @@ interface LLMGatewayModel {
   providers: {
     providerId: string;
     modelName: string;
-    pricing: {
-      prompt: string;
-      completion: string;
-      image: string;
-    };
+    pricing: { prompt: string; completion: string; image: string };
     streaming: boolean;
     cancellation: boolean;
     tools: boolean;
@@ -81,9 +65,11 @@ interface LLMGatewayModel {
   stability: string | null;
 }
 
-const SKIP_IDS = new Set(["custom", "auto"]);
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
 
-// Output modalities that indicate non-LLM models
+const SKIP_IDS = new Set(["custom", "auto"]);
 const NON_LLM_OUTPUTS = new Set(["embedding", "video", "image"]);
 
 function parseModality(mod: string): ModelModality {
@@ -96,230 +82,240 @@ function parseModality(mod: string): ModelModality {
   return "text";
 }
 
-function parseModalities(
-  inputMods: string[],
-  outputMods: string[],
-): { input: ModelModality[]; output: ModelModality[] } {
-  const input = (inputMods.length > 0 ? inputMods : ["text"]).map(parseModality);
-  const output = (outputMods.length > 0 ? outputMods : ["text"]).map(parseModality);
-  return { input, output };
-}
-
 function toPerMTokens(perTokenStr: string): number {
   const perToken = parseFloat(perTokenStr);
-  if (perToken === 0) return 0;
+  if (perToken === 0 || isNaN(perToken)) return 0;
   const perMTokens = perToken * 1e6;
   return Math.round(perMTokens * 1e6) / 1e6;
 }
 
-// Build output limit lookup from existing catalog YAML files
-function buildCatalogLookup(): Map<string, number> {
-  const lookup = new Map<string, number>();
-  const providersDir = path.join(process.cwd(), "providers");
-  // Skip our own provider to avoid circular dependency (our own YAML files
-  // may have incorrect output limits from a previous run)
-  const selfId = "llmgateway";
-  try {
-    const entries = fs.readdirSync(providersDir);
-    for (const entry of entries) {
-      if (entry === selfId) continue; // Skip our own provider
-      const modelsDir = path.join(providersDir, entry, "models");
-      if (!fs.statSync(path.join(providersDir, entry)).isDirectory()) continue;
-      if (!fs.existsSync(modelsDir)) continue;
-      const yamlFiles = fs.readdirSync(modelsDir).filter((f) => f.endsWith(".yaml"));
-      for (const yf of yamlFiles) {
-        const content = fs.readFileSync(path.join(modelsDir, yf), "utf-8");
-        // Match id: at start of line
-        const idMatch = content.match(/^id:\s*(.+)$/m);
-        // Extract the limit section by finding "limit:" and reading until the next
-        // top-level key (a line that starts with a word character at column 0)
-        const limitStart = content.indexOf("limit:");
-        if (idMatch && limitStart !== -1) {
-          // Find the end of the limit section (next top-level key)
-          const afterLimit = content.slice(limitStart);
-          const nextKeyMatch = afterLimit.match(/\n\w/m);
-          const limitSection = nextKeyMatch
-            ? afterLimit.slice(0, nextKeyMatch.index as number)
-            : afterLimit;
-          const outputMatch = limitSection.match(/\n\s+output:\s*(\d+)/);
-          if (outputMatch) {
-            const id = idMatch[1] as string;
-            const output = parseInt(outputMatch[1] as string, 10);
-            // Only set if not already present (prefer first match from original producer)
-            if (output > 0 && !lookup.has(id)) {
-              lookup.set(id, output);
-            }
-          }
+async function fetchModels(): Promise<LLMGatewayModel[]> {
+  const response = await fetch("https://api.llmgateway.io/v1/models");
+  if (!response.ok) throw new Error(`Failed to fetch LLM Gateway models: ${response.status}`);
+  const data = (await response.json()) as { data: LLMGatewayModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.llmgateway.io/v1/models",
+      type: "api",
+      description:
+        "LLM Gateway models API — returns model list with pricing, context, capabilities, modalities",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      const discovered: DiscoveredModel[] = [];
+
+      for (const m of apiModels) {
+        if (SKIP_IDS.has(m.id)) continue;
+        if (m.deactivated_at) continue;
+
+        const outputMods = m.architecture.output_modalities;
+        const hasTextOutput = outputMods.includes("text");
+        const onlyNonLLM = outputMods.every((mod) => NON_LLM_OUTPUTS.has(mod));
+        if (onlyNonLLM) continue;
+
+        const promptPrice = parseFloat(m.pricing.prompt);
+        const completionPrice = parseFloat(m.pricing.completion);
+        const requestPrice = parseFloat(m.pricing.request);
+        if (!hasTextOutput && promptPrice === 0 && completionPrice === 0 && requestPrice > 0)
+          continue;
+        if (hasTextOutput && promptPrice === 0 && completionPrice === 0 && requestPrice > 0)
+          continue;
+        if (isNaN(promptPrice) || isNaN(completionPrice)) continue;
+
+        const flatId = m.id.toLowerCase();
+        discovered.push({ id: flatId, raw: m });
+      }
+
+      return discovered;
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://api.llmgateway.io/v1/models",
+      type: "api",
+      description: "Pricing from LLM Gateway API — per-token USD pricing converted to per-million",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      const pricingMap = new Map<string, Pricing>();
+
+      for (const m of models) {
+        const raw = m.raw as LLMGatewayModel;
+        if (!raw) continue;
+
+        const promptPrice = parseFloat(raw.pricing.prompt);
+        const completionPrice = parseFloat(raw.pricing.completion);
+
+        if (promptPrice === 0 && completionPrice === 0) {
+          pricingMap.set(m.id, { unit: "free" });
+        } else {
+          const p: Pricing = {
+            currency: "USD",
+            input: toPerMTokens(raw.pricing.prompt),
+            output: toPerMTokens(raw.pricing.completion),
+          };
+
+          const cacheRead = toPerMTokens(raw.pricing.input_cache_read);
+          if (cacheRead > 0) p.cache_read = cacheRead;
+
+          const cacheWrite = toPerMTokens(raw.pricing.input_cache_write);
+          if (cacheWrite > 0) p.cache_write = cacheWrite;
+
+          pricingMap.set(m.id, p);
         }
       }
-    }
-  } catch {
-    // Ignore errors - will use default output limit
-  }
-  return lookup;
-}
 
-// Derive family from API family field, with fallback mapping
-function deriveFamily(apiFamily: string, modelId: string): string {
-  // The API provides a family field - use it directly with some normalization
-  const family = apiFamily.toLowerCase();
+      return pricingMap;
+    },
+  },
 
-  if (family === "openai") {
-    if (modelId.startsWith("gpt-4o")) return "gpt-4o";
-    if (modelId.startsWith("gpt-4")) return "gpt-4";
-    if (modelId.startsWith("gpt-3.5")) return "gpt-3.5";
-    if (modelId.startsWith("gpt-5")) return "gpt-5";
-    if (modelId.startsWith("gpt-oss")) return "gpt-oss";
-    if (modelId.startsWith("o1")) return "o1";
-    if (modelId.startsWith("o3")) return "o3";
-    if (modelId.startsWith("o4")) return "o4";
-    return "gpt";
-  }
-  if (family === "anthropic") return "claude";
-  if (family === "google") return "gemini";
-  if (family === "meta") return "llama";
-  if (family === "deepseek") return "deepseek";
-  if (family === "mistral") return "mistral";
-  if (family === "xai") return "grok";
-  if (family === "glm" || family === "zai") return "glm";
-  if (family === "alibaba" || family === "qwen") return "qwen";
-  if (family === "moonshot") return "kimi";
-  if (family === "minimax") return "minimax";
-  if (family === "bytedance") return "seed";
-  if (family === "xiaomi") return "mimo";
-  if (family === "nousresearch") return "hermes";
-  if (family === "perplexity") return "sonar";
-  return family;
-}
+  extractDates: {
+    source: {
+      url: "https://api.llmgateway.io/v1/models",
+      type: "api",
+      description: "Dates from LLM Gateway API — no date field available",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      return new Map<string, ExtractedDates>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.llmgateway.io/v1/models",
+      type: "api",
+      description:
+        "Context window from LLM Gateway API — context_length field; output not available from API",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      const limitsMap = new Map<string, ExtractedLimit>();
+
+      for (const m of models) {
+        const raw = m.raw as LLMGatewayModel;
+        if (!raw) continue;
+
+        if (raw.context_length > 0) {
+          limitsMap.set(m.id, { context: raw.context_length });
+        }
+      }
+
+      return limitsMap;
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://api.llmgateway.io/v1/models",
+      type: "api",
+      description:
+        "Modalities from LLM Gateway API — architecture.input_modalities / output_modalities arrays",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      const modalitiesMap = new Map<string, ExtractedModalities>();
+
+      for (const m of models) {
+        const raw = m.raw as LLMGatewayModel;
+        if (!raw) continue;
+
+        const input = (
+          raw.architecture.input_modalities.length > 0
+            ? raw.architecture.input_modalities
+            : ["text"]
+        ).map(parseModality);
+        const output = (
+          raw.architecture.output_modalities.length > 0
+            ? raw.architecture.output_modalities
+            : ["text"]
+        ).map(parseModality);
+
+        modalitiesMap.set(m.id, { input, output });
+      }
+
+      return modalitiesMap;
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.llmgateway.io/v1/models",
+      type: "api",
+      description:
+        "Features from LLM Gateway API — providers.tools/reasoning + supported_parameters",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      const featuresMap = new Map<string, ExtractedFeatures>();
+
+      for (const m of models) {
+        const raw = m.raw as LLMGatewayModel;
+        if (!raw) continue;
+
+        const features: ExtractedFeatures = {};
+        const hasTools =
+          raw.providers.some((p) => p.tools) ||
+          raw.supported_parameters.includes("tools") ||
+          raw.supported_parameters.includes("tool_choice");
+        const hasReasoning =
+          raw.providers.some((p) => p.reasoning) ||
+          raw.supported_parameters.includes("include_reasoning") ||
+          raw.supported_parameters.includes("reasoning");
+
+        if (hasTools) features.tool_call = true;
+        if (hasReasoning) features.reasoning = true;
+
+        featuresMap.set(m.id, features);
+      }
+
+      return featuresMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      let name = modelId.replace(/-/g, " ").replace(/\b([a-z])/g, (c) => c.toUpperCase());
+      return name;
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      if (lower.includes("claude-opus")) return "claude-opus";
+      if (lower.includes("claude-sonnet")) return "claude-sonnet";
+      if (lower.includes("claude-haiku")) return "claude-haiku";
+      if (lower.includes("claude")) return "claude";
+      if (lower.includes("gpt-4o") || lower.includes("gpt-4") || lower.includes("gpt-5"))
+        return "gpt";
+      if (lower.includes("gpt-oss")) return "gpt-oss";
+      if (lower.includes("o4") || lower.includes("o3") || lower.includes("o1")) return "o";
+      if (lower.includes("gemini")) return "gemini";
+      if (lower.includes("llama")) return "llama";
+      if (lower.includes("deepseek")) return "deepseek";
+      if (lower.includes("qwen")) return "qwen";
+      if (lower.includes("mistral")) return "mistral";
+      if (lower.includes("grok")) return "grok";
+      if (lower.includes("glm")) return "glm";
+      if (lower.includes("kimi")) return "kimi";
+      if (lower.includes("minimax")) return "minimax";
+      if (lower.includes("phi")) return "phi";
+      if (lower.includes("command")) return "command";
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
+
+// ---------------------------------------------------------------------------
+// Main scrape function
+// ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const response = await fetch("https://api.llmgateway.io/v1/models");
-  if (!response.ok) {
-    throw new Error(`Failed to fetch LLM Gateway models: ${response.status}`);
-  }
-  const data = (await response.json()) as { data: LLMGatewayModel[] };
-  const apiModels = data.data;
-
-  const catalogLookup = buildCatalogLookup();
-
-  const models: ReturnType<typeof defineModel>[] = [];
-  const today = new Date().toISOString().split("T")[0] as string;
-
-  for (const m of apiModels) {
-    const id = m.id;
-
-    // Skip routing models
-    if (SKIP_IDS.has(id)) continue;
-
-    // Skip deactivated models
-    if (m.deactivated_at) continue;
-
-    // Skip non-LLM models (embedding-only, video-only, image-only)
-    const outputMods = m.architecture.output_modalities;
-    const hasTextOutput = outputMods.includes("text");
-    const onlyNonLLM = outputMods.every((mod) => NON_LLM_OUTPUTS.has(mod));
-    if (onlyNonLLM) continue;
-
-    // Skip image generation models with only per-request pricing
-    const promptPrice = parseFloat(m.pricing.prompt);
-    const completionPrice = parseFloat(m.pricing.completion);
-    const requestPrice = parseFloat(m.pricing.request);
-    if (!hasTextOutput && promptPrice === 0 && completionPrice === 0 && requestPrice > 0) continue;
-
-    // Also skip models where text output exists but pricing is only per-request
-    // (these are image gen models that also return text descriptions)
-    if (hasTextOutput && promptPrice === 0 && completionPrice === 0 && requestPrice > 0) continue;
-
-    // Flatten ID for filesystem (lowercase)
-    const flatId = id.toLowerCase();
-
-    // Trim name
-    const name = m.name.trim();
-
-    // Parse pricing
-    if (isNaN(promptPrice) || isNaN(completionPrice)) continue;
-
-    // Determine output limit from catalog lookup, default to 4096
-    const catalogOutput = catalogLookup.get(flatId);
-    const outputLimit = catalogOutput !== undefined ? catalogOutput : 4096;
-
-    // Parse modalities
-    const modalities = parseModalities(
-      m.architecture.input_modalities,
-      m.architecture.output_modalities,
-    );
-
-    // Free models (both prompt and completion = 0)
-    if (promptPrice === 0 && completionPrice === 0) {
-      const modelDef: Parameters<typeof defineModel>[0] = {
-        id: flatId,
-        name,
-        family: deriveFamily(m.family, id),
-        limit: {
-          context: m.context_length,
-          output: outputLimit,
-        },
-        modalities,
-        pricing: { unit: "free" },
-        release_date: today,
-        last_updated: today,
-      };
-
-      models.push(defineModel(modelDef));
-      continue;
-    }
-
-    // Paid models
-    const pricing: Pricing = {
-      currency: "USD",
-      input: toPerMTokens(m.pricing.prompt),
-      output: toPerMTokens(m.pricing.completion),
-    };
-
-    // Add cache_read if present and non-zero
-    const cacheRead = toPerMTokens(m.pricing.input_cache_read);
-    if (cacheRead > 0) {
-      pricing.cache_read = cacheRead;
-    }
-
-    // Add cache_write if present and non-zero
-    const cacheWrite = toPerMTokens(m.pricing.input_cache_write);
-    if (cacheWrite > 0) {
-      pricing.cache_write = cacheWrite;
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: flatId,
-      name,
-      family: deriveFamily(m.family, id),
-      limit: {
-        context: m.context_length,
-        output: outputLimit,
-      },
-      modalities,
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    // Check capabilities from providers
-    const hasTools =
-      m.providers.some((p) => p.tools) ||
-      m.supported_parameters.includes("tools") ||
-      m.supported_parameters.includes("tool_choice");
-    const hasReasoning =
-      m.providers.some((p) => p.reasoning) ||
-      m.supported_parameters.includes("include_reasoning") ||
-      m.supported_parameters.includes("reasoning");
-
-    if (hasTools) modelDef.tool_call = true;
-    if (hasReasoning) modelDef.reasoning = true;
-
-    models.push(defineModel(modelDef));
-  }
-
-  console.log(`  LLM Gateway: fetched ${apiModels.length} models from API`);
-  console.log(`  LLM Gateway: ${models.length} valid LLM models`);
-
+  const models = await runPipeline(pipeline);
   return { provider, models };
 }

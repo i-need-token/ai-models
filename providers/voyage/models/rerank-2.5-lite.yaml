@@ -1,17 +1,15 @@
 id: rerank-2.5-lite
 name: Rerank 2.5 Lite
 family: rerank
-limit:
-  context: 32000
+pricing:
+  currency: USD
+  input: 0.02
   output: 0
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.02
-  output: 0
+temperature: true
 release_date: 2025-03
-last_updated: 2026-05-17
+last_updated: 2026-05-18

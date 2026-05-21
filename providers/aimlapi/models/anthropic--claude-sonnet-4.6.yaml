@@ -1,0 +1,16 @@
+id: anthropic--claude-sonnet-4.6
+name: Anthropic / Claude Sonnet 4.6
+family: anthropic
+pricing:
+  currency: USD
+  input: 3.9
+  output: 19.5
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

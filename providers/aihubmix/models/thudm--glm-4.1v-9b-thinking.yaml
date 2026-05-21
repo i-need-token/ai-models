@@ -1,15 +1,13 @@
 id: thudm--glm-4.1v-9b-thinking
-name: "ChatGLM: Thudm/Glm 4.1v 9b Thinking"
-family: glm-4
-temperature: true
+name: Thudm/Glm 4.1v 9b Thinking
+family: glm
 pricing:
   currency: USD
   input: 0.05
   output: 0.05
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

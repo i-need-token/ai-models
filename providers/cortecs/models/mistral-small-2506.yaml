@@ -1,21 +1,17 @@
 id: mistral-small-2506
 name: mistral-small-2506
 family: mistral-small
-temperature: true
-limit:
-  context: 131072
-  output: 131072
+pricing:
+  currency: EUR
+  input: 0.1
+  output: 0.3
+  cache_read: 0.01
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.1
-  output: 0.3
-  cache_read: 0.01
-release_date: 2025-03-20
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-03-20
+last_updated: 2025-03-20

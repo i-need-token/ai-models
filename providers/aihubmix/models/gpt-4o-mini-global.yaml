@@ -1,16 +1,14 @@
 id: gpt-4o-mini-global
-name: "OpenAI: Gpt 4o Mini Global"
-family: gpt-4o
-temperature: true
+name: Gpt 4o Mini Global
+family: gpt
 pricing:
   currency: USD
   input: 0.075
   output: 0.3
   cache_read: 0.0375
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

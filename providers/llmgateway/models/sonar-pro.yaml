@@ -1,18 +1,14 @@
 id: sonar-pro
 name: Sonar Pro
 family: sonar
-limit:
-  context: 200000
-  output: 16384
+pricing:
+  currency: USD
+  input: 3
+  output: 15
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 3
-  output: 15
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

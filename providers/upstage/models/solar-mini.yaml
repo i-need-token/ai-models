@@ -1,9 +1,10 @@
 id: solar-mini
 name: Solar Mini
 family: solar
-temperature: true
-tool_call: true
-open_weights: true
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.15
 limit:
   context: 32768
   output: 4096
@@ -12,9 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.15
+temperature: true
+tool_call: true
+open_weights: true
 release_date: 2024-06-12
-last_updated: 2026-05-17
+last_updated: 2026-05-18

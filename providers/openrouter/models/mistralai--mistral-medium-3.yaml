@@ -1,9 +1,11 @@
 id: mistralai--mistral-medium-3
-name: "Mistral: Mistral Medium 3"
+name: Mistral Medium 3
 family: mistral
-limit:
-  context: 131072
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
+  cache_read: 0.04
 modalities:
   input:
     - text
@@ -11,11 +13,7 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 2
-  cache_read: 0.04
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-05-07
+last_updated: 2025-05-07

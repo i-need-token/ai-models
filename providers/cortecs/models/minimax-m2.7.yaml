@@ -1,21 +1,17 @@
 id: minimax-m2.7
 name: minimax-m2.7
 family: minimax
-temperature: true
-limit:
-  context: 196608
-  output: 196608
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: EUR
   input: 0.444
   output: 1.331
   cache_read: 0.111
-release_date: 2026-04-13
-last_updated: 2026-05-17
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+release_date: 2026-04-13
+last_updated: 2026-04-13

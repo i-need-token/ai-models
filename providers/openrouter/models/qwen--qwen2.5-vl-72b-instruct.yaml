@@ -1,18 +1,16 @@
 id: qwen--qwen2.5-vl-72b-instruct
-name: "Qwen: Qwen2.5 VL 72B Instruct"
+name: Qwen2.5 Vl 72b Instruct
 family: qwen
-limit:
-  context: 131072
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.25
+  output: 0.75
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.25
-  output: 0.75
-release_date: 2026-05-17
-last_updated: 2026-05-17
+structured_output: true
+release_date: 2025-02-01
+last_updated: 2025-02-01

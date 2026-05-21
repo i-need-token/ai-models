@@ -1,21 +1,16 @@
 id: claude-3-5-haiku
-name: "Anthropic: Claude 3 5 Haiku"
-family: claude-haiku
-temperature: true
+name: Claude 3 5 Haiku
+family: claude
 pricing:
   currency: USD
   input: 0.55
   output: 2.75
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
-limit:
-  context: 200000
-  output: 16384
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

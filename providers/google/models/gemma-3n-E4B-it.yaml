@@ -1,0 +1,19 @@
+id: gemma-3n-E4B-it
+name: Gemma 3n E4B IT
+family: gemma-3n
+pricing:
+  unit: free
+limit:
+  context: 131072
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+    - audio
+    - video
+  output:
+    - text
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

@@ -1,18 +1,14 @@
 id: gpt-4
-name: GPT-4
-family: gpt-4
-limit:
-  context: 8192
-  output: 8192
+name: Gpt 4
+family: gpt
+pricing:
+  currency: USD
+  input: 30
+  output: 60
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 30
-  output: 60
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

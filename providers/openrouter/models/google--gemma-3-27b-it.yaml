@@ -1,6 +1,10 @@
 id: google--gemma-3-27b-it
-name: "Google: Gemma 3 27B"
+name: Gemma 3 27b It
 family: gemma
+pricing:
+  currency: USD
+  input: 0.08
+  output: 0.16
 limit:
   context: 131072
   output: 16384
@@ -10,10 +14,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.08
-  output: 0.16
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-03-12
+last_updated: 2025-03-12

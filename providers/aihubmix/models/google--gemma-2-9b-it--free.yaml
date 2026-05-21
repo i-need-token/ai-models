@@ -1,15 +1,13 @@
 id: google--gemma-2-9b-it--free
 name: Google/Gemma 2 9b It/Free
-family: other
-temperature: true
+family: google/gemma
 pricing:
   currency: USD
   input: 0.01
   output: 0.01
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

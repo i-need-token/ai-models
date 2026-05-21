@@ -1,7 +1,10 @@
 id: e2ee-gpt-oss-20b-p
-name: GPT OSS 20B
+name: e2ee-gpt-oss-20b-p
 family: gpt-oss
-temperature: true
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.19
 limit:
   context: 128000
   output: 32768
@@ -10,10 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.05
-  output: 0.19
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+release_date: 2026-03-18
+last_updated: 2026-03-18

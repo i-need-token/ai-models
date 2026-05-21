@@ -1,6 +1,10 @@
 id: baidu--ernie-4.5-21b-a3b
-name: "Baidu: ERNIE 4.5 21B A3B"
-family: cobuddy
+name: Ernie 4.5 21b A3b
+family: baidu
+pricing:
+  currency: USD
+  input: 0.07
+  output: 0.28
 limit:
   context: 131072
   output: 8000
@@ -9,10 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.07
-  output: 0.28
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-08-13
+last_updated: 2025-08-13

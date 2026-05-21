@@ -1,15 +1,13 @@
 id: groq-llama-4-scout-17b-16e-instruct
-name: "Llama: Groq Llama 4 Scout 17b 16e Instruct"
-family: llama-4
-temperature: true
+name: Groq Llama 4 Scout 17b 16e Instruct
+family: llama
 pricing:
   currency: USD
   input: 0.061
   output: 0.183
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

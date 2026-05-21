@@ -1,20 +1,19 @@
 id: deepseek-v3
-name: DeepSeek V3
+name: Deepseek V3
 family: deepseek
-temperature: true
+pricing:
+  currency: USD
+  input: 0.32
+  output: 0.89
+limit:
+  context: 163840
+  output: 16384
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.32
-  output: 0.89
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 163840
-  output: 16384
 tool_call: true
 structured_output: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

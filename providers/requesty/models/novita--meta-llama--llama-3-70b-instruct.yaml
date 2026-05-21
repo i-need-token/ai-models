@@ -1,19 +1,16 @@
 id: novita--meta-llama--llama-3-70b-instruct
 name: Llama 3 70b Instruct
 family: novita
-limit:
-  context: 8192
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.51
   output: 0.74
   cache_read: 0.51
   cache_write: 0.51
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2025-02-07
+last_updated: 2025-02-07

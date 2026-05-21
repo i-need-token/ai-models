@@ -1,19 +1,16 @@
 id: novita--meta-llama--llama-3.1-8b-instruct
 name: Llama 3.1 8b Instruct
 family: novita
-limit:
-  context: 16384
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.05
   output: 0.05
   cache_read: 0.05
   cache_write: 0.05
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2025-02-07
+last_updated: 2025-02-07

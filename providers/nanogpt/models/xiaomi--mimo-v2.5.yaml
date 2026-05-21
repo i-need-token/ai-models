@@ -1,20 +1,14 @@
 id: xiaomi--mimo-v2.5
 name: "Xiaomi: mimo v2.5"
 family: mimo
-temperature: true
-limit:
-  context: 131072
-  output: 16384
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
 pricing:
-  unit: per_mtok
+  currency: USD
   input: 0.4
   output: 2
   cache_read: 0.08
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-05-20

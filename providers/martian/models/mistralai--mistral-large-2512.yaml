@@ -1,22 +1,15 @@
 id: mistralai--mistral-large-2512
 name: Mistral Large 2512
-family: mistral-large
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 262144
-  output: 1
-modalities:
-  input:
-    - text
-  output:
-    - text
+family: mistral
 pricing:
   currency: USD
   input: 0.5
   output: 1.5
   cache_read: 0.05
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-03-17
-last_updated: 2026-05-17
+last_updated: 2026-03-17

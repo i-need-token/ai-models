@@ -1,22 +1,18 @@
 id: mistral-medium-2508
 name: mistral-medium-2508
-family: mistral-medium
-temperature: true
-limit:
-  context: 128000
-  output: 128000
+family: mistral
+pricing:
+  currency: EUR
+  input: 0.4
+  output: 2
+  cache_read: 0.04
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.4
-  output: 2
-  cache_read: 0.04
-release_date: 2024-08-07
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2024-08-07
+last_updated: 2024-08-07

@@ -1,7 +1,11 @@
 id: deepseek-ai--DeepSeek-V3.2
-name: DeepSeek-V3.2
+name: DeepSeek V3.2
 family: deepseek
-temperature: true
+pricing:
+  currency: USD
+  input: 0.5
+  output: 1.5
+  cache_read: 0.25
 limit:
   context: 163840
   output: 163840
@@ -10,12 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.5
-  output: 1.5
-  cache_read: 0.25
-release_date: 2026-09-09
-last_updated: 2026-05-17
 tool_call: true
 structured_output: true
+release_date: 2026-09-09
+last_updated: 2026-09-09

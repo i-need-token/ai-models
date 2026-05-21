@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing, ModelModality } from "../../types/index";
 
 const provider = defineProvider({
   id: "cortecs",
@@ -13,17 +21,7 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Dynamic scrape from Cortecs API
-//
-// Source: https://api.cortecs.ai/v1/models (no auth required)
-//
-// Cortecs is an inference platform hosting models from other providers
-// (Alibaba, Anthropic, DeepSeek, Google, Meta, Mistral, MiniMax, Moonshot,
-// NousResearch, Nvidia, OpenAI, Z.ai, Amazon, H Company, PrimeIntellect)
-// with per-token EUR pricing.
-//
-// Pricing: input_token/output_token fields = EUR per million tokens
-// Model IDs: flat format (no "/" separator)
+// Raw data types (from Cortecs API)
 // ---------------------------------------------------------------------------
 
 interface CortecsModel {
@@ -44,153 +42,191 @@ interface CortecsModel {
 }
 
 // ---------------------------------------------------------------------------
-// Family derivation
+// API fetch helper
 // ---------------------------------------------------------------------------
 
-function deriveFamily(id: string): string {
-  const lower = id.toLowerCase();
-  if (lower.includes("deepseek")) return "deepseek";
-  if (lower.includes("qwen3-coder")) return "qwen-coder";
-  if (lower.includes("qwen3.6")) return "qwen3.6";
-  if (lower.includes("qwen3.5")) return "qwen3.5";
-  if (lower.includes("qwen3")) return "qwen3";
-  if (lower.includes("qwen2.5")) return "qwen2.5";
-  if (lower.includes("qwen")) return "qwen";
-  if (lower.includes("llama-4")) return "llama-4";
-  if (lower.includes("llama-3")) return "llama-3";
-  if (lower.includes("glm")) return "glm";
-  if (lower.includes("minimax")) return "minimax";
-  if (lower.includes("mistral-large")) return "mistral-large";
-  if (lower.includes("mistral-medium")) return "mistral-medium";
-  if (lower.includes("mistral-small")) return "mistral-small";
-  if (lower.includes("mistral-nemo")) return "mistral-nemo";
-  if (lower.includes("ministral")) return "ministral";
-  if (lower.includes("magistral")) return "magistral";
-  if (lower.includes("mistral-7b")) return "mistral-7b";
-  if (lower.includes("mistral")) return "mistral";
-  if (lower.includes("codestral")) return "codestral";
-  if (lower.includes("devstral")) return "devstral";
-  if (lower.includes("pixtral")) return "pixtral";
-  if (lower.includes("mixtral")) return "mixtral";
-  if (lower.includes("voxtral")) return "voxtral";
-  if (lower.includes("claude")) return "claude";
-  if (lower.includes("gpt-5")) return "gpt-5";
-  if (lower.includes("gpt-4")) return "gpt-4";
-  if (lower.includes("gpt-oss")) return "gpt-oss";
-  if (lower.includes("gemini")) return "gemini";
-  if (lower.includes("gemma")) return "gemma";
-  if (lower.includes("kimi")) return "kimi";
-  if (lower.includes("hermes")) return "hermes";
-  if (lower.includes("nemotron")) return "nemotron";
-  if (lower.includes("nova")) return "nova";
-  if (lower.includes("holo")) return "holo";
-  if (lower.includes("intellect")) return "intellect";
-  if (lower.includes("codellama")) return "codellama";
-  return "other";
-}
-
-// ---------------------------------------------------------------------------
-// Modality mapping from tags
-// ---------------------------------------------------------------------------
-
-const TAG_MODALITY_MAP: Record<string, ModelModality | undefined> = {
-  Image: "image",
-  Audio: "audio",
-};
-
-function mapModalities(tags: string[]): { input: ModelModality[]; output: ModelModality[] } {
-  const input: ModelModality[] = ["text"];
-  const output: ModelModality[] = ["text"];
-
-  for (const tag of tags) {
-    const mapped = TAG_MODALITY_MAP[tag];
-    if (mapped) {
-      input.push(mapped);
-    }
-  }
-
-  return { input, output };
-}
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
-
-function timestampToDate(ts: number): string {
-  const d = new Date(ts * 1000);
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-}
-
-// ---------------------------------------------------------------------------
-// Scrape function
-// ---------------------------------------------------------------------------
-
-export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
+async function fetchModels(): Promise<CortecsModel[]> {
   const response = await fetch("https://api.cortecs.ai/v1/models");
   if (!response.ok) {
     throw new Error(`Failed to fetch Cortecs models: ${response.status}`);
   }
-
   const data = (await response.json()) as { data: CortecsModel[] };
-  const apiModels = data.data;
+  return data.data;
+}
 
-  for (const m of apiModels) {
-    // Skip safety-guard models with zero pricing
-    if (m.pricing.input_token === 0 && m.pricing.output_token === 0) {
-      console.warn(`  Skipping ${m.id}: zero pricing (safety-guard)`);
-      continue;
-    }
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
 
-    const pricing: Pricing = {
-      currency: "EUR",
-      input: m.pricing.input_token,
-      output: m.pricing.output_token,
-    };
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.cortecs.ai/v1/models",
+      type: "api",
+      description: "Cortecs models API — returns model list with pricing, context, tags",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      const discovered: DiscoveredModel[] = [];
+      for (const m of apiModels) {
+        if (m.pricing.input_token === 0 && m.pricing.output_token === 0) continue;
+        discovered.push({ id: m.id, raw: m });
+      }
+      return discovered;
+    },
+  },
 
-    // Add cache_read pricing if available and positive
-    if (
-      m.pricing.cache_read_cost !== undefined &&
-      m.pricing.cache_read_cost !== null &&
-      m.pricing.cache_read_cost > 0
-    ) {
-      (pricing as { cache_read?: number }).cache_read =
-        Math.round(m.pricing.cache_read_cost * 1e6) / 1e6;
-    }
+  extractPricing: {
+    source: {
+      url: "https://api.cortecs.ai/v1/models",
+      type: "api",
+      description: "Pricing from Cortecs API — per-million-token EUR pricing with cache_read",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      const pricingMap = new Map<string, Pricing>();
+      for (const m of models) {
+        const raw = m.raw as CortecsModel;
+        if (!raw) continue;
+        const p: Pricing = {
+          currency:
+            raw.pricing.currency === "USD" ||
+            raw.pricing.currency === "CNY" ||
+            raw.pricing.currency === "EUR"
+              ? raw.pricing.currency
+              : "EUR",
+          input: raw.pricing.input_token,
+          output: raw.pricing.output_token,
+        };
+        if (raw.pricing.cache_read_cost != null && raw.pricing.cache_read_cost > 0) {
+          (p as { cache_read?: number }).cache_read =
+            Math.round(raw.pricing.cache_read_cost * 1e6) / 1e6;
+        }
+        pricingMap.set(m.id, p);
+      }
+      return pricingMap;
+    },
+  },
 
-    const modalities = mapModalities(m.tags);
+  extractDates: {
+    source: {
+      url: "https://api.cortecs.ai/v1/models",
+      type: "api",
+      description: "Dates from Cortecs API — created timestamp field",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+      for (const m of models) {
+        const raw = m.raw as CortecsModel;
+        if (!raw || !raw.created) continue;
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+      return datesMap;
+    },
+  },
 
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: m.id,
-      name: m.id,
-      family: deriveFamily(m.id),
-      temperature: true,
-      limit: { context: m.context_size, output: m.context_size },
-      modalities,
-      pricing,
-      release_date: m.created > 0 ? timestampToDate(m.created) : today,
-      last_updated: today,
-    };
+  extractLimits: {
+    source: {
+      url: "https://api.cortecs.ai/v1/models",
+      type: "api",
+      description: "Context window from Cortecs API — context_size field",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      const limitsMap = new Map<string, ExtractedLimit>();
+      for (const m of models) {
+        const raw = m.raw as CortecsModel;
+        if (!raw) continue;
+        if (raw.context_size > 0) {
+          limitsMap.set(m.id, { context: raw.context_size });
+        }
+      }
+      return limitsMap;
+    },
+  },
 
-    // Map tags to features
-    const tags = m.tags || [];
-    if (tags.includes("Tools")) modelDef.tool_call = true;
-    if (tags.includes("Reasoning")) modelDef.reasoning = true;
-    if (tags.includes("Code")) {
-      // Code is not a direct feature flag, but indicates coding capability
-    }
+  extractModalities: {
+    source: {
+      url: "https://api.cortecs.ai/v1/models",
+      type: "api",
+      description: "Modalities from Cortecs API — tags field (Image, Audio)",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      const modalitiesMap = new Map<string, ExtractedModalities>();
+      const TAG_MODALITY_MAP: Record<string, ModelModality | undefined> = {
+        Image: "image",
+        Audio: "audio",
+      };
+      for (const m of models) {
+        const raw = m.raw as CortecsModel;
+        if (!raw) continue;
+        const input: ModelModality[] = ["text"];
+        for (const tag of raw.tags) {
+          const mapped = TAG_MODALITY_MAP[tag];
+          if (mapped) input.push(mapped);
+        }
+        modalitiesMap.set(m.id, { input });
+      }
+      return modalitiesMap;
+    },
+  },
 
-    models.push(defineModel(modelDef));
-  }
+  extractFeatures: {
+    source: {
+      url: "https://api.cortecs.ai/v1/models",
+      type: "api",
+      description: "Features from Cortecs API — tags field (Tools, Reasoning)",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      const featuresMap = new Map<string, ExtractedFeatures>();
+      for (const m of models) {
+        const raw = m.raw as CortecsModel;
+        if (!raw) continue;
+        const features: ExtractedFeatures = {};
+        if (raw.tags.includes("Tools")) features.tool_call = true;
+        if (raw.tags.includes("Reasoning")) features.reasoning = true;
+        featuresMap.set(m.id, features);
+      }
+      return featuresMap;
+    },
+  },
 
-  console.log(`  Cortecs: ${models.length} models`);
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId;
+    },
+  },
 
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /qwen3-coder/i, family: "qwen-coder" },
+        { pattern: /qwen/i, family: "qwen" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /glm/i, family: "glm" },
+        { pattern: /minimax/i, family: "minimax" },
+        { pattern: /mistral-large/i, family: "mistral-large" },
+        { pattern: /mistral-small/i, family: "mistral-small" },
+        { pattern: /claude/i, family: "claude" },
+        { pattern: /gpt/i, family: "gpt" },
+        { pattern: /gemini/i, family: "gemini" },
+        { pattern: /gemma/i, family: "gemma" },
+        { pattern: /kimi/i, family: "kimi" },
+        { pattern: /hermes/i, family: "hermes" },
+        { pattern: /nemotron/i, family: "nemotron" },
+        { pattern: /nova/i, family: "nova" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
+
+export async function scrape(): Promise<ScrapeResult> {
+  const models = await runPipeline(pipeline);
   return { provider, models };
 }

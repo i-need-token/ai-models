@@ -1,7 +1,10 @@
 id: Qwen--Qwen2.5-VL-7B-Instruct
-name: Qwen2.5-VL 7B
-family: qwen2.5-vl
-temperature: true
+name: Qwen2.5 VL 7B Instruct
+family: qwen
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.3
 limit:
   context: 32768
   output: 32768
@@ -11,9 +14,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  input: 0.3
-  output: 0.3
-release_date: 2025-01-28
-last_updated: 2026-05-17
 open_weights: true
+release_date: 2025-01-28
+last_updated: 2025-01-28

@@ -1,20 +1,17 @@
 id: together--meta-llama--meta-llama-3.1-8b-instruct-turbo
-name: Meta Llama 3.1 8B Instruct Turbo
-family: llama
-limit:
-  context: 131072
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Meta Llama 3.1 8b Instruct Turbo
+family: together
 pricing:
   currency: USD
   input: 0.18
   output: 0.18
   cache_read: 0.18
   cache_write: 0.18
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2025-01-31
+last_updated: 2025-01-31

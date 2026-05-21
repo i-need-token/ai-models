@@ -1,6 +1,8 @@
 id: arcee-ai--trinity-large-thinking--free
-name: "Arcee AI: Trinity Large Thinking (free)"
-family: arcee
+name: Free
+family: arcee-ai
+pricing:
+  unit: free
 limit:
   context: 262144
   output: 80000
@@ -9,7 +11,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
+reasoning: true
+tool_call: true
+release_date: 2026-04-01
+last_updated: 2026-04-01

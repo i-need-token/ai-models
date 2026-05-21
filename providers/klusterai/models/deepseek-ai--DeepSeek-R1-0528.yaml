@@ -1,7 +1,10 @@
 id: deepseek-ai--DeepSeek-R1-0528
-name: DeepSeek-R1-0528
-family: deepseek-r1
-temperature: true
+name: DeepSeek R1 0528
+family: deepseek
+pricing:
+  currency: USD
+  input: 2.5
+  output: 5
 limit:
   context: 163840
   output: 163840
@@ -10,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  input: 2.5
-  output: 5
-release_date: 2025-05-28
-last_updated: 2026-05-17
 reasoning: true
 open_weights: true
+release_date: 2025-05-28
+last_updated: 2025-05-28

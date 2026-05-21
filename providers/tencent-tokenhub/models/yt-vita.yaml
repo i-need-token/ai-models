@@ -1,8 +1,10 @@
 id: yt-vita
 name: YT VITA
 family: yt-vision
-temperature: true
-attachment: true
+pricing:
+  currency: CNY
+  input: 1.2
+  output: 3.5
 limit:
   context: 32000
   output: 8000
@@ -13,9 +15,7 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: CNY
-  input: 1.2
-  output: 3.5
+temperature: true
+attachment: true
 release_date: 2026-05-16
-last_updated: 2026-05-17
+last_updated: 2026-05-18

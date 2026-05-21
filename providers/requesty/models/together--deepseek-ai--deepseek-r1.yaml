@@ -1,6 +1,12 @@
 id: together--deepseek-ai--deepseek-r1
-name: DeepSeek R1
-family: deepseek
+name: Deepseek R1
+family: together
+pricing:
+  currency: USD
+  input: 3
+  output: 7
+  cache_read: 3
+  cache_write: 7
 limit:
   context: 64000
   output: 8192
@@ -9,11 +15,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 3
-  output: 7
-  cache_read: 3
-  cache_write: 7
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-05-31
+last_updated: 2025-05-31

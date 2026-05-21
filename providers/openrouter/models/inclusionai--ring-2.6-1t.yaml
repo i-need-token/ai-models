@@ -1,6 +1,11 @@
 id: inclusionai--ring-2.6-1t
-name: "inclusionAI: Ring-2.6-1T"
+name: Ring 2.6 1t
 family: inclusionai
+pricing:
+  currency: USD
+  input: 0.075
+  output: 0.625
+  cache_read: 0.015
 limit:
   context: 262144
   output: 65536
@@ -9,12 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.075
-  output: 0.625
-  cache_read: 0.015
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-05-08
+last_updated: 2026-05-08

@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { ModelModality, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing, ModelModality } from "../../types/index";
 
 const provider = defineProvider({
   id: "requesty",
@@ -12,22 +20,7 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Dynamic model data (from Requesty public API)
-//
-// Sources:
-// - Model list & pricing: https://router.requesty.ai/v1/models (public API)
-// - Context lengths: Requesty API context_window field
-// - Max output tokens: Requesty API max_output_tokens field
-// - Modalities: Requesty API supports_vision field
-// - Cache pricing: Requesty API caching_price / cached_price fields
-// - Capabilities: Requesty API supports_tool_calling / supports_reasoning
-//
-// Requesty is a gateway/router platform with 5% markup on provider pricing.
-// Pricing shown is Requesty's per-1M-token rate (USD).
-//
-// Model IDs use "--" instead of "/" to avoid filesystem issues.
-// Models with @region suffix are excluded (regional variants).
-// Models with "coding/" prefix are excluded (routing models).
+// Raw data types (from Requesty API)
 // ---------------------------------------------------------------------------
 
 interface RequestyModel {
@@ -53,75 +46,17 @@ interface RequestyModel {
   geolocation: string;
 }
 
-function deriveFamily(id: string): string {
-  const parts = id.split("/");
-  if (parts.length < 2) return "other";
-  const provider = parts[0] as string;
-  const model = (parts[1] as string).toLowerCase();
+// ---------------------------------------------------------------------------
+// API fetch helper
+// ---------------------------------------------------------------------------
 
-  if (provider === "anthropic") return "claude";
-  if (provider === "openai" || provider === "openai-responses") {
-    if (model.startsWith("gpt-4o")) return "gpt-4o";
-    if (model.startsWith("gpt-4")) return "gpt-4";
-    if (model.startsWith("gpt-3.5")) return "gpt-3.5";
-    if (model.startsWith("gpt-5")) return "gpt-5";
-    if (model.startsWith("o1")) return "o1";
-    if (model.startsWith("o3")) return "o3";
-    if (model.startsWith("o4")) return "o4";
-    if (model.startsWith("chatgpt")) return "chatgpt";
-    return "gpt";
+async function fetchModels(): Promise<RequestyModel[]> {
+  const response = await fetch("https://router.requesty.ai/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Requesty models: ${response.status}`);
   }
-  if (provider === "google") {
-    if (model.startsWith("gemini")) return "gemini";
-    if (model.startsWith("gemma")) return "gemma";
-    return "google";
-  }
-  if (provider === "vertex") {
-    if (model.startsWith("claude")) return "claude";
-    if (model.startsWith("gemini")) return "gemini";
-    return "vertex";
-  }
-  if (provider === "azure") {
-    if (model.startsWith("claude")) return "claude";
-    if (model.startsWith("gpt")) return "gpt";
-    return "azure";
-  }
-  if (provider === "bedrock") {
-    if (model.startsWith("claude")) return "claude";
-    return "bedrock";
-  }
-  if (provider === "deepseek") return "deepseek";
-  if (provider === "xai") return "grok";
-  if (provider === "mistral") return "mistral";
-  if (provider === "together") {
-    if (model.includes("llama")) return "llama";
-    if (model.includes("qwen")) return "qwen";
-    if (model.includes("deepseek")) return "deepseek";
-    return "together";
-  }
-  if (provider === "fireworks") {
-    if (model.includes("llama")) return "llama";
-    if (model.includes("qwen")) return "qwen";
-    if (model.includes("deepseek")) return "deepseek";
-    return "fireworks";
-  }
-  if (provider === "novita") return "novita";
-  if (provider === "deepinfra") {
-    if (model.includes("llama")) return "llama";
-    if (model.includes("qwen")) return "qwen";
-    if (model.includes("deepseek")) return "deepseek";
-    return "deepinfra";
-  }
-  if (provider === "alibaba") return "qwen";
-  if (provider === "moonshot") return "kimi";
-  if (provider === "minimaxi") return "minimax";
-  if (provider === "perplexity") return "sonar";
-  if (provider === "zai") return "glm";
-  if (provider === "nebius") return "nebius";
-  if (provider === "groq") return "groq";
-  if (provider === "parasail") return "parasail";
-  if (provider === "inceptron") return "inceptron";
-  return provider;
+  const data = (await response.json()) as { data: RequestyModel[] };
+  return data.data;
 }
 
 function toPerMTokens(perToken: number): number {
@@ -130,95 +65,174 @@ function toPerMTokens(perToken: number): number {
   return Math.round(perMTokens * 1e6) / 1e6;
 }
 
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://router.requesty.ai/v1/models",
+      type: "api",
+      description: "Requesty models API — returns model list with pricing, context, capabilities",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      const discovered: DiscoveredModel[] = [];
+      for (const m of apiModels) {
+        if (m.id.includes("@")) continue;
+        if (m.id.startsWith("coding/")) continue;
+        if (m.input_price === 0 && m.output_price === 0) continue;
+        const flatId = m.id.replace(/\//g, "--").toLowerCase();
+        discovered.push({ id: flatId, raw: m });
+      }
+      return discovered;
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://router.requesty.ai/v1/models",
+      type: "api",
+      description: "Pricing from Requesty API — per-token USD pricing converted to per-million",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      const pricingMap = new Map<string, Pricing>();
+      for (const m of models) {
+        const raw = m.raw as RequestyModel;
+        if (!raw) continue;
+        const p: Pricing = {
+          currency: "USD",
+          input: toPerMTokens(raw.input_price),
+          output: toPerMTokens(raw.output_price),
+        };
+        if (raw.cached_price > 0) p.cache_read = toPerMTokens(raw.cached_price);
+        if (raw.caching_price > 0) p.cache_write = toPerMTokens(raw.caching_price);
+        pricingMap.set(m.id, p);
+      }
+      return pricingMap;
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://router.requesty.ai/v1/models",
+      type: "api",
+      description: "Dates from Requesty API — created timestamp field",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+      for (const m of models) {
+        const raw = m.raw as RequestyModel;
+        if (!raw || !raw.created) continue;
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+      return datesMap;
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://router.requesty.ai/v1/models",
+      type: "api",
+      description: "Context window and max output from Requesty API",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      const limitsMap = new Map<string, ExtractedLimit>();
+      for (const m of models) {
+        const raw = m.raw as RequestyModel;
+        if (!raw) continue;
+        if (raw.context_window > 0) {
+          limitsMap.set(m.id, {
+            context: raw.context_window,
+            ...(raw.max_output_tokens > 0 ? { output: raw.max_output_tokens } : {}),
+          });
+        }
+      }
+      return limitsMap;
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://router.requesty.ai/v1/models",
+      type: "api",
+      description: "Modalities from Requesty API — supports_vision field",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      const modalitiesMap = new Map<string, ExtractedModalities>();
+      for (const m of models) {
+        const raw = m.raw as RequestyModel;
+        if (!raw) continue;
+        const input: ModelModality[] = ["text"];
+        if (raw.supports_vision) input.push("image");
+        modalitiesMap.set(m.id, { input });
+      }
+      return modalitiesMap;
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://router.requesty.ai/v1/models",
+      type: "api",
+      description: "Features from Requesty API — supports_tool_calling, supports_reasoning",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      const featuresMap = new Map<string, ExtractedFeatures>();
+      for (const m of models) {
+        const raw = m.raw as RequestyModel;
+        if (!raw) continue;
+        const features: ExtractedFeatures = {};
+        if (raw.supports_tool_calling) features.tool_call = true;
+        if (raw.supports_reasoning) features.reasoning = true;
+        featuresMap.set(m.id, features);
+      }
+      return featuresMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      let name = modelId.replace(/--/g, "/").split("/").pop() || modelId;
+      name = name.replace(/[-_]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+      return name;
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const parts = modelId.split("--");
+      if (parts.length < 2) return modelId.split("-")[0] ?? modelId;
+      const prov = parts[0] as string;
+      const model = (parts[1] as string).toLowerCase();
+      if (prov === "anthropic") return "claude";
+      if (prov === "openai" || prov === "openai-responses") {
+        if (model.startsWith("gpt-4o") || model.startsWith("gpt-4") || model.startsWith("gpt-5"))
+          return "gpt";
+        if (model.startsWith("o3") || model.startsWith("o4")) return "o";
+        return "gpt";
+      }
+      if (prov === "google") {
+        if (model.startsWith("gemini")) return "gemini";
+        if (model.startsWith("gemma")) return "gemma";
+        return "google";
+      }
+      if (prov === "deepseek") return "deepseek";
+      if (prov === "xai") return "grok";
+      if (prov === "mistral") return "mistral";
+      if (prov === "alibaba") return "qwen";
+      if (prov === "moonshot") return "kimi";
+      if (prov === "zai") return "glm";
+      if (prov === "perplexity") return "sonar";
+      return prov;
+    },
+  },
+};
+
 export async function scrape(): Promise<ScrapeResult> {
-  const response = await fetch("https://router.requesty.ai/v1/models");
-  if (!response.ok) {
-    throw new Error(`Failed to fetch Requesty models: ${response.status}`);
-  }
-  const data = (await response.json()) as { data: RequestyModel[] };
-  const apiModels = data.data;
-
-  const models: ReturnType<typeof defineModel>[] = [];
-  const today = new Date().toISOString().split("T")[0] as string;
-
-  for (const m of apiModels) {
-    const id = m.id;
-
-    // Skip models with @region suffix (regional variants)
-    if (id.includes("@")) continue;
-
-    // Skip coding/ prefix (Requesty routing models)
-    if (id.startsWith("coding/")) continue;
-
-    // Flatten ID for filesystem (lowercase, replace / with --)
-    const flatId = id.replace(/\//g, "--").toLowerCase();
-
-    // Parse pricing (already in $/token as a number)
-    const inputPrice = m.input_price;
-    const outputPrice = m.output_price;
-
-    // Skip models with no pricing
-    if (inputPrice === 0 && outputPrice === 0) continue;
-
-    // Determine output limit
-    const maxOut = m.max_output_tokens;
-    const outputLimit = maxOut > 0 ? maxOut : 4096;
-
-    // Parse modalities
-    const inputModalities: ModelModality[] = ["text"];
-    if (m.supports_vision) inputModalities.push("image");
-    const outputModalities: ModelModality[] = ["text"];
-
-    // Build pricing
-    const pricing: Pricing = {
-      currency: "USD",
-      input: toPerMTokens(inputPrice),
-      output: toPerMTokens(outputPrice),
-    };
-
-    // Add cache_read if present and non-zero
-    if (m.cached_price > 0) {
-      pricing.cache_read = toPerMTokens(m.cached_price);
-    }
-
-    // Add cache_write if present and non-zero
-    if (m.caching_price > 0) {
-      pricing.cache_write = toPerMTokens(m.caching_price);
-    }
-
-    // Derive name from ID
-    const nameParts = id.split("/");
-    const name = (nameParts[nameParts.length - 1] as string)
-      .replace(/[-_]/g, " ")
-      .replace(/\b\w/g, (c) => c.toUpperCase());
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: flatId,
-      name,
-      family: deriveFamily(id),
-      limit: {
-        context: m.context_window,
-        output: outputLimit,
-      },
-      modalities: { input: inputModalities, output: outputModalities },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    // Set capabilities
-    if (m.supports_tool_calling) {
-      modelDef.tool_call = true;
-    }
-    if (m.supports_reasoning) {
-      modelDef.reasoning = true;
-    }
-
-    models.push(defineModel(modelDef));
-  }
-
-  console.log(`  Requesty: fetched ${apiModels.length} models from API`);
-  console.log(`  Requesty: ${models.length} valid LLM models`);
-
+  const models = await runPipeline(pipeline);
   return { provider, models };
 }

@@ -1,18 +1,13 @@
 id: undi95--remm-slerp-l2-13b
 name: "Undi95: remm slerp l2 13B"
-family: other
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: undi95/remm
+pricing:
+  currency: USD
+  input: 0.47
+  output: 0.71
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.47
-  output: 0.71
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

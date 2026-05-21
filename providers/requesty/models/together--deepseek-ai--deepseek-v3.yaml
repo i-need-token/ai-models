@@ -1,20 +1,17 @@
 id: together--deepseek-ai--deepseek-v3
-name: DeepSeek V3
-family: deepseek
-limit:
-  context: 131072
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Deepseek V3
+family: together
 pricing:
   currency: USD
   input: 1.25
   output: 1.25
   cache_read: 1.25
   cache_write: 1.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2025-05-31
+last_updated: 2025-05-31

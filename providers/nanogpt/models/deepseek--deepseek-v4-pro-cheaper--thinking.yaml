@@ -1,21 +1,14 @@
 id: deepseek--deepseek-v4-pro-cheaper--thinking
-name: "DeepSeek: deepseek v4 PRO cheaper"
+name: "DeepSeek: deepseek v4 PRO cheaper  thinking"
 family: deepseek
-temperature: true
-limit:
-  context: 65536
-  output: 65536
+pricing:
+  currency: USD
+  input: 0.435
+  output: 0.87
+  cache_read: 0.0435
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.435
-  output: 0.87
-  cache_read: 0.0435
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
-reasoning: true
+last_updated: 2026-05-20

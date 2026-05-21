@@ -1,15 +1,13 @@
 id: text-davinci-002
-name: "OpenAI: Text Davinci 002"
-family: other
-temperature: true
+name: Text Davinci 002
+family: text
 pricing:
   currency: USD
   input: 10
   output: 10
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

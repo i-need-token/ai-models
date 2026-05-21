@@ -1,15 +1,15 @@
 id: nvidia--nemotron-nano-9b-v2--free
-name: "NVIDIA: Nemotron Nano 9B V2 (free)"
+name: Free
 family: nemotron
-limit:
-  context: 128000
-  output: 4096
+pricing:
+  unit: free
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-09-06
+last_updated: 2025-09-06

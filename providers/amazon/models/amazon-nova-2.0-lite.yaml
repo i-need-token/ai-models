@@ -1,10 +1,10 @@
 id: amazon-nova-2.0-lite
 name: Amazon Nova 2.0 Lite
 family: nova
-temperature: true
-reasoning: true
-tool_call: true
-attachment: true
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1.25
 limit:
   context: 64000
   output: 64000
@@ -16,9 +16,9 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 1.25
+reasoning: true
+temperature: true
+tool_call: true
+attachment: true
 release_date: 2025-12-02
-last_updated: 2026-05-17
+last_updated: 2026-05-18

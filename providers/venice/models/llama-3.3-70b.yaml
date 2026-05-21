@@ -1,7 +1,10 @@
 id: llama-3.3-70b
-name: Llama 3.3 70B
-family: llama-3.3
-temperature: true
+name: llama-3.3-70b
+family: llama
+pricing:
+  currency: USD
+  input: 0.7
+  output: 2.8
 limit:
   context: 128000
   output: 4096
@@ -10,10 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.7
-  output: 2.8
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-04-06
+last_updated: 2025-04-06

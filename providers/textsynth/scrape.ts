@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "textsynth",
@@ -13,142 +21,140 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-16)
-//
-// Source: https://textsynth.com/pricing.html (static HTML)
-// TextSynth is a European inference platform hosting open-source models with
-// per-token USD pricing. Separate input and output token rates are provided.
-//
-// The pricing page lists 7 LLM models. MADLAD400 7B is a translation model
-// and is excluded. 6 chat/completion models remain.
-//
-// Note: TextSynth uses its own API format (not OpenAI-compatible).
-// API: POST https://api.textsynth.com/v1/engines/{engine_id}/completions
+// Raw data types (from TextSynth API)
 // ---------------------------------------------------------------------------
 
-interface ModelInfo {
-  name: string;
-  engineId: string;
-  context: number;
-  output: number;
-  openWeights?: boolean;
+interface TextsynthModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
-const MODELS: Record<string, ModelInfo> = {
-  "EleutherAI--gpt-j-6B": {
-    name: "GPT-J 6B",
-    engineId: "gptj_6B",
-    context: 2048,
-    output: 2048,
-    openWeights: true,
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<TextsynthModel[]> {
+  const response = await fetch("https://api.textsynth.com/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch TextSynth models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: TextsynthModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.textsynth.com/v1/models",
+      type: "api",
+      description: "TextSynth /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
   },
-  "mistralai--Mistral-7B": {
-    name: "Mistral 7B",
-    engineId: "mistral_7B",
-    context: 8192,
-    output: 8192,
-    openWeights: true,
+
+  extractPricing: {
+    source: {
+      url: "https://api.textsynth.com/v1/models",
+      type: "api",
+      description: "TextSynth API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
   },
-  "meta-llama--Llama3-8B": {
-    name: "Llama3 8B",
-    engineId: "llama3_8B",
-    context: 8192,
-    output: 8192,
-    openWeights: true,
+
+  extractLimits: {
+    source: {
+      url: "https://api.textsynth.com/v1/models",
+      type: "api",
+      description: "TextSynth API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
   },
-  "meta-llama--Llama3.1-8B-Instruct": {
-    name: "Llama3.1 8B Instruct",
-    engineId: "llama3.1_8B_instruct",
-    context: 131072,
-    output: 131072,
-    openWeights: true,
+
+  extractModalities: {
+    source: {
+      url: "https://api.textsynth.com/v1/models",
+      type: "api",
+      description: "TextSynth API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
   },
-  "google--Gemma-3-27B-Instruct": {
-    name: "Gemma 3 27B Instruct",
-    engineId: "gemma3_27B_it",
-    context: 8192,
-    output: 8192,
-    openWeights: true,
+
+  extractFeatures: {
+    source: {
+      url: "https://api.textsynth.com/v1/models",
+      type: "api",
+      description: "TextSynth API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
   },
-  "meta-llama--Llama3.3-70B-Instruct": {
-    name: "Llama3.3 70B Instruct",
-    engineId: "llama3.3_70B_instruct",
-    context: 131072,
-    output: 131072,
-    openWeights: true,
+
+  extractDates: {
+    source: {
+      url: "https://api.textsynth.com/v1/models",
+      type: "api",
+      description: "TextSynth API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as TextsynthModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /gpt/i, family: "gpt" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /mistral/i, family: "mistral" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
   },
 };
-
-// ---------------------------------------------------------------------------
-// Pricing (USD per million tokens)
-//
-// Source: https://textsynth.com/pricing.html (static HTML, accessed 2026-05-16)
-// ---------------------------------------------------------------------------
-
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  "EleutherAI--gpt-j-6B": { currency: "USD", input: 0.2, output: 2.0 },
-  "mistralai--Mistral-7B": { currency: "USD", input: 0.2, output: 2.0 },
-  "meta-llama--Llama3-8B": { currency: "USD", input: 0.2, output: 2.0 },
-  "meta-llama--Llama3.1-8B-Instruct": { currency: "USD", input: 0.2, output: 2.0 },
-  "google--Gemma-3-27B-Instruct": { currency: "USD", input: 0.4, output: 4.0 },
-  "meta-llama--Llama3.3-70B-Instruct": { currency: "USD", input: 0.7, output: 7.0 },
-};
-
-// ---------------------------------------------------------------------------
-// Family derivation
-// ---------------------------------------------------------------------------
-
-function deriveFamily(id: string): string {
-  if (id.includes("gpt-j")) return "gpt-j";
-  if (id.includes("mistral")) return "mistral";
-  if (id.includes("llama3.3")) return "llama-3.3";
-  if (id.includes("llama3.1")) return "llama-3.1";
-  if (id.includes("llama3")) return "llama-3";
-  if (id.includes("gemma")) return "gemma";
-  return id.split("--")[0] as string;
-}
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  for (const [id, info] of Object.entries(MODELS)) {
-    const pricing = HARDCODED_PRICING[id];
-    if (!pricing) {
-      console.warn(`  TextSynth: skipping ${id} — no pricing`);
-      continue;
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id,
-      name: info.name,
-      family: deriveFamily(id),
-      limit: { context: info.context, output: info.output },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (info.openWeights) modelDef.open_weights = true;
-
-    models.push(defineModel(modelDef));
-  }
-
+  const models = await runPipeline(pipeline);
   console.log(`  TextSynth: ${models.length} models`);
-
   return { provider, models };
 }

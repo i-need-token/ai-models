@@ -1,15 +1,13 @@
 id: llama3-8b-8192
 name: Llama3 8b 8192
 family: llama
-temperature: true
 pricing:
   currency: USD
   input: 0.03
   output: 0.06
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

@@ -1,15 +1,13 @@
 id: minimax-text-01
 name: Minimax Text 01
 family: minimax
-temperature: true
 pricing:
   currency: USD
   input: 0.07
   output: 0.56
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

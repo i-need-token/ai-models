@@ -1,20 +1,13 @@
 id: Qwen--Qwen3.6-35B-A3B--thinking
-name: "Qwen: Qwen3.6 35B A3B"
+name: "Qwen: Qwen3.6 35B A3B  thinking"
 family: qwen
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.15
-  output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
-reasoning: true
+last_updated: 2026-05-20

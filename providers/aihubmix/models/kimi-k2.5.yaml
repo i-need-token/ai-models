@@ -1,14 +1,11 @@
 id: kimi-k2.5
-name: "Moonshot AI: Kimi K2.5"
-family: kimi-k2.5
-temperature: true
+name: Kimi K2.5
+family: kimi
 pricing:
   currency: USD
   input: 0.3
   output: 1.5
   cache_read: 0.0525
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
@@ -16,9 +13,7 @@ modalities:
     - video
   output:
     - text
-limit:
-  context: 256000
-  output: 16384
 reasoning: true
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

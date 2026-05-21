@@ -1,6 +1,10 @@
 id: openai--gpt-3.5-turbo-0613
-name: "OpenAI: GPT-3.5 Turbo (older v0613)"
-family: gpt-3.5
+name: Gpt 3.5 Turbo 0613
+family: gpt
+pricing:
+  currency: USD
+  input: 1
+  output: 2
 limit:
   context: 4095
   output: 4096
@@ -9,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2024-01-25
+last_updated: 2024-01-25

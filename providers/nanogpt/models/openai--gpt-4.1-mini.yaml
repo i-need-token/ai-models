@@ -1,19 +1,13 @@
 id: openai--gpt-4.1-mini
 name: "OpenAI: gpt 4.1 MINI"
-family: gpt-4
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: gpt
+pricing:
+  currency: USD
+  input: 0.4
+  output: 1.6
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.4
-  output: 1.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

@@ -1,6 +1,10 @@
 id: alibaba--qwen3-coder-plus
 name: Qwen3 Coder Plus
 family: qwen
+pricing:
+  currency: USD
+  input: 1
+  output: 5
 limit:
   context: 1048576
   output: 65536
@@ -10,10 +14,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-07-24
+last_updated: 2025-07-24

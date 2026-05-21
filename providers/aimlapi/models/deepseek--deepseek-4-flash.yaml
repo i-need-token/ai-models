@@ -1,17 +1,16 @@
 id: deepseek--deepseek-4-flash
-name: DeepSeek / DeepSeek 4 Flash
+name: Deepseek / Deepseek 4 Flash
 family: deepseek
-limit:
-  context: 1000000
-  output: 8192
+pricing:
+  currency: USD
+  input: 0.182
+  output: 0.364
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.182
-  output: 0.364
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

@@ -1,21 +1,20 @@
 id: gpt-oss-120b-turbo
-name: GPT-OSS 120B Turbo
+name: Gpt Oss 120b Turbo
 family: gpt-oss
-temperature: true
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.6
+limit:
+  context: 131072
+  output: 16384
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 131072
-  output: 16384
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

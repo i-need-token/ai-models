@@ -1,6 +1,10 @@
 id: qwen--qwen3.5-122b-a10b
-name: "Qwen: Qwen3.5-122B-A10B"
+name: Qwen3.5 122b A10b
 family: qwen
+pricing:
+  currency: USD
+  input: 0.26
+  output: 2.08
 limit:
   context: 262144
   output: 65536
@@ -11,11 +15,8 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.26
-  output: 2.08
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-02-26
+last_updated: 2026-02-26

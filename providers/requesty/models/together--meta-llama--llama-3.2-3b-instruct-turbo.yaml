@@ -1,20 +1,17 @@
 id: together--meta-llama--llama-3.2-3b-instruct-turbo
-name: Llama 3.2 3B Instruct Turbo
-family: llama
-limit:
-  context: 131072
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Llama 3.2 3b Instruct Turbo
+family: together
 pricing:
   currency: USD
   input: 0.06
   output: 0.06
   cache_read: 0.06
   cache_write: 0.06
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2025-01-31
+last_updated: 2025-01-31

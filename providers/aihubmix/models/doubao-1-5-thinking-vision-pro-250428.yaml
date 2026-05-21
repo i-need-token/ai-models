@@ -1,15 +1,13 @@
 id: doubao-1-5-thinking-vision-pro-250428
 name: Doubao 1 5 Thinking Vision Pro 250428
 family: doubao
-temperature: true
 pricing:
   currency: USD
   input: 1
   output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

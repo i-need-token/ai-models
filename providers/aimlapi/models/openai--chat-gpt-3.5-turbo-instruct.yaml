@@ -1,0 +1,16 @@
+id: openai--chat-gpt-3.5-turbo-instruct
+name: Openai / Chat Gpt 3.5 Turbo Instruct
+family: openai
+pricing:
+  currency: USD
+  input: 1.95
+  output: 2.6
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

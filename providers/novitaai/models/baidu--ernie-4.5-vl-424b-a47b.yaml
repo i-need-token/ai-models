@@ -1,7 +1,10 @@
 id: baidu--ernie-4.5-vl-424b-a47b
-name: ERNIE 4.5 VL 424B A47B
-family: ernie
-temperature: true
+name: Ernie 4.5 Vl 424b A47b
+family: baidu
+pricing:
+  currency: USD
+  input: 0.42
+  output: 1.25
 limit:
   context: 123000
   output: 16000
@@ -11,10 +14,5 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.42
-  output: 1.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+last_updated: 2026-05-20

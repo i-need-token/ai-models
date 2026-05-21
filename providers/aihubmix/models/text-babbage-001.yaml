@@ -1,15 +1,13 @@
 id: text-babbage-001
-name: "OpenAI: Text Babbage 001"
-family: other
-temperature: true
+name: Text Babbage 001
+family: text
 pricing:
   currency: USD
   input: 0.25
   output: 0.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

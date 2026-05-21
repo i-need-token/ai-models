@@ -1,6 +1,10 @@
 id: meta-llama--llama-4-maverick
-name: "Meta: Llama 4 Maverick"
+name: Llama 4 Maverick
 family: llama
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.6
 limit:
   context: 1048576
   output: 16384
@@ -10,9 +14,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
+structured_output: true
+release_date: 2025-04-06
+last_updated: 2025-04-06

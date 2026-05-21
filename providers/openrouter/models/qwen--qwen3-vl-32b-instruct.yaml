@@ -1,6 +1,10 @@
 id: qwen--qwen3-vl-32b-instruct
-name: "Qwen: Qwen3 VL 32B Instruct"
+name: Qwen3 Vl 32b Instruct
 family: qwen
+pricing:
+  currency: USD
+  input: 0.104
+  output: 0.416
 limit:
   context: 262144
   output: 32768
@@ -10,10 +14,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.104
-  output: 0.416
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-10-23
+last_updated: 2025-10-23

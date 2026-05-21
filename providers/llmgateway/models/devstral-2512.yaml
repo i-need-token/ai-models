@@ -1,18 +1,14 @@
 id: devstral-2512
-name: Devstral 2
-family: mistral
-limit:
-  context: 262144
-  output: 16384
+name: Devstral 2512
+family: devstral
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

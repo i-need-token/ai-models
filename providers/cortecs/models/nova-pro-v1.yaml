@@ -1,21 +1,17 @@
 id: nova-pro-v1
 name: nova-pro-v1
 family: nova
-temperature: true
-limit:
-  context: 300000
-  output: 300000
+pricing:
+  currency: EUR
+  input: 0.824
+  output: 3.295
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.824
-  output: 3.295
-release_date: 2025-04-14
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-04-14
+last_updated: 2025-04-14

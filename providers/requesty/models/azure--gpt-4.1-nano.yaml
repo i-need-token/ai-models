@@ -1,6 +1,12 @@
 id: azure--gpt-4.1-nano
 name: Gpt 4.1 Nano
-family: gpt
+family: azure
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.4
+  cache_read: 0.025
+  cache_write: 0.1
 limit:
   context: 1047576
   output: 32768
@@ -10,12 +16,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.4
-  cache_read: 0.025
-  cache_write: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-04-15
+last_updated: 2025-04-15

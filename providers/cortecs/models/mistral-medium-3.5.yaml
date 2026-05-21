@@ -1,22 +1,18 @@
 id: mistral-medium-3.5
 name: mistral-medium-3.5
-family: mistral-medium
-temperature: true
-limit:
-  context: 256000
-  output: 256000
+family: mistral
+pricing:
+  currency: EUR
+  input: 1.25
+  output: 6.4
+  cache_read: 0.125
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: EUR
-  input: 1.25
-  output: 6.4
-  cache_read: 0.125
-release_date: 2026-04-30
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-04-30
+last_updated: 2026-04-30

@@ -1,19 +1,15 @@
 id: glm-4.5-airx
-name: GLM-4.5 AirX
+name: Glm 4.5 Airx
 family: glm
-limit:
-  context: 128000
-  output: 16384
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 1.1
   output: 4.5
   cache_read: 0.22
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+last_updated: 2026-05-20

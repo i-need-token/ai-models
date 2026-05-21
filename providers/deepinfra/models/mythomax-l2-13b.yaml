@@ -1,7 +1,10 @@
 id: mythomax-l2-13b
-name: MythoMax L2.13b
+name: Mythomax L2.13b
 family: mythomax
-temperature: true
+pricing:
+  currency: USD
+  input: 0.4
+  output: 0.4
 limit:
   context: 4096
   output: 4096
@@ -10,10 +13,4 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 0.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
-open_weights: true
+last_updated: 2026-05-20

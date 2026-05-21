@@ -1,17 +1,14 @@
 id: sao10k--l3.1-70b-hanami-x1
-name: "Sao10K: Llama 3.1 70B Hanami x1"
-family: l3-finetune
-limit:
-  context: 16000
-  output: 4096
+name: L3.1 70b Hanami X1
+family: sao10k
+pricing:
+  currency: USD
+  input: 3
+  output: 3
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 3
-  output: 3
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-01-08
+last_updated: 2025-01-08

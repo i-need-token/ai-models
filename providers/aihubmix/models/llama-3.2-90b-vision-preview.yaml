@@ -1,15 +1,13 @@
 id: llama-3.2-90b-vision-preview
-name: "Meta: Llama 3.2 90b Vision Preview"
-family: llama-3.2
-temperature: true
+name: Llama 3.2 90b Vision Preview
+family: llama
 pricing:
   currency: USD
   input: 1.2
   output: 1.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

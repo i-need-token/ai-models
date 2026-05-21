@@ -1,0 +1,13 @@
+id: ernie-image-turbo
+name: Ernie Image Turbo
+family: ernie
+pricing:
+  currency: USD
+  input: 1
+  output: 0
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-05-19

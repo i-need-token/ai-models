@@ -1,18 +1,13 @@
 id: inclusionai--ring-2.6-1t
 name: "InclusionAI: ring 2.6 1t"
-family: other
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: inclusionai/ring
+pricing:
+  currency: USD
+  input: 1
+  output: 3
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 1
-  output: 3
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

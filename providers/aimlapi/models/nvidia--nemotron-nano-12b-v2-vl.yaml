@@ -1,18 +1,19 @@
 id: nvidia--nemotron-nano-12b-v2-vl
-name: NVIDIA / Nemotron Nano 12B V2 VL
-family: nemotron
-limit:
-  context: 131000
-  output: 16384
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
+name: Nvidia / Nemotron Nano 12b V2 Vl
+family: nvidia
 pricing:
   currency: USD
   input: 0.2743
   output: 0.8229
-release_date: 2026-05-17
-last_updated: 2026-05-17
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: true
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

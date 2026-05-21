@@ -1,6 +1,11 @@
 id: openai--gpt-realtime-mini
-name: GPT Realtime Mini
-family: gpt-realtime
+name: Gpt Realtime Mini
+family: gpt
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.4
+  cache_read: 0.06
 limit:
   context: 32000
   output: 4096
@@ -12,10 +17,4 @@ modalities:
   output:
     - text
     - audio
-pricing:
-  currency: USD
-  input: 0.6
-  output: 2.4
-  cache_read: 0.06
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

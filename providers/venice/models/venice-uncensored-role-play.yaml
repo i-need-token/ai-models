@@ -1,7 +1,10 @@
 id: venice-uncensored-role-play
-name: Venice Role Play Uncensored
+name: venice-uncensored-role-play
 family: venice-uncensored
-temperature: true
+pricing:
+  currency: USD
+  input: 0.5
+  output: 2
 limit:
   context: 128000
   output: 4096
@@ -11,12 +14,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.5
-  output: 2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
-structured_output: true
 attachment: true
+structured_output: true
+release_date: 2026-02-20
+last_updated: 2026-02-20

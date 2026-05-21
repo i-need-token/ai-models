@@ -1,7 +1,10 @@
 id: qwen--qwen3-235b-a22b-instruct-2507
-name: Qwen3 235B A22B Instruct 2507
-family: qwen3
-temperature: true
+name: Qwen3 235b A22b Instruct 2507
+family: qwen
+pricing:
+  currency: USD
+  input: 0.09
+  output: 0.58
 limit:
   context: 131072
   output: 16384
@@ -10,11 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.09
-  output: 0.58
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
 structured_output: true
+last_updated: 2026-05-20

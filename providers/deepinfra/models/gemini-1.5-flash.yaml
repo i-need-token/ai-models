@@ -1,7 +1,10 @@
 id: gemini-1.5-flash
 name: Gemini 1.5 Flash
-family: gemini-1.5
-temperature: true
+family: gemini
+pricing:
+  currency: USD
+  input: 0.075
+  output: 0.3
 limit:
   context: 1000000
   output: 1000000
@@ -11,10 +14,4 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.075
-  output: 0.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

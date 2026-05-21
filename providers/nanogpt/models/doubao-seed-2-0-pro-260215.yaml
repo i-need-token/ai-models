@@ -1,18 +1,13 @@
 id: doubao-seed-2-0-pro-260215
 name: doubao seed 2 0 PRO 260215
 family: doubao
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.46
+  output: 2.28
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.46
-  output: 2.28
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

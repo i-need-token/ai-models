@@ -1,20 +1,16 @@
 id: qwen3-coder-next
 name: qwen3-coder-next
 family: qwen-coder
-temperature: true
-limit:
-  context: 256000
-  output: 256000
+pricing:
+  currency: EUR
+  input: 0.15
+  output: 0.8
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.15
-  output: 0.8
-release_date: 2026-04-02
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-04-02
+last_updated: 2026-04-02

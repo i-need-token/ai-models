@@ -1,15 +1,13 @@
 id: mai-image-2
-name: "Microsoft: Mai Image 2"
-family: other
-temperature: true
+name: Mai Image 2
+family: mai
 pricing:
   currency: USD
   input: 1
   output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

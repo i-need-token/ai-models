@@ -1,18 +1,13 @@
 id: ReadyArt--MS3.2-The-Omega-Directive-24B-Unslop-v2.0
 name: "ReadyArt: MS3.2 The Omega Directive 24B Unslop v2.0"
-family: other
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+family: ReadyArt/MS3.2
+pricing:
+  currency: USD
+  input: 0.5
+  output: 0.5
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.5
-  output: 0.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

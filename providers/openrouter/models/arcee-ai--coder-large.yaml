@@ -1,17 +1,14 @@
 id: arcee-ai--coder-large
-name: "Arcee AI: Coder Large"
-family: arcee
-limit:
-  context: 32768
-  output: 4096
+name: Coder Large
+family: arcee-ai
+pricing:
+  currency: USD
+  input: 0.5
+  output: 0.8
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.5
-  output: 0.8
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-05-06
+last_updated: 2025-05-06

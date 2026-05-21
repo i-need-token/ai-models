@@ -1,22 +1,17 @@
 id: glm-4.7
-name: "Z.AI: Glm 4.7"
-family: glm-4.7
-temperature: true
+name: Glm 4.7
+family: glm
 pricing:
   currency: USD
   input: 0.136987
   output: 0.547948
   cache_read: 0.027397
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
-limit:
-  context: 200000
-  output: 16384
 reasoning: true
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

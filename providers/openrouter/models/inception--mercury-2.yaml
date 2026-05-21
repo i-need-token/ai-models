@@ -1,6 +1,11 @@
 id: inception--mercury-2
-name: "Inception: Mercury 2"
+name: Mercury 2
 family: inception
+pricing:
+  currency: USD
+  input: 0.25
+  output: 0.75
+  cache_read: 0.025
 limit:
   context: 128000
   output: 50000
@@ -9,12 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.25
-  output: 0.75
-  cache_read: 0.025
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-03-04
+last_updated: 2026-03-04

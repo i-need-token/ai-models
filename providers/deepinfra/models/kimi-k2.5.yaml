@@ -1,7 +1,11 @@
 id: kimi-k2.5
 name: Kimi K2.5
 family: kimi
-temperature: true
+pricing:
+  currency: USD
+  input: 0.45
+  output: 2.25
+  cache_read: 0.07
 limit:
   context: 262144
   output: 262144
@@ -11,11 +15,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.45
-  output: 2.25
-  cache_read: 0.07
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+temperature: true
+last_updated: 2026-05-20

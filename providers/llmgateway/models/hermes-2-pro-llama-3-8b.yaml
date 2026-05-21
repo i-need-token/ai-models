@@ -1,18 +1,14 @@
 id: hermes-2-pro-llama-3-8b
-name: Hermes 2 Pro Llama 3 8B
-family: hermes
-limit:
-  context: 8192
-  output: 4096
+name: Hermes 2 Pro Llama 3 8b
+family: llama
+pricing:
+  currency: USD
+  input: 0.14
+  output: 0.14
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.14
-  output: 0.14
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

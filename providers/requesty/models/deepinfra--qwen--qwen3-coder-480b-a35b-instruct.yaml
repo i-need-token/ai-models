@@ -1,20 +1,17 @@
 id: deepinfra--qwen--qwen3-coder-480b-a35b-instruct
-name: Qwen3 Coder 480B A35B Instruct
-family: qwen
-limit:
-  context: 262144
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Qwen3 Coder 480b A35b Instruct
+family: deepinfra
 pricing:
   currency: USD
   input: 0.4
   output: 1.6
   cache_read: 0.4
   cache_write: 1.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2025-07-25
+last_updated: 2025-07-25

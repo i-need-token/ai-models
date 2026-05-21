@@ -1,13 +1,10 @@
 id: inclusionai--ring-flash-2.0
 name: Inclusionai/Ring Flash 2.0
-family: ring
-temperature: true
+family: inclusionai/ring
 pricing:
   currency: USD
   input: 0.068
   output: 0.272
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
@@ -16,3 +13,4 @@ modalities:
 reasoning: true
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

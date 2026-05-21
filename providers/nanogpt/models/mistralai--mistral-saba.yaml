@@ -1,18 +1,13 @@
 id: mistralai--mistral-saba
 name: "Mistral: mistral saba"
 family: mistral
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.117
+  output: 0.35
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.117
-  output: 0.35
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

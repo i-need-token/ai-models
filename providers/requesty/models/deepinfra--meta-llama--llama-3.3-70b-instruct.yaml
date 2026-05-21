@@ -1,20 +1,17 @@
 id: deepinfra--meta-llama--llama-3.3-70b-instruct
-name: Llama 3.3 70B Instruct
-family: llama
-limit:
-  context: 131072
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Llama 3.3 70b Instruct
+family: deepinfra
 pricing:
   currency: USD
   input: 0.23
   output: 0.4
   cache_read: 0.23
   cache_write: 0.23
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2025-02-07
+last_updated: 2025-02-07

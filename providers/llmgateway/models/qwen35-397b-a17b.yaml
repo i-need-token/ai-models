@@ -1,20 +1,16 @@
 id: qwen35-397b-a17b
-name: Qwen3.5 397B A17B
+name: Qwen35 397b A17b
 family: qwen
-limit:
-  context: 262144
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.6
+  output: 3.6
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.6
-  output: 3.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+last_updated: 2026-05-20

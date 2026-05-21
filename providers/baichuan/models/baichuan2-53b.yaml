@@ -1,8 +1,10 @@
 id: baichuan2-53b
 name: Baichuan2 53B
 family: baichuan2
-temperature: true
-open_weights: true
+pricing:
+  currency: CNY
+  input: 20
+  output: 20
 limit:
   context: 32768
   output: 8192
@@ -11,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 20
-  output: 20
+temperature: true
+open_weights: true
 release_date: 2023-08
-last_updated: 2026-05-17
+last_updated: 2026-05-18

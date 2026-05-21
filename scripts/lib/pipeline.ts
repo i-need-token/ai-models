@@ -48,16 +48,16 @@ export interface DiscoveredModel {
 export interface ExtractedLimit {
   /** 上下文窗口大小（token 数） */
   context: number;
-  /** 最大输出 token 数 */
-  output: number;
+  /** 最大输出 token 数（缺失则省略） */
+  output?: number;
 }
 
 /** extractModalities() 的输出 — 输入输出模态 */
 export interface ExtractedModalities {
   /** 输入模态列表 */
   input: ModelModality[];
-  /** 输出模态列表 */
-  output: ModelModality[];
+  /** 输出模态列表 — 可选，缺失时 pipeline 使用默认值 */
+  output?: ModelModality[];
 }
 
 /** extractFeatures() 的输出 — 模型能力标志 */
@@ -365,11 +365,16 @@ export async function runPipeline(pipeline: ScrapePipeline): Promise<Model[]> {
       continue;
     }
 
+    // last_updated 是必须的，缺失则用当前日期（表示"我们今天检查过"）
+    // release_date 是可选的，缺失则省略
+    const dates = datesMap.get(id);
+    const lastUpdated = dates?.last_updated ?? new Date().toISOString().slice(0, 10);
+    const releaseDate = dates?.release_date;
+
     // 从各 Map 中获取数据，缺失 = undefined（省略字段）
     const limit = limitsMap.get(id);
     const modalities = modalitiesMap.get(id);
     const features = featuresMap.get(id);
-    const dates = datesMap.get(id);
     const snapshots = snapshotsMap.get(id);
 
     // 名称和家族从 ID 推导
@@ -383,8 +388,12 @@ export async function runPipeline(pipeline: ScrapePipeline): Promise<Model[]> {
       family,
       ...(deprecated ? { deprecated } : {}),
       pricing,
-      ...(limit ? { limit } : {}),
-      modalities: modalities ?? { input: ["text"], output: ["text"] },
+      ...(limit?.context && limit?.output != null
+        ? { limit: { context: limit.context, output: limit.output } }
+        : {}),
+      modalities: modalities
+        ? { input: modalities.input, output: modalities.output ?? (["text"] as ModelModality[]) }
+        : { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
       ...(features?.reasoning != null ? { reasoning: features.reasoning } : {}),
       ...(features?.temperature != null ? { temperature: features.temperature } : {}),
       ...(features?.tool_call != null ? { tool_call: features.tool_call } : {}),
@@ -394,11 +403,8 @@ export async function runPipeline(pipeline: ScrapePipeline): Promise<Model[]> {
         : {}),
       ...(features?.open_weights != null ? { open_weights: features.open_weights } : {}),
       ...(dates?.knowledge ? { knowledge: dates.knowledge } : {}),
-      // release_date 和 last_updated 是 Model 的必填字段
-      // extractDates 是必须步骤，但某个模型可能不在 Map 里
-      // 缺失时用当前日期作为 fallback（比 "unknown" 好）
-      release_date: dates?.release_date ?? new Date().toISOString().slice(0, 10),
-      last_updated: dates?.last_updated ?? new Date().toISOString().slice(0, 10),
+      ...(releaseDate ? { release_date: releaseDate } : {}),
+      last_updated: lastUpdated,
       ...(snapshots && snapshots.length > 0
         ? {
             snapshots: snapshots.map((s) => ({

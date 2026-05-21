@@ -1,6 +1,10 @@
 id: bytedance-seed--seed-1.6-flash
-name: "ByteDance Seed: Seed 1.6 Flash"
+name: Seed 1.6 Flash
 family: bytedance-seed
+pricing:
+  currency: USD
+  input: 0.075
+  output: 0.3
 limit:
   context: 262144
   output: 32768
@@ -11,11 +15,8 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.075
-  output: 0.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-12-23
+last_updated: 2025-12-23

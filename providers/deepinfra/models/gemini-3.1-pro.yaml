@@ -1,21 +1,18 @@
 id: gemini-3.1-pro
 name: Gemini 3.1 Pro
-family: gemini-3.1
-temperature: true
+family: gemini
+pricing:
+  currency: USD
+  input: 2
+  output: 12
 limit:
   context: 1000000
-  output: 131072
+  output: 1000000
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 2
-  output: 12
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
-tool_call: true
+last_updated: 2026-05-20

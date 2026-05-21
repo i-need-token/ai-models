@@ -1,16 +1,14 @@
 id: o1-pro
-name: "OpenAI: O1 Pro"
-family: o1
-temperature: true
+name: O1 Pro
+family: o
 pricing:
   currency: USD
   input: 85
   output: 340
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
 reasoning: true
+last_updated: 2026-05-19

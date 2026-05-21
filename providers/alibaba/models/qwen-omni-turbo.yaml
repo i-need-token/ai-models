@@ -1,14 +1,10 @@
 id: qwen-omni-turbo
 name: Qwen Omni Turbo
-family: qwen-omni
-deprecated: true
+family: qwen
 pricing:
   currency: CNY
   input: 0.4
   output: 25
-limit:
-  context: 32000
-  output: 8000
 modalities:
   input:
     - text
@@ -17,5 +13,4 @@ modalities:
 reasoning: true
 tool_call: true
 structured_output: true
-release_date: 2026-05
-last_updated: 2026-05
+last_updated: 2026-05-19

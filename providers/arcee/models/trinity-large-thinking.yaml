@@ -1,10 +1,10 @@
 id: trinity-large-thinking
 name: Trinity Large Thinking
 family: trinity
-temperature: true
-reasoning: true
-tool_call: true
-open_weights: true
+pricing:
+  currency: USD
+  input: 0.22
+  output: 0.85
 limit:
   context: 262144
   output: 262144
@@ -13,9 +13,9 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.22
-  output: 0.85
+reasoning: true
+temperature: true
+tool_call: true
+open_weights: true
 release_date: 2025-05-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

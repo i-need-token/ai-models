@@ -1,18 +1,13 @@
 id: failspy--Meta-Llama-3-70B-Instruct-abliterated-v3.5
 name: "Failspy: Meta Llama 3 70B Instruct abliterated v3.5"
 family: llama
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.7
+  output: 0.7
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.7
-  output: 0.7
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

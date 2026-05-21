@@ -1,7 +1,11 @@
 id: mimo-v2.5
-name: MiMo V2.5
+name: Mimo V2.5
 family: mimo
-temperature: true
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
+  cache_read: 0.08
 limit:
   context: 262144
   output: 262144
@@ -11,11 +15,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 2
-  cache_read: 0.08
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+temperature: true
+last_updated: 2026-05-20

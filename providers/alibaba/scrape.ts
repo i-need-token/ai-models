@@ -4,7 +4,6 @@ import type {
   ScrapePipeline,
   DiscoveredModel,
   ExtractedLimit,
-  ExtractedModalities,
   ExtractedFeatures,
   ExtractedDates,
 } from "../../scripts/lib/index";
@@ -124,16 +123,8 @@ interface RawModelInfo {
   functionCalling: boolean;
   /** Whether model supports structured output */
   structuredOutput: boolean;
-  /** Whether model is deprecated/old */
-  deprecated: boolean;
-  /** Whether model has open weights */
-  openWeights: boolean;
   /** Model family for grouping */
   family: string;
-  /** Input modalities */
-  inputModalities: string[];
-  /** Output modalities */
-  outputModalities: string[];
 }
 
 interface RawPricingInfo {
@@ -230,17 +221,8 @@ async function discoverRawModels(): Promise<RawModelInfo[]> {
         structuredOutput = val.includes("支持");
       }
 
-      // Determine if deprecated
-      const deprecated = isDeprecated(id);
-
-      // Determine open weights
-      const openWeights = isOpenWeights(id);
-
       // Determine family
       const family = deriveFamilyFromId(id);
-
-      // Determine modalities
-      const { input: inputModalities, output: outputModalities } = deriveModalitiesFromId(id);
 
       // If we already have this model but this table has output data, update it
       if (seenIds.has(id) && hasOutputCol) {
@@ -261,11 +243,7 @@ async function discoverRawModels(): Promise<RawModelInfo[]> {
         thinkingMode,
         functionCalling,
         structuredOutput,
-        deprecated,
-        openWeights,
         family,
-        inputModalities,
-        outputModalities,
       });
     }
   }
@@ -273,46 +251,31 @@ async function discoverRawModels(): Promise<RawModelInfo[]> {
   return models;
 }
 
-function isDeprecated(id: string): boolean {
-  // Old Qwen1/Qwen2 models
-  if (/^qwen-(plus|max|flash|turbo)(-|$)/.test(id) && !id.includes("3")) return false; // still active
-  if (id.startsWith("qwen-omni-turbo")) return true;
-  return false;
-}
-
-function isOpenWeights(id: string): boolean {
-  // Open-weight models have size suffixes like -72b, -32b, -14b, -7b, etc.
-  return /-\d+b/.test(id) || /-a\d+b/.test(id);
-}
-
 function deriveFamilyFromId(id: string): string {
-  // qwen3.6-plus → qwen3.6
-  // qwen3.6-plus-2026-04-02 → qwen3.6
-  // qwen3-max → qwen3
-  // qwen3-coder-plus → qwen3-coder
-  // qwen2.5-72b-instruct → qwen2.5
+  // qwen3.6-plus → qwen
+  // qwen3.6-plus-2026-04-02 → qwen
+  // qwen3-max → qwen
+  // qwen3-coder-plus → qwen-coder
+  // qwen2.5-72b-instruct → qwen
   // qwen-mt-plus → qwen-mt
   // qwen-long → qwen-long
   // qwen-plus-character → qwen-character
   const patterns: Array<{ pattern: RegExp; family: string }> = [
-    { pattern: /^qwen3\.6/, family: "qwen3.6" },
-    { pattern: /^qwen3\.5/, family: "qwen3.5" },
-    { pattern: /^qwen3-coder/, family: "qwen3-coder" },
-    { pattern: /^qwen3-omni/, family: "qwen3-omni" },
-    { pattern: /^qwen3-vl/, family: "qwen3-vl" },
-    { pattern: /^qwen3-tts/, family: "qwen3-tts" },
-    { pattern: /^qwen3-asr/, family: "qwen3-asr" },
-    { pattern: /^qwen3/, family: "qwen3" },
-    { pattern: /^qwen2\.5-omni/, family: "qwen2.5-omni" },
-    { pattern: /^qwen2\.5-vl/, family: "qwen2.5-vl" },
-    { pattern: /^qwen2\.5-math/, family: "qwen2.5-math" },
-    { pattern: /^qwen2\.5/, family: "qwen2.5" },
+    { pattern: /^qwen3-coder/, family: "qwen-coder" },
+    { pattern: /^qwen3-omni/, family: "qwen-omni" },
+    { pattern: /^qwen3-vl/, family: "qwen-vl" },
+    { pattern: /^qwen3-tts/, family: "qwen-tts" },
+    { pattern: /^qwen3-asr/, family: "qwen-asr" },
+    { pattern: /^qwen2\.5-omni/, family: "qwen-omni" },
+    { pattern: /^qwen2\.5-vl/, family: "qwen-vl" },
+    { pattern: /^qwen2\.5-math/, family: "qwen-math" },
     { pattern: /^qwen-mt/, family: "qwen-mt" },
     { pattern: /^qwen-long/, family: "qwen-long" },
     { pattern: /^qwen-plus-character/, family: "qwen-character" },
     { pattern: /^qwen-flash-character/, family: "qwen-character" },
     { pattern: /^qwen-vl/, family: "qwen-vl" },
     { pattern: /^qwen-tts/, family: "qwen-tts" },
+    { pattern: /^qwen/, family: "qwen" },
     { pattern: /^qwq/, family: "qwq" },
     { pattern: /^qvq/, family: "qvq" },
   ];
@@ -323,31 +286,6 @@ function deriveFamilyFromId(id: string): string {
 
   // Fallback: first two segments
   return id.split("-").slice(0, 2).join("-");
-}
-
-function deriveModalitiesFromId(id: string): { input: string[]; output: string[] } {
-  // Vision models
-  if (/^qwen3-vl|^qwen2\.5-vl|^qwen-vl-ocr|^qvq/.test(id)) {
-    return { input: ["text", "image", "video"], output: ["text"] };
-  }
-  // Omni models (multimodal in/out)
-  if (/^qwen3\.5-omni|^qwen2\.5-omni|^qwen3-omni/.test(id)) {
-    return { input: ["text", "image", "video", "audio"], output: ["text", "audio"] };
-  }
-  // TTS models
-  if (/^qwen3-tts|^qwen-tts|^cosyvoice/.test(id)) {
-    return { input: ["text"], output: ["audio"] };
-  }
-  // ASR models
-  if (/^qwen3-asr|^fun-asr|^paraformer|^sensevoice|^gummy/.test(id)) {
-    return { input: ["audio"], output: ["text"] };
-  }
-  // Image generation
-  if (/^qwen-image|^wan/.test(id)) {
-    return { input: ["text", "image"], output: ["image"] };
-  }
-  // Default: text-in/text-out
-  return { input: ["text"], output: ["text"] };
 }
 
 // ---------------------------------------------------------------------------
@@ -458,31 +396,6 @@ async function fetchPricing(): Promise<Map<string, RawPricingInfo>> {
     }
   }
 
-  // Hardcoded pricing for models not found in the billing page tables
-  // (due to complex rowspan/colspan sub-header structures)
-  // Source: billing page Table 64 (qwen3 open-weight section)
-  const hardcodedPricing: Record<string, RawPricingInfo> = {
-    "qwen3-235b-a22b-thinking-2507": { input: 2, output: 20 },
-    "qwen3-next-80b-a3b-thinking": { input: 1, output: 8 },
-    "qwen3-30b-a3b-thinking-2507": { input: 0.5, output: 4 },
-  };
-
-  for (const [id, info] of Object.entries(hardcodedPricing)) {
-    if (!pricingMap.has(id)) {
-      pricingMap.set(id, info);
-    }
-  }
-
-  // Add pricing aliases for models with different IDs in billing page
-  const aliases: Record<string, string> = {
-    "qwen2.5-72b-instruct-1m": "qwen2.5-72b-instruct",
-  };
-  for (const [alias, source] of Object.entries(aliases)) {
-    if (!pricingMap.has(alias) && pricingMap.has(source)) {
-      pricingMap.set(alias, pricingMap.get(source) as RawPricingInfo);
-    }
-  }
-
   return pricingMap;
 }
 
@@ -505,7 +418,6 @@ const pipeline: ScrapePipeline = {
       return rawModels.map(
         (m): DiscoveredModel => ({
           id: m.id,
-          ...(m.deprecated ? { deprecated: true } : {}),
           raw: m,
         }),
       );
@@ -568,12 +480,8 @@ const pipeline: ScrapePipeline = {
             last_updated: date,
           });
         } else {
-          // For non-dated models, derive from the model series
-          const seriesDate = deriveReleaseDate(m.id);
-          datesMap.set(m.id, {
-            release_date: seriesDate,
-            last_updated: seriesDate,
-          });
+          // No date available from model ID — omit
+          // Pipeline will skip models without dates
         }
       }
 
@@ -603,7 +511,7 @@ const pipeline: ScrapePipeline = {
         if (context) {
           limitsMap.set(m.id, {
             context,
-            output: output ?? defaultOutputLimit(m.id),
+            ...(output ? { output } : {}),
           });
         }
       }
@@ -613,34 +521,11 @@ const pipeline: ScrapePipeline = {
   },
 
   // -----------------------------------------------------------------------
-  // Step 5: Extract modalities
+  // Step 5: Extract features
   // -----------------------------------------------------------------------
-  extractModalities: {
-    source: {
-      url: MODELS_URL,
-      type: "ssr",
-      description: "Modalities derived from model ID (text, image, video, audio)",
-    },
-    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
-      const modalitiesMap = new Map<string, ExtractedModalities>();
+  // Note: extractModalities removed — page tables don't provide modality data.
+  // Pipeline will use default { input: ["text"], output: ["text"] }
 
-      for (const m of models) {
-        const raw = m.raw as RawModelInfo | undefined;
-        if (!raw) continue;
-
-        modalitiesMap.set(m.id, {
-          input: raw.inputModalities as Array<"text" | "image" | "video" | "audio" | "pdf">,
-          output: raw.outputModalities as Array<"text" | "image" | "video" | "audio" | "pdf">,
-        });
-      }
-
-      return modalitiesMap;
-    },
-  },
-
-  // -----------------------------------------------------------------------
-  // Step 6: Extract features
-  // -----------------------------------------------------------------------
   extractFeatures: {
     source: {
       url: MODELS_URL,
@@ -667,10 +552,6 @@ const pipeline: ScrapePipeline = {
 
         if (raw.structuredOutput) {
           features.structured_output = true;
-        }
-
-        if (raw.openWeights) {
-          features.open_weights = true;
         }
 
         if (Object.keys(features).length > 0) {
@@ -836,102 +717,6 @@ const pipeline: ScrapePipeline = {
     return true;
   },
 };
-
-// ---------------------------------------------------------------------------
-// Helpers for default output limits
-// ---------------------------------------------------------------------------
-
-function defaultOutputLimit(id: string): number {
-  // Family-based defaults for models without explicit output limits
-  const rules: Array<{ pattern: RegExp; limit: number }> = [
-    // Qwen 3.6 series: 64k output
-    { pattern: /^qwen3\.6/, limit: 64_000 },
-    // Qwen 3.5 series: 64k output
-    { pattern: /^qwen3\.5/, limit: 64_000 },
-    // Qwen 3 Coder series: 64k output
-    { pattern: /^qwen3-coder-plus/, limit: 64_000 },
-    { pattern: /^qwen3-coder-flash/, limit: 64_000 },
-    { pattern: /^qwen3-coder-next/, limit: 64_000 },
-    { pattern: /^qwen3-coder-480b/, limit: 64_000 },
-    { pattern: /^qwen3-coder-30b/, limit: 64_000 },
-    // Qwen 3 Max series: 8k output
-    { pattern: /^qwen3-max/, limit: 8_000 },
-    { pattern: /^qwen3-max-preview/, limit: 8_000 },
-    // Qwen 3 open-weight models: 8k output
-    { pattern: /^qwen3-235b/, limit: 8_000 },
-    { pattern: /^qwen3-30b/, limit: 8_000 },
-    { pattern: /^qwen3-32b/, limit: 8_000 },
-    { pattern: /^qwen3-14b/, limit: 8_000 },
-    { pattern: /^qwen3-8b/, limit: 8_000 },
-    { pattern: /^qwen3-4b/, limit: 8_000 },
-    { pattern: /^qwen3-1\.7b/, limit: 8_000 },
-    { pattern: /^qwen3-0\.6b/, limit: 8_000 },
-    { pattern: /^qwen3-next/, limit: 8_000 },
-    // Qwen 2.5 open-weight: 8k output
-    { pattern: /^qwen2\.5-72b/, limit: 8_000 },
-    { pattern: /^qwen2\.5-32b/, limit: 8_000 },
-    { pattern: /^qwen2\.5-14b/, limit: 8_000 },
-    { pattern: /^qwen2\.5-7b/, limit: 8_000 },
-    { pattern: /^qwen2\.5-omni/, limit: 8_000 },
-    { pattern: /^qwen2\.5-vl/, limit: 8_000 },
-    // Qwen MT (translation): 16k context, 16k output
-    { pattern: /^qwen-mt/, limit: 16_000 },
-    // Qwen Long: 6k output
-    { pattern: /^qwen-long/, limit: 6_000 },
-    // Qwen character models: 8k output
-    { pattern: /^qwen-plus-character/, limit: 8_000 },
-    { pattern: /^qwen-flash-character/, limit: 8_000 },
-    // Old Qwen models: 8k output
-    { pattern: /^qwen-plus$/, limit: 8_000 },
-    { pattern: /^qwen-max$/, limit: 8_000 },
-    { pattern: /^qwen-flash$/, limit: 8_000 },
-    { pattern: /^qwen-turbo$/, limit: 8_000 },
-    { pattern: /^qwen-omni-turbo/, limit: 8_000 },
-  ];
-
-  for (const { pattern, limit } of rules) {
-    if (pattern.test(id)) return limit;
-  }
-
-  return 0;
-}
-
-// ---------------------------------------------------------------------------
-// Helpers for date derivation
-// ---------------------------------------------------------------------------
-
-function deriveReleaseDate(id: string): string {
-  // Map model series to approximate release dates
-  const dates: Array<{ pattern: RegExp; date: string }> = [
-    { pattern: /^qwen3\.6/, date: "2026-04" },
-    { pattern: /^qwen3\.5/, date: "2026-02" },
-    { pattern: /^qwen3-coder/, date: "2025-09" },
-    { pattern: /^qwen3-omni/, date: "2025-06" },
-    { pattern: /^qwen3-vl/, date: "2025-06" },
-    { pattern: /^qwen3-max/, date: "2026-01" },
-    { pattern: /^qwen3-next/, date: "2025-06" },
-    { pattern: /^qwen3-235b/, date: "2025-04" },
-    { pattern: /^qwen3-30b/, date: "2025-04" },
-    { pattern: /^qwen3-\d+b$/, date: "2025-04" },
-    { pattern: /^qwen3/, date: "2025-04" },
-    { pattern: /^qwen2\.5/, date: "2024-09" },
-    { pattern: /^qwq/, date: "2024-09" },
-    { pattern: /^qvq/, date: "2024-12" },
-    { pattern: /^qwen-long/, date: "2024-06" },
-    { pattern: /^qwen-mt/, date: "2024-06" },
-    { pattern: /^qwen-plus$/, date: "2024-04" },
-    { pattern: /^qwen-max$/, date: "2024-04" },
-    { pattern: /^qwen-flash$/, date: "2024-06" },
-    { pattern: /^qwen-turbo$/, date: "2024-04" },
-  ];
-
-  for (const { pattern, date } of dates) {
-    if (pattern.test(id)) return date;
-  }
-
-  // Fallback: current month
-  return new Date().toISOString().slice(0, 7);
-}
 
 // ---------------------------------------------------------------------------
 // Main scrape function

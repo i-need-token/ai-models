@@ -1,19 +1,16 @@
 id: novita--mistralai--mistral-nemo
 name: Mistral Nemo
 family: novita
-limit:
-  context: 131072
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.17
   output: 0.17
   cache_read: 0.17
   cache_write: 0.17
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2024-06-11
+last_updated: 2024-06-11

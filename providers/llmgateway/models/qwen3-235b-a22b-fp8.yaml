@@ -1,18 +1,14 @@
 id: qwen3-235b-a22b-fp8
-name: Qwen3 235B A22B FP8
+name: Qwen3 235b A22b Fp8
 family: qwen
-limit:
-  context: 40960
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.8
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.2
-  output: 0.8
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

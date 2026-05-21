@@ -2,17 +2,15 @@ id: voyage-3-lite
 name: Voyage 3 Lite
 family: voyage-3
 deprecated: true
-limit:
-  context: 32000
+pricing:
+  currency: USD
+  input: 0.02
   output: 0
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.02
-  output: 0
+temperature: true
 release_date: 2024-09
-last_updated: 2026-05-17
+last_updated: 2026-05-18

@@ -1,22 +1,15 @@
 id: mistralai--mixtral-8x22b-instruct
 name: Mixtral 8x22b Instruct
 family: mistral
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 65536
-  output: 6
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 2
   output: 6
   cache_read: 0.2
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-03-17
-last_updated: 2026-05-17
+last_updated: 2026-03-17

@@ -1,8 +1,10 @@
 id: gpt-oss-120b
 name: GPT-OSS 120B
 family: gpt-oss
-reasoning: true
-open_weights: true
+pricing:
+  currency: USD
+  input: 0.09
+  output: 0.36
 limit:
   context: 131072
   output: 33000
@@ -11,9 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.09
-  output: 0.36
+reasoning: true
+temperature: true
+open_weights: true
 release_date: 2025-08-26
-last_updated: 2026-05-17
+last_updated: 2026-05-18

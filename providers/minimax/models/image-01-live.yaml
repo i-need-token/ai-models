@@ -1,16 +1,16 @@
 id: image-01-live
 name: Image 01 Live
 family: minimax-image
-temperature: false
+pricing:
+  currency: CNY
+  unit: per_image
+  price: 0.025
 modalities:
   input:
     - text
     - image
   output:
     - image
-pricing:
-  currency: CNY
-  unit: per_image
-  price: 0.025
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+release_date: 2026-05-18
+last_updated: 2026-05-18

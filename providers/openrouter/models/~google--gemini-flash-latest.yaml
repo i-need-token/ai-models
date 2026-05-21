@@ -1,0 +1,26 @@
+id: ~google--gemini-flash-latest
+name: Gemini Flash Latest
+family: ~google
+pricing:
+  currency: USD
+  input: 1.5
+  output: 9
+  cache_read: 0.15
+  cache_write: 0.083333
+limit:
+  context: 1048576
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+    - video
+    - pdf
+    - audio
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-04-28
+last_updated: 2026-04-28

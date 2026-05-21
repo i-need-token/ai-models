@@ -1,6 +1,11 @@
 id: openai--o4-mini-deep-research
-name: "OpenAI: o4 Mini Deep Research"
-family: o4
+name: O4 Mini Deep Research
+family: o
+pricing:
+  currency: USD
+  input: 2
+  output: 8
+  cache_read: 0.5
 limit:
   context: 200000
   output: 100000
@@ -11,12 +16,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 2
-  output: 8
-  cache_read: 0.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-10-11
+last_updated: 2025-10-11

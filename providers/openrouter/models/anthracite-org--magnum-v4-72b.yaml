@@ -1,6 +1,10 @@
 id: anthracite-org--magnum-v4-72b
-name: Magnum v4 72B
+name: Magnum V4 72b
 family: anthracite-org
+pricing:
+  currency: USD
+  input: 3
+  output: 5
 limit:
   context: 32768
   output: 2048
@@ -9,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 3
-  output: 5
-release_date: 2026-05-17
-last_updated: 2026-05-17
+structured_output: true
+release_date: 2024-10-22
+last_updated: 2024-10-22

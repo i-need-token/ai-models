@@ -1,32 +1,26 @@
 id: gemini-2.5-flash
 name: Gemini 2.5 Flash
-family: gemini-2.5-flash
-reasoning: true
-temperature: true
-attachment: true
-structured_output: true
+family: gemini-2.5
+pricing:
+  currency: USD
+  input: 0.15
+  output: 3.5
+  cache_read: 0.0375
+  cache_write: 0.525
+limit:
+  context: 1048576
+  output: 65536
 modalities:
   input:
     - text
     - image
-    - video
     - audio
+    - video
   output:
     - text
-pricing:
-  input:
-    text: 0.3
-    image: 0.3
-    video: 0.3
-    audio: 1
-  output: 2.5
-  cache_read:
-    text: 0.03
-    image: 0.03
-    video: 0.03
-    audio: 0.1
-knowledge: 2025-01
-release_date: 2025-06
-last_updated: 2025-06
-snapshots:
-  - id: gemini-2.5-flash-preview-09-2025
+reasoning: true
+temperature: true
+tool_call: true
+structured_output: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

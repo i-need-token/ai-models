@@ -1,23 +1,22 @@
 id: gpt-5.4-mini-2026-03-17
-name: GPT-5.4 mini
-family: gpt-5
-temperature: true
+name: Gpt 5.4 Mini 2026 03 17
+family: gpt
+pricing:
+  currency: USD
+  input: 0.75
+  output: 4.5
+  cache_read: 0.075
+limit:
+  context: 400000
+  output: 128000
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.75
-  output: 4.5
-  cache_read: 0.075
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 400000
-  output: 128000
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+release_date: 2026-05-12
+last_updated: 2026-05-12

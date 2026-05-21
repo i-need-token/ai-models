@@ -1,18 +1,13 @@
 id: jamba-large-1.7
 name: jamba large 1.7
 family: jamba
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 1.17
+  output: 4.7
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 1.17
-  output: 4.7
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

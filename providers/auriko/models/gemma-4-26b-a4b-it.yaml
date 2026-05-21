@@ -1,20 +1,19 @@
 id: gemma-4-26b-a4b-it
-name: Gemma 4 26B A4B Instruct
+name: Gemma 4 26b A4b It
 family: gemma
-temperature: true
+pricing:
+  unit: free
+limit:
+  context: 262144
+  output: 32768
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 262144
-  output: 32768
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

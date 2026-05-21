@@ -1,6 +1,11 @@
 id: openai--gpt-oss-safeguard-20b
-name: "OpenAI: gpt-oss-safeguard-20b"
-family: gpt-oss
+name: Gpt Oss Safeguard 20b
+family: gpt
+pricing:
+  currency: USD
+  input: 0.075
+  output: 0.3
+  cache_read: 0.037
 limit:
   context: 131072
   output: 65536
@@ -9,12 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.075
-  output: 0.3
-  cache_read: 0.037
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-10-29
+last_updated: 2025-10-29

@@ -1,6 +1,10 @@
 id: deepseek--deepseek-chat
-name: "DeepSeek: DeepSeek V3"
+name: Deepseek Chat
 family: deepseek
+pricing:
+  currency: USD
+  input: 0.32
+  output: 0.89
 limit:
   context: 163840
   output: 16384
@@ -9,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.32
-  output: 0.89
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2024-12-27
+last_updated: 2024-12-27

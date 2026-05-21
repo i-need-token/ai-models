@@ -1,13 +1,10 @@
 id: inclusionai--ling-1t
 name: Inclusionai/Ling 1t
-family: ling
-temperature: true
+family: inclusionai/ling
 pricing:
   currency: USD
   input: 0.274
   output: 1.096
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
@@ -15,3 +12,4 @@ modalities:
     - text
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

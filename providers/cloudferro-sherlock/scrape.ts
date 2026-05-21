@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing } from "../../types/index";
 
 const provider = defineProvider({
   id: "cloudferro-sherlock",
@@ -13,181 +21,146 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from Sherlock website JS bundle + catalog lookup)
-//
-// Sources:
-// - Pricing: extracted from sherlock.cloudferro.com JS bundle (EUR per 1M tokens)
-// - Context lengths: looked up from existing provider YAML files in catalog
-// - Capabilities: inferred from model names and original provider data
-//
-// CloudFerro Sherlock is a fully managed Generative AI service by CloudFerro
-// with OpenAI-compatible endpoints. Pricing is in EUR per 1M tokens.
-// Only active LLM models are included (embeddings and comingSoon excluded).
-// Retiring models are included with deprecated: true.
+// Raw data types (from CloudFerro Sherlock OpenAI-compatible API)
 // ---------------------------------------------------------------------------
 
-const MODELS: Record<
-  string,
-  {
-    name: string;
-    family: string;
-    context: number;
-    output: number;
-    input: number;
-    outputPrice: number;
-    deprecated?: boolean;
-    reasoning?: boolean;
-    tool_call?: boolean;
-    structured_output?: boolean;
-    vision?: boolean;
+interface SherlockModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
+}
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<SherlockModel[]> {
+  const response = await fetch("https://api.sherlock.cloudferro.com/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch CloudFerro Sherlock models: ${response.status}`);
   }
-> = {
-  "bielik-11b-v3.0-instruct": {
-    name: "Bielik 11B v3.0 Instruct",
-    family: "bielik",
-    context: 32768,
-    output: 4096,
-    input: 0.56,
-    outputPrice: 0.56,
+  const data = (await response.json()) as { data: SherlockModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.sherlock.cloudferro.com/v1/models",
+      type: "api",
+      description: "CloudFerro Sherlock /v1/models API — OpenAI-compatible model listing",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
   },
-  "gpt-oss-120b": {
-    name: "GPT-OSS 120B",
-    family: "gpt-oss",
-    context: 131072,
-    output: 32768,
-    input: 2.44,
-    outputPrice: 2.44,
-    tool_call: true,
-    structured_output: true,
+
+  extractPricing: {
+    source: {
+      url: "https://api.sherlock.cloudferro.com/v1/models",
+      type: "api",
+      description: "CloudFerro Sherlock API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
   },
-  "villanova-2b-2512-preview-apnea-ft": {
-    name: "Villanova 2B 2512 Preview Apnea FT",
-    family: "villanova",
-    context: 8192,
-    output: 4096,
-    input: 0.33,
-    outputPrice: 0.33,
+
+  extractLimits: {
+    source: {
+      url: "https://api.sherlock.cloudferro.com/v1/models",
+      type: "api",
+      description: "CloudFerro Sherlock API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
   },
-  "minimax-m2.5": {
-    name: "MiniMax M2.5",
-    family: "minimax",
-    context: 1000000,
-    output: 65536,
-    input: 0.26,
-    outputPrice: 1.04,
-    tool_call: true,
-    structured_output: true,
+
+  extractModalities: {
+    source: {
+      url: "https://api.sherlock.cloudferro.com/v1/models",
+      type: "api",
+      description: "CloudFerro Sherlock API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
   },
-  "llama-3.3-70b-instruct": {
-    name: "Llama 3.3 70B Instruct",
-    family: "llama",
-    context: 131072,
-    output: 65536,
-    input: 2.44,
-    outputPrice: 2.44,
-    tool_call: true,
+
+  extractFeatures: {
+    source: {
+      url: "https://api.sherlock.cloudferro.com/v1/models",
+      type: "api",
+      description: "CloudFerro Sherlock API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
   },
-  "llama-3.1-8b-instruct": {
-    name: "Llama 3.1 8B Instruct",
-    family: "llama",
-    context: 131072,
-    output: 4096,
-    input: 0.33,
-    outputPrice: 0.33,
-    tool_call: true,
+
+  extractDates: {
+    source: {
+      url: "https://api.sherlock.cloudferro.com/v1/models",
+      type: "api",
+      description: "Dates from CloudFerro Sherlock API — created timestamp field",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as SherlockModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
   },
-  "pllum-12b-instruct": {
-    name: "PLLuM 12B Instruct",
-    family: "pllum",
-    context: 32768,
-    output: 4096,
-    input: 0.56,
-    outputPrice: 0.56,
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
   },
-  "deepseek-r1-distill-llama-70b": {
-    name: "DeepSeek R1 Distill Llama 70B",
-    family: "deepseek",
-    context: 131072,
-    output: 65536,
-    input: 2.44,
-    outputPrice: 2.44,
-    reasoning: true,
-  },
-  // Retiring models
-  "bielik-11b-v2.6-instruct": {
-    name: "Bielik 11B v2.6 Instruct",
-    family: "bielik",
-    context: 32768,
-    output: 4096,
-    input: 0.56,
-    outputPrice: 0.56,
-    deprecated: true,
-  },
-  "bielik-10b-v2.3-instruct": {
-    name: "Bielik 10B v2.3 Instruct",
-    family: "bielik",
-    context: 8192,
-    output: 4096,
-    input: 0.33,
-    outputPrice: 0.33,
-    deprecated: true,
-  },
-  "mistral-small-24b-instruct-2501": {
-    name: "Mistral Small 24B Instruct 2501",
-    family: "mistral",
-    context: 32768,
-    output: 4096,
-    input: 1.26,
-    outputPrice: 1.26,
-    deprecated: true,
-    tool_call: true,
-  },
-  "pixtral-12b-2409": {
-    name: "Pixtral 12B 2409",
-    family: "pixtral",
-    context: 131072,
-    output: 4096,
-    input: 0.33,
-    outputPrice: 0.33,
-    deprecated: true,
-    vision: true,
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /deepseek-r1/i, family: "deepseek" },
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /mistral/i, family: "mistral" },
+        { pattern: /pixtral/i, family: "pixtral" },
+        { pattern: /minimax/i, family: "minimax" },
+        { pattern: /bielik/i, family: "bielik" },
+        { pattern: /gpt-oss/i, family: "gpt-oss" },
+        { pattern: /villanova/i, family: "villanova" },
+        { pattern: /pllum/i, family: "pllum" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
   },
 };
 
+// ---------------------------------------------------------------------------
+// Main scrape function
+// ---------------------------------------------------------------------------
+
 export async function scrape(): Promise<ScrapeResult> {
-  const today = new Date().toISOString().split("T")[0] as string;
-  const models: Model[] = [];
-
-  for (const [id, data] of Object.entries(MODELS)) {
-    const inputModalities: ("text" | "image")[] = data.vision ? ["text", "image"] : ["text"];
-
-    const pricing: Pricing = {
-      currency: "EUR",
-      input: data.input,
-      output: data.outputPrice,
-    };
-
-    const modelData: Model = {
-      id,
-      name: data.name,
-      family: data.family,
-      temperature: true,
-      limit: { context: data.context, output: data.output },
-      modalities: { input: inputModalities, output: ["text"] as ("text" | "image")[] },
-      pricing,
-      release_date: "2025-06-01",
-      last_updated: today,
-    };
-
-    if (data.deprecated) modelData.deprecated = true;
-    if (data.reasoning) modelData.reasoning = true;
-    if (data.tool_call) modelData.tool_call = true;
-    if (data.structured_output) modelData.structured_output = true;
-
-    models.push(defineModel(modelData));
-  }
-
-  console.log(`  CloudFerro Sherlock: ${models.length} models`);
-
+  const models = await runPipeline(pipeline);
   return { provider, models };
 }

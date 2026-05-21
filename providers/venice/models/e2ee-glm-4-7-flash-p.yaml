@@ -1,7 +1,10 @@
 id: e2ee-glm-4-7-flash-p
-name: GLM 4.7 Flash
-family: e2ee-other
-temperature: true
+name: e2ee-glm-4-7-flash-p
+family: glm
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.55
 limit:
   context: 198000
   output: 4096
@@ -10,10 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.13
-  output: 0.55
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+release_date: 2026-03-18
+last_updated: 2026-03-18

@@ -1,19 +1,13 @@
 id: command-a-reasoning-08-2025
 name: command a reasoning 08 2025
 family: command
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 2.5
+  output: 10
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 2.5
-  output: 10
-release_date: 2026-05-17
-last_updated: 2026-05-17
-reasoning: true
+last_updated: 2026-05-20

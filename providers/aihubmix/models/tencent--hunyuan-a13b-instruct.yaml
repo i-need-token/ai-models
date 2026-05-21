@@ -1,15 +1,13 @@
 id: tencent--hunyuan-a13b-instruct
-name: "Hunyuan: Tencent/Hunyuan A13b Instruct"
+name: Tencent/Hunyuan A13b Instruct
 family: hunyuan
-temperature: true
 pricing:
   currency: USD
   input: 0.07
   output: 0.28
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

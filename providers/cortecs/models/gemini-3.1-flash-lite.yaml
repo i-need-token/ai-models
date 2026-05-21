@@ -1,0 +1,19 @@
+id: gemini-3.1-flash-lite
+name: gemini-3.1-flash-lite
+family: gemini
+pricing:
+  currency: EUR
+  input: 0.244
+  output: 1.464
+  cache_read: 0.022
+modalities:
+  input:
+    - text
+    - image
+    - audio
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

@@ -1,21 +1,14 @@
 id: deepseek--deepseek-v4-flash--thinking
-name: "DeepSeek: deepseek v4 FLASH"
+name: "DeepSeek: deepseek v4 FLASH  thinking"
 family: deepseek
-temperature: true
-limit:
-  context: 65536
-  output: 65536
+pricing:
+  currency: USD
+  input: 0.14
+  output: 0.28
+  cache_read: 0.028
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.14
-  output: 0.28
-  cache_read: 0.028
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
-reasoning: true
+last_updated: 2026-05-20

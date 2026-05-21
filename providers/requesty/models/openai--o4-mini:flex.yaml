@@ -1,6 +1,12 @@
 id: openai--o4-mini:flex
 name: O4 Mini:Flex
-family: o4
+family: o
+pricing:
+  currency: USD
+  input: 0.55
+  output: 2.2
+  cache_read: 0.138
+  cache_write: 0.55
 limit:
   context: 200000
   output: 100000
@@ -9,13 +15,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.55
-  output: 2.2
-  cache_read: 0.138
-  cache_write: 0.55
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-04-17
+last_updated: 2025-04-17

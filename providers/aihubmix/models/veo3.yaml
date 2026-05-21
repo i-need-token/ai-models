@@ -1,18 +1,16 @@
 id: veo3
-name: "Google: Veo3"
-family: o3
-temperature: true
+name: Veo3
+family: o
 pricing:
   currency: USD
   input: 1
   output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
-    - video
     - audio
+    - video
   output:
     - text
+last_updated: 2026-05-19

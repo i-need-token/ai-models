@@ -1,20 +1,17 @@
 id: moonshot--kimi-k2-thinking
 name: Kimi K2 Thinking
 family: kimi
-limit:
-  context: 131072
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.6
   output: 2.5
   cache_read: 0.15
   cache_write: 0.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2025-08-07
+last_updated: 2025-08-07

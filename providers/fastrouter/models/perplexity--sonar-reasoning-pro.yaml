@@ -1,19 +1,15 @@
 id: perplexity--sonar-reasoning-pro
-name: "Perplexity: Sonar Reasoning Pro"
+name: Sonar Reasoning Pro
 family: sonar
-limit:
-  context: 128000
-  output: 4096
+pricing:
+  currency: USD
+  input: 2
+  output: 8
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 2
-  output: 8
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+last_updated: 2026-05-20

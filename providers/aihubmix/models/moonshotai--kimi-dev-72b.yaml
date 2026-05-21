@@ -1,15 +1,13 @@
 id: moonshotai--kimi-dev-72b
-name: "Moonshot AI: Moonshotai/Kimi Dev 72b"
+name: Moonshotai/Kimi Dev 72b
 family: kimi
-temperature: true
 pricing:
   currency: USD
   input: 0.16
   output: 0.64
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

@@ -1,19 +1,18 @@
 id: hermes-3-llama-3.1-405b
-name: Hermes 3 Llama 3.1 405B
+name: Hermes 3 Llama 3.1 405b
 family: hermes
-temperature: true
+pricing:
+  currency: USD
+  input: 1
+  output: 1
+limit:
+  context: 131072
+  output: 16384
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 131072
-  output: 16384
 structured_output: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

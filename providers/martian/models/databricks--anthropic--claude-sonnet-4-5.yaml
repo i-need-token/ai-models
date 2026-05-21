@@ -1,22 +1,13 @@
 id: databricks--anthropic--claude-sonnet-4-5
-name: Claude Sonnet 4.5
-family: dbrx
-reasoning: true
-temperature: true
-tool_call: true
-structured_output: false
-limit:
-  context: 198000
-  output: 8192
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
+name: Claude Sonnet 4 5
+family: claude-sonnet
 pricing:
   currency: USD
   input: 3
   output: 15
-release_date: 2025-01-01
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-05-20

@@ -1,20 +1,14 @@
 id: deepseek--deepseek-v4-pro
 name: "DeepSeek: deepseek v4 PRO"
 family: deepseek
-temperature: true
-limit:
-  context: 65536
-  output: 65536
+pricing:
+  currency: USD
+  input: 1.1
+  output: 2.2
+  cache_read: 0.11
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 1.1
-  output: 2.2
-  cache_read: 0.11
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

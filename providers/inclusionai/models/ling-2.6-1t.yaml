@@ -1,8 +1,10 @@
 id: ling-2.6-1t
 name: Ling 2.6 1T
 family: ling
-temperature: true
-tool_call: true
+pricing:
+  currency: USD
+  input: 0.3
+  output: 2.5
 limit:
   context: 262144
   output: 32768
@@ -11,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 2.5
+temperature: true
+tool_call: true
 release_date: 2025-04-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

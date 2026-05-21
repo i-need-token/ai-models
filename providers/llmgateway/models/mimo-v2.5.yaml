@@ -1,21 +1,17 @@
 id: mimo-v2.5
-name: MiMo V2.5
+name: Mimo V2.5
 family: mimo
-limit:
-  context: 1000000
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
+  cache_read: 0.08
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 2
-  cache_read: 0.08
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+last_updated: 2026-05-20

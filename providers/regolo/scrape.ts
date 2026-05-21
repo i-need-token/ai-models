@@ -1,10 +1,18 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing } from "../../types/index";
 
 const provider = defineProvider({
   id: "regolo",
-  name: "Regolo AI",
+  name: "Regolo",
   url: "https://regolo.ai",
   api_docs: "https://regolo.ai/docs",
   apis: {
@@ -13,187 +21,153 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Dynamic scrape from Regolo AI homepage + API
-//
-// Source: https://regolo.ai (homepage embeds model data JSON in script tag)
-// Source: https://api.regolo.ai/v1/models (public, no auth required)
-//
-// Regolo AI is a European inference platform hosting models from other providers
-// (Swiss AI Initiative, OpenAI, Google, Meta, MiniMax, Mistral, Alibaba/Qwen)
-// with EUR per-token pricing.
-//
-// Pricing: Homepage JSON provides per-token costs; converted to per-million-token (×1e6)
-// Context lengths: Homepage JSON provides max_input_tokens and max_output_tokens
-// Features: Homepage JSON provides supports_vision, supports_function_calling,
-//           supports_reasoning, supported_openai_params
-// Model IDs: flat format (no "/" separator)
+// Raw data types (from Regolo API)
 // ---------------------------------------------------------------------------
 
 interface RegoloModel {
-  model_group: string;
-  providers: string[];
-  max_tokens: number | null;
-  quantization: string | null;
-  max_input_tokens: number | null;
-  max_output_tokens: number | null;
-  input_cost_per_token: number;
-  output_cost_per_token: number;
-  mode: string;
-  supports_parallel_function_calling: boolean;
-  supports_vision: boolean;
-  supports_web_search: boolean;
-  supports_reasoning: boolean;
-  supports_function_calling: boolean;
-  supports_audio_input: boolean | null;
-  supports_video_understanding: boolean;
-  supported_openai_params: string[];
-  description: string;
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
 // ---------------------------------------------------------------------------
-// Family derivation
+// Helpers
 // ---------------------------------------------------------------------------
 
-function deriveFamily(id: string): string {
-  const lower = id.toLowerCase();
-  if (lower.includes("apertus")) return "apertus";
-  if (lower.includes("gpt-oss")) return "gpt-oss";
-  if (lower.includes("gemma")) return "gemma";
-  if (lower.includes("llama-3.3")) return "llama-3.3";
-  if (lower.includes("llama-3.1")) return "llama-3.1";
-  if (lower.includes("minimax")) return "minimax";
-  if (lower.includes("mistral-small-4")) return "mistral-small";
-  if (lower.includes("mistral-small3")) return "mistral-small";
-  if (lower.includes("qwen3-coder")) return "qwen-coder";
-  if (lower.includes("qwen3.6")) return "qwen3.6";
-  if (lower.includes("qwen3.5")) return "qwen3.5";
-  if (lower.includes("qwen3")) return "qwen3";
-  return "other";
+async function fetchModels(): Promise<RegoloModel[]> {
+  const response = await fetch("https://api.regolo.ai/v1/models");
+  if (!response.ok) throw new Error(`Failed to fetch Regolo models: ${response.status}`);
+  const data = (await response.json()) as { data: RegoloModel[] };
+  return data.data;
 }
 
 // ---------------------------------------------------------------------------
-// Modality mapping
+// Pipeline definition
 // ---------------------------------------------------------------------------
 
-function mapInputModalities(m: RegoloModel): ModelModality[] {
-  const result: ModelModality[] = ["text"];
-  if (m.supports_vision) result.push("image");
-  return result;
-}
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.regolo.ai/v1/models",
+      type: "api",
+      description: "Regolo /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      const discovered: DiscoveredModel[] = [];
 
-function mapOutputModalities(): ModelModality[] {
-  return ["text"];
-}
+      for (const m of apiModels) {
+        // Flatten org/model format: "meta-llama/llama-4-maverick" → "meta-llama--llama-4-maverick"
+        const flatId = m.id.replace(/\//g, "--");
+        discovered.push({ id: flatId, raw: m });
+      }
+
+      return discovered;
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://api.regolo.ai/v1/models",
+      type: "api",
+      description: "Regolo API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.regolo.ai/v1/models",
+      type: "api",
+      description: "Regolo API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://api.regolo.ai/v1/models",
+      type: "api",
+      description: "Regolo API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.regolo.ai/v1/models",
+      type: "api",
+      description: "Regolo API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.regolo.ai/v1/models",
+      type: "api",
+      description: "Regolo API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as RegoloModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      let name = modelId.replace(/--/g, "/").split("/").pop() || modelId;
+      name = name.replace(/-/g, " ").replace(/\b([a-z])/g, (c) => c.toUpperCase());
+      return name;
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /mistral-large/i, family: "mistral-large" },
+        { pattern: /mistral-small/i, family: "mistral-small" },
+        { pattern: /mistral-nemo/i, family: "mistral-nemo" },
+        { pattern: /mistral/i, family: "mistral" },
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /qwen/i, family: "qwen" },
+        { pattern: /gemma/i, family: "gemma" },
+        { pattern: /phi/i, family: "phi" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
-
-// ---------------------------------------------------------------------------
-// Scrape function
+// Main scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // Fetch homepage HTML to extract embedded model data JSON
-  const homeResponse = await fetch("https://regolo.ai");
-  if (!homeResponse.ok) {
-    throw new Error(`Failed to fetch Regolo homepage: ${homeResponse.status}`);
-  }
-
-  const html = await homeResponse.text();
-
-  // Extract the regolo_model_list JSON from the embedded script
-  const idx = html.indexOf("regolo_model_list");
-  if (idx < 0) {
-    throw new Error("Could not find regolo_model_list in homepage HTML");
-  }
-
-  const jsonStart = html.indexOf("{", idx);
-  let depth = 0;
-  let jsonEnd = jsonStart;
-  for (let j = jsonStart; j < Math.min(html.length, jsonStart + 100000); j++) {
-    if (html[j] === "{") depth += 1;
-    else if (html[j] === "}") {
-      depth -= 1;
-      if (depth === 0) {
-        jsonEnd = j + 1;
-        break;
-      }
-    }
-  }
-
-  const jsonStr = html.slice(jsonStart, jsonEnd);
-  const modelData = JSON.parse(jsonStr) as { json: RegoloModel[] };
-  const apiModels = modelData.json;
-
-  for (const m of apiModels) {
-    // Only process chat models (skip embedding, OCR, STT, image, reranker)
-    if (m.mode !== "chat") continue;
-
-    // Skip semantic router (brick-v1-beta is not a real model)
-    if (m.model_group === "brick-v1-beta") continue;
-
-    // Skip models with no context length data
-    if (m.max_input_tokens === null || m.max_output_tokens === null) {
-      console.warn(`  Skipping ${m.model_group}: no context length data`);
-      continue;
-    }
-
-    // Convert pricing: per-token → per-million-token (×1e6), rounded to avoid floating-point noise
-    const rawInput = m.input_cost_per_token * 1_000_000;
-    const rawOutput = m.output_cost_per_token * 1_000_000;
-
-    // Use FreePricing for zero-cost models
-    let pricing: Pricing;
-    if (rawInput === 0 && rawOutput === 0) {
-      pricing = { unit: "free" };
-    } else {
-      pricing = {
-        currency: "EUR",
-        input: Math.round(rawInput * 1e6) / 1e6,
-        output: Math.round(rawOutput * 1e6) / 1e6,
-      };
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: m.model_group,
-      name: m.model_group,
-      family: deriveFamily(m.model_group),
-      temperature: true,
-      limit: {
-        context: m.max_input_tokens as number,
-        output: m.max_output_tokens as number,
-      },
-      modalities: {
-        input: mapInputModalities(m),
-        output: mapOutputModalities(),
-      },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    // Map features from model data
-    if (m.supports_function_calling || m.supports_parallel_function_calling) {
-      modelDef.tool_call = true;
-    }
-    if (m.supports_reasoning) modelDef.reasoning = true;
-    if (m.supported_openai_params.includes("response_format")) {
-      modelDef.structured_output = true;
-    }
-
-    models.push(defineModel(modelDef));
-  }
-
-  console.log(`  Regolo: ${models.length} models`);
-
+  const models = await runPipeline(pipeline);
   return { provider, models };
 }

@@ -1,6 +1,12 @@
 id: openai--o3
 name: O3
-family: o3
+family: o
+pricing:
+  currency: USD
+  input: 2
+  output: 8
+  cache_read: 0.5
+  cache_write: 2
 limit:
   context: 200000
   output: 100000
@@ -10,13 +16,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 2
-  output: 8
-  cache_read: 0.5
-  cache_write: 2
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-04-17
+last_updated: 2025-04-17

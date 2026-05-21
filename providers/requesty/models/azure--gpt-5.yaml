@@ -1,6 +1,12 @@
 id: azure--gpt-5
 name: Gpt 5
-family: gpt
+family: azure
+pricing:
+  currency: USD
+  input: 1.25
+  output: 10
+  cache_read: 0.125
+  cache_write: 10
 limit:
   context: 200000
   output: 100000
@@ -10,13 +16,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.25
-  output: 10
-  cache_read: 0.125
-  cache_write: 10
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-04-17
+last_updated: 2025-04-17

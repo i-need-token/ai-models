@@ -1,6 +1,11 @@
 id: thedrummer--cydonia-24b-v4.1
-name: "TheDrummer: Cydonia 24B V4.1"
+name: Cydonia 24b V4.1
 family: thedrummer
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.5
+  cache_read: 0.15
 limit:
   context: 131072
   output: 131072
@@ -9,10 +14,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 0.5
-  cache_read: 0.15
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-09-27
+last_updated: 2025-09-27

@@ -1,0 +1,16 @@
+id: tii--falcon-40b
+name: Tii / Falcon 40b
+family: tii
+pricing:
+  currency: USD
+  input: 0.84
+  output: 0.84
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

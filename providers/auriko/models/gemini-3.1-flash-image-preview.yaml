@@ -1,7 +1,13 @@
 id: gemini-3.1-flash-image-preview
 name: Gemini 3.1 Flash Image Preview
 family: gemini
-temperature: true
+pricing:
+  currency: USD
+  input: 0.5
+  output: 3
+limit:
+  context: 65536
+  output: 65536
 modalities:
   input:
     - text
@@ -9,13 +15,6 @@ modalities:
   output:
     - text
     - image
-pricing:
-  currency: USD
-  input: 0.5
-  output: 3
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 65536
-  output: 65536
 reasoning: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

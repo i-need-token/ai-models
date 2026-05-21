@@ -1,7 +1,10 @@
 id: google--gemma-3-12b-it
-name: Gemma3 12B
+name: Gemma 3 12b It
 family: gemma
-temperature: true
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.1
 limit:
   context: 131072
   output: 8192
@@ -11,9 +14,4 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.05
-  output: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

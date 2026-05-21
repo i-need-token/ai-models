@@ -1,15 +1,15 @@
 id: music-2.6
 name: Music 2.6
 family: minimax-music
-temperature: false
+pricing:
+  currency: CNY
+  unit: per_request
+  price: 1
 modalities:
   input:
     - text
   output:
     - audio
-pricing:
-  currency: CNY
-  unit: per_request
-  price: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+release_date: 2026-05-18
+last_updated: 2026-05-18

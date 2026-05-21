@@ -1,7 +1,10 @@
 id: qwen--qwen3-coder-next
 name: Qwen3 Coder Next
 family: qwen-coder
-temperature: true
+pricing:
+  currency: USD
+  input: 0.2
+  output: 1.5
 limit:
   context: 262144
   output: 65536
@@ -10,11 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.2
-  output: 1.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
 structured_output: true
+last_updated: 2026-05-20

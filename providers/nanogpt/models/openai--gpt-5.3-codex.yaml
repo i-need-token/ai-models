@@ -1,20 +1,13 @@
 id: openai--gpt-5.3-codex
 name: "OpenAI: gpt 5.3 codex"
-family: gpt-5
-temperature: true
-limit:
-  context: 1048576
-  output: 131072
+family: gpt
+pricing:
+  currency: USD
+  input: 1.75
+  output: 14
 modalities:
   input:
     - text
-    - image
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 1.75
-  output: 14
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

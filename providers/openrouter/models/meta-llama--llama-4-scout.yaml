@@ -1,6 +1,10 @@
 id: meta-llama--llama-4-scout
-name: "Meta: Llama 4 Scout"
+name: Llama 4 Scout
 family: llama
+pricing:
+  currency: USD
+  input: 0.08
+  output: 0.3
 limit:
   context: 10000000
   output: 16384
@@ -10,10 +14,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.08
-  output: 0.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-04-06
+last_updated: 2025-04-06

@@ -1,10 +1,10 @@
 id: o1-pro
 name: o1 Pro
-family: o
-reasoning: true
-tool_call: true
-structured_output: true
-deprecated: true
+family: o1
+pricing:
+  currency: USD
+  input: 150
+  output: 600
 limit:
   context: 200000
   output: 100000
@@ -14,11 +14,9 @@ modalities:
     - image
   output:
     - text
-pricing:
-  input: 150
-  output: 600
-release_date: 2025-03-19
-last_updated: 2025-03-19
-snapshots:
-  - id: o1-pro-2025-03-19
-    deprecated: true
+reasoning: true
+temperature: false
+tool_call: true
+structured_output: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

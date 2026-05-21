@@ -1,0 +1,16 @@
+id: imagen-4.0-fast-generate
+name: Imagen 4.0 Fast
+family: imagen-4
+pricing:
+  currency: USD
+  unit: per_image
+  price: 0.02
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - image
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

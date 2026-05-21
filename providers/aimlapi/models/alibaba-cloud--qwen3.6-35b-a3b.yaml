@@ -1,0 +1,16 @@
+id: alibaba-cloud--qwen3.6-35b-a3b
+name: Alibaba Cloud / Qwen3.6 35b A3b
+family: alibaba
+pricing:
+  currency: USD
+  input: 0.375
+  output: 2.25
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

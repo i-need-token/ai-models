@@ -1,6 +1,11 @@
 id: openai--o3
-name: "OpenAI: o3"
-family: o3
+name: O3
+family: gpt
+pricing:
+  currency: USD
+  input: 2
+  output: 8
+  cache_read: 0.5
 limit:
   context: 200000
   output: 100000
@@ -11,12 +16,6 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 2
-  output: 8
-  cache_read: 0.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+last_updated: 2026-05-20

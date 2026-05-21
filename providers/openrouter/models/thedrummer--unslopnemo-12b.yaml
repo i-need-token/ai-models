@@ -1,6 +1,10 @@
 id: thedrummer--unslopnemo-12b
-name: "TheDrummer: UnslopNemo 12B"
+name: Unslopnemo 12b
 family: thedrummer
+pricing:
+  currency: USD
+  input: 0.4
+  output: 0.4
 limit:
   context: 32768
   output: 32768
@@ -9,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 0.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2024-11-09
+last_updated: 2024-11-09

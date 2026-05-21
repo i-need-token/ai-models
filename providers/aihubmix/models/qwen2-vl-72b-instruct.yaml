@@ -1,13 +1,10 @@
 id: qwen2-vl-72b-instruct
 name: Qwen2 Vl 72b Instruct
-family: qwen2
-temperature: true
+family: qwen
 pricing:
   currency: USD
   input: 1.09
   output: 3.27
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
@@ -15,3 +12,4 @@ modalities:
     - video
   output:
     - text
+last_updated: 2026-05-19

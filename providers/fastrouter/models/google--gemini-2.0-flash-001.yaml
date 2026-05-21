@@ -1,6 +1,12 @@
 id: google--gemini-2.0-flash-001
-name: "Google: Gemini 2.0 Flash"
+name: Gemini 2.0 Flash 001
 family: gemini
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.4
+  cache_read: 0.025
+  cache_write: 0.1833
 limit:
   context: 1048576
   output: 8192
@@ -11,12 +17,5 @@ modalities:
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.4
-  cache_read: 0.025
-  cache_write: 0.1833
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

@@ -1,8 +1,10 @@
 id: hy-2.0-instruct
 name: Tencent HY 2.0 Instruct
 family: hunyuan
-temperature: true
-tool_call: true
+pricing:
+  currency: CNY
+  input: 3.18
+  output: 7.95
 limit:
   context: 128000
   output: 16000
@@ -11,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 3.18
-  output: 7.95
+temperature: true
+tool_call: true
 release_date: 2025-11-11
-last_updated: 2026-05-17
+last_updated: 2026-05-18

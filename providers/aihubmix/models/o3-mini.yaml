@@ -1,21 +1,16 @@
 id: o3-mini
-name: "OpenAI: O3 Mini"
-family: o3-mini
-temperature: true
+name: O3 Mini
+family: o
 pricing:
   currency: USD
   input: 0.55
   output: 2.2
   cache_read: 0.275
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
-limit:
-  context: 200000
-  output: 16384
 reasoning: true
+last_updated: 2026-05-19

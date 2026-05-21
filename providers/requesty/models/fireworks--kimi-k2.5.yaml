@@ -1,6 +1,12 @@
 id: fireworks--kimi-k2.5
 name: Kimi K2.5
 family: fireworks
+pricing:
+  currency: USD
+  input: 0.6
+  output: 3
+  cache_read: 0.1
+  cache_write: 3
 limit:
   context: 262144
   output: 262144
@@ -10,13 +16,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.6
-  output: 3
-  cache_read: 0.1
-  cache_write: 3
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-03-31
+last_updated: 2026-03-31

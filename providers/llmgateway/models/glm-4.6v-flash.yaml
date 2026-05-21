@@ -1,16 +1,14 @@
 id: glm-4.6v-flash
-name: GLM-4.6V Flash
+name: Glm 4.6v Flash
 family: glm
-limit:
-  context: 128000
-  output: 32768
+pricing:
+  unit: free
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
+reasoning: true
+tool_call: true
+last_updated: 2026-05-20

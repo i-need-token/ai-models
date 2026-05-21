@@ -1,17 +1,16 @@
 id: alibaba-cloud--qwen3-coder
 name: Alibaba Cloud / Qwen3 Coder
-family: qwen
-limit:
-  context: 262000
-  output: 8192
+family: alibaba
+pricing:
+  currency: USD
+  input: 1.95
+  output: 9.75
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.95
-  output: 9.75
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

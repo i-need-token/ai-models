@@ -1,0 +1,16 @@
+id: 01.ai--01-ai-yi-base-6b
+name: 01.Ai / 01 Ai Yi Base 6b
+family: 01.ai
+pricing:
+  currency: USD
+  input: 0.21
+  output: 0.21
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

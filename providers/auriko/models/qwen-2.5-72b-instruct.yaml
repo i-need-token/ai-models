@@ -1,20 +1,19 @@
 id: qwen-2.5-72b-instruct
-name: Qwen 2.5 72B Instruct
+name: Qwen 2.5 72b Instruct
 family: qwen
-temperature: true
+pricing:
+  currency: USD
+  input: 0.36
+  output: 0.4
+limit:
+  context: 32768
+  output: 16384
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.36
-  output: 0.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 32768
-  output: 16384
 tool_call: true
 structured_output: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

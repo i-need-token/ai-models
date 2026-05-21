@@ -1,22 +1,14 @@
 id: amazon--nova-micro-v1
 name: Nova Micro V1
 family: nova
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: false
-limit:
-  context: 128000
-  output: 5120
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.035
   output: 0.14
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2025-10-08
-last_updated: 2026-05-17
+last_updated: 2025-10-08

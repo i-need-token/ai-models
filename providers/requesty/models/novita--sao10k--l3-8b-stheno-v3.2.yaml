@@ -1,19 +1,16 @@
 id: novita--sao10k--l3-8b-stheno-v3.2
-name: L3 8B Stheno V3.2
+name: L3 8b Stheno V3.2
 family: novita
-limit:
-  context: 8192
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.05
   output: 0.05
   cache_read: 0.05
   cache_write: 0.05
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2024-12-18
+last_updated: 2024-12-18

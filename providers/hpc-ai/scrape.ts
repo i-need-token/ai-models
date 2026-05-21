@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "hpc-ai",
@@ -13,227 +21,140 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-16)
-//
-// Source: https://hpc-ai.com/pricing (SSR HTML, browser-verified)
-// Model detail pages: https://hpc-ai.com/models/{provider}/{model}
-// API docs: https://www.hpc-ai.com/doc/docs/Model-APIs/User-Guides/Quickstart/
-//
-// HPC-AI Cloud is a GPU cloud platform that also offers serverless Model APIs
-// with per-token USD pricing. The pricing page lists 11 LLM models with
-// clear input/output/cache_read rates per million tokens.
-//
-// Model IDs use provider/model format (e.g., deepseek/deepseek-v4-pro).
-// In YAML filenames and id fields, / is flattened to --.
-//
-// Context window data:
-// - DeepSeek V4 Pro/Flash: 1M (confirmed from model page)
-// - MiMo V2.5/V2.5 Pro: 1M (confirmed from model page)
-// - Kimi K2.5/K2.6: 262144 (from moonshotai provider catalog)
-// - MiniMax M2.5: 204800 (from minimax provider catalog)
-// - GLM 5.1: 200000 (from zhipuai provider catalog, glm-5.1)
-// - Qwen3.5 models: not yet available in our catalog or on HPC-AI model pages;
-//   limit field omitted per project rule (never fabricate missing data)
+// Raw data types (from HPC-AI Cloud API)
 // ---------------------------------------------------------------------------
 
-interface ModelInfo {
-  name: string;
-  context?: number;
-  output?: number;
-  openWeights?: boolean;
-  reasoning?: boolean;
-  toolCall?: boolean;
-  modalities?: { input: ModelModality[]; output: ModelModality[] };
+interface HpcAiModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
-const MODELS: Record<string, ModelInfo> = {
-  // --- DeepSeek ---
-  "deepseek--deepseek-v4-pro": {
-    name: "DeepSeek V4 Pro",
-    context: 1000000,
-    output: 1000000,
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
-  },
-  "deepseek--deepseek-v4-flash": {
-    name: "DeepSeek V4 Flash",
-    context: 1000000,
-    output: 1000000,
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<HpcAiModel[]> {
+  const response = await fetch("https://api.hpc-ai.com/inference/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch HPC-AI Cloud models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: HpcAiModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.hpc-ai.com/inference/v1/models",
+      type: "api",
+      description: "HPC-AI Cloud /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
   },
 
-  // --- Xiaomi ---
-  "xiaomi--mimo-v2.5-pro": {
-    name: "MiMo V2.5 Pro",
-    context: 1048576,
-    output: 1048576,
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
-  },
-  "xiaomi--mimo-v2.5": {
-    name: "MiMo V2.5",
-    context: 1048576,
-    output: 1048576,
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
-    modalities: { input: ["text", "image", "video", "audio"], output: ["text"] },
+  extractPricing: {
+    source: {
+      url: "https://api.hpc-ai.com/inference/v1/models",
+      type: "api",
+      description: "HPC-AI Cloud API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
   },
 
-  // --- MoonshotAI ---
-  "moonshotai--kimi-k2.6": {
-    name: "Kimi K2.6",
-    context: 262144,
-    output: 262144,
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
-    modalities: { input: ["text", "image"], output: ["text"] },
-  },
-  "moonshotai--kimi-k2.5": {
-    name: "Kimi K2.5",
-    context: 262144,
-    output: 262144,
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
-    modalities: { input: ["text", "image"], output: ["text"] },
+  extractLimits: {
+    source: {
+      url: "https://api.hpc-ai.com/inference/v1/models",
+      type: "api",
+      description: "HPC-AI Cloud API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
   },
 
-  // --- Z.ai (ZhipuAI) ---
-  "zai--glm-5.1": {
-    name: "GLM 5.1",
-    context: 200000,
-    output: 200000,
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
+  extractModalities: {
+    source: {
+      url: "https://api.hpc-ai.com/inference/v1/models",
+      type: "api",
+      description: "HPC-AI Cloud API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
   },
 
-  // --- MiniMax ---
-  "minimax--minimax-m2.5": {
-    name: "MiniMax M2.5",
-    context: 204800,
-    output: 204800,
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
+  extractFeatures: {
+    source: {
+      url: "https://api.hpc-ai.com/inference/v1/models",
+      type: "api",
+      description: "HPC-AI Cloud API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
   },
 
-  // --- Qwen ---
-  "qwen--qwen3.5-397b-a17b": {
-    name: "Qwen3.5 397B A17B",
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
-    // Context window not yet verified; limit omitted
+  extractDates: {
+    source: {
+      url: "https://api.hpc-ai.com/inference/v1/models",
+      type: "api",
+      description: "HPC-AI Cloud API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as HpcAiModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
   },
-  "qwen--qwen3.5-35b-a3b": {
-    name: "Qwen3.5 35B A3B",
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
-    // Context window not yet verified; limit omitted
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
   },
-  "qwen--qwen3.5-27b": {
-    name: "Qwen3.5 27B",
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
-    // Context window not yet verified; limit omitted
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /qwen/i, family: "qwen" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
   },
 };
-
-// ---------------------------------------------------------------------------
-// Pricing (USD per million tokens)
-//
-// Source: https://hpc-ai.com/pricing (browser-verified, accessed 2026-05-16)
-//
-// All prices are USD per million tokens.
-// "-" means no cache_read pricing available; omit the field.
-// ---------------------------------------------------------------------------
-
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  "deepseek--deepseek-v4-pro": { currency: "USD", input: 1.74, output: 3.48, cache_read: 0.145 },
-  "deepseek--deepseek-v4-flash": { currency: "USD", input: 0.14, output: 0.28, cache_read: 0.028 },
-  "xiaomi--mimo-v2.5-pro": { currency: "USD", input: 1.0, output: 3.0, cache_read: 0.2 },
-  "xiaomi--mimo-v2.5": { currency: "USD", input: 0.4, output: 2.0, cache_read: 0.08 },
-  "moonshotai--kimi-k2.6": { currency: "USD", input: 0.95, output: 4.0, cache_read: 0.16 },
-  "moonshotai--kimi-k2.5": { currency: "USD", input: 0.6, output: 3.0, cache_read: 0.1 },
-  "zai--glm-5.1": { currency: "USD", input: 1.4, output: 4.4, cache_read: 0.26 },
-  "minimax--minimax-m2.5": { currency: "USD", input: 0.3, output: 1.2, cache_read: 0.03 },
-  "qwen--qwen3.5-397b-a17b": { currency: "USD", input: 0.6, output: 3.6 },
-  "qwen--qwen3.5-35b-a3b": { currency: "USD", input: 0.25, output: 2.0 },
-  "qwen--qwen3.5-27b": { currency: "USD", input: 0.3, output: 2.4 },
-};
-
-// ---------------------------------------------------------------------------
-// Family derivation
-// ---------------------------------------------------------------------------
-
-function deriveFamily(id: string): string {
-  if (id.includes("deepseek")) return "deepseek";
-  if (id.includes("mimo")) return "mimo";
-  if (id.includes("kimi")) return "kimi";
-  if (id.includes("glm")) return "glm";
-  if (id.includes("minimax")) return "minimax";
-  if (id.includes("qwen3.5-397b")) return "qwen3.5-397b";
-  if (id.includes("qwen3.5-35b")) return "qwen3.5-35b";
-  if (id.includes("qwen3.5-27b")) return "qwen3.5-27b";
-  if (id.includes("qwen")) return "qwen";
-  return id.split("--")[0] as string;
-}
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  for (const [id, info] of Object.entries(MODELS)) {
-    const pricing = HARDCODED_PRICING[id];
-    if (!pricing) {
-      console.warn(`  HPC-AI: skipping ${id} — no pricing`);
-      continue;
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id,
-      name: info.name,
-      family: deriveFamily(id),
-      modalities: info.modalities ?? { input: ["text"], output: ["text"] },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (info.context !== undefined && info.output !== undefined) {
-      modelDef.limit = { context: info.context, output: info.output };
-    }
-
-    if (info.openWeights) modelDef.open_weights = true;
-    if (info.reasoning) modelDef.reasoning = true;
-    if (info.toolCall) modelDef.tool_call = true;
-
-    models.push(defineModel(modelDef));
-  }
-
-  console.log(`  HPC-AI: ${models.length} models`);
-
+  const models = await runPipeline(pipeline);
+  console.log(`  HPC-AI Cloud: ${models.length} models`);
   return { provider, models };
 }

@@ -1,7 +1,10 @@
 id: pllum-12b-instruct
 name: PLLuM 12B Instruct
 family: pllum
-temperature: true
+pricing:
+  currency: EUR
+  input: 0.56
+  output: 0.56
 limit:
   context: 32768
   output: 4096
@@ -10,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.56
-  output: 0.56
-release_date: 2025-06-01
-last_updated: 2026-05-17
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

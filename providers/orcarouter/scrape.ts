@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "orcarouter",
@@ -13,1277 +21,142 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-17)
-//
-// Sources:
-// - Model list: https://www.orcarouter.ai/sitemap.xml (155 model URLs)
-// - Pricing: https://www.orcarouter.ai/models/{id} (browser-scraped per-model pages)
-// - Context lengths: browser-scraped from per-model pages
-// - Capabilities: inferred from model family/name
-//
-// OrcaRouter is a zero-markup inference router providing pass-through pricing
-// from leading AI providers (OpenAI, Anthropic, Google, DeepSeek, Qwen,
-// MiniMax, ZhipuAI/GLM, Kimi, Grok). Pricing shown is per-1M-token USD rate,
-// identical to the underlying provider's pricing (0% markup).
-//
-// Model IDs use "--" instead of "/" to avoid filesystem issues.
-// Non-LLM models (TTS, embedding, image/video generation) are excluded.
-// Tiered pricing uses tier1 (short context) rates.
+// Raw data types (from OrcaRouter API)
 // ---------------------------------------------------------------------------
 
-// ---------------------------------------------------------------------------
-// Model info type
-// ---------------------------------------------------------------------------
-
-interface ModelInfo {
-  name: string;
-  context: number;
-  output: number;
-  inputModalities: ModelModality[];
-  outputModalities: ModelModality[];
-  openWeights?: boolean;
-  reasoning?: boolean;
-  toolCall?: boolean;
+interface OrcarouterModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
 // ---------------------------------------------------------------------------
-// Model data (120 LLM models from 9 providers)
+// Helpers
 // ---------------------------------------------------------------------------
 
-const MODELS: Record<string, ModelInfo> = {
-  // --- Claude ---
-  "anthropic--claude-opus-4.7": {
-    name: "Claude Opus 4.7",
-    context: 1000000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "anthropic--claude-sonnet-4.5": {
-    name: "Claude Sonnet 4.5",
-    context: 1000000,
-    output: 1000000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "anthropic--claude-opus-4.5": {
-    name: "Claude Opus 4.5",
-    context: 200000,
-    output: 200000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "anthropic--claude-opus-4.1": {
-    name: "Claude Opus 4.1",
-    context: 200000,
-    output: 200000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "anthropic--claude-haiku-4.5": {
-    name: "Claude Haiku 4.5",
-    context: 200000,
-    output: 200000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "anthropic--claude-sonnet-4": {
-    name: "Claude Sonnet 4",
-    context: 1000000,
-    output: 1000000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "anthropic--claude-opus-4.6": {
-    name: "Claude Opus 4.6",
-    context: 1000000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "anthropic--claude-opus-4": {
-    name: "Claude Opus 4",
-    context: 200000,
-    output: 200000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "anthropic--claude-sonnet-4.6": {
-    name: "Claude Sonnet 4.6",
-    context: 1000000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
+async function fetchModels(): Promise<OrcarouterModel[]> {
+  const response = await fetch("https://orcarouter.ai/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch OrcaRouter models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: OrcarouterModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://orcarouter.ai/v1/models",
+      type: "api",
+      description: "OrcaRouter /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
   },
 
-  // --- DeepSeek ---
-  "deepseek--deepseek-v4-flash": {
-    name: "DeepSeek V4 Flash",
-    context: 1050000,
-    output: 65536,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "deepseek--deepseek-chat": {
-    name: "DeepSeek Chat",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "deepseek--deepseek-reasoner": {
-    name: "DeepSeek Reasoner",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "deepseek--deepseek-v4-pro": {
-    name: "DeepSeek V4 Pro",
-    context: 1050000,
-    output: 65536,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
+  extractPricing: {
+    source: {
+      url: "https://orcarouter.ai/v1/models",
+      type: "api",
+      description: "OrcaRouter API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
   },
 
-  // --- Gemini ---
-  "google--gemma-4-31b-it": {
-    name: "Gemma 4 31B IT",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-    toolCall: true,
-  },
-  "google--gemini-3.1-flash-lite-preview": {
-    name: "Gemini 3.1 Flash Lite Preview",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "google--gemini-3-pro-preview": {
-    name: "Gemini 3 Pro Preview",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "google--gemini-pro-latest": {
-    name: "Gemini Pro Latest",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-  },
-  "google--gemini-3-flash-preview": {
-    name: "Gemini 3 Flash Preview",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "google--gemma-4-26b-a4b-it": {
-    name: "Gemma 4 26B A4B IT",
-    context: 262100,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-    toolCall: true,
-  },
-  "google--gemini-2.5-flash-lite": {
-    name: "Gemini 2.5 Flash Lite",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "google--gemini-2.5-flash": {
-    name: "Gemini 2.5 Flash",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "google--gemini-3.1-pro-preview-customtools": {
-    name: "Gemini 3.1 Pro Preview Custom Tools",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "google--gemini-3.1-pro-preview": {
-    name: "Gemini 3.1 Pro Preview",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "google--gemini-flash-latest": {
-    name: "Gemini Flash Latest",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-  },
-  "google--gemini-flash-lite-latest": {
-    name: "Gemini Flash Lite Latest",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-  },
-  "google--gemini-2.5-pro": {
-    name: "Gemini 2.5 Pro",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
+  extractLimits: {
+    source: {
+      url: "https://orcarouter.ai/v1/models",
+      type: "api",
+      description: "OrcaRouter API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
   },
 
-  // --- Grok ---
-  "grok--grok-4.3": {
-    name: "Grok 4.3",
-    context: 1000000,
-    output: 1000000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
+  extractModalities: {
+    source: {
+      url: "https://orcarouter.ai/v1/models",
+      type: "api",
+      description: "OrcaRouter API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
   },
 
-  // --- Kimi ---
-  "kimi--kimi-k2.5": {
-    name: "Kimi K2.5",
-    context: 262100,
-    output: 262100,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "kimi--kimi-k2.6": {
-    name: "Kimi K2.6",
-    context: 262100,
-    output: 262100,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
+  extractFeatures: {
+    source: {
+      url: "https://orcarouter.ai/v1/models",
+      type: "api",
+      description: "OrcaRouter API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
   },
 
-  // --- MiniMax ---
-  "minimax--minimax-m2.5": {
-    name: "MiniMax M2.5",
-    context: 204800,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "minimax--minimax-m2.7": {
-    name: "MiniMax M2.7",
-    context: 204800,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "minimax--minimax-m2.5-highspeed": {
-    name: "MiniMax M2.5 Highspeed",
-    context: 204800,
-    output: 204800,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "minimax--minimax-m2.7-highspeed": {
-    name: "MiniMax M2.7 Highspeed",
-    context: 204800,
-    output: 204800,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
+  extractDates: {
+    source: {
+      url: "https://orcarouter.ai/v1/models",
+      type: "api",
+      description: "OrcaRouter API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as OrcarouterModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
   },
 
-  // --- GPT ---
-  "openai--gpt-3.5-turbo-16k": {
-    name: "GPT-3.5 Turbo 16K",
-    context: 16400,
-    output: 16400,
-    inputModalities: ["text"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-  },
-  "openai--gpt-4-turbo": {
-    name: "GPT-4 Turbo",
-    context: 128000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-4o-mini": {
-    name: "GPT-4o Mini",
-    context: 128000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-5-2025-08-07": {
-    name: "GPT-5 2025-08-07",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-4.1-mini": {
-    name: "GPT-4.1 Mini",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-5.2-chat-latest": {
-    name: "GPT-5.2 Chat Latest",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.4-pro-2026-03-05": {
-    name: "GPT-5.4 Pro 2026-03-05",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.5": {
-    name: "GPT-5.5",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-4.1-2025-04-14": {
-    name: "GPT-4.1 2025-04-14",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-4o-mini-search-preview": {
-    name: "GPT-4o Mini Search Preview",
-    context: 128000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-5.2-2025-12-11": {
-    name: "GPT-5.2 2025-12-11",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.2-pro-2025-12-11": {
-    name: "GPT-5.2 Pro 2025-12-11",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-4o-2024-08-06": {
-    name: "GPT-4o 2024-08-06",
-    context: 128000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-5-search-api": {
-    name: "GPT-5 Search API",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-3.5-turbo": {
-    name: "GPT-3.5 Turbo",
-    context: 16400,
-    output: 16384,
-    inputModalities: ["text"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-  },
-  "openai--gpt-4o": {
-    name: "GPT-4o",
-    context: 128000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-5-codex": {
-    name: "GPT-5 Codex",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.5-pro": {
-    name: "GPT-5.5 Pro",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.4-mini-2026-03-17": {
-    name: "GPT-5.4 Mini 2026-03-17",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5": {
-    name: "GPT-5",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5-pro": {
-    name: "GPT-5 Pro",
-    context: 400000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.4-nano-2026-03-17": {
-    name: "GPT-5.4 Nano 2026-03-17",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.4-pro": {
-    name: "GPT-5.4 Pro",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.4-mini": {
-    name: "GPT-5.4 Mini",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-4o-2024-05-13": {
-    name: "GPT-4o 2024-05-13",
-    context: 128000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-4o-mini-2024-07-18": {
-    name: "GPT-4o Mini 2024-07-18",
-    context: 128000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-4o-search-preview-2025-03-11": {
-    name: "GPT-4o Search Preview 2025-03-11",
-    context: 128000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-4.1": {
-    name: "GPT-4.1",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-4.1-nano": {
-    name: "GPT-4.1 Nano",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-5-nano": {
-    name: "GPT-5 Nano",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.4-nano": {
-    name: "GPT-5.4 Nano",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-3.5-turbo-0125": {
-    name: "GPT-3.5 Turbo 0125",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-  },
-  "openai--gpt-5.1-codex": {
-    name: "GPT-5.1 Codex",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5-search-api-2025-10-14": {
-    name: "GPT-5 Search API 2025-10-14",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.1-2025-11-13": {
-    name: "GPT-5.1 2025-11-13",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.1-codex-mini": {
-    name: "GPT-5.1 Codex Mini",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.2": {
-    name: "GPT-5.2",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.2-codex": {
-    name: "GPT-5.2 Codex",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5-mini-2025-08-07": {
-    name: "GPT-5 Mini 2025-08-07",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.3-chat-latest": {
-    name: "GPT-5.3 Chat Latest",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.5-pro-2026-04-23": {
-    name: "GPT-5.5 Pro 2026-04-23",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.2-pro": {
-    name: "GPT-5.2 Pro",
-    context: 400000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-4-0613": {
-    name: "GPT-4 0613",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-  },
-  "openai--gpt-5.4": {
-    name: "GPT-5.4",
-    context: 1050000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.5-2026-04-23": {
-    name: "GPT-5.5 2026-04-23",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5-chat-latest": {
-    name: "GPT-5 Chat Latest",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-4": {
-    name: "GPT-4",
-    context: 8200,
-    output: 8200,
-    inputModalities: ["text"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-  },
-  "openai--gpt-4o-mini-search-preview-2025-03-11": {
-    name: "GPT-4o Mini Search Preview 2025-03-11",
-    context: 128000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-4o-search-preview": {
-    name: "GPT-4o Search Preview",
-    context: 128000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-5-mini": {
-    name: "GPT-5 Mini",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.1-chat-latest": {
-    name: "GPT-5.1 Chat Latest",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.4-2026-03-05": {
-    name: "GPT-5.4 2026-03-05",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.1": {
-    name: "GPT-5.1",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.1-codex-max": {
-    name: "GPT-5.1 Codex Max",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-5.3-codex": {
-    name: "GPT-5.3 Codex",
-    context: 400000,
-    output: 131072,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-4.1-mini-2025-04-14": {
-    name: "GPT-4.1 Mini 2025-04-14",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-4.1-nano-2025-04-14": {
-    name: "GPT-4.1 Nano 2025-04-14",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-4o-2024-11-20": {
-    name: "GPT-4o 2024-11-20",
-    context: 128000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-5-nano-2025-08-07": {
-    name: "GPT-5 Nano 2025-08-07",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "openai--gpt-3.5-turbo-1106": {
-    name: "GPT-3.5 Turbo 1106",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-  },
-  "openai--gpt-4-turbo-2024-04-09": {
-    name: "GPT-4 Turbo 2024-04-09",
-    context: 128000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "openai--gpt-5-pro-2025-10-06": {
-    name: "GPT-5 Pro 2025-10-06",
-    context: 400000,
-    output: 400000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
   },
 
-  // --- Qwen ---
-  "qwen--qwen3-vl-235b-a22b-thinking": {
-    name: "Qwen3 VL 235B A22B Thinking",
-    context: 131100,
-    output: 131100,
-    inputModalities: ["text", "image", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-    reasoning: true,
-  },
-  "qwen--qwen3.5-plus-2026-02-15": {
-    name: "Qwen3.5 Plus 2026-02-15",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "qwen--qwen3.6-flash": {
-    name: "Qwen3.6 Flash",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-    toolCall: true,
-  },
-  "qwen--qwen3-max": {
-    name: "Qwen3 Max",
-    context: 262100,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "qwen--qwen3.6-35b-a3b": {
-    name: "Qwen3.6 35B A3B",
-    context: 262100,
-    output: 262100,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-  },
-  "qwen--qwen3-vl-8b-thinking": {
-    name: "Qwen3 VL 8B Thinking",
-    context: 131100,
-    output: 131100,
-    inputModalities: ["text", "image", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-    reasoning: true,
-  },
-  "qwen--qwen3.5-397b-a17b": {
-    name: "Qwen3.5 397B A17B",
-    context: 32800,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-  },
-  "qwen--qwen3.5-flash-2026-02-23": {
-    name: "Qwen3.5 Flash 2026-02-23",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-    toolCall: true,
-  },
-  "qwen--qwen3.5-plus": {
-    name: "Qwen3.5 Plus",
-    context: 1050000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "qwen--qwen3.6-plus": {
-    name: "Qwen3.6 Plus",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "qwen--qwen3-vl-8b-instruct": {
-    name: "Qwen3 VL 8B Instruct",
-    context: 131100,
-    output: 131100,
-    inputModalities: ["text", "image", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-  },
-  "qwen--qwen3-max-preview": {
-    name: "Qwen3 Max Preview",
-    context: 262100,
-    output: 262100,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "qwen--qwen3.5-flash": {
-    name: "Qwen3.5 Flash",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-    toolCall: true,
-  },
-  "qwen--qwen3.6-flash-2026-04-16": {
-    name: "Qwen3.6 Flash 2026-04-16",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-    toolCall: true,
-  },
-  "qwen--qwen3-vl-235b-a22b-instruct": {
-    name: "Qwen3 VL 235B A22B Instruct",
-    context: 262100,
-    output: 262100,
-    inputModalities: ["text", "image", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-  },
-  "qwen--qwen3.5-35b-a3b": {
-    name: "Qwen3.5 35B A3B",
-    context: 32800,
-    output: 8192,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-  },
-  "qwen--qwen3.5-122b-a10b": {
-    name: "Qwen3.5 122B A10B",
-    context: 32800,
-    output: 32800,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-  },
-  "qwen--qwen3.6-plus-2026-04-02": {
-    name: "Qwen3.6 Plus 2026-04-02",
-    context: 1050000,
-    output: 1050000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
-  },
-  "qwen--qwen3.5-27b": {
-    name: "Qwen3.5 27B",
-    context: 32800,
-    output: 8192,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    openWeights: true,
-  },
-
-  // --- GLM ---
-  "z-ai--glm-5.1": {
-    name: "GLM 5.1",
-    context: 200000,
-    output: 200000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "z-ai--glm-4.5": {
-    name: "GLM 4.5",
-    context: 128000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "z-ai--glm-4.7": {
-    name: "GLM 4.7",
-    context: 200000,
-    output: 200000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "z-ai--glm-4.5-air": {
-    name: "GLM 4.5 Air",
-    context: 128000,
-    output: 128000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "z-ai--glm-5": {
-    name: "GLM 5",
-    context: 200000,
-    output: 200000,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    reasoning: true,
-    toolCall: true,
-  },
-  "z-ai--glm-4.6": {
-    name: "GLM 4.6",
-    context: 200000,
-    output: 16384,
-    inputModalities: ["text", "image"] as ModelModality[],
-    outputModalities: ["text"] as ModelModality[],
-    toolCall: true,
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /qwen/i, family: "qwen" },
+        { pattern: /gpt/i, family: "gpt" },
+        { pattern: /claude/i, family: "claude" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
   },
 };
-
-// ---------------------------------------------------------------------------
-// Pricing (USD per million tokens, zero markup — pass-through from providers)
-//
-// Source: https://www.orcarouter.ai/models/{id} (browser-scraped, 2026-05-17)
-// ---------------------------------------------------------------------------
-
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  "anthropic--claude-opus-4.7": { currency: "USD", input: 5, output: 25 },
-  "minimax--minimax-m2.5": { currency: "USD", input: 0.3, output: 1.2 },
-  "openai--gpt-3.5-turbo-16k": { currency: "USD", input: 3, output: 4 },
-  "openai--gpt-4-turbo": { currency: "USD", input: 10, output: 30 },
-  "openai--gpt-4o-mini": { currency: "USD", input: 0.15, output: 0.6 },
-  "openai--gpt-5-2025-08-07": { currency: "USD", input: 1.25, output: 10 },
-  "google--gemma-4-31b-it": { currency: "USD", input: 0.13, output: 0.38 },
-  "qwen--qwen3-vl-235b-a22b-thinking": { currency: "USD", input: 0.4, output: 4 },
-  "kimi--kimi-k2.5": { currency: "USD", input: 0.6, output: 3 },
-  "openai--gpt-4.1-mini": { currency: "USD", input: 0.4, output: 1.6 },
-  "qwen--qwen3.5-plus-2026-02-15": { currency: "USD", input: 0.4, output: 2.4 },
-  "qwen--qwen3.6-flash": { currency: "USD", input: 0.25, output: 1.5 },
-  "google--gemini-3.1-flash-lite-preview": { currency: "USD", input: 0.25, output: 1.5 },
-  "minimax--minimax-m2.7": { currency: "USD", input: 0.3, output: 1.2 },
-  "deepseek--deepseek-v4-flash": { currency: "USD", input: 0.19, output: 0.37 },
-  "openai--gpt-5.2-chat-latest": { currency: "USD", input: 1.75, output: 14 },
-  "openai--gpt-5.4-pro-2026-03-05": { currency: "USD", input: 30, output: 180 },
-  "openai--gpt-5.5": { currency: "USD", input: 5, output: 30 },
-  "qwen--qwen3-max": { currency: "USD", input: 0.36, output: 1.43 },
-  "qwen--qwen3.6-35b-a3b": { currency: "USD", input: 0.25, output: 1.49 },
-  "anthropic--claude-sonnet-4.5": { currency: "USD", input: 3, output: 15 },
-  "openai--gpt-4.1-2025-04-14": { currency: "USD", input: 2, output: 8 },
-  "openai--gpt-4o-mini-search-preview": { currency: "USD", input: 0.15, output: 0.6 },
-  "openai--gpt-5.2-2025-12-11": { currency: "USD", input: 1.75, output: 14 },
-  "openai--gpt-5.2-pro-2025-12-11": { currency: "USD", input: 21, output: 168 },
-  "z-ai--glm-5.1": { currency: "USD", input: 1.4, output: 4.4 },
-  "anthropic--claude-opus-4.5": { currency: "USD", input: 5, output: 25 },
-  "google--gemini-3-pro-preview": { currency: "USD", input: 4, output: 18 },
-  "google--gemini-pro-latest": { currency: "USD", input: 4, output: 18 },
-  "openai--gpt-4o-2024-08-06": { currency: "USD", input: 2.5, output: 10 },
-  "qwen--qwen3-vl-8b-thinking": { currency: "USD", input: 0.18, output: 2.1 },
-  "google--gemini-3-flash-preview": { currency: "USD", input: 0.5, output: 3 },
-  "openai--gpt-5-search-api": { currency: "USD", input: 1.25, output: 10 },
-  "openai--gpt-3.5-turbo": { currency: "USD", input: 0.5, output: 1.5 },
-  "openai--gpt-4o": { currency: "USD", input: 2.5, output: 10 },
-  "openai--gpt-5-codex": { currency: "USD", input: 1.25, output: 10 },
-  "openai--gpt-5.5-pro": { currency: "USD", input: 30, output: 180 },
-  "openai--gpt-5.4-mini-2026-03-17": { currency: "USD", input: 0.75, output: 4.5 },
-  "qwen--qwen3.5-397b-a17b": { currency: "USD", input: 0.17, output: 1.03 },
-  "google--gemma-4-26b-a4b-it": { currency: "USD", input: 0.06, output: 0.33 },
-  "openai--gpt-5": { currency: "USD", input: 1.25, output: 10 },
-  "openai--gpt-5-pro": { currency: "USD", input: 15, output: 120 },
-  "deepseek--deepseek-chat": { currency: "USD", input: 0.14, output: 0.28 },
-  "openai--gpt-5.4-nano-2026-03-17": { currency: "USD", input: 0.2, output: 1.25 },
-  "openai--gpt-5.4-pro": { currency: "USD", input: 30, output: 180 },
-  "anthropic--claude-opus-4.1": { currency: "USD", input: 15, output: 75 },
-  "deepseek--deepseek-reasoner": { currency: "USD", input: 0.43, output: 0.87 },
-  "google--gemini-2.5-flash-lite": { currency: "USD", input: 0.1, output: 0.4 },
-  "z-ai--glm-4.5": { currency: "USD", input: 0.6, output: 2.2 },
-  "openai--gpt-5.4-mini": { currency: "USD", input: 0.75, output: 4.5 },
-  "google--gemini-2.5-flash": { currency: "USD", input: 0.3, output: 2.5 },
-  "openai--gpt-4o-2024-05-13": { currency: "USD", input: 5, output: 15 },
-  "openai--gpt-4o-mini-2024-07-18": { currency: "USD", input: 0.15, output: 0.6 },
-  "openai--gpt-4o-search-preview-2025-03-11": { currency: "USD", input: 2.5, output: 10 },
-  "openai--gpt-4.1": { currency: "USD", input: 2, output: 8 },
-  "openai--gpt-4.1-nano": { currency: "USD", input: 0.1, output: 0.4 },
-  "openai--gpt-5-nano": { currency: "USD", input: 0.05, output: 0.4 },
-  "grok--grok-4.3": { currency: "USD", input: 1.25, output: 2.5 },
-  "openai--gpt-5.4-nano": { currency: "USD", input: 0.2, output: 1.25 },
-  "qwen--qwen3.5-flash-2026-02-23": { currency: "USD", input: 0.1, output: 0.4 },
-  "qwen--qwen3.5-plus": { currency: "USD", input: 0.4, output: 2.4 },
-  "qwen--qwen3.6-plus": { currency: "USD", input: 0.28, output: 1.65 },
-  "z-ai--glm-4.7": { currency: "USD", input: 0.6, output: 2.2 },
-  "kimi--kimi-k2.6": { currency: "USD", input: 0.95, output: 4 },
-  "openai--gpt-3.5-turbo-0125": { currency: "USD", input: 0.5, output: 1.5 },
-  "google--gemini-3.1-pro-preview-customtools": { currency: "USD", input: 4, output: 18 },
-  "openai--gpt-5.1-codex": { currency: "USD", input: 1.25, output: 10 },
-  "qwen--qwen3-vl-8b-instruct": { currency: "USD", input: 0.18, output: 0.7 },
-  "openai--gpt-5-search-api-2025-10-14": { currency: "USD", input: 1.25, output: 10 },
-  "openai--gpt-5.1-2025-11-13": { currency: "USD", input: 1.25, output: 10 },
-  "openai--gpt-5.1-codex-mini": { currency: "USD", input: 0.25, output: 2 },
-  "openai--gpt-5.2": { currency: "USD", input: 1.75, output: 14 },
-  "openai--gpt-5.2-codex": { currency: "USD", input: 1.75, output: 14 },
-  "anthropic--claude-haiku-4.5": { currency: "USD", input: 1, output: 5 },
-  "openai--gpt-5-mini-2025-08-07": { currency: "USD", input: 0.25, output: 2 },
-  "openai--gpt-5.3-chat-latest": { currency: "USD", input: 1.75, output: 14 },
-  "openai--gpt-5.5-pro-2026-04-23": { currency: "USD", input: 30, output: 180 },
-  "qwen--qwen3-max-preview": { currency: "USD", input: 0.86, output: 3.44 },
-  "qwen--qwen3.5-flash": { currency: "USD", input: 0.1, output: 0.4 },
-  "z-ai--glm-4.5-air": { currency: "USD", input: 0.2, output: 1.1 },
-  "openai--gpt-5.2-pro": { currency: "USD", input: 21, output: 168 },
-  "z-ai--glm-5": { currency: "USD", input: 1, output: 3.2 },
-  "openai--gpt-4-0613": { currency: "USD", input: 30, output: 60 },
-  "openai--gpt-5.4": { currency: "USD", input: 2.5, output: 15 },
-  "openai--gpt-5.5-2026-04-23": { currency: "USD", input: 5, output: 30 },
-  "qwen--qwen3.6-flash-2026-04-16": { currency: "USD", input: 0.25, output: 1.5 },
-  "google--gemini-3.1-pro-preview": { currency: "USD", input: 4, output: 18 },
-  "google--gemini-flash-latest": { currency: "USD", input: 0.5, output: 3 },
-  "google--gemini-flash-lite-latest": { currency: "USD", input: 0.25, output: 1.5 },
-  "openai--gpt-5-chat-latest": { currency: "USD", input: 1.25, output: 10 },
-  "anthropic--claude-sonnet-4": { currency: "USD", input: 3, output: 15 },
-  "google--gemini-2.5-pro": { currency: "USD", input: 2.5, output: 15 },
-  "minimax--minimax-m2.5-highspeed": { currency: "USD", input: 0.6, output: 2.4 },
-  "openai--gpt-4": { currency: "USD", input: 30, output: 60 },
-  "openai--gpt-4o-mini-search-preview-2025-03-11": { currency: "USD", input: 0.15, output: 0.6 },
-  "qwen--qwen3-vl-235b-a22b-instruct": { currency: "USD", input: 0.4, output: 1.6 },
-  "qwen--qwen3.5-35b-a3b": { currency: "USD", input: 0.06, output: 0.46 },
-  "openai--gpt-4o-search-preview": { currency: "USD", input: 2.5, output: 10 },
-  "openai--gpt-5-mini": { currency: "USD", input: 0.25, output: 2 },
-  "openai--gpt-5.1-chat-latest": { currency: "USD", input: 1.25, output: 10 },
-  "openai--gpt-5.4-2026-03-05": { currency: "USD", input: 2.5, output: 15 },
-  "z-ai--glm-4.6": { currency: "USD", input: 0.6, output: 2.2 },
-  "openai--gpt-5.1": { currency: "USD", input: 1.25, output: 10 },
-  "openai--gpt-5.1-codex-max": { currency: "USD", input: 1.25, output: 10 },
-  "openai--gpt-5.3-codex": { currency: "USD", input: 1.75, output: 14 },
-  "qwen--qwen3.5-122b-a10b": { currency: "USD", input: 0.12, output: 0.92 },
-  "qwen--qwen3.6-plus-2026-04-02": { currency: "USD", input: 0.5, output: 3 },
-  "deepseek--deepseek-v4-pro": { currency: "USD", input: 0.56, output: 1.12 },
-  "openai--gpt-4.1-mini-2025-04-14": { currency: "USD", input: 0.4, output: 1.6 },
-  "minimax--minimax-m2.7-highspeed": { currency: "USD", input: 0.6, output: 2.4 },
-  "openai--gpt-4.1-nano-2025-04-14": { currency: "USD", input: 0.1, output: 0.4 },
-  "openai--gpt-4o-2024-11-20": { currency: "USD", input: 2.5, output: 10 },
-  "openai--gpt-5-nano-2025-08-07": { currency: "USD", input: 0.05, output: 0.4 },
-  "anthropic--claude-opus-4.6": { currency: "USD", input: 5, output: 25 },
-  "qwen--qwen3.5-27b": { currency: "USD", input: 0.09, output: 0.69 },
-  "anthropic--claude-opus-4": { currency: "USD", input: 15, output: 75 },
-  "anthropic--claude-sonnet-4.6": { currency: "USD", input: 3, output: 15 },
-  "openai--gpt-3.5-turbo-1106": { currency: "USD", input: 1, output: 2 },
-  "openai--gpt-4-turbo-2024-04-09": { currency: "USD", input: 10, output: 30 },
-  "openai--gpt-5-pro-2025-10-06": { currency: "USD", input: 15, output: 120 },
-};
-
-// ---------------------------------------------------------------------------
-// Family derivation
-// ---------------------------------------------------------------------------
-
-function deriveFamily(id: string): string {
-  const prefix = id.split("--")[0] as string;
-  const FAMILY_MAP: Record<string, string> = {
-    anthropic: "claude",
-    openai: "gpt",
-    google: "gemini",
-    deepseek: "deepseek",
-    qwen: "qwen",
-    minimax: "minimax",
-    "z-ai": "glm",
-    kimi: "kimi",
-    grok: "grok",
-  };
-  const mapped = FAMILY_MAP[prefix];
-  return mapped !== undefined ? mapped : prefix;
-}
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate() as string;
-  const models: Model[] = [];
-
-  for (const [id, info] of Object.entries(MODELS)) {
-    const pricing = HARDCODED_PRICING[id];
-    if (!pricing) {
-      console.warn(`  OrcaRouter: skipping ${id} — no pricing`);
-      continue;
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id,
-      name: info.name,
-      family: deriveFamily(id),
-      limit: { context: info.context, output: info.output },
-      modalities: { input: info.inputModalities, output: info.outputModalities },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (info.openWeights) modelDef.open_weights = true;
-    if (info.reasoning) modelDef.reasoning = true;
-    if (info.toolCall) modelDef.tool_call = true;
-
-    models.push(defineModel(modelDef));
-  }
-
+  const models = await runPipeline(pipeline);
   console.log(`  OrcaRouter: ${models.length} models`);
-
   return { provider, models };
 }

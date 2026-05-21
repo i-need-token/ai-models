@@ -1,0 +1,16 @@
+id: meta--llama-2-13b
+name: Meta / Llama 2 13b
+family: meta
+pricing:
+  currency: USD
+  input: 0.231
+  output: 0.231
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

@@ -1,20 +1,17 @@
 id: nemotron-3-nano-30b-a3b
-name: Nemotron 3 Nano 30B A3B
+name: Nemotron 3 Nano 30b A3b
 family: nemotron
-temperature: true
+pricing:
+  currency: USD
+  input: 0.05
+  output: 0.2
 limit:
   context: 262144
-  output: 131072
+  output: 262144
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.05
-  output: 0.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
-open_weights: true
+last_updated: 2026-05-20

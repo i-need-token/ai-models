@@ -1,9 +1,10 @@
 id: mimo-v2.5
 name: MiMo V2.5
 family: mimo
-temperature: true
-tool_call: true
-attachment: true
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
 limit:
   context: 1048576
   output: 131072
@@ -15,9 +16,8 @@ modalities:
     - audio
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 2
+temperature: true
+tool_call: true
+attachment: true
 release_date: 2025-09-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

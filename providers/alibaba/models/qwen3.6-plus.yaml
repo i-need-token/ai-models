@@ -1,6 +1,6 @@
 id: qwen3.6-plus
 name: Qwen 3.6 Plus
-family: qwen3.6
+family: qwen
 pricing:
   currency: CNY
   input: 2
@@ -16,5 +16,4 @@ modalities:
 reasoning: true
 tool_call: true
 structured_output: true
-release_date: 2026-04
-last_updated: 2026-04
+last_updated: 2026-05-19

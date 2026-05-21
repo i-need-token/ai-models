@@ -1,7 +1,10 @@
 id: klusterai--Meta-Llama-3.3-70B-Instruct-Turbo
-name: Meta Llama 3.3 70B
-family: llama-3.3
-temperature: true
+name: Meta Llama 3.3 70B Instruct Turbo
+family: llama
+pricing:
+  currency: USD
+  input: 0.038
+  output: 0.12
 limit:
   context: 131000
   output: 131000
@@ -10,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  input: 0.038
-  output: 0.12
-release_date: 2024-12-06
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2024-12-06
+last_updated: 2024-12-06

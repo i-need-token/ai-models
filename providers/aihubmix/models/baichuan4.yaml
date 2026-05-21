@@ -1,15 +1,13 @@
 id: baichuan4
 name: Baichuan4
 family: baichuan
-temperature: true
 pricing:
   currency: USD
   input: 8
   output: 8
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

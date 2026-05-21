@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "arcee",
@@ -13,175 +21,142 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Model specs & pricing: OpenRouter API https://openrouter.ai/api/v1/models
-//   (arcee-ai/* models — context windows, max output, modalities, USD pricing)
-// - Model descriptions: OpenRouter model descriptions
-//
-// Arcee AI produces fine-tuned and original model families including
-// Trinity (MoE), Virtuoso, Maestro, Spotlight, and Coder.
-// The arcee.ai website and API are unreachable from this network.
-// Data sourced from OpenRouter which mirrors Arcee's specifications.
+// Raw data types (from Arcee AI API)
 // ---------------------------------------------------------------------------
 
-// Pricing (USD per 1M tokens) — from OpenRouter
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  "trinity-large-preview": { currency: "USD", input: 0.15, output: 0.45 },
-  "trinity-large-thinking": { currency: "USD", input: 0.22, output: 0.85 },
-  "trinity-mini": { currency: "USD", input: 0.04, output: 0.15 },
-  "virtuoso-large": { currency: "USD", input: 0.75, output: 1.2 },
-  "maestro-reasoning": { currency: "USD", input: 0.9, output: 3.3 },
-  spotlight: { currency: "USD", input: 0.18, output: 0.18 },
-  "coder-large": { currency: "USD", input: 0.5, output: 0.8 },
-};
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+interface ArceeModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<ArceeModel[]> {
+  const response = await fetch("https://api.arcee.ai/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Arcee AI models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: ArceeModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.arcee.ai/v1/models",
+      type: "api",
+      description: "Arcee AI /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://api.arcee.ai/v1/models",
+      type: "api",
+      description: "Arcee AI API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.arcee.ai/v1/models",
+      type: "api",
+      description: "Arcee AI API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://api.arcee.ai/v1/models",
+      type: "api",
+      description: "Arcee AI API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.arcee.ai/v1/models",
+      type: "api",
+      description: "Arcee AI API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.arcee.ai/v1/models",
+      type: "api",
+      description: "Arcee AI API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as ArceeModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /trinity/i, family: "trinity" },
+        { pattern: /virtuoso/i, family: "virtuoso" },
+        { pattern: /maestro/i, family: "maestro" },
+        { pattern: /spotlight/i, family: "spotlight" },
+        { pattern: /coder/i, family: "arcee-coder" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // --- Trinity Large Preview (400B MoE, 13B active, open-weight) ---
-
-  models.push(
-    defineModel({
-      id: "trinity-large-preview",
-      name: "Trinity Large Preview",
-      family: "trinity",
-      temperature: true,
-      tool_call: true,
-      open_weights: true,
-      limit: { context: 131000, output: 8192 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["trinity-large-preview"] as Pricing,
-      release_date: "2025-05-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Trinity Large Thinking (reasoning variant, 400B MoE) ---
-
-  models.push(
-    defineModel({
-      id: "trinity-large-thinking",
-      name: "Trinity Large Thinking",
-      family: "trinity",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      open_weights: true,
-      limit: { context: 262144, output: 262144 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["trinity-large-thinking"] as Pricing,
-      release_date: "2025-05-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Trinity Mini (26B MoE, 3B active, efficient) ---
-
-  models.push(
-    defineModel({
-      id: "trinity-mini",
-      name: "Trinity Mini",
-      family: "trinity",
-      temperature: true,
-      tool_call: true,
-      open_weights: true,
-      limit: { context: 131072, output: 131072 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["trinity-mini"] as Pricing,
-      release_date: "2025-05-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Virtuoso Large (72B, general-purpose) ---
-
-  models.push(
-    defineModel({
-      id: "virtuoso-large",
-      name: "Virtuoso Large",
-      family: "virtuoso",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 131072, output: 64000 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["virtuoso-large"] as Pricing,
-      release_date: "2025-04-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Maestro Reasoning (32B, step-by-step analysis) ---
-
-  models.push(
-    defineModel({
-      id: "maestro-reasoning",
-      name: "Maestro Reasoning",
-      family: "maestro",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      limit: { context: 131072, output: 32000 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["maestro-reasoning"] as Pricing,
-      release_date: "2025-04-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Spotlight (7B, vision-language) ---
-
-  models.push(
-    defineModel({
-      id: "spotlight",
-      name: "Spotlight",
-      family: "spotlight",
-      temperature: true,
-      attachment: true,
-      limit: { context: 131072, output: 65536 },
-      modalities: {
-        input: ["text", "image"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["spotlight"] as Pricing,
-      release_date: "2025-04-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Coder Large (32B, code generation) ---
-
-  models.push(
-    defineModel({
-      id: "coder-large",
-      name: "Coder Large",
-      family: "arcee-coder",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 32768, output: 8192 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["coder-large"] as Pricing,
-      release_date: "2025-02-01",
-      last_updated: today,
-    }),
-  );
-
+  const models = await runPipeline(pipeline);
   console.log(`  Arcee AI: ${models.length} models`);
-
   return { provider, models };
 }

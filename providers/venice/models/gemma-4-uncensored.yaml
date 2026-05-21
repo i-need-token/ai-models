@@ -1,7 +1,10 @@
 id: gemma-4-uncensored
-name: Gemma 4 Uncensored
-family: gemma-4
-temperature: true
+name: gemma-4-uncensored
+family: gemma
+pricing:
+  currency: USD
+  input: 0.1625
+  output: 0.5
 limit:
   context: 256000
   output: 8192
@@ -11,12 +14,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1625
-  output: 0.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
-structured_output: true
 attachment: true
+structured_output: true
+release_date: 2026-04-13
+last_updated: 2026-04-13

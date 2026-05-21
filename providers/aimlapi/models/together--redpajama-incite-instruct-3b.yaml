@@ -1,0 +1,16 @@
+id: together--redpajama-incite-instruct-3b
+name: Together / Redpajama Incite Instruct 3b
+family: together
+pricing:
+  currency: USD
+  input: 0.105
+  output: 0.105
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

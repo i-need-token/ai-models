@@ -1,0 +1,19 @@
+id: yi-large
+name: Yi Large
+family: yi
+pricing:
+  currency: CNY
+  input: 20
+  output: 20
+limit:
+  context: 32768
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: true
+tool_call: true
+release_date: 2024-03-01
+last_updated: 2026-05-18

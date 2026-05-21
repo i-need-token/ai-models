@@ -1,18 +1,13 @@
 id: mistralai--Mistral-Nemo-Instruct-2407
 name: "Mistral: Mistral Nemo Instruct 2407"
 family: mistral
-temperature: true
-limit:
-  context: 32768
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.059
+  output: 0.071
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.059
-  output: 0.071
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

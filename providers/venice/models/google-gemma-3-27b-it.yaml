@@ -1,7 +1,10 @@
 id: google-gemma-3-27b-it
-name: Google Gemma 3 27B Instruct
-family: gemma-3
-temperature: true
+name: google-gemma-3-27b-it
+family: gemma
+pricing:
+  currency: USD
+  input: 0.12
+  output: 0.2
 limit:
   context: 198000
   output: 16384
@@ -11,12 +14,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.12
-  output: 0.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
-structured_output: true
 attachment: true
+structured_output: true
+release_date: 2025-11-04
+last_updated: 2025-11-04

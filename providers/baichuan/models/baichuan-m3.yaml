@@ -1,8 +1,10 @@
 id: baichuan-m3
 name: Baichuan M3
 family: baichuan-m
-reasoning: true
-temperature: true
+pricing:
+  currency: CNY
+  input: 10
+  output: 30
 limit:
   context: 32768
   output: 8192
@@ -11,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 10
-  output: 30
+reasoning: true
+temperature: true
 release_date: 2025-04
-last_updated: 2026-05-17
+last_updated: 2026-05-18

@@ -1,0 +1,25 @@
+id: gemini-2.0-flash
+name: Gemini 2.0 Flash
+family: gemini-2.0
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.4
+  cache_read: 0.025
+  cache_write: 0.35
+limit:
+  context: 1048576
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+    - audio
+    - video
+  output:
+    - text
+temperature: true
+tool_call: true
+structured_output: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

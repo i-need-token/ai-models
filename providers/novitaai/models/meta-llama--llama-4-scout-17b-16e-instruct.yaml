@@ -1,7 +1,10 @@
 id: meta-llama--llama-4-scout-17b-16e-instruct
-name: Llama 4 Scout Instruct
-family: llama-4
-temperature: true
+name: Llama 4 Scout 17b 16e Instruct
+family: llama
+pricing:
+  currency: USD
+  input: 0.18
+  output: 0.59
 limit:
   context: 131072
   output: 131072
@@ -11,9 +14,4 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.18
-  output: 0.59
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

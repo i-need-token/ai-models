@@ -1,19 +1,13 @@
 id: mistralai--mistral-small-4-119b-2603--thinking
-name: "Mistral: mistral small 4 119B 2603"
+name: "Mistral: mistral small 4 119B 2603  thinking"
 family: mistral
-temperature: true
-limit:
-  context: 32768
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.4
+  output: 1.4
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.4
-  output: 1.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
-reasoning: true
+last_updated: 2026-05-20

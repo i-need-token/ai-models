@@ -1,6 +1,12 @@
 id: openai-responses--gpt-5.3-chat
 name: Gpt 5.3 Chat
-family: gpt-5
+family: gpt
+pricing:
+  currency: USD
+  input: 1.75
+  output: 14
+  cache_read: 0.175
+  cache_write: 14
 limit:
   context: 128000
   output: 16384
@@ -10,13 +16,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.75
-  output: 14
-  cache_read: 0.175
-  cache_write: 14
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-03-18
+last_updated: 2026-03-18

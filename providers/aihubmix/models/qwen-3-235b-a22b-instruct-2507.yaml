@@ -1,15 +1,13 @@
 id: qwen-3-235b-a22b-instruct-2507
 name: Qwen 3 235b A22b Instruct 2507
 family: qwen
-temperature: true
 pricing:
   currency: USD
   input: 0.14
   output: 0.7
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

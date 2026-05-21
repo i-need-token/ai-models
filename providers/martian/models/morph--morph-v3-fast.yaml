@@ -1,21 +1,14 @@
 id: morph--morph-v3-fast
 name: Morph V3 Fast
 family: morph
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: false
-limit:
-  context: 81920
-  output: 38000
+pricing:
+  currency: USD
+  input: 0.8
+  output: 1.2
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.8
-  output: 1.2
 release_date: 2026-01-21
-last_updated: 2026-05-17
+last_updated: 2026-01-21

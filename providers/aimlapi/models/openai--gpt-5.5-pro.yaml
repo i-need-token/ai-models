@@ -1,0 +1,16 @@
+id: openai--gpt-5.5-pro
+name: Openai / Gpt 5.5 Pro
+family: openai
+pricing:
+  currency: USD
+  input: 39
+  output: 234
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

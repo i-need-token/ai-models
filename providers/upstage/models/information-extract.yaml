@@ -1,20 +1,17 @@
 id: information-extract
 name: Information Extract
 family: information-extract
-temperature: false
-attachment: true
-limit:
-  context: 100
-  output: 0
+pricing:
+  currency: USD
+  unit: per_request
+  price: 0.04
 modalities:
   input:
     - image
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  unit: per_request
-  price: 0.04
+temperature: true
+attachment: true
 release_date: 2025-05-29
-last_updated: 2026-05-17
+last_updated: 2026-05-18

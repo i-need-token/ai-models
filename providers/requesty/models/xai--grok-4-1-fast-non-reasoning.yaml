@@ -1,21 +1,18 @@
 id: xai--grok-4-1-fast-non-reasoning
 name: Grok 4 1 Fast Non Reasoning
 family: grok
-limit:
-  context: 2000000
-  output: 4096
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.2
   output: 0.5
   cache_read: 0.05
   cache_write: 0.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
 tool_call: true
+release_date: 2025-12-02
+last_updated: 2025-12-02

@@ -1,6 +1,10 @@
 id: minimax--minimax-m2.5
-name: "MiniMax: MiniMax M2.5"
+name: Minimax M2.5
 family: minimax
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1.15
 limit:
   context: 204800
   output: 196608
@@ -9,11 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 1.15
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-02-12
+last_updated: 2026-02-12

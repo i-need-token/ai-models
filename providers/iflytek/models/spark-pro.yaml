@@ -1,7 +1,10 @@
 id: spark-pro
 name: Spark Pro
 family: spark-pro
-temperature: true
+pricing:
+  currency: CNY
+  input: 5
+  output: 5
 limit:
   context: 8192
   output: 4096
@@ -10,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 5
-  output: 5
+temperature: true
 release_date: 2024-04
-last_updated: 2026-05-17
+last_updated: 2026-05-18

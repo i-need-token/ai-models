@@ -1,23 +1,15 @@
 id: amazon--nova-premier-v1
 name: Nova Premier V1
 family: nova
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: false
-limit:
-  context: 1000000
-  output: 32000
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
 pricing:
   currency: USD
   input: 2.5
   output: 12.5
   cache_read: 0.625
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-02-05
-last_updated: 2026-05-17
+last_updated: 2026-02-05

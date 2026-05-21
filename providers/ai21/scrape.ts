@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedFeatures,
+  ExtractedDates,
+  ExtractedSnapshot,
+} from "../../scripts/lib/index";
+import type { Pricing } from "../../types/index";
 
 const provider = defineProvider({
   id: "ai21",
@@ -13,158 +21,180 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Dynamic AI21 scraper
-//
-// Sources:
-// - Model list + pricing: https://api.ai21.com/studio/v1/models (public API)
-// - Max output tokens: API docs at https://docs.ai21.com/reference/jamba-1-6-api-ref.md
-//   "For Jamba models, the maximum allowed value is 4096 tokens."
-// - Model details: https://docs.ai21.com/docs/jamba-foundation-models.md
-// - Deprecation info: docs show deprecation dates for older models
-//
-// The API returns only current (non-deprecated) models with per-token pricing.
-// Deprecated models are hardcoded below since the API no longer lists them.
+// Raw data types (from AI21 API)
 // ---------------------------------------------------------------------------
 
-// Max output tokens for ALL Jamba models (from API docs)
-const MAX_OUTPUT_TOKENS = 4096;
+interface Ai21Model {
+  id: string;
+  name: string;
+  updated: string;
+  context_length: number;
+  quantization: string;
+  max_completion_tokens: number;
+  pricing: { prompt: string; completion: string };
+}
 
-// Deprecated models not returned by the API
-const DEPRECATED_MODELS: Model[] = [
-  defineModel({
-    id: "jamba-mini-1.7",
-    name: "Jamba Mini 1.7",
-    family: "jamba-mini",
-    temperature: true,
-    deprecated: true,
-    open_weights: true,
-    limit: { context: 256000, output: MAX_OUTPUT_TOKENS },
-    modalities: { input: ["text"], output: ["text"] },
-    pricing: { currency: "USD", input: 0.2, output: 0.4 },
-    release_date: "2025-07-01",
-    last_updated: new Date().toISOString().split("T")[0] as string,
-  }),
-  defineModel({
-    id: "jamba-large-1.6",
-    name: "Jamba Large 1.6",
-    family: "jamba-large",
-    temperature: true,
-    deprecated: true,
-    open_weights: true,
-    limit: { context: 256000, output: MAX_OUTPUT_TOKENS },
-    modalities: { input: ["text"], output: ["text"] },
-    pricing: { currency: "USD", input: 2, output: 8 },
-    release_date: "2025-03-01",
-    last_updated: new Date().toISOString().split("T")[0] as string,
-  }),
-  defineModel({
-    id: "jamba-mini-1.6",
-    name: "Jamba Mini 1.6",
-    family: "jamba-mini",
-    temperature: true,
-    deprecated: true,
-    open_weights: true,
-    limit: { context: 256000, output: MAX_OUTPUT_TOKENS },
-    modalities: { input: ["text"], output: ["text"] },
-    pricing: { currency: "USD", input: 0.2, output: 0.4 },
-    release_date: "2025-03-01",
-    last_updated: new Date().toISOString().split("T")[0] as string,
-  }),
-];
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
 
-// Jamba 3B is self-hosted only (no API endpoint), not in the API response
-const JAMBA_3B: Model = defineModel({
-  id: "jamba-3b",
-  name: "Jamba 3B",
-  family: "jamba-3b",
-  temperature: true,
-  open_weights: true,
-  limit: { context: 256000, output: MAX_OUTPUT_TOKENS },
-  modalities: { input: ["text"], output: ["text"] },
-  pricing: { unit: "free" } as Pricing,
-  knowledge: "2024-08-22",
-  release_date: "2026-01-01",
-  last_updated: new Date().toISOString().split("T")[0] as string,
-});
+async function fetchModels(): Promise<Ai21Model[]> {
+  const response = await fetch("https://api.ai21.com/studio/v1/models");
+  if (!response.ok) throw new Error(`Failed to fetch AI21 models: ${response.status}`);
+  const data = (await response.json()) as { data: Ai21Model[] };
+  return data.data;
+}
 
-// Map API model IDs to stable model IDs and families
-const MODEL_MAP: Record<string, { id: string; name: string; family: string }> = {
-  "jamba-large-1.7-2025-07": {
-    id: "jamba-large",
-    name: "Jamba Large",
-    family: "jamba-large",
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.ai21.com/studio/v1/models",
+      type: "api",
+      description: "AI21 Studio API — returns current Jamba models with pricing and context",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
   },
-  "jamba-mini-2-2026-01": {
-    id: "jamba-mini",
-    name: "Jamba Mini",
-    family: "jamba-mini",
+
+  extractPricing: {
+    source: {
+      url: "https://api.ai21.com/studio/v1/models",
+      type: "api",
+      description: "Pricing from AI21 API — per-token USD pricing converted to per-million",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      const pricingMap = new Map<string, Pricing>();
+
+      for (const m of models) {
+        const raw = m.raw as Ai21Model;
+        if (!raw || !raw.pricing) continue;
+
+        if ("prompt" in raw.pricing && "completion" in raw.pricing) {
+          const promptPerToken = parseFloat(raw.pricing.prompt as string);
+          const completionPerToken = parseFloat(raw.pricing.completion as string);
+          pricingMap.set(m.id, {
+            currency: "USD",
+            input: Math.round(promptPerToken * 1e6 * 1e6) / 1e6,
+            output: Math.round(completionPerToken * 1e6 * 1e6) / 1e6,
+          });
+        }
+      }
+
+      return pricingMap;
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.ai21.com/studio/v1/models",
+      type: "api",
+      description: "Dates from AI21 API — updated field (YYYY-MM format)",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as Ai21Model;
+        if (!raw || !raw.updated) continue;
+
+        datesMap.set(m.id, {
+          release_date: `${raw.updated}-01`,
+          last_updated: `${raw.updated}-01`,
+        });
+      }
+
+      return datesMap;
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.ai21.com/studio/v1/models",
+      type: "api",
+      description: "Context window and max output from AI21 API",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      const limitsMap = new Map<string, ExtractedLimit>();
+
+      for (const m of models) {
+        const raw = m.raw as Ai21Model;
+        if (!raw || !raw.context_length) continue;
+
+        limitsMap.set(m.id, {
+          context: raw.context_length,
+          ...(raw.max_completion_tokens ? { output: raw.max_completion_tokens } : {}),
+        });
+      }
+
+      return limitsMap;
+    },
+  },
+
+  // Note: extractModalities removed — API doesn't provide modality data.
+  // Pipeline will use default { input: ["text"], output: ["text"] }
+
+  extractFeatures: {
+    source: {
+      url: "https://api.ai21.com/studio/v1/models",
+      type: "api",
+      description: "Features — API doesn't provide feature flags, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractSnapshots: {
+    source: {
+      url: "https://api.ai21.com/studio/v1/models",
+      type: "api",
+      description: "Snapshots — API model IDs are snapshot IDs (e.g., jamba-large-1.7-2025-07)",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedSnapshot[]>> => {
+      const snapshotsMap = new Map<string, ExtractedSnapshot[]>();
+      for (const m of models) {
+        const raw = m.raw as Ai21Model;
+        if (raw && raw.id !== m.id) {
+          snapshotsMap.set(m.id, [{ id: raw.id }]);
+        }
+      }
+      return snapshotsMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /jamba-large/i, family: "jamba-large" },
+        { pattern: /jamba-mini/i, family: "jamba-mini" },
+        { pattern: /jamba/i, family: "jamba" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return "jamba";
+    },
   },
 };
 
 // ---------------------------------------------------------------------------
-// Scrape function
+// Main scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = new Date().toISOString().split("T")[0] as string;
-  const models: Model[] = [];
-
-  // Fetch current models from public API
-  const response = await fetch("https://api.ai21.com/studio/v1/models");
-  const data = (await response.json()) as {
-    data: Array<{
-      id: string;
-      name: string;
-      updated: string;
-      context_length: number;
-      max_completion_tokens: number;
-      pricing: { prompt: string; completion: string };
-    }>;
-  };
-
-  for (const apiModel of data.data) {
-    const mapping = MODEL_MAP[apiModel.id];
-    if (!mapping) {
-      console.warn(`  AI21: Unknown model ${apiModel.id}, skipping`);
-      continue;
-    }
-
-    // Convert per-token pricing to per-1M-token
-    const promptPerToken = parseFloat(apiModel.pricing.prompt);
-    const completionPerToken = parseFloat(apiModel.pricing.completion);
-    const inputPerMTokens = Math.round(promptPerToken * 1e6 * 1e6) / 1e6;
-    const outputPerMTokens = Math.round(completionPerToken * 1e6 * 1e6) / 1e6;
-
-    // Derive release_date from "updated" field (format: "YYYY-MM")
-    const releaseDate = `${apiModel.updated}-01`;
-
-    models.push(
-      defineModel({
-        id: mapping.id,
-        name: mapping.name,
-        family: mapping.family,
-        temperature: true,
-        tool_call: true,
-        structured_output: true,
-        open_weights: true,
-        limit: { context: apiModel.context_length, output: MAX_OUTPUT_TOKENS },
-        modalities: { input: ["text"], output: ["text"] },
-        pricing: { currency: "USD", input: inputPerMTokens, output: outputPerMTokens },
-        knowledge: "2024-08-22",
-        release_date: releaseDate,
-        last_updated: today,
-        snapshots: [{ id: apiModel.id }],
-      }),
-    );
-  }
-
-  // Add Jamba 3B (self-hosted only, not in API)
-  models.push(JAMBA_3B);
-
-  // Add deprecated models
-  models.push(...DEPRECATED_MODELS);
-
-  console.log(`  AI21 Labs: ${models.length} models`);
-
+  const models = await runPipeline(pipeline);
   return { provider, models };
 }

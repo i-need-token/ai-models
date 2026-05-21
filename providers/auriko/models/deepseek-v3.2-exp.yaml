@@ -1,19 +1,18 @@
 id: deepseek-v3.2-exp
-name: DeepSeek V3.2 Exp
+name: Deepseek V3.2 Exp
 family: deepseek
-temperature: true
+pricing:
+  currency: USD
+  input: 0.27
+  output: 0.41
+limit:
+  context: 164000
+  output: 164000
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.27
-  output: 0.41
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 164000
-  output: 164000
 tool_call: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

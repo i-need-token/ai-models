@@ -1,6 +1,12 @@
 id: google--gemini-2.5-pro-preview
-name: "Google: Gemini 2.5 Pro Preview 06-05"
+name: Gemini 2.5 Pro Preview
 family: gemini
+pricing:
+  currency: USD
+  input: 1.25
+  output: 10
+  cache_read: 0.125
+  cache_write: 0.375
 limit:
   context: 1048576
   output: 65536
@@ -12,13 +18,8 @@ modalities:
     - audio
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.25
-  output: 10
-  cache_read: 0.125
-  cache_write: 0.375
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-06-05
+last_updated: 2025-06-05

@@ -1,6 +1,12 @@
 id: vertex--deepseek-v3.2
 name: Deepseek V3.2
 family: vertex
+pricing:
+  currency: USD
+  input: 0.56
+  output: 1.68
+  cache_read: 0.056
+  cache_write: 1.68
 limit:
   context: 163840
   output: 65535
@@ -10,13 +16,7 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.56
-  output: 1.68
-  cache_read: 0.056
-  cache_write: 1.68
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-03-20
+last_updated: 2026-03-20

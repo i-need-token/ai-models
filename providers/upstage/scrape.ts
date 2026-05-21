@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "upstage",
@@ -13,181 +21,138 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Model details: https://console.upstage.ai/docs/models (CSR)
-// - Model history: https://console.upstage.ai/docs/models/history (CSR)
-// - Pricing: https://www.upstage.ai/pricing/api (CSR)
-// - API: https://api.upstage.ai/v1 (OpenAI-compatible, requires auth)
-//
-// Upstage produces Solar LLMs and Document Intelligence models.
-// Optimized for Korean with English and Japanese support.
+// Raw data types (from Upstage API)
 // ---------------------------------------------------------------------------
 
-// Pricing (USD) — from upstage.ai pricing page
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  // Chat LLMs — USD per 1M tokens
-  "solar-pro3": { currency: "USD", input: 0.15, output: 0.6, cache_read: 0.015 },
-  "solar-pro2": { currency: "USD", input: 0.15, output: 0.6, cache_read: 0.015 },
-  "solar-mini": { currency: "USD", input: 0.15, output: 0.15 },
-
-  // Embed — USD per 1M tokens
-  "solar-embedding-1-large": { currency: "USD", input: 0.1, output: 0 },
-
-  // Document Intelligence — USD per page
-  "document-parse": { currency: "USD", unit: "per_request", price: 0.01 },
-  "document-ocr": { currency: "USD", unit: "per_request", price: 0.0015 },
-  "information-extract": { currency: "USD", unit: "per_request", price: 0.04 },
-  "document-classify": { currency: "USD", unit: "per_request", price: 0.004 },
-};
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+interface UpstageModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<UpstageModel[]> {
+  const response = await fetch("https://api.upstage.ai/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Upstage models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: UpstageModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.upstage.ai/v1/models",
+      type: "api",
+      description: "Upstage /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://api.upstage.ai/v1/models",
+      type: "api",
+      description: "Upstage API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.upstage.ai/v1/models",
+      type: "api",
+      description: "Upstage API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://api.upstage.ai/v1/models",
+      type: "api",
+      description: "Upstage API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.upstage.ai/v1/models",
+      type: "api",
+      description: "Upstage API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.upstage.ai/v1/models",
+      type: "api",
+      description: "Upstage API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as UpstageModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /solar/i, family: "solar" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // --- Generative Intelligence (Chat LLMs) ---
-  models.push(
-    defineModel({
-      id: "solar-pro3",
-      name: "Solar Pro 3",
-      family: "solar",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      open_weights: false,
-      limit: { context: 128000, output: 4096 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["solar-pro3"] as Pricing,
-      release_date: "2026-01-26",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "solar-pro2",
-      name: "Solar Pro 2",
-      family: "solar",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      open_weights: false,
-      limit: { context: 65536, output: 4096 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["solar-pro2"] as Pricing,
-      release_date: "2025-07-10",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "solar-mini",
-      name: "Solar Mini",
-      family: "solar",
-      temperature: true,
-      tool_call: true,
-      open_weights: true,
-      limit: { context: 32768, output: 4096 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["solar-mini"] as Pricing,
-      release_date: "2024-06-12",
-      last_updated: today,
-    }),
-  );
-
-  // --- Embed ---
-  models.push(
-    defineModel({
-      id: "solar-embedding-1-large",
-      name: "Solar Embedding 1 Large",
-      family: "solar-embedding",
-      temperature: false,
-      open_weights: true,
-      limit: { context: 4000, output: 0 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["solar-embedding-1-large"] as Pricing,
-      release_date: "2024-05-10",
-      last_updated: today,
-    }),
-  );
-
-  // --- Document Intelligence ---
-  models.push(
-    defineModel({
-      id: "document-parse",
-      name: "Document Parse",
-      family: "document-parse",
-      temperature: false,
-      attachment: true,
-      limit: { context: 100, output: 0 },
-      modalities: { input: ["image", "pdf"], output: ["text"] },
-      pricing: HARDCODED_PRICING["document-parse"] as Pricing,
-      release_date: "2024-02-28",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "document-ocr",
-      name: "Document OCR",
-      family: "document-ocr",
-      temperature: false,
-      attachment: true,
-      limit: { context: 30, output: 0 },
-      modalities: { input: ["image", "pdf"], output: ["text"] },
-      pricing: HARDCODED_PRICING["document-ocr"] as Pricing,
-      release_date: "2023-04-10",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "information-extract",
-      name: "Information Extract",
-      family: "information-extract",
-      temperature: false,
-      attachment: true,
-      limit: { context: 100, output: 0 },
-      modalities: { input: ["image", "pdf"], output: ["text"] },
-      pricing: HARDCODED_PRICING["information-extract"] as Pricing,
-      release_date: "2025-05-29",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "document-classify",
-      name: "Document Classify",
-      family: "document-classify",
-      temperature: false,
-      attachment: true,
-      limit: { context: 100, output: 0 },
-      modalities: { input: ["image", "pdf"], output: ["text"] },
-      pricing: HARDCODED_PRICING["document-classify"] as Pricing,
-      release_date: "2025-08-30",
-      last_updated: today,
-    }),
-  );
-
+  const models = await runPipeline(pipeline);
   console.log(`  Upstage: ${models.length} models`);
-
   return { provider, models };
 }

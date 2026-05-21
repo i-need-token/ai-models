@@ -1,6 +1,10 @@
 id: bytedance-seed--seed-2.0-mini
-name: "ByteDance Seed: Seed-2.0-Mini"
+name: Seed 2.0 Mini
 family: bytedance-seed
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.4
 limit:
   context: 262144
   output: 131072
@@ -11,11 +15,8 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-02-27
+last_updated: 2026-02-27

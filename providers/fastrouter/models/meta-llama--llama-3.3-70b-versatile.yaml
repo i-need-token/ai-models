@@ -1,17 +1,13 @@
 id: meta-llama--llama-3.3-70b-versatile
-name: "Meta: LLaMA 3.3 70B Versatile"
+name: Llama 3.3 70b Versatile
 family: llama
-limit:
-  context: 131072
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.59
+  output: 0.79
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.59
-  output: 0.79
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

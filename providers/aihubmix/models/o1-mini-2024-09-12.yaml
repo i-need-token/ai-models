@@ -1,16 +1,14 @@
 id: o1-mini-2024-09-12
-name: "OpenAI: O1 Mini 2024 09 12"
-family: o1
-temperature: true
+name: O1 Mini 2024 09 12
+family: o
 pricing:
   currency: USD
   input: 1.5
   output: 6
   cache_read: 0.75
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

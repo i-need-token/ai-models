@@ -1,21 +1,18 @@
 id: gemma-4-31b-it
-name: Gemma 4.31B It
-family: gemma-4
-temperature: true
+name: Gemma 4.31b It
+family: gemma
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.38
 limit:
   context: 262144
-  output: 131072
+  output: 262144
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.13
-  output: 0.38
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
-open_weights: true
+last_updated: 2026-05-20

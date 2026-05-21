@@ -1,19 +1,15 @@
 id: gpt-4-turbo
-name: GPT-4 Turbo
-family: gpt-4
-limit:
-  context: 128000
-  output: 4096
+name: Gpt 4 Turbo
+family: gpt
+pricing:
+  currency: USD
+  input: 10
+  output: 30
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 10
-  output: 30
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

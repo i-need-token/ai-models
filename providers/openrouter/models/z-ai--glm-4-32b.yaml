@@ -1,18 +1,15 @@
 id: z-ai--glm-4-32b
-name: "Z.ai: GLM 4 32B "
+name: Glm 4 32b
 family: glm
-limit:
-  context: 128000
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.1
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-07-25
+last_updated: 2025-07-25

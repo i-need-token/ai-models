@@ -1,18 +1,13 @@
 id: meta-llama--llama-3.1-8b-instruct
 name: "Meta: llama 3.1 8B instruct"
 family: llama
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.032
+  output: 0.032
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.032
-  output: 0.032
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

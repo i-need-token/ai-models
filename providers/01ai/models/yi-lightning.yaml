@@ -1,9 +1,10 @@
 id: yi-lightning
 name: Yi Lightning
 family: yi
-temperature: true
-reasoning: true
-tool_call: true
+pricing:
+  currency: CNY
+  input: 1
+  output: 1
 limit:
   context: 16384
   output: 4096
@@ -12,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.14
-  output: 0.14
-release_date: 2024-10-01
-last_updated: 2026-05-17
+temperature: true
+tool_call: true
+release_date: 2024-06-01
+last_updated: 2026-05-18

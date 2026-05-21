@@ -1,7 +1,11 @@
 id: pixtral-12b-2409
 name: Pixtral 12B 2409
 family: pixtral
-temperature: true
+deprecated: true
+pricing:
+  currency: EUR
+  input: 0.33
+  output: 0.33
 limit:
   context: 131072
   output: 4096
@@ -11,10 +15,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.33
-  output: 0.33
-release_date: 2025-06-01
-last_updated: 2026-05-17
-deprecated: true
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

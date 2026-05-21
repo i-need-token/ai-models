@@ -1,6 +1,8 @@
 id: nvidia--nemotron-3-nano-omni-30b-a3b-reasoning--free
-name: "NVIDIA: Nemotron 3 Nano Omni (free)"
+name: Free
 family: nemotron
+pricing:
+  unit: free
 limit:
   context: 256000
   output: 65536
@@ -12,7 +14,7 @@ modalities:
     - video
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
+reasoning: true
+tool_call: true
+release_date: 2026-04-29
+last_updated: 2026-04-29

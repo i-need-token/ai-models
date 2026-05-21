@@ -1,7 +1,10 @@
 id: baidu--ernie-4.5-vl-28b-a3b-thinking
-name: ERNIE-4.5-VL-28B-A3B-Thinking
-family: ernie
-temperature: true
+name: Ernie 4.5 Vl 28b A3b Thinking
+family: baidu
+pricing:
+  currency: USD
+  input: 0.39
+  output: 0.39
 limit:
   context: 131072
   output: 65536
@@ -12,12 +15,7 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.39
-  output: 0.39
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+last_updated: 2026-05-20

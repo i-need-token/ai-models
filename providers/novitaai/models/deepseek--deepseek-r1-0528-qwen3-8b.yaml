@@ -1,7 +1,10 @@
 id: deepseek--deepseek-r1-0528-qwen3-8b
-name: DeepSeek R1 0528 Qwen3 8B
+name: Deepseek R1 0528 Qwen3 8b
 family: deepseek
-temperature: true
+pricing:
+  currency: USD
+  input: 0.06
+  output: 0.09
 limit:
   context: 128000
   output: 32000
@@ -10,9 +13,4 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.06
-  output: 0.09
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

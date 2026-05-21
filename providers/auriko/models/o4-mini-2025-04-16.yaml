@@ -1,23 +1,22 @@
 id: o4-mini-2025-04-16
-name: o4-mini
-family: o4-mini
-temperature: true
+name: O4 Mini 2025 04 16
+family: o
+pricing:
+  currency: USD
+  input: 1.1
+  output: 4.4
+  cache_read: 0.275
+limit:
+  context: 200000
+  output: 100000
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.1
-  output: 4.4
-  cache_read: 0.275
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 200000
-  output: 100000
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+release_date: 2026-05-12
+last_updated: 2026-05-12

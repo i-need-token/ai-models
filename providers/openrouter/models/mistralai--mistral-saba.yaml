@@ -1,20 +1,18 @@
 id: mistralai--mistral-saba
-name: "Mistral: Saba"
+name: Mistral Saba
 family: mistral
-limit:
-  context: 32768
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.6
+  cache_read: 0.02
 modalities:
   input:
     - text
     - pdf
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.2
-  output: 0.6
-  cache_read: 0.02
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-02-17
+last_updated: 2025-02-17

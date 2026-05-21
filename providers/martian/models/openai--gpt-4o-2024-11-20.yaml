@@ -1,23 +1,15 @@
 id: openai--gpt-4o-2024-11-20
-name: GPT 4o 2024 11 20
-family: gpt-4o
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 128000
-  output: 16384
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
+name: Gpt 4o 2024 11 20
+family: gpt
 pricing:
   currency: USD
   input: 2.5
   output: 10
   cache_read: 1.25
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-02-04
-last_updated: 2026-05-17
+last_updated: 2026-02-04

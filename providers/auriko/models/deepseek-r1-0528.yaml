@@ -1,21 +1,20 @@
 id: deepseek-r1-0528
-name: DeepSeek R1 0528
+name: Deepseek R1 0528
 family: deepseek
-temperature: true
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.5
   output: 2.15
   cache_read: 0.35
-release_date: 2026-05-17
-last_updated: 2026-05-17
 limit:
   context: 163840
   output: 32768
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

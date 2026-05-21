@@ -1,15 +1,13 @@
 id: qwen-flash-2025-07-28
 name: Qwen Flash 2025 07 28
 family: qwen
-temperature: true
 pricing:
   currency: USD
   input: 0.01
   output: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

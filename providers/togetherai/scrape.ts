@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "togetherai",
@@ -13,382 +21,144 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Pricing: https://together.ai/pricing (SSR page, browser-verified)
-// - Model IDs: Together AI API & docs
-// - Context lengths: Together AI docs (most models support 128k)
-//
-// Together AI is an inference platform hosting models from other providers
-// (Zhipu AI, MiniMax, Moonshot AI, DeepSeek, Alibaba, OpenAI, Liquid AI,
-// Google, Meta, Cogito, Essential AI) with its own per-token pricing.
-// Pricing shown is Together AI's per-1M-token rate (USD).
-// Some models have prompt caching pricing (cache_read).
-//
-// Model IDs use "--" instead of "/" to avoid filesystem issues
-// (Together AI API uses "provider/model" format).
+// Raw data types (from Together AI API)
 // ---------------------------------------------------------------------------
 
-interface ModelInfo {
-  name: string;
-  context: number;
-  output: number;
-  inputModalities: ModelModality[];
-  outputModalities: ModelModality[];
-  toolCall?: boolean;
-  openWeights?: boolean;
-  reasoning?: boolean;
+interface TogetheraiModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
-const MODELS: Record<string, ModelInfo> = {
-  // --- Zhipu AI / ZAI GLM family ---
-  "zai-org--GLM-5.1": {
-    name: "GLM 5.1",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-  },
-  "zai-org--GLM-5": {
-    name: "GLM 5",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<TogetheraiModel[]> {
+  const response = await fetch("https://api.together.xyz/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Together AI models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: TogetheraiModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.together.xyz/v1/models",
+      type: "api",
+      description: "Together AI /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
   },
 
-  // --- MiniMax family ---
-  "MiniMaxAI--MiniMax-M2.7": {
-    name: "MiniMax M2.7",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-  },
-  "MiniMaxAI--MiniMax-M2.5": {
-    name: "MiniMax M2.5",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
+  extractPricing: {
+    source: {
+      url: "https://api.together.xyz/v1/models",
+      type: "api",
+      description: "Together AI API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
   },
 
-  // --- Moonshot AI / Kimi family ---
-  "moonshotai--Kimi-K2.6": {
-    name: "Kimi K2.6",
-    context: 262144,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-  },
-  "moonshotai--Kimi-K2.5": {
-    name: "Kimi K2.5",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
+  extractLimits: {
+    source: {
+      url: "https://api.together.xyz/v1/models",
+      type: "api",
+      description: "Together AI API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
   },
 
-  // --- DeepSeek family ---
-  "deepseek-ai--DeepSeek-V4-Pro": {
-    name: "DeepSeek V4 Pro",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    reasoning: true,
-    toolCall: true,
-  },
-  "deepseek-ai--DeepSeek-V3.1": {
-    name: "DeepSeek V3.1",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
+  extractModalities: {
+    source: {
+      url: "https://api.together.xyz/v1/models",
+      type: "api",
+      description: "Together AI API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
   },
 
-  // --- Alibaba Qwen family ---
-  "Qwen--Qwen3.6-Plus": {
-    name: "Qwen 3.6 Plus",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-  },
-  "Qwen--Qwen3.5-397B-A17B": {
-    name: "Qwen 3.5 397B A17B",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-  },
-  "Qwen--Qwen3-Coder-Next": {
-    name: "Qwen 3 Coder Next",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-  },
-  "Qwen--Qwen3-Coder-480B-A35B-Instruct": {
-    name: "Qwen 3 Coder 480B A35B Instruct",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-  },
-  "Qwen--Qwen3.5-9B": {
-    name: "Qwen 3.5 9B",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
-  "Qwen--Qwen3-235B-A22B-FP8-Throughput": {
-    name: "Qwen 3 235B A22B FP8 Throughput",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-  },
-  "Qwen--Qwen2.5-7B-Instruct-Turbo": {
-    name: "Qwen 2.5 7B Instruct Turbo",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
+  extractFeatures: {
+    source: {
+      url: "https://api.together.xyz/v1/models",
+      type: "api",
+      description: "Together AI API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
   },
 
-  // --- OpenAI GPT-OSS family ---
-  "openai--gpt-oss-120b": {
-    name: "GPT OSS 120B",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
-  "openai--gpt-oss-20b": {
-    name: "GPT OSS 20B",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
+  extractDates: {
+    source: {
+      url: "https://api.together.xyz/v1/models",
+      type: "api",
+      description: "Together AI API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as TogetheraiModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
   },
 
-  // --- Liquid AI LFM family ---
-  "liquid-ai--LFM2-24B-A2B": {
-    name: "LFM2 24B A2B",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
   },
 
-  // --- Google Gemma family ---
-  "google--gemma-4-31B-it": {
-    name: "Gemma 4 31B",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
-  "google--gemma-3n-E4B-it": {
-    name: "Gemma 3n E4B Instruct",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    openWeights: true,
-  },
-
-  // --- Meta Llama family ---
-  "meta-llama--Llama-3.3-70B-Instruct-Turbo": {
-    name: "Llama 3.3 70B Turbo",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
-  "meta-llama--Meta-Llama-3.1-8B-Instruct-Lite": {
-    name: "Llama 3.1 8B Lite",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    toolCall: true,
-    openWeights: true,
-  },
-
-  // --- Cogito family ---
-  "cogito-ai--Cogito-v2.1-671B": {
-    name: "Cogito v2.1 671B",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    reasoning: true,
-    toolCall: true,
-  },
-
-  // --- Essential AI family ---
-  "essential-ai--Rnj-1-Instruct": {
-    name: "Rnj-1 Instruct",
-    context: 131072,
-    output: 131072,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /qwen/i, family: "qwen" },
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /mistral/i, family: "mistral" },
+        { pattern: /gemma/i, family: "gemma" },
+        { pattern: /mixtral/i, family: "mixtral" },
+        { pattern: /dbrx/i, family: "dbrx" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
   },
 };
-
-// ---------------------------------------------------------------------------
-// Pricing (USD per million tokens)
-//
-// Source: https://together.ai/pricing (browser-verified 2026-05-15)
-// Some models have prompt caching pricing (cache_read).
-// ---------------------------------------------------------------------------
-
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  // ZAI GLM family
-  "zai-org--GLM-5.1": { currency: "USD", input: 1.4, output: 4.4 },
-  "zai-org--GLM-5": { currency: "USD", input: 1.0, output: 3.2 },
-
-  // MiniMax family
-  "MiniMaxAI--MiniMax-M2.7": { currency: "USD", input: 0.3, output: 1.2, cache_read: 0.06 },
-  "MiniMaxAI--MiniMax-M2.5": { currency: "USD", input: 0.3, output: 1.2, cache_read: 0.06 },
-
-  // Kimi family
-  "moonshotai--Kimi-K2.6": { currency: "USD", input: 1.2, output: 4.5, cache_read: 0.2 },
-  "moonshotai--Kimi-K2.5": { currency: "USD", input: 0.5, output: 2.8 },
-
-  // DeepSeek family
-  "deepseek-ai--DeepSeek-V4-Pro": { currency: "USD", input: 2.1, output: 4.4, cache_read: 0.2 },
-  "deepseek-ai--DeepSeek-V3.1": { currency: "USD", input: 0.6, output: 1.7 },
-
-  // Qwen family
-  "Qwen--Qwen3.6-Plus": { currency: "USD", input: 0.5, output: 3.0 },
-  "Qwen--Qwen3.5-397B-A17B": { currency: "USD", input: 0.6, output: 3.6 },
-  "Qwen--Qwen3-Coder-Next": { currency: "USD", input: 0.5, output: 1.2 },
-  "Qwen--Qwen3-Coder-480B-A35B-Instruct": { currency: "USD", input: 2.0, output: 2.0 },
-  "Qwen--Qwen3.5-9B": { currency: "USD", input: 0.1, output: 0.15 },
-  "Qwen--Qwen3-235B-A22B-FP8-Throughput": { currency: "USD", input: 0.2, output: 0.6 },
-  "Qwen--Qwen2.5-7B-Instruct-Turbo": { currency: "USD", input: 0.3, output: 0.3 },
-
-  // GPT-OSS family
-  "openai--gpt-oss-120b": { currency: "USD", input: 0.15, output: 0.6 },
-  "openai--gpt-oss-20b": { currency: "USD", input: 0.05, output: 0.2 },
-
-  // Liquid AI family
-  "liquid-ai--LFM2-24B-A2B": { currency: "USD", input: 0.03, output: 0.12 },
-
-  // Gemma family
-  "google--gemma-4-31B-it": { currency: "USD", input: 0.39, output: 0.97 },
-  "google--gemma-3n-E4B-it": { currency: "USD", input: 0.06, output: 0.12 },
-
-  // Llama family
-  "meta-llama--Llama-3.3-70B-Instruct-Turbo": { currency: "USD", input: 0.88, output: 0.88 },
-  "meta-llama--Meta-Llama-3.1-8B-Instruct-Lite": { currency: "USD", input: 0.1, output: 0.1 },
-
-  // Cogito family
-  "cogito-ai--Cogito-v2.1-671B": { currency: "USD", input: 1.25, output: 1.25 },
-
-  // Essential AI family
-  "essential-ai--Rnj-1-Instruct": { currency: "USD", input: 0.15, output: 0.15 },
-};
-
-// ---------------------------------------------------------------------------
-// Family derivation
-// ---------------------------------------------------------------------------
-
-function deriveFamily(id: string): string {
-  if (id.includes("GLM")) return "glm";
-  if (id.includes("MiniMax")) return "minimax";
-  if (id.includes("Kimi")) return "kimi";
-  if (id.includes("DeepSeek")) return "deepseek";
-  if (id.includes("Qwen3-Coder")) return "qwen-coder";
-  if (id.includes("Qwen3.6")) return "qwen3.6";
-  if (id.includes("Qwen3.5")) return "qwen3.5";
-  if (id.includes("Qwen3")) return "qwen3";
-  if (id.includes("Qwen2.5")) return "qwen2.5";
-  if (id.includes("gpt-oss")) return "gpt-oss";
-  if (id.includes("LFM")) return "lfm";
-  if (id.includes("gemma-4")) return "gemma-4";
-  if (id.includes("gemma-3n")) return "gemma-3n";
-  if (id.includes("Llama-3.3")) return "llama-3.3";
-  if (id.includes("Llama-3.1") || id.includes("Llama3.1")) return "llama-3.1";
-  if (id.includes("Cogito")) return "cogito";
-  if (id.includes("Rnj")) return "rnj";
-  return "other";
-}
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  for (const [id, info] of Object.entries(MODELS)) {
-    const pricing = HARDCODED_PRICING[id];
-    if (!pricing) {
-      console.warn(`  Together AI: skipping ${id} — no pricing`);
-      continue;
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id,
-      name: info.name,
-      family: deriveFamily(id),
-      temperature: true,
-      limit: { context: info.context, output: info.output },
-      modalities: { input: info.inputModalities, output: info.outputModalities },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (info.toolCall) modelDef.tool_call = true;
-    if (info.openWeights) modelDef.open_weights = true;
-    if (info.reasoning) modelDef.reasoning = true;
-
-    models.push(defineModel(modelDef));
-  }
-
+  const models = await runPipeline(pipeline);
   console.log(`  Together AI: ${models.length} models`);
-
   return { provider, models };
 }

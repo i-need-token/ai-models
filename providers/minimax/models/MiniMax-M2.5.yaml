@@ -1,7 +1,12 @@
 id: MiniMax-M2.5
 name: MiniMax M2.5
 family: minimax-m2.5
-temperature: true
+pricing:
+  currency: CNY
+  input: 2.1
+  output: 8.4
+  cache_read: 0.21
+  cache_write: 2.625
 limit:
   context: 204800
   output: 204800
@@ -10,11 +15,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 2.1
-  output: 8.4
-  cache_read: 0.21
-  cache_write: 2.625
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

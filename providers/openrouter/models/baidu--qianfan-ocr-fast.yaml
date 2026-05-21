@@ -1,6 +1,10 @@
 id: baidu--qianfan-ocr-fast
-name: "Baidu: Qianfan-OCR-Fast"
-family: cobuddy
+name: Qianfan Ocr Fast
+family: baidu
+pricing:
+  currency: USD
+  input: 0.68
+  output: 2.81
 limit:
   context: 65536
   output: 28672
@@ -10,10 +14,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.68
-  output: 2.81
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+release_date: 2026-04-21
+last_updated: 2026-04-21

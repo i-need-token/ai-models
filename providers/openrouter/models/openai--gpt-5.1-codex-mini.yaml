@@ -1,6 +1,11 @@
 id: openai--gpt-5.1-codex-mini
-name: "OpenAI: GPT-5.1-Codex-Mini"
+name: Gpt 5.1 Codex Mini
 family: gpt
+pricing:
+  currency: USD
+  input: 0.25
+  output: 2
+  cache_read: 0.03
 limit:
   context: 400000
   output: 128000
@@ -10,12 +15,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.25
-  output: 2
-  cache_read: 0.03
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-11-14
+last_updated: 2025-11-14

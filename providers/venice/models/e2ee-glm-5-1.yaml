@@ -1,7 +1,10 @@
 id: e2ee-glm-5-1
-name: GLM 5.1
-family: glm-5.1
-temperature: true
+name: e2ee-glm-5-1
+family: glm
+pricing:
+  currency: USD
+  input: 1.1
+  output: 4.15
 limit:
   context: 200000
   output: 32768
@@ -10,10 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.1
-  output: 4.15
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+release_date: 2026-04-24
+last_updated: 2026-04-24

@@ -1,7 +1,10 @@
 id: llama-3.2-3b
-name: Llama 3.2 3B
-family: llama-3.2
-temperature: true
+name: llama-3.2-3b
+family: llama
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.6
 limit:
   context: 128000
   output: 4096
@@ -10,10 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2024-10-03
+last_updated: 2024-10-03

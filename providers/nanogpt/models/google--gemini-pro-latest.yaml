@@ -1,21 +1,15 @@
 id: google--gemini-pro-latest
 name: "Google: gemini PRO latest"
 family: gemini
-temperature: true
-limit:
-  context: 131072
-  output: 16384
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
 pricing:
-  unit: per_mtok
+  currency: USD
   input: 2
   output: 12
   cache_read: 0.2
   cache_write: 0.375
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-05-20

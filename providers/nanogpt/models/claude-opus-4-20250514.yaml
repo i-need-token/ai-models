@@ -1,18 +1,13 @@
 id: claude-opus-4-20250514
 name: claude opus 4 20250514
 family: claude-opus
-temperature: true
-limit:
-  context: 200000
-  output: 128000
+pricing:
+  currency: USD
+  input: 8.82
+  output: 44.12
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 8.82
-  output: 44.12
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

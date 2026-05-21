@@ -1,21 +1,14 @@
 id: thedrummer--rocinante-12b
-name: Rocinante 12B
+name: Rocinante 12b
 family: thedrummer
-reasoning: false
-temperature: true
-tool_call: false
-structured_output: false
-limit:
-  context: 32768
-  output: 32768
+pricing:
+  currency: USD
+  input: 0.17
+  output: 0.43
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.17
-  output: 0.43
 release_date: 2026-02-28
-last_updated: 2026-05-17
+last_updated: 2026-02-28

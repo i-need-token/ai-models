@@ -1,20 +1,17 @@
 id: novita--qwen--qwen-2.5-72b-instruct
 name: Qwen 2.5 72b Instruct
 family: novita
-limit:
-  context: 32000
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.38
   output: 0.4
   cache_read: 0.38
   cache_write: 0.38
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2025-04-29
+last_updated: 2025-04-29

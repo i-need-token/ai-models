@@ -1,13 +1,15 @@
 id: tts-1
-name: Tts 1
+name: TTS 1
 family: tts
+pricing:
+  currency: USD
+  unit: per_request
+  price: 15
 modalities:
   input:
     - text
   output:
-    - text
     - audio
-pricing:
-  unit: free
-release_date: unknown
-last_updated: unknown
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

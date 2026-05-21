@@ -1,9 +1,10 @@
 id: baichuan-m3-plus
 name: Baichuan M3 Plus
 family: baichuan-m
-reasoning: true
-temperature: true
-attachment: true
+pricing:
+  currency: CNY
+  input: 5
+  output: 9
 limit:
   context: 32768
   output: 8192
@@ -12,9 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 5
-  output: 9
+reasoning: true
+temperature: true
+attachment: true
 release_date: 2025-04
-last_updated: 2026-05-17
+last_updated: 2026-05-18

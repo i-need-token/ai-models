@@ -1,0 +1,16 @@
+id: zhipu-ai--glm-5.1
+name: Zhipu Ai / Glm 5.1
+family: zhipu
+pricing:
+  currency: USD
+  input: 1.82
+  output: 5.72
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

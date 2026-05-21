@@ -1,7 +1,10 @@
 id: deepseek-r1-0528-turbo
-name: DeepSeek R1.0528 Turbo
-family: deepseek-r1
-temperature: true
+name: Deepseek R1.0528 Turbo
+family: deepseek
+pricing:
+  currency: USD
+  input: 1
+  output: 3
 limit:
   context: 32768
   output: 32768
@@ -10,12 +13,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 3
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
-tool_call: true
-open_weights: true
+last_updated: 2026-05-20

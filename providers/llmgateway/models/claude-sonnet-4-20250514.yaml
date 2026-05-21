@@ -1,21 +1,17 @@
 id: claude-sonnet-4-20250514
-name: Claude Sonnet 4 (2025-05-14)
-family: claude
-limit:
-  context: 200000
-  output: 32000
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Claude Sonnet 4 20250514
+family: claude-sonnet
 pricing:
   currency: USD
   input: 3
   output: 15
   cache_read: 0.3
   cache_write: 3.75
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+last_updated: 2026-05-20

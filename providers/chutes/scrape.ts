@@ -1,4 +1,4 @@
-import { defineModel, defineProvider, runDeclarativePipeline } from "../../scripts/lib/index";
+import { defineProvider, runDeclarativePipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
 import type { DeclarativePipeline } from "../../scripts/lib/extraction-rules";
 
@@ -216,9 +216,9 @@ const pipeline: DeclarativePipeline = {
   deriveFamily: {
     rules: [
       { pattern: "^deepseek-ai", template: "deepseek" },
-      { pattern: "^Qwen--Qwen3\\.5", template: "qwen3" },
-      { pattern: "^Qwen--Qwen3\\.6", template: "qwen3" },
-      { pattern: "^Qwen--Qwen3", template: "qwen3" },
+      { pattern: "^Qwen--Qwen3\\.5", template: "qwen" },
+      { pattern: "^Qwen--Qwen3\\.6", template: "qwen" },
+      { pattern: "^Qwen--Qwen3", template: "qwen" },
       { pattern: "^Qwen--Qwen2\\.5-Coder", template: "qwen-coder" },
       { pattern: "^Qwen--Qwen2\\.5", template: "qwen" },
       { pattern: "^google--gemma", template: "gemma" },
@@ -227,7 +227,7 @@ const pipeline: DeclarativePipeline = {
       { pattern: "^MiniMaxAI--MiniMax", template: "minimax" },
       { pattern: "^unsloth--mistral", template: "mistral" },
     ],
-    default: "other",
+    default: "${id}",
   },
 
   // ── 模型 ID 转换 ──────────────────────────────────────────────────────
@@ -262,6 +262,6 @@ export async function scrape(): Promise<ScrapeResult> {
 
   return {
     provider,
-    models: filtered.map((m) => defineModel(m)),
+    models: filtered.map((m) => m),
   };
 }

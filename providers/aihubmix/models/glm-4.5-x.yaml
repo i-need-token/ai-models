@@ -1,16 +1,14 @@
 id: glm-4.5-x
-name: "ChatGLM: Glm 4.5 X"
-family: glm-4.5
-temperature: true
+name: Glm 4.5 X
+family: glm
 pricing:
   currency: USD
   input: 1.1
   output: 4.455
   cache_read: 0.22
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

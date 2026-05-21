@@ -1,0 +1,14 @@
+id: google--gemini-3.5-flash
+name: "Google: gemini 3.5 FLASH"
+family: gemini
+pricing:
+  currency: USD
+  input: 1.5
+  output: 9
+  cache_write: 0.08333
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-05-20

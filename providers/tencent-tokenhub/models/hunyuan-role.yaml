@@ -1,7 +1,10 @@
 id: hunyuan-role
 name: Hunyuan Role
 family: hunyuan
-temperature: true
+pricing:
+  currency: CNY
+  input: 2.4
+  output: 9.6
 limit:
   context: 28000
   output: 4000
@@ -10,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 2.4
-  output: 9.6
+temperature: true
 release_date: 2025-09-24
-last_updated: 2026-05-17
+last_updated: 2026-05-18

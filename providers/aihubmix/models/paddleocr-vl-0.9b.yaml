@@ -1,15 +1,13 @@
 id: paddleocr-vl-0.9b
-name: "Baidu: Paddleocr Vl 0.9b"
-family: other
-temperature: true
+name: Paddleocr Vl 0.9b
+family: paddleocr
 pricing:
   currency: USD
   input: 1
   output: 0
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

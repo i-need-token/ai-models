@@ -1,18 +1,13 @@
 id: claude-haiku-4-5-20251001
 name: claude haiku 4 5 20251001
 family: claude-haiku
-temperature: true
-limit:
-  context: 200000
-  output: 64000
+pricing:
+  currency: USD
+  input: 1
+  output: 5
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 1
-  output: 5
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

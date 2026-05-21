@@ -1,9 +1,10 @@
 id: ring-2.6-1t
 name: Ring 2.6 1T
 family: ring
-temperature: true
-reasoning: true
-tool_call: true
+pricing:
+  currency: USD
+  input: 0.07
+  output: 0.62
 limit:
   context: 262144
   output: 65536
@@ -12,9 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.07
-  output: 0.62
+reasoning: true
+temperature: true
+tool_call: true
 release_date: 2025-04-01
-last_updated: 2026-05-17
+last_updated: 2026-05-18

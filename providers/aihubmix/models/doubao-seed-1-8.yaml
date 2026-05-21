@@ -1,14 +1,11 @@
 id: doubao-seed-1-8
 name: Doubao Seed 1 8
 family: doubao-seed
-temperature: true
 pricing:
   currency: USD
   input: 0.054795
   output: 0.136988
   cache_read: 0.010959
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
@@ -16,9 +13,7 @@ modalities:
     - video
   output:
     - text
-limit:
-  context: 256000
-  output: 16384
 reasoning: true
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

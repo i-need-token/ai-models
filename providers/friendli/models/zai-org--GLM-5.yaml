@@ -1,7 +1,11 @@
 id: zai-org--GLM-5
-name: GLM-5
+name: GLM 5
 family: glm
-temperature: true
+pricing:
+  currency: USD
+  input: 1
+  output: 3.2
+  cache_read: 0.5
 limit:
   context: 202752
   output: 202752
@@ -10,12 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 3.2
-  cache_read: 0.5
-release_date: 2026-02-11
-last_updated: 2026-05-17
 tool_call: true
 structured_output: true
+release_date: 2026-02-11
+last_updated: 2026-02-11

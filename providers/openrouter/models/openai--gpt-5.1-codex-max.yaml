@@ -1,6 +1,11 @@
 id: openai--gpt-5.1-codex-max
-name: "OpenAI: GPT-5.1-Codex-Max"
+name: Gpt 5.1 Codex Max
 family: gpt
+pricing:
+  currency: USD
+  input: 1.25
+  output: 10
+  cache_read: 0.125
 limit:
   context: 400000
   output: 128000
@@ -10,12 +15,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.25
-  output: 10
-  cache_read: 0.125
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2025-12-05
+last_updated: 2025-12-05

@@ -1,6 +1,10 @@
 id: openai--gpt-audio-mini
-name: "OpenAI: GPT Audio Mini"
+name: Gpt Audio Mini
 family: gpt
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.4
 limit:
   context: 128000
   output: 16384
@@ -11,10 +15,7 @@ modalities:
   output:
     - text
     - audio
-pricing:
-  currency: USD
-  input: 0.6
-  output: 2.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2026-01-20
+last_updated: 2026-01-20

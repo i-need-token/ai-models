@@ -1,19 +1,15 @@
 id: pixtral-large-latest
 name: Pixtral Large Latest
-family: mistral
-limit:
-  context: 128000
-  output: 16384
+family: pixtral
+pricing:
+  currency: USD
+  input: 4
+  output: 12
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 4
-  output: 12
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

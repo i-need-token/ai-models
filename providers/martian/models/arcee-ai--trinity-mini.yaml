@@ -1,21 +1,14 @@
 id: arcee-ai--trinity-mini
 name: Trinity Mini
 family: arcee
-reasoning: false
-temperature: true
-tool_call: true
-structured_output: false
-limit:
-  context: 131072
-  output: 131072
+pricing:
+  currency: USD
+  input: 0.045
+  output: 0.15
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.045
-  output: 0.15
 release_date: 2026-04-28
-last_updated: 2026-05-17
+last_updated: 2026-04-28

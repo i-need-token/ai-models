@@ -1,18 +1,16 @@
 id: alibaba-cloud--qwen3-vl-flash
-name: Alibaba Cloud / Qwen3 VL Flash
-family: qwen
-limit:
-  context: 262000
-  output: 8192
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
+name: Alibaba Cloud / Qwen3 Vl Flash
+family: alibaba
 pricing:
   currency: USD
   input: 0.065
   output: 0.52
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

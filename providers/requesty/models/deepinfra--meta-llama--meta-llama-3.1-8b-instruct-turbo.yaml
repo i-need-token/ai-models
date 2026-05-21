@@ -1,20 +1,17 @@
 id: deepinfra--meta-llama--meta-llama-3.1-8b-instruct-turbo
-name: Meta Llama 3.1 8B Instruct Turbo
-family: llama
-limit:
-  context: 131072
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
+name: Meta Llama 3.1 8b Instruct Turbo
+family: deepinfra
 pricing:
   currency: USD
   input: 0.02
   output: 0.05
   cache_read: 0.02
   cache_write: 0.02
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+  output:
+    - text
 tool_call: true
+release_date: 2024-05-14
+last_updated: 2024-05-14

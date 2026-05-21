@@ -1,20 +1,16 @@
 id: qwen3-32b
 name: qwen3-32b
-family: qwen3
-temperature: true
-limit:
-  context: 40000
-  output: 40000
+family: qwen
+pricing:
+  currency: EUR
+  input: 0.089
+  output: 0.268
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.089
-  output: 0.268
-release_date: 2025-04-28
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-04-28
+last_updated: 2025-04-28

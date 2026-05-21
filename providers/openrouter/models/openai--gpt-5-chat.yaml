@@ -1,6 +1,11 @@
 id: openai--gpt-5-chat
-name: "OpenAI: GPT-5 Chat"
+name: Gpt 5 Chat
 family: gpt
+pricing:
+  currency: USD
+  input: 1.25
+  output: 10
+  cache_read: 0.125
 limit:
   context: 128000
   output: 16384
@@ -11,10 +16,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.25
-  output: 10
-  cache_read: 0.125
-release_date: 2026-05-17
-last_updated: 2026-05-17
+structured_output: true
+release_date: 2025-08-08
+last_updated: 2025-08-08

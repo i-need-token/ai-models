@@ -1,6 +1,12 @@
 id: deepinfra--qwen--qwen3-235b-a22b
-name: Qwen3 235B A22B
-family: qwen
+name: Qwen3 235b A22b
+family: deepinfra
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.6
+  cache_read: 0.2
+  cache_write: 0.2
 limit:
   context: 40000
   output: 4096
@@ -9,12 +15,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.2
-  output: 0.6
-  cache_read: 0.2
-  cache_write: 0.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2025-04-29
+last_updated: 2025-04-29

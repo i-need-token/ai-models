@@ -1,20 +1,15 @@
 id: qwen3-coder-plus-2025-07-22
 name: Qwen3 Coder Plus 2025 07 22
-family: qwen3
-temperature: true
+family: qwen-coder
 pricing:
   currency: USD
   input: 0.27
   output: 1.08
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
-limit:
-  context: 128000
-  output: 16384
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

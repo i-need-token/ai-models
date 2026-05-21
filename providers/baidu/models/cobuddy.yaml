@@ -1,8 +1,8 @@
 id: cobuddy
 name: CoBuddy
 family: cobuddy
-temperature: true
-tool_call: true
+pricing:
+  unit: free
 limit:
   context: 131072
   output: 65536
@@ -11,7 +11,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  unit: free
-release_date: 2025-01-01
-last_updated: 2026-05-17
+temperature: false
+tool_call: true
+release_date: 2026-04-28
+last_updated: 2026-04-28

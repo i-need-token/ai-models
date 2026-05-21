@@ -1,8 +1,10 @@
 id: ministral-8b
 name: Ministral 8B
 family: ministral
-temperature: true
-tool_call: true
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.1
 limit:
   context: 128000
   output: 4096
@@ -11,9 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.1
+temperature: true
+tool_call: true
 release_date: 2024-09-18
-last_updated: 2026-05-17
+last_updated: 2026-05-18

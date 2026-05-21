@@ -1,6 +1,10 @@
 id: perceptron--perceptron-mk1
-name: "Perceptron: Perceptron Mk1"
+name: Perceptron Mk1
 family: perceptron
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1.5
 limit:
   context: 32768
   output: 8192
@@ -11,10 +15,6 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 1.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+release_date: 2026-05-12
+last_updated: 2026-05-12

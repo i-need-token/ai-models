@@ -1,17 +1,16 @@
 id: alibaba-cloud--qwen3-max-preview
-name: Alibaba Cloud / Qwen3-Max Preview
-family: qwen
-limit:
-  context: 256000
-  output: 8192
+name: Alibaba Cloud / Qwen3 Max Preview
+family: alibaba
+pricing:
+  currency: USD
+  input: 1.56
+  output: 7.8
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.56
-  output: 7.8
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

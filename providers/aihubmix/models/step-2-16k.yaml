@@ -1,15 +1,13 @@
 id: step-2-16k
-name: "阶跃星辰: Step 2 16k"
+name: Step 2 16k
 family: step
-temperature: true
 pricing:
   currency: USD
   input: 1
   output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

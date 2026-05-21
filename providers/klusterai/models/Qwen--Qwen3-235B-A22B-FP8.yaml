@@ -1,7 +1,10 @@
 id: Qwen--Qwen3-235B-A22B-FP8
-name: Qwen3-235B-A22B
-family: qwen3
-temperature: true
+name: Qwen3 235B A22B FP8
+family: qwen
+pricing:
+  currency: USD
+  input: 0.13
+  output: 2
 limit:
   context: 40960
   output: 40960
@@ -10,11 +13,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  input: 0.13
-  output: 2
-release_date: 2025-04-28
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
 open_weights: true
+release_date: 2025-04-28
+last_updated: 2025-04-28

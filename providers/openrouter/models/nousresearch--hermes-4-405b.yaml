@@ -1,18 +1,16 @@
 id: nousresearch--hermes-4-405b
-name: "Nous: Hermes 4 405B"
-family: hermes
-limit:
-  context: 131072
-  output: 4096
+name: Hermes 4 405b
+family: nousresearch
+pricing:
+  currency: USD
+  input: 1
+  output: 3
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 3
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+structured_output: true
+release_date: 2025-08-27
+last_updated: 2025-08-27

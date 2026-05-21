@@ -1,0 +1,16 @@
+id: minimax--minimax-m2.7
+name: Minimax / Minimax M2.7
+family: minimax
+pricing:
+  currency: USD
+  input: 0.39
+  output: 1.56
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

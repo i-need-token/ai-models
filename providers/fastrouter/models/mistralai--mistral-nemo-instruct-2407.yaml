@@ -1,6 +1,10 @@
 id: mistralai--mistral-nemo-instruct-2407
-name: "Mistral: Mistral Nemo"
+name: Mistral Nemo Instruct 2407
 family: mistral
+pricing:
+  currency: USD
+  input: 0.02
+  output: 0.04
 limit:
   context: 131072
   output: 65536
@@ -9,10 +13,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.02
-  output: 0.04
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

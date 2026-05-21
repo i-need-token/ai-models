@@ -1,0 +1,16 @@
+id: openai--gpt-image-2
+name: Openai / Gpt Image 2
+family: openai
+pricing:
+  currency: USD
+  input: 10.4
+  output: 39
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

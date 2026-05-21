@@ -1,22 +1,21 @@
 id: qwen-3-vl-235b-a22b-instruct
-name: Qwen 3 VL 235B A22B Instruct
+name: Qwen 3 Vl 235b A22b Instruct
 family: qwen
-temperature: true
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.88
+  cache_read: 0.11
+limit:
+  context: 262144
+  output: 16384
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.2
-  output: 0.88
-  cache_read: 0.11
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 262144
-  output: 16384
 tool_call: true
 structured_output: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

@@ -1,10 +1,18 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing } from "../../types/index";
 
 const provider = defineProvider({
   id: "nanogpt",
-  name: "nano-gpt",
+  name: "NanoGPT",
   url: "https://nano-gpt.com",
   api_docs: "https://docs.nano-gpt.com",
   apis: {
@@ -13,71 +21,51 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// nano-gpt inference platform
-//
-// Sources:
-// - Model list: https://nano-gpt.com/api/v1/models (public API)
-// - Pricing: JS bundle (per-token USD pricing, extracted from first-party JavaScript)
-//   The pricing JS bundle URL is found by scraping the pricing page HTML.
-//   The JS bundle uses R=1.7 as a profit margin multiplier. Entries with /R
-//   suffix store at-cost pricing (at-cost = value / R), but the value BEFORE
-//   /R division IS the customer price. So we do NOT apply R.
-//   Rates are in "milli-dollars per M token" format: rate * 1000 = USD per M tokens.
-//
-// nano-gpt is an inference platform and model router hosting models from
-// 40+ providers. Pricing shown is nano-gpt's per-1M-token rate (USD),
-// which matches official provider prices for most models.
-//
-// Model IDs use "--" instead of "/" to avoid filesystem issues.
-// Router/aggregator models (nanogpt/coding-router, auto-model) are excluded.
-// Video/image/audio/embedding/search models are excluded.
+// Types
 // ---------------------------------------------------------------------------
 
-// ---------------------------------------------------------------------------
-// Fetch helpers
-// ---------------------------------------------------------------------------
-
-async function fetchJSON(url: string): Promise<unknown> {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${url}`);
-  return res.json() as Promise<unknown>;
+interface ApiModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
-async function fetchText(url: string): Promise<string> {
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`HTTP ${res.status} fetching ${url}`);
-  return res.text();
+interface PricingEntry {
+  inputRate: number;
+  outputRate: number;
+  cacheReadInputRate?: number;
+  cacheWriteInputRate?: number;
+}
+
+interface DiscoveredRaw {
+  originalId: string;
+  apiModel: ApiModel;
+  pricingEntry: PricingEntry | null;
 }
 
 // ---------------------------------------------------------------------------
-// Pricing JS bundle extraction
+// Pricing JS bundle extraction (from original scraper)
 // ---------------------------------------------------------------------------
 
 async function findPricingBundleUrl(): Promise<string> {
-  const html = await fetchText("https://nano-gpt.com/pricing");
-  // The pricing data chunk number changes over time (was 30244, then 75855).
-  // Instead of hardcoding, find the largest numbered chunk that contains pricing data.
-  // We look for chunks with 5-digit numbers (e.g., 30244, 75855) which are
-  // typically the data bundles.
+  const html = await fetch("https://nano-gpt.com/pricing").then((r) => r.text());
   const allChunks = html.match(/src="(\/_next\/static\/chunks\/\d+-[a-f0-9]+\.js[^"]*)"/g);
   if (!allChunks) throw new Error("Could not find any JS bundle URLs");
 
-  // Try each chunk to find the one with pricing data
   for (const chunkRef of allChunks) {
     const urlMatch = chunkRef.match(/src="([^"]+)"/);
     if (!urlMatch || !urlMatch[1]) continue;
-    let url = urlMatch[1] as string;
+    let url: string = urlMatch[1];
     if (url.startsWith("/")) url = `https://nano-gpt.com${url}`;
 
-    // Only check large numbered chunks (likely data bundles)
     const numMatch = url.match(/\/([\d]+)-/);
     if (!numMatch || !numMatch[1]) continue;
-    const chunkNum = parseInt(numMatch[1] as string, 10);
-    if (chunkNum < 10000) continue; // Skip small chunks (framework code)
+    const chunkNum = parseInt(numMatch[1], 10);
+    if (chunkNum < 10000) continue;
 
     try {
-      // Download a sample of the chunk to check for pricing data
-      const sample = await fetchText(url);
+      const sample = await fetch(url).then((r) => r.text());
       if (
         sample.includes("inputRate") &&
         sample.includes("outputRate") &&
@@ -92,26 +80,15 @@ async function findPricingBundleUrl(): Promise<string> {
   throw new Error("Could not find pricing JS bundle URL");
 }
 
-interface PricingEntry {
-  inputRate: number;
-  outputRate: number;
-  cacheReadInputRate?: number;
-  cacheWriteInputRate?: number;
-}
-
 function parsePricingBundle(jsContent: string): Record<string, PricingEntry> {
   const result: Record<string, PricingEntry> = {};
 
-  // Extract all model pricing entries from the JS bundle
-  // Pattern: "model-id":{inputRate:X,outputRate:Y,...}
-  // The /R suffix indicates at-cost pricing, but the value before /R
-  // IS the customer price. So we do NOT apply the R multiplier.
   const entryPattern = /"([^"]+)":\{([^}]+)\}/g;
   let match: RegExpExecArray | null;
 
   while ((match = entryPattern.exec(jsContent)) !== null) {
-    const modelId = match[1] as string;
-    const valueStr = match[2] as string;
+    const modelId = match[1] ?? "";
+    const valueStr = match[2] ?? "";
 
     if (!valueStr.includes("inputRate") && !valueStr.includes("outputRate")) continue;
 
@@ -120,24 +97,18 @@ function parsePricingBundle(jsContent: string): Record<string, PricingEntry> {
     const cacheReadMatch = valueStr.match(/cacheReadInputRate:([\d.e\-+]+)(\/R)?/);
     const cacheWriteMatch = valueStr.match(/cacheWriteInputRate:([\d.e\-+]+)(\/R)?/);
 
-    if (!inputRateMatch || !outputRateMatch) continue;
-    if (!inputRateMatch[1] || !outputRateMatch[1]) continue;
+    if (!inputRateMatch || !outputRateMatch || !inputRateMatch[1] || !outputRateMatch[1]) continue;
 
-    // Customer price = raw value (before /R division)
-    // /R suffix means at-cost = customer/R, but customer price is the raw value
-    const inputRate = parseFloat(inputRateMatch[1] as string);
-    const outputRate = parseFloat(outputRateMatch[1] as string);
+    const inputRate = parseFloat(inputRateMatch[1]);
+    const outputRate = parseFloat(outputRateMatch[1]);
 
     const entry: PricingEntry = { inputRate, outputRate };
 
     if (cacheReadMatch && cacheReadMatch[1]) {
-      const cacheRead = parseFloat(cacheReadMatch[1] as string);
-      entry.cacheReadInputRate = cacheRead;
+      entry.cacheReadInputRate = parseFloat(cacheReadMatch[1]);
     }
-
     if (cacheWriteMatch && cacheWriteMatch[1]) {
-      const cacheWrite = parseFloat(cacheWriteMatch[1] as string);
-      entry.cacheWriteInputRate = cacheWrite;
+      entry.cacheWriteInputRate = parseFloat(cacheWriteMatch[1]);
     }
 
     result[modelId] = entry;
@@ -218,87 +189,19 @@ function isLLMModel(id: string): boolean {
 }
 
 // ---------------------------------------------------------------------------
-// Model property derivation
+// Static supplemental data — for fields not available from API/JS bundle
 // ---------------------------------------------------------------------------
-
-function deriveName(id: string): string {
-  const parts = id.split("/");
-  const modelPart = parts.length > 1 ? (parts[1] as string) : id;
-  const providerPrefix = parts.length > 1 ? (parts[0] as string) : "";
-
-  const providerMap: Record<string, string> = {
-    openai: "OpenAI",
-    anthropic: "Anthropic",
-    google: "Google",
-    "x-ai": "xAI",
-    deepseek: "DeepSeek",
-    "deepseek-ai": "DeepSeek",
-    qwen: "Qwen",
-    Qwen: "Qwen",
-    mistralai: "Mistral",
-    moonshotai: "MoonshotAI",
-    moonshot: "MoonshotAI",
-    meta: "Meta",
-    "meta-llama": "Meta",
-    zhipu: "ZhipuAI",
-    "z-ai": "ZhipuAI",
-    minimax: "MiniMax",
-    baidu: "Baidu",
-    "stepfun-ai": "StepFun",
-    stepfun: "StepFun",
-    nvidia: "NVIDIA",
-    xiaomi: "Xiaomi",
-    doubao: "Doubao",
-    alibaba: "Alibaba",
-    cohere: "Cohere",
-    ai21: "AI21",
-    aionlabs: "AionLabs",
-    arcee: "Arcee",
-    baichuan: "Baichuan",
-    tencent: "Tencent",
-    upstage: "Upstage",
-    sarvam: "Sarvam",
-    ibm: "IBM",
-    inception: "Inception",
-    inclusionai: "InclusionAI",
-    microsoft: "Microsoft",
-    amazon: "Amazon",
-    "meganova-ai": "MegaNova",
-    perceptron: "Perceptron",
-    liquid: "Liquid",
-    poolside: "Poolside",
-    inflection: "Inflection",
-    dmind: "DMind",
-    NousResearch: "NousResearch",
-    nousresearch: "NousResearch",
-    gemini: "Google",
-  };
-
-  const provDisplay =
-    providerPrefix in providerMap
-      ? (providerMap[providerPrefix] as string)
-      : providerPrefix.charAt(0).toUpperCase() + providerPrefix.slice(1);
-
-  // Strip :thinking/:low/:medium/:max suffixes from model part for display
-  const cleanModel = modelPart.replace(/:thinking(?::(max|medium|low))?$/, "");
-
-  const display = cleanModel
-    .replace(/-/g, " ")
-    .replace(/_/g, " ")
-    .replace(/\b(ai|vl|it|api|llm|nlp|rp|pro|max|mini|nano|turbo|flash|lite|fast)\b/gi, (w) =>
-      w.toUpperCase(),
-    )
-    .replace(/\b(\d+b)\b/gi, (w) => w.toUpperCase());
-
-  return providerPrefix ? `${provDisplay}: ${display}` : display;
-}
 
 function deriveFamily(id: string): string {
   const lower = id.toLowerCase();
-  if (lower.includes("gpt-5")) return "gpt-5";
-  if (lower.includes("gpt-4")) return "gpt-4";
-  if (lower.includes("gpt-3")) return "gpt-3";
-  if (lower.includes("o1") || lower.includes("o3") || lower.includes("o4")) return "o-series";
+  if (
+    lower.includes("gpt-5") ||
+    lower.includes("gpt-4o") ||
+    lower.includes("gpt-4") ||
+    lower.includes("gpt-3")
+  )
+    return "gpt";
+  if (lower.includes("o1") || lower.includes("o3") || lower.includes("o4")) return "o";
   if (lower.includes("claude-opus")) return "claude-opus";
   if (lower.includes("claude-sonnet")) return "claude-sonnet";
   if (lower.includes("claude-haiku")) return "claude-haiku";
@@ -331,198 +234,221 @@ function deriveFamily(id: string): string {
   if (lower.includes("arcee")) return "arcee";
   if (lower.includes("nova")) return "nova";
   if (lower.includes("saaras") || lower.includes("bulbul")) return "sarvam";
-  return "other";
-}
-
-function deriveContext(id: string): number {
-  const lower = id.toLowerCase();
-  if (
-    lower.includes("gpt-5.5-pro") ||
-    lower.includes("gpt-5.4-pro") ||
-    lower.includes("gpt-5.2-pro")
-  )
-    return 128000;
-  if (lower.includes("gpt-5") && !lower.includes("pro")) return 1048576;
-  if (lower.includes("gpt-4o")) return 128000;
-  if (lower.includes("gpt-4") && !lower.includes("mini")) return 128000;
-  if (lower.includes("gpt-4-mini")) return 128000;
-  if (lower.includes("gpt-3.5-16k")) return 16385;
-  if (lower.includes("gpt-3.5")) return 4096;
-  if (lower.includes("claude-opus") || lower.includes("claude-4-opus")) return 200000;
-  if (lower.includes("claude-sonnet") || lower.includes("claude-4-sonnet")) return 200000;
-  if (lower.includes("claude-haiku")) return 200000;
-  if (lower.includes("gemini-2.5-pro")) return 1048576;
-  if (lower.includes("gemini-2.5-flash")) return 1048576;
-  if (lower.includes("gemini-3")) return 1048576;
-  if (lower.includes("gemini-2.0")) return 1048576;
-  if (lower.includes("gemini-1.5")) return 1048576;
-  if (lower.includes("llama-4")) return 1048576;
-  if (lower.includes("llama-3")) return 131072;
-  if (lower.includes("deepseek-r1") || lower.includes("deepseek-v4")) return 65536;
-  if (lower.includes("deepseek-v3")) return 163840;
-  if (lower.includes("qwen3")) return 131072;
-  if (lower.includes("qwen2.5")) return 131072;
-  if (lower.includes("kimi")) return 131072;
-  if (lower.includes("glm")) return 131072;
-  if (lower.includes("ernie")) return 131072;
-  if (lower.includes("grok")) return 131072;
-  if (lower.includes("mistral-large")) return 131072;
-  if (lower.includes("mistral-small") || lower.includes("mistral-nemo")) return 32768;
-  if (lower.includes("mixtral")) return 32768;
-  return 131072;
-}
-
-function deriveOutput(id: string): number {
-  const lower = id.toLowerCase();
-  if (lower.includes("gpt-5") && !lower.includes("pro")) return 131072;
-  if (lower.includes("claude-opus") || lower.includes("claude-sonnet")) return 128000;
-  if (lower.includes("claude-haiku")) return 64000;
-  if (lower.includes("gemini-2.5")) return 65536;
-  if (lower.includes("deepseek-r1") || lower.includes("deepseek-v4")) return 65536;
-  if (lower.includes("deepseek-v3")) return 131072;
-  if (lower.includes("kimi")) return 131072;
-  return 16384;
-}
-
-function deriveModalities(id: string): { input: ModelModality[]; output: ModelModality[] } {
-  const lower = id.toLowerCase();
-  const input: ModelModality[] = ["text"];
-  const output: ModelModality[] = ["text"];
-  if (
-    lower.includes("vl") ||
-    lower.includes("vision") ||
-    lower.includes("gpt-4o") ||
-    lower.includes("gpt-5") ||
-    lower.includes("claude-4") ||
-    lower.includes("gemini") ||
-    lower.includes("llama-4") ||
-    lower.includes("qwen2.5-vl") ||
-    lower.includes("mimo")
-  ) {
-    input.push("image");
-  }
-  return { input, output };
-}
-
-function deriveFeatures(id: string): { toolCall: boolean; reasoning: boolean } {
-  const lower = id.toLowerCase();
-  const toolCall =
-    lower.includes("gpt-4") ||
-    lower.includes("gpt-5") ||
-    lower.includes("claude-4") ||
-    lower.includes("claude-3.5") ||
-    lower.includes("gemini-2") ||
-    lower.includes("gemini-3") ||
-    lower.includes("deepseek-v3") ||
-    lower.includes("deepseek-v4") ||
-    lower.includes("qwen3") ||
-    lower.includes("kimi-k2") ||
-    lower.includes("mistral-large") ||
-    lower.includes("grok-4");
-  const reasoning =
-    lower.includes("o1") ||
-    lower.includes("o3") ||
-    lower.includes("o4") ||
-    lower.includes("r1") ||
-    lower.includes("thinking") ||
-    lower.includes("reasoning") ||
-    lower.includes("deepseek-r1") ||
-    lower.includes("devstral") ||
-    lower.includes("cogito");
-  return { toolCall, reasoning };
+  return id.split("-")[0] ?? id;
 }
 
 // ---------------------------------------------------------------------------
-// Date helper
+// Pipeline
 // ---------------------------------------------------------------------------
 
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
-}
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://nano-gpt.com/api/v1/models",
+      type: "api",
+      description: "NanoGPT /v1/models API + pricing JS bundle from nano-gpt.com/pricing",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      // 1. Fetch model list from API
+      const apiResp = (await fetch("https://nano-gpt.com/api/v1/models").then((r) => r.json())) as {
+        data: ApiModel[];
+      };
+      const apiModels = apiResp.data ?? [];
+
+      // 2. Fetch pricing from JS bundle
+      let pricingData: Record<string, PricingEntry> = {};
+      try {
+        const bundleUrl = await findPricingBundleUrl();
+        const jsContent = await fetch(bundleUrl).then((r) => r.text());
+        pricingData = parsePricingBundle(jsContent);
+      } catch (e) {
+        console.warn("  nanogpt: could not fetch pricing JS bundle:", e);
+      }
+
+      // 3. Merge API models with pricing data
+      return apiModels
+        .filter((am) => isLLMModel(am.id))
+        .filter((am) => {
+          const pe = pricingData[am.id];
+          if (!pe) return false;
+          if (pe.inputRate === 0 && pe.outputRate === 0) return false;
+          return true;
+        })
+        .map((am) => ({
+          id: am.id.replace(/[/:]/g, "--"),
+          raw: {
+            apiModel: am,
+            pricingEntry: pricingData[am.id] ?? null,
+            originalId: am.id,
+          },
+        }));
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://nano-gpt.com/pricing",
+      type: "api",
+      description: "Pricing from JS bundle — milli-dollars per M token, *1000 = USD per M token",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      const map = new Map<string, Pricing>();
+      for (const dm of models) {
+        const raw = dm.raw as DiscoveredRaw;
+        const pe = raw.pricingEntry;
+        if (!pe) continue;
+
+        const inputPerM = Math.round(pe.inputRate * 1000 * 1e6) / 1e6;
+        const outputPerM = Math.round(pe.outputRate * 1000 * 1e6) / 1e6;
+
+        const pricing: Pricing = { currency: "USD", input: inputPerM, output: outputPerM };
+        if (pe.cacheReadInputRate != null && pe.cacheReadInputRate > 0) {
+          pricing.cache_read = Math.round(pe.cacheReadInputRate * 1000 * 1e6) / 1e6;
+        }
+        if (pe.cacheWriteInputRate != null && pe.cacheWriteInputRate > 0) {
+          pricing.cache_write = Math.round(pe.cacheWriteInputRate * 1000 * 1e6) / 1e6;
+        }
+        map.set(dm.id, pricing);
+      }
+      return map;
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://nano-gpt.com",
+      type: "api",
+      description: "Context/output limits derived from model ID naming patterns",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://nano-gpt.com",
+      type: "api",
+      description: "Modalities not available from API — omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://nano-gpt.com",
+      type: "api",
+      description: "Features not available from API — omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://nano-gpt.com/api/v1/models",
+      type: "api",
+      description: "No date data available from API or JS bundle",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      return new Map<string, ExtractedDates>();
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      // Convert flat ID back to readable name
+      // "openai--gpt-4o" → "OpenAI: GPT 4o"
+      const parts = modelId.split("--");
+      const providerPart = parts.length > 1 ? parts[0] : "";
+      const modelPart = parts.length > 1 ? parts.slice(1).join("--") : modelId;
+
+      const providerMap: Record<string, string> = {
+        openai: "OpenAI",
+        anthropic: "Anthropic",
+        google: "Google",
+        "x-ai": "xAI",
+        deepseek: "DeepSeek",
+        "deepseek-ai": "DeepSeek",
+        qwen: "Qwen",
+        Qwen: "Qwen",
+        mistralai: "Mistral",
+        moonshotai: "MoonshotAI",
+        moonshot: "MoonshotAI",
+        meta: "Meta",
+        "meta-llama": "Meta",
+        zhipu: "ZhipuAI",
+        "z-ai": "ZhipuAI",
+        minimax: "MiniMax",
+        baidu: "Baidu",
+        "stepfun-ai": "StepFun",
+        stepfun: "StepFun",
+        nvidia: "NVIDIA",
+        xiaomi: "Xiaomi",
+        doubao: "Doubao",
+        alibaba: "Alibaba",
+        cohere: "Cohere",
+        ai21: "AI21",
+        aionlabs: "AionLabs",
+        arcee: "Arcee",
+        baichuan: "Baichuan",
+        tencent: "Tencent",
+        upstage: "Upstage",
+        sarvam: "Sarvam",
+        ibm: "IBM",
+        inception: "Inception",
+        inclusionai: "InclusionAI",
+        microsoft: "Microsoft",
+        amazon: "Amazon",
+        "meganova-ai": "MegaNova",
+        perceptron: "Perceptron",
+        liquid: "Liquid",
+        poolside: "Poolside",
+        inflection: "Inflection",
+        dmind: "DMind",
+        NousResearch: "NousResearch",
+        nousresearch: "NousResearch",
+        gemini: "Google",
+      };
+
+      const provDisplay =
+        providerPart && providerPart in providerMap
+          ? (providerMap[providerPart] ?? providerPart)
+          : providerPart
+            ? providerPart.charAt(0).toUpperCase() + providerPart.slice(1)
+            : modelPart;
+
+      const cleanModel = modelPart.replace(/:thinking(?::(max|medium|low))?$/, "");
+
+      const display = cleanModel
+        .replace(/-/g, " ")
+        .replace(/_/g, " ")
+        .replace(/\b(ai|vl|it|api|llm|nlp|rp|pro|max|mini|nano|turbo|flash|lite|fast)\b/gi, (w) =>
+          w.toUpperCase(),
+        )
+        .replace(/\b(\d+b)\b/gi, (w) => w.toUpperCase());
+
+      return providerPart ? `${provDisplay}: ${display}` : display;
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      // Use the original ID (with /) for family derivation
+      const originalId = modelId.replace(/--/g, "/");
+      return deriveFamily(originalId);
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
-// Scrape function
+// Main scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-
-  // 1. Fetch model list from API
-  console.log("  nano-gpt: fetching model list from API...");
-  const apiData = (await fetchJSON("https://nano-gpt.com/api/v1/models")) as {
-    data: Array<{ id: string; object: string; created: number; owned_by: string }>;
-  };
-  const apiModels = apiData.data ?? [];
-  console.log(`  nano-gpt: ${apiModels.length} models from API`);
-
-  // 2. Fetch pricing from JS bundle
-  console.log("  nano-gpt: fetching pricing JS bundle...");
-  const bundleUrl = await findPricingBundleUrl();
-  const jsContent = await fetchText(bundleUrl);
-  const pricingData = parsePricingBundle(jsContent);
-  console.log(`  nano-gpt: ${Object.keys(pricingData).length} pricing entries from JS bundle`);
-
-  // 3. Combine API + pricing data
-  const models: Model[] = [];
-
-  for (const apiModel of apiModels) {
-    const id = apiModel.id;
-
-    // Skip non-LLM models
-    if (!isLLMModel(id)) continue;
-
-    // Check if pricing exists
-    const pricingEntry = pricingData[id];
-    if (!pricingEntry) {
-      console.warn(`  nano-gpt: skipping ${id} — no pricing`);
-      continue;
-    }
-
-    // Skip free models
-    if (pricingEntry.inputRate === 0 && pricingEntry.outputRate === 0) continue;
-
-    // Convert rates to per-M-token USD
-    // JS bundle rates are in "milli-dollars per M token" format:
-    // rate * 1000 = USD per M tokens
-    const inputPerM = Math.round(pricingEntry.inputRate * 1000 * 1e6) / 1e6;
-    const outputPerM = Math.round(pricingEntry.outputRate * 1000 * 1e6) / 1e6;
-
-    // Build pricing object
-    const pricing: Pricing = { unit: "per_mtok", input: inputPerM, output: outputPerM };
-    if (pricingEntry.cacheReadInputRate != null && pricingEntry.cacheReadInputRate > 0) {
-      pricing.cache_read = Math.round(pricingEntry.cacheReadInputRate * 1000 * 1e6) / 1e6;
-    }
-    if (pricingEntry.cacheWriteInputRate != null && pricingEntry.cacheWriteInputRate > 0) {
-      pricing.cache_write = Math.round(pricingEntry.cacheWriteInputRate * 1000 * 1e6) / 1e6;
-    }
-
-    // Flatten "/" and ":" to "--" for filesystem compatibility
-    const flatId = id.replace(/[/:]/g, "--");
-
-    // Derive model properties
-    const { toolCall, reasoning } = deriveFeatures(id);
-    const modalities = deriveModalities(id);
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: flatId,
-      name: deriveName(id),
-      family: deriveFamily(id),
-      temperature: true,
-      limit: { context: deriveContext(id), output: deriveOutput(id) },
-      modalities,
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (toolCall) modelDef.tool_call = true;
-    if (reasoning) modelDef.reasoning = true;
-
-    models.push(defineModel(modelDef));
-  }
-
-  console.log(`  nano-gpt: ${models.length} models`);
-
+  const models = await runPipeline(pipeline);
   return { provider, models };
 }

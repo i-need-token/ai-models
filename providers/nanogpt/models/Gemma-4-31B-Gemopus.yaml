@@ -1,18 +1,13 @@
 id: Gemma-4-31B-Gemopus
 name: Gemma 4 31B Gemopus
 family: gemma
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.18
+  output: 0.18
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.18
-  output: 0.18
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

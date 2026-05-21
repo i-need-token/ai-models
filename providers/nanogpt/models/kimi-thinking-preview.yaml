@@ -1,19 +1,13 @@
 id: kimi-thinking-preview
 name: kimi thinking preview
 family: kimi
-temperature: true
-limit:
-  context: 131072
-  output: 131072
+pricing:
+  currency: USD
+  input: 31.46
+  output: 31.46
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 31.46
-  output: 31.46
-release_date: 2026-05-17
-last_updated: 2026-05-17
-reasoning: true
+last_updated: 2026-05-20

@@ -1,20 +1,18 @@
 id: z-ai--glm-5
-name: "Z.ai: GLM 5"
+name: Glm 5
 family: glm
-limit:
-  context: 202752
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.6
   output: 1.92
   cache_read: 0.12
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-02-12
+last_updated: 2026-02-12

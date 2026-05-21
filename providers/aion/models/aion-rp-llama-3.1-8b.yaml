@@ -1,7 +1,10 @@
 id: aion-rp-llama-3.1-8b
 name: Aion RP Llama 3.1 8B
 family: aion-rp
-temperature: true
+pricing:
+  currency: USD
+  input: 0.7999999999999999
+  output: 1.5999999999999999
 limit:
   context: 32768
   output: 32768
@@ -10,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.8
-  output: 1.6
-release_date: 2024-09
-last_updated: 2026-05-17
+reasoning: false
+release_date: 2024-11-30
+last_updated: 2024-11-30

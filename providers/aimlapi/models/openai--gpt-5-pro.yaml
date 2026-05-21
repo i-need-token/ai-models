@@ -1,17 +1,16 @@
 id: openai--gpt-5-pro
-name: OpenAI / GPT-5 Pro
-family: gpt
-limit:
-  context: 400000
-  output: 16384
+name: Openai / Gpt 5 Pro
+family: openai
+pricing:
+  currency: USD
+  input: 19.5
+  output: 156
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 19.5
-  output: 156
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

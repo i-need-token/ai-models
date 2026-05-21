@@ -1,21 +1,16 @@
 id: zai-org--GLM-4.7-FP8
-name: GLM-4.7-FP8
+name: GLM 4.7 FP8
 family: glm
-temperature: true
-limit:
-  context: 204800
-  output: 131072
+pricing:
+  currency: EUR
+  input: 0.7
+  output: 2.5
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.7
-  output: 2.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
-reasoning: true
 structured_output: true
+release_date: 2026-01-19
+last_updated: 2026-01-19

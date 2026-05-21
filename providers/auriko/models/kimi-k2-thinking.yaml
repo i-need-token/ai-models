@@ -1,21 +1,20 @@
 id: kimi-k2-thinking
 name: Kimi K2 Thinking
 family: kimi
-temperature: true
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.6
   output: 2.5
   cache_read: 0.15
-release_date: 2026-05-17
-last_updated: 2026-05-17
 limit:
   context: 262144
   output: 262144
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+release_date: 2026-05-07
+last_updated: 2026-05-07

@@ -1,15 +1,13 @@
 id: chatglm_pro
-name: "智谱 ChatGLM: Chatglm_pro"
+name: Chatglm_pro
 family: glm
-temperature: true
 pricing:
   currency: USD
   input: 0.7143
   output: 0.7143
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

@@ -1,20 +1,16 @@
 id: x-ai--grok-3-mini-beta
-name: "xAI: Grok 3 Mini Beta"
+name: Grok 3 Mini Beta
 family: grok
-limit:
-  context: 131072
-  output: 4096
-modalities:
-  input:
-    - text
-  output:
-    - text
 pricing:
   currency: USD
   input: 0.6
   output: 4
   cache_read: 0.15
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+modalities:
+  input:
+    - text
+  output:
+    - text
 reasoning: true
+tool_call: true
+last_updated: 2026-05-20

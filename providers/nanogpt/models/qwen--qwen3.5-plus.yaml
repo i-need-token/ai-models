@@ -1,19 +1,13 @@
 id: qwen--qwen3.5-plus
 name: "Qwen: qwen3.5 plus"
 family: qwen
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2.4
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.4
-  output: 2.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
+last_updated: 2026-05-20

@@ -1,18 +1,18 @@
 id: mistralai--mistral-small-3.1-24b-instruct
-name: "Mistral: Mistral Small 3.1 24B"
+name: Mistral Small 3.1 24b Instruct
 family: mistral
+pricing:
+  currency: USD
+  input: 0.351
+  output: 0.555
 limit:
   context: 128000
-  output: 4096
+  output: 128000
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.351
-  output: 0.555
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-03-18
+last_updated: 2025-03-18

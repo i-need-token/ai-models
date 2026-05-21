@@ -1,10 +1,11 @@
 id: solar-pro3
 name: Solar Pro 3
 family: solar
-temperature: true
-reasoning: true
-tool_call: true
-open_weights: false
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.6
+  cache_read: 0.015
 limit:
   context: 128000
   output: 4096
@@ -13,10 +14,8 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.6
-  cache_read: 0.015
+reasoning: true
+temperature: true
+tool_call: true
 release_date: 2026-01-26
-last_updated: 2026-05-17
+last_updated: 2026-05-18

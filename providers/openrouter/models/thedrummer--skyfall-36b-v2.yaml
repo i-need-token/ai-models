@@ -1,6 +1,11 @@
 id: thedrummer--skyfall-36b-v2
-name: "TheDrummer: Skyfall 36B V2"
+name: Skyfall 36b V2
 family: thedrummer
+pricing:
+  currency: USD
+  input: 0.55
+  output: 0.8
+  cache_read: 0.25
 limit:
   context: 32768
   output: 32768
@@ -9,10 +14,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.55
-  output: 0.8
-  cache_read: 0.25
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-03-11
+last_updated: 2025-03-11

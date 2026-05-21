@@ -1,20 +1,17 @@
 id: qwen3-vl-plus
-name: Qwen3 VL Plus
+name: Qwen3 Vl Plus
 family: qwen
-limit:
-  context: 262144
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.2
+  output: 1.6
+  cache_read: 0.04
+  cache_write: 0.25
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.2
-  output: 1.6
-  cache_read: 0.04
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

@@ -1,7 +1,10 @@
 id: microsoft--wizardlm-2-8x22b
-name: Wizardlm 2 8x22B
-family: wizardlm
-temperature: true
+name: Wizardlm 2 8x22b
+family: microsoft
+pricing:
+  currency: USD
+  input: 0.62
+  output: 0.62
 limit:
   context: 65535
   output: 8000
@@ -10,10 +13,5 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.62
-  output: 0.62
-release_date: 2026-05-17
-last_updated: 2026-05-17
 structured_output: true
+last_updated: 2026-05-20

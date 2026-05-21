@@ -1,17 +1,16 @@
 id: openai--openai-o3-pro
-name: OpenAI / OpenAI o3-Pro
-family: gpt
-limit:
-  context: 200000
-  output: 16384
+name: Openai / Openai O3 Pro
+family: openai
+pricing:
+  currency: USD
+  input: 26
+  output: 104
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 26
-  output: 104
-release_date: 2026-05-17
-last_updated: 2026-05-17
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

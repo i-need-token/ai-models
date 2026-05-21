@@ -1,6 +1,11 @@
 id: qwen--qwen3.6-35b-a3b
-name: "Qwen: Qwen3.6 35B A3B"
+name: Qwen3.6 35b A3b
 family: qwen
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1
+  cache_read: 0.05
 limit:
   context: 262144
   output: 262144
@@ -11,12 +16,8 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 1
-  cache_read: 0.05
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-04-27
+last_updated: 2026-04-27

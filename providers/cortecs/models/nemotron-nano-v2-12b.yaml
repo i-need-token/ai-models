@@ -1,21 +1,17 @@
 id: nemotron-nano-v2-12b
 name: nemotron-nano-v2-12b
 family: nemotron
-temperature: true
-limit:
-  context: 128000
-  output: 128000
+pricing:
+  currency: EUR
+  input: 0.215
+  output: 0.635
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.215
-  output: 0.635
-release_date: 2025-10-31
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2025-10-31
+last_updated: 2025-10-31

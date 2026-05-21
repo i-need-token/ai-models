@@ -1,7 +1,10 @@
 id: deepseek--deepseek-v3.1
-name: DeepSeek V3.1
+name: Deepseek V3.1
 family: deepseek
-temperature: true
+pricing:
+  currency: USD
+  input: 0.27
+  output: 1
 limit:
   context: 131072
   output: 32768
@@ -10,12 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.27
-  output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
 structured_output: true
+last_updated: 2026-05-20

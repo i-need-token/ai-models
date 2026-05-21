@@ -1,0 +1,14 @@
+id: openrouter--bodybuilder
+name: Bodybuilder
+family: openrouter
+pricing:
+  currency: USD
+  input: -1000000
+  output: -1000000
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2025-12-05
+last_updated: 2025-12-05

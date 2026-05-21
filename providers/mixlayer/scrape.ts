@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "mixlayer",
@@ -13,128 +21,140 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-16)
-//
-// Sources:
-// - Model list: https://docs.mixlayer.com/models (6 models, 5 with pricing)
-// - Pricing: https://mixlayer.com homepage (per-token USD pricing)
-// - Context lengths: Mixlayer docs (131K for all models)
-// - Capabilities: Mixlayer docs (Tools, Reasoning for all models)
-//
-// Mixlayer is an inference platform for open-source AI models.
-// All models are from the Qwen 3.5 family with 131K context windows.
-// qwen/qwen3.5-4b-free is free (rate-limited, not for production).
-// qwen/qwen3.5-122b-a10b is skipped (no pricing data on homepage or docs).
+// Raw data types (from Mixlayer API)
 // ---------------------------------------------------------------------------
 
-interface ModelInfo {
-  name: string;
-  context: number;
-  output: number;
-  inputModalities: ModelModality[];
-  outputModalities: ModelModality[];
-  openWeights?: boolean;
-  reasoning?: boolean;
-  toolCall?: boolean;
-  free?: boolean;
+interface MixlayerModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
 
-const MODELS: Record<string, ModelInfo> = {
-  "qwen--qwen3.5-4b-free": {
-    name: "Qwen 3.5 4B Free",
-    context: 131072,
-    output: 8192,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
-    free: true,
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<MixlayerModel[]> {
+  const response = await fetch("https://models.mixlayer.ai/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Mixlayer models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: MixlayerModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://models.mixlayer.ai/v1/models",
+      type: "api",
+      description: "Mixlayer /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
   },
-  "qwen--qwen3.5-9b": {
-    name: "Qwen 3.5 9B",
-    context: 131072,
-    output: 8192,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
+
+  extractPricing: {
+    source: {
+      url: "https://models.mixlayer.ai/v1/models",
+      type: "api",
+      description: "Mixlayer API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
   },
-  "qwen--qwen3.5-27b": {
-    name: "Qwen 3.5 27B",
-    context: 131072,
-    output: 8192,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
+
+  extractLimits: {
+    source: {
+      url: "https://models.mixlayer.ai/v1/models",
+      type: "api",
+      description: "Mixlayer API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
   },
-  "qwen--qwen3.5-35b-a3b": {
-    name: "Qwen 3.5 35B A3B",
-    context: 131072,
-    output: 8192,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
+
+  extractModalities: {
+    source: {
+      url: "https://models.mixlayer.ai/v1/models",
+      type: "api",
+      description: "Mixlayer API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
   },
-  "qwen--qwen3.5-397b-a17b": {
-    name: "Qwen 3.5 397B A17B",
-    context: 131072,
-    output: 8192,
-    inputModalities: ["text"],
-    outputModalities: ["text"],
-    openWeights: true,
-    reasoning: true,
-    toolCall: true,
+
+  extractFeatures: {
+    source: {
+      url: "https://models.mixlayer.ai/v1/models",
+      type: "api",
+      description: "Mixlayer API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://models.mixlayer.ai/v1/models",
+      type: "api",
+      description: "Mixlayer API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as MixlayerModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /deepseek/i, family: "deepseek" },
+        { pattern: /llama/i, family: "llama" },
+        { pattern: /qwen/i, family: "qwen" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
   },
 };
 
-// Pricing per 1M tokens (USD)
-const PRICING: Record<string, Pricing> = {
-  "qwen--qwen3.5-4b-free": { unit: "free" },
-  "qwen--qwen3.5-9b": { currency: "USD", input: 0.1, output: 0.4 },
-  "qwen--qwen3.5-27b": { currency: "USD", input: 0.3, output: 2.4 },
-  "qwen--qwen3.5-35b-a3b": { currency: "USD", input: 0.25, output: 1.3 },
-  "qwen--qwen3.5-397b-a17b": { currency: "USD", input: 0.6, output: 3.6 },
-};
-
-function deriveFamily(id: string): string {
-  if (id.startsWith("qwen--")) return "qwen3.5";
-  return "other";
-}
+// ---------------------------------------------------------------------------
+// Scrape function
+// ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const models: ReturnType<typeof defineModel>[] = [];
-  const today = new Date().toISOString().split("T")[0] as string;
-
-  for (const [id, info] of Object.entries(MODELS)) {
-    const pricing = PRICING[id];
-    if (!pricing) {
-      console.warn(`  Mixlayer: skipping ${id} — no pricing`);
-      continue;
-    }
-
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: id as string,
-      name: info.name as string,
-      family: deriveFamily(id as string),
-      limit: { context: info.context, output: info.output },
-      modalities: { input: info.inputModalities, output: info.outputModalities },
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
-
-    if (info.openWeights) modelDef.open_weights = true;
-    if (info.reasoning) modelDef.reasoning = true;
-    if (info.toolCall) modelDef.tool_call = true;
-
-    models.push(defineModel(modelDef));
-  }
-
+  const models = await runPipeline(pipeline);
+  console.log(`  Mixlayer: ${models.length} models`);
   return { provider, models };
 }

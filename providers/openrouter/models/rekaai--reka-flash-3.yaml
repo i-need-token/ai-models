@@ -1,6 +1,10 @@
 id: rekaai--reka-flash-3
 name: Reka Flash 3
 family: rekaai
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.2
 limit:
   context: 65536
   output: 65536
@@ -9,10 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.1
-  output: 0.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+release_date: 2025-03-13
+last_updated: 2025-03-13

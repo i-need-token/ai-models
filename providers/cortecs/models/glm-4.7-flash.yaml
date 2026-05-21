@@ -1,19 +1,15 @@
 id: glm-4.7-flash
 name: glm-4.7-flash
 family: glm
-temperature: true
-limit:
-  context: 203000
-  output: 203000
+pricing:
+  currency: EUR
+  input: 0.072
+  output: 0.429
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.072
-  output: 0.429
-release_date: 2026-02-19
-last_updated: 2026-05-17
 tool_call: true
+release_date: 2026-02-19
+last_updated: 2026-02-19

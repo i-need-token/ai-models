@@ -1,8 +1,11 @@
 id: gpt-4.1-mini
-name: GPT-4.1 mini
-family: gpt
-tool_call: true
-structured_output: true
+name: GPT-4.1 Mini
+family: gpt-4.1
+pricing:
+  currency: USD
+  input: 0.4
+  output: 1.6
+  cache_read: 0.1
 limit:
   context: 1047576
   output: 32768
@@ -12,11 +15,8 @@ modalities:
     - image
   output:
     - text
-pricing:
-  input: 0.4
-  output: 1.6
-  cache_read: 0.1
-release_date: 2025-04-14
-last_updated: 2025-04-14
-snapshots:
-  - id: gpt-4.1-mini-2025-04-14
+temperature: true
+tool_call: true
+structured_output: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

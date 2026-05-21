@@ -1,6 +1,12 @@
 id: qwen--qwen-plus
-name: "Qwen: Qwen-Plus"
+name: Qwen Plus
 family: qwen
+pricing:
+  currency: USD
+  input: 0.26
+  output: 0.78
+  cache_read: 0.052
+  cache_write: 0.325
 limit:
   context: 1000000
   output: 32768
@@ -9,12 +15,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.26
-  output: 0.78
-  cache_read: 0.052
-  cache_write: 0.325
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2025-02-01
+last_updated: 2025-02-01

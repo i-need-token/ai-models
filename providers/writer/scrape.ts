@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "writer",
@@ -13,142 +21,138 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Model details: https://dev.writer.com/home/models/choose-a-model (CSR)
-// - Pricing: https://dev.writer.com/home/pricing (CSR)
-// - API: https://api.writer.com/v1/models (requires auth)
-//
-// Writer produces Palmyra LLMs — enterprise-focused models.
+// Raw data types (from Writer API)
 // ---------------------------------------------------------------------------
 
-// Pricing (USD per 1M tokens) — from dev.writer.com/home/pricing
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  // Active models
-  "palmyra-x5": { currency: "USD", input: 0.6, output: 6 },
-  "palmyra-x4": { currency: "USD", input: 2.5, output: 10 },
-
-  // Deprecated models (deprecation date: 2026-07-13)
-  "palmyra-x-003-instruct": { currency: "USD", input: 7.5, output: 22.5 },
-  "palmyra-med": { currency: "USD", input: 5, output: 12 },
-  "palmyra-fin": { currency: "USD", input: 5, output: 12 },
-  "palmyra-creative": { currency: "USD", input: 5, output: 12 },
-};
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+interface WriterModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<WriterModel[]> {
+  const response = await fetch("https://api.writer.com/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Writer models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: WriterModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.writer.com/v1/models",
+      type: "api",
+      description: "Writer /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://api.writer.com/v1/models",
+      type: "api",
+      description: "Writer API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.writer.com/v1/models",
+      type: "api",
+      description: "Writer API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://api.writer.com/v1/models",
+      type: "api",
+      description: "Writer API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.writer.com/v1/models",
+      type: "api",
+      description: "Writer API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.writer.com/v1/models",
+      type: "api",
+      description: "Writer API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as WriterModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /palmyra/i, family: "palmyra" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // --- Active models ---
-  models.push(
-    defineModel({
-      id: "palmyra-x5",
-      name: "Palmyra X5",
-      family: "palmyra",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      limit: { context: 1000000, output: 16384 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["palmyra-x5"] as Pricing,
-      release_date: "2025-11-01",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "palmyra-x4",
-      name: "Palmyra X4",
-      family: "palmyra",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      limit: { context: 128000, output: 16384 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["palmyra-x4"] as Pricing,
-      release_date: "2025-06-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Deprecated models (deprecation date: 2026-07-13) ---
-  models.push(
-    defineModel({
-      id: "palmyra-x-003-instruct",
-      name: "Palmyra X 003 Instruct",
-      family: "palmyra",
-      temperature: true,
-      tool_call: true,
-      deprecated: true,
-      limit: { context: 8192, output: 8192 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["palmyra-x-003-instruct"] as Pricing,
-      release_date: "2024-03-01",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "palmyra-med",
-      name: "Palmyra Med",
-      family: "palmyra",
-      temperature: true,
-      deprecated: true,
-      limit: { context: 8192, output: 8192 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["palmyra-med"] as Pricing,
-      release_date: "2024-06-01",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "palmyra-fin",
-      name: "Palmyra Fin",
-      family: "palmyra",
-      temperature: true,
-      deprecated: true,
-      limit: { context: 8192, output: 8192 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["palmyra-fin"] as Pricing,
-      release_date: "2024-06-01",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "palmyra-creative",
-      name: "Palmyra Creative",
-      family: "palmyra",
-      temperature: true,
-      deprecated: true,
-      limit: { context: 8192, output: 8192 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["palmyra-creative"] as Pricing,
-      release_date: "2024-06-01",
-      last_updated: today,
-    }),
-  );
-
+  const models = await runPipeline(pipeline);
   console.log(`  Writer: ${models.length} models`);
-
   return { provider, models };
 }

@@ -1,6 +1,10 @@
 id: openai--gpt-4-1106-preview
-name: "OpenAI: GPT-4 Turbo (older v1106)"
-family: gpt-4
+name: Gpt 4 1106 Preview
+family: gpt
+pricing:
+  currency: USD
+  input: 10
+  output: 30
 limit:
   context: 128000
   output: 4096
@@ -9,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 10
-  output: 30
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2023-11-06
+last_updated: 2023-11-06

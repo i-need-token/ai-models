@@ -1,0 +1,17 @@
+id: jamba-mini-2-2026-01
+name: Jamba Mini 2 2026 01
+family: jamba-mini
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.4
+limit:
+  context: 256000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-01-01
+last_updated: 2026-01-01

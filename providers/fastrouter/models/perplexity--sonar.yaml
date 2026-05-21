@@ -1,18 +1,14 @@
 id: perplexity--sonar
-name: "Perplexity: Sonar"
+name: Sonar
 family: sonar
-limit:
-  context: 127072
-  output: 4096
+pricing:
+  currency: USD
+  input: 1
+  output: 1
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 1
-  output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

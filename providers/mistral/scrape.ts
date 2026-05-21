@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "mistral",
@@ -13,328 +21,145 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Model IDs: GitHub Models API https://models.github.ai/v1/models
-// - Pricing (most models): AWS Price List API
-//   https://pricing.us-east-1.amazonaws.com/offers/v1.0/aws/AmazonBedrock/current/index.json
-// - Pricing (Codestral, Doc AI): Azure Retail Prices API
-//   https://prices.azure.com/api/retail/prices?productName=Azure%20Mistral%20Models
-//
-// Mistral AI models, produced by Mistral AI. Available via AWS Bedrock,
-// Azure Foundry, and the Mistral API (docs.mistral.ai currently unreachable).
-// Pricing is in USD per 1M tokens.
+// Raw data types (from Mistral AI API)
 // ---------------------------------------------------------------------------
 
-// Pricing (USD per 1M tokens)
-// AWS Bedrock us-east-1 standard on-demand unless noted
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  // Current models
-  "mistral-large": { currency: "USD", input: 2.0, output: 6.0 },
-  "mistral-small": { currency: "USD", input: 0.2, output: 0.6 },
-  "mistral-nemo": { currency: "USD", input: 0.15, output: 0.15 },
-  "mistral-medium": { currency: "USD", input: 0.4, output: 2.0 },
-  codestral: { currency: "USD", input: 0.3, output: 0.9 },
-  "ministral-3b": { currency: "USD", input: 0.04, output: 0.04 },
-  "ministral-8b": { currency: "USD", input: 0.1, output: 0.1 },
-  "pixtral-large": { currency: "USD", input: 2.0, output: 6.0 },
-  devstral: { currency: "USD", input: 0.4, output: 2.0 },
-  "magistral-small": { currency: "USD", input: 0.5, output: 1.5 },
-  "voxtral-mini": { currency: "USD", input: 0.04, output: 0.04 },
-  "voxtral-small": { currency: "USD", input: 0.1, output: 0.3 },
-  // Deprecated models
-  "mistral-large-2407": { currency: "USD", input: 4.0, output: 12.0 },
-  "mixtral-8x22b": { currency: "USD", input: 0.8, output: 1.2 },
-  "mixtral-8x7b": { currency: "USD", input: 0.45, output: 0.7 },
-  "mistral-7b": { currency: "USD", input: 0.15, output: 0.2 },
-};
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+interface MistralModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<MistralModel[]> {
+  const response = await fetch("https://api.mistral.ai/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Mistral AI models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: MistralModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.mistral.ai/v1/models",
+      type: "api",
+      description: "Mistral AI /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://api.mistral.ai/v1/models",
+      type: "api",
+      description: "Mistral AI API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.mistral.ai/v1/models",
+      type: "api",
+      description: "Mistral AI API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://api.mistral.ai/v1/models",
+      type: "api",
+      description: "Mistral AI API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.mistral.ai/v1/models",
+      type: "api",
+      description: "Mistral AI API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.mistral.ai/v1/models",
+      type: "api",
+      description: "Mistral AI API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as MistralModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /mistral/i, family: "mistral" },
+        { pattern: /mixtral/i, family: "mixtral" },
+        { pattern: /codestral/i, family: "codestral" },
+        { pattern: /pixtral/i, family: "pixtral" },
+        { pattern: /ministral/i, family: "ministral" },
+        { pattern: /magistral/i, family: "magistral" },
+        { pattern: /devstral/i, family: "devstral" },
+        { pattern: /voxtral/i, family: "voxtral" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // --- Mistral Large 3 (March 2025) ---
-
-  models.push(
-    defineModel({
-      id: "mistral-large",
-      name: "Mistral Large",
-      family: "mistral",
-      temperature: true,
-      tool_call: true,
-      attachment: true,
-      limit: { context: 128000, output: 8192 },
-      modalities: { input: ["text", "image"], output: ["text"] },
-      pricing: HARDCODED_PRICING["mistral-large"] as Pricing,
-      release_date: "2025-03-18",
-      last_updated: today,
-    }),
-  );
-
-  // --- Mistral Medium (May 2025) ---
-
-  models.push(
-    defineModel({
-      id: "mistral-medium",
-      name: "Mistral Medium",
-      family: "mistral",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 128000, output: 8192 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["mistral-medium"] as Pricing,
-      release_date: "2025-05-07",
-      last_updated: today,
-    }),
-  );
-
-  // --- Mistral Small (September 2024) ---
-
-  models.push(
-    defineModel({
-      id: "mistral-small",
-      name: "Mistral Small",
-      family: "mistral",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 128000, output: 8192 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["mistral-small"] as Pricing,
-      release_date: "2024-09-18",
-      last_updated: today,
-    }),
-  );
-
-  // --- Mistral Nemo (July 2024) ---
-
-  models.push(
-    defineModel({
-      id: "mistral-nemo",
-      name: "Mistral Nemo",
-      family: "mistral",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 128000, output: 4096 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["mistral-nemo"] as Pricing,
-      release_date: "2024-07-18",
-      last_updated: today,
-    }),
-  );
-
-  // --- Codestral (May 2024) ---
-
-  models.push(
-    defineModel({
-      id: "codestral",
-      name: "Codestral",
-      family: "codestral",
-      temperature: true,
-      limit: { context: 256000, output: 8192 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["codestral"] as Pricing,
-      release_date: "2024-05-29",
-      last_updated: today,
-    }),
-  );
-
-  // --- Ministral (September 2024) ---
-
-  models.push(
-    defineModel({
-      id: "ministral-8b",
-      name: "Ministral 8B",
-      family: "ministral",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 128000, output: 4096 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["ministral-8b"] as Pricing,
-      release_date: "2024-09-18",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "ministral-3b",
-      name: "Ministral 3B",
-      family: "ministral",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 128000, output: 4096 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["ministral-3b"] as Pricing,
-      release_date: "2024-09-18",
-      last_updated: today,
-    }),
-  );
-
-  // --- Pixtral Large (November 2024) ---
-
-  models.push(
-    defineModel({
-      id: "pixtral-large",
-      name: "Pixtral Large",
-      family: "pixtral",
-      temperature: true,
-      tool_call: true,
-      attachment: true,
-      limit: { context: 128000, output: 8192 },
-      modalities: { input: ["text", "image"], output: ["text"] },
-      pricing: HARDCODED_PRICING["pixtral-large"] as Pricing,
-      release_date: "2024-11-18",
-      last_updated: today,
-    }),
-  );
-
-  // --- Devstral (May 2025) ---
-
-  models.push(
-    defineModel({
-      id: "devstral",
-      name: "Devstral",
-      family: "devstral",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 128000, output: 8192 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["devstral"] as Pricing,
-      release_date: "2025-05-15",
-      last_updated: today,
-    }),
-  );
-
-  // --- Magistral Small (June 2025) ---
-
-  models.push(
-    defineModel({
-      id: "magistral-small",
-      name: "Magistral Small",
-      family: "magistral",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      limit: { context: 128000, output: 8192 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["magistral-small"] as Pricing,
-      release_date: "2025-06-10",
-      last_updated: today,
-    }),
-  );
-
-  // --- Voxtral (July 2025) ---
-
-  models.push(
-    defineModel({
-      id: "voxtral-mini",
-      name: "Voxtral Mini",
-      family: "voxtral",
-      temperature: true,
-      attachment: true,
-      limit: { context: 128000, output: 4096 },
-      modalities: { input: ["text", "audio"], output: ["text"] },
-      pricing: HARDCODED_PRICING["voxtral-mini"] as Pricing,
-      release_date: "2025-07-01",
-      last_updated: today,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "voxtral-small",
-      name: "Voxtral Small",
-      family: "voxtral",
-      temperature: true,
-      attachment: true,
-      limit: { context: 128000, output: 4096 },
-      modalities: { input: ["text", "audio"], output: ["text"] },
-      pricing: HARDCODED_PRICING["voxtral-small"] as Pricing,
-      release_date: "2025-07-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Deprecated models ---
-
-  models.push(
-    defineModel({
-      id: "mistral-large-2407",
-      name: "Mistral Large (2407)",
-      family: "mistral",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 128000, output: 8192 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["mistral-large-2407"] as Pricing,
-      release_date: "2024-07-24",
-      last_updated: today,
-      deprecated: true,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "mixtral-8x22b",
-      name: "Mixtral 8x22B",
-      family: "mixtral",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 64000, output: 4096 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["mixtral-8x22b"] as Pricing,
-      release_date: "2024-04-10",
-      last_updated: today,
-      deprecated: true,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "mixtral-8x7b",
-      name: "Mixtral 8x7B",
-      family: "mixtral",
-      temperature: true,
-      tool_call: true,
-      limit: { context: 32000, output: 4096 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["mixtral-8x7b"] as Pricing,
-      release_date: "2023-12-11",
-      last_updated: today,
-      deprecated: true,
-    }),
-  );
-
-  models.push(
-    defineModel({
-      id: "mistral-7b",
-      name: "Mistral 7B",
-      family: "mistral",
-      temperature: true,
-      limit: { context: 32000, output: 4096 },
-      modalities: { input: ["text"], output: ["text"] },
-      pricing: HARDCODED_PRICING["mistral-7b"] as Pricing,
-      release_date: "2023-09-27",
-      last_updated: today,
-      deprecated: true,
-    }),
-  );
-
+  const models = await runPipeline(pipeline);
   console.log(`  Mistral AI: ${models.length} models`);
-
   return { provider, models };
 }

@@ -1,6 +1,10 @@
 id: sao10k--l3-lunaris-8b
-name: "Sao10K: Llama 3 8B Lunaris"
-family: l3-finetune
+name: L3 Lunaris 8b
+family: sao10k
+pricing:
+  currency: USD
+  input: 0.04
+  output: 0.05
 limit:
   context: 8192
   output: 16384
@@ -9,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.04
-  output: 0.05
-release_date: 2026-05-17
-last_updated: 2026-05-17
+structured_output: true
+release_date: 2024-08-13
+last_updated: 2024-08-13

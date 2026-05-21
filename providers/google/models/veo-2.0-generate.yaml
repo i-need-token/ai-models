@@ -1,0 +1,16 @@
+id: veo-2.0-generate
+name: Veo 2.0
+family: veo-2
+pricing:
+  currency: USD
+  unit: per_second
+  price: 0.5
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - video
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

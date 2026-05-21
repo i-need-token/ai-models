@@ -1,19 +1,13 @@
 id: meta-llama--llama-4-scout
 name: "Meta: llama 4 scout"
 family: llama
-temperature: true
-limit:
-  context: 1048576
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.085
+  output: 0.46
 modalities:
   input:
     - text
-    - image
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.085
-  output: 0.46
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

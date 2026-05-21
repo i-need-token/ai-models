@@ -1,16 +1,14 @@
 id: mimo-v2-flash
-name: "Xiaomi: Mimo V2 Flash"
+name: Mimo V2 Flash
 family: mimo
-temperature: true
 pricing:
   currency: USD
   input: 0.0959
   output: 0.2877
   cache_read: 0.01918
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

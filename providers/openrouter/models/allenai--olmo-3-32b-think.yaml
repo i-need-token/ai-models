@@ -1,6 +1,10 @@
 id: allenai--olmo-3-32b-think
-name: "AllenAI: Olmo 3 32B Think"
+name: Olmo 3 32b Think
 family: allenai
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.5
 limit:
   context: 65536
   output: 65536
@@ -9,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.15
-  output: 0.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
+structured_output: true
+release_date: 2025-11-22
+last_updated: 2025-11-22

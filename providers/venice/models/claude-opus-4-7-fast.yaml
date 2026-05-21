@@ -1,7 +1,11 @@
 id: claude-opus-4-7-fast
-name: Claude Opus 4.7 Fast
+name: claude-opus-4-7-fast
 family: claude-opus
-temperature: true
+pricing:
+  currency: USD
+  input: 36
+  output: 180
+  cache_read: 3.6
 limit:
   context: 1000000
   output: 128000
@@ -11,14 +15,9 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 36
-  output: 180
-  cache_read: 3.6
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
 tool_call: true
-structured_output: true
 attachment: true
+structured_output: true
+release_date: 2026-05-14
+last_updated: 2026-05-14

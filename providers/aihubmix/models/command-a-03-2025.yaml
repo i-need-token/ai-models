@@ -1,15 +1,13 @@
 id: command-a-03-2025
-name: "Cohere: Command A 03 2025"
+name: Command A 03 2025
 family: command-a
-temperature: true
 pricing:
   currency: USD
   input: 1.25
   output: 5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

@@ -1,13 +1,10 @@
 id: inclusionai--ling-mini-2.0
 name: Inclusionai/Ling Mini 2.0
-family: ling
-temperature: true
+family: inclusionai/ling
 pricing:
   currency: USD
   input: 0.034
   output: 0.136
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
@@ -15,3 +12,4 @@ modalities:
     - text
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

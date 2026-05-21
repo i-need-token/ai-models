@@ -1,13 +1,17 @@
 id: text-embedding-3-large
 name: Text Embedding 3 Large
 family: text-embedding
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0
+limit:
+  context: 8191
+  output: 3072
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  input: 0.13
-  output: 0
-release_date: unknown
-last_updated: unknown
+release_date: 2026-05-18
+last_updated: 2026-05-18

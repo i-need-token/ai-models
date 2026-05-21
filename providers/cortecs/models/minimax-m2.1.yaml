@@ -1,20 +1,16 @@
 id: minimax-m2.1
 name: minimax-m2.1
 family: minimax
-temperature: true
-limit:
-  context: 196000
-  output: 196000
+pricing:
+  currency: EUR
+  input: 0.322
+  output: 1.288
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: EUR
-  input: 0.322
-  output: 1.288
-release_date: 2026-02-04
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-02-04
+last_updated: 2026-02-04

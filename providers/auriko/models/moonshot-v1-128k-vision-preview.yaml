@@ -1,20 +1,19 @@
 id: moonshot-v1-128k-vision-preview
-name: Moonshot V1 128K Vision Preview
+name: Moonshot V1 128k Vision Preview
 family: moonshot
-temperature: true
+pricing:
+  currency: USD
+  input: 2
+  output: 5
+limit:
+  context: 131072
+  output: 131072
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 2
-  output: 5
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 131072
-  output: 131072
 tool_call: true
+release_date: 2026-05-07
+last_updated: 2026-05-07

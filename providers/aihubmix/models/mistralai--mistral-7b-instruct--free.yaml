@@ -1,15 +1,13 @@
 id: mistralai--mistral-7b-instruct--free
 name: Mistralai/Mistral 7b Instruct/Free
 family: mistral
-temperature: true
 pricing:
   currency: USD
   input: 0.001
   output: 0.001
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

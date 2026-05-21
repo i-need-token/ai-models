@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { ModelModality, Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
+import type { Pricing, ModelModality } from "../../types/index";
 
 const provider = defineProvider({
   id: "fastrouter",
@@ -12,23 +20,7 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Dynamic model data (from FastRouter public API)
-//
-// Sources:
-// - Model list & pricing: https://api.fastrouter.ai/v1/models (public API)
-// - Context lengths: FastRouter API context_length field
-// - Modalities: FastRouter API architecture.modality field
-// - Max output tokens: FastRouter API top_provider.max_completion_tokens
-// - Cache pricing: FastRouter API pricing.input_cache_read / input_cache_write
-//
-// FastRouter is an inference platform and model router hosting models from
-// 20+ providers with per-token pricing. Pricing shown is FastRouter's
-// per-1M-token rate (USD). Some models have prompt caching pricing.
-//
-// Model IDs use "--" instead of "/" to avoid filesystem issues
-// (FastRouter API uses "provider/model" format).
-// The fastrouter/auto routing model is excluded as it is not a distinct model.
-// Non-LLM models (image, video, embedding, audio, classification) are excluded.
+// Raw data types (from FastRouter API)
 // ---------------------------------------------------------------------------
 
 interface FastRouterModel {
@@ -59,8 +51,6 @@ interface FastRouterModel {
 }
 
 const SKIP_IDS = new Set(["fastrouter/auto"]);
-
-// Modality strings that indicate non-LLM output types
 const NON_LLM_OUTPUTS = new Set(["vector", "image", "video", "audio", "classification"]);
 
 function parseModality(mod: string): ModelModality {
@@ -73,78 +63,12 @@ function parseModality(mod: string): ModelModality {
   return "text";
 }
 
-function parseModalities(
-  inputMods: string[],
-  outputMods: string[],
-): { input: ModelModality[]; output: ModelModality[] } {
-  const input = (inputMods.length > 0 ? inputMods : ["text"]).map(parseModality);
-  const output = (outputMods.length > 0 ? outputMods : ["text"]).map(parseModality);
-  return { input, output };
-}
-
-function deriveFamily(id: string): string {
-  const parts = id.split("/");
-  if (parts.length < 2) return "other";
-  const provider = parts[0] as string;
-  const model = (parts[1] as string).toLowerCase();
-
-  if (provider === "anthropic") return "claude";
-  if (provider === "openai") {
-    if (model.startsWith("gpt-4o")) return "gpt-4o";
-    if (model.startsWith("gpt-4")) return "gpt-4";
-    if (model.startsWith("gpt-3.5")) return "gpt-3.5";
-    if (model.startsWith("gpt-5")) return "gpt-5";
-    if (model.startsWith("gpt-oss")) return "gpt-oss";
-    if (model.startsWith("gpt-realtime")) return "gpt-realtime";
-    if (model.startsWith("o1")) return "o1";
-    if (model.startsWith("o3")) return "o3";
-    if (model.startsWith("o4")) return "o4";
-    if (model.startsWith("dall-e")) return "dall-e";
-    if (model.startsWith("gpt-image")) return "gpt-image";
-    return "gpt";
+function isLLMModel(modality: string): boolean {
+  if (!modality.includes("->text")) return false;
+  for (const nonLLM of NON_LLM_OUTPUTS) {
+    if (modality.includes(`->${nonLLM}`)) return false;
   }
-  if (provider === "google") {
-    if (model.startsWith("gemini")) return "gemini";
-    if (model.startsWith("gemma")) return "gemma";
-    if (model.startsWith("imagen")) return "imagen";
-    if (model.startsWith("veo")) return "veo";
-    return "google";
-  }
-  if (provider === "meta-llama") return "llama";
-  if (provider === "deepseek" || provider === "deepseek-ai") return "deepseek";
-  if (provider === "mistralai") return "mistral";
-  if (provider === "qwen" || provider === "Qwen") return "qwen";
-  if (provider === "nvidia") return "nemotron";
-  if (provider === "microsoft") return "phi";
-  if (provider === "cohere") return "command";
-  if (provider === "perplexity") return "sonar";
-  if (provider === "x-ai") return "grok";
-  if (provider === "z-ai") return "glm";
-  if (provider === "moonshotai") return "kimi";
-  if (provider === "minimax") return "minimax";
-  if (provider === "stepfun") return "step";
-  if (provider === "nousresearch") return "hermes";
-  if (provider === "bytedance") return "seed";
-  if (provider === "sarvam") return "sarvam";
-  if (provider === "inception") return "inception";
-  if (provider === "upstage") return "solar";
-  if (provider === "writer") return "palmyra";
-  if (provider === "reka") return "reka";
-  if (provider === "aion") return "aion";
-  if (provider === "evroc") return "evroc";
-  if (provider === "scaleway") return "scaleway";
-  if (provider === "friendli") return "friendli";
-  if (provider === "ibm") return "granite";
-  if (provider === "black-forest-labs") return "flux";
-  if (provider === "leonardo-ai") return "leonardo";
-  if (provider === "kling-ai") return "kling";
-  if (provider === "runway") return "runway";
-  if (provider === "vidu") return "vidu";
-  if (provider === "wanx") return "wanx";
-  if (provider === "pika") return "pika";
-  if (provider === "pollo") return "pollo";
-  if (provider === "ace-step") return "ace-step";
-  return provider;
+  return true;
 }
 
 function toPerMTokens(perTokenStr: string): number {
@@ -154,133 +78,203 @@ function toPerMTokens(perTokenStr: string): number {
   return Math.round(perMTokens * 1e6) / 1e6;
 }
 
-function isLLMModel(modality: string): boolean {
-  // Must produce text output and NOT be an embedding/classification/audio/image/video model
-  if (!modality.includes("->text")) return false;
-  for (const nonLLM of NON_LLM_OUTPUTS) {
-    if (modality.includes(`->${nonLLM}`)) return false;
-  }
-  return true;
-}
-
-export async function scrape(): Promise<ScrapeResult> {
+async function fetchModels(): Promise<FastRouterModel[]> {
   const response = await fetch("https://api.fastrouter.ai/v1/models");
   if (!response.ok) {
     throw new Error(`Failed to fetch FastRouter models: ${response.status}`);
   }
   const data = (await response.json()) as { data: FastRouterModel[] };
-  const apiModels = data.data;
+  return data.data;
+}
 
-  const models: ReturnType<typeof defineModel>[] = [];
-  const today = new Date().toISOString().split("T")[0] as string;
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
 
-  for (const m of apiModels) {
-    const id = m.id;
-
-    // Skip routing models
-    if (SKIP_IDS.has(id)) continue;
-
-    // Skip inactive models
-    if (!m.is_active) continue;
-
-    // Only include LLM models (text output, not embedding/image/video/audio/classification)
-    const modality = m.architecture.modality;
-    if (!isLLMModel(modality)) continue;
-
-    // Flatten ID for filesystem (lowercase, replace / and : with --)
-    const flatId = id.replace("/", "--").replace(":", "--").toLowerCase();
-
-    // Trim name (some API responses have trailing spaces)
-    const name = m.name.trim();
-
-    // Parse pricing
-    const promptPrice = parseFloat(m.pricing.prompt);
-    const completionPrice = parseFloat(m.pricing.completion);
-
-    // Skip models with no pricing data
-    if (isNaN(promptPrice) || isNaN(completionPrice)) continue;
-
-    // Determine output limit
-    const maxCompletion = m.top_provider.max_completion_tokens;
-    const outputLimit = maxCompletion !== null && maxCompletion > 0 ? maxCompletion : 4096;
-
-    // Parse modalities
-    const modalities = parseModalities(
-      m.architecture.input_modalities,
-      m.architecture.output_modalities,
-    );
-
-    // Free models (both prompt and completion = 0)
-    if (promptPrice === 0 && completionPrice === 0) {
-      const modelDef: Parameters<typeof defineModel>[0] = {
-        id: flatId,
-        name,
-        family: deriveFamily(id),
-        limit: {
-          context: m.context_length,
-          output: outputLimit,
-        },
-        modalities,
-        pricing: { unit: "free" },
-        release_date: today,
-        last_updated: today,
-      };
-
-      models.push(defineModel(modelDef));
-      continue;
-    }
-
-    // Paid models
-    const pricing: Pricing = {
-      currency: "USD",
-      input: toPerMTokens(m.pricing.prompt),
-      output: toPerMTokens(m.pricing.completion),
-    };
-
-    // Add cache_read if present and non-zero
-    if (m.pricing.input_cache_read) {
-      const cacheRead = toPerMTokens(m.pricing.input_cache_read);
-      if (cacheRead > 0) {
-        pricing.cache_read = cacheRead;
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.fastrouter.ai/v1/models",
+      type: "api",
+      description:
+        "FastRouter models API — returns model list with pricing, context, capabilities, modalities",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      const discovered: DiscoveredModel[] = [];
+      for (const m of apiModels) {
+        if (SKIP_IDS.has(m.id)) continue;
+        if (!m.is_active) continue;
+        if (!isLLMModel(m.architecture.modality)) continue;
+        const promptPrice = parseFloat(m.pricing.prompt);
+        const completionPrice = parseFloat(m.pricing.completion);
+        if (isNaN(promptPrice) || isNaN(completionPrice)) continue;
+        const flatId = m.id.replace("/", "--").replace(":", "--").toLowerCase();
+        discovered.push({ id: flatId, raw: m });
       }
-    }
+      return discovered;
+    },
+  },
 
-    // Add cache_write if present and non-zero
-    if (m.pricing.input_cache_write) {
-      const cacheWrite = toPerMTokens(m.pricing.input_cache_write);
-      if (cacheWrite > 0) {
-        pricing.cache_write = cacheWrite;
+  extractPricing: {
+    source: {
+      url: "https://api.fastrouter.ai/v1/models",
+      type: "api",
+      description: "Pricing from FastRouter API — per-token USD pricing converted to per-million",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      const pricingMap = new Map<string, Pricing>();
+      for (const m of models) {
+        const raw = m.raw as FastRouterModel;
+        if (!raw) continue;
+        const promptPrice = parseFloat(raw.pricing.prompt);
+        const completionPrice = parseFloat(raw.pricing.completion);
+        if (promptPrice === 0 && completionPrice === 0) {
+          pricingMap.set(m.id, { unit: "free" });
+        } else {
+          const p: Pricing = {
+            currency: "USD",
+            input: toPerMTokens(raw.pricing.prompt),
+            output: toPerMTokens(raw.pricing.completion),
+          };
+          if (raw.pricing.input_cache_read) {
+            const cacheRead = toPerMTokens(raw.pricing.input_cache_read);
+            if (cacheRead > 0) p.cache_read = cacheRead;
+          }
+          if (raw.pricing.input_cache_write) {
+            const cacheWrite = toPerMTokens(raw.pricing.input_cache_write);
+            if (cacheWrite > 0) p.cache_write = cacheWrite;
+          }
+          pricingMap.set(m.id, p);
+        }
       }
-    }
+      return pricingMap;
+    },
+  },
 
-    const modelDef: Parameters<typeof defineModel>[0] = {
-      id: flatId,
-      name,
-      family: deriveFamily(id),
-      limit: {
-        context: m.context_length,
-        output: outputLimit,
-      },
-      modalities,
-      pricing,
-      release_date: today,
-      last_updated: today,
-    };
+  extractDates: {
+    source: {
+      url: "https://api.fastrouter.ai/v1/models",
+      type: "api",
+      description: "Dates from FastRouter API — no date field available",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      return new Map<string, ExtractedDates>();
+    },
+  },
 
-    // Check supported parameters for capabilities
-    const params = m.supported_parameters;
-    if (params.includes("tools") || params.includes("tool_choice")) {
-      modelDef.tool_call = true;
-    }
-    if (params.includes("include_reasoning") || params.includes("reasoning")) {
-      modelDef.reasoning = true;
-    }
+  extractLimits: {
+    source: {
+      url: "https://api.fastrouter.ai/v1/models",
+      type: "api",
+      description: "Context window and max output from FastRouter API",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      const limitsMap = new Map<string, ExtractedLimit>();
+      for (const m of models) {
+        const raw = m.raw as FastRouterModel;
+        if (!raw) continue;
+        if (raw.context_length > 0) {
+          const maxCompletion = raw.top_provider.max_completion_tokens;
+          limitsMap.set(m.id, {
+            context: raw.context_length,
+            ...(maxCompletion !== null && maxCompletion > 0 ? { output: maxCompletion } : {}),
+          });
+        }
+      }
+      return limitsMap;
+    },
+  },
 
-    models.push(defineModel(modelDef));
-  }
+  extractModalities: {
+    source: {
+      url: "https://api.fastrouter.ai/v1/models",
+      type: "api",
+      description: "Modalities from FastRouter API — input_modalities and output_modalities arrays",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      const modalitiesMap = new Map<string, ExtractedModalities>();
+      for (const m of models) {
+        const raw = m.raw as FastRouterModel;
+        if (!raw) continue;
+        const input = (
+          raw.architecture.input_modalities.length > 0
+            ? raw.architecture.input_modalities
+            : ["text"]
+        ).map(parseModality);
+        const output =
+          raw.architecture.output_modalities.length > 0
+            ? raw.architecture.output_modalities.map(parseModality)
+            : undefined;
+        modalitiesMap.set(m.id, { input, ...(output ? { output } : {}) });
+      }
+      return modalitiesMap;
+    },
+  },
 
-  console.log(`  FastRouter: fetched ${apiModels.length} models from API`);
-  console.log(`  FastRouter: ${models.length} valid LLM models`);
+  extractFeatures: {
+    source: {
+      url: "https://api.fastrouter.ai/v1/models",
+      type: "api",
+      description: "Features from FastRouter API — supported_parameters (tools, reasoning)",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      const featuresMap = new Map<string, ExtractedFeatures>();
+      for (const m of models) {
+        const raw = m.raw as FastRouterModel;
+        if (!raw) continue;
+        const features: ExtractedFeatures = {};
+        const params = raw.supported_parameters;
+        if (params.includes("tools") || params.includes("tool_choice")) features.tool_call = true;
+        if (params.includes("include_reasoning") || params.includes("reasoning"))
+          features.reasoning = true;
+        featuresMap.set(m.id, features);
+      }
+      return featuresMap;
+    },
+  },
 
+  deriveName: {
+    execute: (modelId: string): string => {
+      let name = modelId.replace(/--/g, "/").split("/").pop() || modelId;
+      name = name.replace(/-/g, " ").replace(/\b([a-z])/g, (c) => c.toUpperCase());
+      return name;
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const parts = modelId.split("--");
+      if (parts.length < 2) return modelId.split("-")[0] ?? modelId;
+      const prov = parts[0] as string;
+      const model = (parts[1] as string).toLowerCase();
+      if (prov === "anthropic") return "claude";
+      if (prov === "openai") {
+        if (model.startsWith("gpt-4o") || model.startsWith("gpt-4") || model.startsWith("gpt-5"))
+          return "gpt";
+        return "gpt";
+      }
+      if (prov === "google") {
+        if (model.startsWith("gemini")) return "gemini";
+        if (model.startsWith("gemma")) return "gemma";
+        return "google";
+      }
+      if (prov === "meta-llama") return "llama";
+      if (prov === "deepseek" || prov === "deepseek-ai") return "deepseek";
+      if (prov === "mistralai") return "mistral";
+      if (prov === "qwen") return "qwen";
+      if (prov === "nvidia") return "nemotron";
+      if (prov === "microsoft") return "phi";
+      if (prov === "cohere") return "command";
+      if (prov === "perplexity") return "sonar";
+      if (prov === "x-ai") return "grok";
+      if (prov === "z-ai") return "glm";
+      return prov;
+    },
+  },
+};
+
+export async function scrape(): Promise<ScrapeResult> {
+  const models = await runPipeline(pipeline);
   return { provider, models };
 }

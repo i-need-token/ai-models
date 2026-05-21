@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "iflytek",
@@ -10,150 +18,145 @@ const provider = defineProvider({
   apis: {
     openai: "https://spark-api-open.xf-yun.com/v1",
   },
-  currency: "CNY",
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Pricing: iFlytek SparkDesk API pricing page
-//   https://xinghuo.xfyun.cn/sparkapi (browser-verified CSR page)
-// - Model IDs & API specs: iFlytek API docs
-//   https://www.xfyun.cn/doc/sparkapi.html
-//
-// Pricing is in CNY per 1M tokens (blended — same for input and output).
-// Spark X2 Flash has volume-based pricing (1.0~2.0 CNY/mtok);
-// we use the standard rate (简享包: 2.0 CNY/mtok).
-// Spark Lite is free (0 CNY/mtok).
+// Raw data types (from iFlytek API)
 // ---------------------------------------------------------------------------
 
-// Pricing (CNY per 1M tokens, blended) — from pricing page
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  "spark-x2-flash": { currency: "CNY", input: 2, output: 2 },
-  "spark-x2": { currency: "CNY", input: 2, output: 2 },
-  "spark-ultra": { currency: "CNY", input: 0.8, output: 0.8 },
-  "spark-pro": { currency: "CNY", input: 5, output: 5 },
-  "spark-pro-128k": { currency: "CNY", input: 5, output: 5 },
-  "spark-lite": { unit: "free" },
-};
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+interface IflytekModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<IflytekModel[]> {
+  const response = await fetch("https://spark-api-open.xf-yun.com/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch iFlytek models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: IflytekModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://spark-api-open.xf-yun.com/v1/models",
+      type: "api",
+      description: "iFlytek /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://spark-api-open.xf-yun.com/v1/models",
+      type: "api",
+      description: "iFlytek API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://spark-api-open.xf-yun.com/v1/models",
+      type: "api",
+      description: "iFlytek API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://spark-api-open.xf-yun.com/v1/models",
+      type: "api",
+      description: "iFlytek API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://spark-api-open.xf-yun.com/v1/models",
+      type: "api",
+      description: "iFlytek API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://spark-api-open.xf-yun.com/v1/models",
+      type: "api",
+      description: "iFlytek API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as IflytekModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /spark-x\d/i, family: "spark-x" },
+        { pattern: /spark-ultra/i, family: "spark-ultra" },
+        { pattern: /spark-pro/i, family: "spark-pro" },
+        { pattern: /spark-lite/i, family: "spark-lite" },
+        { pattern: /spark/i, family: "spark" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // --- Spark X2 Flash (deep reasoning, fast/slow thinking, 256K) ---
-
-  models.push(
-    defineModel({
-      id: "spark-x2-flash",
-      name: "Spark X2 Flash",
-      family: "spark-x2",
-      reasoning: true,
-      temperature: true,
-      limit: { context: 262144, output: 16384 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["spark-x2-flash"] as Pricing,
-      release_date: "2025-05",
-      last_updated: today,
-    }),
-  );
-
-  // --- Spark X2 (deep reasoning, 128K) ---
-
-  models.push(
-    defineModel({
-      id: "spark-x2",
-      name: "Spark X2",
-      family: "spark-x2",
-      reasoning: true,
-      temperature: true,
-      limit: { context: 131072, output: 16384 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["spark-x2"] as Pricing,
-      release_date: "2025-03",
-      last_updated: today,
-    }),
-  );
-
-  // --- Spark Ultra (high cost-performance, 128K) ---
-
-  models.push(
-    defineModel({
-      id: "spark-ultra",
-      name: "Spark Ultra",
-      family: "spark-ultra",
-      temperature: true,
-      limit: { context: 131072, output: 8192 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["spark-ultra"] as Pricing,
-      release_date: "2024-10",
-      last_updated: today,
-    }),
-  );
-
-  // --- Spark Pro (strong performance, 8K) ---
-
-  models.push(
-    defineModel({
-      id: "spark-pro",
-      name: "Spark Pro",
-      family: "spark-pro",
-      temperature: true,
-      limit: { context: 8192, output: 4096 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["spark-pro"] as Pricing,
-      release_date: "2024-04",
-      last_updated: today,
-    }),
-  );
-
-  // --- Spark Pro 128K (strong performance, 128K context) ---
-
-  models.push(
-    defineModel({
-      id: "spark-pro-128k",
-      name: "Spark Pro 128K",
-      family: "spark-pro",
-      temperature: true,
-      limit: { context: 131072, output: 8192 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["spark-pro-128k"] as Pricing,
-      release_date: "2024-06",
-      last_updated: today,
-    }),
-  );
-
-  // --- Spark Lite (free, 8K) ---
-
-  models.push(
-    defineModel({
-      id: "spark-lite",
-      name: "Spark Lite",
-      family: "spark-lite",
-      temperature: true,
-      limit: { context: 8192, output: 4096 },
-      modalities: { input: ["text"] as ModelModality[], output: ["text"] as ModelModality[] },
-      pricing: HARDCODED_PRICING["spark-lite"] as Pricing,
-      release_date: "2024-01",
-      last_updated: today,
-    }),
-  );
-
+  const models = await runPipeline(pipeline);
   console.log(`  iFlytek SparkDesk: ${models.length} models`);
-
   return { provider, models };
 }

@@ -1,22 +1,15 @@
 id: openai--o4-mini-2025-04-16
 name: O4 Mini 2025 04 16
-family: o4
-reasoning: true
-temperature: true
-tool_call: true
-structured_output: true
-limit:
-  context: 200000
-  output: 100000
-modalities:
-  input:
-    - text
-  output:
-    - text
+family: o
 pricing:
   currency: USD
   input: 1.1
   output: 4.4
   cache_read: 0.275
+modalities:
+  input:
+    - text
+  output:
+    - text
 release_date: 2026-02-04
-last_updated: 2026-05-17
+last_updated: 2026-02-04

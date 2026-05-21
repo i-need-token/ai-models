@@ -1,15 +1,13 @@
 id: command-r
-name: "Cohere: Command R"
+name: Command R
 family: command-r
-temperature: true
 pricing:
   currency: USD
   input: 0.32
   output: 0.96
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

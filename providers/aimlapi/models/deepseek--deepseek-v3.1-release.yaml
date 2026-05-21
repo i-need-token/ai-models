@@ -1,0 +1,16 @@
+id: deepseek--deepseek-v3.1-release
+name: Deepseek / Deepseek V3.1 Release
+family: deepseek
+pricing:
+  currency: USD
+  input: 0.294
+  output: 0.441
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

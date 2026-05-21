@@ -1,7 +1,10 @@
 id: baichuan4-turbo
 name: Baichuan4 Turbo
 family: baichuan4
-temperature: true
+pricing:
+  currency: CNY
+  input: 15
+  output: 15
 limit:
   context: 32768
   output: 8192
@@ -10,9 +13,6 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: CNY
-  input: 15
-  output: 15
+temperature: true
 release_date: 2024-05
-last_updated: 2026-05-17
+last_updated: 2026-05-18

@@ -1,17 +1,15 @@
 id: codex-mini-latest
-name: "OpenAI: Codex Mini Latest"
-family: other
-temperature: true
+name: Codex Mini Latest
+family: codex
 pricing:
   currency: USD
   input: 0.75
   output: 3
   cache_read: 0.1875
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
+last_updated: 2026-05-19

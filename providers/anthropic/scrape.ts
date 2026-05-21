@@ -1,6 +1,14 @@
-import { defineModel, defineProvider } from "../../scripts/lib/index";
+import { defineProvider, runPipeline } from "../../scripts/lib/index";
 import type { ScrapeResult } from "../../scripts/lib/types";
-import type { Model, ModelModality, Pricing } from "../../types/index";
+import type { Pricing } from "../../types/index";
+import type {
+  ScrapePipeline,
+  DiscoveredModel,
+  ExtractedLimit,
+  ExtractedModalities,
+  ExtractedFeatures,
+  ExtractedDates,
+} from "../../scripts/lib/index";
 
 const provider = defineProvider({
   id: "anthropic",
@@ -13,338 +21,140 @@ const provider = defineProvider({
 });
 
 // ---------------------------------------------------------------------------
-// Hardcoded model data (from first-party sources accessed 2026-05-15)
-//
-// Sources:
-// - Pricing: Anthropic API documentation (Pricing page)
-//   https://platform.claude.com/docs/en/about-claude/pricing
-//   (accessed via browser automation — CSR page geo-blocked from CLI)
-// - Model specs: Anthropic API documentation (Models overview page)
-//   https://platform.claude.com/docs/en/about-claude/models/overview
-//   (accessed via browser automation)
-// - Context/output limits for non-latest models: OpenRouter API
-//   https://openrouter.ai/api/v1/models (anthropic/* models)
-//
-// Anthropic docs are CSR (client-side rendered) and geo-blocked from CLI fetch.
-// Data was extracted using browser automation (agent-browser).
+// Raw data types (from Anthropic API)
 // ---------------------------------------------------------------------------
 
-// Pricing (USD per 1M tokens) — from Anthropic Pricing page
-const HARDCODED_PRICING: Record<string, Pricing> = {
-  // Opus family — latest generation ($5/$25)
-  "claude-opus-4-7": { currency: "USD", input: 5, output: 25 },
-  "claude-opus-4-6": { currency: "USD", input: 5, output: 25 },
-  "claude-opus-4-5": { currency: "USD", input: 5, output: 25 },
-  // Opus family — legacy generation ($15/$75)
-  "claude-opus-4-1": { currency: "USD", input: 15, output: 75 },
-  "claude-opus-4-0": { currency: "USD", input: 15, output: 75 },
-  // Opus fast variants ($30/$150)
-  "claude-opus-4-6-fast": { currency: "USD", input: 30, output: 150 },
-  "claude-opus-4-7-fast": { currency: "USD", input: 30, output: 150 },
-  // Sonnet family ($3/$15)
-  "claude-sonnet-4-6": { currency: "USD", input: 3, output: 15 },
-  "claude-sonnet-4-5": { currency: "USD", input: 3, output: 15 },
-  "claude-sonnet-4-0": { currency: "USD", input: 3, output: 15 },
-  // Haiku family ($1/$5)
-  "claude-haiku-4-5": { currency: "USD", input: 1, output: 5 },
-};
-
-// ---------------------------------------------------------------------------
-// Date helper
-// ---------------------------------------------------------------------------
-
-function getCurrentDate(): string {
-  const now = new Date();
-  return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-${String(now.getDate()).padStart(2, "0")}`;
+interface AnthropicModel {
+  id: string;
+  object: string;
+  created: number;
+  owned_by: string;
 }
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+async function fetchModels(): Promise<AnthropicModel[]> {
+  const response = await fetch("https://api.anthropic.com/v1/models");
+  if (!response.ok) {
+    throw new Error(`Failed to fetch Anthropic models: ${response.status}`);
+  }
+  const data = (await response.json()) as { data: AnthropicModel[] };
+  return data.data;
+}
+
+// ---------------------------------------------------------------------------
+// Pipeline definition
+// ---------------------------------------------------------------------------
+
+const pipeline: ScrapePipeline = {
+  discover: {
+    source: {
+      url: "https://api.anthropic.com/v1/models",
+      type: "api",
+      description: "Anthropic /v1/models API — dynamic model discovery",
+    },
+    execute: async (): Promise<DiscoveredModel[]> => {
+      const apiModels = await fetchModels();
+      return apiModels.map((m) => ({ id: m.id, raw: m }));
+    },
+  },
+
+  extractPricing: {
+    source: {
+      url: "https://api.anthropic.com/v1/models",
+      type: "api",
+      description: "Anthropic API — pricing not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, Pricing>> => {
+      return new Map<string, Pricing>();
+    },
+  },
+
+  extractLimits: {
+    source: {
+      url: "https://api.anthropic.com/v1/models",
+      type: "api",
+      description: "Anthropic API — limits not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedLimit>> => {
+      return new Map<string, ExtractedLimit>();
+    },
+  },
+
+  extractModalities: {
+    source: {
+      url: "https://api.anthropic.com/v1/models",
+      type: "api",
+      description: "Anthropic API — modalities not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedModalities>> => {
+      return new Map<string, ExtractedModalities>();
+    },
+  },
+
+  extractFeatures: {
+    source: {
+      url: "https://api.anthropic.com/v1/models",
+      type: "api",
+      description: "Anthropic API — features not available via API, omitted",
+    },
+    execute: async (_models: DiscoveredModel[]): Promise<Map<string, ExtractedFeatures>> => {
+      return new Map<string, ExtractedFeatures>();
+    },
+  },
+
+  extractDates: {
+    source: {
+      url: "https://api.anthropic.com/v1/models",
+      type: "api",
+      description: "Anthropic API — created timestamp for dates",
+    },
+    execute: async (models: DiscoveredModel[]): Promise<Map<string, ExtractedDates>> => {
+      const datesMap = new Map<string, ExtractedDates>();
+
+      for (const m of models) {
+        const raw = m.raw as AnthropicModel;
+        if (!raw || !raw.created) continue;
+
+        const d = new Date(raw.created * 1000);
+        const dateStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+        datesMap.set(m.id, { release_date: dateStr, last_updated: dateStr });
+      }
+
+      return datesMap;
+    },
+  },
+
+  deriveName: {
+    execute: (modelId: string): string => {
+      return modelId.replace(/-/g, " ").replace(/\b(\w)/g, (_, c: string) => c.toUpperCase());
+    },
+  },
+
+  deriveFamily: {
+    execute: (modelId: string): string => {
+      const lower = modelId.toLowerCase();
+      const rules: Array<{ pattern: RegExp; family: string }> = [
+        { pattern: /opus/i, family: "claude-opus" },
+        { pattern: /sonnet/i, family: "claude-sonnet" },
+        { pattern: /haiku/i, family: "claude-haiku" },
+      ];
+      for (const { pattern, family } of rules) {
+        if (pattern.test(lower)) return family;
+      }
+      return lower.split("-")[0] ?? lower;
+    },
+  },
+};
 
 // ---------------------------------------------------------------------------
 // Scrape function
 // ---------------------------------------------------------------------------
 
 export async function scrape(): Promise<ScrapeResult> {
-  const today = getCurrentDate();
-  const models: Model[] = [];
-
-  // --- Claude Opus 4.7 (latest flagship, 1M context) ---
-  // Extended thinking: No, Adaptive thinking: Yes
-
-  models.push(
-    defineModel({
-      id: "claude-opus-4-7",
-      name: "Claude Opus 4.7",
-      family: "claude-opus",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      structured_output: true,
-      open_weights: false,
-      limit: { context: 1000000, output: 128000 },
-      modalities: {
-        input: ["text", "image", "pdf"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["claude-opus-4-7"] as Pricing,
-      knowledge: "2026-01",
-      release_date: "2026-05-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Claude Opus 4.6 (1M context, extended + adaptive thinking) ---
-
-  models.push(
-    defineModel({
-      id: "claude-opus-4-6",
-      name: "Claude Opus 4.6",
-      family: "claude-opus",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      structured_output: true,
-      open_weights: false,
-      limit: { context: 1000000, output: 128000 },
-      modalities: {
-        input: ["text", "image", "pdf"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["claude-opus-4-6"] as Pricing,
-      knowledge: "2025-08",
-      release_date: "2026-03-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Claude Opus 4.5 (200K context, extended + adaptive thinking) ---
-
-  models.push(
-    defineModel({
-      id: "claude-opus-4-5",
-      name: "Claude Opus 4.5",
-      family: "claude-opus",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      structured_output: true,
-      open_weights: false,
-      limit: { context: 200000, output: 64000 },
-      modalities: {
-        input: ["text", "image", "pdf"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["claude-opus-4-5"] as Pricing,
-      knowledge: "2025-01",
-      release_date: "2025-02-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Claude Opus 4.1 (200K context, extended + adaptive thinking) ---
-
-  models.push(
-    defineModel({
-      id: "claude-opus-4-1",
-      name: "Claude Opus 4.1",
-      family: "claude-opus",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      structured_output: true,
-      open_weights: false,
-      limit: { context: 200000, output: 32000 },
-      modalities: {
-        input: ["text", "image", "pdf"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["claude-opus-4-1"] as Pricing,
-      knowledge: "2025-03",
-      release_date: "2025-04-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Claude Opus 4 (deprecated, 200K context) ---
-
-  models.push(
-    defineModel({
-      id: "claude-opus-4-0",
-      name: "Claude Opus 4",
-      family: "claude-opus",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      structured_output: true,
-      open_weights: false,
-      deprecated: true,
-      limit: { context: 200000, output: 32000 },
-      modalities: {
-        input: ["text", "image", "pdf"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["claude-opus-4-0"] as Pricing,
-      knowledge: "2025-03",
-      release_date: "2025-03-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Claude Opus 4.6 Fast (1M context, fast mode) ---
-
-  models.push(
-    defineModel({
-      id: "claude-opus-4-6-fast",
-      name: "Claude Opus 4.6 Fast",
-      family: "claude-opus",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      structured_output: true,
-      open_weights: false,
-      limit: { context: 1000000, output: 128000 },
-      modalities: {
-        input: ["text", "image", "pdf"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["claude-opus-4-6-fast"] as Pricing,
-      knowledge: "2025-08",
-      release_date: "2026-03-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Claude Opus 4.7 Fast (1M context, fast mode) ---
-
-  models.push(
-    defineModel({
-      id: "claude-opus-4-7-fast",
-      name: "Claude Opus 4.7 Fast",
-      family: "claude-opus",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      structured_output: true,
-      open_weights: false,
-      limit: { context: 1000000, output: 128000 },
-      modalities: {
-        input: ["text", "image", "pdf"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["claude-opus-4-7-fast"] as Pricing,
-      knowledge: "2026-01",
-      release_date: "2026-05-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Claude Sonnet 4.6 (1M context, extended + adaptive thinking) ---
-
-  models.push(
-    defineModel({
-      id: "claude-sonnet-4-6",
-      name: "Claude Sonnet 4.6",
-      family: "claude-sonnet",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      structured_output: true,
-      open_weights: false,
-      limit: { context: 1000000, output: 128000 },
-      modalities: {
-        input: ["text", "image", "pdf"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["claude-sonnet-4-6"] as Pricing,
-      knowledge: "2025-08",
-      release_date: "2026-03-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Claude Sonnet 4.5 (1M context, extended + adaptive thinking) ---
-
-  models.push(
-    defineModel({
-      id: "claude-sonnet-4-5",
-      name: "Claude Sonnet 4.5",
-      family: "claude-sonnet",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      structured_output: true,
-      open_weights: false,
-      limit: { context: 1000000, output: 64000 },
-      modalities: {
-        input: ["text", "image", "pdf"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["claude-sonnet-4-5"] as Pricing,
-      knowledge: "2025-01",
-      release_date: "2025-02-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Claude Sonnet 4 (deprecated, 1M context) ---
-
-  models.push(
-    defineModel({
-      id: "claude-sonnet-4-0",
-      name: "Claude Sonnet 4",
-      family: "claude-sonnet",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      structured_output: true,
-      open_weights: false,
-      deprecated: true,
-      limit: { context: 1000000, output: 64000 },
-      modalities: {
-        input: ["text", "image", "pdf"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["claude-sonnet-4-0"] as Pricing,
-      knowledge: "2025-01",
-      release_date: "2025-01-01",
-      last_updated: today,
-    }),
-  );
-
-  // --- Claude Haiku 4.5 (200K context, extended thinking only) ---
-
-  models.push(
-    defineModel({
-      id: "claude-haiku-4-5",
-      name: "Claude Haiku 4.5",
-      family: "claude-haiku",
-      temperature: true,
-      reasoning: true,
-      tool_call: true,
-      attachment: true,
-      structured_output: true,
-      open_weights: false,
-      limit: { context: 200000, output: 64000 },
-      modalities: {
-        input: ["text", "image", "pdf"] as ModelModality[],
-        output: ["text"] as ModelModality[],
-      },
-      pricing: HARDCODED_PRICING["claude-haiku-4-5"] as Pricing,
-      knowledge: "2025-02",
-      release_date: "2025-10-01",
-      last_updated: today,
-    }),
-  );
-
+  const models = await runPipeline(pipeline);
   console.log(`  Anthropic: ${models.length} models`);
-
   return { provider, models };
 }

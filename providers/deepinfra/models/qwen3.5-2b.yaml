@@ -1,7 +1,10 @@
 id: qwen3.5-2b
-name: Qwen3.5.2B
-family: qwen3.5
-temperature: true
+name: Qwen3.5.2b
+family: qwen
+pricing:
+  currency: USD
+  input: 0.02
+  output: 0.1
 limit:
   context: 262144
   output: 262144
@@ -11,11 +14,5 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.02
-  output: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
-open_weights: true
+last_updated: 2026-05-20

@@ -1,18 +1,14 @@
 id: mistralai--mixtral-8x7b-instruct-v0.1
-name: "Mistral: Mixtral 8x7B Instruct"
+name: Mixtral 8x7b Instruct V0.1
 family: mistral
-limit:
-  context: 32768
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.54
+  output: 0.54
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.54
-  output: 0.54
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+last_updated: 2026-05-20

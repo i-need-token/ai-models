@@ -1,0 +1,15 @@
+id: chirp-3.0-HD
+name: Chirp 3.0 HD
+family: chirp-3
+pricing:
+  currency: USD
+  unit: per_second
+  price: 0.016
+modalities:
+  input:
+    - audio
+  output:
+    - text
+temperature: true
+release_date: 2026-05-18
+last_updated: 2026-05-18

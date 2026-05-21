@@ -1,16 +1,14 @@
 id: v3
-name: "Ideogram: V3"
-family: other
-temperature: true
+name: V3
+family: v3
 pricing:
   currency: USD
   input: 1
   output: 1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
   output:
     - text
+last_updated: 2026-05-19

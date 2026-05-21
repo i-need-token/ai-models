@@ -1,24 +1,19 @@
 id: gemini-3.1-flash-lite-preview-nothink
-name: "Google: Gemini 3.1 Flash Lite Preview Nothink"
-family: gemini-3.1
-temperature: true
+name: Gemini 3.1 Flash Lite Preview Nothink
+family: gemini
 pricing:
   currency: USD
   input: 0.125
   output: 0.75
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
     - image
-    - video
     - audio
+    - video
   output:
     - text
-limit:
-  context: 1000000
-  output: 16384
 reasoning: true
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

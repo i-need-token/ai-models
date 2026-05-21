@@ -1,15 +1,13 @@
 id: text-moderation-stable
-name: "OpenAI: Text Moderation Stable"
-family: other
-temperature: true
+name: Text Moderation Stable
+family: text
 pricing:
   currency: USD
   input: 0.1
   output: 0.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

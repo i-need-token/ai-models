@@ -1,18 +1,13 @@
 id: cohere--command-r
 name: "Cohere: command r"
 family: command
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.28
+  output: 0.84
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.28
-  output: 0.84
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

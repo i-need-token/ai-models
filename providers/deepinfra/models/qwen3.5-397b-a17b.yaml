@@ -1,7 +1,11 @@
 id: qwen3.5-397b-a17b
-name: Qwen3.5.397B A17B
-family: qwen3.5
-temperature: true
+name: Qwen3.5.397b A17b
+family: qwen
+pricing:
+  currency: USD
+  input: 0.49
+  output: 3.6
+  cache_read: 0.3
 limit:
   context: 262144
   output: 262144
@@ -11,12 +15,6 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.49
-  output: 3.6
-  cache_read: 0.3
-release_date: 2026-05-17
-last_updated: 2026-05-17
 reasoning: true
-open_weights: true
+temperature: true
+last_updated: 2026-05-20

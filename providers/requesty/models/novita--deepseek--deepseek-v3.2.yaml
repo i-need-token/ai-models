@@ -1,6 +1,12 @@
 id: novita--deepseek--deepseek-v3.2
 name: Deepseek V3.2
 family: novita
+pricing:
+  currency: USD
+  input: 0.269
+  output: 0.4
+  cache_read: 0.1345
+  cache_write: 0.269
 limit:
   context: 163840
   output: 65536
@@ -9,13 +15,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.269
-  output: 0.4
-  cache_read: 0.1345
-  cache_write: 0.269
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-02-28
+last_updated: 2026-02-28

@@ -1,19 +1,15 @@
 id: qwen--qwen3-32b
-name: "Qwen: Qwen3 32B"
+name: Qwen3 32b
 family: qwen
-limit:
-  context: 40960
-  output: 4096
+pricing:
+  currency: USD
+  input: 0.29
+  output: 0.59
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.29
-  output: 0.59
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+last_updated: 2026-05-20

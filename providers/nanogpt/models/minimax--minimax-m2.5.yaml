@@ -1,18 +1,13 @@
 id: minimax--minimax-m2.5
 name: "MiniMax: minimax m2.5"
 family: minimax
-temperature: true
-limit:
-  context: 131072
-  output: 16384
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.2
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: per_mtok
-  input: 0.3
-  output: 1.2
-release_date: 2026-05-17
-last_updated: 2026-05-17
+last_updated: 2026-05-20

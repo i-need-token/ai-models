@@ -1,6 +1,11 @@
 id: fireworks--deepseek-v4-pro
 name: Deepseek V4 Pro
-family: deepseek
+family: fireworks
+pricing:
+  currency: USD
+  input: 1.74
+  output: 3.48
+  cache_read: 0.15
 limit:
   context: 1000000
   output: 131072
@@ -9,12 +14,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 1.74
-  output: 3.48
-  cache_read: 0.15
-release_date: 2026-05-17
-last_updated: 2026-05-17
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-04-29
+last_updated: 2026-04-29

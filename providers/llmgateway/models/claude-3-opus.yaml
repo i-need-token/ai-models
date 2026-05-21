@@ -1,21 +1,17 @@
 id: claude-3-opus
 name: Claude 3 Opus
 family: claude
-limit:
-  context: 200000
-  output: 4096
-modalities:
-  input:
-    - text
-    - image
-  output:
-    - text
 pricing:
   currency: USD
   input: 15
   output: 75
   cache_read: 1.5
   cache_write: 18.75
-release_date: 2026-05-17
-last_updated: 2026-05-17
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
 tool_call: true
+last_updated: 2026-05-20

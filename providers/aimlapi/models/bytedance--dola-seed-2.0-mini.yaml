@@ -1,0 +1,16 @@
+id: bytedance--dola-seed-2.0-mini
+name: Bytedance / Dola Seed 2.0 Mini
+family: bytedance
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.52
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-05-19

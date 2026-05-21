@@ -1,15 +1,13 @@
 id: llama-3.1-405b-instruct
-name: "Meta: Llama 3.1 405b Instruct"
-family: llama-3.1
-temperature: true
+name: Llama 3.1 405b Instruct
+family: llama
 pricing:
   currency: USD
   input: 2
   output: 2
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
+last_updated: 2026-05-19

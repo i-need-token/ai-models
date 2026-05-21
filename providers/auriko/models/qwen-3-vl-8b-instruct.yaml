@@ -1,20 +1,19 @@
 id: qwen-3-vl-8b-instruct
-name: Qwen 3 VL 8B Instruct
+name: Qwen 3 Vl 8b Instruct
 family: qwen
-temperature: true
+pricing:
+  currency: USD
+  input: 0.18
+  output: 0.68
+limit:
+  context: 262000
+  output: 262000
 modalities:
   input:
     - text
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.18
-  output: 0.68
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 262000
-  output: 262000
 tool_call: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

@@ -1,0 +1,20 @@
+id: moonshot-ai--kimi-k2.5
+name: Moonshot Ai / Kimi K2.5
+family: moonshot
+pricing:
+  currency: USD
+  input: 0.78
+  output: 3.9
+limit:
+  context: 131000
+  output: 131000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+temperature: true
+tool_call: true
+structured_output: true
+last_updated: 2026-05-19

@@ -1,18 +1,17 @@
 id: glm-4.5-flash
-name: GLM-4.5 Flash
+name: Glm 4.5 Flash
 family: glm
-temperature: true
+pricing:
+  unit: free
+limit:
+  context: 200000
+  output: 98304
 modalities:
   input:
     - text
   output:
     - text
-pricing:
-  unit: free
-release_date: 2026-05-17
-last_updated: 2026-05-17
-limit:
-  context: 200000
-  output: 98304
-tool_call: true
 reasoning: true
+tool_call: true
+release_date: 2026-05-19
+last_updated: 2026-05-19

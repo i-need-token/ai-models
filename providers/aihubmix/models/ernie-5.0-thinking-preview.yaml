@@ -1,21 +1,16 @@
 id: ernie-5.0-thinking-preview
-name: "Baidu: Ernie 5.0 Thinking Preview"
-family: ernie-5.0
-temperature: true
+name: Ernie 5.0 Thinking Preview
+family: ernie
 pricing:
   currency: USD
   input: 0.411
   output: 1.644
-release_date: 2026-05-17
-last_updated: 2026-05-17
 modalities:
   input:
     - text
   output:
     - text
-limit:
-  context: 183000
-  output: 16384
 reasoning: true
 tool_call: true
 structured_output: true
+last_updated: 2026-05-19

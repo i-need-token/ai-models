@@ -1,7 +1,10 @@
 id: qwen--qwen3-vl-235b-a22b-instruct
-name: Qwen3 VL 235B A22B Instruct
-family: qwen3
-temperature: true
+name: Qwen3 Vl 235b A22b Instruct
+family: qwen
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.5
 limit:
   context: 131072
   output: 32768
@@ -12,11 +15,6 @@ modalities:
     - video
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.3
-  output: 1.5
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
 structured_output: true
+last_updated: 2026-05-20

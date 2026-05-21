@@ -1,6 +1,10 @@
 id: meta-llama--llama-3.1-70b-instruct
-name: "Meta: Llama 3.1 70B Instruct"
+name: Llama 3.1 70b Instruct
 family: llama
+pricing:
+  currency: USD
+  input: 0.4
+  output: 0.4
 limit:
   context: 131072
   output: 16384
@@ -9,10 +13,7 @@ modalities:
     - text
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.4
-  output: 0.4
-release_date: 2026-05-17
-last_updated: 2026-05-17
 tool_call: true
+structured_output: true
+release_date: 2024-07-23
+last_updated: 2024-07-23

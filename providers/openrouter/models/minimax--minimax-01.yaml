@@ -1,6 +1,10 @@
 id: minimax--minimax-01
-name: "MiniMax: MiniMax-01"
+name: Minimax 01
 family: minimax
+pricing:
+  currency: USD
+  input: 0.2
+  output: 1.1
 limit:
   context: 1000192
   output: 1000192
@@ -10,9 +14,5 @@ modalities:
     - image
   output:
     - text
-pricing:
-  currency: USD
-  input: 0.2
-  output: 1.1
-release_date: 2026-05-17
-last_updated: 2026-05-17
+release_date: 2025-01-15
+last_updated: 2025-01-15
