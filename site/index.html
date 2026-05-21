@@ -35,13 +35,40 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "SoftwareSourceCode",
+        "@type": "Dataset",
         "name": "AI Models Catalog",
-        "description": "Structured YAML catalog of AI model metadata from 95+ providers with pricing, context windows, modalities, and capabilities.",
+        "description": "Structured catalog of 4,587 AI models across 95 providers with pricing, context windows, modalities, and capabilities. All data sourced from first-party APIs.",
         "url": "https://github.com/i-need-token/ai-models",
-        "programmingLanguage": "TypeScript",
         "license": "https://opensource.org/licenses/MIT",
-        "codeRepository": "https://github.com/i-need-token/ai-models"
+        "creator": {
+          "@type": "Organization",
+          "name": "i-need-token"
+        },
+        "distribution": [
+          {
+            "@type": "DataDownload",
+            "name": "models.json",
+            "encodingFormat": "application/json",
+            "contentUrl": "https://github.com/i-need-token/ai-models/releases/latest/download/models.json"
+          },
+          {
+            "@type": "DataDownload",
+            "name": "models.csv",
+            "encodingFormat": "text/csv",
+            "contentUrl": "https://github.com/i-need-token/ai-models/releases/latest/download/models.csv"
+          }
+        ],
+        "keywords": [
+          "AI models",
+          "LLM pricing",
+          "model catalog",
+          "context windows",
+          "tool calling",
+          "reasoning",
+          "vision",
+          "open weights",
+          "free models"
+        ]
       }
     </script>
     <style>
