@@ -26,6 +26,7 @@ A structured catalog of AI model providers and their models, stored as YAML file
 - [`docs/quick-start.md`](docs/quick-start.md) — Quick start guide ([中文](docs/zh/quick-start.md))
 - [`docs/api.md`](docs/api.md) — API & programmatic access ([中文](docs/zh/api.md))
 - [`docs/code-examples.md`](docs/code-examples.md) — code examples in multiple languages ([中文](docs/zh/code-examples.md))
+- [`docs/faq.md`](docs/faq.md) — frequently asked questions ([中文](docs/zh/faq.md))
 
 ## Key Design Decisions
 

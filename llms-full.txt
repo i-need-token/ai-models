@@ -316,6 +316,7 @@ by_context = sorted(
 - [Quick Start](docs/quick-start.md) — find the right model in 30 seconds
 - [API & Programmatic Access](docs/api.md) — download models.json, code examples
 - [Code Examples](docs/code-examples.md) — practical examples in TypeScript, Python, Go, Rust, jq
+- [FAQ](docs/faq.md) — frequently asked questions about the catalog, data, and contributing
 - [Model Comparison](docs/model-comparison.md) — flagship, cost-effective, free, open-weight
 - [Pricing Comparison](docs/pricing-comparison.md) — side-by-side pricing across providers
 - [Context Window Comparison](docs/context-windows.md) — largest context windows, best value
