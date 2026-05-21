@@ -11,7 +11,7 @@
 [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97-Dataset-blue)](https://huggingface.co/datasets/i-need-token/ai-models)
 [![Models](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/i-need-token/ai-models/main/.github/badges/models.json)](providers/)
 [![Providers](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/i-need-token/ai-models/main/.github/badges/providers.json)](providers/)
-[![CI](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml/badge.svg)](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml) [![GitHub stars](https://img.shields.io/github/stars/i-need-token/ai-models?style=social)](https://github.com/i-need-token/ai-models/stargazers) [![Star History](https://api.star-history.com/svg?repos=i-need-token/ai-models&type=Date)](https://star-history.com/#i-need-token/ai-models&Date)
+[![CI](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml/badge.svg)](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml) [![GitHub stars](https://img.shields.io/github/stars/i-need-token/ai-models?style=social)](https://github.com/i-need-token/ai-models/stargazers) [![Last Updated](https://img.shields.io/github/last-commit/i-need-token/ai-models?label=updated)](https://github.com/i-need-token/ai-models/commits/main) [![Star History](https://api.star-history.com/svg?repos=i-need-token/ai-models&type=Date)](https://star-history.com/#i-need-token/ai-models&Date)
 
 </div>
 
