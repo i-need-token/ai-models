@@ -18,7 +18,7 @@
 
 Machine-readable YAML catalog of every major AI model provider and their models — pricing, context windows, modalities, capabilities, and more. All data sourced from first-party APIs and official documentation, never third-party aggregators.
 
-**[Quick start →](docs/quick-start.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)** · **[Download CSV →](https://github.com/i-need-token/ai-models/releases/latest/download/models.csv)** · **[CDN access →](https://cdn.jsdelivr.net/npm/ai-models@latest/models.json)**
+**[Quick start →](docs/quick-start.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)** · **[🔍 Search models →](https://i-need-token.github.io/ai-models/)** · **[Download CSV →](https://github.com/i-need-token/ai-models/releases/latest/download/models.csv)** · **[CDN access →](https://cdn.jsdelivr.net/npm/ai-models@latest/models.json)**
 
 ## Why This Catalog?
 
@@ -44,14 +44,15 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 
 ## Use Cases
 
-| Use Case                       | How This Catalog Helps                                                    |
-| ------------------------------ | ------------------------------------------------------------------------- |
-| 💰 **Find the cheapest model** | [Pricing comparison](docs/pricing-comparison.md) across 95 providers      |
-| 🔎 **Pick the right model**    | [Model comparison](docs/model-comparison.md) by capability, context, cost |
-| 🔌 **Build an API gateway**    | Structured pricing + modality data for routing decisions                  |
-| 📊 **Track the AI landscape**  | 2,712 models with release dates, deprecation status                       |
-| 🤖 **Power an AI tool**        | TypeScript types + Zod validation = type-safe access                      |
-| 🌍 **Find local/EU providers** | [Provider overview](docs/providers.md) with market segmentation           |
+| Use Case                       | How This Catalog Helps                                                                  |
+| ------------------------------ | --------------------------------------------------------------------------------------- |
+| 💰 **Find the cheapest model** | [Pricing comparison](docs/pricing-comparison.md) across 95 providers                    |
+| 🔎 **Pick the right model**    | [Model comparison](docs/model-comparison.md) by capability, context, cost               |
+| 🔍 **Search & filter models**  | [Interactive catalog](https://i-need-token.github.io/ai-models/) — search, sort, filter |
+| 🔌 **Build an API gateway**    | Structured pricing + modality data for routing decisions                                |
+| 📊 **Track the AI landscape**  | 2,712 models with release dates, deprecation status                                     |
+| 🤖 **Power an AI tool**        | TypeScript types + Zod validation = type-safe access                                    |
+| 🌍 **Find local/EU providers** | [Provider overview](docs/providers.md) with market segmentation                         |
 
 ## Quick Numbers
 
@@ -330,26 +331,27 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 
 ## Documentation
 
-| Document                                                | Description                                                     |
-| ------------------------------------------------------- | --------------------------------------------------------------- |
-| [Tool Calling Models](docs/tool-calling.md)             | 2,350 tool-calling models — cheapest, largest context, free     |
-| [Vision Models](docs/vision-models.md)                  | 1,487 vision models — cheapest, largest context, open-weight    |
-| [Image Generation](docs/image-generation.md)            | 28 image generation models — DALL·E, Imagen, GPT-5 Image        |
-| [Structured Output](docs/structured-output.md)          | 829 JSON-mode models — cheapest, free, with tool calling        |
-| [Quick Start Guide](docs/quick-start.md)                | Find the right model in 30 seconds                              |
-| [API & Programmatic Access](docs/api.md)                | Download models.json, code examples in JS/Python                |
-| [Code Examples](docs/code-examples.md)                  | Practical examples in TypeScript, Python, Go, Rust, jq          |
-| [Model Comparison](docs/model-comparison.md)            | Compare flagship, cost-effective, free, and open-weight models  |
-| [Pricing Comparison](docs/pricing-comparison.md)        | Side-by-side pricing across providers and platforms             |
-| [Modality Matrix](docs/modality-matrix.md)              | Vision, image gen, audio, video — which models support what     |
-| [Context Window Comparison](docs/context-windows.md)    | Largest context windows, best value per tier                    |
-| [Free AI Models](docs/free-models.md)                   | 81 free models — tool calling, reasoning, vision at no cost     |
-| [Open-Weight Models](docs/open-weights.md)              | 513 open-weight models — run on your own infrastructure         |
-| [Reasoning Models](docs/reasoning-models.md)            | 1,306 reasoning models — chain-of-thought and extended thinking |
-| [Provider Overview](docs/providers.md)                  | All 95 providers organized by type and market                   |
-| [Data Schema Reference](docs/data-schema.md)            | Complete YAML schema — model, pricing, snapshot, provider       |
-| [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data                            |
-| [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog                       |
+| Document                                                            | Description                                                     |
+| ------------------------------------------------------------------- | --------------------------------------------------------------- |
+| [Tool Calling Models](docs/tool-calling.md)                         | 2,350 tool-calling models — cheapest, largest context, free     |
+| [Vision Models](docs/vision-models.md)                              | 1,487 vision models — cheapest, largest context, open-weight    |
+| [Image Generation](docs/image-generation.md)                        | 28 image generation models — DALL·E, Imagen, GPT-5 Image        |
+| [Structured Output](docs/structured-output.md)                      | 829 JSON-mode models — cheapest, free, with tool calling        |
+| [🔍 Interactive Catalog](https://i-need-token.github.io/ai-models/) | Search, sort, and filter all 4,587 models in your browser       |
+| [Quick Start Guide](docs/quick-start.md)                            | Find the right model in 30 seconds                              |
+| [API & Programmatic Access](docs/api.md)                            | Download models.json, code examples in JS/Python                |
+| [Code Examples](docs/code-examples.md)                              | Practical examples in TypeScript, Python, Go, Rust, jq          |
+| [Model Comparison](docs/model-comparison.md)                        | Compare flagship, cost-effective, free, and open-weight models  |
+| [Pricing Comparison](docs/pricing-comparison.md)                    | Side-by-side pricing across providers and platforms             |
+| [Modality Matrix](docs/modality-matrix.md)                          | Vision, image gen, audio, video — which models support what     |
+| [Context Window Comparison](docs/context-windows.md)                | Largest context windows, best value per tier                    |
+| [Free AI Models](docs/free-models.md)                               | 81 free models — tool calling, reasoning, vision at no cost     |
+| [Open-Weight Models](docs/open-weights.md)                          | 513 open-weight models — run on your own infrastructure         |
+| [Reasoning Models](docs/reasoning-models.md)                        | 1,306 reasoning models — chain-of-thought and extended thinking |
+| [Provider Overview](docs/providers.md)                              | All 95 providers organized by type and market                   |
+| [Data Schema Reference](docs/data-schema.md)                        | Complete YAML schema — model, pricing, snapshot, provider       |
+| [Data Acquisition](docs/data-acquisition.md)                        | How we acquire and update model data                            |
+| [Design Principles & Pitfalls](docs/lessons-learned.md)             | Lessons learned from building the catalog                       |
 
 **中文文档：**
 

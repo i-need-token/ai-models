@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Models Catalog — Search & Compare 4,587 AI Models</title>
+    <meta
+      name="description"
+      content="Search and compare 4,587 AI models across 95 providers. Filter by pricing, context window, tool calling, vision, reasoning, and more."
+    />
+    <meta
+      name="keywords"
+      content="AI models, LLM pricing, model comparison, tool calling, vision models, reasoning models, open weights"
+    />
+    <meta property="og:title" content="AI Models Catalog — 4,587 Models, 95 Providers" />
+    <meta
+      property="og:description"
+      content="Search and compare AI models by pricing, context window, capabilities, and more."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://i-need-token.github.io/ai-models/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>"
+    />
+    <style>
+      :root {
+        --bg: #0f1117;
+        --surface: #1a1d27;
+        --surface2: #242736;
+        --border: #2e3244;
+        --text: #e1e4ed;
+        --text2: #8b8fa3;
+        --accent: #6366f1;
+        --accent2: #818cf8;
+        --green: #22c55e;
+        --red: #ef4444;
+        --yellow: #eab308;
+        --blue: #3b82f6;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.5;
+      }
+      a {
+        color: var(--accent2);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
+        border-bottom: 1px solid var(--border);
+        padding: 2rem 1rem;
+        text-align: center;
+      }
+      .header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.25rem;
+      }
+      .header .subtitle {
+        color: var(--text2);
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+      .header .stats {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        font-size: 0.85rem;
+        color: var(--text2);
+      }
+      .header .stats span {
+        color: var(--accent2);
+        font-weight: 600;
+      }
+
+      /* Controls */
+      .controls {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1rem;
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .search-box {
+        flex: 1;
+        min-width: 200px;
+        padding: 0.6rem 1rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-size: 0.9rem;
+        outline: none;
+      }
+      .search-box:focus {
+        border-color: var(--accent);
+      }
+      .filter-btn {
+        padding: 0.5rem 0.9rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text2);
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: all 0.15s;
+        white-space: nowrap;
+      }
+      .filter-btn:hover {
+        border-color: var(--accent);
+        color: var(--text);
+      }
+      .filter-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      .sort-select {
+        padding: 0.5rem 0.7rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text);
+        font-size: 0.8rem;
+        cursor: pointer;
+        outline: none;
+      }
+      .result-count {
+        font-size: 0.85rem;
+        color: var(--text2);
+        padding: 0 1rem;
+      }
+
+      /* Table */
+      .table-wrap {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1rem 2rem;
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.82rem;
+      }
+      th {
+        text-align: left;
+        padding: 0.6rem 0.5rem;
+        border-bottom: 2px solid var(--border);
+        color: var(--text2);
+        font-weight: 500;
+        white-space: nowrap;
+        cursor: pointer;
+        user-select: none;
+      }
+      th:hover {
+        color: var(--accent2);
+      }
+      td {
+        padding: 0.5rem;
+        border-bottom: 1px solid var(--border);
+        white-space: nowrap;
+      }
+      tr:hover td {
+        background: var(--surface);
+      }
+      .model-name {
+        font-weight: 500;
+        color: var(--text);
+      }
+      .provider {
+        color: var(--text2);
+      }
+      .price {
+        font-variant-numeric: tabular-nums;
+      }
+      .badge {
+        display: inline-block;
+        padding: 0.1rem 0.4rem;
+        border-radius: 4px;
+        font-size: 0.7rem;
+        font-weight: 500;
+      }
+      .badge-yes {
+        background: rgba(34, 197, 94, 0.15);
+        color: var(--green);
+      }
+      .badge-no {
+        color: var(--text2);
+        opacity: 0.5;
+      }
+      .badge-free {
+        background: rgba(34, 197, 94, 0.15);
+        color: var(--green);
+      }
+      .badge-open {
+        background: rgba(59, 130, 246, 0.15);
+        color: var(--blue);
+      }
+      .badge-dep {
+        background: rgba(234, 179, 8, 0.15);
+        color: var(--yellow);
+      }
+      .ctx {
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* Loading */
+      .loading {
+        text-align: center;
+        padding: 4rem 1rem;
+        color: var(--text2);
+      }
+      .loading .spinner {
+        display: inline-block;
+        width: 2rem;
+        height: 2rem;
+        border: 3px solid var(--border);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        padding: 2rem 1rem;
+        color: var(--text2);
+        font-size: 0.8rem;
+        border-top: 1px solid var(--border);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .header h1 {
+          font-size: 1.3rem;
+        }
+        .controls {
+          gap: 0.5rem;
+        }
+        table {
+          font-size: 0.75rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>🤖 AI Models Catalog</h1>
+      <div class="subtitle">
+        Search and compare AI models by pricing, context window, capabilities, and more
+      </div>
+      <div class="stats" id="header-stats">
+        <div><span id="stat-models">—</span> models</div>
+        <div><span id="stat-providers">—</span> providers</div>
+        <div><span id="stat-toolcall">—</span> tool calling</div>
+        <div><span id="stat-vision">—</span> vision</div>
+        <div><span id="stat-reasoning">—</span> reasoning</div>
+        <div><span id="stat-free">—</span> free</div>
+      </div>
+    </div>
+
+    <div class="controls">
+      <input
+        type="text"
+        class="search-box"
+        id="search"
+        placeholder="Search models, providers, families…"
+        autocomplete="off"
+      />
+      <button class="filter-btn" data-filter="tool_call">🔧 Tool Call</button>
+      <button class="filter-btn" data-filter="reasoning">🧠 Reasoning</button>
+      <button class="filter-btn" data-filter="vision">👁️ Vision</button>
+      <button class="filter-btn" data-filter="structured_output">{ } JSON</button>
+      <button class="filter-btn" data-filter="open_weights">🔓 Open</button>
+      <button class="filter-btn" data-filter="free">🆓 Free</button>
+      <select class="sort-select" id="sort">
+        <option value="name-asc">Name A→Z</option>
+        <option value="name-desc">Name Z→A</option>
+        <option value="input-asc">Input $ ↑</option>
+        <option value="input-desc">Input $ ↓</option>
+        <option value="output-asc">Output $ ↑</option>
+        <option value="output-desc">Output $ ↓</option>
+        <option value="context-desc">Context ↓</option>
+        <option value="context-asc">Context ↑</option>
+        <option value="provider-asc">Provider A→Z</option>
+      </select>
+    </div>
+    <div class="result-count" id="result-count"></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Provider</th>
+            <th>Input $/1M</th>
+            <th>Output $/1M</th>
+            <th>Context</th>
+            <th>Tool</th>
+            <th>Reason</th>
+            <th>Vision</th>
+            <th>JSON</th>
+            <th>Tags</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr>
+            <td colspan="10">
+              <div class="loading">
+                <div class="spinner"></div>
+                <p style="margin-top: 1rem">Loading catalog…</p>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      <a href="https://github.com/i-need-token/ai-models">GitHub</a> ·
+      <a href="https://github.com/i-need-token/ai-models/releases/latest/download/models.json"
+        >Download JSON</a
+      >
+      ·
+      <a href="https://github.com/i-need-token/ai-models/releases/latest/download/models.csv"
+        >Download CSV</a
+      >
+      · <a href="https://www.npmjs.com/package/ai-models">npm</a> ·
+      <a href="https://cdn.jsdelivr.net/npm/ai-models@latest/models.json">CDN</a>
+    </div>
+
+    <script>
+      const DATA_URL = "https://cdn.jsdelivr.net/npm/ai-models@latest/models.json";
+      let allModels = [];
+      let filtered = [];
+      let activeFilters = new Set();
+      let sortKey = "name-asc";
+      let searchQuery = "";
+
+      function getNumPrice(p, field) {
+        if (!p) return null;
+        if (typeof p[field] === "number") return p[field];
+        return null;
+      }
+
+      function formatCtx(tokens) {
+        if (!tokens) return "—";
+        if (tokens >= 1_000_000)
+          return (tokens / 1_000_000).toFixed(tokens % 1_000_000 === 0 ? 0 : 1) + "M";
+        if (tokens >= 1_000) return (tokens / 1_000).toFixed(0) + "K";
+        return tokens;
+      }
+
+      function formatPrice(val) {
+        if (val == null) return "—";
+        if (val === 0) return "$0";
+        if (val < 0.01) return "$" + val.toFixed(4);
+        if (val < 1) return "$" + val.toFixed(2);
+        return "$" + val.toFixed(2);
+      }
+
+      function isFree(m) {
+        return m.pricing && m.pricing.unit === "free";
+      }
+
+      function hasVision(m) {
+        return m.modalities && m.modalities.input && m.modalities.input.includes("image");
+      }
+
+      function applyFilters() {
+        filtered = allModels.filter((m) => {
+          if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            const haystack = (
+              m.id +
+              " " +
+              m.name +
+              " " +
+              m.provider +
+              " " +
+              (m.family || "")
+            ).toLowerCase();
+            if (!haystack.includes(q)) return false;
+          }
+          if (activeFilters.has("tool_call") && !m.tool_call) return false;
+          if (activeFilters.has("reasoning") && !m.reasoning) return false;
+          if (activeFilters.has("vision") && !hasVision(m)) return false;
+          if (activeFilters.has("structured_output") && !m.structured_output) return false;
+          if (activeFilters.has("open_weights") && !m.open_weights) return false;
+          if (activeFilters.has("free") && !isFree(m)) return false;
+          return true;
+        });
+
+        // Sort
+        const [key, dir] = sortKey.split("-");
+        filtered.sort((a, b) => {
+          let va, vb;
+          switch (key) {
+            case "name":
+              va = a.name.toLowerCase();
+              vb = b.name.toLowerCase();
+              break;
+            case "input":
+              va = getNumPrice(a.pricing, "input") ?? Infinity;
+              vb = getNumPrice(b.pricing, "input") ?? Infinity;
+              break;
+            case "output":
+              va = getNumPrice(a.pricing, "output") ?? Infinity;
+              vb = getNumPrice(b.pricing, "output") ?? Infinity;
+              break;
+            case "context":
+              va = a.limit?.context ?? 0;
+              vb = b.limit?.context ?? 0;
+              break;
+            case "provider":
+              va = a.provider.toLowerCase();
+              vb = b.provider.toLowerCase();
+              break;
+            default:
+              va = a.name;
+              vb = b.name;
+          }
+          if (va < vb) return dir === "asc" ? -1 : 1;
+          if (va > vb) return dir === "asc" ? 1 : -1;
+          return 0;
+        });
+
+        render();
+      }
+
+      function render() {
+        const tbody = document.getElementById("tbody");
+        const count = document.getElementById("result-count");
+        count.textContent = `${filtered.length} of ${allModels.length} models`;
+
+        // Limit to 500 for performance
+        const show = filtered.slice(0, 500);
+        let html = "";
+        for (const m of show) {
+          const inp = getNumPrice(m.pricing, "input");
+          const out = getNumPrice(m.pricing, "output");
+          const ctx = m.limit?.context;
+          const tags = [];
+          if (isFree(m)) tags.push('<span class="badge badge-free">FREE</span>');
+          if (m.open_weights) tags.push('<span class="badge badge-open">OPEN</span>');
+          if (m.deprecated) tags.push('<span class="badge badge-dep">DEP</span>');
+
+          html += `<tr>
+      <td class="model-name">${esc(m.name || m.id)}</td>
+      <td class="provider">${esc(m.provider)}</td>
+      <td class="price">${isFree(m) ? '<span class="badge badge-free">FREE</span>' : formatPrice(inp)}</td>
+      <td class="price">${isFree(m) ? "—" : formatPrice(out)}</td>
+      <td class="ctx">${formatCtx(ctx)}</td>
+      <td>${m.tool_call ? '<span class="badge badge-yes">✓</span>' : '<span class="badge-no">—</span>'}</td>
+      <td>${m.reasoning ? '<span class="badge badge-yes">✓</span>' : '<span class="badge-no">—</span>'}</td>
+      <td>${hasVision(m) ? '<span class="badge badge-yes">✓</span>' : '<span class="badge-no">—</span>'}</td>
+      <td>${m.structured_output ? '<span class="badge badge-yes">✓</span>' : '<span class="badge-no">—</span>'}</td>
+      <td>${tags.join(" ")}</td>
+    </tr>`;
+        }
+        if (filtered.length > 500) {
+          html += `<tr><td colspan="10" style="text-align:center;color:var(--text2);padding:1rem">
+      Showing 500 of ${filtered.length} results. Use filters or search to narrow down.
+    </td></tr>`;
+        }
+        if (filtered.length === 0) {
+          html =
+            '<tr><td colspan="10" style="text-align:center;color:var(--text2);padding:2rem">No models match your filters</td></tr>';
+        }
+        tbody.innerHTML = html;
+      }
+
+      function esc(s) {
+        const d = document.createElement("div");
+        d.textContent = s;
+        return d.innerHTML;
+      }
+
+      async function init() {
+        try {
+          const resp = await fetch(DATA_URL);
+          const data = await resp.json();
+          allModels = data.models || [];
+
+          // Update header stats
+          document.getElementById("stat-models").textContent =
+            data.stats?.models?.toLocaleString() || allModels.length.toLocaleString();
+          document.getElementById("stat-providers").textContent = data.stats?.providers || "—";
+          document.getElementById("stat-toolcall").textContent = allModels
+            .filter((m) => m.tool_call)
+            .length.toLocaleString();
+          document.getElementById("stat-vision").textContent = allModels
+            .filter((m) => hasVision(m))
+            .length.toLocaleString();
+          document.getElementById("stat-reasoning").textContent = allModels
+            .filter((m) => m.reasoning)
+            .length.toLocaleString();
+          document.getElementById("stat-free").textContent = allModels
+            .filter((m) => isFree(m))
+            .length.toLocaleString();
+
+          applyFilters();
+        } catch (e) {
+          document.getElementById("tbody").innerHTML =
+            `<tr><td colspan="10" style="text-align:center;color:var(--red);padding:2rem">
+      Failed to load catalog data. <a href="${DATA_URL}">Download JSON directly</a>.<br>
+      <small>${e.message}</small>
+    </td></tr>`;
+        }
+      }
+
+      // Event listeners
+      document.getElementById("search").addEventListener("input", (e) => {
+        searchQuery = e.target.value.trim();
+        applyFilters();
+      });
+
+      document.getElementById("sort").addEventListener("change", (e) => {
+        sortKey = e.target.value;
+        applyFilters();
+      });
+
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const f = btn.dataset.filter;
+          if (activeFilters.has(f)) {
+            activeFilters.delete(f);
+            btn.classList.remove("active");
+          } else {
+            activeFilters.add(f);
+            btn.classList.add("active");
+          }
+          applyFilters();
+        });
+      });
+
+      init();
+    </script>
+  </body>
+</html>
