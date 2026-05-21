@@ -1,0 +1,281 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/i-need-token/ai-models/main/schema.json",
+  "title": "AI Models Catalog",
+  "description": "Schema for the AI Models Catalog YAML data files",
+  "definitions": {
+    "TokenPricing": {
+      "type": "object",
+      "description": "Per-million-token pricing (most common)",
+      "properties": {
+        "input": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Price per 1M input tokens (USD or CNY)"
+        },
+        "output": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Price per 1M output tokens (USD or CNY)"
+        },
+        "cache_write": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Price per 1M cached write tokens"
+        },
+        "cache_read": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Price per 1M cached read tokens"
+        }
+      },
+      "required": ["input", "output"]
+    },
+    "VideoPricing": {
+      "type": "object",
+      "description": "Per-second video pricing",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "const": "per_second",
+          "description": "Pricing unit"
+        },
+        "price": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Price per second"
+        }
+      },
+      "required": ["unit", "price"]
+    },
+    "UnitPricing": {
+      "type": "object",
+      "description": "Per-unit pricing (per image, per request, etc.)",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "enum": ["per_image", "per_request"],
+          "description": "Pricing unit"
+        },
+        "price": {
+          "type": "number",
+          "minimum": 0,
+          "description": "Price per unit"
+        }
+      },
+      "required": ["unit", "price"]
+    },
+    "FreePricing": {
+      "type": "object",
+      "description": "Free pricing (no cost)",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "const": "free",
+          "description": "Pricing unit"
+        }
+      },
+      "required": ["unit"]
+    },
+    "Pricing": {
+      "oneOf": [
+        { "$ref": "#/definitions/TokenPricing" },
+        { "$ref": "#/definitions/VideoPricing" },
+        { "$ref": "#/definitions/UnitPricing" },
+        { "$ref": "#/definitions/FreePricing" }
+      ]
+    },
+    "Modality": {
+      "type": "string",
+      "enum": ["text", "image", "video", "audio", "pdf"],
+      "description": "Input or output modality"
+    },
+    "Snapshot": {
+      "type": "object",
+      "description": "A dated version of a model (inherits parent fields)",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Snapshot ID (typically includes date, e.g. gpt-4o-2024-08-06)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name override"
+        },
+        "reasoning": {
+          "type": "boolean",
+          "description": "Supports reasoning/thinking mode"
+        },
+        "temperature": {
+          "type": "boolean",
+          "description": "Supports temperature parameter"
+        },
+        "tool_call": {
+          "type": "boolean",
+          "description": "Supports tool/function calling"
+        },
+        "attachment": {
+          "type": "boolean",
+          "description": "Supports file attachments"
+        },
+        "structured_output": {
+          "type": "boolean",
+          "description": "Supports structured/JSON output"
+        },
+        "open_weights": {
+          "type": "boolean",
+          "description": "Open-weight model"
+        },
+        "deprecated": {
+          "type": "boolean",
+          "description": "Deprecated but still accessible"
+        },
+        "limit": {
+          "type": "object",
+          "properties": {
+            "context": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Maximum context window in tokens"
+            },
+            "output": {
+              "type": "integer",
+              "minimum": 1,
+              "description": "Maximum output tokens"
+            }
+          }
+        },
+        "pricing": {
+          "$ref": "#/definitions/Pricing"
+        },
+        "modalities": {
+          "type": "object",
+          "properties": {
+            "input": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Modality" }
+            },
+            "output": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/Modality" }
+            }
+          }
+        },
+        "knowledge": {
+          "type": "string",
+          "description": "Training data cutoff (e.g. 2023-10)"
+        },
+        "release_date": {
+          "type": "string",
+          "description": "Model release date (YYYY-MM-DD or YYYY-MM)"
+        },
+        "last_updated": {
+          "type": "string",
+          "description": "Last data update (YYYY-MM-DD or YYYY-MM)"
+        }
+      },
+      "required": ["id", "last_updated"]
+    }
+  },
+  "type": "object",
+  "description": "A single AI model definition",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Stable model ID (no date suffix)",
+      "pattern": "^[a-z0-9][a-z0-9._-]*[a-z0-9]$"
+    },
+    "name": {
+      "type": "string",
+      "description": "Display name"
+    },
+    "family": {
+      "type": "string",
+      "description": "Model family (broad lineage)"
+    },
+    "reasoning": {
+      "type": "boolean",
+      "default": false,
+      "description": "Supports reasoning/thinking mode"
+    },
+    "temperature": {
+      "type": "boolean",
+      "default": true,
+      "description": "Supports temperature parameter"
+    },
+    "tool_call": {
+      "type": "boolean",
+      "default": false,
+      "description": "Supports tool/function calling"
+    },
+    "attachment": {
+      "type": "boolean",
+      "default": false,
+      "description": "Supports file attachments"
+    },
+    "structured_output": {
+      "type": "boolean",
+      "default": false,
+      "description": "Supports structured/JSON output"
+    },
+    "open_weights": {
+      "type": "boolean",
+      "default": false,
+      "description": "Open-weight model"
+    },
+    "deprecated": {
+      "type": "boolean",
+      "default": false,
+      "description": "Deprecated but still accessible"
+    },
+    "limit": {
+      "type": "object",
+      "properties": {
+        "context": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum context window in tokens"
+        },
+        "output": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Maximum output tokens"
+        }
+      }
+    },
+    "pricing": {
+      "$ref": "#/definitions/Pricing"
+    },
+    "modalities": {
+      "type": "object",
+      "properties": {
+        "input": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Modality" }
+        },
+        "output": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Modality" }
+        }
+      }
+    },
+    "knowledge": {
+      "type": "string",
+      "description": "Training data cutoff (e.g. 2023-10)"
+    },
+    "release_date": {
+      "type": "string",
+      "description": "Model release date (YYYY-MM-DD or YYYY-MM)"
+    },
+    "last_updated": {
+      "type": "string",
+      "description": "Last data update (YYYY-MM-DD or YYYY-MM)"
+    },
+    "snapshots": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/Snapshot" },
+      "description": "Dated model versions"
+    }
+  },
+  "required": ["id", "name", "family", "pricing", "modalities", "last_updated"]
+}
