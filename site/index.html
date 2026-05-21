@@ -467,6 +467,22 @@
         color: #fff;
         border-color: var(--accent);
       }
+      .per-page-select {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-left: 12px;
+        font-size: 13px;
+        color: var(--text-secondary);
+      }
+      .per-page-select select {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 13px;
+      }
       .pagination .page-info {
         color: var(--text-secondary);
         font-size: 13px;
@@ -886,7 +902,27 @@
           <tbody id="tbody"></tbody>
         </table>
       </div>
-      <div class="pagination" id="pagination"></div>
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: 8px;
+        "
+      >
+        <div class="pagination" id="pagination"></div>
+        <div class="per-page-select">
+          <label for="perPageSelect">Per page:</label>
+          <select id="perPageSelect" onchange="changePerPage(this.value)">
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100" selected>100</option>
+            <option value="200">200</option>
+            <option value="500">500</option>
+          </select>
+        </div>
+      </div>
       <div class="footer">
         <a href="https://github.com/i-need-token/ai-models">⭐ Star on GitHub</a> ·
         <a href="https://github.com/i-need-token/ai-models/releases/latest/download/models.json"
@@ -1070,7 +1106,7 @@
     </div>
 
     <script>
-      const PER_PAGE = 100;
+      let perPage = 100;
       let models = [];
       let filtered = [];
       let activeFilters = new Set();
@@ -1127,7 +1163,7 @@
           highlightRow(activeRow);
         }
         if (e.key === "Enter" && activeRow >= 0 && activeRow < rows.length) {
-          showDetail(activeRow + (currentPage - 1) * PER_PAGE);
+          showDetail(activeRow + (currentPage - 1) * perPage);
         }
         if (e.key === "c" && activeRow >= 0 && activeRow < rows.length) {
           const cb = rows[activeRow].querySelector(".compare-checkbox");
@@ -1330,10 +1366,10 @@
         });
 
         // Pagination
-        const totalPages = Math.ceil(filtered.length / PER_PAGE);
+        const totalPages = Math.ceil(filtered.length / perPage);
         if (currentPage > totalPages) currentPage = totalPages || 1;
-        const start = (currentPage - 1) * PER_PAGE;
-        const end = Math.min(start + PER_PAGE, filtered.length);
+        const start = (currentPage - 1) * perPage;
+        const end = Math.min(start + perPage, filtered.length);
 
         // Result count
         document.getElementById("resultCount").textContent =
@@ -1416,8 +1452,13 @@
         updateURL();
       }
 
+      function changePerPage(val) {
+        perPage = parseInt(val) || 100;
+        currentPage = 1;
+        render();
+      }
       function goPage(p) {
-        const totalPages = Math.ceil(filtered.length / PER_PAGE);
+        const totalPages = Math.ceil(filtered.length / perPage);
         currentPage = Math.max(1, Math.min(p, totalPages));
         render();
         document.querySelector(".table-wrap").scrollTop = 0;
