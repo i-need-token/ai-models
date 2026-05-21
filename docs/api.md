@@ -80,6 +80,8 @@ All model data is available from [GitHub Releases](https://github.com/i-need-tok
 | `models.csv`  | CSV    | ~560 KB | Excel, Google Sheets, data analysis       |
 | `stats.json`  | JSON   | ~1 KB   | Catalog statistics summary                |
 
+Also available on [Hugging Face Datasets](https://huggingface.co/datasets/i-need-token/ai-models) for the ML community.
+
 ```bash
 # Download JSON (full metadata)
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
