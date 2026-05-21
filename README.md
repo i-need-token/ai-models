@@ -372,6 +372,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [Tool Calling Models](docs/tool-calling.md)                         | 2,350 tool-calling models — cheapest, largest context, free     |
 | [Vision Models](docs/vision-models.md)                              | 1,487 vision models — cheapest, largest context, open-weight    |
 | [Image Generation](docs/image-generation.md)                        | 28 image generation models — DALL·E, Imagen, GPT-5 Image        |
+| [Audio Models](docs/audio-models.md)                                | 118 audio input + 34 audio output models                        |
 | [Structured Output](docs/structured-output.md)                      | 829 JSON-mode models — cheapest, free, with tool calling        |
 | [🔍 Interactive Catalog](https://i-need-token.github.io/ai-models/) | Search, sort, and filter all 4,587 models in your browser       |
 | [Quick Start Guide](docs/quick-start.md)                            | Find the right model in 30 seconds                              |
@@ -399,6 +400,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [视觉模型](docs/zh/vision-models.md)         | 1,487 个视觉模型 — 最便宜、最大上下文、开源权重 |
 | [快速入门](docs/zh/quick-start.md)           | 30 秒内找到适合的模型                           |
 | [图像生成](docs/zh/image-generation.md)      | 28 个图像生成模型 — DALL·E、Imagen、GPT-5 Image |
+| [音频模型](docs/zh/audio-models.md)          | 118 个音频输入 + 34 个音频输出模型              |
 | [API 与编程访问](docs/zh/api.md)             | 下载 models.json，JS/Python 代码示例            |
 | [代码示例](docs/zh/code-examples.md)         | TypeScript、Python、Go、Rust、jq 实用示例       |
 | [常见问题](docs/zh/faq.md)                   | 关于目录、数据和贡献的常见问题                  |
