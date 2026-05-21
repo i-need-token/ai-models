@@ -1,0 +1,59 @@
+name: Sync to Hugging Face
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Compile JSON
+        run: npx tsx scripts/compile.ts
+
+      - name: Export CSV
+        run: npx tsx scripts/export-csv.ts
+
+      - name: Push to Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "HF_TOKEN not set — skipping Hugging Face sync"
+            exit 0
+          fi
+
+          pip install huggingface-hub
+
+          python3 -c "
+          from huggingface_hub import HfApi
+          import os
+
+          api = HfApi(token=os.environ['HF_TOKEN'])
+          repo_id = os.environ.get('HF_REPO_ID', 'i-need-token/ai-models')
+
+          api.upload_file(
+              path_or_fileobj='dist/models.json',
+              path_in_repo='models.json',
+              repo_id=repo_id,
+              repo_type='dataset',
+              commit_message='Sync models.json from GitHub release',
+          )
+
+          api.upload_file(
+              path_or_fileobj='models.csv',
+              path_in_repo='models.csv',
+              repo_id=repo_id,
+              repo_type='dataset',
+              commit_message='Sync models.csv from GitHub release',
+          )
+
+          print(f'Synced to https://huggingface.co/datasets/{repo_id}')
+          "
