@@ -235,16 +235,19 @@ console.log(model.limit); // { context: 1047576, output: 32768 }
 console.log(model.modalities); // { input: ["text", "image"], output: ["text"] }
 ```
 
-### Download Compiled JSON
+### Download Data
+
+Available in JSON and CSV formats from [GitHub Releases](https://github.com/i-need-token/ai-models/releases/latest):
 
 ```bash
-# Latest release
+# JSON — full metadata (2.3 MB)
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+
+# CSV — flat table for Excel/Google Sheets (560 KB)
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
 ```
 
-See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScript and Python.
-
-## Project Structure
+See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScript and Python.## Project Structure
 
 ```
 ├── providers/           # 95 provider directories

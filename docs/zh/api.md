@@ -26,13 +26,20 @@ const affordable = catalog.models.filter((m) => m.tool_call && m.pricing.input <
 
 ## 编译 JSON
 
-访问所有模型数据最简单的方式是通过编译后的 `models.json` 文件。
+所有模型数据可以从 [GitHub Releases](https://github.com/i-need-token/ai-models/releases/latest) 下载，提供两种格式：
 
-### 从 GitHub Releases 下载
+| 文件          | 格式 | 大小    | 适用场景                       |
+| ------------- | ---- | ------- | ------------------------------ |
+| `models.json` | JSON | ~2.3 MB | 编程访问、Web 应用、TypeScript |
+| `models.csv`  | CSV  | ~560 KB | Excel、Google Sheets、数据分析 |
+| `stats.json`  | JSON | ~1 KB   | 目录统计摘要                   |
 
 ```bash
-# 最新版本
+# 下载 JSON（完整元数据）
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+
+# 下载 CSV（适合电子表格）
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
 
 # 特定版本
 curl -LO https://github.com/i-need-token/ai-models/releases/download/v0.1.0/models.json

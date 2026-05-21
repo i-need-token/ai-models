@@ -26,13 +26,20 @@ The package includes:
 
 ## Compiled JSON
 
-The easiest way to access all model data is via the compiled `models.json` file.
+All model data is available from [GitHub Releases](https://github.com/i-need-token/ai-models/releases/latest) in two formats:
 
-### Download from GitHub Releases
+| File          | Format | Size    | Best For                                  |
+| ------------- | ------ | ------- | ----------------------------------------- |
+| `models.json` | JSON   | ~2.3 MB | Programmatic access, web apps, TypeScript |
+| `models.csv`  | CSV    | ~560 KB | Excel, Google Sheets, data analysis       |
+| `stats.json`  | JSON   | ~1 KB   | Catalog statistics summary                |
 
 ```bash
-# Latest release
+# Download JSON (full metadata)
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+
+# Download CSV (flat table for spreadsheets)
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
 
 # Specific version
 curl -LO https://github.com/i-need-token/ai-models/releases/download/v0.1.0/models.json
