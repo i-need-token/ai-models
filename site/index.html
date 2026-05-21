@@ -258,6 +258,20 @@
       .model-id:hover {
         text-decoration: underline;
       }
+      .copy-id {
+        opacity: 0;
+        cursor: pointer;
+        margin-left: 4px;
+        font-size: 11px;
+        color: var(--text-secondary);
+        transition: opacity 0.15s;
+      }
+      tr:hover .copy-id {
+        opacity: 1;
+      }
+      .copy-id:hover {
+        color: var(--accent);
+      }
       .provider {
         color: var(--purple);
       }
@@ -879,6 +893,16 @@
         <a href="https://github.com/i-need-token/ai-models/blob/main/docs/embedding-models.md"
           >Embeddings</a
         >
+        <br />
+        <a href="https://i-need-token.github.io/ai-models/best-ai-models.html">🏆 Best AI Models</a>
+        ·
+        <a href="https://i-need-token.github.io/ai-models/free-ai-models.html">🆓 Free Models</a>
+        ·
+        <a href="https://i-need-token.github.io/ai-models/llm-pricing.html">💰 LLM Pricing</a>
+        ·
+        <a href="https://i-need-token.github.io/ai-models/openai-alternatives.html"
+          >🔄 OpenAI Alternatives</a
+        >
       </div>
     </div>
     <div
@@ -1282,7 +1306,7 @@
           const checked = selectedModels.has(m.id) ? "checked" : "";
           return `<tr>
           <td><input type="checkbox" class="compare-checkbox" data-id="${m.id}" ${checked} onchange="toggleCompare(this.dataset.id)"></td>
-          <td class="model-id" onclick="showDetail(${idx})" title="Click for details">${esc(m.id)}</td>
+          <td class="model-id" onclick="showDetail(${idx})" title="Click for details">${esc(m.id)}<span class="copy-id" onclick="event.stopPropagation();copyId('${m.id}')" title="Copy ID">📋</span></td>
           <td class="provider">${esc(m.provider)}</td>
           <td class="ctx">${ctx}</td>
           <td class="price">${inp}</td>
