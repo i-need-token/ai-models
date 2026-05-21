@@ -125,6 +125,9 @@ Models with the largest context windows — for long documents, multi-turn conve
 - [Chat Models](chat-models.md) — 2,350 models with tool calling for chat applications
 - [Multimodal Models](multimodal-models.md) — 1,519 models with image/audio/video input
 
+- [Large Context Models](large-context-models.md) — 2,195 models with 128K+ context
+- [Small & Edge Models](small-models.md) — 1,153 models for on-device inference
+
 ---
 
 Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.
