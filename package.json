@@ -38,6 +38,7 @@
     "llm-catalog",
     "llm-pricing",
     "machine-readable",
+    "migration-guide",
     "mistral",
     "model-catalog",
     "model-comparison",

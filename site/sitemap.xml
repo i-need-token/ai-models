@@ -86,6 +86,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/migration-guide</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://i-need-token.github.io/ai-models/docs/modality-matrix</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
