@@ -44,6 +44,43 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 - [Who's Using This](#whos-using-this)
 - [License](#license)
 
+## Quick Compare
+
+> Popular models at a glance — full data for [4,587 models](docs/model-comparison.md)
+
+| Model            | Provider  | Context | Input $/M | Output $/M | Tools | Reason | Vision |
+| ---------------- | --------- | ------- | --------- | ---------- | ----- | ------ | ------ |
+| gpt-4.1          | openai    | 1M      | $2        | $8         | ✓     |        | ✓      |
+| gpt-4.1-mini     | openai    | 1M      | $0.40     | $1.60      | ✓     |        | ✓      |
+| gpt-4.1-nano     | openai    | 1M      | $0.10     | $0.40      | ✓     |        | ✓      |
+| o3               | openai    | 200K    | $10       | $40        | ✓     | ✓      | ✓      |
+| o4-mini          | openai    | 200K    | $1.10     | $4.40      | ✓     | ✓      | ✓      |
+| claude-opus-4    | anthropic | 200K    | $15       | $75        | ✓     | ✓      | ✓      |
+| claude-sonnet-4  | anthropic | 200K    | $3        | $15        | ✓     | ✓      | ✓      |
+| claude-haiku-4   | anthropic | 200K    | $1        | $5         | ✓     | ✓      | ✓      |
+| gemini-2.5-pro   | google    | 1M      | $1.25     | $10        | ✓     | ✓      | ✓      |
+| gemini-2.5-flash | google    | 1M      | $0.15     | $0.60      | ✓     | ✓      | ✓      |
+| deepseek-r1      | deepseek  | 128K    | $0.55     | $2.19      |       | ✓      |        |
+| deepseek-chat    | deepseek  | 128K    | $0.14     | $0.28      | ✓     |        |        |
+| llama-4-maverick | meta      | 1M      | $0.20     | $0.20      | ✓     |        | ✓      |
+| llama-4-scout    | meta      | 10M     | $0.03     | $0.03      | ✓     |        | ✓      |
+| grok-3           | xai       | 131K    | $3        | $15        | ✓     |        | ✓      |
+| grok-3-mini      | xai       | 131K    | $0.30     | $0.50      | ✓     | ✓      | ✓      |
+| mistral-large    | mistral   | 128K    | $2        | $6         | ✓     |        | ✓      |
+| qwen3-235b-a22b  | alibaba   | 128K    | $0.14     | $0.42      | ✓     | ✓      | ✓      |
+| qwen3-30b-a3b    | alibaba   | 128K    | $0.03     | $0.05      | ✓     | ✓      | ✓      |
+
+<details><summary>📖 How to read this table</summary>
+
+- **Context**: Maximum context window (input + output tokens)
+- **Input/Output $/M**: Price per million tokens
+- **Tools**: Supports function/tool calling
+- **Reason**: Uses chain-of-thought reasoning
+- **Vision**: Accepts image input
+- Prices shown are for standard (non-cached) API calls. Many providers offer 50-90% discounts for cached inputs.
+
+</details>
+
 ## Use Cases
 
 | Use Case                       | How This Catalog Helps                                                                  |
