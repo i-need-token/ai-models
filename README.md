@@ -242,6 +242,17 @@ npx tsx scripts/stats.ts
 npx tsx scripts/compile.ts
 ```
 
+Or use the Makefile shortcuts:
+
+```bash
+make install    # npm install
+make validate   # validate all YAML
+make scrape     # sync all providers
+make build      # compile models.json
+make stats      # compute statistics
+make check      # run all checks (fmt + lint + typecheck + validate)
+```
+
 ### Use Programmatically
 
 ```typescript
