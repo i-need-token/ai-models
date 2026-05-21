@@ -23,6 +23,8 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 
 **[Quick start →](docs/quick-start.md)** · **[Choose a model →](docs/model-selection.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[🔍 Search →](https://i-need-token.github.io/ai-models/)** · **[Download CSV →](https://github.com/i-need-token/ai-models/releases/latest/download/models.csv)** · **[JSON →](https://github.com/i-need-token/ai-models/releases/latest/download/models.json)**
 
+> 🆓 **81 free models** with tool calling, reasoning, and vision — [see the list →](docs/free-models.md) · 💰 **Cheapest models from $0.01/M tokens** — [compare pricing →](docs/pricing-comparison.md) · 🤖 **1,080 agentic models** for AI agents — [find yours →](docs/agentic-models.md)
+
 > 💡 **Try it now** — fetch model data in one command:
 >
 > ```bash
