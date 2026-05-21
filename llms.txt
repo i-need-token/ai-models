@@ -2,6 +2,8 @@
 
 > Structured YAML catalog of 4,587 AI models across 95 providers — pricing, context windows, modalities, capabilities. First-party data only.
 
+See [llms-full.txt](./llms-full.txt) for the complete data schema, pricing types, provider list, and usage examples.
+
 ## What is this?
 
 A machine-readable YAML catalog of every major AI model provider and their models. Every data point comes from the provider's own API or documentation, never third-party aggregators.
