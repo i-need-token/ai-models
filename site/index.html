@@ -297,6 +297,41 @@
         font-family: "SFMono-Regular", Consolas, monospace;
         font-size: 12px;
       }
+      .help-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+      .help-panel {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px 24px;
+        max-width: 400px;
+        width: 90vw;
+      }
+      .help-grid {
+        display: grid;
+        grid-template-columns: 60px 1fr;
+        gap: 8px 12px;
+        font-size: 13px;
+      }
+      .help-grid kbd {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 2px 8px;
+        font-family: monospace;
+        font-size: 12px;
+        text-align: center;
+      }
+      .help-grid span {
+        color: var(--text-secondary);
+      }
       .toast {
         position: fixed;
         bottom: 20px;
@@ -812,6 +847,39 @@
           </button>
         </div>
         <div class="compare-content" id="compareContent"></div>
+      </div>
+    </div>
+    <div class="help-overlay" id="helpOverlay" onclick="if (event.target === this) closeHelp();">
+      <div class="help-panel">
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+          "
+        >
+          <h3 style="margin: 0">⌨️ Keyboard Shortcuts</h3>
+          <button
+            onclick="closeHelp()"
+            style="
+              background: none;
+              border: none;
+              color: var(--text-secondary);
+              font-size: 18px;
+              cursor: pointer;
+            "
+          >
+            ✕
+          </button>
+        </div>
+        <div class="help-grid">
+          <kbd>/</kbd><span>Focus search</span> <kbd>Esc</kbd
+          ><span>Close modal / clear search</span> <kbd>?</kbd><span>Show this help</span>
+          <kbd>←</kbd><span>Previous page</span> <kbd>→</kbd><span>Next page</span> <kbd>j</kbd
+          ><span>Next row</span> <kbd>k</kbd><span>Previous row</span> <kbd>Enter</kbd
+          ><span>Open model detail</span> <kbd>c</kbd><span>Toggle compare checkbox</span>
+        </div>
       </div>
     </div>
     <div class="toast" id="toast"></div>
