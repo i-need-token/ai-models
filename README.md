@@ -536,6 +536,15 @@ Built something with this catalog? [Open a PR](https://github.com/i-need-token/a
 | **Data dashboards**        | Import CSV into Excel/Google Sheets for visual pricing analysis          |
 | **Chatbot builders**       | Pick the right model by context window, modality, and budget             |
 
+## Contributors
+
+Thanks to everyone who has contributed to this catalog!
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Want to contribute? Check out [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
 ## License
 
 [MIT](LICENSE)
