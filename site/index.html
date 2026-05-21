@@ -545,14 +545,16 @@
         navigator.clipboard.writeText(id).then(() => showToast(`Copied: ${id}`));
       }
 
-      // Fetch data — try CDN first (fast, cached), fall back to GitHub Releases
+      // Fetch data — try local first (same-origin, always works on Pages),
+      // then CDN (fast when npm published), then Releases (CORS may not work)
+      const LOCAL_URL = "models.json";
       const CDN_URL = "https://cdn.jsdelivr.net/npm/ai-models@latest/models.json";
       const RELEASES_URL =
         "https://github.com/i-need-token/ai-models/releases/latest/download/models.json";
 
-      fetch(CDN_URL)
+      fetch(LOCAL_URL)
         .then((r) => {
-          if (!r.ok) throw new Error("CDN not available");
+          if (!r.ok) throw new Error("Local not available");
           return r.json();
         })
         .then((data) => {
@@ -560,16 +562,27 @@
           init();
         })
         .catch(() => {
-          fetch(RELEASES_URL)
-            .then((r) => r.json())
+          fetch(CDN_URL)
+            .then((r) => {
+              if (!r.ok) throw new Error("CDN not available");
+              return r.json();
+            })
             .then((data) => {
               models = Array.isArray(data) ? data : data.models;
               init();
+            })
+            .catch(() => {
+              fetch(RELEASES_URL)
+                .then((r) => r.json())
+                .then((data) => {
+                  models = Array.isArray(data) ? data : data.models;
+                  init();
+                })
+                .catch(() => {
+                  document.getElementById("tbody").innerHTML =
+                    '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-secondary)">Failed to load data. Try refreshing the page.</td></tr>';
+                });
             });
-        })
-        .catch(() => {
-          document.getElementById("tbody").innerHTML =
-            '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-secondary)">Failed to load data. Try refreshing the page.</td></tr>';
         });
 
       function init() {
