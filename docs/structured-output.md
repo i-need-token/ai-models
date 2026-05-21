@@ -1,3 +1,5 @@
+**English** | [中文](./zh/structured-output.md)
+
 # AI Structured Output Models (JSON Mode)
 
 829 models in this catalog support structured output — the ability to generate responses that conform to a specified JSON schema. This is essential for building reliable AI-powered APIs, data pipelines, and automation.

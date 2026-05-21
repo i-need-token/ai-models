@@ -1,3 +1,5 @@
+**English** | [中文](./zh/image-generation.md)
+
 # AI Image Generation Models
 
 28 models in this catalog can generate images (image output modality). This page covers text-to-image, image editing, and multimodal generation models.

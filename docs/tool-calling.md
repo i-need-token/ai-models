@@ -1,3 +1,5 @@
+**English** | [中文](./zh/tool-calling.md)
+
 # AI Tool Calling Models
 
 2,350 models in this catalog support tool calling (function calling). This page highlights the most capable and cost-effective models for building AI agents and automation.

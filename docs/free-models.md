@@ -1,3 +1,5 @@
+**English** | [中文](./zh/free-models.md)
+
 # Free AI Models
 
 81 models in this catalog are free to use. This page lists them by capability so you can find the right free model for your project.

@@ -1,3 +1,5 @@
+**English** | [中文](./zh/vision-models.md)
+
 # AI Vision Models
 
 1,487 models in this catalog accept image input (vision). This page highlights the most capable and cost-effective vision models for image understanding, document analysis, and visual reasoning.

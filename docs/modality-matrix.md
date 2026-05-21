@@ -1,3 +1,5 @@
+**English** | [中文](./zh/modality-matrix.md)
+
 # Modality Matrix
 
 Which models support vision, audio, image generation, and video? This page lists the top models for each modality.

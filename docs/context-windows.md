@@ -1,3 +1,5 @@
+**English** | [中文](./zh/context-windows.md)
+
 # Context Window Comparison
 
 Which models have the largest context windows? This page lists models by context window size and pricing.

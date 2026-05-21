@@ -1,3 +1,5 @@
+**English** | [中文](./zh/quick-start.md)
+
 # Quick Start Guide
 
 Find the right AI model for your needs in 30 seconds.

@@ -1,3 +1,5 @@
+[English](../structured-output.md) | **中文**
+
 # AI 结构化输出模型（JSON 模式）
 
 本目录中有 829 个模型支持结构化输出 — 能够按照指定的 JSON Schema 生成回复。这对于构建可靠的 AI 驱动 API、数据管道和自动化至关重要。
