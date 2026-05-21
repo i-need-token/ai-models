@@ -788,6 +788,7 @@
         <button class="filter-btn" data-filter="image_output">🖼️ Image Gen</button>
         <button class="filter-btn" data-filter="audio_input">🎤 Audio In</button>
         <button class="filter-btn" data-filter="video_input">📹 Video In</button>
+        <button class="filter-btn" data-filter="audio_output">🔊 Audio Out</button>
         <button class="filter-btn" data-filter="deprecated">⚠️ Deprecated</button>
         <button
           class="filter-btn"
@@ -1199,6 +1200,11 @@
             if (
               f === "video_input" &&
               !(m.modalities && m.modalities.input && m.modalities.input.includes("video"))
+            )
+              return false;
+            if (
+              f === "audio_output" &&
+              !(m.modalities && m.modalities.output && m.modalities.output.includes("audio"))
             )
               return false;
             if (f === "open_weights" && !m.open_weights) return false;
