@@ -1,7 +1,7 @@
 {
   "name": "ai-models",
   "version": "0.1.0",
-  "description": "Structured YAML catalog of 4,682 AI models across 95 providers — pricing, context windows, modalities, capabilities. First-party data with TypeScript types and Zod validation.",
+  "description": "Structured YAML catalog of 4,587 AI models across 95 providers — pricing, context windows, modalities, capabilities. First-party data with TypeScript types and Zod validation.",
   "keywords": [
     "ai-catalog",
     "ai-models",
@@ -37,6 +37,7 @@
     "sync": "npx tsx scripts/sync.ts",
     "validate": "npx tsx scripts/validate.ts",
     "stats": "npx tsx scripts/stats.ts",
+    "compile": "npx tsx scripts/compile.ts",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "lint": "oxlint",
