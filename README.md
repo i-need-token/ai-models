@@ -101,6 +101,9 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 | 📊 **Track the AI landscape**  | 2,712 models with release dates, deprecation status                                     |
 | 🤖 **Power an AI tool**        | TypeScript types + Zod validation = type-safe access                                    |
 | 🌍 **Find local/EU providers** | [Provider overview](docs/providers.md) with market segmentation                         |
+| 🎯 **Choose the right model**  | [Model selection guide](docs/model-selection.md) — decision framework                   |
+| 💸 **Optimize API costs**      | [Cached pricing](docs/cached-pricing.md) — 1,374 models with 50-90% savings             |
+| 🧪 **Prototype for free**      | [Free models](docs/free-models.md) — 81 models at zero cost                             |
 
 ## Quick Numbers
 
