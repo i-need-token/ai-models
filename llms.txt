@@ -18,6 +18,17 @@ A machine-readable YAML catalog of every major AI model provider and their model
 - 81 free models
 - 1,487 vision models
 
+## Install
+
+```bash
+npm install ai-models
+```
+
+```typescript
+import catalog from "ai-models"; // 4,587 models as JSON
+import type { Model } from "ai-models"; // TypeScript types
+```
+
 ## Data Format
 
 Each model is a single YAML file at `providers/<provider>/models/<model-id>.yaml`:
@@ -42,10 +53,19 @@ modalities:
 
 ## Documentation
 
+- [Quick Start](docs/quick-start.md) — find the right model in 30 seconds
+- [API & Programmatic Access](docs/api.md) — download models.json, code examples
 - [Model Comparison](docs/model-comparison.md) — flagship, cost-effective, free, open-weight
 - [Pricing Comparison](docs/pricing-comparison.md) — side-by-side pricing across providers
-- [Provider Overview](docs/providers.md) — all providers by type and market
+- [Context Window Comparison](docs/context-windows.md) — largest context windows, best value
+- [Free AI Models](docs/free-models.md) — 81 free models by capability
+- [Open-Weight Models](docs/open-weights.md) — 513 open-weight models
+- [Reasoning Models](docs/reasoning-models.md) — 1,306 reasoning models
+- [Modality Matrix](docs/modality-matrix.md) — vision, image gen, audio, video
+- [Provider Overview](docs/providers.md) — all 95 providers by type and market
 - [Data Schema Reference](docs/data-schema.md) — complete YAML schema
+- [Data Acquisition](docs/data-acquisition.md) — how we acquire and update data
+- [Design Principles](docs/lessons-learned.md) — lessons learned
 
 ## Covered Providers
 
