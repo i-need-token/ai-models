@@ -103,3 +103,7 @@ Models with publicly available weights for self-hosting.
 - [Free AI Models](free-models.md) — 81 free models
 - [Open-Weight Models](open-weights.md) — 527 models you can run yourself
 - [Context Window Comparison](context-windows.md) — largest context windows
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

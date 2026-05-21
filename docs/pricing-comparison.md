@@ -127,3 +127,7 @@ The absolute cheapest per-token models across all providers.
 - [Free AI Models](free-models.md) — 81 free models
 - [Context Window Comparison](context-windows.md) — largest context windows
 - [Provider Overview](providers.md) — all 95 providers
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

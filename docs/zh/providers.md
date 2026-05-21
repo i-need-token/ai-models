@@ -166,3 +166,7 @@
 - [开源权重模型](open-weights.md) — 527 个可自行运行的模型
 - [免费 AI 模型](free-models.md) — 81 个免费模型
 - [数据模式](data-schema.md) — 完整 YAML 模式
+
+---
+
+数据来源于 [AI Models Catalog](https://github.com/i-need-token/ai-models) — 结构化 YAML，包含 95 个提供商 4,587+ 模型的定价、上下文窗口和能力信息。

@@ -77,3 +77,7 @@
 - [推理模型](reasoning-models.md) — 1,306 个支持推理的模型
 - [免费 AI 模型](free-models.md) — 81 个免费模型，部分支持结构化输出
 - [缓存定价](cached-pricing.md) — 1,374 个支持提示缓存的模型
+
+---
+
+数据来源于 [AI Models Catalog](https://github.com/i-need-token/ai-models) — 结构化 YAML，包含 95 个提供商 4,587+ 模型的定价、上下文窗口和能力信息。

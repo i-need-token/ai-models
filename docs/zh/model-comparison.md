@@ -103,3 +103,7 @@
 - [免费 AI 模型](free-models.md) — 81 个免费模型
 - [开源权重模型](open-weights.md) — 527 个可自行运行的模型
 - [上下文窗口对比](context-windows.md) — 最大上下文窗口
+
+---
+
+数据来源于 [AI Models Catalog](https://github.com/i-need-token/ai-models) — 结构化 YAML，包含 95 个提供商 4,587+ 模型的定价、上下文窗口和能力信息。

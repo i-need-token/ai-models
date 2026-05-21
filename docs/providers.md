@@ -166,3 +166,7 @@ Providers with EUR pricing, serving the European market.
 - [Open-Weight Models](open-weights.md) — 527 models you can run yourself
 - [Free AI Models](free-models.md) — 81 free models
 - [Data Schema](data-schema.md) — complete YAML schema
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

@@ -95,3 +95,7 @@ Models that can reason about images — ideal for visual analysis:
 - [Structured Output](structured-output.md) — 829 JSON-mode models
 - [Free AI Models](free-models.md) — 81 free models, some with reasoning
 - [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

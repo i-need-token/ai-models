@@ -93,3 +93,7 @@ The most capable vision models — can see, reason, and act:
 - [Video Models](video-models.md) — 167 video input/output models
 - [Modality Matrix](modality-matrix.md) — all modalities at a glance
 - [Free AI Models](free-models.md) — 81 free models, some with vision
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

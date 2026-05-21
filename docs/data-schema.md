@@ -215,3 +215,7 @@ The validation uses `ModelSchema` from [`types/schemas.ts`](../types/schemas.ts)
 - [Code Examples](code-examples.md) — practical code examples
 - [Design Principles](lessons-learned.md) — lessons learned
 - [FAQ](faq.md) — common questions
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

@@ -215,3 +215,7 @@ npx tsx scripts/validate.ts openai
 - [代码示例](code-examples.md) — 实用代码示例
 - [设计原则](lessons-learned.md) — 经验教训
 - [常见问题](faq.md) — 常见问题
+
+---
+
+数据来源于 [AI Models Catalog](https://github.com/i-need-token/ai-models) — 结构化 YAML，包含 95 个提供商 4,587+ 模型的定价、上下文窗口和能力信息。

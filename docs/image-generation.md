@@ -64,3 +64,7 @@
 - [Modality Matrix](modality-matrix.md) — all modalities at a glance
 - [Model Selection Guide](model-selection.md) — decision framework
 - [Free AI Models](free-models.md) — 81 free models
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

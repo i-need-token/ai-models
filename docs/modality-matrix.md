@@ -100,3 +100,7 @@ Models that accept text + at least 2 additional input modalities:
 - [Video Models](video-models.md) — 167 video input/output models
 - [Image Generation](image-generation.md) — 28 image generation models
 - [Model Selection Guide](model-selection.md) — decision framework
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

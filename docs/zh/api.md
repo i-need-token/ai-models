@@ -216,3 +216,7 @@ npx tsx scripts/sync.ts           # 所有提供商
 - [数据模式](data-schema.md) — 完整 YAML 模式参考
 - [常见问题](faq.md) — 常见问题
 - [模型选择指南](model-selection.md) — 决策框架
+
+---
+
+数据来源于 [AI Models Catalog](https://github.com/i-need-token/ai-models) — 结构化 YAML，包含 95 个提供商 4,587+ 模型的定价、上下文窗口和能力信息。

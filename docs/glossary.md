@@ -77,3 +77,7 @@ See [Data Schema Reference](data-schema.md) for the complete YAML field specific
 - [Quick Start](quick-start.md) — find the right model in 30 seconds
 - [Model Comparison](model-comparison.md) — compare models
 - [Modality Matrix](modality-matrix.md) — all modalities at a glance
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

@@ -112,3 +112,7 @@ Lowest per-token pricing for open-weight inference:
 - [Provider Overview](providers.md) — all 95 providers organized by type
 - [Reasoning Models](reasoning-models.md) — 1,306 models with reasoning
 - [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

@@ -365,3 +365,7 @@ const results = findModels({
 - [Data Schema](data-schema.md) — complete YAML schema reference
 - [FAQ](faq.md) — common questions
 - [Glossary](glossary.md) — key terms and definitions
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.
