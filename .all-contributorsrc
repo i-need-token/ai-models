@@ -1,0 +1,20 @@
+{
+  "files": ["README.md"],
+  "imageSize": 100,
+  "contributorsPerLine": 7,
+  "contributorsSortAlphabetically": true,
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors-)",
+  "contributorTemplate": "<a href=\"<%= contributor.profile %>\"><img src=\"<%= contributor.avatar_url %>\" width=\"<%= options.imageSize %>px;\" alt=\"<%= contributor.name %>\"/><br /><sub><b><%= contributor.name %></b></sub></a>",
+  "types": {
+    "code": { "symbol": "💻", "description": "Code" },
+    "data": { "symbol": "🔣", "description": "Data" },
+    "doc": { "symbol": "📖", "description": "Documentation" },
+    "ideas": { "symbol": "🤔", "description": "Ideas, Planning, & Feedback" },
+    "maintenance": { "symbol": "🚧", "description": "Maintenance" },
+    "review": { "symbol": "👀", "description": "Reviewed Pull Requests" },
+    "test": { "symbol": "⚠️", "description": "Tests" },
+    "infra": { "symbol": "🔧", "description": "Infrastructure" }
+  },
+  "skipCi": true,
+  "contributors": []
+}
