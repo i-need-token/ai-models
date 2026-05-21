@@ -42,6 +42,8 @@ keywords:
   - embedding-models
   - migration-guide
   - provider-comparison
+  - large-context-models
+  - small-models
 license: MIT
 version: 0.1.0
 date-released: "2026-05-21"
