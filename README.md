@@ -433,11 +433,16 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 Built something with this catalog? [Open a PR](https://github.com/i-need-token/ai-models/edit/main/README.md) to add your project!
 
-<!-- Add your project below -->
-
-| Project             | Description               |
-| ------------------- | ------------------------- |
-| _Your project here_ | _How you use the catalog_ |
+| Use Case                   | How the Catalog Is Used                                                  |
+| -------------------------- | ------------------------------------------------------------------------ |
+| **AI API gateways**        | Route requests to the cheapest provider with real-time pricing data      |
+| **Model comparison tools** | Compare capabilities, context windows, and costs across providers        |
+| **Cost optimization**      | Find the cheapest model for each task (reasoning, vision, tool calling)  |
+| **AI agent frameworks**    | Select models with tool calling + structured output for agent workflows  |
+| **Research & analysis**    | Track the AI landscape — 2,712 models with release dates and deprecation |
+| **CI/CD pipelines**        | Use the [GitHub Action](action.yml) to fetch model data in workflows     |
+| **Data dashboards**        | Import CSV into Excel/Google Sheets for visual pricing analysis          |
+| **Chatbot builders**       | Pick the right model by context window, modality, and budget             |
 
 ## License
 
