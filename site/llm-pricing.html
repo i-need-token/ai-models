@@ -1,0 +1,822 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LLM Pricing Comparison — 4587 AI Models, Real Prices (2025) | AI Models Catalog</title>
+    <meta
+      name="description"
+      content="Compare LLM pricing across 4587 AI models and 95 providers. Find the cheapest model for your use case. Input/output prices per million tokens, cache pricing, and cost calculator."
+    />
+    <meta
+      name="keywords"
+      content="LLM pricing, AI model pricing, cheapest LLM, LLM cost comparison, GPT-4 pricing, Claude pricing, AI API cost"
+    />
+    <link rel="canonical" href="https://i-need-token.github.io/ai-models/llm-pricing.html" />
+    <meta
+      property="og:title"
+      content="LLM Pricing Comparison — 4587 AI Models, Real Prices (2025)"
+    />
+    <meta
+      property="og:description"
+      content="Compare LLM pricing across 4587 models. Find the cheapest model. Input/output prices per million tokens."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://i-need-token.github.io/ai-models/llm-pricing.html" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LLM Pricing Comparison — 4587 AI Models, Real Prices" />
+    <meta
+      name="twitter:description"
+      content="Compare LLM pricing across 4587 models. Find the cheapest model for your use case."
+    />
+    <style>
+      :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --border: #30363d;
+        --text: #e6edf3;
+        --text2: #8b949e;
+        --accent: #58a6ff;
+        --green: #3fb950;
+        --orange: #f0883e;
+        --red: #f85149;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          -apple-system,
+          BlinkMacSystemFont,
+          Segoe UI,
+          Helvetica,
+          Arial,
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        margin: 0;
+        padding: 20px;
+        max-width: 960px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+      h1 {
+        font-size: 2rem;
+        margin-top: 40px;
+      }
+      h2 {
+        font-size: 1.4rem;
+        color: var(--accent);
+        margin-top: 40px;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 8px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 14px;
+      }
+      th {
+        background: var(--surface);
+        padding: 8px 12px;
+        text-align: left;
+        border-bottom: 2px solid var(--border);
+        color: var(--text2);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+      td {
+        padding: 6px 12px;
+        border-bottom: 1px solid var(--border);
+      }
+      tr:hover td {
+        background: var(--surface);
+      }
+      .cheapest {
+        color: var(--green);
+        font-weight: 600;
+      }
+      .priciest {
+        color: var(--red);
+      }
+      .cta {
+        display: inline-block;
+        background: linear-gradient(135deg, #f0883e, #db6d28);
+        color: #fff;
+        padding: 10px 24px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        margin: 16px 4px;
+      }
+      .cta:hover {
+        opacity: 0.9;
+      }
+      .nav {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin: 16px 0;
+      }
+      .nav a {
+        color: var(--accent);
+        text-decoration: none;
+        padding: 4px 12px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 13px;
+      }
+      .nav a:hover {
+        border-color: var(--accent);
+      }
+      .stat {
+        display: inline-block;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 20px;
+        margin: 4px;
+        text-align: center;
+      }
+      .stat b {
+        display: block;
+        font-size: 1.5rem;
+        color: var(--accent);
+      }
+      .stat small {
+        color: var(--text2);
+      }
+      .calc {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+      }
+      .calc input {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 8px 12px;
+        color: var(--text);
+        font-size: 14px;
+        width: 120px;
+      }
+      .calc button {
+        background: var(--accent);
+        border: none;
+        border-radius: 6px;
+        padding: 8px 16px;
+        color: #fff;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .tip {
+        background: rgba(88, 166, 255, 0.08);
+        border: 1px solid rgba(88, 166, 255, 0.2);
+        border-radius: 8px;
+        padding: 16px;
+        margin: 16px 0;
+      }
+      footer {
+        margin-top: 60px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+        color: var(--text2);
+        font-size: 13px;
+      }
+      footer a {
+        color: var(--accent);
+      }
+    </style>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "LLM Pricing Comparison — 4587 AI Models, Real Prices (2025)",
+        "description": "Compare LLM pricing across 4587 AI models and 95 providers. Find the cheapest model for your use case.",
+        "author": { "@type": "Organization", "name": "AI Models Catalog" },
+        "datePublished": "2025-05-21",
+        "dateModified": "2025-05-21"
+      }
+    </script>
+  </head>
+  <body>
+    <h1>💰 LLM Pricing Comparison — 4587 AI Models</h1>
+    <p>
+      Real pricing data for <b>4587</b> AI models across <b>95</b> providers. All prices are per
+      million tokens, sourced from first-party APIs. No third-party aggregators.
+    </p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0">
+      <div class="stat"><b>$0.01</b><small>Cheapest Input/1M</small></div>
+      <div class="stat"><b>$150.00</b><small>Most Expensive Input/1M</small></div>
+      <div class="stat"><b>$1.61</b><small>Average Input/1M</small></div>
+      <div class="stat"><b>81</b><small>Free Models</small></div>
+      <div class="stat"><b>0</b><small>With Cache Pricing</small></div>
+    </div>
+
+    <a class="cta" href="https://i-need-token.github.io/ai-models/"
+      >🔍 Price Calculator in Catalog</a
+    >
+    <a
+      class="cta"
+      href="https://github.com/i-need-token/ai-models"
+      style="background: linear-gradient(135deg, #58a6ff, #388bfd)"
+      >⭐ Star on GitHub</a
+    >
+
+    <div class="tip">
+      <strong>💡 Pro tip:</strong> Use the
+      <a href="https://i-need-token.github.io/ai-models/" style="color: var(--accent)"
+        >interactive catalog's price calculator</a
+      >
+      to estimate monthly costs based on your actual token usage.
+    </div>
+
+    <div class="nav">
+      <a href="#cheapest-all">Cheapest Overall</a>
+      <a href="#cheapest-tool">Cheapest Tool Calling</a>
+      <a href="#cheapest-reasoning">Cheapest Reasoning</a>
+      <a href="#cheapest-vision">Cheapest Vision</a>
+      <a href="#cheapest-128k">Cheapest 128K+ Context</a>
+      <a href="#flagship">Flagship Model Prices</a>
+      <a href="#cache">Cache Pricing</a>
+    </div>
+
+    <h2 id="cheapest-all">💵 Cheapest AI Models Overall</h2>
+    <p>The most affordable models per million input tokens.</p>
+    <table>
+      <tr>
+        <th>Model</th>
+        <th>Provider</th>
+        <th>Input $/1M</th>
+        <th>Output $/1M</th>
+        <th>Context</th>
+      </tr>
+      <tr>
+        <td><b>openai--gpt-image-1-mini</b></td>
+        <td>aimlapi</td>
+        <td class="cheapest">$0.007</td>
+        <td>$0.676</td>
+        <td>?</td>
+      </tr>
+      <tr>
+        <td><b>mistralai--Mistral-Nemo-Instruct-2407</b></td>
+        <td>klusterai</td>
+        <td class="cheapest">$0.008</td>
+        <td>$0.001</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-0.8b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.01</td>
+        <td>$0.05</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>ling-2.6-flash</b></td>
+        <td>inclusionai</td>
+        <td class="cheapest">$0.01</td>
+        <td>$0.03</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>bdc-coder</b></td>
+        <td>inferencenet</td>
+        <td class="cheapest">$0.01</td>
+        <td>$0.01</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>openai--gpt-image-1-model</b></td>
+        <td>aimlapi</td>
+        <td class="cheapest">$0.012</td>
+        <td>$0.175</td>
+        <td>?</td>
+      </tr>
+      <tr>
+        <td><b>klusterai--Meta-Llama-3.1-8B-Instruct-Turbo</b></td>
+        <td>klusterai</td>
+        <td class="cheapest">$0.015</td>
+        <td>$0.02</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>granite-4.0-h-micro</b></td>
+        <td>cloudflare</td>
+        <td class="cheapest">$0.017</td>
+        <td>$0.112</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>meta-llama-3.1-8b-instruct-turbo</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.03</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>meta-llama-3.1-8b-instruct</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.05</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>mistral-nemo-instruct-2407</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.04</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-2b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.1</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>llama-3.1-8b-instruct--fp-16</b></td>
+        <td>inferencenet</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.03</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>schematron-3b</b></td>
+        <td>inferencenet</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.05</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>schematron-v3</b></td>
+        <td>inferencenet</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.05</td>
+        <td>131K</td>
+      </tr>
+    </table>
+
+    <h2 id="cheapest-tool">🔧 Cheapest Models with Tool Calling</h2>
+    <p>The most affordable models that support function/tool calling — essential for AI agents.</p>
+    <table>
+      <tr>
+        <th>Model</th>
+        <th>Provider</th>
+        <th>Input $/1M</th>
+        <th>Output $/1M</th>
+        <th>Context</th>
+      </tr>
+      <tr>
+        <td><b>ling-2.6-flash</b></td>
+        <td>inclusionai</td>
+        <td class="cheapest">$0.01</td>
+        <td>$0.03</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>bdc-coder</b></td>
+        <td>inferencenet</td>
+        <td class="cheapest">$0.01</td>
+        <td>$0.01</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>klusterai--Meta-Llama-3.1-8B-Instruct-Turbo</b></td>
+        <td>klusterai</td>
+        <td class="cheapest">$0.015</td>
+        <td>$0.02</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>granite-4.0-h-micro</b></td>
+        <td>cloudflare</td>
+        <td class="cheapest">$0.017</td>
+        <td>$0.112</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>llama-3.1-8b-instruct--fp-16</b></td>
+        <td>inferencenet</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.03</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>schematron-3b</b></td>
+        <td>inferencenet</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.05</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>schematron-v3</b></td>
+        <td>inferencenet</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.05</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>gpt-oss-20b</b></td>
+        <td>inferencenet</td>
+        <td class="cheapest">$0.03</td>
+        <td>$0.15</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>schematron-v2-turbo</b></td>
+        <td>inferencenet</td>
+        <td class="cheapest">$0.03</td>
+        <td>$0.15</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>openai--gpt-oss-20b</b></td>
+        <td>neuralwatt</td>
+        <td class="cheapest">$0.03</td>
+        <td>$0.16</td>
+        <td>?</td>
+      </tr>
+    </table>
+
+    <h2 id="cheapest-reasoning">🧠 Cheapest Models with Reasoning</h2>
+    <p>The most affordable models with advanced reasoning capabilities.</p>
+    <table>
+      <tr>
+        <th>Model</th>
+        <th>Provider</th>
+        <th>Input $/1M</th>
+        <th>Output $/1M</th>
+        <th>Context</th>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-0.8b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.01</td>
+        <td>$0.05</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-2b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.1</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>gpt-oss-20b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.03</td>
+        <td>$0.14</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-4b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.03</td>
+        <td>$0.15</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>openai--gpt-oss-20b</b></td>
+        <td>neuralwatt</td>
+        <td class="cheapest">$0.03</td>
+        <td>$0.16</td>
+        <td>?</td>
+      </tr>
+      <tr>
+        <td><b>qwen--qwen3-4b-fp8</b></td>
+        <td>novitaai</td>
+        <td class="cheapest">$0.03</td>
+        <td>$0.03</td>
+        <td>128K</td>
+      </tr>
+      <tr>
+        <td><b>gpt-oss-120b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.039</td>
+        <td>$0.19</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>nvidia-nemotron-nano-9b-v2</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.04</td>
+        <td>$0.16</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>openai--gpt-oss-20b</b></td>
+        <td>novitaai</td>
+        <td class="cheapest">$0.04</td>
+        <td>$0.15</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>nemotron-3-nano-30b-a3b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.05</td>
+        <td>$0.2</td>
+        <td>262K</td>
+      </tr>
+    </table>
+
+    <h2 id="cheapest-vision">👁️ Cheapest Models with Vision</h2>
+    <p>The most affordable models that can understand images.</p>
+    <table>
+      <tr>
+        <th>Model</th>
+        <th>Provider</th>
+        <th>Input $/1M</th>
+        <th>Output $/1M</th>
+        <th>Context</th>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-0.8b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.01</td>
+        <td>$0.05</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-2b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.1</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>paddlepaddle--paddleocr-vl</b></td>
+        <td>novitaai</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.02</td>
+        <td>16K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-4b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.03</td>
+        <td>$0.15</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>deepseek--deepseek-ocr-2</b></td>
+        <td>novitaai</td>
+        <td class="cheapest">$0.03</td>
+        <td>$0.03</td>
+        <td>8K</td>
+      </tr>
+      <tr>
+        <td><b>deepseek--deepseek-ocr</b></td>
+        <td>novitaai</td>
+        <td class="cheapest">$0.03</td>
+        <td>$0.03</td>
+        <td>8K</td>
+      </tr>
+      <tr>
+        <td><b>reka-edge-2</b></td>
+        <td>reka</td>
+        <td class="cheapest">$0.03</td>
+        <td>$0.1</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>zai-org--autoglm-phone-9b-multilingual</b></td>
+        <td>novitaai</td>
+        <td class="cheapest">$0.035</td>
+        <td>$0.138</td>
+        <td>65K</td>
+      </tr>
+      <tr>
+        <td><b>gemini-1.5-flash-8b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.0375</td>
+        <td>$0.15</td>
+        <td>1M</td>
+      </tr>
+      <tr>
+        <td><b>google-gemma-3-4b</b></td>
+        <td>amazon-bedrock</td>
+        <td class="cheapest">$0.04</td>
+        <td>$0.08</td>
+        <td>131K</td>
+      </tr>
+    </table>
+
+    <h2 id="cheapest-128k">📏 Cheapest Models with 128K+ Context</h2>
+    <p>The most affordable models with large context windows (128K+ tokens).</p>
+    <table>
+      <tr>
+        <th>Model</th>
+        <th>Provider</th>
+        <th>Input $/1M</th>
+        <th>Output $/1M</th>
+        <th>Context</th>
+      </tr>
+      <tr>
+        <td><b>mistralai--Mistral-Nemo-Instruct-2407</b></td>
+        <td>klusterai</td>
+        <td class="cheapest">$0.008</td>
+        <td>$0.001</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-0.8b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.01</td>
+        <td>$0.05</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>ling-2.6-flash</b></td>
+        <td>inclusionai</td>
+        <td class="cheapest">$0.01</td>
+        <td>$0.03</td>
+        <td>262K</td>
+      </tr>
+      <tr>
+        <td><b>bdc-coder</b></td>
+        <td>inferencenet</td>
+        <td class="cheapest">$0.01</td>
+        <td>$0.01</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>klusterai--Meta-Llama-3.1-8B-Instruct-Turbo</b></td>
+        <td>klusterai</td>
+        <td class="cheapest">$0.015</td>
+        <td>$0.02</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>granite-4.0-h-micro</b></td>
+        <td>cloudflare</td>
+        <td class="cheapest">$0.017</td>
+        <td>$0.112</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>meta-llama-3.1-8b-instruct-turbo</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.03</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>meta-llama-3.1-8b-instruct</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.05</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>mistral-nemo-instruct-2407</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.04</td>
+        <td>131K</td>
+      </tr>
+      <tr>
+        <td><b>qwen3.5-2b</b></td>
+        <td>deepinfra</td>
+        <td class="cheapest">$0.02</td>
+        <td>$0.1</td>
+        <td>262K</td>
+      </tr>
+    </table>
+
+    <h2 id="flagship">🏆 Flagship Model Prices</h2>
+    <p>How much do the top AI models cost? A side-by-side comparison of the most popular models.</p>
+    <table>
+      <tr>
+        <th>Model</th>
+        <th>Provider</th>
+        <th>Input $/1M</th>
+        <th>Output $/1M</th>
+        <th>Context</th>
+      </tr>
+      <tr>
+        <td><b>gpt-4.1</b></td>
+        <td>openai</td>
+        <td>$2</td>
+        <td>$8</td>
+        <td>1M</td>
+      </tr>
+      <tr>
+        <td><b>gpt-4o</b></td>
+        <td>openai</td>
+        <td>$2.5</td>
+        <td>$10</td>
+        <td>128K</td>
+      </tr>
+      <tr>
+        <td><b>gpt-4o-mini</b></td>
+        <td>openai</td>
+        <td>$0.15</td>
+        <td>$0.6</td>
+        <td>128K</td>
+      </tr>
+      <tr>
+        <td><b>gemini-2.5-pro</b></td>
+        <td>deepinfra</td>
+        <td>$1.25</td>
+        <td>$10</td>
+        <td>1M</td>
+      </tr>
+      <tr>
+        <td><b>gemini-2.5-flash</b></td>
+        <td>deepinfra</td>
+        <td>$0.3</td>
+        <td>$2.5</td>
+        <td>1M</td>
+      </tr>
+      <tr>
+        <td><b>llama-4-maverick</b></td>
+        <td>digitalocean</td>
+        <td>$0.25</td>
+        <td>$0.87</td>
+        <td>1M</td>
+      </tr>
+      <tr>
+        <td><b>deepseek-r1</b></td>
+        <td>amazon-bedrock</td>
+        <td>$1.35</td>
+        <td>$5.4</td>
+        <td>65K</td>
+      </tr>
+      <tr>
+        <td><b>deepseek-v3</b></td>
+        <td>deepinfra</td>
+        <td>$0.32</td>
+        <td>$0.89</td>
+        <td>163K</td>
+      </tr>
+    </table>
+
+    <h2 id="cache">⚡ Cache Pricing</h2>
+    <p>
+      0 models offer cache pricing — significantly reducing costs for repeated prompts. Cache
+      pricing is typically 50-90% cheaper than standard input pricing.
+    </p>
+    <table>
+      <tr>
+        <th>Model</th>
+        <th>Provider</th>
+        <th>Input $/1M</th>
+        <th>Cache $/1M</th>
+        <th>Savings</th>
+      </tr>
+    </table>
+
+    <h2>📊 Methodology</h2>
+    <p>
+      All pricing data is sourced from <b>first-party APIs</b> — not third-party aggregators. Prices
+      are per million tokens (input and output separately). Aggregator providers (OpenRouter,
+      Requesty, etc.) are excluded from ranking tables to avoid duplicate models. Cache pricing is
+      shown where available.
+    </p>
+    <p>Data is auto-scraped and validated with Zod schemas. Last updated: 2025-05-21.</p>
+
+    <h2>🔗 More Resources</h2>
+    <ul>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/">Interactive Catalog</a> — search,
+        filter, compare with price calculator
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/free-ai-models.html">Free AI Models</a> —
+        81 models at zero cost
+      </li>
+      <li>
+        <a href="https://i-need-token.github.io/ai-models/best-ai-models.html">Best AI Models</a> —
+        curated by use case
+      </li>
+      <li>
+        <a href="https://github.com/i-need-token/ai-models/blob/main/docs/pricing-comparison.md"
+          >Pricing Comparison Guide</a
+        >
+        — detailed analysis
+      </li>
+      <li>
+        <a href="https://github.com/i-need-token/ai-models">GitHub Repository</a> — star, fork,
+        contribute
+      </li>
+    </ul>
+
+    <footer>
+      <p>
+        Data from <a href="https://github.com/i-need-token/ai-models">AI Models Catalog</a> — 4587
+        models, 95 providers, first-party data.
+      </p>
+      <p>
+        Last updated: 2025-05-21.
+        <a href="https://github.com/i-need-token/ai-models">View on GitHub</a>
+      </p>
+    </footer>
+  </body>
+</html>
