@@ -1208,38 +1208,34 @@
       const RELEASES_URL =
         "https://github.com/i-need-token/ai-models/releases/latest/download/models.json";
 
-      fetch(LOCAL_URL)
-        .then((r) => {
-          if (!r.ok) throw new Error("Local not available");
-          return r.json();
-        })
-        .then((data) => {
-          models = Array.isArray(data) ? data : data.models;
-          init();
-        })
-        .catch(() => {
-          fetch(CDN_URL)
-            .then((r) => {
-              if (!r.ok) throw new Error("CDN not available");
-              return r.json();
-            })
-            .then((data) => {
-              models = Array.isArray(data) ? data : data.models;
+      async function loadData() {
+        const urls = [LOCAL_URL, CDN_URL, RELEASES_URL];
+        for (const url of urls) {
+          try {
+            const r = await fetch(url);
+            if (!r.ok) continue;
+            const data = await r.json();
+            models = Array.isArray(data) ? data : data.models;
+            try {
               init();
-            })
-            .catch(() => {
-              fetch(RELEASES_URL)
-                .then((r) => r.json())
-                .then((data) => {
-                  models = Array.isArray(data) ? data : data.models;
-                  init();
-                })
-                .catch(() => {
-                  document.getElementById("tbody").innerHTML =
-                    '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-secondary)">Failed to load data. Try refreshing the page.</td></tr>';
-                });
-            });
-        });
+              return; // success
+            } catch (e) {
+              console.error("init() error:", e);
+              document.getElementById("tbody").innerHTML =
+                '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-secondary)">Error rendering data: ' +
+                esc(e.message) +
+                "</td></tr>";
+              return;
+            }
+          } catch (e) {
+            // fetch or parse failed, try next URL
+            continue;
+          }
+        }
+        document.getElementById("tbody").innerHTML =
+          '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-secondary)">Failed to load data. Try refreshing the page.</td></tr>';
+      }
+      loadData();
 
       function init() {
         // Stats
