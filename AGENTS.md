@@ -10,6 +10,10 @@ A structured catalog of AI model providers and their models, stored as YAML file
 - [`types/schemas.ts`](types/schemas.ts) — Zod runtime validation schemas
 - [`docs/data-acquisition.md`](docs/data-acquisition.md) — How we acquire and update model data ([中文](docs/zh/data-acquisition.md))
 - [`docs/lessons-learned.md`](docs/lessons-learned.md) — Design principles and pitfalls ([中文](docs/zh/lessons-learned.md))
+- [`docs/context-windows.md`](docs/context-windows.md) — Context window comparison by size and pricing ([中文](docs/zh/context-windows.md))
+- [`docs/free-models.md`](docs/free-models.md) — 81 free AI models by capability ([中文](docs/zh/free-models.md))
+- [`docs/open-weights.md`](docs/open-weights.md) — 513 open-weight models ([中文](docs/zh/open-weights.md))
+- [`docs/reasoning-models.md`](docs/reasoning-models.md) — 1,306 reasoning models ([中文](docs/zh/reasoning-models.md))
 - [`docs/providers.md`](docs/providers.md) — Provider overview by type and market ([中文](docs/zh/providers.md))
 - [`docs/model-comparison.md`](docs/model-comparison.md) — Model comparison tables ([中文](docs/zh/model-comparison.md))
 - [`docs/pricing-comparison.md`](docs/pricing-comparison.md) — Pricing comparison across providers ([中文](docs/zh/pricing-comparison.md))
