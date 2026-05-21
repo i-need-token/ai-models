@@ -122,6 +122,9 @@ Models with the largest context windows — for long documents, multi-turn conve
 - [Vision Models](vision-models.md) — 1,487 models with image understanding
 - [Quick Start Guide](quick-start.md) — get started in 30 seconds
 
+- [Chat Models](chat-models.md) — 2,350 models with tool calling for chat applications
+- [Multimodal Models](multimodal-models.md) — 1,519 models with image/audio/video input
+
 ---
 
 Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.
