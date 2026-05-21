@@ -323,6 +323,10 @@ by_context = sorted(
 - [Pricing Comparison](docs/pricing-comparison.md) — side-by-side pricing across providers
 - [Cached Pricing](docs/cached-pricing.md) — 1,374 models with prompt caching, 50-90% input cost savings
 - [Context Window Comparison](docs/context-windows.md) — largest context windows, best value
+- [Large Context Models](docs/large-context-models.md) — 2,195 models with 128K+ context, 397 with 1M+
+- [Small & Edge Models](docs/small-models.md) — 1,153 models under 10B params for on-device use
+- [Provider Comparison](docs/provider-comparison.md) — top 30 providers by model count and capabilities
+- [Migration Guide](docs/migration-guide.md) — switch providers with pricing, API compatibility, checklist
 - [Free AI Models](docs/free-models.md) — 81 free models by capability
 - [Open-Weight Models](docs/open-weights.md) — 513 open-weight models
 - [Reasoning Models](docs/reasoning-models.md) — 1,306 reasoning models
