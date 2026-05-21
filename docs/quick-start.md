@@ -1,0 +1,87 @@
+# Quick Start Guide
+
+Find the right AI model for your needs in 30 seconds.
+
+## I want to find the cheapest model
+
+→ See [Pricing Comparison](pricing-comparison.md) for the cheapest models per provider and cross-platform price comparisons.
+
+**Cheapest models with tool calling:**
+
+| Model            | Provider      | Input (per 1M tokens) | Output (per 1M tokens) |
+| ---------------- | ------------- | --------------------: | ---------------------: |
+| DeepSeek-V3      | DeepSeek      |                 $0.27 |                  $1.10 |
+| Qwen3-235B-A22B  | Alibaba Cloud |                 $0.14 |                  $0.42 |
+| Llama 4 Maverick | Together AI   |                 $0.20 |                  $0.80 |
+
+## I want the most capable model
+
+→ See [Model Comparison](model-comparison.md) for flagship model comparisons.
+
+**Top-tier flagships:**
+
+| Model          | Context | Tool Call | Vision | Input $/1M | Output $/1M |
+| -------------- | ------- | --------- | ------ | ---------: | ----------: |
+| GPT-4.1        | 1M      | ✅        | ✅     |      $2.00 |       $8.00 |
+| Claude Opus 4  | 200K    | ✅        | ✅     |     $15.00 |      $75.00 |
+| Gemini 2.5 Pro | 1M      | ✅        | ✅     |      $1.25 |      $10.00 |
+| DeepSeek-R1    | 128K    | ✅        | ❌     |      $0.55 |       $2.19 |
+
+## I want a free model
+
+→ See [Model Comparison](model-comparison.md#free-models) for the full list.
+
+**Free models with tool calling:**
+
+- Google Gemini 2.0 Flash (via Google AI Studio)
+- Cloudflare Workers AI models (edge inference)
+- Various models on Chutes, Cerebras, Groq free tiers
+
+## I want the largest context window
+
+→ See [Model Comparison](model-comparison.md#largest-context-windows) for the full list.
+
+| Model           | Context Window |
+| --------------- | -------------: |
+| Llama 4 Scout   |     10M tokens |
+| Gemini 2.5 Pro  |      1M tokens |
+| GPT-4.1         |     ~1M tokens |
+| Claude Sonnet 4 |    200K tokens |
+
+## I want to browse all providers
+
+→ See [Provider Overview](providers.md) for all 95 providers organized by type.
+
+## I want to use the data programmatically
+
+```bash
+# Install dependencies
+npm install
+
+# Compute catalog statistics
+npx tsx scripts/stats.ts
+
+# Validate all model data
+npx tsx scripts/validate.ts
+```
+
+```typescript
+import { ModelSchema } from "./types/schemas";
+import { parse } from "yaml";
+import { readFileSync } from "fs";
+
+// Load and validate a model
+const raw = readFileSync("providers/openai/models/gpt-4.1.yaml", "utf-8");
+const model = ModelSchema.parse(parse(raw));
+
+console.log(model.pricing); // { input: 2, output: 8, cache_read: 0.5 }
+console.log(model.limit); // { context: 1047576, output: 32768 }
+```
+
+## I want to add a new provider
+
+→ See [Contributing Guide](../CONTRIBUTING.md) and [Data Acquisition Guide](data-acquisition.md).
+
+## I want to understand the data format
+
+→ See [Data Schema Reference](data-schema.md) for the complete YAML schema.
