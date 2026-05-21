@@ -90,6 +90,23 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 
 </details>
 
+## 🏆 Model Picks
+
+> Curated recommendations for common use cases — from [4,587 models](docs/model-comparison.md) across 95 providers
+
+| Use Case              | Model            | Why                                     | Input $/M    | Context |
+| --------------------- | ---------------- | --------------------------------------- | ------------ | ------- |
+| **Coding**            | gpt-4.1          | Best code generation + 1M context       |              | 1M      |
+| **Coding (cheap)**    | gpt-4.1-nano     | 20× cheaper, great for autocomplete     | /bin/bash.10 | 1M      |
+| **Reasoning**         | o4-mini          | Best cost-effective reasoning           | .10          | 200K    |
+| **Reasoning (power)** | claude-opus-4    | Deepest reasoning for hard problems     | 5            | 200K    |
+| **Agents**            | claude-sonnet-4  | Best tool use + reasoning balance       |              | 200K    |
+| **Agents (cheap)**    | gemini-2.5-flash | Fastest agent loop under                | /bin/bash.15 | 1M      |
+| **Vision**            | gemini-2.5-pro   | Best multimodal understanding           | .25          | 1M      |
+| **Free**              | llama-4-scout    | 10M context, open weights, free on Groq | /bin/bash    | 10M     |
+| **Open weights**      | deepseek-r1      | Best open reasoning model               | /bin/bash.55 | 128K    |
+| **Large context**     | gemini-2.5-flash | 1M context at lowest price              | /bin/bash.15 | 1M      |
+
 ## Use Cases
 
 | Use Case                       | How This Catalog Helps                                                                  |
