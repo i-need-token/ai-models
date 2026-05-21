@@ -1,0 +1,29 @@
+name: Stats
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * 0" # weekly on Sunday
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Compute stats
+        run: npx tsx scripts/stats.ts json > stats.json
+
+      - name: Upload stats
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-stats
+          path: stats.json
+          retention-days: 30
