@@ -21,9 +21,14 @@ jobs:
       - name: Compute stats
         run: npx tsx scripts/stats.ts json > stats.json
 
-      - name: Upload stats
+      - name: Export CSV
+        run: npx tsx scripts/export-csv.ts
+
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: catalog-stats
-          path: stats.json
+          name: catalog-data
+          path: |
+            stats.json
+            models.csv
           retention-days: 30

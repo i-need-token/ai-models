@@ -28,6 +28,9 @@ jobs:
       - name: Compile models.json
         run: npx tsx scripts/compile.ts
 
+      - name: Export models.csv
+        run: npx tsx scripts/export-csv.ts
+
       - name: Compute stats
         run: npx tsx scripts/stats.ts json > stats.json
 
@@ -36,16 +39,26 @@ jobs:
         with:
           files: |
             dist/models.json
+            models.csv
             stats.json
           body: |
             ## AI Models Catalog Release
 
-            **Compiled data file:** `models.json` — all 4,587 models from 95 providers in a single JSON file.
+            **Compiled data files:**
+
+            | File | Format | Size | Description |
+            | ---- | ------ | ---- | ----------- |
+            | `models.json` | JSON | ~2.3 MB | All 4,587 models with full metadata |
+            | `models.csv` | CSV | ~560 KB | Flat table — open in Excel, Google Sheets, Python |
+            | `stats.json` | JSON | ~1 KB | Catalog statistics summary |
 
             **Usage:**
             ```bash
             # Download the compiled JSON
             curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+
+            # Download the CSV (for Excel/Sheets)
+            curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
 
             # Use in JavaScript
             const catalog = require("./models.json");

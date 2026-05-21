@@ -5,3 +5,5 @@ dist/
 *.local
 *.tsbuildinfo
 dist/
+models.csv
+stats.json
