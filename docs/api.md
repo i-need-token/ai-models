@@ -2,6 +2,28 @@
 
 Use the catalog data in your applications.
 
+## npm Package
+
+Install the catalog as an npm dependency:
+
+```bash
+npm install ai-models
+```
+
+```typescript
+import catalog from "ai-models"; // 4,587 models as JSON
+import type { Model } from "ai-models"; // TypeScript types
+
+// Find models with tool calling under $1/1M input
+const affordable = catalog.models.filter((m) => m.tool_call && m.pricing.input < 1);
+```
+
+The package includes:
+
+- `dist/models.json` — full catalog as JSON
+- `dist/index.d.ts` — TypeScript type definitions
+- `types/` — source type definitions (Model, Snapshot, Provider, Pricing)
+
 ## Compiled JSON
 
 The easiest way to access all model data is via the compiled `models.json` file.

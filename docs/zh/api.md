@@ -2,6 +2,28 @@
 
 在你的应用中使用目录数据。
 
+## npm 包
+
+将目录作为 npm 依赖安装：
+
+```bash
+npm install ai-models
+```
+
+```typescript
+import catalog from "ai-models"; // 4,587 个模型 JSON
+import type { Model } from "ai-models"; // TypeScript 类型
+
+// 查找支持工具调用且输入价格低于 $1/1M 的模型
+const affordable = catalog.models.filter((m) => m.tool_call && m.pricing.input < 1);
+```
+
+包内容包括：
+
+- `dist/models.json` — 完整目录 JSON
+- `dist/index.d.ts` — TypeScript 类型定义
+- `types/` — 源类型定义（Model、Snapshot、Provider、Pricing）
+
 ## 编译 JSON
 
 访问所有模型数据最简单的方式是通过编译后的 `models.json` 文件。
