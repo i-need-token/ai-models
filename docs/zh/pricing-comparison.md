@@ -119,3 +119,11 @@
 ---
 
 **注意**：所有定价来自第一方来源，以数据采集日期为准。推理平台价格可能不同。查看 `providers/<id>/models/` 获取最新数据。人民币和欧元定价见提供商 YAML 文件。
+
+## 相关文档
+
+- [模型选择指南](model-selection.md) — 选择模型的决策框架
+- [缓存定价](cached-pricing.md) — 1,374 个支持提示缓存的模型
+- [免费 AI 模型](free-models.md) — 81 个免费模型
+- [上下文窗口对比](context-windows.md) — 最大上下文窗口
+- [提供商概览](providers.md) — 95 个提供商

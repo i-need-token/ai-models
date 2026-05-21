@@ -119,3 +119,11 @@ The absolute cheapest per-token models across all providers.
 ---
 
 **Note**: All pricing from first-party sources as of data collection date. Inference platform prices may differ. Check `providers/<id>/models/` for current data. CNY and EUR pricing available in provider YAML files.
+
+## Related Documentation
+
+- [Model Selection Guide](model-selection.md) — decision framework for choosing models
+- [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching
+- [Free AI Models](free-models.md) — 81 free models
+- [Context Window Comparison](context-windows.md) — largest context windows
+- [Provider Overview](providers.md) — all 95 providers

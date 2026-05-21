@@ -235,3 +235,11 @@
 ---
 
 数据来源于 [AI Models Catalog](https://github.com/i-need-token/ai-models) — 结构化 YAML，包含 95 个提供商 4,587+ 模型的定价、上下文窗口和能力信息。
+
+## 相关文档
+
+- [模型选择指南](model-selection.md) — 成本优化技巧
+- [定价对比](pricing-comparison.md) — 各提供商定价并排对比
+- [免费 AI 模型](free-models.md) — 81 个免费模型
+- [上下文窗口对比](context-windows.md) — 最大上下文窗口
+- [开源权重模型](open-weights.md) — 527 个可自行运行的模型

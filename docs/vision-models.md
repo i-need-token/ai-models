@@ -85,3 +85,11 @@ The most capable vision models — can see, reason, and act:
 - **Grok 4 Fast Reasoning** is the only model combining 2M context, vision, tool calling, and reasoning
 - **104 open-weight vision models** available — run vision AI on your own infrastructure
 - Small vision models (Qwen 3.5 0.8B–4B) cost as little as $0.01–$0.03/1M tokens
+
+## Related Documentation
+
+- [Model Selection Guide](model-selection.md) — decision framework for choosing models
+- [Image Generation](image-generation.md) — 28 image generation models
+- [Video Models](video-models.md) — 167 video input/output models
+- [Modality Matrix](modality-matrix.md) — all modalities at a glance
+- [Free AI Models](free-models.md) — 81 free models, some with vision

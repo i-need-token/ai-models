@@ -69,3 +69,11 @@ For AI agents that need to return structured data, call tools, and reason:
 - **Gemini 2.5 Flash** is the best value: 1M context, structured output, tool calling, and reasoning for $0.15/1M
 - Small models (Ernie 4.5 0.3B, Ling 2.6 Flash) cost as little as $0.01/1M with structured output
 - 91% of structured output models also support tool calling — these capabilities go hand-in-hand
+
+## Related Documentation
+
+- [Model Selection Guide](model-selection.md) — decision framework for choosing models
+- [Tool Calling Models](tool-calling.md) — 2,350 models with tool calling
+- [Reasoning Models](reasoning-models.md) — 1,306 models with reasoning
+- [Free AI Models](free-models.md) — 81 free models, some with structured output
+- [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching

@@ -128,3 +128,11 @@ console.log(model.limit); // { context: 1047576, output: 32768 }
 ## I want to understand the data format
 
 → See [Data Schema Reference](data-schema.md) for the complete YAML schema.
+
+## Related Documentation
+
+- [Model Selection Guide](model-selection.md) — decision framework for choosing models
+- [FAQ](faq.md) — common questions about the catalog
+- [API & Programmatic Access](api.md) — download and use the data
+- [Code Examples](code-examples.md) — practical examples in TypeScript, Python, Go, Rust
+- [Glossary](glossary.md) — key terms and definitions

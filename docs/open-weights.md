@@ -104,3 +104,11 @@ Lowest per-token pricing for open-weight inference:
 - **DeepSeek-R1** is the most popular open-weight reasoning model, available on 3 providers
 - **MiMo V2.5** is the only open-weight model combining 1M context, reasoning, and vision
 - Pricing varies widely — the cheapest open-weight models cost under $0.01/1M tokens
+
+## Related Documentation
+
+- [Model Selection Guide](model-selection.md) — decision framework for choosing models
+- [Free AI Models](free-models.md) — 81 free models
+- [Provider Overview](providers.md) — all 95 providers organized by type
+- [Reasoning Models](reasoning-models.md) — 1,306 models with reasoning
+- [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching

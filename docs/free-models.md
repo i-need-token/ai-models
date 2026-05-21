@@ -109,3 +109,11 @@ Groq offers free tier for some models with rate limits:
 - **Llama 4 Scout** on Chutes offers the largest free context window at 10M tokens
 - Free tiers typically have rate limits (requests per minute) — check provider docs for specifics
 - For production use, consider upgrading to paid tiers for reliability and higher rate limits
+
+## Related Documentation
+
+- [Model Selection Guide](model-selection.md) — decision framework for choosing models
+- [Open-Weight Models](open-weights.md) — 527 models you can run yourself
+- [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching
+- [Tool Calling Models](tool-calling.md) — 2,350 models with tool calling
+- [Reasoning Models](reasoning-models.md) — 1,306 models with reasoning

@@ -128,3 +128,11 @@ console.log(model.limit); // { context: 1047576, output: 32768 }
 ## 我想了解数据格式
 
 → 查看[数据 Schema 参考](data-schema.md)，了解完整的 YAML Schema。
+
+## 相关文档
+
+- [模型选择指南](model-selection.md) — 选择模型的决策框架
+- [常见问题](faq.md) — 关于目录的常见问题
+- [API 与编程访问](api.md) — 下载和使用数据
+- [代码示例](code-examples.md) — TypeScript、Python、Go、Rust 实用示例
+- [术语表](glossary.md) — 关键术语和定义

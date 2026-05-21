@@ -87,3 +87,11 @@ Models that can reason about images — ideal for visual analysis:
 - **MiMo V2.5** is the only open-weight model combining 1M context, reasoning, and vision
 - **697 reasoning models** also support vision — the most common combined capability
 - Small reasoning models (Qwen 3.5 0.8B–4B) cost as little as $0.01–$0.03/1M tokens
+
+## Related Documentation
+
+- [Model Selection Guide](model-selection.md) — decision framework for choosing models
+- [Tool Calling Models](tool-calling.md) — 2,350 models with tool calling
+- [Structured Output](structured-output.md) — 829 JSON-mode models
+- [Free AI Models](free-models.md) — 81 free models, some with reasoning
+- [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching

@@ -85,3 +85,11 @@
 - **Grok 4 Fast Reasoning** 是唯一结合 2M 上下文、视觉、工具调用和推理的模型
 - **104 个开源权重视觉模型** — 在自己的基础设施上运行视觉 AI
 - 小型视觉模型（Qwen 3.5 0.8B–4B）每 1M tokens 仅需 $0.01–$0.03
+
+## 相关文档
+
+- [模型选择指南](model-selection.md) — 选择模型的决策框架
+- [图像生成](image-generation.md) — 28 个图像生成模型
+- [视频模型](video-models.md) — 167 个视频输入/输出模型
+- [模态矩阵](modality-matrix.md) — 所有模态一览
+- [免费 AI 模型](free-models.md) — 81 个免费模型，部分支持视觉

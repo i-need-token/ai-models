@@ -86,3 +86,11 @@ The "holy trinity" for advanced AI agents — tool calling, reasoning, and visio
 - **45 free models** support tool calling — start building agents at zero cost
 - **829 models** also support structured output — perfect for reliable JSON responses
 - Small models (Qwen 3.5 0.8B–4B) cost as little as $0.01–$0.03/1M tokens with tool calling
+
+## Related Documentation
+
+- [Model Selection Guide](model-selection.md) — decision framework for choosing models
+- [Free AI Models](free-models.md) — 81 free models, many with tool calling
+- [Structured Output](structured-output.md) — 829 JSON-mode models
+- [Reasoning Models](reasoning-models.md) — 1,306 models with reasoning
+- [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching
