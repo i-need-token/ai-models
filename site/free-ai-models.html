@@ -183,6 +183,52 @@
       footer a {
         color: var(--accent);
       }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 12px;
+        }
+        h1 {
+          font-size: 1.4rem;
+        }
+        h2 {
+          font-size: 1.2rem;
+        }
+        table {
+          font-size: 12px;
+          display: block;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+        th,
+        td {
+          padding: 4px 8px;
+        }
+        .stat {
+          padding: 8px 12px;
+        }
+        .stat b {
+          font-size: 1.2rem;
+        }
+        .compare-grid {
+          grid-template-columns: 1fr;
+        }
+        .calc-box {
+          padding: 16px;
+        }
+      }
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1.2rem;
+        }
+        .stat b {
+          font-size: 1rem;
+        }
+        .cta {
+          padding: 8px 16px;
+          font-size: 14px;
+        }
+      }
     </style>
     <script type="application/ld+json">
       {
