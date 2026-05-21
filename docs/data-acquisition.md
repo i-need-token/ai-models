@@ -264,3 +264,7 @@ Providers that host and serve models produced by others. They are added **after 
 - [Provider Overview](providers.md) — all 95 providers
 - [FAQ](faq.md) — common questions
 - [Contributing](https://github.com/i-need-token/ai-models/blob/main/CONTRIBUTING.md) — how to contribute
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

@@ -71,3 +71,7 @@ Which models have the largest context windows? This page lists models by context
 - [Free AI Models](free-models.md) — 81 free models by context window
 - [Vision Models](vision-models.md) — 1,487 vision models with context info
 - [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

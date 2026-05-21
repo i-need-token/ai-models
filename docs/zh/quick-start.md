@@ -136,3 +136,7 @@ console.log(model.limit); // { context: 1047576, output: 32768 }
 - [API 与编程访问](api.md) — 下载和使用数据
 - [代码示例](code-examples.md) — TypeScript、Python、Go、Rust 实用示例
 - [术语表](glossary.md) — 关键术语和定义
+
+---
+
+数据来源于 [AI Models Catalog](https://github.com/i-need-token/ai-models) — 结构化 YAML，包含 95 个提供商 4,587+ 模型的定价、上下文窗口和能力信息。

@@ -478,6 +478,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [Free AI Models](docs/free-models.md)                               | 81 free models — tool calling, reasoning, vision at no cost     |
 | [Open-Weight Models](docs/open-weights.md)                          | 513 open-weight models — run on your own infrastructure         |
 | [Reasoning Models](docs/reasoning-models.md)                        | 1,306 reasoning models — chain-of-thought and extended thinking |
+| [OpenAI Alternatives](docs/openai-alternatives.md)                  | GPT-4/GPT-3.5 alternatives — pricing, free options, compat      |
 | [Provider Overview](docs/providers.md)                              | All 95 providers organized by type and market                   |
 | [Data Schema Reference](docs/data-schema.md)                        | Complete YAML schema — model, pricing, snapshot, provider       |
 | [Data Acquisition](docs/data-acquisition.md)                        | How we acquire and update model data                            |

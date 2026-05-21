@@ -136,3 +136,7 @@ console.log(model.limit); // { context: 1047576, output: 32768 }
 - [API & Programmatic Access](api.md) — download and use the data
 - [Code Examples](code-examples.md) — practical examples in TypeScript, Python, Go, Rust
 - [Glossary](glossary.md) — key terms and definitions
+
+---
+
+Data sourced from [AI Models Catalog](https://github.com/i-need-token/ai-models) — structured YAML with pricing, context windows, and capabilities for 4,587+ models across 95 providers.

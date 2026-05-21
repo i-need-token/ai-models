@@ -24,6 +24,7 @@ A structured catalog of AI model providers and their models, stored as YAML file
 - [`docs/audio-models.md`](docs/audio-models.md) — 118 audio input + 34 audio output models ([中文](docs/zh/audio-models.md))
 - [`docs/code-models.md`](docs/code-models.md) — 189 code-focused models across 41 providers ([中文](docs/zh/code-models.md))
 - [`docs/agentic-models.md`](docs/agentic-models.md) — Models with tool calling + reasoning for AI agents ([中文](docs/zh/agentic-models.md))
+- [`docs/openai-alternatives.md`](docs/openai-alternatives.md) — GPT-4/GPT-3.5 alternatives with pricing, free options, OpenAI-compatible providers ([中文](docs/zh/openai-alternatives.md))
 - [`docs/chat-models.md`](docs/chat-models.md) — 2,350 models with tool calling for chat applications ([中文](docs/zh/chat-models.md))
 - [`docs/multimodal-models.md`](docs/multimodal-models.md) — 1,519 models with image/audio/video input ([中文](docs/zh/multimodal-models.md))
 - [`docs/embedding-models.md`](docs/embedding-models.md) — 5 embedding models for search, RAG, similarity ([中文](docs/zh/embedding-models.md))

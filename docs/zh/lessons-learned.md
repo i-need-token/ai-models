@@ -298,3 +298,7 @@
 - [提供商概览](providers.md) — 95 个提供商
 - [常见问题](faq.md) — 常见问题
 - [贡献指南](https://github.com/i-need-token/ai-models/blob/main/CONTRIBUTING.md) — 如何贡献
+
+---
+
+数据来源于 [AI Models Catalog](https://github.com/i-need-token/ai-models) — 结构化 YAML，包含 95 个提供商 4,587+ 模型的定价、上下文窗口和能力信息。
