@@ -34,6 +34,7 @@ keywords:
   - cached-pricing
   - audio-models
   - video-models
+  - code-models
   - modality-matrix
 license: MIT
 version: 0.1.0
