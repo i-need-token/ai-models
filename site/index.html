@@ -340,6 +340,20 @@
         color: var(--text-secondary);
         font-size: 13px;
       }
+      .export-btn {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 13px;
+        margin-left: 8px;
+      }
+      .export-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
       kbd {
         background: var(--surface);
         border: 1px solid var(--border);
@@ -407,6 +421,12 @@
         <button class="filter-btn" data-filter="video_input">📹 Video In</button>
       </div>
       <div class="result-count" id="resultCount"></div>
+      <button class="export-btn" onclick="exportCSV()" title="Export filtered results as CSV">
+        ⬇ Export CSV
+      </button>
+      <button class="export-btn" onclick="exportJSON()" title="Export filtered results as JSON">
+        ⬇ Export JSON
+      </button>
       <div class="table-wrap">
         <table>
           <thead>
@@ -765,6 +785,7 @@
         pagHtml += `<button onclick="goPage(${totalPages})" ${currentPage === totalPages ? "disabled" : ""}>»</button>`;
         pagHtml += `<span class="page-info">Page ${currentPage} of ${totalPages}</span>`;
         pag.innerHTML = pagHtml;
+        updateURL();
       }
 
       function goPage(p) {
@@ -778,6 +799,106 @@
         const d = document.createElement("div");
         d.textContent = s;
         return d.innerHTML;
+      }
+
+      // Export filtered results
+      function exportCSV() {
+        const cols = [
+          "id",
+          "provider",
+          "context",
+          "input_price",
+          "output_price",
+          "free",
+          "open_weights",
+          "reasoning",
+          "tool_call",
+          "structured_output",
+          "vision",
+          "audio_input",
+          "image_output",
+        ];
+        let csv = cols.join(",") + "\n";
+        filtered.forEach((m) => {
+          const ctx = (m.limit && m.limit.context) || m.context_window || "";
+          const inp =
+            m.pricing && m.pricing.unit === "free" ? 0 : (m.pricing && m.pricing.input) || "";
+          const out =
+            m.pricing && m.pricing.unit === "free" ? 0 : (m.pricing && m.pricing.output) || "";
+          const free = m.pricing && (m.pricing.input === 0 || m.pricing.unit === "free") ? 1 : 0;
+          const ow = m.open_weights ? 1 : 0;
+          const r = m.reasoning ? 1 : 0;
+          const tc = m.tool_call ? 1 : 0;
+          const so = m.structured_output ? 1 : 0;
+          const vis =
+            m.modalities && m.modalities.input && m.modalities.input.includes("image") ? 1 : 0;
+          const ai =
+            m.modalities && m.modalities.input && m.modalities.input.includes("audio") ? 1 : 0;
+          const io =
+            m.modalities && m.modalities.output && m.modalities.output.includes("image") ? 1 : 0;
+          csv +=
+            [m.id, m.provider, ctx, inp, out, free, ow, r, tc, so, vis, ai, io].join(",") + "\n";
+        });
+        const blob = new Blob([csv], { type: "text/csv" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "ai-models-filtered.csv";
+        a.click();
+      }
+
+      function exportJSON() {
+        const data = filtered.map((m) => ({
+          id: m.id,
+          provider: m.provider,
+          context: (m.limit && m.limit.context) || m.context_window || null,
+          pricing: m.pricing,
+          free: m.pricing && (m.pricing.input === 0 || m.pricing.unit === "free"),
+          open_weights: m.open_weights,
+          reasoning: m.reasoning,
+          tool_call: m.tool_call,
+          structured_output: m.structured_output,
+          modalities: m.modalities,
+        }));
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = "ai-models-filtered.json";
+        a.click();
+      }
+
+      // URL state — share filter views via URL params
+      function updateURL() {
+        const params = new URLSearchParams();
+        const q = document.getElementById("search").value;
+        const prov = document.getElementById("providerFilter").value;
+        if (q) params.set("q", q);
+        if (prov) params.set("provider", prov);
+        if (activeFilters.size) params.set("filters", [...activeFilters].join(","));
+        if (sortCol !== "id") params.set("sort", sortCol);
+        if (!sortAsc) params.set("dir", "desc");
+        if (currentPage > 1) params.set("page", currentPage);
+        const url = params.toString();
+        history.replaceState(null, "", url ? "?" + url : location.pathname);
+      }
+
+      function loadURL() {
+        const params = new URLSearchParams(location.search);
+        if (params.has("q")) document.getElementById("search").value = params.get("q");
+        if (params.has("provider"))
+          document.getElementById("providerFilter").value = params.get("provider");
+        if (params.has("filters")) {
+          params
+            .get("filters")
+            .split(",")
+            .forEach((f) => {
+              activeFilters.add(f);
+              const btn = document.querySelector(`.filter-btn[data-filter="${f}"]`);
+              if (btn) btn.classList.add("active");
+            });
+        }
+        if (params.has("sort")) sortCol = params.get("sort");
+        if (params.has("dir") && params.get("dir") === "desc") sortAsc = false;
+        if (params.has("page")) currentPage = parseInt(params.get("page")) || 1;
       }
 
       // Events
