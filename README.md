@@ -4,10 +4,10 @@
 
 **The most comprehensive structured catalog of AI models on GitHub**
 
-95 providers · 4,682 models · 2,807 unique model IDs · First-party data only
+95 providers · 4,587 model files · 2,712 unique model IDs · First-party data only
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Models](https://img.shields.io/badge/Models-4%2C682-green.svg)](providers/)
+[![Models](https://img.shields.io/badge/Models-4%2C587-green.svg)](providers/)
 [![Providers](https://img.shields.io/badge/Providers-95-orange.svg)](providers/)
 [![CI](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml/badge.svg)](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml)
 
@@ -24,7 +24,7 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 |                                         |                                                                           |
 | --------------------------------------- | ------------------------------------------------------------------------- |
 | 🔍 **Compare models at a glance**       | Pricing, context windows, capabilities — all in one place, all structured |
-| 📊 **4,682 models across 95 providers** | From OpenAI to Zhipu, from cloud APIs to open-weights                     |
+| 📊 **4,587 models across 95 providers** | From OpenAI to Zhipu, from cloud APIs to open-weights                     |
 | ✅ **First-party data only**            | Every data point comes from the provider's own API or docs                |
 | 🤖 **Machine-readable YAML**            | TypeScript types + Zod validation = programmatic access with confidence   |
 | 🔄 **Automated sync**                   | Scrape scripts pull fresh data from provider APIs                         |
@@ -34,8 +34,8 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 | Metric                      | Count |
 | --------------------------- | ----: |
 | Providers                   |    95 |
-| Model files                 | 4,682 |
-| Unique model IDs            | 2,807 |
+| Model files                 | 4,587 |
+| Unique model IDs            | 2,712 |
 | Model families              |   441 |
 | Reasoning models            | 1,306 |
 | Tool-calling models         | 2,350 |

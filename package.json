@@ -36,6 +36,7 @@
   "scripts": {
     "sync": "npx tsx scripts/sync.ts",
     "validate": "npx tsx scripts/validate.ts",
+    "stats": "npx tsx scripts/stats.ts",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "lint": "oxlint",

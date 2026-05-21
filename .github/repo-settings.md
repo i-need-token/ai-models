@@ -5,7 +5,7 @@ This file documents the recommended GitHub repository settings for discoverabili
 ## Repository Description
 
 ```
-Structured YAML catalog of 4,682 AI models across 95 providers — pricing, context windows, modalities, capabilities. First-party data with TypeScript types and Zod validation.
+Structured YAML catalog of 4,587 AI models across 95 providers — pricing, context windows, modalities, capabilities. First-party data with TypeScript types and Zod validation.
 ```
 
 ## Topics

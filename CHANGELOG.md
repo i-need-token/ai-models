@@ -7,7 +7,7 @@ All notable changes to the AI Models Catalog.
 ### Added
 
 - **95 providers** with structured YAML model data
-- **4,682 model files** covering 2,807 unique model IDs across 441 families
+- **4,587 model files** covering 2,712 unique model IDs across 441 families
 - TypeScript type definitions (`types/model.ts`, `types/pricing.ts`, `types/provider.ts`)
 - Zod runtime validation schemas (`types/schemas.ts`)
 - Automated scrape scripts for each provider (`providers/<id>/scrape.ts`)
