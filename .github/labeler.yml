@@ -1,0 +1,27 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: ["docs/**", "*.md", "README.md", "CONTRIBUTING.md"]
+
+data-update:
+  - changed-files:
+      - any-glob-to-any-file: ["providers/**/*.yaml", "providers/**/*.yml"]
+
+new-provider:
+  - changed-files:
+      - any-glob-to-any-file: ["providers/*/provider.yaml", "providers/*/scrape.ts"]
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: [".github/workflows/**", "action.yml"]
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file: ["package.json", "package-lock.json"]
+
+types:
+  - changed-files:
+      - any-glob-to-any-file: ["types/**"]
+
+scripts:
+  - changed-files:
+      - any-glob-to-any-file: ["scripts/**"]
