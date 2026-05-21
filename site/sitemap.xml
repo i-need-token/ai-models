@@ -26,6 +26,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/chat-models</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://i-need-token.github.io/ai-models/docs/code-examples</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -47,6 +52,11 @@
   </url>
   <url>
     <loc>https://i-need-token.github.io/ai-models/docs/data-schema</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/embedding-models</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -87,6 +97,11 @@
   </url>
   <url>
     <loc>https://i-need-token.github.io/ai-models/docs/model-selection</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/multimodal-models</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

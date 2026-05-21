@@ -122,6 +122,9 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 | 🎯 **Choose the right model**  | [Model selection guide](docs/model-selection.md) — decision framework                   |
 | 💸 **Optimize API costs**      | [Cached pricing](docs/cached-pricing.md) — 1,374 models with 50-90% savings             |
 | 🧪 **Prototype for free**      | [Free models](docs/free-models.md) — 81 models at zero cost                             |
+| 💬 **Build chat apps**         | [Chat models](docs/chat-models.md) — 2,350 models with tool calling                     |
+| 🖼️ **Process images/audio**    | [Multimodal models](docs/multimodal-models.md) — 1,519 models with vision/audio/video   |
+| 🔎 **Power semantic search**   | [Embedding models](docs/embedding-models.md) — vector search & RAG                      |
 
 ## Quick Numbers
 
@@ -442,6 +445,9 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [Audio Models](docs/audio-models.md)                                | 118 audio input + 34 audio output models                        |
 | [Code Models](docs/code-models.md)                                  | 189 code-focused models across 41 providers                     |
 | [Agentic Models](docs/agentic-models.md)                            | 1,080 models with tool calling + reasoning for AI agents        |
+| [Chat Models](docs/chat-models.md)                                  | 2,350 models with tool calling for chat applications            |
+| [Multimodal Models](docs/multimodal-models.md)                      | 1,519 models with image/audio/video input                       |
+| [Embedding Models](docs/embedding-models.md)                        | 5 embedding models for search, RAG, similarity                  |
 | [Video Models](docs/video-models.md)                                | 167 video input + 4 video output models                         |
 | [Structured Output](docs/structured-output.md)                      | 829 JSON-mode models — cheapest, free, with tool calling        |
 | [🔍 Interactive Catalog](https://i-need-token.github.io/ai-models/) | Search, sort, and filter all 4,587 models in your browser       |

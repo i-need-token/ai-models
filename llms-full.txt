@@ -332,6 +332,9 @@ by_context = sorted(
 - [Audio Models](docs/audio-models.md) — 118 audio input + 34 audio output models
 - [Code Models](docs/code-models.md) — 189 code-focused models across 41 providers
 - [Agentic Models](docs/agentic-models.md) — models with tool calling + reasoning for AI agents
+- [Chat Models](docs/chat-models.md) — 2,350 models with tool calling for chat applications
+- [Multimodal Models](docs/multimodal-models.md) — 1,519 models with image/audio/video input
+- [Embedding Models](docs/embedding-models.md) — 5 embedding models for search, RAG, similarity
 - [Video Models](docs/video-models.md) — 167 video input + 4 video output models
 - [Structured Output](docs/structured-output.md) — 829 JSON-mode models
 - [Modality Matrix](docs/modality-matrix.md) — vision, image gen, audio, video

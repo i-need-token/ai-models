@@ -37,6 +37,9 @@ keywords:
   - code-models
   - agentic-models
   - modality-matrix
+  - chat-models
+  - multimodal-models
+  - embedding-models
 license: MIT
 version: 0.1.0
 date-released: "2026-05-21"
