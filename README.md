@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🤖 AI Models Catalog
+# 🤖 AI Models Catalog [![Awesome](https://awesome.re/badge-flat2.svg)](https://github.com/sindresorhus/awesome)
 
 **The most comprehensive structured catalog of AI models on GitHub**
 
