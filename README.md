@@ -389,15 +389,17 @@ See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScri
   run: |
     echo "Models: ${{ steps.catalog.outputs.model-count }}"
     echo "Providers: ${{ steps.catalog.outputs.provider-count }}"
+    echo "File: ${{ steps.catalog.outputs.file-path }}"
 ```
 
-Filter models with [JMESPath](https://jmespath.org/):
+Download a specific version or format:
 
 ```yaml
 - uses: i-need-token/ai-models@main
-  id: tool-models
   with:
-    filter: "models[?tool_call==`true`]" # only tool-calling models
+    version: v0.1.0 # specific release tag
+    format: csv # csv or json
+    output-dir: data # directory to save files
 ```
 
 See [`action.yml`](action.yml) for all inputs and outputs.
