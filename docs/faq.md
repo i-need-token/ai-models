@@ -75,7 +75,7 @@ Yes! Use the reusable GitHub Action:
     filter: "[?tool_call && open_weights]"
 ```
 
-See [API Documentation](api.md#github-action) for details.
+See [API Documentation](api.md) for details.
 
 ## Contributing
 
