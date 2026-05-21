@@ -1099,6 +1099,118 @@
         if (el.style.display !== "none") updateCalc();
       }
 
+      function togglePicker() {
+        const el = document.getElementById("picker");
+        el.style.display = el.style.display === "none" ? "block" : "none";
+        if (el.style.display !== "none") updatePicker();
+      }
+
+      function updatePicker() {
+        const task = document.getElementById("pickerTask").value;
+        const budget = document.getElementById("pickerBudget").value;
+        const AGGREGATORS = new Set([
+          "openrouter",
+          "requesty",
+          "auriko",
+          "llmgateway",
+          "cortecs",
+          "aihubmix",
+          "orcarouter",
+          "fastrouter",
+          "302ai",
+          "martian",
+          "nanogpt",
+          "jiekou",
+          "venice",
+          "meganova",
+        ]);
+        let pool = models.filter((m) => !AGGREGATORS.has(m.provider));
+        if (budget === "free") pool = pool.filter((m) => m.pricing && m.pricing.unit === "free");
+        else if (budget === "low")
+          pool = pool.filter((m) => m.pricing && m.pricing.unit !== "free" && m.pricing.input < 1);
+        else if (budget === "mid")
+          pool = pool.filter(
+            (m) =>
+              m.pricing &&
+              m.pricing.unit !== "free" &&
+              m.pricing.input >= 1 &&
+              m.pricing.input <= 5,
+          );
+        else if (budget === "high") pool = pool.filter((m) => m.pricing && m.pricing.input > 5);
+        let scored = pool
+          .map((m) => {
+            let s = 0;
+            if (task === "chat") {
+              if (m.modalities) s += 1;
+              if (m.tool_call) s += 1;
+            } else if (task === "code") {
+              if (m.code) s += 3;
+              if (m.reasoning) s += 1;
+            } else if (task === "agent") {
+              if (m.tool_call) s += 3;
+              if (m.reasoning) s += 1;
+            } else if (task === "reasoning") {
+              if (m.reasoning) s += 3;
+            } else if (task === "vision") {
+              if (m.modalities && m.modalities.input && m.modalities.input.includes("image"))
+                s += 3;
+            } else if (task === "cheap") {
+              if (m.pricing && m.pricing.input > 0) s = 1000 / m.pricing.input;
+            } else if (task === "free") {
+              if (m.pricing && m.pricing.unit === "free") s += 1;
+            } else if (task === "large") {
+              if (m.limit && m.limit.context) s = m.limit.context;
+            }
+            return { ...m, score: s };
+          })
+          .filter((m) => m.score > 0)
+          .sort((a, b) => b.score - a.score);
+        const top5 = scored.slice(0, 5);
+        if (!top5.length) {
+          document.getElementById("pickerResult").innerHTML = "No matching models found";
+          return;
+        }
+        document.getElementById("pickerResult").innerHTML = top5
+          .map((m, i) => {
+            const price =
+              m.pricing && m.pricing.unit === "free"
+                ? "Free"
+                : m.pricing
+                  ? "$" + m.pricing.input + "/$" + m.pricing.output
+                  : "N/A";
+            const ctx =
+              m.limit && m.limit.context
+                ? m.limit.context >= 1000000
+                  ? m.limit.context / 1000000 + "M"
+                  : m.limit.context / 1000 + "K"
+                : "?";
+            const badges = [
+              m.tool_call ? "🔧" : "",
+              m.reasoning ? "🧠" : "",
+              m.modalities && m.modalities.input && m.modalities.input.includes("image")
+                ? "👁️"
+                : "",
+            ]
+              .filter(Boolean)
+              .join(" ");
+            return (
+              '<span class="price">' +
+              (i + 1) +
+              ". " +
+              m.id +
+              "</span> (" +
+              m.provider +
+              ") — " +
+              price +
+              " · " +
+              ctx +
+              " ctx " +
+              badges
+            );
+          })
+          .join("<br>");
+      }
+
       function updateCalc() {
         const inputTokens = parseInt(document.getElementById("calcInput").value) || 0;
         const outputTokens = parseInt(document.getElementById("calcOutput").value) || 0;
