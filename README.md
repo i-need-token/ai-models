@@ -279,39 +279,41 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 
 ## Documentation
 
-| Document                                                | Description                                                     |
+| Document | Description |
+| [Tool Calling Models](docs/tool-calling.md) | 2,350 tool-calling models — cheapest, largest context, free |
 | ------------------------------------------------------- | --------------------------------------------------------------- |
-| [Quick Start Guide](docs/quick-start.md)                | Find the right model in 30 seconds                              |
-| [API & Programmatic Access](docs/api.md)                | Download models.json, code examples in JS/Python                |
-| [Model Comparison](docs/model-comparison.md)            | Compare flagship, cost-effective, free, and open-weight models  |
-| [Pricing Comparison](docs/pricing-comparison.md)        | Side-by-side pricing across providers and platforms             |
-| [Modality Matrix](docs/modality-matrix.md)              | Vision, image gen, audio, video — which models support what     |
-| [Context Window Comparison](docs/context-windows.md)    | Largest context windows, best value per tier                    |
-| [Free AI Models](docs/free-models.md)                   | 81 free models — tool calling, reasoning, vision at no cost     |
-| [Open-Weight Models](docs/open-weights.md)              | 513 open-weight models — run on your own infrastructure         |
-| [Reasoning Models](docs/reasoning-models.md)            | 1,306 reasoning models — chain-of-thought and extended thinking |
-| [Provider Overview](docs/providers.md)                  | All 95 providers organized by type and market                   |
-| [Data Schema Reference](docs/data-schema.md)            | Complete YAML schema — model, pricing, snapshot, provider       |
-| [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data                            |
-| [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog                       |
+| [Quick Start Guide](docs/quick-start.md) | Find the right model in 30 seconds |
+| [API & Programmatic Access](docs/api.md) | Download models.json, code examples in JS/Python |
+| [Model Comparison](docs/model-comparison.md) | Compare flagship, cost-effective, free, and open-weight models |
+| [Pricing Comparison](docs/pricing-comparison.md) | Side-by-side pricing across providers and platforms |
+| [Modality Matrix](docs/modality-matrix.md) | Vision, image gen, audio, video — which models support what |
+| [Context Window Comparison](docs/context-windows.md) | Largest context windows, best value per tier |
+| [Free AI Models](docs/free-models.md) | 81 free models — tool calling, reasoning, vision at no cost |
+| [Open-Weight Models](docs/open-weights.md) | 513 open-weight models — run on your own infrastructure |
+| [Reasoning Models](docs/reasoning-models.md) | 1,306 reasoning models — chain-of-thought and extended thinking |
+| [Provider Overview](docs/providers.md) | All 95 providers organized by type and market |
+| [Data Schema Reference](docs/data-schema.md) | Complete YAML schema — model, pricing, snapshot, provider |
+| [Data Acquisition](docs/data-acquisition.md) | How we acquire and update model data |
+| [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog |
 
 **中文文档：**
 
-| 文档                                         | 描述                                        |
+| 文档 | 描述 |
+| [工具调用模型](docs/zh/tool-calling.md) | 2,350 个工具调用模型 — 最便宜、最大上下文、免费 |
 | -------------------------------------------- | ------------------------------------------- |
-| [快速入门](docs/zh/quick-start.md)           | 30 秒内找到适合的模型                       |
-| [API 与编程访问](docs/zh/api.md)             | 下载 models.json，JS/Python 代码示例        |
-| [模型对比](docs/zh/model-comparison.md)      | 旗舰、高性价比、免费和开源模型对比          |
-| [定价对比](docs/zh/pricing-comparison.md)    | 各提供商和平台定价并排对比                  |
-| [模态矩阵](docs/zh/modality-matrix.md)       | 视觉、图像生成、音频、视频 — 各模型支持什么 |
-| [上下文窗口对比](docs/zh/context-windows.md) | 最大上下文窗口，各层级最佳性价比            |
-| [免费 AI 模型](docs/zh/free-models.md)       | 81 个免费模型 — 工具调用、推理、视觉零成本  |
-| [开源权重模型](docs/zh/open-weights.md)      | 513 个开源权重模型 — 自有基础设施运行       |
-| [提供商概览](docs/zh/providers.md)           | 95 个提供商按类型和市场分类                 |
-| [推理模型](docs/zh/reasoning-models.md)      | 1,306 个推理模型 — 链式思维和扩展思考       |
-| [数据 Schema 参考](docs/zh/data-schema.md)   | 完整 YAML Schema — 模型、定价、快照、提供商 |
-| [数据采集](docs/zh/data-acquisition.md)      | 数据采集指南                                |
-| [设计原则与陷阱](docs/zh/lessons-learned.md) | 经验教训                                    |
+| [快速入门](docs/zh/quick-start.md) | 30 秒内找到适合的模型 |
+| [API 与编程访问](docs/zh/api.md) | 下载 models.json，JS/Python 代码示例 |
+| [模型对比](docs/zh/model-comparison.md) | 旗舰、高性价比、免费和开源模型对比 |
+| [定价对比](docs/zh/pricing-comparison.md) | 各提供商和平台定价并排对比 |
+| [模态矩阵](docs/zh/modality-matrix.md) | 视觉、图像生成、音频、视频 — 各模型支持什么 |
+| [上下文窗口对比](docs/zh/context-windows.md) | 最大上下文窗口，各层级最佳性价比 |
+| [免费 AI 模型](docs/zh/free-models.md) | 81 个免费模型 — 工具调用、推理、视觉零成本 |
+| [开源权重模型](docs/zh/open-weights.md) | 513 个开源权重模型 — 自有基础设施运行 |
+| [提供商概览](docs/zh/providers.md) | 95 个提供商按类型和市场分类 |
+| [推理模型](docs/zh/reasoning-models.md) | 1,306 个推理模型 — 链式思维和扩展思考 |
+| [数据 Schema 参考](docs/zh/data-schema.md) | 完整 YAML Schema — 模型、定价、快照、提供商 |
+| [数据采集](docs/zh/data-acquisition.md) | 数据采集指南 |
+| [设计原则与陷阱](docs/zh/lessons-learned.md) | 经验教训 |
 
 ## Design Principles
 
