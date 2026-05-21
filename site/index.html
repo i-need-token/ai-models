@@ -997,6 +997,16 @@
           `<span>🆓 ${free} free</span>` +
           `<span>🔓 ${openW} open weights</span>`;
 
+        // Family filter
+        const families = new Set(models.map((m) => m.family).filter(Boolean));
+        const famSel = document.getElementById("familyFilter");
+        [...families].sort().forEach((f) => {
+          const opt = document.createElement("option");
+          opt.value = f;
+          opt.textContent = f;
+          famSel.appendChild(opt);
+        });
+
         // Provider filter
         const sel = document.getElementById("providerFilter");
         [...providers].sort().forEach((p) => {
@@ -1017,6 +1027,8 @@
           if (q && !(m.id + " " + m.provider + " " + (m.family || "")).toLowerCase().includes(q))
             return false;
           if (prov && m.provider !== prov) return false;
+          const fam = document.getElementById("familyFilter").value;
+          if (fam && m.family !== fam) return false;
           for (const f of activeFilters) {
             if (
               f === "free" &&
