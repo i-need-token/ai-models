@@ -422,6 +422,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [Vision Models](docs/vision-models.md)                              | 1,487 vision models — cheapest, largest context, open-weight    |
 | [Image Generation](docs/image-generation.md)                        | 28 image generation models — DALL·E, Imagen, GPT-5 Image        |
 | [Audio Models](docs/audio-models.md)                                | 118 audio input + 34 audio output models                        |
+| [Code Models](docs/code-models.md)                                  | 189 code-focused models across 41 providers                     |
 | [Video Models](docs/video-models.md)                                | 167 video input + 4 video output models                         |
 | [Structured Output](docs/structured-output.md)                      | 829 JSON-mode models — cheapest, free, with tool calling        |
 | [🔍 Interactive Catalog](https://i-need-token.github.io/ai-models/) | Search, sort, and filter all 4,587 models in your browser       |
