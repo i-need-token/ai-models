@@ -320,7 +320,7 @@ by_context = sorted(
 - [Glossary](docs/glossary.md) — key terms and definitions for AI model terminology
 - [Model Comparison](docs/model-comparison.md) — flagship, cost-effective, free, open-weight
 - [Pricing Comparison](docs/pricing-comparison.md) — side-by-side pricing across providers
-- [Cached Pricing](docs/cached-pricing.md) — 75 models with prompt caching, 50-90% input cost savings
+- [Cached Pricing](docs/cached-pricing.md) — 1,374 models with prompt caching, 50-90% input cost savings
 - [Context Window Comparison](docs/context-windows.md) — largest context windows, best value
 - [Free AI Models](docs/free-models.md) — 81 free models by capability
 - [Open-Weight Models](docs/open-weights.md) — 513 open-weight models
