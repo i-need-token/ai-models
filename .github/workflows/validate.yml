@@ -1,0 +1,58 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "providers/**/*.yaml"
+      - "providers/**/*.yml"
+      - "types/**"
+      - "scripts/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - "providers/**/*.yaml"
+      - "providers/**/*.yml"
+      - "types/**"
+      - "scripts/**"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate YAML data
+        run: npx tsx scripts/validate.ts
+
+      - name: Type check
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npm run lint
+
+  stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Count providers
+        id: count
+        run: |
+          providers=$(ls providers/ | wc -l | tr -d ' ')
+          models=$(find providers -name "*.yaml" -o -name "*.yml" | wc -l | tr -d ' ')
+          echo "providers=$providers" >> "$GITHUB_OUTPUT"
+          echo "models=$models" >> "$GITHUB_OUTPUT"
+
+      - name: Report stats
+        run: |
+          echo "📊 Catalog Stats"
+          echo "Providers: ${{ steps.count.outputs.providers }}"
+          echo "Model files: ${{ steps.count.outputs.models }}"
