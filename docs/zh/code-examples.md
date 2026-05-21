@@ -14,6 +14,13 @@ curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/mode
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
 ```
 
+或使用 [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models)（无需下载，支持 CORS）：
+
+```bash
+# 始终最新，可在浏览器中使用
+curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
+```
+
 ## TypeScript / JavaScript
 
 ### 安装 npm 包

@@ -18,7 +18,7 @@
 
 Machine-readable YAML catalog of every major AI model provider and their models — pricing, context windows, modalities, capabilities, and more. All data sourced from first-party APIs and official documentation, never third-party aggregators.
 
-**[Quick start →](docs/quick-start.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)** · **[Download CSV →](https://github.com/i-need-token/ai-models/releases/latest/download/models.csv)**
+**[Quick start →](docs/quick-start.md)** · **[Compare pricing →](docs/pricing-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)** · **[Download CSV →](https://github.com/i-need-token/ai-models/releases/latest/download/models.csv)** · **[CDN access →](https://cdn.jsdelivr.net/npm/ai-models@latest/models.json)**
 
 ## Why This Catalog?
 
@@ -265,6 +265,32 @@ curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/mode
 
 # CSV — flat table for Excel/Google Sheets (560 KB)
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
+```
+
+### CDN Access (no install)
+
+The compiled JSON is available via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models) — no download or install needed:
+
+```html
+<!-- Use in any HTML page -->
+<script type="module">
+  const catalog = await fetch("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").then(
+    (r) => r.json(),
+  );
+  console.log(catalog.models.length); // 4,587
+</script>
+```
+
+```bash
+# Direct curl (always up-to-date)
+curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
+```
+
+```python
+# Python — no pip install needed
+import urllib.request, json
+catalog = json.loads(urllib.request.urlopen("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").read())
+print(len(catalog["models"]))  # 4587
 ```
 
 See [API & Programmatic Access](docs/api.md) for full usage examples in JavaScript and Python.

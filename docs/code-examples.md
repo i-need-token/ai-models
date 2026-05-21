@@ -14,6 +14,13 @@ curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/mode
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
 ```
 
+Or use the [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models) (no download needed, CORS-enabled):
+
+```bash
+# Always up-to-date, works in browsers
+curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
+```
+
 ## TypeScript / JavaScript
 
 ### Install the npm package

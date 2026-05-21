@@ -77,6 +77,24 @@ curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/mode
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
 ```
 
+### CDN 访问（无需安装）
+
+编译后的 JSON 可通过 [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models) 访问 — 无需下载或安装：
+
+```bash
+# 始终最新，支持 CORS，可在浏览器中使用
+curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
+```
+
+```html
+<script type="module">
+  const catalog = await fetch("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").then(
+    (r) => r.json(),
+  );
+  console.log(catalog.models.length);
+</script>
+```
+
 ### 从源码
 
 ```bash

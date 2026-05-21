@@ -41,6 +41,9 @@ curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/mode
 
 # CSV — flat table for Excel/Google Sheets (560 KB)
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
+
+# CDN (no install, CORS-enabled, always up-to-date)
+curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
 ```
 
 ## Data Format

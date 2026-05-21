@@ -26,6 +26,50 @@ The package includes:
 - `dist/index.d.ts` — TypeScript type definitions
 - `types/` — source type definitions (Model, Snapshot, Provider, Pricing)
 
+## CDN Access (No Install)
+
+The compiled JSON is available via [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models) — no download or install needed. The CDN automatically serves the latest npm release:
+
+```html
+<!-- Use in any HTML page -->
+<script type="module">
+  const catalog = await fetch("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").then(
+    (r) => r.json(),
+  );
+  console.log(catalog.models.length); // 4,587
+</script>
+```
+
+```bash
+# Direct curl (always up-to-date)
+curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
+
+# Pin to a specific version
+curl -s https://cdn.jsdelivr.net/npm/ai-models@0.1.0/models.json | jq '.stats'
+```
+
+```python
+# Python — no pip install needed
+import urllib.request, json
+catalog = json.loads(urllib.request.urlopen("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").read())
+print(len(catalog["models"]))  # 4587
+```
+
+```go
+// Go — no dependencies needed
+resp, err := http.Get("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json")
+```
+
+### CDN vs GitHub Releases
+
+| Feature       | jsDelivr CDN                                 | GitHub Releases                               |
+| ------------- | -------------------------------------------- | --------------------------------------------- |
+| URL stability | `cdn.jsdelivr.net/npm/ai-models@latest/...`  | `github.com/.../releases/latest/download/...` |
+| CORS          | ✅ Yes — works in browsers                   | ❌ No — download only                         |
+| Caching       | 7 days (versioned), 5 min (`@latest`)        | No caching                                    |
+| Speed         | Global CDN, 300+ edge locations              | GitHub CDN                                    |
+| Best for      | Web apps, browser scripts, quick prototyping | CLI tools, CI/CD, batch processing            |
+
 ## Compiled JSON
 
 All model data is available from [GitHub Releases](https://github.com/i-need-token/ai-models/releases/latest) in two formats:

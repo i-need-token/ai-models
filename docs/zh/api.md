@@ -26,6 +26,50 @@ const affordable = catalog.models.filter((m) => m.tool_call && m.pricing.input <
 - `dist/index.d.ts` — TypeScript 类型定义
 - `types/` — 源类型定义（Model、Snapshot、Provider、Pricing）
 
+## CDN 访问（无需安装）
+
+编译后的 JSON 可通过 [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models) 访问 — 无需下载或安装。CDN 自动提供最新的 npm 发布版本：
+
+```html
+<!-- 在任何 HTML 页面中使用 -->
+<script type="module">
+  const catalog = await fetch("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").then(
+    (r) => r.json(),
+  );
+  console.log(catalog.models.length); // 4,587
+</script>
+```
+
+```bash
+# 直接 curl（始终最新）
+curl -s https://cdn.jsdelivr.net/npm/ai-models@latest/models.json | jq '.models | length'
+
+# 锁定特定版本
+curl -s https://cdn.jsdelivr.net/npm/ai-models@0.1.0/models.json | jq '.stats'
+```
+
+```python
+# Python — 无需 pip install
+import urllib.request, json
+catalog = json.loads(urllib.request.urlopen("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json").read())
+print(len(catalog["models"]))  # 4587
+```
+
+```go
+// Go — 无需依赖
+resp, err := http.Get("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json")
+```
+
+### CDN 与 GitHub Releases 对比
+
+| 特性       | jsDelivr CDN                                | GitHub Releases                               |
+| ---------- | ------------------------------------------- | --------------------------------------------- |
+| URL 稳定性 | `cdn.jsdelivr.net/npm/ai-models@latest/...` | `github.com/.../releases/latest/download/...` |
+| CORS       | ✅ 支持 — 可在浏览器中使用                  | ❌ 不支持 — 仅下载                            |
+| 缓存       | 7 天（版本化），5 分钟（`@latest`）         | 无缓存                                        |
+| 速度       | 全球 CDN，300+ 边缘节点                     | GitHub CDN                                    |
+| 适用场景   | Web 应用、浏览器脚本、快速原型              | CLI 工具、CI/CD、批处理                       |
+
 ## 编译 JSON
 
 所有模型数据可以从 [GitHub Releases](https://github.com/i-need-token/ai-models/releases/latest) 下载，提供两种格式：
