@@ -1,8 +1,6 @@
 # AI Models Catalog
 
-> Structured YAML catalog of 4,587 AI models across 95 providers — pricing, context windows, modalities, capabilities. First-party data only.
-
-See [llms-full.txt](./llms-full.txt) for the complete data schema, pricing types, provider list, and usage examples.
+> Structured YAML catalog of 4,587 AI models across 95 providers — pricing, context windows, modalities, capabilities. First-party data only. npm package available.
 
 ## What is this?
 
@@ -19,6 +17,10 @@ A machine-readable YAML catalog of every major AI model provider and their model
 - 527 open-weight models
 - 81 free models
 - 1,487 vision models
+- 829 structured output models
+- 28 image generation models
+- 118 audio input models
+- 167 video input models
 
 ## Install
 
@@ -64,11 +66,255 @@ limit:
 modalities:
   input: [text, image]
   output: [text]
+release_date: "2026-05-18"
+last_updated: "2026-05-18"
+```
+
+## Pricing Types
+
+| Type           | When                      | Example                         |
+| -------------- | ------------------------- | ------------------------------- |
+| `TokenPricing` | Per-million-token pricing | `input: 2.5, output: 10`        |
+| `VideoPricing` | Per-second pricing        | `unit: per_second, price: 0.03` |
+| `UnitPricing`  | Per-image or per-request  | `unit: per_image, price: 0.04`  |
+| `FreePricing`  | No cost                   | `unit: free`                    |
+
+## Covered Providers
+
+OpenAI, Anthropic, Google, Meta, DeepSeek, Alibaba Cloud, Mistral, xAI, Cohere, NVIDIA, IBM, Microsoft, Amazon Bedrock, Azure OpenAI, Google Vertex AI, OpenRouter, Together AI, Fireworks AI, Groq, Cerebras, DeepInfra, SiliconFlow, Novita AI, SambaNova, Cloudflare Workers AI, Chutes, Kluster AI, NanoGPT, and 75+ more.
+
+Full list: 01.AI, 302.AI, AI21 Labs, AIHubMix, AI/ML API, Aion Labs, Alibaba Cloud, Amazon Bedrock, Amazon Nova, Anthropic, Arcee AI, Auriko, Azure OpenAI, Baichuan AI, Baidu, Baseten, Berget, ByteDance, Cerebras, Chutes, Clarifai, CloudFerro Sherlock, Cloudflare Workers AI, Cohere, Cortecs, DInference, Databricks, DeepInfra, DeepSeek, DigitalOcean, evroc, FastRouter, Fireworks AI, FriendliAI, GMI Cloud, Google, Google Vertex AI, Groq, HPC-AI Cloud, Hyperbolic, IBM Granite, iFlytek SparkDesk, Inception Labs, InclusionAI, Inference.net, Kluster AI, LLM Gateway, Martian, MegaNova, Meta Llama, Microsoft Phi, MiniMax, Mistral AI, Mixlayer, MoArk AI, Moonshot AI, Morph, NanoGPT, Nebius, NeuralWatt, Nous Research, Novita AI, NVIDIA, OpenAI, OpenRouter, OrcaRouter, OVHcloud, PPIO, Perplexity, Privatemode AI, Qiniu AI, Regolo, Reka AI, Requesty, SambaNova, Sarvam AI, Scaleway, SiliconFlow, SiliconFlow CN, StepFun, SubModel, Tencent Cloud TokenHub, Tencent Hunyuan, TextSynth, Together AI, Upstage, Venice AI, Voyage AI, Vultr, Wafer, Writer, xAI Grok, Xiaomi, Zhipu AI, 接口 AI
+
+## Data Schema
+
+### Model Schema (Required Fields)
+
+| Field          | Type    | Description                              | Example                                    |
+| -------------- | ------- | ---------------------------------------- | ------------------------------------------ |
+| `id`           | string  | Stable model ID (no date suffix)         | `gpt-4o`, `claude-sonnet-4-5`              |
+| `name`         | string  | Display name                             | `GPT-4o`, `Claude Sonnet 4.5`              |
+| `family`       | string  | Model family (broad lineage)             | `gpt-4o`, `claude-sonnet`                  |
+| `pricing`      | Pricing | Model pricing (see below)                | —                                          |
+| `modalities`   | object  | Input/output modalities                  | `{ input: [text, image], output: [text] }` |
+| `last_updated` | string  | Last data update (YYYY-MM-DD or YYYY-MM) | `2024-08-06`                               |
+
+### Model Schema (Optional Fields)
+
+| Field               | Type    | Default | Description                      | Example                              |
+| ------------------- | ------- | ------- | -------------------------------- | ------------------------------------ |
+| `reasoning`         | boolean | `false` | Supports reasoning/thinking mode | `true`                               |
+| `temperature`       | boolean | `true`  | Supports temperature parameter   | `false`                              |
+| `tool_call`         | boolean | `false` | Supports tool/function calling   | `true`                               |
+| `attachment`        | boolean | `false` | Supports file attachments        | `true`                               |
+| `structured_output` | boolean | `false` | Supports structured/JSON output  | `true`                               |
+| `open_weights`      | boolean | `false` | Open-weight model                | `true`                               |
+| `deprecated`        | boolean | `false` | Deprecated but still accessible  | `true`                               |
+| `limit`             | object  | —       | Token limits                     | `{ context: 128000, output: 16384 }` |
+| `knowledge`         | string  | —       | Training data cutoff             | `2023-10`                            |
+| `release_date`      | string  | —       | Model release date               | `2024-05-13`                         |
+| `snapshots`         | array   | —       | Dated model versions             | See below                            |
+
+### Modality Types
+
+| Modality | Description           |
+| -------- | --------------------- |
+| `text`   | Text input or output  |
+| `image`  | Image input or output |
+| `video`  | Video input           |
+| `audio`  | Audio input or output |
+| `pdf`    | PDF document input    |
+
+### Pricing Schema
+
+Pricing is a union of four types:
+
+**TokenPricing** (most common — per-million-token pricing):
+
+```yaml
+pricing:
+  input: 2.5    # $/M input tokens
+  output: 10    # $/M output tokens
+  cache_write: 1.25  # optional
+  cache_read: 0.625  # optional
+```
+
+**VideoPricing** (per-second, optionally tiered by resolution):
+
+```yaml
+pricing:
+  unit: per_second
+  price: 0.03
+```
+
+**UnitPricing** (per-image or per-request):
+
+```yaml
+pricing:
+  unit: per_image
+  price: 0.04
+```
+
+**FreePricing** (no cost):
+
+```yaml
+pricing:
+  unit: free
+```
+
+### Snapshot Schema
+
+Snapshots represent dated versions of a model. They inherit all parent fields and only override what differs:
+
+```yaml
+id: gpt-4o
+name: GPT-4o
+snapshots:
+  - id: gpt-4o-2024-08-06
+    last_updated: "2024-08-06"
+  - id: gpt-4o-2024-05-13
+    deprecated: true
+    last_updated: "2024-05-13"
+```
+
+### Provider Schema
+
+Each provider has a `provider.yaml` file:
+
+| Field            | Type   | Required | Description                          | Example                            |
+| ---------------- | ------ | -------- | ------------------------------------ | ---------------------------------- |
+| `id`             | string | ✅       | Provider ID (matches directory name) | `openai`                           |
+| `name`           | string | ✅       | Display name                         | `OpenAI`                           |
+| `url`            | string | ✅       | Official website URL                 | `https://openai.com`               |
+| `api_docs`       | string | ❌       | API documentation URL                | `https://platform.openai.com/docs` |
+| `apis`           | object | ✅       | API endpoints keyed by format        | See below                          |
+| `apis.openai`    | string | ❌       | OpenAI-compatible API endpoint       | `https://api.openai.com/v1`        |
+| `apis.anthropic` | string | ❌       | Anthropic API endpoint               | —                                  |
+| `apis.google`    | string | ❌       | Google AI API endpoint               | —                                  |
+| `currency`       | string | ❌       | Default currency (USD/CNY/EUR)       | `USD`                              |
+
+## Quick Start
+
+### Find the cheapest model
+
+→ See [Pricing Comparison](docs/pricing-comparison.md)
+
+**Cheapest models with tool calling:**
+
+| Model            | Provider      | Input (per 1M tokens) | Output (per 1M tokens) |
+| ---------------- | ------------- | --------------------: | ---------------------: |
+| DeepSeek-V3      | DeepSeek      |                 $0.27 |                  $1.10 |
+| Qwen3-235B-A22B  | Alibaba Cloud |                 $0.14 |                  $0.42 |
+| Llama 4 Maverick | Together AI   |                 $0.20 |                  $0.80 |
+
+### Find the most capable model
+
+→ See [Model Comparison](docs/model-comparison.md)
+
+**Top-tier flagships:**
+
+| Model          | Context | Tool Call | Vision | Input $/1M | Output $/1M |
+| -------------- | ------- | --------- | ------ | ---------: | ----------: |
+| GPT-4.1        | 1M      | ✅        | ✅     |      $2.00 |       $8.00 |
+| Claude Opus 4  | 200K    | ✅        | ✅     |     $15.00 |      $75.00 |
+| Gemini 2.5 Pro | 1M      | ✅        | ✅     |      $1.25 |      $10.00 |
+
+### Find a free model
+
+→ See [Free AI Models](docs/free-models.md)
+
+- Google Gemini 2.0 Flash (1M context, tool calling, vision, reasoning)
+- 70+ models on Chutes (Llama 4, Qwen3, DeepSeek-R1, etc.)
+
+### Find the largest context window
+
+→ See [Context Window Comparison](docs/context-windows.md)
+
+| Model           | Context Window |
+| --------------- | -------------: |
+| Llama 4 Scout   |     10M tokens |
+| Gemini 2.5 Pro  |      1M tokens |
+| GPT-4.1         |     ~1M tokens |
+
+## Programmatic Access
+
+### npm package
+
+```bash
+npm install ai-models
+```
+
+```typescript
+import catalog from "ai-models"; // 4,587 models as JSON
+import type { Model } from "ai-models"; // TypeScript types
+
+// Find models with tool calling under $1/1M input
+const affordable = catalog.models.filter((m) => m.tool_call && m.pricing.input < 1);
+```
+
+### Download data files
+
+```bash
+# JSON — full metadata (2.3 MB)
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
+
+# CSV — flat table for Excel/Google Sheets (560 KB)
+curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
+```
+
+### Python usage
+
+```python
+import json
+
+with open("models.json") as f:
+    catalog = json.load(f)
+
+# Find all reasoning models
+reasoning = [m for m in catalog["models"] if m.get("reasoning")]
+
+# Find models with largest context windows
+by_context = sorted(
+    catalog["models"],
+    key=lambda m: (m.get("limit", {}) or {}).get("context", 0),
+    reverse=True,
+)[:10]
+```
+
+### JSON structure
+
+```json
+{
+  "generated_at": "2026-05-21T02:13:04.076Z",
+  "stats": {
+    "providers": 95,
+    "models": 4587,
+    "unique_model_ids": 2712,
+    "families": 441
+  },
+  "providers": {
+    "openai": { "name": "OpenAI", "model_count": 28 },
+    "anthropic": { "name": "Anthropic", "model_count": 11 }
+  },
+  "models": [
+    {
+      "id": "gpt-4.1",
+      "name": "GPT-4.1",
+      "family": "gpt-4.1",
+      "provider": "openai",
+      "tool_call": true,
+      "structured_output": true,
+      "pricing": { "input": 2, "output": 8, "cache_read": 0.5 },
+      "limit": { "context": 1047576, "output": 32768 },
+      "modalities": { "input": ["text", "image"], "output": ["text"] }
+    }
+  ]
+}
 ```
 
 ## Documentation
 
 - [Quick Start](docs/quick-start.md) — find the right model in 30 seconds
+- [Model Selection Guide](docs/model-selection.md) — decision framework: free, best value, large context models
 - [API & Programmatic Access](docs/api.md) — download models.json, code examples
 - [Code Examples](docs/code-examples.md) — practical examples in TypeScript, Python, Go, Rust, jq
 - [FAQ](docs/faq.md) — frequently asked questions about the catalog, data, and contributing
@@ -92,6 +338,40 @@ modalities:
 - [Data Acquisition](docs/data-acquisition.md) — how we acquire and update data
 - [Design Principles](docs/lessons-learned.md) — lessons learned
 
-## Covered Providers
+## Design Principles
 
-OpenAI, Anthropic, Google, Meta, DeepSeek, Alibaba Cloud, Mistral, xAI, Cohere, NVIDIA, IBM, Microsoft, Amazon Bedrock, Azure OpenAI, Google Vertex AI, OpenRouter, Together AI, Fireworks AI, Groq, Cerebras, DeepInfra, and 75+ more.
+- **First-party data only** — all model data comes from the provider's own API or website
+- **Dynamic discovery** — scrape functions discover models from the source, not from hardcoded lists
+- **Include deprecated, exclude retired** — deprecated models are included with `deprecated: true`; retired (inaccessible) models are excluded
+- **Never fabricate data** — if required data is missing, skip the model with a warning rather than filling in guessed values
+- **YAML source format** — human-readable, supports comments, machine-parseable
+- **Snapshot inheritance** — dated model versions are nested within the parent model, inheriting all fields
+
+## Adding a New Provider
+
+1. Create `providers/<id>/scrape.ts` with a `scrape()` function that returns `{ provider, models }`
+2. Data must come from a first-party source (provider's API or website)
+3. Include a discovery step — no hardcoded model ID lists
+4. Run `npx tsx scripts/sync.ts <id>` to generate initial data
+5. Validate with `npx tsx scripts/validate.ts`
+
+## CLI Tools
+
+```bash
+# Validate all YAML data
+npx tsx scripts/validate.ts
+
+# Compute catalog statistics
+npx tsx scripts/stats.ts          # table format
+npx tsx scripts/stats.ts json     # JSON format
+
+# Compile to models.json
+npx tsx scripts/compile.ts
+
+# Sync data from providers
+npx tsx scripts/sync.ts openai    # single provider
+npx tsx scripts/sync.ts           # all providers
+
+# Export to CSV
+npx tsx scripts/export-csv.ts
+```
