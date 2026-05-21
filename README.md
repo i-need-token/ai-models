@@ -276,6 +276,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [Pricing Comparison](docs/pricing-comparison.md)        | Side-by-side pricing across providers and platforms            |
 | [Modality Matrix](docs/modality-matrix.md)              | Vision, image gen, audio, video — which models support what    |
 | [Context Window Comparison](docs/context-windows.md)    | Largest context windows, best value per tier                   |
+| [Free AI Models](docs/free-models.md)                   | 81 free models — tool calling, reasoning, vision at no cost    |
 | [Provider Overview](docs/providers.md)                  | All 95 providers organized by type and market                  |
 | [Data Schema Reference](docs/data-schema.md)            | Complete YAML schema — model, pricing, snapshot, provider      |
 | [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data                           |
@@ -291,6 +292,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [定价对比](docs/zh/pricing-comparison.md)    | 各提供商和平台定价并排对比                  |
 | [模态矩阵](docs/zh/modality-matrix.md)       | 视觉、图像生成、音频、视频 — 各模型支持什么 |
 | [上下文窗口对比](docs/zh/context-windows.md) | 最大上下文窗口，各层级最佳性价比            |
+| [免费 AI 模型](docs/zh/free-models.md)       | 81 个免费模型 — 工具调用、推理、视觉零成本  |
 | [提供商概览](docs/zh/providers.md)           | 95 个提供商按类型和市场分类                 |
 | [数据 Schema 参考](docs/zh/data-schema.md)   | 完整 YAML Schema — 模型、定价、快照、提供商 |
 | [数据采集](docs/zh/data-acquisition.md)      | 数据采集指南                                |
