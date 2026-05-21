@@ -7,6 +7,7 @@
 95 providers · 4,587 model files · 2,712 unique model IDs · First-party data only
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![npm version](https://img.shields.io/npm/v/ai-models.svg)](https://www.npmjs.com/package/ai-models)
 [![Models](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/i-need-token/ai-models/main/.github/badges/models.json)](providers/)
 [![Providers](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/i-need-token/ai-models/main/.github/badges/providers.json)](providers/)
 [![CI](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml/badge.svg)](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml)[![Star History](https://api.star-history.com/svg?repos=i-need-token/ai-models&type=Date)](https://star-history.com/#i-need-token/ai-models&Date)
