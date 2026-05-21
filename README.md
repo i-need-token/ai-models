@@ -373,7 +373,7 @@ curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/mode
   const catalog = await fetch(
     "https://github.com/i-need-token/ai-models/releases/latest/download/models.json",
   ).then((r) => r.json());
-  console.log(catalog.length); // 4,587
+  console.log(catalog.models.length); // 4,587
 </script>
 ```
 
@@ -381,7 +381,7 @@ curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/mode
 # Python — no pip install needed
 import urllib.request, json
 catalog = json.loads(urllib.request.urlopen("https://github.com/i-need-token/ai-models/releases/latest/download/models.json").read())
-print(len(catalog))  # 4587
+print(len(catalog['models']))  # 4587
 ```
 
 Once the npm package is published, you can also use [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models):
@@ -565,7 +565,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 - **Machine-readable YAML** — structured data with Zod validation, not just a web UI
 - **Multiple access formats** — npm, CDN, CSV, GitHub Action, Hugging Face dataset
 - **Comprehensive metadata** — pricing, context windows, modalities, capabilities, snapshots
-- **Bilingual docs** — 24 English + 24 Chinese documentation pages
+- **Bilingual docs** — 34 English + 34 Chinese documentation pages
 - **Open data** — all model data is open and programmatically accessible
 
 ## Ecosystem & Integrations
@@ -581,26 +581,18 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Roadmap
 
-- [ ] Embedding models documentation page
-- [ ] Provider comparison (side-by-side)
+- [x] ~~Embedding models documentation~~ → [docs/embedding-models.md](docs/embedding-models.md)
+- [x] ~~Provider comparison~~ → [docs/provider-comparison.md](docs/provider-comparison.md)
+- [x] ~~Large context models~~ → [docs/large-context-models.md](docs/large-context-models.md)
+- [x] ~~Small/edge models~~ → [docs/small-models.md](docs/small-models.md)
+- [x] ~~Migration guide~~ → [docs/migration-guide.md](docs/migration-guide.md)
 - [ ] Model benchmarking data integration
 - [ ] Streaming support metadata
 - [ ] Fine-tuning availability tracking
 - [ ] Regional availability data
 - [ ] Community-contributed model reviews
-
-- [ ] Add embedding models documentation
-- [ ] Add provider comparison page
-- [ ] Add model benchmarking data
-- [ ] Add streaming support metadata
-- [ ] Add fine-tuning availability tracking
-- [ ] Add regional availability data
-- [ ] Community-contributed model reviews
-
-- 🔜 **More providers** — continuously adding new AI model providers
 - 🔜 **REST API** — hosted API for querying the catalog
 - 🔜 **Historical pricing** — track pricing changes over time
-- 🔜 **Model benchmarks** — integrate performance benchmarks from standard benchmarks
 - 🔜 **Community scrapers** — enable community-contributed scrape scripts with automated validation
 
 ## Who's Using This?
@@ -634,10 +626,10 @@ Want to contribute? Check out [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 | Date    | Milestone                                                   |
 | ------- | ----------------------------------------------------------- |
-| 2026-05 | 🚀 Public launch — 4,587 models, 95 providers, 66 docs      |
+| 2026-05 | 🚀 Public launch — 4,587 models, 95 providers, 68 docs      |
 | 2026-05 | 📊 Interactive catalog live at GitHub Pages                 |
 | 2026-05 | 📦 npm package, CSV export, GitHub Action                   |
-| 2026-05 | 🌐 Bilingual docs — 33 EN + 33 ZH pages                     |
+| 2026-05 | 🌐 Bilingual docs — 34 EN + 34 ZH pages                     |
 | 2026-05 | 🤖 1,080 agentic models, 2,350 tool-calling models          |
 | Future  | 📈 More providers, REST API, historical pricing, benchmarks |
 
