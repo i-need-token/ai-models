@@ -2,122 +2,137 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://i-need-token.github.io/ai-models/</loc>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/quick-start.md</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/api.md</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/faq.md</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/glossary.md</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/data-schema.md</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/providers.md</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/model-comparison.md</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/pricing-comparison.md</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/context-windows.md</loc>
+    <loc>https://i-need-token.github.io/ai-models/docs/agentic-models</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/modality-matrix.md</loc>
+    <loc>https://i-need-token.github.io/ai-models/docs/api</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/reasoning-models.md</loc>
+    <loc>https://i-need-token.github.io/ai-models/docs/audio-models</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/tool-calling.md</loc>
+    <loc>https://i-need-token.github.io/ai-models/docs/cached-pricing</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/structured-output.md</loc>
+    <loc>https://i-need-token.github.io/ai-models/docs/code-examples</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/vision-models.md</loc>
+    <loc>https://i-need-token.github.io/ai-models/docs/code-models</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/video-models.md</loc>
+    <loc>https://i-need-token.github.io/ai-models/docs/context-windows</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/audio-models.md</loc>
+    <loc>https://i-need-token.github.io/ai-models/docs/data-acquisition</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/image-generation.md</loc>
+    <loc>https://i-need-token.github.io/ai-models/docs/data-schema</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/free-models.md</loc>
+    <loc>https://i-need-token.github.io/ai-models/docs/faq</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/open-weights.md</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/code-examples.md</loc>
-    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/data-acquisition.md</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://i-need-token.github.io/ai-models/docs/free-models</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/docs/lessons-learned.md</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <loc>https://i-need-token.github.io/ai-models/docs/glossary</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://github.com/i-need-token/ai-models/blob/main/CONTRIBUTING.md</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <loc>https://i-need-token.github.io/ai-models/docs/image-generation</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/lessons-learned</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/modality-matrix</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/model-comparison</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/model-selection</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/open-weights</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/pricing-comparison</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/providers</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/quick-start</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/reasoning-models</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/structured-output</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/tool-calling</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/video-models</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://i-need-token.github.io/ai-models/docs/vision-models</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

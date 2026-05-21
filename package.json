@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "description": "Structured YAML catalog of 4,587 AI models across 95 providers — pricing, context windows, modalities, capabilities. First-party data with TypeScript types and Zod validation.",
   "keywords": [
+    "agentic-models",
+    "ai-agents",
     "ai-catalog",
     "ai-directory",
     "ai-model-pricing",
