@@ -381,6 +381,51 @@
         border-color: var(--accent);
         color: var(--accent);
       }
+      .calculator {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 12px 16px;
+        margin-top: 8px;
+      }
+      .calc-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .calc-inputs {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+      }
+      .calc-inputs label {
+        font-size: 12px;
+        color: var(--text-secondary);
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .calc-inputs input {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 6px 10px;
+        color: var(--text);
+        font-size: 13px;
+        width: 180px;
+      }
+      .calc-result {
+        font-size: 13px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+      }
+      .calc-result .price {
+        color: var(--accent);
+        font-weight: 600;
+      }
       kbd {
         background: var(--surface);
         border: 1px solid var(--border);
@@ -495,6 +540,48 @@
         </div>
       </div>
       <div class="stats" id="stats"></div>
+      <div class="calculator" id="calculator" style="display: none">
+        <div class="calc-header">
+          <span>💰 Price Calculator</span>
+          <button
+            onclick="toggleCalc()"
+            style="
+              background: none;
+              border: none;
+              color: var(--text-secondary);
+              cursor: pointer;
+              font-size: 16px;
+            "
+          >
+            ✕
+          </button>
+        </div>
+        <div class="calc-inputs">
+          <label
+            >Input tokens/month
+            <input
+              type="number"
+              id="calcInput"
+              value="1000000"
+              min="0"
+              step="100000"
+              onchange="updateCalc()"
+              oninput="updateCalc()"
+          /></label>
+          <label
+            >Output tokens/month
+            <input
+              type="number"
+              id="calcOutput"
+              value="500000"
+              min="0"
+              step="100000"
+              onchange="updateCalc()"
+              oninput="updateCalc()"
+          /></label>
+        </div>
+        <div class="calc-result" id="calcResult"></div>
+      </div>
       <div class="controls">
         <input
           type="text"
@@ -996,6 +1083,43 @@
 
       function tag(cls, text) {
         return '<span class="tag ' + cls + '">' + text + "</span>";
+      }
+
+      // Price calculator
+      function toggleCalc() {
+        const el = document.getElementById("calculator");
+        el.style.display = el.style.display === "none" ? "block" : "none";
+        if (el.style.display !== "none") updateCalc();
+      }
+
+      function updateCalc() {
+        const inputTokens = parseInt(document.getElementById("calcInput").value) || 0;
+        const outputTokens = parseInt(document.getElementById("calcOutput").value) || 0;
+
+        const prices = filtered
+          .filter((m) => m.pricing && m.pricing.unit !== "free" && m.pricing.input > 0)
+          .map((m) => ({
+            id: m.id,
+            provider: m.provider,
+            monthly:
+              (inputTokens / 1e6) * m.pricing.input + (outputTokens / 1e6) * m.pricing.output,
+          }))
+          .sort((a, b) => a.monthly - b.monthly);
+
+        if (!prices.length) {
+          document.getElementById("calcResult").innerHTML = "No priced models in current filter";
+          return;
+        }
+
+        const cheapest = prices[0];
+        const median = prices[Math.floor(prices.length / 2)];
+        const mostExpensive = prices[prices.length - 1];
+
+        document.getElementById("calcResult").innerHTML =
+          `For <b>${(inputTokens / 1e6).toFixed(1)}M</b> input + <b>${(outputTokens / 1e6).toFixed(1)}M</b> output tokens/month across <b>${prices.length}</b> models:<br>` +
+          `💰 Cheapest: <span class="price">${cheapest.id}</span> ($${cheapest.monthly.toFixed(2)}/mo) · ` +
+          `Median: <span class="price">${median.id}</span> ($${median.monthly.toFixed(2)}/mo) · ` +
+          `Most expensive: <span class="price">${mostExpensive.id}</span> ($${mostExpensive.monthly.toFixed(2)}/mo)`;
       }
 
       // Export filtered results
