@@ -545,6 +545,22 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ## Roadmap
 
+- [ ] Embedding models documentation page
+- [ ] Provider comparison (side-by-side)
+- [ ] Model benchmarking data integration
+- [ ] Streaming support metadata
+- [ ] Fine-tuning availability tracking
+- [ ] Regional availability data
+- [ ] Community-contributed model reviews
+
+- [ ] Add embedding models documentation
+- [ ] Add provider comparison page
+- [ ] Add model benchmarking data
+- [ ] Add streaming support metadata
+- [ ] Add fine-tuning availability tracking
+- [ ] Add regional availability data
+- [ ] Community-contributed model reviews
+
 - 🔜 **More providers** — continuously adding new AI model providers
 - 🔜 **REST API** — hosted API for querying the catalog
 - 🔜 **Historical pricing** — track pricing changes over time
