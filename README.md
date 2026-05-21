@@ -549,6 +549,10 @@ Want to contribute? Check out [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 - 📋 [Changelog](CHANGELOG.md) — what's new in each release
 - 🔒 [Security Policy](SECURITY.md) — reporting vulnerabilities
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=i-need-token/ai-models&type=Date)](https://star-history.com/#i-need-token/ai-models&Date)
+
 ## Sponsors
 
 Support this project by [sponsoring us on GitHub](https://github.com/sponsors/i-need-token). Your sponsorship helps maintain and expand the catalog.
