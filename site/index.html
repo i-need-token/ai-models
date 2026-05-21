@@ -3,145 +3,176 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Models Catalog — Search & Compare 4,587 AI Models</title>
+    <title>AI Models Catalog — Interactive Explorer</title>
     <meta
       name="description"
-      content="Search and compare 4,587 AI models across 95 providers. Filter by pricing, context window, tool calling, vision, reasoning, and more."
+      content="Explore 4,587+ AI models across 95 providers. Search, filter, and compare models by pricing, context windows, modalities, and capabilities."
     />
-    <meta
-      name="keywords"
-      content="AI models, LLM pricing, model comparison, tool calling, vision models, reasoning models, open weights"
-    />
-    <meta property="og:title" content="AI Models Catalog — 4,587 Models, 95 Providers" />
+    <link rel="canonical" href="https://i-need-token.github.io/ai-models/" />
+    <meta property="og:title" content="AI Models Catalog — Interactive Explorer" />
     <meta
       property="og:description"
-      content="Search and compare AI models by pricing, context window, capabilities, and more."
+      content="Explore 4,587+ AI models across 95 providers. Search, filter, and compare models by pricing, context windows, modalities, and capabilities."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://i-need-token.github.io/ai-models/" />
+    <meta
+      property="og:image"
+      content="https://i-need-token.github.io/ai-models/social-preview.svg"
+    />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="640" />
     <meta name="twitter:card" content="summary_large_image" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>"
+    <meta name="twitter:title" content="AI Models Catalog — Interactive Explorer" />
+    <meta
+      name="twitter:description"
+      content="Explore 4,587+ AI models across 95 providers. Search, filter, and compare."
+    />
+    <meta
+      name="twitter:image"
+      content="https://i-need-token.github.io/ai-models/social-preview.svg"
     />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "SoftwareSourceCode",
         "name": "AI Models Catalog",
-        "description": "Structured catalog of 4,587 AI models across 95 providers with pricing, context windows, modalities, and capabilities metadata.",
+        "description": "Structured YAML catalog of AI model metadata from 95+ providers with pricing, context windows, modalities, and capabilities.",
         "url": "https://github.com/i-need-token/ai-models",
-        "codeRepository": "https://github.com/i-need-token/ai-models",
         "programmingLanguage": "TypeScript",
         "license": "https://opensource.org/licenses/MIT",
-        "author": {
-          "@type": "Organization",
-          "name": "i-need-token"
-        },
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        }
+        "codeRepository": "https://github.com/i-need-token/ai-models"
       }
     </script>
     <style>
       :root {
-        --bg: #0f1117;
-        --surface: #1a1d27;
-        --surface2: #242736;
-        --border: #2e3244;
-        --text: #e1e4ed;
-        --text2: #8b8fa3;
-        --accent: #6366f1;
-        --accent2: #818cf8;
-        --green: #22c55e;
-        --red: #ef4444;
-        --yellow: #eab308;
-        --blue: #3b82f6;
+        --bg: #0d1117;
+        --surface: #161b22;
+        --border: #30363d;
+        --text: #e6edf3;
+        --text-secondary: #8b949e;
+        --accent: #58a6ff;
+        --accent-hover: #79c0ff;
+        --green: #3fb950;
+        --yellow: #d29922;
+        --red: #f85149;
+        --purple: #bc8cff;
+      }
+      [data-theme="light"] {
+        --bg: #ffffff;
+        --surface: #f6f8fa;
+        --border: #d0d7de;
+        --text: #1f2328;
+        --text-secondary: #656d76;
+        --accent: #0969da;
+        --accent-hover: #0550ae;
+        --green: #1a7f37;
+        --yellow: #9a6700;
+        --red: #cf222e;
+        --purple: #8250df;
       }
       * {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
       }
       body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
         background: var(--bg);
         color: var(--text);
         line-height: 1.5;
       }
-      a {
-        color: var(--accent2);
-        text-decoration: none;
-      }
-      a:hover {
-        text-decoration: underline;
-      }
-
-      /* Header */
-      .header {
-        background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
-        border-bottom: 1px solid var(--border);
-        padding: 2rem 1rem;
-        text-align: center;
-      }
-      .header h1 {
-        font-size: 1.8rem;
-        margin-bottom: 0.25rem;
-      }
-      .header .subtitle {
-        color: var(--text2);
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
-      }
-      .header .stats {
-        display: flex;
-        gap: 1.5rem;
-        justify-content: center;
-        flex-wrap: wrap;
-        font-size: 0.85rem;
-        color: var(--text2);
-      }
-      .header .stats span {
-        color: var(--accent2);
-        font-weight: 600;
-      }
-
-      /* Controls */
-      .controls {
+      .container {
         max-width: 1400px;
         margin: 0 auto;
-        padding: 1rem;
+        padding: 16px;
+      }
+      .header {
         display: flex;
-        gap: 0.75rem;
+        justify-content: space-between;
+        align-items: center;
         flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .header h1 {
+        font-size: 1.5em;
+        font-weight: 600;
+      }
+      .header h1 a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .header-actions {
+        display: flex;
+        gap: 8px;
         align-items: center;
       }
-      .search-box {
-        flex: 1;
-        min-width: 200px;
-        padding: 0.6rem 1rem;
+      .theme-toggle {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 8px;
         color: var(--text);
-        font-size: 0.9rem;
-        outline: none;
+        padding: 6px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
       }
-      .search-box:focus {
+      .theme-toggle:hover {
         border-color: var(--accent);
       }
-      .filter-btn {
-        padding: 0.5rem 0.9rem;
+      .stats {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+        font-size: 0.85em;
+        color: var(--text-secondary);
+      }
+      .stats span {
+        background: var(--surface);
+        padding: 4px 10px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+      }
+      .controls {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      .controls input,
+      .controls select {
         background: var(--surface);
         border: 1px solid var(--border);
-        border-radius: 8px;
-        color: var(--text2);
-        font-size: 0.8rem;
+        color: var(--text);
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 14px;
+      }
+      .controls input {
+        flex: 1;
+        min-width: 200px;
+      }
+      .controls input:focus,
+      .controls select:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
+      .filter-bar {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 12px;
+      }
+      .filter-btn {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text-secondary);
+        padding: 4px 10px;
+        border-radius: 16px;
         cursor: pointer;
+        font-size: 12px;
         transition: all 0.15s;
-        white-space: nowrap;
       }
       .filter-btn:hover {
         border-color: var(--accent);
@@ -149,369 +180,419 @@
       }
       .filter-btn.active {
         background: var(--accent);
-        border-color: var(--accent);
         color: #fff;
-      }
-      .sort-select {
-        padding: 0.5rem 0.7rem;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        color: var(--text);
-        font-size: 0.8rem;
-        cursor: pointer;
-        outline: none;
+        border-color: var(--accent);
       }
       .result-count {
-        font-size: 0.85rem;
-        color: var(--text2);
-        padding: 0 1rem;
+        font-size: 0.85em;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
       }
-
-      /* Table */
       .table-wrap {
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0 1rem 2rem;
         overflow-x: auto;
       }
       table {
         width: 100%;
         border-collapse: collapse;
-        font-size: 0.82rem;
+        font-size: 13px;
       }
-      th {
-        text-align: left;
-        padding: 0.6rem 0.5rem;
-        border-bottom: 2px solid var(--border);
-        color: var(--text2);
-        font-weight: 500;
-        white-space: nowrap;
-        cursor: pointer;
-        user-select: none;
-      }
-      th:hover {
-        color: var(--accent2);
-      }
+      th,
       td {
-        padding: 0.5rem;
+        padding: 8px 10px;
+        text-align: left;
         border-bottom: 1px solid var(--border);
         white-space: nowrap;
       }
-      tr:hover td {
+      th {
+        background: var(--surface);
+        color: var(--text-secondary);
+        font-weight: 600;
+        cursor: pointer;
+        user-select: none;
+        position: sticky;
+        top: 0;
+      }
+      th:hover {
+        color: var(--accent);
+      }
+      th .sort-arrow {
+        margin-left: 4px;
+        font-size: 10px;
+      }
+      tr:hover {
         background: var(--surface);
       }
-      .model-name {
-        font-weight: 500;
-        color: var(--text);
+      .model-id {
+        color: var(--accent);
+        cursor: pointer;
+        font-family: "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
+      }
+      .model-id:hover {
+        text-decoration: underline;
       }
       .provider {
-        color: var(--text2);
+        color: var(--purple);
       }
-      .price {
-        font-variant-numeric: tabular-nums;
-      }
-      .badge {
+      .tag {
         display: inline-block;
-        padding: 0.1rem 0.4rem;
-        border-radius: 4px;
-        font-size: 0.7rem;
+        padding: 1px 6px;
+        border-radius: 10px;
+        font-size: 11px;
         font-weight: 500;
+        margin: 1px;
       }
-      .badge-yes {
-        background: rgba(34, 197, 94, 0.15);
+      .tag-free {
+        background: rgba(63, 185, 80, 0.15);
         color: var(--green);
       }
-      .badge-no {
-        color: var(--text2);
-        opacity: 0.5;
+      .tag-ow {
+        background: rgba(188, 140, 255, 0.15);
+        color: var(--purple);
       }
-      .badge-free {
-        background: rgba(34, 197, 94, 0.15);
-        color: var(--green);
-      }
-      .badge-open {
-        background: rgba(59, 130, 246, 0.15);
-        color: var(--blue);
-      }
-      .badge-dep {
-        background: rgba(234, 179, 8, 0.15);
+      .tag-reason {
+        background: rgba(210, 153, 34, 0.15);
         color: var(--yellow);
       }
+      .tag-tool {
+        background: rgba(88, 166, 255, 0.15);
+        color: var(--accent);
+      }
+      .tag-vision {
+        background: rgba(248, 81, 73, 0.15);
+        color: var(--red);
+      }
+      .price {
+        font-family: "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
+      }
       .ctx {
-        font-variant-numeric: tabular-nums;
+        font-family: "SFMono-Regular", Consolas, monospace;
+        font-size: 12px;
       }
-
-      /* Loading */
-      .loading {
-        text-align: center;
-        padding: 4rem 1rem;
-        color: var(--text2);
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%) translateY(80px);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-size: 13px;
+        z-index: 1000;
+        transition: transform 0.2s ease;
+        pointer-events: none;
       }
-      .loading .spinner {
-        display: inline-block;
-        width: 2rem;
-        height: 2rem;
-        border: 3px solid var(--border);
-        border-top-color: var(--accent);
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
       }
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      /* Footer */
       .footer {
         text-align: center;
-        padding: 2rem 1rem;
-        color: var(--text2);
-        font-size: 0.8rem;
+        margin-top: 20px;
+        padding: 12px;
         border-top: 1px solid var(--border);
+        font-size: 13px;
       }
-
-      /* Responsive */
+      .footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .footer a:hover {
+        text-decoration: underline;
+      }
+      .shortcut-hint {
+        color: var(--text-secondary);
+        font-size: 12px;
+      }
+      kbd {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 1px 5px;
+        font-size: 11px;
+        font-family: inherit;
+      }
       @media (max-width: 768px) {
+        .container {
+          padding: 8px;
+        }
         .header h1 {
-          font-size: 1.3rem;
+          font-size: 1.2em;
         }
-        .controls {
-          gap: 0.5rem;
+        .controls input {
+          min-width: 150px;
         }
-        table {
-          font-size: 0.75rem;
+        th,
+        td {
+          padding: 6px 8px;
+          font-size: 12px;
         }
       }
     </style>
   </head>
   <body>
-    <div class="header">
-      <h1>🤖 AI Models Catalog</h1>
-      <div class="subtitle">
-        Search and compare AI models by pricing, context window, capabilities, and more
+    <div class="container">
+      <div class="header">
+        <h1>🤖 <a href="https://github.com/i-need-token/ai-models">AI Models Catalog</a></h1>
+        <div class="header-actions">
+          <span class="shortcut-hint"><kbd>/</kbd> to search</span>
+          <button class="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">
+            🌙
+          </button>
+        </div>
       </div>
-      <div class="stats" id="header-stats">
-        <div><span id="stat-models">—</span> models</div>
-        <div><span id="stat-providers">—</span> providers</div>
-        <div><span id="stat-toolcall">—</span> tool calling</div>
-        <div><span id="stat-vision">—</span> vision</div>
-        <div><span id="stat-reasoning">—</span> reasoning</div>
-        <div><span id="stat-free">—</span> free</div>
+      <div class="stats" id="stats"></div>
+      <div class="controls">
+        <input
+          type="text"
+          id="search"
+          placeholder="Search models, providers, families… (press /)"
+          autocomplete="off"
+        />
+        <select id="providerFilter">
+          <option value="">All providers</option>
+        </select>
+        <select id="sortBy">
+          <option value="id">Sort: Model ID</option>
+          <option value="provider">Sort: Provider</option>
+          <option value="context">Sort: Context ↓</option>
+          <option value="input_price">Sort: Price ↓</option>
+        </select>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-btn" data-filter="free">🆓 Free</button>
+        <button class="filter-btn" data-filter="open_weights">🔓 Open Weights</button>
+        <button class="filter-btn" data-filter="reasoning">🧠 Reasoning</button>
+        <button class="filter-btn" data-filter="tool_call">🔧 Tool Call</button>
+        <button class="filter-btn" data-filter="structured_output">📋 Structured Output</button>
+        <button class="filter-btn" data-filter="vision">👁️ Vision</button>
+        <button class="filter-btn" data-filter="image_output">🖼️ Image Gen</button>
+        <button class="filter-btn" data-filter="audio_input">🎤 Audio In</button>
+        <button class="filter-btn" data-filter="video_input">📹 Video In</button>
+      </div>
+      <div class="result-count" id="resultCount"></div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-col="id">Model <span class="sort-arrow"></span></th>
+              <th data-col="provider">Provider <span class="sort-arrow"></span></th>
+              <th data-col="context">Context <span class="sort-arrow"></span></th>
+              <th data-col="input_price">Input $/M <span class="sort-arrow"></span></th>
+              <th data-col="output_price">Output $/M <span class="sort-arrow"></span></th>
+              <th>Capabilities</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="footer">
+        <a href="https://github.com/i-need-token/ai-models">⭐ Star on GitHub</a> ·
+        <a href="https://cdn.jsdelivr.net/npm/ai-models@latest/models.json">CDN</a> ·
+        <a href="https://github.com/i-need-token/ai-models/blob/main/action.yml">GitHub Action</a> ·
+        <a href="https://www.npmjs.com/package/ai-models">npm</a> ·
+        <a href="https://huggingface.co/datasets/i-need-token/ai-models">Hugging Face</a>
       </div>
     </div>
-
-    <div class="controls">
-      <input
-        type="text"
-        class="search-box"
-        id="search"
-        placeholder="Search models, providers, families…"
-        autocomplete="off"
-      />
-      <button class="filter-btn" data-filter="tool_call">🔧 Tool Call</button>
-      <button class="filter-btn" data-filter="reasoning">🧠 Reasoning</button>
-      <button class="filter-btn" data-filter="vision">👁️ Vision</button>
-      <button class="filter-btn" data-filter="structured_output">{ } JSON</button>
-      <button class="filter-btn" data-filter="open_weights">🔓 Open</button>
-      <button class="filter-btn" data-filter="free">🆓 Free</button>
-      <select class="sort-select" id="sort">
-        <option value="name-asc">Name A→Z</option>
-        <option value="name-desc">Name Z→A</option>
-        <option value="input-asc">Input $ ↑</option>
-        <option value="input-desc">Input $ ↓</option>
-        <option value="output-asc">Output $ ↑</option>
-        <option value="output-desc">Output $ ↓</option>
-        <option value="context-desc">Context ↓</option>
-        <option value="context-asc">Context ↑</option>
-        <option value="provider-asc">Provider A→Z</option>
-      </select>
-    </div>
-    <div class="result-count" id="result-count"></div>
-
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Model</th>
-            <th>Provider</th>
-            <th>Input $/1M</th>
-            <th>Output $/1M</th>
-            <th>Context</th>
-            <th>Tool</th>
-            <th>Reason</th>
-            <th>Vision</th>
-            <th>JSON</th>
-            <th>Tags</th>
-          </tr>
-        </thead>
-        <tbody id="tbody">
-          <tr>
-            <td colspan="10">
-              <div class="loading">
-                <div class="spinner"></div>
-                <p style="margin-top: 1rem">Loading catalog…</p>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="footer">
-      <a href="https://github.com/i-need-token/ai-models">GitHub</a> ·
-      <a href="https://github.com/i-need-token/ai-models/releases/latest/download/models.json"
-        >Download JSON</a
-      >
-      ·
-      <a href="https://github.com/i-need-token/ai-models/releases/latest/download/models.csv"
-        >Download CSV</a
-      >
-      · <a href="https://www.npmjs.com/package/ai-models">npm</a> ·
-      <a href="https://cdn.jsdelivr.net/npm/ai-models@latest/models.json">CDN</a> ·
-      <a href="https://github.com/i-need-token/ai-models/blob/main/action.yml">GitHub Action</a>
-    </div>
+    <div class="toast" id="toast"></div>
 
     <script>
-      const DATA_URL = "https://cdn.jsdelivr.net/npm/ai-models@latest/models.json";
-      let allModels = [];
+      const MAX_ROWS = 500;
+      let models = [];
       let filtered = [];
       let activeFilters = new Set();
-      let sortKey = "name-asc";
-      let searchQuery = "";
+      let sortCol = "id";
+      let sortAsc = true;
 
-      function getNumPrice(p, field) {
-        if (!p) return null;
-        if (typeof p[field] === "number") return p[field];
-        return null;
+      // Theme
+      function toggleTheme() {
+        const current = document.documentElement.getAttribute("data-theme");
+        const next = current === "light" ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+        document.querySelector(".theme-toggle").textContent = next === "light" ? "☀️" : "🌙";
+      }
+      (function () {
+        const saved = localStorage.getItem("theme");
+        if (saved) {
+          document.documentElement.setAttribute("data-theme", saved);
+          document.querySelector(".theme-toggle").textContent = saved === "light" ? "☀️" : "🌙";
+        }
+      })();
+
+      // Keyboard shortcut
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "/" && document.activeElement !== document.getElementById("search")) {
+          e.preventDefault();
+          document.getElementById("search").focus();
+        }
+        if (e.key === "Escape") {
+          document.getElementById("search").blur();
+        }
+      });
+
+      // Toast
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 1500);
       }
 
-      function formatCtx(tokens) {
-        if (!tokens) return "—";
-        if (tokens >= 1_000_000)
-          return (tokens / 1_000_000).toFixed(tokens % 1_000_000 === 0 ? 0 : 1) + "M";
-        if (tokens >= 1_000) return (tokens / 1_000).toFixed(0) + "K";
-        return tokens;
+      // Copy model ID
+      function copyId(id) {
+        navigator.clipboard.writeText(id).then(() => showToast(`Copied: ${id}`));
       }
 
-      function formatPrice(val) {
-        if (val == null) return "—";
-        if (val === 0) return "$0";
-        if (val < 0.01) return "$" + val.toFixed(4);
-        if (val < 1) return "$" + val.toFixed(2);
-        return "$" + val.toFixed(2);
-      }
-
-      function isFree(m) {
-        return m.pricing && m.pricing.unit === "free";
-      }
-
-      function hasVision(m) {
-        return m.modalities && m.modalities.input && m.modalities.input.includes("image");
-      }
-
-      function applyFilters() {
-        filtered = allModels.filter((m) => {
-          if (searchQuery) {
-            const q = searchQuery.toLowerCase();
-            const haystack = (
-              m.id +
-              " " +
-              m.name +
-              " " +
-              m.provider +
-              " " +
-              (m.family || "")
-            ).toLowerCase();
-            if (!haystack.includes(q)) return false;
-          }
-          if (activeFilters.has("tool_call") && !m.tool_call) return false;
-          if (activeFilters.has("reasoning") && !m.reasoning) return false;
-          if (activeFilters.has("vision") && !hasVision(m)) return false;
-          if (activeFilters.has("structured_output") && !m.structured_output) return false;
-          if (activeFilters.has("open_weights") && !m.open_weights) return false;
-          if (activeFilters.has("free") && !isFree(m)) return false;
-          return true;
+      // Fetch data
+      fetch("https://cdn.jsdelivr.net/npm/ai-models@latest/models.json")
+        .then((r) => r.json())
+        .then((data) => {
+          models = data;
+          init();
+        })
+        .catch(() => {
+          document.getElementById("tbody").innerHTML =
+            '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-secondary)">Failed to load data. Try refreshing the page.</td></tr>';
         });
 
-        // Sort
-        const [key, dir] = sortKey.split("-");
-        filtered.sort((a, b) => {
-          let va, vb;
-          switch (key) {
-            case "name":
-              va = a.name.toLowerCase();
-              vb = b.name.toLowerCase();
-              break;
-            case "input":
-              va = getNumPrice(a.pricing, "input") ?? Infinity;
-              vb = getNumPrice(b.pricing, "input") ?? Infinity;
-              break;
-            case "output":
-              va = getNumPrice(a.pricing, "output") ?? Infinity;
-              vb = getNumPrice(b.pricing, "output") ?? Infinity;
-              break;
-            case "context":
-              va = a.limit?.context ?? 0;
-              vb = b.limit?.context ?? 0;
-              break;
-            case "provider":
-              va = a.provider.toLowerCase();
-              vb = b.provider.toLowerCase();
-              break;
-            default:
-              va = a.name;
-              vb = b.name;
-          }
-          if (va < vb) return dir === "asc" ? -1 : 1;
-          if (va > vb) return dir === "asc" ? 1 : -1;
-          return 0;
+      function init() {
+        // Stats
+        const providers = new Set(models.map((m) => m.provider));
+        const free = models.filter((m) => m.pricing && m.pricing.input === 0).length;
+        const openW = models.filter((m) => m.open_weights).length;
+        document.getElementById("stats").innerHTML =
+          `<span>📦 ${models.length.toLocaleString()} models</span>` +
+          `<span>🏢 ${providers.size} providers</span>` +
+          `<span>🆓 ${free} free</span>` +
+          `<span>🔓 ${openW} open weights</span>`;
+
+        // Provider filter
+        const sel = document.getElementById("providerFilter");
+        [...providers].sort().forEach((p) => {
+          const opt = document.createElement("option");
+          opt.value = p;
+          opt.textContent = p;
+          sel.appendChild(opt);
         });
 
         render();
       }
 
       function render() {
+        const q = document.getElementById("search").value.toLowerCase();
+        const prov = document.getElementById("providerFilter").value;
+
+        filtered = models.filter((m) => {
+          if (q && !(m.id + " " + m.provider + " " + (m.family || "")).toLowerCase().includes(q))
+            return false;
+          if (prov && m.provider !== prov) return false;
+          for (const f of activeFilters) {
+            if (f === "free" && !(m.pricing && m.pricing.input === 0)) return false;
+            if (
+              f === "vision" &&
+              !(m.modalities && m.modalities.input && m.modalities.input.includes("image"))
+            )
+              return false;
+            if (
+              f === "image_output" &&
+              !(m.modalities && m.modalities.output && m.modalities.output.includes("image"))
+            )
+              return false;
+            if (
+              f === "audio_input" &&
+              !(m.modalities && m.modalities.input && m.modalities.input.includes("audio"))
+            )
+              return false;
+            if (
+              f === "video_input" &&
+              !(m.modalities && m.modalities.input && m.modalities.input.includes("video"))
+            )
+              return false;
+            if (f === "open_weights" && !m.open_weights) return false;
+            if (f === "reasoning" && !m.reasoning) return false;
+            if (f === "tool_call" && !m.tool_call) return false;
+            if (f === "structured_output" && !m.structured_output) return false;
+          }
+          return true;
+        });
+
+        // Sort
+        filtered.sort((a, b) => {
+          let va, vb;
+          switch (sortCol) {
+            case "id":
+              va = a.id;
+              vb = b.id;
+              break;
+            case "provider":
+              va = a.provider;
+              vb = b.provider;
+              break;
+            case "context":
+              va = a.context_window || 0;
+              vb = b.context_window || 0;
+              break;
+            case "input_price":
+              va = (a.pricing && a.pricing.input) || 999;
+              vb = (b.pricing && b.pricing.input) || 999;
+              break;
+            case "output_price":
+              va = (a.pricing && a.pricing.output) || 999;
+              vb = (b.pricing && b.pricing.output) || 999;
+              break;
+            default:
+              va = a.id;
+              vb = b.id;
+          }
+          if (typeof va === "string") return sortAsc ? va.localeCompare(vb) : vb.localeCompare(va);
+          return sortAsc ? va - vb : vb - va;
+        });
+
+        // Result count
+        const showing = Math.min(filtered.length, MAX_ROWS);
+        document.getElementById("resultCount").textContent =
+          `Showing ${showing.toLocaleString()} of ${filtered.length.toLocaleString()} models` +
+          (filtered.length > MAX_ROWS ? ` (first ${MAX_ROWS} — use filters to narrow)` : "");
+
+        // Render table
         const tbody = document.getElementById("tbody");
-        const count = document.getElementById("result-count");
-        count.textContent = `${filtered.length} of ${allModels.length} models`;
-
-        // Limit to 500 for performance
-        const show = filtered.slice(0, 500);
-        let html = "";
-        for (const m of show) {
-          const inp = getNumPrice(m.pricing, "input");
-          const out = getNumPrice(m.pricing, "output");
-          const ctx = m.limit?.context;
+        const rows = filtered.slice(0, MAX_ROWS).map((m) => {
           const tags = [];
-          if (isFree(m)) tags.push('<span class="badge badge-free">FREE</span>');
-          if (m.open_weights) tags.push('<span class="badge badge-open">OPEN</span>');
-          if (m.deprecated) tags.push('<span class="badge badge-dep">DEP</span>');
+          if (m.pricing && m.pricing.input === 0)
+            tags.push('<span class="tag tag-free">Free</span>');
+          if (m.open_weights) tags.push('<span class="tag tag-ow">Open</span>');
+          if (m.reasoning) tags.push('<span class="tag tag-reason">Reason</span>');
+          if (m.tool_call) tags.push('<span class="tag tag-tool">Tool</span>');
+          if (m.modalities && m.modalities.input && m.modalities.input.includes("image"))
+            tags.push('<span class="tag tag-vision">Vision</span>');
 
-          html += `<tr>
-      <td class="model-name">${esc(m.name || m.id)}</td>
-      <td class="provider">${esc(m.provider)}</td>
-      <td class="price">${isFree(m) ? '<span class="badge badge-free">FREE</span>' : formatPrice(inp)}</td>
-      <td class="price">${isFree(m) ? "—" : formatPrice(out)}</td>
-      <td class="ctx">${formatCtx(ctx)}</td>
-      <td>${m.tool_call ? '<span class="badge badge-yes">✓</span>' : '<span class="badge-no">—</span>'}</td>
-      <td>${m.reasoning ? '<span class="badge badge-yes">✓</span>' : '<span class="badge-no">—</span>'}</td>
-      <td>${hasVision(m) ? '<span class="badge badge-yes">✓</span>' : '<span class="badge-no">—</span>'}</td>
-      <td>${m.structured_output ? '<span class="badge badge-yes">✓</span>' : '<span class="badge-no">—</span>'}</td>
-      <td>${tags.join(" ")}</td>
-    </tr>`;
-        }
-        if (filtered.length > 500) {
-          html += `<tr><td colspan="10" style="text-align:center;color:var(--text2);padding:1rem">
-      Showing 500 of ${filtered.length} results. Use filters or search to narrow down.
-    </td></tr>`;
-        }
-        if (filtered.length === 0) {
-          html =
-            '<tr><td colspan="10" style="text-align:center;color:var(--text2);padding:2rem">No models match your filters</td></tr>';
-        }
-        tbody.innerHTML = html;
+          const ctx = m.context_window ? m.context_window.toLocaleString() : "—";
+          const inp =
+            m.pricing && m.pricing.input != null
+              ? m.pricing.input === 0
+                ? "Free"
+                : "$" + m.pricing.input
+              : "—";
+          const out =
+            m.pricing && m.pricing.output != null
+              ? m.pricing.output === 0
+                ? "Free"
+                : "$" + m.pricing.output
+              : "—";
+
+          return `<tr>
+          <td class="model-id" onclick="copyId('${m.id}')" title="Click to copy">${esc(m.id)}</td>
+          <td class="provider">${esc(m.provider)}</td>
+          <td class="ctx">${ctx}</td>
+          <td class="price">${inp}</td>
+          <td class="price">${out}</td>
+          <td>${tags.join(" ")}</td>
+        </tr>`;
+        });
+        tbody.innerHTML = rows.join("");
       }
 
       function esc(s) {
@@ -520,50 +601,36 @@
         return d.innerHTML;
       }
 
-      async function init() {
-        try {
-          const resp = await fetch(DATA_URL);
-          const data = await resp.json();
-          allModels = data.models || [];
-
-          // Update header stats
-          document.getElementById("stat-models").textContent =
-            data.stats?.models?.toLocaleString() || allModels.length.toLocaleString();
-          document.getElementById("stat-providers").textContent = data.stats?.providers || "—";
-          document.getElementById("stat-toolcall").textContent = allModels
-            .filter((m) => m.tool_call)
-            .length.toLocaleString();
-          document.getElementById("stat-vision").textContent = allModels
-            .filter((m) => hasVision(m))
-            .length.toLocaleString();
-          document.getElementById("stat-reasoning").textContent = allModels
-            .filter((m) => m.reasoning)
-            .length.toLocaleString();
-          document.getElementById("stat-free").textContent = allModels
-            .filter((m) => isFree(m))
-            .length.toLocaleString();
-
-          applyFilters();
-        } catch (e) {
-          document.getElementById("tbody").innerHTML =
-            `<tr><td colspan="10" style="text-align:center;color:var(--red);padding:2rem">
-      Failed to load catalog data. <a href="${DATA_URL}">Download JSON directly</a>.<br>
-      <small>${e.message}</small>
-    </td></tr>`;
+      // Events
+      document.getElementById("search").addEventListener("input", render);
+      document.getElementById("providerFilter").addEventListener("change", render);
+      document.getElementById("sortBy").addEventListener("change", (e) => {
+        const v = e.target.value;
+        if (v === sortCol) sortAsc = !sortAsc;
+        else {
+          sortCol = v;
+          sortAsc = v === "id" || v === "provider";
         }
-      }
-
-      // Event listeners
-      document.getElementById("search").addEventListener("input", (e) => {
-        searchQuery = e.target.value.trim();
-        applyFilters();
+        render();
       });
 
-      document.getElementById("sort").addEventListener("change", (e) => {
-        sortKey = e.target.value;
-        applyFilters();
+      // Column header sorting
+      document.querySelectorAll("th[data-col]").forEach((th) => {
+        th.addEventListener("click", () => {
+          const col = th.dataset.col;
+          if (sortCol === col) sortAsc = !sortAsc;
+          else {
+            sortCol = col;
+            sortAsc = col === "id" || col === "provider";
+          }
+          // Update sort arrows
+          document.querySelectorAll("th .sort-arrow").forEach((a) => (a.textContent = ""));
+          th.querySelector(".sort-arrow").textContent = sortAsc ? "▲" : "▼";
+          render();
+        });
       });
 
+      // Filter buttons
       document.querySelectorAll(".filter-btn").forEach((btn) => {
         btn.addEventListener("click", () => {
           const f = btn.dataset.filter;
@@ -574,11 +641,9 @@
             activeFilters.add(f);
             btn.classList.add("active");
           }
-          applyFilters();
+          render();
         });
       });
-
-      init();
     </script>
   </body>
 </html>
