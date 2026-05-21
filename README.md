@@ -9,12 +9,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Models](https://img.shields.io/badge/Models-4%2C682-green.svg)](providers/)
 [![Providers](https://img.shields.io/badge/Providers-95-orange.svg)](providers/)
+[![CI](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml/badge.svg)](https://github.com/i-need-token/ai-models/actions/workflows/validate.yml)
 
 </div>
 
 ---
 
 Machine-readable YAML catalog of every major AI model provider and their models — pricing, context windows, modalities, capabilities, and more. All data sourced from first-party APIs and official documentation, never third-party aggregators.
+
+**[Compare models →](docs/model-comparison.md)** · **[Browse providers →](docs/providers.md)** · **[Data schema →](docs/data-schema.md)**
 
 ## Why This Catalog?
 
@@ -236,10 +239,12 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | ------------------------------------------------------- | -------------------------------------------------------------- |
 | [Model Comparison](docs/model-comparison.md)            | Compare flagship, cost-effective, free, and open-weight models |
 | [Provider Overview](docs/providers.md)                  | All 95 providers organized by type and market                  |
+| [Data Schema Reference](docs/data-schema.md)            | Complete YAML schema — model, pricing, snapshot, provider      |
 | [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data                           |
 | [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog                      |
 | [模型对比（中文）](docs/zh/model-comparison.md)         | 旗舰、高性价比、免费和开源模型对比                             |
 | [提供商概览（中文）](docs/zh/providers.md)              | 95 个提供商按类型和市场分类                                    |
+| [数据 Schema 参考（中文）](docs/zh/data-schema.md)      | 完整 YAML Schema — 模型、定价、快照、提供商                    |
 | [数据采集（中文）](docs/zh/data-acquisition.md)         | 数据采集指南                                                   |
 | [设计原则与陷阱（中文）](docs/zh/lessons-learned.md)    | 经验教训                                                       |
 
