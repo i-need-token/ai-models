@@ -389,6 +389,82 @@
         font-size: 11px;
         font-family: inherit;
       }
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-overlay.open {
+        display: flex;
+      }
+      .modal {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 24px;
+        max-width: 520px;
+        width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+        position: relative;
+      }
+      .modal-close {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: none;
+        border: none;
+        color: var(--text-secondary);
+        font-size: 20px;
+        cursor: pointer;
+        padding: 4px 8px;
+      }
+      .modal-close:hover {
+        color: var(--text);
+      }
+      .modal h2 {
+        margin: 0 0 4px;
+        font-size: 18px;
+        color: var(--accent);
+      }
+      .modal .modal-provider {
+        color: var(--purple);
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+      .modal-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .modal-field {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 10px 12px;
+      }
+      .modal-field .label {
+        color: var(--text-secondary);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .modal-field .value {
+        color: var(--text);
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 2px;
+      }
+      .modal-caps {
+        display: flex;
+        gap: 6px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
       @media (max-width: 768px) {
         .container {
           padding: 8px;
@@ -542,6 +618,15 @@
       </div>
     </div>
     <div class="toast" id="toast"></div>
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+      <div class="modal" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal()">✕</button>
+        <h2 id="modalTitle"></h2>
+        <div class="modal-provider" id="modalProvider"></div>
+        <div class="modal-grid" id="modalGrid"></div>
+        <div class="modal-caps" id="modalCaps"></div>
+      </div>
+    </div>
 
     <script>
       const PER_PAGE = 100;
@@ -576,6 +661,7 @@
         }
         if (e.key === "Escape") {
           document.getElementById("search").blur();
+          closeModal();
         }
       });
 
@@ -747,7 +833,7 @@
 
         // Render table
         const tbody = document.getElementById("tbody");
-        const rows = filtered.slice(start, end).map((m) => {
+        const rows = filtered.slice(start, end).map((m, i) => {
           const tags = [];
           if (m.pricing && (m.pricing.input === 0 || m.pricing.unit === "free"))
             tags.push('<span class="tag tag-free">Free</span>');
@@ -780,8 +866,9 @@
                   : "$" + m.pricing.output
                 : "—";
 
+          const idx = start + i;
           return `<tr>
-          <td class="model-id" onclick="copyId('${m.id}')" title="Click to copy">${esc(m.id)}</td>
+          <td class="model-id" onclick="showDetail(${idx})" title="Click for details">${esc(m.id)}</td>
           <td class="provider">${esc(m.provider)}</td>
           <td class="ctx">${ctx}</td>
           <td class="price">${inp}</td>
@@ -826,6 +913,89 @@
         const d = document.createElement("div");
         d.textContent = s;
         return d.innerHTML;
+      }
+
+      // Model detail modal
+      function showDetail(idx) {
+        const m = filtered[idx];
+        if (!m) return;
+        document.getElementById("modalTitle").textContent = m.id;
+        document.getElementById("modalProvider").textContent = m.provider;
+
+        const ctx = (m.limit && m.limit.context) || m.context_window || null;
+        const outLimit = (m.limit && m.limit.output) || null;
+        const inp =
+          m.pricing && m.pricing.unit === "free"
+            ? "Free"
+            : m.pricing && m.pricing.input != null
+              ? m.pricing.input === 0
+                ? "Free"
+                : "$" + m.pricing.input + "/1M"
+              : "—";
+        const out =
+          m.pricing && m.pricing.unit === "free"
+            ? "Free"
+            : m.pricing && m.pricing.output != null
+              ? m.pricing.output === 0
+                ? "Free"
+                : "$" + m.pricing.output + "/1M"
+              : "—";
+        const cacheRead =
+          m.pricing && m.pricing.cache_read ? "$" + m.pricing.cache_read + "/1M" : null;
+        const cacheWrite =
+          m.pricing && m.pricing.cache_write ? "$" + m.pricing.cache_write + "/1M" : null;
+
+        let gridHtml = "";
+        gridHtml += field("Context Window", ctx ? ctx.toLocaleString() + " tokens" : "—");
+        gridHtml += field("Max Output", outLimit ? outLimit.toLocaleString() + " tokens" : "—");
+        gridHtml += field("Input Price", inp);
+        gridHtml += field("Output Price", out);
+        if (cacheRead) gridHtml += field("Cache Read", cacheRead);
+        if (cacheWrite) gridHtml += field("Cache Write", cacheWrite);
+        gridHtml += field("Family", m.family || "—");
+        gridHtml += field("Released", m.release_date || "—");
+        gridHtml += field("Last Updated", m.last_updated || "—");
+        document.getElementById("modalGrid").innerHTML = gridHtml;
+
+        const caps = [];
+        if (m.tool_call) caps.push(tag("tag-tool", "🔧 Tool Call"));
+        if (m.reasoning) caps.push(tag("tag-reason", "🧠 Reasoning"));
+        if (m.structured_output) caps.push(tag("tag-tool", "📋 Structured Output"));
+        if (m.open_weights) caps.push(tag("tag-ow", "🔓 Open Weights"));
+        if (m.pricing && (m.pricing.input === 0 || m.pricing.unit === "free"))
+          caps.push(tag("tag-free", "🆓 Free"));
+        if (m.modalities && m.modalities.input && m.modalities.input.includes("image"))
+          caps.push(tag("tag-vision", "👁️ Vision"));
+        if (m.modalities && m.modalities.input && m.modalities.input.includes("audio"))
+          caps.push(tag("tag-tool", "🎤 Audio In"));
+        if (m.modalities && m.modalities.output && m.modalities.output.includes("image"))
+          caps.push(tag("tag-vision", "🖼️ Image Gen"));
+        if (m.modalities && m.modalities.output && m.modalities.output.includes("audio"))
+          caps.push(tag("tag-tool", "🔊 Audio Out"));
+        if (m.modalities && m.modalities.input && m.modalities.input.includes("video"))
+          caps.push(tag("tag-vision", "📹 Video In"));
+        if (m.deprecated) caps.push(tag("tag-reason", "⚠️ Deprecated"));
+        document.getElementById("modalCaps").innerHTML = caps.join(" ");
+
+        document.getElementById("modalOverlay").classList.add("open");
+      }
+
+      function closeModal() {
+        document.getElementById("modalOverlay").classList.remove("open");
+      }
+
+      function field(label, value) {
+        return (
+          '<div class="modal-field"><div class="label">' +
+          esc(label) +
+          '</div><div class="value">' +
+          esc(value) +
+          "</div></div>"
+        );
+      }
+
+      function tag(cls, text) {
+        return '<span class="tag ' + cls + '">' + text + "</span>";
       }
 
       // Export filtered results
