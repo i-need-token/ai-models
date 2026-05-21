@@ -263,6 +263,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [Data Schema Reference](docs/data-schema.md)            | Complete YAML schema — model, pricing, snapshot, provider      |
 | [Data Acquisition](docs/data-acquisition.md)            | How we acquire and update model data                           |
 | [API & Programmatic Access](docs/api.md)                | Download models.json, code examples in JS/Python               |
+| [Modality Matrix](docs/modality-matrix.md)              | Vision, image gen, audio, video — which models support what    |
 | [Design Principles & Pitfalls](docs/lessons-learned.md) | Lessons learned from building the catalog                      |
 | [模型对比（中文）](docs/zh/model-comparison.md)         | 旗舰、高性价比、免费和开源模型对比                             |
 | [定价对比（中文）](docs/zh/pricing-comparison.md)       | 各提供商和平台定价并排对比                                     |
