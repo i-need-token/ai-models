@@ -1,90 +1,96 @@
-# 智能体模型
+[English](../agentic-models.md) | **中文**
 
-[English](../agentic-models.md)
+# 智能体 AI 模型 — 1,080 个用于 AI 智能体的模型
 
-同时具备**工具调用**和**推理**能力的 AI 模型 — 构建 AI Agent 的关键要求。这些模型可以规划、推理多步骤任务，并使用外部工具完成目标。
+具备 **工具调用 + 推理** 能力的模型 — AI 智能体、自主工作流和多步任务执行的核心构建块。所有数据来源于 [AI Models Catalog](https://github.com/i-need-token/ai-models) 一手 API。
 
-数据来源于 [AI Models Catalog](https://github.com/i-need-token/ai-models)。
+## 什么使模型成为"智能体"？
 
-## 为什么智能体模型很重要
+智能体模型可以：
 
-智能体模型结合了两个关键能力：
+- **调用工具/函数** — 与 API、数据库和外部系统交互
+- **逐步推理** — 规划、分解任务和验证结果
+- **自主行动** — 无需人工干预即可做出决策和采取行动
 
-- **工具调用** — 调用函数、API 和外部工具来执行操作
-- **推理** — 链式思维思考，规划和分解复杂任务
-
-两者结合可以实现：
-
-- **自主智能体** — 独立规划、行动和迭代的模型
-- **多步骤工作流** — 将复杂任务分解为子任务并使用工具
-- **自我纠正** — 推理失败原因并使用不同方法重试
-- **代码智能体** — 自主编写、执行和调试代码
-- **研究智能体** — 搜索、综合和总结信息
+这些能力是聊天机器人和 AI 智能体的关键区别。
 
 ## 统计
 
-| 指标                          | 数量 |
-| ----------------------------- | ---- |
-| 智能体模型（工具调用 + 推理） | 1080 |
-| 提供商                        | 51   |
-| 免费智能体模型                | 0    |
-| 开源权重智能体模型            | 65   |
-| 带结构化输出                  | 455  |
+| Metric                 | Count |
+| ---------------------- | ----- |
+| Agentic models         | 1076  |
+| Providers              | 51    |
+| With vision            | 617   |
+| With structured output | 453   |
+| Free                   | 30    |
+| Open weights           | 64    |
 
-## 提供商
+## 最便宜的智能体模型（直连提供商）
 
-`302ai`, `aihubmix`, `alibaba`, `amazon`, `anthropic`, `arcee`, `auriko`, `baidu`, `baseten`, `bytedance`, `chutes`, `clarifai`, `cloudflare`, `cortecs`, `deepseek`, `digitalocean`, `dinference`, `fastrouter`, `fireworks`, `google`, `hpc-ai`, `inclusionai`, `inferencenet`, `klusterai`, `llmgateway` 等 26 个
+| Model                          | Provider     | Context | Input $/1M | Output $/1M | Vision |
+| ------------------------------ | ------------ | ------- | ---------- | ----------- | ------ |
+| qwen--qwen3-4b-fp8             | novitaai     | 125K    | $0.03      | $0.03       |        |
+| openai--gpt-oss-20b            | neuralwatt   | 0       | $0.03      | $0.16       |        |
+| openai--gpt-oss-120b           | novitaai     | 128K    | $0.05      | $0.25       | ✅     |
+| gpt-oss-120b                   | inferencenet | 128K    | $0.05      | $0.45       |        |
+| Qwen--Qwen3.6-35B-A3B          | neuralwatt   | 0       | $0.05      | $0.1        | ✅     |
+| qwen3-30b-a3b-fp8              | cloudflare   | 40K     | $0.051     | $0.335      |        |
+| glm-4.7-flash                  | cloudflare   | 128K    | $0.06      | $0.4        |        |
+| Nemotron-3-Nano-Omni           | nebius       | 125K    | $0.06      | $0.24       | ✅     |
+| hermes-4-llama-3.1-8b          | nousresearch | 128K    | $0.06      | $0.12       |        |
+| zai-org--glm-4.7-flash         | novitaai     | 195K    | $0.07      | $0.4        |        |
+| ring-2.6-1t                    | inclusionai  | 256K    | $0.07      | $0.62       |        |
+| seed-1.6-flash                 | bytedance    | 256K    | $0.07      | $0.3        | ✅     |
+| microsoft-phi-4-mini-reasoning | microsoft    | 125K    | $0.075     | $0.3        |        |
+| Qwen--Qwen3-32B-TEE            | chutes       | 40K     | $0.08      | $0.24       |        |
+| qwen--qwen3-30b-a3b-fp8        | novitaai     | 40K     | $0.09      | $0.45       |        |
 
 ## 免费智能体模型
 
-同时具备工具调用和推理的免费模型 — 零成本 Agent。
+| Model                             | Provider | Context | Vision | Structured Output |
+| --------------------------------- | -------- | ------- | ------ | ----------------- |
+| glm-4.1v-thinking-flash           | zhipuai  | 62K     | ✅     | ✅                |
+| qwen--qwen3-omni-30b-a3b-thinking | novitaai | 64K     | ✅     | ✅                |
+| qwen--qwen3.5-4b-free             | mixlayer | 128K    |        |                   |
 
-| 模型 | 提供商 | 上下文 | 输入 $/M | 输出 $/M | 能力 |
-| ---- | ------ | ------ | -------- | -------- | ---- |
+## 最大上下文智能体模型
 
-## 最便宜智能体模型
+| Model                       | Provider    | Context | Input $/1M | Output $/1M |
+| --------------------------- | ----------- | ------- | ---------- | ----------- |
+| deepseek-v4-flash           | baidu       | 1024K   | $0.126     | $0.252      |
+| deepseek-v4-pro             | siliconflow | 1024K   | $1.74      | $3.48       |
+| deepseek-v4-flash           | siliconflow | 1024K   | $0.14      | $0.28       |
+| deepseek--deepseek-v4-pro   | novitaai    | 1024K   | $1.67      | $3.38       |
+| xiaomimimo--mimo-v2.5-pro   | novitaai    | 1024K   | $2         | $6          |
+| deepseek--deepseek-v4-flash | novitaai    | 1024K   | $0.14      | $0.28       |
+| gemini-2.5-flash            | google      | 1024K   | $0.15      | $3.5        |
+| gemini-2.5-pro              | google      | 1024K   | $1.25      | $10         |
+| deepseek-v4-pro             | fireworks   | 1024K   | $1.74      | $3.48       |
+| xiaomi--mimo-v2.5-pro       | hpc-ai      | 1024K   | $1         | $3          |
+| xiaomi--mimo-v2.5           | hpc-ai      | 1024K   | $0.4       | $2          |
+| mimo-v2.5-pro               | xiaomi      | 1024K   | $1         | $3          |
+| mimo-v2-pro                 | xiaomi      | 1024K   | $1         | $3          |
+| minimaxai--minimax-m1-80k   | novitaai    | 976K    | $0.55      | $2.2        |
+| qwen3.6-flash               | alibaba     | 976K    | $1.2       | $7.2        |
 
-生产环境 Agent 的最佳性价比模型。
+## 构建 AI 智能体
 
-| 模型                    | 提供商     | 上下文 | 输入 $/M | 输出 $/M | 能力 |
-| ----------------------- | ---------- | ------ | -------- | -------- | ---- |
-| qwen-3.5-0.8b           | auriko     | 262K   | $0.01    | $0.05    |      |
-| llama-3.1-8b-instruct   | cortecs    | 0      | $0.018   | $0.054   |      |
-| qwen-3.5-2b             | auriko     | 262K   | $0.02    | $0.1     |      |
-| openai--gpt-5-nano:flex | requesty   | 400K   | $0.025   | $0.2     |      |
-| gpt-5-nano              | aihubmix   | 0      | $0.025   | $0.2     | 📋   |
-| gpt-oss-20b             | cortecs    | 0      | $0.027   | $0.124   |      |
-| qwen--qwen3-4b-fp8      | novitaai   | 128K   | $0.03    | $0.03    |      |
-| openai--gpt-oss-20b     | openrouter | 131K   | $0.03    | $0.14    | 📋   |
-| qwen-3.5-4b             | auriko     | 262K   | $0.03    | $0.15    |      |
-| openai--gpt-oss-20b     | neuralwatt | 0      | $0.03    | $0.16    | 📋   |
-
-## 大上下文智能体模型
-
-上下文窗口最大的智能体模型 — 适用于复杂多步骤任务。
-
-| 模型                          | 提供商   | 上下文 | 输入 $/M | 输出 $/M | 能力 |
-| ----------------------------- | -------- | ------ | -------- | -------- | ---- |
-| grok-4-20                     | venice   | 2M     | $1.42    | $2.83    | 📋   |
-| grok-4.20-beta-0309-reasoning | 302ai    | 2M     | $2       | $6       |      |
-| grok-4-1-fast-reasoning       | 302ai    | 2M     | $0.2     | $0.5     |      |
-| grok-4-fast-reasoning         | 302ai    | 2M     | $0.2     | $0.5     |      |
-| openai--gpt-5.5               | requesty | 1M     | $5       | $30      |      |
-| openai-responses--gpt-5.4     | requesty | 1M     | $2.5     | $15      |      |
-| openai-responses--gpt-5.5     | requesty | 1M     | $5       | $30      |      |
-| openai--gpt-5.4               | requesty | 1M     | $2.5     | $15      |      |
-| openai-responses--gpt-5.4-pro | requesty | 1M     | $30      | $180     |      |
-| openai-responses--gpt-5.5-pro | requesty | 1M     | $30      | $180     |      |
+| Agent Type       | Recommended Models          | Key Capabilities               |
+| ---------------- | --------------------------- | ------------------------------ |
+| Code agents      | Claude Sonnet 4, GPT-4.1    | Tool call + reasoning + code   |
+| Research agents  | Gemini 2.5 Pro, DeepSeek R1 | Large context + reasoning      |
+| Data agents      | Claude Sonnet 4, Qwen3      | Structured output + tool call  |
+| Vision agents    | GPT-4o, Gemini 2.5 Flash    | Vision + tool call + reasoning |
+| Customer support | Llama 4 Scout, Qwen3        | Free/cheap + tool call         |
 
 ## 相关文档
 
-- [模型选择指南](model-selection.md) — 选择模型的决策框架
-- [工具调用模型](tool-calling.md) — 2,350 个支持工具调用的模型
-- [推理模型](reasoning-models.md) — 1,306 个支持推理的模型
-- [代码模型](code-models.md) — 189 个代码模型
-- [结构化输出](structured-output.md) — 829 个 JSON 模式模型
-- [免费 AI 模型](free-models.md) — 81 个免费模型按能力分类
-- [缓存定价](cached-pricing.md) — 1,374 个支持提示缓存的模型
+- [Tool Calling Models](tool-calling.md) — 2,350 models with function calling
+- [Reasoning Models](reasoning-models.md) — 1,306 models with chain-of-thought
+- [Structured Output](structured-output.md) — 829 models with JSON mode
+- [OpenAI Alternatives](openai-alternatives.md) — GPT-4 alternatives with agent capabilities
+- [Vision Models](vision-models.md) — 1,487 models with image understanding
+- [Free AI Models](free-models.md) — 81 models at zero cost
 
 ---
 

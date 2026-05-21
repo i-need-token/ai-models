@@ -328,6 +328,9 @@ by_context = sorted(
 - [Provider Comparison](docs/provider-comparison.md) — top 30 providers by model count and capabilities
 - [Migration Guide](docs/migration-guide.md) — switch providers with pricing, API compatibility, checklist
 - [OpenAI Alternatives](docs/openai-alternatives.md) — GPT-4/GPT-3.5 alternatives, free options, OpenAI-compatible providers
+- [Agentic Models](docs/agentic-models.md) — 1,080 models with tool_call + reasoning for AI agents
+- [Code Models](docs/code-models.md) — 189 code-focused models for generation, review, debugging
+- [Audio Models](docs/audio-models.md) — 118 audio input + 34 audio output models for speech/voice
 - [Free AI Models](docs/free-models.md) — 81 free models by capability
 - [Open-Weight Models](docs/open-weights.md) — 513 open-weight models
 - [Reasoning Models](docs/reasoning-models.md) — 1,306 reasoning models

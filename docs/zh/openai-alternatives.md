@@ -149,6 +149,7 @@
 - [迁移指南](migration-guide.md) — switch providers with minimal code changes
 - [提供商对比](provider-comparison.md) — top 30 providers by model count
 - [智能体模型](agentic-models.md) — 1,080 models for AI agents
+- [代码模型](code-models.md) — 189 个代码模型
 
 ---
 

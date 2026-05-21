@@ -95,6 +95,7 @@
 - [推理模型](reasoning-models.md) — 1,306 个支持推理的模型
 - [缓存定价](cached-pricing.md) — 1,374 个支持提示缓存的模型
 - [OpenAI 替代方案](openai-alternatives.md) — GPT-4/GPT-3.5 工具调用替代
+- [智能体模型](agentic-models.md) — 1,080 个工具调用+推理模型
 
 ---
 

@@ -94,6 +94,7 @@ The most capable vision models — can see, reason, and act:
 - [Modality Matrix](modality-matrix.md) — all modalities at a glance
 - [Free AI Models](free-models.md) — 81 free models, some with vision
 - [OpenAI Alternatives](openai-alternatives.md) — GPT-4 class alternatives with vision
+- [Audio Models](audio-models.md) — 118 audio input + 34 audio output models
 
 ---
 

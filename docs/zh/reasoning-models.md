@@ -96,6 +96,8 @@
 - [免费 AI 模型](free-models.md) — 81 个免费模型，部分支持推理
 - [缓存定价](cached-pricing.md) — 1,374 个支持提示缓存的模型
 - [OpenAI 替代方案](openai-alternatives.md) — GPT-4 级别推理替代
+- [智能体模型](agentic-models.md) — 1,080 个工具调用+推理模型
+- [代码模型](code-models.md) — 189 个代码模型
 
 ---
 

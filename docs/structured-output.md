@@ -77,6 +77,7 @@ For AI agents that need to return structured data, call tools, and reason:
 - [Reasoning Models](reasoning-models.md) — 1,306 models with reasoning
 - [Free AI Models](free-models.md) — 81 free models, some with structured output
 - [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching
+- [Agentic Models](agentic-models.md) — 1,080 models with tool_call + reasoning for agents
 
 ---
 

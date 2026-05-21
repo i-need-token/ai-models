@@ -149,6 +149,7 @@ Models with tool calling at zero cost (direct providers):
 - [Migration Guide](migration-guide.md) — switch providers with minimal code changes
 - [Provider Comparison](provider-comparison.md) — top 30 providers by model count
 - [Agentic Models](agentic-models.md) — 1,080 models for AI agents
+- [Code Models](code-models.md) — 189 code-focused models
 
 ---
 

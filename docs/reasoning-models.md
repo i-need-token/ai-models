@@ -96,6 +96,8 @@ Models that can reason about images — ideal for visual analysis:
 - [Free AI Models](free-models.md) — 81 free models, some with reasoning
 - [Cached Pricing](cached-pricing.md) — 1,374 models with prompt caching
 - [OpenAI Alternatives](openai-alternatives.md) — GPT-4 class alternatives with reasoning
+- [Agentic Models](agentic-models.md) — 1,080 models with tool_call + reasoning for agents
+- [Code Models](code-models.md) — 189 code-focused models
 
 ---
 
