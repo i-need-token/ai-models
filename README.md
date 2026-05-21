@@ -355,18 +355,6 @@ curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/mode
 curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
 ```
 
-### Direct Download (no install)
-
-The compiled JSON is always available from [GitHub Releases](https://github.com/i-need-token/ai-models/releases):
-
-```bash
-# Download latest models.json
-curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.json
-
-# Download latest models.csv (for Excel/Sheets)
-curl -LO https://github.com/i-need-token/ai-models/releases/latest/download/models.csv
-```
-
 ```html
 <!-- Use in any HTML page -->
 <script type="module">
@@ -384,9 +372,8 @@ catalog = json.loads(urllib.request.urlopen("https://github.com/i-need-token/ai-
 print(len(catalog['models']))  # 4587
 ```
 
-Once the npm package is published, you can also use [jsDelivr CDN](https://www.jsdelivr.com/package/npm/ai-models):
-
 ```bash
+# Quick stats with jq
 curl -s https://github.com/i-need-token/ai-models/releases/latest/download/models.json | jq '.models | length'
 ```
 
