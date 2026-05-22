@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      AI Model Picker — Find the Best Model for Your Use Case (2025) | AI Models Catalog
+    </title>
+    <meta
+      name="description"
+      content="Answer 4 simple questions to find the best AI model for your use case. Compares 4,587+ models across 95 providers by price, capabilities, and context window."
+    />
+    <meta
+      name="keywords"
+      content="AI model picker, best AI model, LLM selector, model recommendation, which AI model to use, AI model comparison"
+    />
+    <link rel="canonical" href="https://i-need-token.github.io/ai-models/ai-model-picker.html" />
+    <meta property="og:title" content="AI Model Picker — Find the Best Model for Your Use Case" />
+    <meta
+      property="og:description"
+      content="Answer 4 questions to find the best AI model. Compares 4,587+ models by price, capabilities, and context window."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/social-preview.png"
+    />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="640" />
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/social-preview.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "AI Model Picker — Find the Best Model for Your Use Case",
+        "description": "Answer 4 questions to find the best AI model. Compares 4,587+ models by price, capabilities, and context window.",
+        "author": { "@type": "Organization", "name": "AI Models Catalog" },
+        "publisher": { "@type": "Organization", "name": "AI Models Catalog" },
+        "datePublished": "2025-05-21",
+        "dateModified": "2025-05-21",
+        "url": "https://i-need-token.github.io/ai-models/ai-model-picker.html"
+      }
+    </script>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-secondary: #f6f8fa;
+        --text: #1f2328;
+        --text-secondary: #656d76;
+        --border: #d0d7de;
+        --accent: #0969da;
+        --accent-light: #ddf4ff;
+        --card-bg: #ffffff;
+        --card-border: #d0d7de;
+        --success: #1a7f37;
+        --warning: #9a6700;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --bg-secondary: #161b22;
+          --text: #e6edf3;
+          --text-secondary: #8b949e;
+          --border: #30363d;
+          --accent: #58a6ff;
+          --accent-light: #1f2d3d;
+          --card-bg: #161b22;
+          --card-border: #30363d;
+          --success: #3fb950;
+          --warning: #d29922;
+        }
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 2em;
+        margin-bottom: 8px;
+      }
+      h2 {
+        font-size: 1.4em;
+        margin: 24px 0 12px;
+      }
+      p {
+        margin: 8px 0;
+        color: var(--text-secondary);
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .wizard {
+        margin: 24px 0;
+      }
+      .step {
+        display: none;
+        margin: 20px 0;
+      }
+      .step.active {
+        display: block;
+      }
+      .step-title {
+        font-size: 1.3em;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+      .options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        margin: 16px 0;
+      }
+      .option {
+        background: var(--card-bg);
+        border: 2px solid var(--card-border);
+        border-radius: 12px;
+        padding: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .option:hover {
+        border-color: var(--accent);
+        transform: translateY(-2px);
+      }
+      .option.selected {
+        border-color: var(--accent);
+        background: var(--accent-light);
+      }
+      .option-icon {
+        font-size: 2em;
+        margin-bottom: 8px;
+      }
+      .option-title {
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .option-desc {
+        font-size: 0.85em;
+        color: var(--text-secondary);
+      }
+      .btn {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        border: none;
+        cursor: pointer;
+        font-size: 1em;
+      }
+      .btn:hover {
+        opacity: 0.9;
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .btn-secondary {
+        background: var(--bg-secondary);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .progress {
+        display: flex;
+        gap: 8px;
+        margin: 20px 0;
+      }
+      .progress-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--border);
+      }
+      .progress-dot.active {
+        background: var(--accent);
+      }
+      .progress-dot.done {
+        background: var(--success);
+      }
+      .results {
+        display: none;
+        margin: 24px 0;
+      }
+      .results.active {
+        display: block;
+      }
+      .result-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 12px 0;
+      }
+      .result-card.best {
+        border-color: var(--success);
+        border-width: 2px;
+      }
+      .result-rank {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 28px;
+        font-weight: 700;
+        font-size: 0.85em;
+        margin-right: 8px;
+      }
+      .result-card.best .result-rank {
+        background: var(--success);
+      }
+      .result-name {
+        font-weight: 700;
+        font-size: 1.1em;
+      }
+      .result-meta {
+        display: flex;
+        gap: 16px;
+        margin: 8px 0;
+        flex-wrap: wrap;
+      }
+      .result-meta span {
+        font-size: 0.9em;
+        color: var(--text-secondary);
+      }
+      .result-price {
+        color: var(--success);
+        font-weight: 600;
+      }
+      .result-reason {
+        font-size: 0.9em;
+        color: var(--text-secondary);
+        margin-top: 8px;
+        font-style: italic;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.75em;
+        font-weight: 600;
+        margin-left: 4px;
+      }
+      .badge-tc {
+        background: #fff8c5;
+        color: #7c6600;
+      }
+      .badge-reason {
+        background: #f0fff4;
+        color: #1a7f37;
+      }
+      .badge-free {
+        background: #ddf4ff;
+        color: #0969da;
+      }
+      @media (prefers-color-scheme: dark) {
+        .badge-tc {
+          background: #3d2e00;
+          color: #d29922;
+        }
+        .badge-reason {
+          background: #0d2818;
+          color: #3fb950;
+        }
+        .badge-free {
+          background: #1f2d3d;
+          color: #58a6ff;
+        }
+      }
+      .related-pages {
+        margin: 40px 0;
+        padding: 20px;
+        background: var(--bg-secondary);
+        border-radius: 8px;
+      }
+      .related-pages a {
+        display: inline-block;
+        margin: 4px 8px 4px 0;
+        padding: 4px 12px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+      footer {
+        margin-top: 40px;
+        padding: 20px 0;
+        border-top: 1px solid var(--border);
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.85em;
+      }
+      .loading {
+        text-align: center;
+        padding: 40px;
+      }
+      .spinner {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border: 4px solid var(--border);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 12px;
+        }
+        h1 {
+          font-size: 1.5em;
+        }
+        .options {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🎯 AI Model Picker</h1>
+      <p>
+        Answer 4 questions to find the best AI model for your use case. Data from
+        <a href="https://github.com/i-need-token/ai-models">AI Models Catalog</a> — 4,587+ models
+        across 95 providers.
+      </p>
+
+      <div class="progress" id="progress">
+        <div class="progress-dot active" id="dot-1"></div>
+        <div class="progress-dot" id="dot-2"></div>
+        <div class="progress-dot" id="dot-3"></div>
+        <div class="progress-dot" id="dot-4"></div>
+      </div>
+
+      <div class="wizard" id="wizard">
+        <!-- Step 1: Use Case -->
+        <div class="step active" id="step-1">
+          <div class="step-title">What are you building?</div>
+          <div class="options" id="usecase-options">
+            <div class="option" data-value="agents" onclick="selectOption(1, this)">
+              <div class="option-icon">🤖</div>
+              <div class="option-title">AI Agents</div>
+              <div class="option-desc">Tool calling, autonomous workflows</div>
+            </div>
+            <div class="option" data-value="coding" onclick="selectOption(1, this)">
+              <div class="option-icon">💻</div>
+              <div class="option-title">Code Generation</div>
+              <div class="option-desc">Code completion, review, debugging</div>
+            </div>
+            <div class="option" data-value="chat" onclick="selectOption(1, this)">
+              <div class="option-icon">💬</div>
+              <div class="option-title">Chat / RAG</div>
+              <div class="option-desc">Conversational AI, document QA</div>
+            </div>
+            <div class="option" data-value="reasoning" onclick="selectOption(1, this)">
+              <div class="option-icon">🧮</div>
+              <div class="option-title">Math & Reasoning</div>
+              <div class="option-desc">Step-by-step problem solving</div>
+            </div>
+            <div class="option" data-value="vision" onclick="selectOption(1, this)">
+              <div class="option-icon">👁️</div>
+              <div class="option-title">Vision / Multimodal</div>
+              <div class="option-desc">Image understanding, OCR</div>
+            </div>
+            <div class="option" data-value="production" onclick="selectOption(1, this)">
+              <div class="option-icon">🏭</div>
+              <div class="option-title">High-Volume Production</div>
+              <div class="option-desc">Lowest cost per token at scale</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2: Budget -->
+        <div class="step" id="step-2">
+          <div class="step-title">What's your budget per million tokens?</div>
+          <div class="options" id="budget-options">
+            <div class="option" data-value="free" onclick="selectOption(2, this)">
+              <div class="option-icon">🆓</div>
+              <div class="option-title">Free</div>
+              <div class="option-desc">$0 — prototyping & testing</div>
+            </div>
+            <div class="option" data-value="budget" onclick="selectOption(2, this)">
+              <div class="option-icon">💰</div>
+              <div class="option-title">Under $0.10/M</div>
+              <div class="option-desc">Budget-friendly production</div>
+            </div>
+            <div class="option" data-value="mid" onclick="selectOption(2, this)">
+              <div class="option-icon">⚖️</div>
+              <div class="option-title">Under $1/M</div>
+              <div class="option-desc">Balanced cost & quality</div>
+            </div>
+            <div class="option" data-value="premium" onclick="selectOption(2, this)">
+              <div class="option-icon">💎</div>
+              <div class="option-title">Premium</div>
+              <div class="option-desc">Best quality regardless of cost</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Context Window -->
+        <div class="step" id="step-3">
+          <div class="step-title">How much context do you need?</div>
+          <div class="options" id="context-options">
+            <div class="option" data-value="small" onclick="selectOption(3, this)">
+              <div class="option-icon">📝</div>
+              <div class="option-title">Under 32K</div>
+              <div class="option-desc">Short prompts, simple tasks</div>
+            </div>
+            <div class="option" data-value="medium" onclick="selectOption(3, this)">
+              <div class="option-icon">📄</div>
+              <div class="option-title">32K – 128K</div>
+              <div class="option-desc">Documents, code files</div>
+            </div>
+            <div class="option" data-value="large" onclick="selectOption(3, this)">
+              <div class="option-icon">📚</div>
+              <div class="option-title">128K – 512K</div>
+              <div class="option-desc">Large codebases, long documents</div>
+            </div>
+            <div class="option" data-value="huge" onclick="selectOption(3, this)">
+              <div class="option-icon">🗄️</div>
+              <div class="option-title">512K+</div>
+              <div class="option-desc">Entire repos, massive datasets</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Priority -->
+        <div class="step" id="step-4">
+          <div class="step-title">What matters most?</div>
+          <div class="options" id="priority-options">
+            <div class="option" data-value="cost" onclick="selectOption(4, this)">
+              <div class="option-icon">💸</div>
+              <div class="option-title">Lowest Cost</div>
+              <div class="option-desc">Minimize spending per token</div>
+            </div>
+            <div class="option" data-value="quality" onclick="selectOption(4, this)">
+              <div class="option-icon">🏆</div>
+              <div class="option-title">Best Quality</div>
+              <div class="option-desc">Highest accuracy & reasoning</div>
+            </div>
+            <div class="option" data-value="speed" onclick="selectOption(4, this)">
+              <div class="option-icon">⚡</div>
+              <div class="option-title">Lowest Latency</div>
+              <div class="option-desc">Fastest response time</div>
+            </div>
+            <div class="option" data-value="privacy" onclick="selectOption(4, this)">
+              <div class="option-icon">🔒</div>
+              <div class="option-title">Privacy / On-Device</div>
+              <div class="option-desc">Data never leaves your device</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div class="results" id="results">
+        <h2>🎯 Recommended Models</h2>
+        <p id="results-summary"></p>
+        <div id="results-list"></div>
+        <div style="margin-top: 20px">
+          <a class="btn" href="https://i-need-token.github.io/ai-models/"
+            >🔍 Explore All 4,587 Models →</a
+          >
+          <button class="btn btn-secondary" onclick="resetWizard()" style="margin-left: 8px">
+            🔄 Start Over
+          </button>
+        </div>
+      </div>
+
+      <div class="loading" id="loading" style="display: none">
+        <div class="spinner"></div>
+        <p style="margin-top: 12px">Finding the best models for you...</p>
+      </div>
+
+      <div class="related-pages">
+        <strong>Related:</strong>
+        <a href="best-ai-models.html">Best AI Models</a>
+        <a href="free-ai-models.html">Free AI Models</a>
+        <a href="cheapest-ai-models.html">Cheapest AI Models</a>
+        <a href="tool-calling-models-comparison.html">Tool Calling Models</a>
+        <a href="reasoning-models-comparison.html">Reasoning Models</a>
+        <a href="best-ai-models-for-coding.html">Best for Coding</a>
+        <a href="best-ai-models-for-agents.html">Best for Agents</a>
+        <a href="best-ai-models-for-vision.html">Vision Models</a>
+        <a href="small-language-models.html">Small Language Models</a>
+        <a href="ai-model-comparison-chart.html">Comparison Chart</a>
+        <a href="context-window-comparison.html">Context Windows</a>
+        <a href="llm-pricing.html">LLM Pricing</a>
+        <a href="ai-model-pricing-calculator.html">Pricing Calculator</a>
+        <a href="openai-alternatives.html">OpenAI Alternatives</a>
+        <a href="open-source-ai-models.html">Open Source Models</a>
+        <a href="state-of-ai-models.html">State of AI Models</a>
+        <a href="ai-model-benchmarks.html">Benchmarks</a>
+        <a href="chatgpt-vs-claude-vs-gemini.html">ChatGPT vs Claude vs Gemini</a>
+        <a href="ai-models-by-provider.html">By Provider</a>
+        <a href="multimodal-ai-models.html">Multimodal Models</a>
+        <a href="structured-output-models-comparison.html">Structured Output</a>
+        <a href="best-ai-models-for-image-generation.html">Image Generation</a>
+      </div>
+
+      <footer>
+        <p>
+          Data from <a href="https://github.com/i-need-token/ai-models">AI Models Catalog</a> —
+          4,587 models across 95 providers. First-party data only.
+        </p>
+        <p>
+          <a href="https://i-need-token.github.io/ai-models/">Interactive Catalog</a> ·
+          <a href="https://github.com/i-need-token/ai-models">GitHub</a>
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      let answers = { usecase: null, budget: null, context: null, priority: null };
+      let allModels = [];
+      const AGG = new Set([
+        "openrouter",
+        "requesty",
+        "auriko",
+        "llmgateway",
+        "cortecs",
+        "aihubmix",
+        "orcarouter",
+        "fastrouter",
+        "302ai",
+        "martian",
+        "nanogpt",
+        "jiekou",
+        "venice",
+        "meganova",
+      ]);
+
+      // Load models
+      fetch("models.json")
+        .then((r) => r.json())
+        .then((data) => {
+          allModels = data.models || [];
+        })
+        .catch(() => {});
+
+      function selectOption(step, el) {
+        // Remove previous selection
+        el.parentElement.querySelectorAll(".option").forEach((o) => o.classList.remove("selected"));
+        el.classList.add("selected");
+
+        const value = el.dataset.value;
+        const keys = ["usecase", "budget", "context", "priority"];
+        answers[keys[step - 1]] = value;
+
+        // Update progress
+        for (let i = 1; i <= 4; i++) {
+          const dot = document.getElementById("dot-" + i);
+          dot.className = "progress-dot";
+          if (i < step) dot.classList.add("done");
+          if (i === step) dot.classList.add("active");
+        }
+
+        // Auto-advance after 500ms
+        setTimeout(() => {
+          if (step < 4) {
+            document.getElementById("step-" + step).classList.remove("active");
+            document.getElementById("step-" + (step + 1)).classList.add("active");
+            document.getElementById("dot-" + step).classList.remove("active");
+            document.getElementById("dot-" + step).classList.add("done");
+            document.getElementById("dot-" + (step + 1)).classList.add("active");
+          } else {
+            showResults();
+          }
+        }, 500);
+      }
+
+      function showResults() {
+        document.getElementById("wizard").style.display = "none";
+        document.getElementById("loading").style.display = "block";
+
+        setTimeout(() => {
+          const results = recommendModels();
+          renderResults(results);
+          document.getElementById("loading").style.display = "none";
+          document.getElementById("results").classList.add("active");
+        }, 800);
+      }
+
+      function recommendModels() {
+        let candidates = allModels.filter((m) => !AGG.has(m.provider));
+
+        // Filter by budget
+        if (answers.budget === "free") {
+          candidates = candidates.filter((m) => m.pricing && m.pricing.unit === "free");
+        } else if (answers.budget === "budget") {
+          candidates = candidates.filter(
+            (m) => m.pricing && m.pricing.unit !== "free" && m.pricing.input <= 0.1,
+          );
+        } else if (answers.budget === "mid") {
+          candidates = candidates.filter(
+            (m) => m.pricing && m.pricing.unit !== "free" && m.pricing.input <= 1,
+          );
+        }
+        // premium: no filter
+
+        // Filter by context
+        if (answers.context === "small") {
+          candidates = candidates.filter(
+            (m) => m.limit && m.limit.context > 0 && m.limit.context < 32768,
+          );
+        } else if (answers.context === "medium") {
+          candidates = candidates.filter(
+            (m) => m.limit && m.limit.context >= 32768 && m.limit.context < 131072,
+          );
+        } else if (answers.context === "large") {
+          candidates = candidates.filter(
+            (m) => m.limit && m.limit.context >= 131072 && m.limit.context < 524288,
+          );
+        } else if (answers.context === "huge") {
+          candidates = candidates.filter((m) => m.limit && m.limit.context >= 524288);
+        }
+
+        // Score by use case
+        candidates = candidates.map((m) => {
+          let score = 0;
+          if (answers.usecase === "agents") {
+            if (m.tool_call) score += 10;
+            if (m.reasoning) score += 5;
+            if (m.pricing && m.pricing.unit !== "free") score -= Math.min(m.pricing.input * 2, 5);
+          } else if (answers.usecase === "coding") {
+            if (m.tool_call) score += 8;
+            if (m.reasoning) score += 5;
+            if (m.structured_output) score += 3;
+          } else if (answers.usecase === "chat") {
+            if (m.limit && m.limit.context >= 131072) score += 5;
+            if (m.tool_call) score += 3;
+          } else if (answers.usecase === "reasoning") {
+            if (m.reasoning) score += 10;
+            if (m.tool_call) score += 3;
+          } else if (answers.usecase === "vision") {
+            const mods = m.modalities || [];
+            const hasVision = mods.some(
+              (mod) => mod.type === "image" && mod.modalities && mod.modalities.includes("input"),
+            );
+            if (hasVision) score += 10;
+            if (m.tool_call) score += 3;
+          } else if (answers.usecase === "production") {
+            if (m.pricing && m.pricing.unit !== "free") score -= Math.min(m.pricing.input * 5, 10);
+            if (m.tool_call) score += 5;
+          }
+
+          // Priority scoring
+          if (answers.priority === "cost") {
+            if (m.pricing && m.pricing.unit === "free") score += 10;
+            else if (m.pricing && m.pricing.input <= 0.1) score += 8;
+            else if (m.pricing && m.pricing.input <= 0.5) score += 4;
+          } else if (answers.priority === "quality") {
+            if (m.reasoning) score += 5;
+            if (m.tool_call) score += 3;
+          } else if (answers.priority === "speed") {
+            if (m.pricing && m.pricing.unit !== "free" && m.pricing.input <= 0.5) score += 5;
+          } else if (answers.priority === "privacy") {
+            if (m.open_weights) score += 10;
+          }
+
+          return { ...m, score };
+        });
+
+        // Sort by score descending
+        candidates.sort((a, b) => b.score - a.score);
+
+        return candidates.slice(0, 5);
+      }
+
+      function renderResults(results) {
+        const usecaseNames = {
+          agents: "AI Agents",
+          coding: "Code Generation",
+          chat: "Chat / RAG",
+          reasoning: "Math & Reasoning",
+          vision: "Vision / Multimodal",
+          production: "High-Volume Production",
+        };
+        const budgetNames = {
+          free: "Free",
+          budget: "Under $0.10/M",
+          mid: "Under $1/M",
+          premium: "Premium",
+        };
+
+        document.getElementById("results-summary").textContent =
+          `Top ${results.length} models for ${usecaseNames[answers.usecase] || answers.usecase} with ${budgetNames[answers.budget] || answers.budget} budget:`;
+
+        const list = document.getElementById("results-list");
+        list.innerHTML = "";
+
+        results.forEach((m, i) => {
+          const isBest = i === 0;
+          const price =
+            m.pricing && m.pricing.unit === "free"
+              ? "Free"
+              : m.pricing
+                ? `$${m.pricing.input}/$${m.pricing.output} per M`
+                : "N/A";
+          const ctx =
+            m.limit && m.limit.context
+              ? m.limit.context >= 1000
+                ? `${Math.round(m.limit.context / 1000)}K`
+                : m.limit.context
+              : "N/A";
+
+          const badges = [];
+          if (m.tool_call) badges.push('<span class="badge badge-tc">Tool Calling</span>');
+          if (m.reasoning) badges.push('<span class="badge badge-reason">Reasoning</span>');
+          if (m.pricing && m.pricing.unit === "free")
+            badges.push('<span class="badge badge-free">Free</span>');
+
+          const reasons = [];
+          if (answers.usecase === "agents" && m.tool_call)
+            reasons.push("Supports tool calling for agent workflows");
+          if (answers.usecase === "coding" && m.tool_call)
+            reasons.push("Tool calling for code execution");
+          if (answers.usecase === "reasoning" && m.reasoning)
+            reasons.push("Built-in reasoning capability");
+          if (answers.usecase === "vision") reasons.push("Supports image input");
+          if (answers.priority === "cost" && m.pricing && m.pricing.unit === "free")
+            reasons.push("Completely free to use");
+          if (answers.priority === "cost" && m.pricing && m.pricing.input <= 0.1)
+            reasons.push("Very low cost per token");
+          if (m.limit && m.limit.context >= 131072) reasons.push(`${ctx} context window`);
+
+          const card = document.createElement("div");
+          card.className = "result-card" + (isBest ? " best" : "");
+          card.innerHTML = `
+            <div><span class="result-rank">${i + 1}</span><span class="result-name">${m.id}</span> ${badges.join(" ")}</div>
+            <div class="result-meta">
+              <span>Provider: ${m.provider}</span>
+              <span class="result-price">${price}</span>
+              <span>Context: ${ctx}</span>
+            </div>
+            ${reasons.length ? `<div class="result-reason">${reasons[0]}</div>` : ""}
+          `;
+          list.appendChild(card);
+        });
+      }
+
+      function resetWizard() {
+        answers = { usecase: null, budget: null, context: null, priority: null };
+        document.getElementById("results").classList.remove("active");
+        document.getElementById("wizard").style.display = "block";
+        document.querySelectorAll(".step").forEach((s) => s.classList.remove("active"));
+        document.getElementById("step-1").classList.add("active");
+        document.querySelectorAll(".option").forEach((o) => o.classList.remove("selected"));
+        document.querySelectorAll(".progress-dot").forEach((d, i) => {
+          d.className = "progress-dot";
+          if (i === 0) d.classList.add("active");
+        });
+      }
+    </script>
+  </body>
+</html>
