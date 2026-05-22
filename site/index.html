@@ -813,6 +813,47 @@
         font-weight: 700;
         color: var(--accent);
       }
+
+      .motd {
+        margin: 12px 0;
+        padding: 16px 20px;
+        background: var(--card-bg);
+        border: 1px solid var(--accent);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .motd:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      .motd-icon {
+        font-size: 2em;
+      }
+      .motd-content {
+        flex: 1;
+      }
+      .motd-title {
+        font-weight: 700;
+        font-size: 1.05em;
+      }
+      .motd-meta {
+        font-size: 0.85em;
+        color: var(--text-secondary);
+        margin-top: 2px;
+      }
+      .motd-badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.7em;
+        font-weight: 600;
+        margin-left: 6px;
+        vertical-align: middle;
+      }
     </style>
   </head>
   <body>
@@ -834,6 +875,16 @@
         </div>
       </div>
       <div class="stats" id="stats"></div>
+
+      <div class="motd" id="motd" onclick="showMotdDetail()" style="display: none">
+        <div class="motd-icon">🌟</div>
+        <div class="motd-content">
+          <div class="motd-title" id="motd-title"></div>
+          <div class="motd-meta" id="motd-meta"></div>
+        </div>
+        <div style="font-size: 0.8em; color: var(--text-secondary)">Model of the Day</div>
+      </div>
+
       <div class="calculator" id="calculator" style="display: none">
         <div class="calc-header">
           <span>💰 Price Calculator</span>
@@ -1308,6 +1359,7 @@
             models = Array.isArray(data) ? data : data.models;
             try {
               init();
+              initMotd();
               return; // success
             } catch (e) {
               console.error("init() error:", e);
@@ -1325,6 +1377,69 @@
         document.getElementById("tbody").innerHTML =
           '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-secondary)">Failed to load data. Try refreshing the page.</td></tr>';
       }
+
+      // Model of the Day
+      function initMotd() {
+        if (!models || models.length === 0) return;
+        const AGG = new Set([
+          "openrouter",
+          "requesty",
+          "auriko",
+          "llmgateway",
+          "cortecs",
+          "aihubmix",
+          "orcarouter",
+          "fastrouter",
+          "302ai",
+          "martian",
+          "nanogpt",
+          "jiekou",
+          "venice",
+          "meganova",
+        ]);
+        const fp = models.filter((m) => !AGG.has(m.provider));
+        // Use date as seed for consistent daily pick
+        const today = new Date();
+        const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+        const idx = seed % fp.length;
+        const m = fp[idx];
+
+        const price =
+          m.pricing && m.pricing.unit === "free"
+            ? "Free"
+            : m.pricing
+              ? "$" + m.pricing.input + "/$" + m.pricing.output + "/M"
+              : "N/A";
+        const ctx =
+          m.limit && m.limit.context
+            ? m.limit.context >= 1000
+              ? Math.round(m.limit.context / 1000) + "K"
+              : m.limit.context
+            : "N/A";
+
+        let badges = "";
+        if (m.tool_call)
+          badges += '<span class="motd-badge" style="background:#fff8c5;color:#7c6600">TC</span>';
+        if (m.reasoning)
+          badges +=
+            '<span class="motd-badge" style="background:#f0fff4;color:#1a7f37">Reason</span>';
+        if (m.pricing && m.pricing.unit === "free")
+          badges += '<span class="motd-badge" style="background:#ddf4ff;color:#0969da">Free</span>';
+
+        document.getElementById("motd-title").innerHTML = m.id + badges;
+        document.getElementById("motd-meta").textContent =
+          m.provider + " · " + price + " · " + ctx + " context";
+        document.getElementById("motd").style.display = "flex";
+      }
+
+      function showMotdDetail() {
+        // Find the model and show its detail
+        const title = document.getElementById("motd-title").textContent;
+        const modelId = title.replace(/TC|Reason|Free/g, "").trim();
+        const m = models.find((x) => x.id === modelId);
+        if (m) showDetail(m);
+      }
+
       loadData();
 
       function init() {
