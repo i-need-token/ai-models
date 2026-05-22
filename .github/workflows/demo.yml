@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Get AI Model Data
         id: models
-        uses: i-need-token/ai-models@v0.2.0
+        uses: i-need-token/ai-models@main
         with:
           format: json
           output-dir: model-data
