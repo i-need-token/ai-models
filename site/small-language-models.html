@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Small Language Models (SLM) — 2,000+ Models Under 10B Parameters (2025) | AI Models Catalog
+    </title>
+    <meta
+      name="description"
+      content="Complete guide to 2,000+ small language models in 2025. Compare SLMs under 10B parameters — pricing, context windows, tool calling, and deployment options for edge and mobile."
+    />
+    <meta
+      name="keywords"
+      content="small language model, SLM, small LLM, edge AI, on-device AI, mobile AI, compact model, lightweight LLM, 7B model, 3B model, 1B model"
+    />
+    <link
+      rel="canonical"
+      href="https://i-need-token.github.io/ai-models/small-language-models.html"
+    />
+    <meta
+      property="og:title"
+      content="Small Language Models (SLM) — 2,000+ Models Under 10B Parameters (2025)"
+    />
+    <meta
+      property="og:description"
+      content="2,000+ small language models compared. Find the best SLM for edge deployment, mobile apps, and cost-efficient production."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/social-preview.png"
+    />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="640" />
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/social-preview.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Small Language Models (SLM) — 2,000+ Models Under 10B Parameters (2025)",
+        "description": "Complete guide to 2,000+ small language models. Compare SLMs for edge deployment, mobile apps, and cost-efficient production.",
+        "author": { "@type": "Organization", "name": "AI Models Catalog" },
+        "publisher": { "@type": "Organization", "name": "AI Models Catalog" },
+        "datePublished": "2025-05-21",
+        "dateModified": "2025-05-21",
+        "url": "https://i-need-token.github.io/ai-models/small-language-models.html"
+      }
+    </script>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-secondary: #f6f8fa;
+        --text: #1f2328;
+        --text-secondary: #656d76;
+        --border: #d0d7de;
+        --accent: #0969da;
+        --accent-light: #ddf4ff;
+        --card-bg: #ffffff;
+        --card-border: #d0d7de;
+        --highlight: #1a7f37;
+        --warning: #9a6700;
+        --free: #1a7f37;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --bg-secondary: #161b22;
+          --text: #e6edf3;
+          --text-secondary: #8b949e;
+          --border: #30363d;
+          --accent: #58a6ff;
+          --accent-light: #1f2d3d;
+          --card-bg: #161b22;
+          --card-border: #30363d;
+          --highlight: #3fb950;
+          --warning: #d29922;
+          --free: #3fb950;
+        }
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 2em;
+        margin-bottom: 16px;
+      }
+      h2 {
+        font-size: 1.5em;
+        margin: 32px 0 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--border);
+      }
+      h3 {
+        font-size: 1.2em;
+        margin: 24px 0 12px;
+      }
+      p {
+        margin: 12px 0;
+        color: var(--text-secondary);
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+        margin: 20px 0;
+      }
+      .stat-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        padding: 16px;
+        text-align: center;
+      }
+      .stat-card .number {
+        font-size: 2em;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .stat-card .label {
+        font-size: 0.85em;
+        color: var(--text-secondary);
+        margin-top: 4px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 0.9em;
+      }
+      th,
+      td {
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+      th {
+        background: var(--bg-secondary);
+        font-weight: 600;
+        position: sticky;
+        top: 0;
+      }
+      tr:hover {
+        background: var(--bg-secondary);
+      }
+      .free {
+        color: var(--free);
+        font-weight: 600;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 12px;
+        font-size: 0.75em;
+        font-weight: 600;
+      }
+      .badge-free {
+        background: var(--accent-light);
+        color: var(--accent);
+      }
+      .badge-tc {
+        background: #fff8c5;
+        color: #7c6600;
+      }
+      .badge-reason {
+        background: #f0fff4;
+        color: #1a7f37;
+      }
+      @media (prefers-color-scheme: dark) {
+        .badge-tc {
+          background: #3d2e00;
+          color: #d29922;
+        }
+        .badge-reason {
+          background: #0d2818;
+          color: #3fb950;
+        }
+      }
+      .cta {
+        display: inline-block;
+        background: var(--accent);
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        margin: 16px 0;
+      }
+      .cta:hover {
+        text-decoration: none;
+        opacity: 0.9;
+      }
+      .related-pages {
+        margin: 40px 0;
+        padding: 20px;
+        background: var(--bg-secondary);
+        border-radius: 8px;
+      }
+      .related-pages a {
+        display: inline-block;
+        margin: 4px 8px 4px 0;
+        padding: 4px 12px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+      footer {
+        margin-top: 40px;
+        padding: 20px 0;
+        border-top: 1px solid var(--border);
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.85em;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 12px;
+        }
+        h1 {
+          font-size: 1.5em;
+        }
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        table {
+          font-size: 0.8em;
+        }
+        th,
+        td {
+          padding: 6px 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🤏 Small Language Models (SLM) — 2,000+ Models Under 10B Parameters</h1>
+      <p>
+        Complete guide to small language models for edge deployment, mobile apps, and cost-efficient
+        production. All data from
+        <a href="https://github.com/i-need-token/ai-models">AI Models Catalog</a> — first-party data
+        only.
+      </p>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="number">2,002</div>
+          <div class="label">Small Models</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">928</div>
+          <div class="label">With Tool Calling</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">557</div>
+          <div class="label">With Reasoning</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">48</div>
+          <div class="label">Free SLMs</div>
+        </div>
+        <div class="stat-card">
+          <div class="number">689</div>
+          <div class="label">First-Party</div>
+        </div>
+      </div>
+
+      <a class="cta" href="https://i-need-token.github.io/ai-models/"
+        >🔍 Search All 4,587 Models →</a
+      >
+
+      <h2>What Are Small Language Models?</h2>
+      <p>
+        Small Language Models (SLMs) are AI models with fewer than ~10 billion parameters, designed
+        for efficiency, low latency, and deployment on resource-constrained hardware — from
+        smartphones to edge servers. They offer a practical alternative to large frontier models
+        when cost, speed, or privacy matters.
+      </p>
+      <p><strong>Key advantages of SLMs:</strong></p>
+      <ul>
+        <li><strong>Lower cost</strong> — often 10-100x cheaper per token than frontier models</li>
+        <li><strong>Lower latency</strong> — faster inference for real-time applications</li>
+        <li><strong>Edge deployment</strong> — run on-device without cloud dependency</li>
+        <li><strong>Privacy</strong> — data never leaves the device</li>
+        <li><strong>Fine-tuning</strong> — easier to customize for specific domains</li>
+      </ul>
+
+      <h2>Cheapest Small Models with Tool Calling</h2>
+      <p>Best value SLMs for AI agents and tool-use workflows (first-party providers only):</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Provider</th>
+            <th>Input $/M</th>
+            <th>Output $/M</th>
+            <th>Context</th>
+            <th>Reasoning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>ling-2.6-flash</td>
+            <td>ling</td>
+            <td>$0.01</td>
+            <td>$0.03</td>
+            <td>262K</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>klusterai--Meta-Llama-3.1-8B-Instruct-Turbo</td>
+            <td>klusterai</td>
+            <td>$0.015</td>
+            <td>$0.02</td>
+            <td>131K</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>granite-4.0-h-micro</td>
+            <td>ibm</td>
+            <td>$0.017</td>
+            <td>$0.112</td>
+            <td>131K</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>llama-3.1-8b-instruct--fp-16</td>
+            <td>fireworks</td>
+            <td>$0.02</td>
+            <td>$0.03</td>
+            <td>131K</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>schematron-3b</td>
+            <td>fireworks</td>
+            <td>$0.02</td>
+            <td>$0.05</td>
+            <td>131K</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Free Small Language Models</h2>
+      <p>48 small models available at zero cost — perfect for prototyping and development:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Provider</th>
+            <th>Context</th>
+            <th>Tool Calling</th>
+            <th>Reasoning</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>deepseek-r1-distill-llama-8b</td>
+            <td>cerebras</td>
+            <td>131K</td>
+            <td></td>
+            <td>✓</td>
+          </tr>
+          <tr>
+            <td>llama-4-scout-17b-16e-instruct</td>
+            <td>cerebras</td>
+            <td>131K</td>
+            <td>✓</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>qwen-2.5-32b</td>
+            <td>cerebras</td>
+            <td>131K</td>
+            <td>✓</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>gemma-4-26b-a4b-it</td>
+            <td>auriko</td>
+            <td>262K</td>
+            <td>✓</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>glm-4.5-flash</td>
+            <td>auriko</td>
+            <td>200K</td>
+            <td>✓</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>glm-4.6v-flash</td>
+            <td>auriko</td>
+            <td>128K</td>
+            <td>✓</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>baidu--ernie-4.5-0.3b</td>
+            <td>aimlapi</td>
+            <td>120K</td>
+            <td>✓</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Small Models with Reasoning</h2>
+      <p>
+        557 small models with reasoning capabilities — ideal for math, logic, and step-by-step
+        problem solving:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Provider</th>
+            <th>Input $/M</th>
+            <th>Output $/M</th>
+            <th>Context</th>
+            <th>Tool Calling</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>qwen3.5-0.8b</td>
+            <td>qwen</td>
+            <td>$0.01</td>
+            <td>$0.05</td>
+            <td>262K</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>qwen3.5-2b</td>
+            <td>qwen</td>
+            <td>$0.02</td>
+            <td>$0.10</td>
+            <td>262K</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>qwen--qwen3-4b-fp8</td>
+            <td>fireworks</td>
+            <td>$0.03</td>
+            <td>$0.03</td>
+            <td>128K</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>qwen3.5-4b</td>
+            <td>qwen</td>
+            <td>$0.03</td>
+            <td>$0.15</td>
+            <td>262K</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>deepseek-r1-distill-llama-8b</td>
+            <td>cerebras</td>
+            <td class="free">Free</td>
+            <td class="free">Free</td>
+            <td>131K</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>Best SLMs by Use Case</h2>
+      <h3>🤖 AI Agents on a Budget</h3>
+      <p>
+        <strong>ling-2.6-flash</strong> ($0.01/$0.03/M) — cheapest tool-calling model with 262K
+        context. Perfect for high-volume agent workflows.
+      </p>
+      <h3>📱 On-Device / Edge Deployment</h3>
+      <p>
+        <strong>Qwen3.5 0.8B</strong> — ultra-compact reasoning model.
+        <strong>Gemma 4 27B IT</strong> — free with vision + tool calling.
+      </p>
+      <h3>💻 Code Completion</h3>
+      <p>
+        <strong>bdc-coder</strong> ($0.01/$0.01/M) — cheapest coding model.
+        <strong>Qwen3 4B</strong> ($0.03/$0.15/M) — open-source with reasoning.
+      </p>
+      <h3>🧮 Math & Reasoning</h3>
+      <p>
+        <strong>DeepSeek R1 Distill Llama 8B</strong> — free reasoning model.
+        <strong>Qwen3.5 0.8B</strong> ($0.01/$0.05/M) — cheapest reasoning.
+      </p>
+      <h3>💬 Chat & RAG</h3>
+      <p>
+        <strong>GPT-4.1-nano</strong> ($0.10/$0.40/M) — fast, cheap, reliable.
+        <strong>Qwen3 4B</strong> ($0.03/$0.15/M) — open-source alternative.
+      </p>
+
+      <h2>SLM vs LLM: When to Choose Small</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th>Small Model (SLM)</th>
+            <th>Large Model (LLM)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cost per 1M tokens</td>
+            <td>$0.01 – $0.20</td>
+            <td>$1 – $40</td>
+          </tr>
+          <tr>
+            <td>Latency (first token)</td>
+            <td>50 – 200ms</td>
+            <td>200 – 2000ms</td>
+          </tr>
+          <tr>
+            <td>Deployment</td>
+            <td>On-device, edge, cloud</td>
+            <td>Cloud only</td>
+          </tr>
+          <tr>
+            <td>Privacy</td>
+            <td>Data stays on device</td>
+            <td>Data sent to cloud</td>
+          </tr>
+          <tr>
+            <td>Customization</td>
+            <td>Easy fine-tuning</td>
+            <td>Expensive fine-tuning</td>
+          </tr>
+          <tr>
+            <td>Complex reasoning</td>
+            <td>Good for simple tasks</td>
+            <td>Superior for complex tasks</td>
+          </tr>
+          <tr>
+            <td>Best for</td>
+            <td>High-volume, real-time, edge</td>
+            <td>Complex, nuanced, creative</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="related-pages">
+        <strong>Related:</strong>
+        <a href="free-ai-models.html">Free AI Models</a>
+        <a href="cheapest-ai-models.html">Cheapest AI Models</a>
+        <a href="tool-calling-models-comparison.html">Tool Calling Models</a>
+        <a href="reasoning-models-comparison.html">Reasoning Models</a>
+        <a href="open-source-ai-models.html">Open Source Models</a>
+        <a href="best-ai-models-for-coding.html">Best for Coding</a>
+        <a href="best-ai-models-for-agents.html">Best for Agents</a>
+        <a href="ai-model-comparison-chart.html">Comparison Chart</a>
+        <a href="context-window-comparison.html">Context Windows</a>
+        <a href="llm-pricing.html">LLM Pricing</a>
+        <a href="best-ai-models.html">Best AI Models</a>
+        <a href="state-of-ai-models.html">State of AI Models</a>
+        <a href="ai-model-benchmarks.html">Benchmarks</a>
+        <a href="chatgpt-vs-claude-vs-gemini.html">ChatGPT vs Claude vs Gemini</a>
+        <a href="ai-models-by-provider.html">By Provider</a>
+        <a href="multimodal-ai-models.html">Multimodal Models</a>
+        <a href="structured-output-models-comparison.html">Structured Output</a>
+        <a href="best-ai-models-for-vision.html">Vision Models</a>
+        <a href="best-ai-models-for-image-generation.html">Image Generation</a>
+        <a href="openai-alternatives.html">OpenAI Alternatives</a>
+        <a href="ai-model-pricing-calculator.html">Pricing Calculator</a>
+      </div>
+
+      <footer>
+        <p>
+          Data from <a href="https://github.com/i-need-token/ai-models">AI Models Catalog</a> —
+          4,587 models across 95 providers. First-party data only.
+        </p>
+        <p>
+          <a href="https://i-need-token.github.io/ai-models/">Interactive Catalog</a> ·
+          <a href="https://github.com/i-need-token/ai-models">GitHub</a> ·
+          <a href="https://github.com/i-need-token/ai-models/releases/latest/download/models.json"
+            >Download JSON</a
+          >
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
