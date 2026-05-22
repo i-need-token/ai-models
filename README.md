@@ -432,6 +432,28 @@ Download a specific version or format:
 
 See [`action.yml`](action.yml) for all inputs and outputs.
 
+<details>
+<summary>🎬 Live demo output (from our CI)</summary>
+
+```
+📊 4587 models from 87 providers
+📁 Data saved to model-data/models.json
+
+💰 Cheapest tool-calling models:
+  bdc-coder: $0.01/$0.01/M tokens
+  ling-2.6-flash: $0.01/$0.03/M tokens
+  klusterai--Meta-Llama-3.1-8B-Instruct-Turbo: $0.015/$0.02/M tokens
+  granite-4.0-h-micro: $0.017/$0.112/M tokens
+
+🆓 Free reasoning models:
+  gemma-4-26b-a4b-it: 262K context
+  gemma-4-31b-it: 262K context
+```
+
+_[View the live workflow →](https://github.com/i-need-token/ai-models/actions/workflows/demo.yml)_
+
+</details>
+
 ## Project Structure
 
 ```
