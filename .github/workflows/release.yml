@@ -35,7 +35,7 @@ jobs:
         run: npx tsx scripts/stats.ts json > stats.json
 
       - name: Create release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             dist/models.json
