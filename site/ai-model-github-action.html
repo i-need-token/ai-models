@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Model GitHub Action — Automate Model Data in CI/CD | AI Models Catalog</title>
+    <meta
+      name="description"
+      content="GitHub Action for AI model data. Auto-update model lists, validate pricing, check availability in your CI/CD pipeline. Free and open source."
+    />
+    <meta
+      name="keywords"
+      content="AI model GitHub Action, LLM CI/CD, model data automation, AI model API GitHub Action, LLM pricing automation"
+    />
+    <link
+      rel="canonical"
+      href="https://i-need-token.github.io/ai-models/ai-model-github-action.html"
+    />
+    <meta property="og:title" content="AI Model GitHub Action — Automate Model Data in CI/CD" />
+    <meta
+      property="og:description"
+      content="GitHub Action for AI model data. Auto-update model lists, validate pricing, check availability in your pipeline."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/social-preview.png"
+    />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="640" />
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/social-preview.png"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "AI Model GitHub Action — Automate Model Data in CI/CD",
+        "description": "GitHub Action for AI model data. Auto-update model lists, validate pricing, check availability in your pipeline.",
+        "author": { "@type": "Organization", "name": "AI Models Catalog" },
+        "publisher": { "@type": "Organization", "name": "AI Models Catalog" },
+        "datePublished": "2025-05-21",
+        "dateModified": "2025-05-21",
+        "url": "https://i-need-token.github.io/ai-models/ai-model-github-action.html"
+      }
+    </script>
+    <style>
+      :root {
+        --bg: #ffffff;
+        --bg-secondary: #f6f8fa;
+        --text: #1f2328;
+        --text-secondary: #656d76;
+        --border: #d0d7de;
+        --accent: #0969da;
+        --accent-light: #ddf4ff;
+        --card-bg: #ffffff;
+        --card-border: #d0d7de;
+        --success: #1a7f37;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0d1117;
+          --bg-secondary: #161b22;
+          --text: #e6edf3;
+          --text-secondary: #8b949e;
+          --border: #30363d;
+          --accent: #58a6ff;
+          --accent-light: #1f2d3d;
+          --card-bg: #161b22;
+          --card-border: #30363d;
+          --success: #3fb950;
+        }
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 {
+        font-size: 2em;
+        margin-bottom: 8px;
+      }
+      h2 {
+        font-size: 1.4em;
+        margin: 28px 0 12px;
+      }
+      h3 {
+        font-size: 1.15em;
+        margin: 20px 0 8px;
+      }
+      p {
+        margin: 8px 0;
+        color: var(--text-secondary);
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      pre {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 16px;
+        overflow-x: auto;
+        margin: 12px 0;
+        font-size: 0.9em;
+        line-height: 1.5;
+      }
+      code {
+        font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        font-size: 0.9em;
+      }
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 16px;
+        margin: 16px 0;
+      }
+      .feature-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 8px;
+        padding: 16px;
+      }
+      .feature-card h3 {
+        margin-top: 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 12px 0;
+      }
+      th,
+      td {
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        text-align: left;
+      }
+      th {
+        background: var(--bg-secondary);
+        font-weight: 600;
+      }
+      .related-pages {
+        margin: 40px 0;
+        padding: 20px;
+        background: var(--bg-secondary);
+        border-radius: 8px;
+      }
+      .related-pages a {
+        display: inline-block;
+        margin: 4px 8px 4px 0;
+        padding: 4px 12px;
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 4px;
+        font-size: 0.9em;
+      }
+      footer {
+        margin-top: 40px;
+        padding: 20px 0;
+        border-top: 1px solid var(--border);
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 0.85em;
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 12px;
+        }
+        h1 {
+          font-size: 1.5em;
+        }
+        .feature-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>⚡ AI Model GitHub Action</h1>
+      <p>
+        Automate AI model data in your CI/CD pipeline. Free, open source, and always up-to-date.
+      </p>
+
+      <h2>Quick Start</h2>
+      <pre><code>- name: Get AI Model Data
+  uses: i-need-token/ai-models@v0.2.0
+  with:
+    format: json
+    output: models.json</code></pre>
+
+      <h2>Features</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>📊 Model Data</h3>
+          <p>
+            Get structured model data with pricing, context windows, and capabilities for 4,587+
+            models across 95 providers.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>🔍 Filter & Search</h3>
+          <p>
+            Filter by provider, capability (tool calling, reasoning, vision), pricing tier, or
+            context window size.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3>💰 Price Tracking</h3>
+          <p>Monitor pricing changes across providers. Get alerts when model prices change.</p>
+        </div>
+        <div class="feature-card">
+          <h3>📋 Format Options</h3>
+          <p>Output as JSON, YAML, CSV, or Markdown table. Use in scripts, docs, or dashboards.</p>
+        </div>
+      </div>
+
+      <h2>Action Inputs</h2>
+      <table>
+        <tr>
+          <th>Input</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+        <tr>
+          <td><code>format</code></td>
+          <td>Output format: json, yaml, csv, markdown</td>
+          <td><code>json</code></td>
+        </tr>
+        <tr>
+          <td><code>output</code></td>
+          <td>Output file path</td>
+          <td><code>models.json</code></td>
+        </tr>
+        <tr>
+          <td><code>provider</code></td>
+          <td>Filter by provider name</td>
+          <td>(all)</td>
+        </tr>
+        <tr>
+          <td><code>capability</code></td>
+          <td>Filter by capability: tool_call, reasoning, vision, structured_output</td>
+          <td>(all)</td>
+        </tr>
+        <tr>
+          <td><code>free-only</code></td>
+          <td>Only include free models</td>
+          <td><code>false</code></td>
+        </tr>
+        <tr>
+          <td><code>max-price</code></td>
+          <td>Maximum input price per M tokens</td>
+          <td>(no limit)</td>
+        </tr>
+        <tr>
+          <td><code>min-context</code></td>
+          <td>Minimum context window size</td>
+          <td>0</td>
+        </tr>
+      </table>
+
+      <h2>Usage Examples</h2>
+
+      <h3>Get Free Models with Tool Calling</h3>
+      <pre><code>- name: Get free tool-calling models
+  uses: i-need-token/ai-models@v0.2.0
+  with:
+    format: json
+    output: free-tc-models.json
+    capability: tool_call
+    free-only: true</code></pre>
+
+      <h3>Get Cheapest Models Under $0.50/M</h3>
+      <pre><code>- name: Get budget models
+  uses: i-need-token/ai-models@v0.2.0
+  with:
+    format: csv
+    output: budget-models.csv
+    max-price: 0.50</code></pre>
+
+      <h3>Generate Model Comparison Table</h3>
+      <pre><code>- name: Generate comparison table
+  uses: i-need-token/ai-models@v0.2.0
+  with:
+    format: markdown
+    output: model-comparison.md
+    provider: openai
+    capability: reasoning</code></pre>
+
+      <h3>Weekly Price Monitoring</h3>
+      <pre><code>name: Price Monitor
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # Every Monday 6:00 UTC
+jobs:
+  check-prices:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: i-need-token/ai-models@v0.2.0
+        with:
+          format: csv
+          output: current-prices.csv
+      - name: Compare with last week
+        run: |
+          diff last-week-prices.csv current-prices.csv || echo "Prices changed!"
+      - name: Save for next week
+        run: cp current-prices.csv last-week-prices.csv</code></pre>
+
+      <h2>Output Formats</h2>
+
+      <h3>JSON</h3>
+      <pre><code>{
+  "generated_at": "2025-05-21T12:00:00Z",
+  "stats": { "models": 4587, "providers": 95 },
+  "models": [
+    {
+      "id": "gpt-4o",
+      "provider": "openai",
+      "pricing": { "input": 2.5, "output": 10 },
+      "limit": { "context": 128000 },
+      "tool_call": true,
+      "reasoning": false
+    }
+  ]
+}</code></pre>
+
+      <h3>CSV</h3>
+      <pre><code>id,provider,input_price,output_price,context_window,tool_call,reasoning
+gpt-4o,openai,2.5,10,128000,true,false</code></pre>
+
+      <h2>Why Use This Action?</h2>
+      <ul style="margin: 12px 0; padding-left: 24px">
+        <li style="margin: 8px 0">✅ Always up-to-date — data refreshed from provider APIs</li>
+        <li style="margin: 8px 0">✅ First-party data only — no third-party aggregators</li>
+        <li style="margin: 8px 0">✅ Structured & validated — TypeScript types + Zod schemas</li>
+        <li style="margin: 8px 0">✅ Zero configuration — works out of the box</li>
+        <li style="margin: 8px 0">✅ Free & open source — MIT license</li>
+      </ul>
+
+      <p>
+        <a href="https://github.com/i-need-token/ai-models">View on GitHub →</a> ·
+        <a href="https://i-need-token.github.io/ai-models/">Interactive Catalog →</a>
+      </p>
+
+      <div class="related-pages">
+        <strong>Related:</strong>
+        <a href="best-ai-models.html">Best AI Models</a>
+        <a href="free-ai-models.html">Free AI Models</a>
+        <a href="cheapest-ai-models.html">Cheapest AI Models</a>
+        <a href="tool-calling-models-comparison.html">Tool Calling Models</a>
+        <a href="reasoning-models-comparison.html">Reasoning Models</a>
+        <a href="ai-model-picker.html">AI Model Picker</a>
+        <a href="best-ai-models-for-coding.html">Best for Coding</a>
+        <a href="best-ai-models-for-agents.html">Best for Agents</a>
+        <a href="best-ai-models-for-vision.html">Vision Models</a>
+        <a href="small-language-models.html">Small Language Models</a>
+        <a href="ai-model-comparison-chart.html">Comparison Chart</a>
+        <a href="context-window-comparison.html">Context Windows</a>
+        <a href="llm-pricing.html">LLM Pricing</a>
+        <a href="ai-model-pricing-calculator.html">Pricing Calculator</a>
+        <a href="openai-alternatives.html">OpenAI Alternatives</a>
+        <a href="open-source-ai-models.html">Open Source Models</a>
+        <a href="state-of-ai-models.html">State of AI Models</a>
+        <a href="ai-model-benchmarks.html">Benchmarks</a>
+        <a href="chatgpt-vs-claude-vs-gemini.html">ChatGPT vs Claude vs Gemini</a>
+        <a href="ai-models-by-provider.html">By Provider</a>
+        <a href="multimodal-ai-models.html">Multimodal Models</a>
+        <a href="structured-output-models-comparison.html">Structured Output</a>
+        <a href="best-ai-models-for-image-generation.html">Image Generation</a>
+      </div>
+
+      <footer>
+        <p>
+          Data from <a href="https://github.com/i-need-token/ai-models">AI Models Catalog</a> —
+          4,587 models across 95 providers. First-party data only.
+        </p>
+        <p>
+          <a href="https://i-need-token.github.io/ai-models/">Interactive Catalog</a> ·
+          <a href="https://github.com/i-need-token/ai-models">GitHub</a>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
