@@ -484,6 +484,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [Quick Start Guide](docs/quick-start.md)                            | Find the right model in 30 seconds                              |
 | [Model Selection Guide](docs/model-selection.md)                    | Decision framework: free, best value, large context models      |
 | [Model Selection Cheatsheet](docs/model-selection-cheatsheet.md)    | Quick-reference: best model by budget and use case              |
+| [AI Model Picker](docs/ai-model-picker.md)                          | 4-question wizard: find the best model for your use case        |
 | [Benchmarks & Leaderboards](docs/benchmarks.md)                     | MMLU, MATH, HumanEval, SWE-bench, Chatbot Arena guide           |
 | [Migration Guide](docs/migration-guide.md)                          | Switch providers — pricing, API compatibility, checklist        |
 | [API & Programmatic Access](docs/api.md)                            | Download models.json, code examples in JS/Python                |
