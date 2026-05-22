@@ -1,0 +1,50 @@
+name: AI Models Demo
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * 1" # Every Monday 6:00 UTC
+
+jobs:
+  demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get AI Model Data
+        id: models
+        uses: i-need-token/ai-models@v0.2.0
+        with:
+          format: json
+          output-dir: model-data
+
+      - name: Show Stats
+        run: |
+          echo "📊 ${{ steps.models.outputs.model-count }} models from ${{ steps.models.outputs.provider-count }} providers"
+          echo "📁 Data saved to ${{ steps.models.outputs.file-path }}"
+
+      - name: Find Cheapest Tool-Calling Model
+        run: |
+          python3 -c "
+          import json
+          with open('model-data/models.json') as f:
+              data = json.load(f)
+          models = data['models']
+          AGG = {'openrouter','requesty','auriko','llmgateway','cortecs','aihubmix','orcarouter','fastrouter','302ai','martian','nanogpt','jiekou','venice','meganova'}
+          tc = [m for m in models if m.get('tool_call') and m.get('provider') not in AGG and m.get('pricing',{}).get('unit') != 'free' and m.get('pricing',{}).get('input',999) > 0]
+          tc.sort(key=lambda m: (m['pricing']['input'], m['pricing']['output']))
+          print('💰 Cheapest tool-calling models:')
+          for m in tc[:5]:
+              print(f'  {m[\"id\"]}: \${m[\"pricing\"][\"input\"]}/\${m[\"pricing\"][\"output\"]}/M tokens')
+          "
+
+      - name: Find Free Reasoning Models
+        run: |
+          python3 -c "
+          import json
+          with open('model-data/models.json') as f:
+              data = json.load(f)
+          models = data['models']
+          free_reason = [m for m in models if m.get('reasoning') and m.get('pricing',{}).get('unit') == 'free']
+          print('🆓 Free reasoning models:')
+          for m in free_reason[:5]:
+              ctx = m.get('limit',{}).get('context',0)
+              print(f'  {m[\"id\"]}: {ctx//1000 if ctx >= 1000 else ctx}K context')
+          "
