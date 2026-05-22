@@ -463,6 +463,7 @@ See [`docs/data-acquisition.md`](docs/data-acquisition.md) for detailed guidelin
 | [🔍 Interactive Catalog](https://i-need-token.github.io/ai-models/) | Search, sort, and filter all 4,587 models in your browser       |
 | [Quick Start Guide](docs/quick-start.md)                            | Find the right model in 30 seconds                              |
 | [Model Selection Guide](docs/model-selection.md)                    | Decision framework: free, best value, large context models      |
+| [Benchmarks & Leaderboards](docs/benchmarks.md)                     | MMLU, MATH, HumanEval, SWE-bench, Chatbot Arena guide           |
 | [Migration Guide](docs/migration-guide.md)                          | Switch providers — pricing, API compatibility, checklist        |
 | [API & Programmatic Access](docs/api.md)                            | Download models.json, code examples in JS/Python                |
 | [Code Examples](docs/code-examples.md)                              | Practical examples in TypeScript, Python, Go, Rust, jq          |
