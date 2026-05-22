@@ -410,3 +410,4 @@ npx tsx scripts/export-csv.ts
 - State of AI Models 2025: site/state-of-ai-models.html
 - AI Model Benchmarks Comparison: site/ai-model-benchmarks.html
 - ChatGPT vs Claude vs Gemini: site/chatgpt-vs-claude-vs-gemini.html
+- AI Model Comparison Chart: site/ai-model-comparison-chart.html
