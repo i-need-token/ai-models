@@ -50,6 +50,13 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 
 **[Try it live →](https://i-need-token.github.io/ai-models/)** — Search, filter, compare 4,587+ models with 25+ features including dark/light theme, keyboard shortcuts, price calculator, and model picker wizard.
 
+<details>
+<summary>📊 AI Models Landscape — providers, capabilities, pricing, context windows at a glance</summary>
+
+![AI Models Landscape 2025 — 4,587 models across 95 providers](docs/images/ai-models-landscape.png)
+
+</details>
+
 ## Why This Catalog?
 
 |                                         |                                                                           |
