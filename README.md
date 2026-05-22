@@ -31,6 +31,12 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 > curl -sL https://github.com/i-need-token/ai-models/releases/latest/download/models.json | python3 -c "import sys,json; d=json.load(sys.stdin); print(f'{len(d["models"])} models across {len(set(m["provider"] for m in d["models"]))} providers')"
 > ```
 
+## 💡 Quick Value Demo
+
+> **What's the cheapest model with tool calling?** → ling-2.6-flash at **$0.01/$0.03** per M tokens ([see all 2,350 →](docs/tool-calling.md))
+> **What's the best free reasoning model?** → DeepSeek R1 — **92% MATH-500** ([see all 81 free →](docs/free-models.md))
+> **Which model has the largest context window?** → Gemini 2.5 Pro — **1,048,576 tokens** ([see all context windows →](docs/context-windows.md))
+
 ## 🖥️ Interactive Catalog
 
 [![AI Models Catalog — Interactive model comparison tool](docs/images/catalog-screenshot.png)](https://i-need-token.github.io/ai-models/)
