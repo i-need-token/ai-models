@@ -22,15 +22,19 @@ inputs:
 outputs:
   model-count:
     description: "Number of models in the catalog"
+    value: ${{ steps.download.outputs.model-count }}
   provider-count:
     description: "Number of providers in the catalog"
+    value: ${{ steps.download.outputs.provider-count }}
   file-path:
     description: "Path to the downloaded file"
+    value: ${{ steps.download.outputs.file-path }}
 
 runs:
   using: "composite"
   steps:
-    - shell: bash
+    - id: download
+      shell: bash
       run: |
         VERSION="${{ inputs.version }}"
         FORMAT="${{ inputs.format }}"
@@ -60,8 +64,8 @@ runs:
           MODEL_COUNT=$(python3 -c "import json; d=json.load(open('$OUTPUT_DIR/models.json')); print(len(d.get('models', d)))" 2>/dev/null || echo "0")
           PROVIDER_COUNT=$(python3 -c "import json; d=json.load(open('$OUTPUT_DIR/models.json')); print(len(d.get('providers', [])))" 2>/dev/null || echo "0")
           echo "📊 $MODEL_COUNT models from $PROVIDER_COUNT providers"
-          echo "model-count=$MODEL_COUNT" >> $GITHUB_OUTPUT
-          echo "provider-count=$PROVIDER_COUNT" >> $GITHUB_OUTPUT
+          echo "model-count=$MODEL_COUNT" >> "$GITHUB_OUTPUT"
+          echo "provider-count=$PROVIDER_COUNT" >> "$GITHUB_OUTPUT"
         fi
 
-        echo "file-path=$OUTPUT_DIR/models.$FORMAT" >> $GITHUB_OUTPUT
+        echo "file-path=$OUTPUT_DIR/models.$FORMAT" >> "$GITHUB_OUTPUT"
