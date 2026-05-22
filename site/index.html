@@ -2106,12 +2106,28 @@
         table += "</tr>";
 
         table += "</tbody></table>";
-        document.getElementById("compareContent").innerHTML = table;
+        // Add share button
+        const shareBtn =
+          '<div style="margin-top:12px;text-align:center"><button onclick="shareCompare()" style="background:var(--accent);color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:0.9em">🔗 Share Comparison</button></div>';
+        document.getElementById("compareContent").innerHTML = table + shareBtn;
         document.getElementById("compareModal").style.display = "flex";
       }
 
       function closeCompare() {
         document.getElementById("compareModal").style.display = "none";
+      }
+
+      function shareCompare() {
+        const ids = Array.from(selectedModels).join(",");
+        const url = new URL(window.location);
+        url.searchParams.set("compare", ids);
+        const text = "Comparing " + selectedModels.size + " AI models";
+        if (navigator.share) {
+          navigator.share({ title: text, url: url.toString() });
+        } else {
+          navigator.clipboard.writeText(url.toString());
+          alert("Comparison URL copied to clipboard!");
+        }
       }
 
       // Share current view
@@ -2223,6 +2239,22 @@
         if (params.has("sort")) sortCol = params.get("sort");
         if (params.has("dir") && params.get("dir") === "desc") sortAsc = false;
         if (params.has("page")) currentPage = parseInt(params.get("page")) || 1;
+        if (params.has("compare")) {
+          params
+            .get("compare")
+            .split(",")
+            .forEach((id) => {
+              selectedModels.add(id);
+            });
+          const btn = document.getElementById("compareBtn");
+          const cnt = document.getElementById("compareCount");
+          btn.style.display = "inline-flex";
+          cnt.textContent = selectedModels.size;
+          // Auto-show comparison after data loads
+          setTimeout(() => {
+            if (selectedModels.size >= 2) showCompare();
+          }, 500);
+        }
       }
 
       // Events
