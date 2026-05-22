@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatGPT vs Claude vs Gemini — 2025 Comparison | AI Models Catalog</title>
+    <meta
+      name="description"
+      content="ChatGPT vs Claude vs Gemini: pricing, context windows, capabilities, benchmarks, and API comparison. GPT-4.1 vs Claude Sonnet 4 vs Gemini 2.5 Pro head-to-head."
+    />
+    <link
+      rel="canonical"
+      href="https://i-need-token.github.io/ai-models/chatgpt-vs-claude-vs-gemini.html"
+    />
+    <meta property="og:title" content="ChatGPT vs Claude vs Gemini — 2025 Comparison" />
+    <meta
+      property="og:description"
+      content="Head-to-head comparison: pricing, context windows, capabilities, benchmarks."
+    />
+    <meta
+      property="og:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/catalog-screenshot.png"
+    />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="577" />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://raw.githubusercontent.com/i-need-token/ai-models/main/docs/images/catalog-screenshot.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "ChatGPT vs Claude vs Gemini — 2025 Comparison",
+        "description": "Head-to-head comparison of GPT-4.1, Claude Sonnet 4, and Gemini 2.5 Pro",
+        "author": { "@type": "Organization", "name": "AI Models Catalog" },
+        "publisher": { "@type": "Organization", "name": "AI Models Catalog" },
+        "datePublished": "2025-05-21",
+        "url": "https://i-need-token.github.io/ai-models/chatgpt-vs-claude-vs-gemini.html"
+      }
+    </script>
+    <style>
+      :root {
+        --bg: #fff;
+        --text: #1a1a2e;
+        --text2: #555;
+        --accent: #e94560;
+        --card: #f8f9fa;
+        --border: #e0e0e0;
+        --hero: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        --openai: #10a37f;
+        --anthropic: #d4a574;
+        --google: #4285f4;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0f0c29;
+          --text: #e0e0e0;
+          --text2: #aaa;
+          --accent: #e94560;
+          --card: #1a1a2e;
+          --border: #333;
+          --hero: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        }
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+        line-height: 1.7;
+      }
+      .hero {
+        background: var(--hero);
+        color: #fff;
+        padding: 60px 20px;
+        text-align: center;
+      }
+      .hero h1 {
+        font-size: 2.2em;
+        margin-bottom: 12px;
+      }
+      .hero p {
+        font-size: 1.1em;
+        opacity: 0.9;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 30px 20px;
+      }
+      h2 {
+        color: var(--accent);
+        margin: 40px 0 16px;
+        font-size: 1.5em;
+        border-bottom: 2px solid var(--accent);
+        padding-bottom: 8px;
+      }
+      p {
+        margin: 12px 0;
+        color: var(--text2);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 0.9em;
+      }
+      th,
+      td {
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+      th {
+        background: var(--card);
+        font-weight: 600;
+      }
+      tr:hover {
+        background: var(--card);
+      }
+      .vs-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        margin: 20px 0;
+      }
+      .vs-card {
+        background: var(--card);
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+        border: 2px solid var(--border);
+      }
+      .vs-card h3 {
+        margin: 0 0 8px;
+        font-size: 1.1em;
+      }
+      .vs-card .price {
+        font-size: 1.8em;
+        font-weight: 700;
+        margin: 8px 0;
+      }
+      .vs-card .label {
+        font-size: 0.8em;
+        color: var(--text2);
+      }
+      .vs-card.openai {
+        border-color: var(--openai);
+      }
+      .vs-card.anthropic {
+        border-color: var(--anthropic);
+      }
+      .vs-card.google {
+        border-color: var(--google);
+      }
+      .winner {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.85em;
+        font-weight: 600;
+      }
+      .insight {
+        background: var(--card);
+        border-left: 4px solid var(--accent);
+        padding: 16px 20px;
+        margin: 20px 0;
+        border-radius: 0 8px 8px 0;
+      }
+      .insight strong {
+        color: var(--accent);
+      }
+      .related-pages {
+        margin: 40px 0;
+        padding: 20px 0;
+        border-top: 1px solid var(--border);
+      }
+      .related-pages a {
+        display: inline-block;
+        margin: 4px 8px 4px 0;
+        padding: 6px 14px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        text-decoration: none;
+        color: var(--text);
+        font-size: 0.85em;
+      }
+      .related-pages a:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      footer {
+        text-align: center;
+        padding: 30px;
+        color: var(--text2);
+        font-size: 0.85em;
+        border-top: 1px solid var(--border);
+        margin-top: 40px;
+      }
+      footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 1.6em;
+        }
+        .vs-grid {
+          grid-template-columns: 1fr;
+        }
+        table {
+          font-size: 0.8em;
+        }
+        th,
+        td {
+          padding: 6px 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hero">
+      <h1>⚡ ChatGPT vs Claude vs Gemini</h1>
+      <p>
+        The definitive 2025 comparison: pricing, context windows, capabilities, benchmarks, and API
+        features. GPT-4.1 vs Claude Sonnet 4 vs Gemini 2.5 Pro.
+      </p>
+    </div>
+    <div class="container">
+      <h2>1. Flagship Models at a Glance</h2>
+      <div class="vs-grid">
+        <div class="vs-card openai">
+          <h3 style="color: var(--openai)">OpenAI GPT-4.1</h3>
+          <div class="price">$2 / $8</div>
+          <div class="label">Input / Output per M tokens</div>
+          <div class="label">1,047,576 context</div>
+        </div>
+        <div class="vs-card anthropic">
+          <h3 style="color: var(--anthropic)">Anthropic Claude Sonnet 4</h3>
+          <div class="price">$3 / $15</div>
+          <div class="label">Input / Output per M tokens</div>
+          <div class="label">200,000 context</div>
+        </div>
+        <div class="vs-card google">
+          <h3 style="color: var(--google)">Google Gemini 2.5 Pro</h3>
+          <div class="price">$1.25 / $10</div>
+          <div class="label">Input / Output per M tokens</div>
+          <div class="label">1,048,576 context</div>
+        </div>
+      </div>
+
+      <h2>2. Pricing Comparison</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>GPT-4.1</th>
+            <th>Claude Sonnet 4</th>
+            <th>Gemini 2.5 Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Input price ($/M tokens)</td>
+            <td>$2.00</td>
+            <td>$3.00</td>
+            <td class="winner">$1.25</td>
+          </tr>
+          <tr>
+            <td>Output price ($/M tokens)</td>
+            <td class="winner">$8.00</td>
+            <td>$15.00</td>
+            <td>$10.00</td>
+          </tr>
+          <tr>
+            <td>Cache input ($/M tokens)</td>
+            <td>$0.50</td>
+            <td>$0.30</td>
+            <td class="winner">$0.07</td>
+          </tr>
+          <tr>
+            <td>Context window</td>
+            <td class="winner">1,047,576</td>
+            <td>200,000</td>
+            <td class="winner">1,048,576</td>
+          </tr>
+          <tr>
+            <td>Max output tokens</td>
+            <td>32,768</td>
+            <td class="winner">64,000</td>
+            <td>65,536</td>
+          </tr>
+          <tr>
+            <td>Free tier</td>
+            <td>No</td>
+            <td>Yes (limited)</td>
+            <td class="winner">Yes (generous)</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="insight">
+        <strong>Winner on price:</strong> Gemini 2.5 Pro offers the best input pricing ($1.25/M) and
+        cache pricing ($0.07/M). GPT-4.1 wins on output pricing ($8/M vs $10-15/M).
+      </div>
+
+      <h2>3. Capabilities</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th>GPT-4.1</th>
+            <th>Claude Sonnet 4</th>
+            <th>Gemini 2.5 Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Tool calling</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Structured output</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Reasoning (extended thinking)</td>
+            <td>❌ (use o3)</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Vision (image input)</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Image generation</td>
+            <td>✅ (DALL-E)</td>
+            <td>❌</td>
+            <td>✅ (Imagen)</td>
+          </tr>
+          <tr>
+            <td>Audio input</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Audio output</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Video input</td>
+            <td>❌</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>PDF input</td>
+            <td>✅</td>
+            <td>✅</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Code execution</td>
+            <td>✅</td>
+            <td>✅ (analysis tool)</td>
+            <td>✅</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="insight">
+        <strong>Winner on capabilities:</strong> Gemini 2.5 Pro has the broadest multimodal support
+        (video, audio I/O, image generation). Claude Sonnet 4 excels at coding and analysis. GPT-4.1
+        has the strongest tool calling (BFCL #1).
+      </div>
+
+      <h2>4. Benchmark Performance</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Benchmark</th>
+            <th>GPT-4.1</th>
+            <th>Claude Sonnet 4</th>
+            <th>Gemini 2.5 Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MMLU</td>
+            <td>~90%</td>
+            <td>~88%</td>
+            <td>~90%</td>
+          </tr>
+          <tr>
+            <td>MATH-500</td>
+            <td>~85%</td>
+            <td>~88%</td>
+            <td>~91%</td>
+          </tr>
+          <tr>
+            <td>HumanEval</td>
+            <td>~91%</td>
+            <td class="winner">~93%</td>
+            <td>~90%</td>
+          </tr>
+          <tr>
+            <td>SWE-bench Verified</td>
+            <td>~65%</td>
+            <td class="winner">~72%</td>
+            <td>~63%</td>
+          </tr>
+          <tr>
+            <td>GPQA Diamond</td>
+            <td>~72%</td>
+            <td>~70%</td>
+            <td class="winner">~78%</td>
+          </tr>
+          <tr>
+            <td>BFCL v3 (tool calling)</td>
+            <td class="winner">~88%</td>
+            <td>~86%</td>
+            <td>~85%</td>
+          </tr>
+          <tr>
+            <td>Chatbot Arena</td>
+            <td class="winner">~1380</td>
+            <td>~1370</td>
+            <td>~1360</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="insight">
+        <strong>Key takeaway:</strong> No single model wins all benchmarks. GPT-4.1 leads on tool
+        calling and chat. Claude Sonnet 4 dominates coding (SWE-bench). Gemini 2.5 Pro excels at
+        math and science.
+      </div>
+
+      <h2>5. API &amp; Developer Experience</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>OpenAI</th>
+            <th>Anthropic</th>
+            <th>Google</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>API maturity</td>
+            <td class="winner">Most mature</td>
+            <td>Mature</td>
+            <td>Maturing</td>
+          </tr>
+          <tr>
+            <td>SDK languages</td>
+            <td>Python, Node, Go, etc.</td>
+            <td>Python, Node</td>
+            <td>Python, Node, Go, etc.</td>
+          </tr>
+          <tr>
+            <td>Streaming</td>
+            <td>✅ SSE</td>
+            <td>✅ SSE</td>
+            <td>✅ SSE</td>
+          </tr>
+          <tr>
+            <td>Function calling</td>
+            <td class="winner">Parallel, strict mode</td>
+            <td>Parallel, forced tool</td>
+            <td>Parallel, auto</td>
+          </tr>
+          <tr>
+            <td>Batch API</td>
+            <td>✅ (50% discount)</td>
+            <td>✅ (50% discount)</td>
+            <td>✅ (50% discount)</td>
+          </tr>
+          <tr>
+            <td>Fine-tuning</td>
+            <td>✅</td>
+            <td>❌</td>
+            <td>✅ (limited)</td>
+          </tr>
+          <tr>
+            <td>Rate limits</td>
+            <td>Tier-based</td>
+            <td>Tier-based</td>
+            <td>Per-project</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>6. Budget Alternatives</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Use Case</th>
+            <th>Best Budget Option</th>
+            <th>Price</th>
+            <th>Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>General chat</td>
+            <td>Gemini 2.5 Flash</td>
+            <td>Free</td>
+            <td>Strong quality at zero cost</td>
+          </tr>
+          <tr>
+            <td>Coding</td>
+            <td>DeepSeek V3</td>
+            <td>$0.07/$0.27</td>
+            <td>Near-frontier coding at 1/30th the price</td>
+          </tr>
+          <tr>
+            <td>Reasoning</td>
+            <td>DeepSeek R1</td>
+            <td>Free</td>
+            <td>Top-tier reasoning at zero cost</td>
+          </tr>
+          <tr>
+            <td>Tool calling</td>
+            <td>Gemini 2.5 Flash</td>
+            <td>Free</td>
+            <td>Strong BFCL scores for free</td>
+          </tr>
+          <tr>
+            <td>Long context</td>
+            <td>Gemini 2.5 Flash</td>
+            <td>Free</td>
+            <td>1M context window for free</td>
+          </tr>
+          <tr>
+            <td>Open source</td>
+            <td>Qwen3-235B</td>
+            <td>Free</td>
+            <td>Best open-weight model</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>7. The Verdict</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>If you need...</th>
+            <th>Choose</th>
+            <th>Because</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Best overall value</td>
+            <td>Gemini 2.5 Pro</td>
+            <td>Lowest input price, 1M context, broadest capabilities</td>
+          </tr>
+          <tr>
+            <td>Best coding assistant</td>
+            <td>Claude Sonnet 4</td>
+            <td>#1 on SWE-bench, 64K output, analysis tool</td>
+          </tr>
+          <tr>
+            <td>Best tool calling</td>
+            <td>GPT-4.1</td>
+            <td>#1 on BFCL, parallel calls, strict mode</td>
+          </tr>
+          <tr>
+            <td>Best free option</td>
+            <td>Gemini 2.5 Flash</td>
+            <td>Free with 1M context, strong capabilities</td>
+          </tr>
+          <tr>
+            <td>Best reasoning</td>
+            <td>o3 / DeepSeek R1</td>
+            <td>Reasoning models outperform standard models on math/science</td>
+          </tr>
+          <tr>
+            <td>Most mature API</td>
+            <td>OpenAI</td>
+            <td>Widest SDK support, fine-tuning, most integrations</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="related-pages">
+        <strong>Explore More:</strong>
+        <a href="best-ai-models.html">Best AI Models</a>
+        <a href="free-ai-models.html">Free AI Models</a>
+        <a href="llm-pricing.html">LLM Pricing</a>
+        <a href="openai-alternatives.html">OpenAI Alternatives</a>
+        <a href="ai-model-benchmarks.html">Benchmarks</a>
+        <a href="best-ai-models-for-coding.html">Coding Models</a>
+        <a href="best-ai-models-for-agents.html">Agent Models</a>
+        <a href="cheapest-ai-models.html">Cheapest Models</a>
+        <a href="ai-model-pricing-calculator.html">Price Calculator</a>
+        <a href="index.html">Interactive Catalog</a>
+      </div>
+    </div>
+    <footer>
+      <p>
+        Data from <a href="https://github.com/i-need-token/ai-models">AI Models Catalog</a> — 4,587
+        models across 95 providers. Updated continuously.
+      </p>
+    </footer>
+  </body>
+</html>
