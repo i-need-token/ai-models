@@ -315,6 +315,7 @@ by_context = sorted(
 
 - [Quick Start](docs/quick-start.md) — find the right model in 30 seconds
 - [Model Selection Guide](docs/model-selection.md) — decision framework: free, best value, large context models
+- [Model Selection Cheatsheet](docs/model-selection-cheatsheet.md) — quick-reference: best model by budget and use case
 - [Benchmarks & Leaderboards](docs/benchmarks.md) — key benchmarks, leaderboard landscape, interpretation guide
 - [API & Programmatic Access](docs/api.md) — download models.json, code examples
 - [Code Examples](docs/code-examples.md) — practical examples in TypeScript, Python, Go, Rust, jq

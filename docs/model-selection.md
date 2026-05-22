@@ -1,6 +1,7 @@
 # Model Selection Guide
 
-[中文](zh/model-selection.md)
+> 📋 **Quick reference?** See the [Model Selection Cheatsheet](model-selection-cheatsheet.md) for a budget-by-budget guide.
+> [中文](zh/model-selection.md)
 
 How to choose the right AI model for your use case — practical recommendations based on cost, capabilities, and context windows.
 

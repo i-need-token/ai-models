@@ -37,6 +37,7 @@ A structured catalog of AI model providers and their models, stored as YAML file
 - [`docs/data-schema.md`](docs/data-schema.md) — Data schema reference ([中文](docs/zh/data-schema.md))
 - [`docs/quick-start.md`](docs/quick-start.md) — Quick start guide ([中文](docs/zh/quick-start.md))
 - [`docs/model-selection.md`](docs/model-selection.md) — Model selection guide: free, best value, large context ([中文](docs/zh/model-selection.md))
+- [`docs/model-selection-cheatsheet.md`](docs/model-selection-cheatsheet.md) — Model selection cheatsheet: best model by budget and use case ([中文](docs/zh/model-selection-cheatsheet.md))
 - [`docs/benchmarks.md`](docs/benchmarks.md) — AI Model Benchmarks & Leaderboards: key benchmarks, leaderboard landscape, interpretation guide ([中文](docs/zh/benchmarks.md))
 - [`docs/migration-guide.md`](docs/migration-guide.md) — Switch providers: pricing, API compatibility, checklist ([中文](docs/zh/migration-guide.md))
 - [`docs/api.md`](docs/api.md) — API & programmatic access ([中文](docs/zh/api.md))

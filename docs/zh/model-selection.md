@@ -1,6 +1,7 @@
 # 模型选择指南
 
-[English](../model-selection.md)
+> 📋 **快速参考？** 查看[模型选择速查表](model-selection-cheatsheet.md)，按预算选择最佳模型。
+> [English](../model-selection.md)
 
 如何根据使用场景选择合适的 AI 模型 — 基于成本、能力和上下文窗口的实用建议。
 
