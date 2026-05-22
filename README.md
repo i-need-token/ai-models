@@ -41,6 +41,13 @@ Machine-readable YAML catalog of every major AI model provider and their models 
 
 [![AI Models Catalog — Interactive model comparison tool](docs/images/catalog-screenshot.png)](https://i-need-token.github.io/ai-models/)
 
+<details>
+<summary>🎬 Watch demo (filter, sort, dark mode, calculator)</summary>
+
+![Demo: filter by free models, sort by price, toggle dark mode, use price calculator](docs/images/catalog-demo.gif)
+
+</details>
+
 **[Try it live →](https://i-need-token.github.io/ai-models/)** — Search, filter, compare 4,587+ models with 25+ features including dark/light theme, keyboard shortcuts, price calculator, and model picker wizard.
 
 ## Why This Catalog?
