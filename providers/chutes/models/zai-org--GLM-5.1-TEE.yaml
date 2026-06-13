@@ -3,9 +3,9 @@ name: GLM 5.1
 family: glm
 temperature: true
 pricing:
-  input: 1.05
-  output: 3.5
-  cache_read: 0.525
+  input: 1.2
+  output: 4
+  cache_read: 0.6
 limit:
   context: 202752
   output: 65535
@@ -17,5 +17,5 @@ modalities:
 structured_output: true
 tool_call: true
 reasoning: true
-release_date: 2026-05-19
-last_updated: 2026-05-19
+release_date: 2026-06-13
+last_updated: 2026-06-13

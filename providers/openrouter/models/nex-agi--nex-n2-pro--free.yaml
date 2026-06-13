@@ -1,0 +1,19 @@
+id: nex-agi--nex-n2-pro--free
+name: Free
+family: nex-agi
+pricing:
+  unit: free
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-06-09
+last_updated: 2026-06-09

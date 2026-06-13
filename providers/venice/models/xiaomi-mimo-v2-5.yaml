@@ -1,0 +1,23 @@
+id: xiaomi-mimo-v2-5
+name: xiaomi-mimo-v2-5
+family: xiaomi
+pricing:
+  currency: USD
+  input: 0.175
+  output: 0.35
+  cache_read: 0.0625
+limit:
+  context: 1000000
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+attachment: true
+structured_output: true
+release_date: 2026-06-11
+last_updated: 2026-06-11

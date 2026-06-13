@@ -3,11 +3,11 @@ name: "Anthropic: claude opus 4.6  thinking  low"
 family: claude-opus
 pricing:
   currency: USD
-  input: 2.94
-  output: 14.71
+  input: 5
+  output: 25
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

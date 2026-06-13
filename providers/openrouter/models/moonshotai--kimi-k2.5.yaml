@@ -3,12 +3,8 @@ name: Kimi K2.5
 family: moonshotai
 pricing:
   currency: USD
-  input: 0.4
-  output: 1.9
-  cache_read: 0.09
-limit:
-  context: 262144
-  output: 262144
+  input: 0.375
+  output: 2.025
 modalities:
   input:
     - text

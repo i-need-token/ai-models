@@ -1,0 +1,19 @@
+id: doubao-seed-2-0-lite-260215
+name: Doubao Seed 2 0 Lite 260215
+family: doubao-seed
+pricing:
+  currency: USD
+  input: 0.045205
+  output: 0.27123
+  cache_read: 0.009041
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

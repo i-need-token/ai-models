@@ -3,11 +3,11 @@ name: Deepseek Chat
 family: deepseek
 pricing:
   currency: USD
-  input: 0.32
-  output: 0.89
+  input: 0.2002
+  output: 0.8001
 limit:
-  context: 163840
-  output: 16384
+  context: 131072
+  output: 16000
 modalities:
   input:
     - text

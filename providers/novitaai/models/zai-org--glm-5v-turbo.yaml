@@ -1,0 +1,21 @@
+id: zai-org--glm-5v-turbo
+name: Glm 5v Turbo
+family: glm
+pricing:
+  currency: USD
+  input: 1.2
+  output: 4
+limit:
+  context: 204800
+  output: 131072
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

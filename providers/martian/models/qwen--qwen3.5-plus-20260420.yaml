@@ -3,12 +3,13 @@ name: Qwen3.5 Plus 20260420
 family: qwen
 pricing:
   currency: USD
-  input: 0.4
-  output: 2.4
+  input: 0.3
+  output: 1.8
+  cache_write: 0.375
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-04-28
-last_updated: 2026-04-28
+release_date: 2026-05-28
+last_updated: 2026-05-28

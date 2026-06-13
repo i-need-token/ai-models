@@ -1,0 +1,17 @@
+id: nvidia--nemotron-3.5-content-safety--free
+name: Free
+family: nemotron
+pricing:
+  unit: free
+limit:
+  context: 128000
+  output: 8192
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+release_date: 2026-06-04
+last_updated: 2026-06-04

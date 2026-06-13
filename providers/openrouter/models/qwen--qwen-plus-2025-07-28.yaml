@@ -5,7 +5,6 @@ pricing:
   currency: USD
   input: 0.26
   output: 0.78
-  cache_write: 0.325
 limit:
   context: 1000000
   output: 32768

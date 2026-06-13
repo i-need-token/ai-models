@@ -3,8 +3,12 @@ name: Qwen2.5 Vl 72b Instruct
 family: qwen
 pricing:
   currency: USD
-  input: 0.25
-  output: 0.75
+  input: 0.8
+  output: 1
+  cache_read: 0.4
+limit:
+  context: 131072
+  output: 128000
 modalities:
   input:
     - text

@@ -1,0 +1,16 @@
+id: anthropic--claude-fable-5
+name: Anthropic / Claude Fable 5
+family: anthropic
+pricing:
+  currency: USD
+  input: 13
+  output: 65
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-06-13

@@ -3,11 +3,11 @@ name: "OpenAI: gpt 4o MINI"
 family: gpt
 pricing:
   currency: USD
-  input: 0.088
-  output: 0.35
+  input: 0.15
+  output: 0.6
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

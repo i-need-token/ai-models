@@ -3,8 +3,8 @@ name: Mimo V2.5 Pro
 family: mimo
 pricing:
   currency: USD
-  input: 2
-  output: 6
+  input: 0.522
+  output: 1.044
 limit:
   context: 1048576
   output: 131072
@@ -16,4 +16,4 @@ modalities:
 reasoning: true
 tool_call: true
 structured_output: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

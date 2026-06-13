@@ -1,0 +1,17 @@
+id: qwen3.6-27b
+name: qwen3.6-27b
+family: qwen
+pricing:
+  currency: EUR
+  input: 0.4
+  output: 2.7
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-06-02
+last_updated: 2026-06-02

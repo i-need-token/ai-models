@@ -3,12 +3,12 @@ name: Llama 4 Scout
 family: llama
 pricing:
   currency: USD
-  input: 0.08
+  input: 0.1
   output: 0.3
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-01-26
-last_updated: 2026-01-26
+release_date: 2026-06-08
+last_updated: 2026-06-08

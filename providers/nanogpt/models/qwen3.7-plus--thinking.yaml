@@ -1,0 +1,15 @@
+id: qwen3.7-plus--thinking
+name: "Qwen3.7-plus: thinking"
+family: qwen
+pricing:
+  currency: USD
+  input: 0.4
+  output: 1.6
+  cache_read: 0.04
+  cache_write: 0.5
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

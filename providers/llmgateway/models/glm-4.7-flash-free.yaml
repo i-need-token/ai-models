@@ -1,0 +1,13 @@
+id: glm-4.7-flash-free
+name: Glm 4.7 Flash Free
+family: glm
+pricing:
+  unit: free
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+last_updated: 2026-06-13

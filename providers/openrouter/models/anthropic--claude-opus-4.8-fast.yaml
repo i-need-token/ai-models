@@ -1,0 +1,24 @@
+id: anthropic--claude-opus-4.8-fast
+name: Claude Opus 4.8 Fast
+family: claude
+pricing:
+  currency: USD
+  input: 10
+  output: 50
+  cache_read: 1
+  cache_write: 12.5
+limit:
+  context: 1000000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+    - pdf
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-05-28
+last_updated: 2026-05-28

@@ -2,7 +2,9 @@ id: qwen--qwen3-omni-30b-a3b-instruct
 name: Qwen3 Omni 30b A3b Instruct
 family: qwen
 pricing:
-  unit: free
+  currency: USD
+  input: 0.25
+  output: 0.97
 limit:
   context: 65536
   output: 16384
@@ -17,4 +19,4 @@ modalities:
     - audio
 tool_call: true
 structured_output: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

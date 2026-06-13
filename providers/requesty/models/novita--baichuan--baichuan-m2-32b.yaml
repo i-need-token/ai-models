@@ -1,0 +1,14 @@
+id: novita--baichuan--baichuan-m2-32b
+name: Baichuan M2 32b
+family: novita
+pricing:
+  currency: USD
+  input: 0.07
+  output: 0.07
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-05-27
+last_updated: 2026-05-27

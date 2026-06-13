@@ -15,5 +15,5 @@ modalities:
     - text
 reasoning: true
 structured_output: true
-release_date: 2026-05-19
-last_updated: 2026-05-19
+release_date: 2026-06-08
+last_updated: 2026-06-08

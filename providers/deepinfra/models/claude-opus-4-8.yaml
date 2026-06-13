@@ -1,0 +1,18 @@
+id: claude-opus-4-8
+name: Claude Opus 4.8
+family: claude-opus
+pricing:
+  currency: USD
+  input: 5
+  output: 25
+limit:
+  context: 1000000
+  output: 1000000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+last_updated: 2026-06-13

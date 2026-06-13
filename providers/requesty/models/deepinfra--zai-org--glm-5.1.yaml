@@ -1,0 +1,17 @@
+id: deepinfra--zai-org--glm-5.1
+name: Glm 5.1
+family: deepinfra
+pricing:
+  currency: USD
+  input: 1.05
+  output: 3.5
+  cache_read: 0.205
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

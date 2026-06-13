@@ -3,11 +3,11 @@ name: "TEE: gemma4 31B"
 family: gemma
 pricing:
   currency: USD
-  input: 0.12
-  output: 0.37
+  input: 0.45
+  output: 1
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

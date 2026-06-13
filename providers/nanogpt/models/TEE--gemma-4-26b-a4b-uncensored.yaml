@@ -1,0 +1,13 @@
+id: TEE--gemma-4-26b-a4b-uncensored
+name: "TEE: gemma 4 26B a4b uncensored"
+family: gemma
+pricing:
+  currency: USD
+  input: 0.15
+  output: 0.7
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

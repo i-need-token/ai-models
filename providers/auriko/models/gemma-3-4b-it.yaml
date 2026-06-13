@@ -3,8 +3,8 @@ name: Gemma 3 4b It
 family: gemma
 pricing:
   currency: USD
-  input: 0.04
-  output: 0.08
+  input: 0.05
+  output: 0.1
 limit:
   context: 131072
   output: 16384
@@ -16,5 +16,5 @@ modalities:
     - text
 tool_call: true
 structured_output: true
-release_date: 2026-05-19
-last_updated: 2026-05-19
+release_date: 2026-06-08
+last_updated: 2026-06-08

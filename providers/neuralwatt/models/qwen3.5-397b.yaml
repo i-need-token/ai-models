@@ -1,0 +1,16 @@
+id: qwen3.5-397b
+name: Qwen3.5 397b
+family: qwen
+pricing:
+  currency: USD
+  input: 0.69
+  output: 4.14
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

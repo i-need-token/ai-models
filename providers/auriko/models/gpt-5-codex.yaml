@@ -1,0 +1,22 @@
+id: gpt-5-codex
+name: Gpt 5 Codex
+family: gpt
+pricing:
+  currency: USD
+  input: 1.25
+  output: 10
+  cache_read: 0.125
+limit:
+  context: 400000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-06-10
+last_updated: 2026-06-10

@@ -3,8 +3,8 @@ name: Qwen2.5 Coder 32b Instruct
 family: qwen
 pricing:
   currency: USD
-  input: 0.06
-  output: 0.15
+  input: 0.08
+  output: 0.28
 limit:
   context: 32768
   output: 16384
@@ -13,4 +13,4 @@ modalities:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

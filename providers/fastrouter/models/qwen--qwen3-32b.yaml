@@ -3,8 +3,8 @@ name: Qwen3 32b
 family: qwen
 pricing:
   currency: USD
-  input: 0.29
-  output: 0.59
+  input: 0.08
+  output: 0.28
 modalities:
   input:
     - text
@@ -12,4 +12,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

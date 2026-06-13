@@ -1,0 +1,15 @@
+id: deepinfra--qwen--qwen3-235b-a22b-instruct-2507
+name: Qwen3 235b A22b Instruct 2507
+family: deepinfra
+pricing:
+  currency: USD
+  input: 0.071
+  output: 0.1
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

@@ -3,8 +3,8 @@ name: Mistral 7b Instruct V0.1
 family: mistral
 pricing:
   currency: USD
-  input: 0.028
-  output: 0.054
+  input: 0.075
+  output: 0.2
 limit:
   context: 32768
   output: 16384
@@ -13,4 +13,4 @@ modalities:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

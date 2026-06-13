@@ -1,0 +1,22 @@
+id: gpt-5.1-codex-mini
+name: Gpt 5.1 Codex Mini
+family: gpt
+pricing:
+  currency: USD
+  input: 0.25
+  output: 2
+  cache_read: 0.025
+limit:
+  context: 400000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-06-10
+last_updated: 2026-06-10

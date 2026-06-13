@@ -3,8 +3,9 @@ name: Minimax M2.7
 family: minimax
 pricing:
   currency: USD
-  input: 0.279
-  output: 1.2
+  input: 0.25
+  output: 1
+  cache_read: 0.05
 limit:
   context: 204800
   output: 131072

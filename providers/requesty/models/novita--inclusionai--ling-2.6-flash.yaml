@@ -1,0 +1,15 @@
+id: novita--inclusionai--ling-2.6-flash
+name: Ling 2.6 Flash
+family: novita
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.3
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

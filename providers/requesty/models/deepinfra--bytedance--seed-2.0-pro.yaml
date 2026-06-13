@@ -1,0 +1,18 @@
+id: deepinfra--bytedance--seed-2.0-pro
+name: Seed 2.0 Pro
+family: deepinfra
+pricing:
+  currency: USD
+  input: 0.5
+  output: 3
+  cache_read: 0.1
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

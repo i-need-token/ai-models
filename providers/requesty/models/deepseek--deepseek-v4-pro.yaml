@@ -3,10 +3,9 @@ name: Deepseek V4 Pro
 family: deepseek
 pricing:
   currency: USD
-  input: 1.74
-  output: 3.48
-  cache_read: 0.145
-  cache_write: 1.74
+  input: 0.435
+  output: 0.87
+  cache_read: 0.0145
 limit:
   context: 1000000
   output: 384000

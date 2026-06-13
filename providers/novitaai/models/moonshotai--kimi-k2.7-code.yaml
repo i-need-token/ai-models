@@ -1,0 +1,21 @@
+id: moonshotai--kimi-k2.7-code
+name: Kimi K2.7 Code
+family: kimi
+pricing:
+  currency: USD
+  input: 0.95
+  output: 4
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

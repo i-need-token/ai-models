@@ -3,11 +3,8 @@ name: Gpt Oss 20b
 family: gpt
 pricing:
   currency: USD
-  input: 0.03
+  input: 0.029
   output: 0.14
-limit:
-  context: 131072
-  output: 131072
 modalities:
   input:
     - text

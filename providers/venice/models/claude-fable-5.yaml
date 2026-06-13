@@ -1,0 +1,23 @@
+id: claude-fable-5
+name: claude-fable-5
+family: claude
+pricing:
+  currency: USD
+  input: 12
+  output: 60
+  cache_read: 1.2
+limit:
+  context: 1000000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+attachment: true
+structured_output: true
+release_date: 2026-06-10
+last_updated: 2026-06-10

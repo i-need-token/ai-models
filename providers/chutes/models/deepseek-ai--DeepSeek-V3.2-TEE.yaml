@@ -3,9 +3,9 @@ name: DeepSeek V3.2
 family: deepseek
 temperature: true
 pricing:
-  input: 0.28
-  output: 0.42
-  cache_read: 0.14
+  input: 1
+  output: 1
+  cache_read: 0.5
 limit:
   context: 131072
   output: 65536
@@ -17,5 +17,5 @@ modalities:
 structured_output: true
 tool_call: true
 reasoning: true
-release_date: 2026-05-19
-last_updated: 2026-05-19
+release_date: 2026-06-13
+last_updated: 2026-06-13

@@ -1,0 +1,16 @@
+id: deepinfra--qwen--qwen3-max
+name: Qwen3 Max
+family: deepinfra
+pricing:
+  currency: USD
+  input: 1.2
+  output: 6
+  cache_read: 0.24
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

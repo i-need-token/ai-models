@@ -1,0 +1,15 @@
+id: novita--inclusionai--ling-2.6-1t
+name: Ling 2.6 1t
+family: novita
+pricing:
+  currency: USD
+  input: 0.3
+  output: 2.5
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

@@ -1,0 +1,18 @@
+id: mistral--mistral-medium-3-5
+name: Mistral Medium 3 5
+family: mistral
+pricing:
+  currency: USD
+  input: 1.5
+  output: 7.5
+  cache_read: 1.5
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-20
+last_updated: 2026-05-20

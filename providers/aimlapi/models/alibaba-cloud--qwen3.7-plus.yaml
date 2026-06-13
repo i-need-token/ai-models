@@ -1,0 +1,16 @@
+id: alibaba-cloud--qwen3.7-plus
+name: Alibaba Cloud / Qwen3.7 Plus
+family: alibaba
+pricing:
+  currency: USD
+  input: 0.52
+  output: 2.08
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-06-13

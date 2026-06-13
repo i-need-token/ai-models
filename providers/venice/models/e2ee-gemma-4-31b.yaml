@@ -1,0 +1,19 @@
+id: e2ee-gemma-4-31b
+name: e2ee-gemma-4-31b
+family: gemma
+pricing:
+  currency: USD
+  input: 0.139
+  output: 0.43
+  cache_read: 0.028
+limit:
+  context: 32000
+  output: 4096
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+release_date: 2026-05-20
+last_updated: 2026-05-20

@@ -1,0 +1,19 @@
+id: xiaomimimo--mimo-v2-pro
+name: Mimo V2 Pro
+family: mimo
+pricing:
+  currency: USD
+  input: 2
+  output: 6
+limit:
+  context: 1048576
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

@@ -1,0 +1,16 @@
+id: deepinfra--nvidia--nvidia-nemotron-3-super-120b-a12b
+name: Nvidia Nemotron 3 Super 120b A12b
+family: deepinfra
+pricing:
+  currency: USD
+  input: 0.1
+  output: 0.5
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

@@ -3,9 +3,9 @@ name: Qwen 3.5 397B
 family: qwen
 temperature: true
 pricing:
-  input: 0.39
-  output: 2.34
-  cache_read: 0.195
+  input: 0.45
+  output: 3
+  cache_read: 0.225
 limit:
   context: 262144
   output: 65536
@@ -18,5 +18,5 @@ modalities:
 structured_output: true
 tool_call: true
 reasoning: true
-release_date: 2026-05-19
-last_updated: 2026-05-19
+release_date: 2026-06-13
+last_updated: 2026-06-13

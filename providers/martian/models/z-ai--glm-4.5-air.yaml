@@ -3,13 +3,13 @@ name: Glm 4.5 Air
 family: glm
 pricing:
   currency: USD
-  input: 0.13
+  input: 0.125
   output: 0.85
-  cache_read: 0.025
+  cache_read: 0.06
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-02-12
-last_updated: 2026-02-12
+release_date: 2026-05-28
+last_updated: 2026-05-28

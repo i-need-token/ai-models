@@ -1,0 +1,16 @@
+id: qwen--qwen3.7-max
+name: Qwen3.7 Max
+family: qwen
+pricing:
+  currency: USD
+  input: 1.25
+  output: 3.75
+  cache_read: 0.25
+  cache_write: 1.5625
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-05-28
+last_updated: 2026-05-28

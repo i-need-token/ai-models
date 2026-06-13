@@ -3,7 +3,7 @@ name: Qwen3 235b A22b 2507
 family: qwen
 pricing:
   currency: USD
-  input: 0.071
+  input: 0.09
   output: 0.1
 limit:
   context: 262144

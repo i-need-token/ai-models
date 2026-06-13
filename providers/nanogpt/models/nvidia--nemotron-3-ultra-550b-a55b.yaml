@@ -1,0 +1,13 @@
+id: nvidia--nemotron-3-ultra-550b-a55b
+name: "NVIDIA: nemotron 3 ultra 550B a55b"
+family: nvidia/nemotron
+pricing:
+  currency: USD
+  input: 0.5
+  output: 2.5
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

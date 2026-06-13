@@ -1,0 +1,16 @@
+id: gemma-4-31b-it-pearl
+name: Gemma 4 31b It Pearl
+family: gemma
+pricing:
+  currency: USD
+  input: 0.28
+  output: 0.86
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-06-10
+last_updated: 2026-06-10

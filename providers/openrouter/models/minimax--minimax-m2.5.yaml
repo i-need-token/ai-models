@@ -4,7 +4,8 @@ family: minimax
 pricing:
   currency: USD
   input: 0.15
-  output: 1.15
+  output: 0.9
+  cache_read: 0.05
 limit:
   context: 204800
   output: 196608

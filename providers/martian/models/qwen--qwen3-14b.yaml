@@ -3,12 +3,12 @@ name: Qwen3 14b
 family: qwen
 pricing:
   currency: USD
-  input: 0.06
+  input: 0.1
   output: 0.24
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-04-28
-last_updated: 2026-04-28
+release_date: 2026-05-18
+last_updated: 2026-05-18

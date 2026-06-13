@@ -1,0 +1,14 @@
+id: xiaomi--mimo-v2.5--thinking
+name: "Xiaomi: mimo v2.5  thinking"
+family: mimo
+pricing:
+  currency: USD
+  input: 0.14
+  output: 0.28
+  cache_read: 0.0028
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

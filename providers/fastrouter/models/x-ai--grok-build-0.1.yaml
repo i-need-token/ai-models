@@ -1,0 +1,20 @@
+id: x-ai--grok-build-0.1
+name: Grok Build 0.1
+family: grok
+pricing:
+  currency: USD
+  input: 1
+  output: 2
+  cache_read: 0.2
+limit:
+  context: 256000
+  output: 256000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+last_updated: 2026-06-13

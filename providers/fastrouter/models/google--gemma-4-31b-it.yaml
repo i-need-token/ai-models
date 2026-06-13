@@ -3,8 +3,8 @@ name: Gemma 4 31b It
 family: gemma
 pricing:
   currency: USD
-  input: 0.2
-  output: 0.5
+  input: 0.13
+  output: 0.38
 limit:
   context: 262144
   output: 131072
@@ -17,4 +17,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

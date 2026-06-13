@@ -3,13 +3,13 @@ name: Deepseek V4 Flash
 family: deepseek
 pricing:
   currency: USD
-  input: 0.14
-  output: 0.28
-  cache_read: 0.0028
+  input: 0.0983
+  output: 0.1966
+  cache_read: 0.0197
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-04-28
-last_updated: 2026-04-28
+release_date: 2026-06-08
+last_updated: 2026-06-08

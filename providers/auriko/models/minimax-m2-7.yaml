@@ -5,6 +5,7 @@ pricing:
   currency: USD
   input: 0.3
   output: 1.2
+  cache_read: 0.06
   cache_write: 0.375
 modalities:
   input:
@@ -13,5 +14,5 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-release_date: 2026-04-27
-last_updated: 2026-04-27
+release_date: 2026-06-08
+last_updated: 2026-06-08

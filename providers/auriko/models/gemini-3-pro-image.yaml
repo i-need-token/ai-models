@@ -1,0 +1,22 @@
+id: gemini-3-pro-image
+name: Gemini 3 Pro Image
+family: gemini
+pricing:
+  currency: USD
+  input: 2
+  output: 12
+limit:
+  context: 131072
+  output: 32768
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+    - image
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-06-01
+last_updated: 2026-06-01

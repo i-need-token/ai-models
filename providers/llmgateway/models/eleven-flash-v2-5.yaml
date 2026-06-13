@@ -1,0 +1,12 @@
+id: eleven-flash-v2-5
+name: Eleven Flash V2 5
+family: eleven
+pricing:
+  unit: free
+modalities:
+  input:
+    - text
+  output:
+    - audio
+tool_call: true
+last_updated: 2026-06-13

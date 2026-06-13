@@ -1,0 +1,17 @@
+id: nemotron-content-safety-3.5
+name: Nemotron Content Safety 3.5
+family: nemotron
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.2
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+last_updated: 2026-06-13

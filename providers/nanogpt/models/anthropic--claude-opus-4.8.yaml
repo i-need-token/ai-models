@@ -1,0 +1,13 @@
+id: anthropic--claude-opus-4.8
+name: "Anthropic: claude opus 4.8"
+family: claude-opus
+pricing:
+  currency: USD
+  input: 5
+  output: 25
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

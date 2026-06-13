@@ -3,11 +3,12 @@ name: deepseek v3 0324
 family: deepseek
 pricing:
   currency: USD
-  input: 0.1
-  output: 0.425
+  input: 0.2
+  output: 0.77
+  cache_read: 0.135
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

@@ -1,0 +1,21 @@
+id: gpt-5-pro-2025-10-06
+name: Gpt 5 Pro 2025 10 06
+family: gpt
+pricing:
+  currency: USD
+  input: 15
+  output: 120
+limit:
+  context: 400000
+  output: 272000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-06-10
+last_updated: 2026-06-10

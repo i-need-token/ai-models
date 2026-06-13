@@ -1,0 +1,11 @@
+id: minimax--m2-her
+name: M2 Her
+family: minimax
+pricing:
+  unit: free
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

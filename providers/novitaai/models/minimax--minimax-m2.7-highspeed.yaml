@@ -1,0 +1,19 @@
+id: minimax--minimax-m2.7-highspeed
+name: Minimax M2.7 Highspeed
+family: minimax
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.4
+limit:
+  context: 204800
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

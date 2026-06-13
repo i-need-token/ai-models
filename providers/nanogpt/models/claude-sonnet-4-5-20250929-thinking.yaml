@@ -3,11 +3,11 @@ name: claude sonnet 4 5 20250929 thinking
 family: claude-sonnet
 pricing:
   currency: USD
-  input: 1.76
-  output: 8.82
+  input: 3
+  output: 15
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

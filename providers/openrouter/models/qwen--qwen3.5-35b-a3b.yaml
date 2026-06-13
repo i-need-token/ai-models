@@ -3,8 +3,12 @@ name: Qwen3.5 35b A3b
 family: qwen
 pricing:
   currency: USD
-  input: 0.139
+  input: 0.14
   output: 1
+  cache_read: 0.05
+limit:
+  context: 262144
+  output: 262144
 modalities:
   input:
     - text

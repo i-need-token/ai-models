@@ -3,11 +3,11 @@ name: claude opus 4 1 thinking
 family: claude-opus
 pricing:
   currency: USD
-  input: 8.82
-  output: 44.12
+  input: 15
+  output: 75
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

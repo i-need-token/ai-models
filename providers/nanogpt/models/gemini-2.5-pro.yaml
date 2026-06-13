@@ -3,11 +3,13 @@ name: gemini 2.5 PRO
 family: gemini
 pricing:
   currency: USD
-  input: 2.5
+  input: 1.25
   output: 10
+  cache_read: 0.125
+  cache_write: 0.375
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

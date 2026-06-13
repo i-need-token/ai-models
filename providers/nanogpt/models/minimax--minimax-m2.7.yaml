@@ -3,11 +3,11 @@ name: "MiniMax: minimax m2.7"
 family: minimax
 pricing:
   currency: USD
-  input: 0.3
-  output: 1.2
+  input: 0.315
+  output: 1.26
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

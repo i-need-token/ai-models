@@ -1,0 +1,18 @@
+id: deepinfra--google--gemini-3.5-flash
+name: Gemini 3.5 Flash
+family: gemini
+pricing:
+  currency: USD
+  input: 1.5
+  output: 9
+  cache_read: 0.15
+  cache_write: 0.083333
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+release_date: 2026-05-28
+last_updated: 2026-05-28

@@ -1,0 +1,16 @@
+id: baidu--ernie-4.5-vl-424b-a47b
+name: Baidu / Ernie 4.5 Vl 424b A47b
+family: baidu
+pricing:
+  currency: USD
+  input: 0.5577
+  output: 1.677
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-06-13

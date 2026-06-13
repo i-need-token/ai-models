@@ -1,0 +1,15 @@
+id: x-ai--grok-4.20-non-reasoning
+name: Grok 4.20 Non Reasoning
+family: grok
+pricing:
+  currency: USD
+  input: 1.25
+  output: 2.5
+  cache_read: 0.2
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-05-22
+last_updated: 2026-05-22

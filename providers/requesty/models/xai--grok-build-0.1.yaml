@@ -1,0 +1,16 @@
+id: xai--grok-build-0.1
+name: Grok Build 0.1
+family: grok
+pricing:
+  currency: USD
+  input: 1
+  output: 2
+  cache_read: 0.1
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

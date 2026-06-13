@@ -3,8 +3,8 @@ name: Qwen3.6 35b Fast
 family: qwen
 pricing:
   currency: USD
-  input: 0.05
-  output: 0.1
+  input: 0.29
+  output: 1.15
 modalities:
   input:
     - text
@@ -13,4 +13,4 @@ modalities:
     - text
 tool_call: true
 structured_output: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

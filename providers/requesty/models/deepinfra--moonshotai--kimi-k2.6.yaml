@@ -1,0 +1,18 @@
+id: deepinfra--moonshotai--kimi-k2.6
+name: Kimi K2.6
+family: deepinfra
+pricing:
+  currency: USD
+  input: 0.75
+  output: 3.5
+  cache_read: 0.15
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

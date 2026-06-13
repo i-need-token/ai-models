@@ -1,0 +1,16 @@
+id: dev--glm46
+name: Glm46
+family: glm
+pricing:
+  unit: free
+limit:
+  context: 256000
+  output: 256000
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

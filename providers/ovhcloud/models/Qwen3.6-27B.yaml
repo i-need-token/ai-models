@@ -1,0 +1,17 @@
+id: Qwen3.6-27B
+name: Qwen3.6 27B
+family: qwen
+pricing:
+  currency: USD
+  input: 0.47
+  output: 3.19
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-06-01
+last_updated: 2026-06-01

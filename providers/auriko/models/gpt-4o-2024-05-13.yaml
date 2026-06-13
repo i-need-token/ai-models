@@ -15,5 +15,5 @@ modalities:
   output:
     - text
 tool_call: true
-release_date: 2026-05-12
-last_updated: 2026-05-12
+release_date: 2026-06-10
+last_updated: 2026-06-10

@@ -1,0 +1,19 @@
+id: doubao-seed-2-0-mini
+name: Doubao Seed 2 0 Mini
+family: doubao-seed
+pricing:
+  currency: USD
+  input: 0.015068
+  output: 0.15068
+  cache_read: 0.003014
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

@@ -3,8 +3,9 @@ name: Deepseek V3.1
 family: deepseek
 pricing:
   currency: USD
-  input: 0.27
-  output: 1
+  input: 0.21
+  output: 0.79
+  cache_read: 0.13
 modalities:
   input:
     - text
@@ -12,4 +13,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

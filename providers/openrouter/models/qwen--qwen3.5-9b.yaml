@@ -3,11 +3,11 @@ name: Qwen3.5 9b
 family: qwen
 pricing:
   currency: USD
-  input: 0.04
+  input: 0.1
   output: 0.15
 limit:
   context: 262144
-  output: 81920
+  output: 262144
 modalities:
   input:
     - text

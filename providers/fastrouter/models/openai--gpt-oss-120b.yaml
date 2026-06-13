@@ -3,8 +3,8 @@ name: Gpt Oss 120b
 family: gpt
 pricing:
   currency: USD
-  input: 0.15
-  output: 0.75
+  input: 0.09
+  output: 0.36
 modalities:
   input:
     - text
@@ -12,4 +12,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

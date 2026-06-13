@@ -1,0 +1,18 @@
+id: thudm--glm-4-32b-0414
+name: Glm 4 32b 0414
+family: glm
+pricing:
+  currency: USD
+  input: 0.55
+  output: 1.66
+limit:
+  context: 32000
+  output: 32000
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

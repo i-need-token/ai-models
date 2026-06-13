@@ -1,0 +1,17 @@
+id: glm-5
+name: Glm 5
+family: glm
+pricing:
+  currency: USD
+  input: 0.44
+  output: 1.408
+  cache_read: 0.088
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

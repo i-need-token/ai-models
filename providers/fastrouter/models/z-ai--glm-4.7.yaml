@@ -3,8 +3,9 @@ name: Glm 4.7
 family: glm
 pricing:
   currency: USD
-  input: 0.43
+  input: 0.4
   output: 1.75
+  cache_read: 0.08
 limit:
   context: 202752
   output: 131072
@@ -15,4 +16,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

@@ -1,0 +1,21 @@
+id: moonshot--kimi-k2.7-code
+name: Kimi K2.7 Code
+family: kimi
+pricing:
+  currency: USD
+  input: 0.95
+  output: 4
+  cache_read: 0.19
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-06-13
+last_updated: 2026-06-13

@@ -6,7 +6,6 @@ pricing:
   input: 1.75
   output: 14
   cache_read: 0.175
-  cache_write: 14
 limit:
   context: 128000
   output: 16384

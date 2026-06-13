@@ -1,0 +1,14 @@
+id: moonshotai--kimi-k2.7-code
+name: "MoonshotAI: kimi k2.7 code"
+family: kimi
+pricing:
+  currency: USD
+  input: 0.95
+  output: 4
+  cache_read: 0.19
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

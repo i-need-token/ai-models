@@ -1,0 +1,16 @@
+id: bunny
+name: Bunny
+family: bunny
+pricing:
+  unit: free
+limit:
+  context: 262144
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

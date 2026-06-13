@@ -3,11 +3,11 @@ name: "Google: gemma 4 31B IT"
 family: gemma
 pricing:
   currency: USD
-  input: 0.12
-  output: 0.37
+  input: 0.1
+  output: 0.35
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

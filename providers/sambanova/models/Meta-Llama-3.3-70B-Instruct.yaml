@@ -1,6 +1,6 @@
 id: Meta-Llama-3.3-70B-Instruct
 name: Llama 3.3 70B
-family: llama-3.3
+family: llama
 pricing:
   currency: USD
   input: 0.6
@@ -13,4 +13,4 @@ modalities:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

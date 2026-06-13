@@ -1,0 +1,23 @@
+id: gemini-3-5-flash
+name: gemini-3-5-flash
+family: gemini
+pricing:
+  currency: USD
+  input: 1.55
+  output: 9.45
+  cache_read: 0.155
+limit:
+  context: 1000000
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+attachment: true
+structured_output: true
+release_date: 2026-05-22
+last_updated: 2026-05-22

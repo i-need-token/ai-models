@@ -1,0 +1,16 @@
+id: moonshot-ai--kimi-k2.7-code
+name: Moonshot Ai / Kimi K2.7 Code
+family: moonshot
+pricing:
+  currency: USD
+  input: 1.24
+  output: 5.2
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-06-13

@@ -1,0 +1,16 @@
+id: xai--grok-build-0.1
+name: Xai / Grok Build 0.1
+family: xai
+pricing:
+  currency: USD
+  input: 1.3
+  output: 2.6
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-06-13

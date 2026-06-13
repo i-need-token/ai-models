@@ -1,0 +1,17 @@
+id: minimax-m3
+name: Minimax M3
+family: minimax
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.4
+  cache_read: 0.12
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+last_updated: 2026-06-13

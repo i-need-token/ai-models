@@ -3,12 +3,12 @@ name: Mixtral 8x7b Instruct V0.1
 family: mistral
 pricing:
   currency: USD
-  input: 0.54
-  output: 0.54
+  input: 0.05
+  output: 0.08
 modalities:
   input:
     - text
   output:
     - text
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

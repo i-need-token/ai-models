@@ -1,0 +1,18 @@
+id: parasail--google--gemma-4-26b-a4b-it
+name: Gemma 4 26b A4b It
+family: parasail
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.4
+  cache_read: 0.05
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-25
+last_updated: 2026-05-25

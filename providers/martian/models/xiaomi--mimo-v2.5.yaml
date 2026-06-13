@@ -3,13 +3,13 @@ name: Mimo V2.5
 family: xiaomi
 pricing:
   currency: USD
-  input: 0.4
-  output: 2
-  cache_read: 0.08
+  input: 0.14
+  output: 0.28
+  cache_read: 0.0028
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-04-28
-last_updated: 2026-04-28
+release_date: 2026-05-26
+last_updated: 2026-05-26

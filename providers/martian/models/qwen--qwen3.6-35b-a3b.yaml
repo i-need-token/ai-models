@@ -3,13 +3,12 @@ name: Qwen3.6 35b A3b
 family: qwen
 pricing:
   currency: USD
-  input: 0.15
+  input: 0.14
   output: 1
-  cache_read: 0.05
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-05-12
-last_updated: 2026-05-12
+release_date: 2026-05-28
+last_updated: 2026-05-28

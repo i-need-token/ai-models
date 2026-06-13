@@ -3,8 +3,8 @@ name: Llama 3.3 70b Instruct Fp8
 family: llama
 pricing:
   currency: USD
-  input: 0.88
-  output: 0.88
+  input: 1.04
+  output: 1.04
 modalities:
   input:
     - text
@@ -12,5 +12,5 @@ modalities:
     - text
 tool_call: true
 structured_output: true
-release_date: 2026-05-19
-last_updated: 2026-05-19
+release_date: 2026-06-10
+last_updated: 2026-06-10

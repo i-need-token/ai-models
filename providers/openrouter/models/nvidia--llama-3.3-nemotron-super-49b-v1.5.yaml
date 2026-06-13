@@ -3,7 +3,7 @@ name: Llama 3.3 Nemotron Super 49b V1.5
 family: nemotron
 pricing:
   currency: USD
-  input: 0.1
+  input: 0.4
   output: 0.4
 limit:
   context: 131072

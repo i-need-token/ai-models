@@ -3,13 +3,13 @@ name: Ling 2.6 1t
 family: inclusionai
 pricing:
   currency: USD
-  input: 0.3
-  output: 2.5
-  cache_read: 0.06
+  input: 0.075
+  output: 0.625
+  cache_read: 0.015
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-05-12
-last_updated: 2026-05-12
+release_date: 2026-05-22
+last_updated: 2026-05-22

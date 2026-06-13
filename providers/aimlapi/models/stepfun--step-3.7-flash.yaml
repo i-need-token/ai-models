@@ -1,0 +1,16 @@
+id: stepfun--step-3.7-flash
+name: Stepfun / Step 3.7 Flash
+family: stepfun
+pricing:
+  currency: USD
+  input: 0.26
+  output: 1.495
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-06-13

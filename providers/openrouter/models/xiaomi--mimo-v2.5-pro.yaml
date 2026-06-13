@@ -3,12 +3,12 @@ name: Mimo V2.5 Pro
 family: xiaomi
 pricing:
   currency: USD
-  input: 1
-  output: 3
-  cache_read: 0.2
+  input: 0.435
+  output: 0.87
+  cache_read: 0.0036
 limit:
   context: 1048576
-  output: 16384
+  output: 131072
 modalities:
   input:
     - text

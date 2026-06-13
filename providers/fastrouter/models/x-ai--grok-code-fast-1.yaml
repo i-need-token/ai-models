@@ -15,4 +15,4 @@ modalities:
   output:
     - text
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

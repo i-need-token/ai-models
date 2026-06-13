@@ -1,0 +1,18 @@
+id: claude-opus4-8
+name: claude-opus4-8
+family: claude
+pricing:
+  currency: EUR
+  input: 4.881
+  output: 24.404
+  cache_read: 0.488
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-29
+last_updated: 2026-05-29

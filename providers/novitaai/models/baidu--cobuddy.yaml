@@ -1,0 +1,18 @@
+id: baidu--cobuddy
+name: Cobuddy
+family: baidu
+pricing:
+  currency: USD
+  input: 0.28
+  output: 1.13
+limit:
+  context: 131072
+  output: 65536
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+last_updated: 2026-06-13

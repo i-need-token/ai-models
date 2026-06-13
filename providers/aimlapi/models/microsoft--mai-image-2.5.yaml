@@ -1,0 +1,14 @@
+id: microsoft--mai-image-2.5
+name: Microsoft / Mai Image 2.5
+family: microsoft
+pricing:
+  unit: free
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-06-13

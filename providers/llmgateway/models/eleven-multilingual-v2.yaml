@@ -1,0 +1,12 @@
+id: eleven-multilingual-v2
+name: Eleven Multilingual V2
+family: eleven
+pricing:
+  unit: free
+modalities:
+  input:
+    - text
+  output:
+    - audio
+tool_call: true
+last_updated: 2026-06-13

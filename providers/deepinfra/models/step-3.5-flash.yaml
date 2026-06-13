@@ -3,7 +3,7 @@ name: Step 3.5 Flash
 family: step
 pricing:
   currency: USD
-  input: 0.1
+  input: 0.09
   output: 0.3
   cache_read: 0.02
 limit:
@@ -15,4 +15,4 @@ modalities:
   output:
     - text
 temperature: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

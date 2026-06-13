@@ -1,0 +1,14 @@
+id: novita--baidu--ernie-4.5-300b-a47b-paddle
+name: Ernie 4.5 300b A47b Paddle
+family: novita
+pricing:
+  currency: USD
+  input: 0.28
+  output: 1.1
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-05-27
+last_updated: 2026-05-27

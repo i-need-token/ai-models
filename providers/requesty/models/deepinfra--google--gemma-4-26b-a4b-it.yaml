@@ -1,0 +1,18 @@
+id: deepinfra--google--gemma-4-26b-a4b-it
+name: Gemma 4 26b A4b It
+family: deepinfra
+pricing:
+  currency: USD
+  input: 0.07
+  output: 0.34
+  cache_read: 0.07
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-25
+last_updated: 2026-05-25

@@ -1,0 +1,18 @@
+id: qwen3.7-max
+name: Qwen3.7 Max
+family: qwen
+pricing:
+  currency: USD
+  input: 2.5
+  output: 7.5
+  cache_read: 0.5
+limit:
+  context: 256000
+  output: 256000
+modalities:
+  input:
+    - text
+  output:
+    - text
+temperature: true
+last_updated: 2026-06-13

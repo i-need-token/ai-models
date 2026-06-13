@@ -3,12 +3,13 @@ name: Qwen3 235b A22b Thinking 2507
 family: qwen
 pricing:
   currency: USD
-  input: 0.1495
-  output: 1.495
+  input: 0.1
+  output: 0.1
+  cache_read: 0.1
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-04-28
-last_updated: 2026-04-28
+release_date: 2026-06-08
+last_updated: 2026-06-08

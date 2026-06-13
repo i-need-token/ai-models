@@ -4,11 +4,11 @@ family: llama
 pricing:
   currency: USD
   input: 0.027
-  output: 0.2
+  output: 0.201
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-01-21
-last_updated: 2026-01-21
+release_date: 2026-05-18
+last_updated: 2026-05-18

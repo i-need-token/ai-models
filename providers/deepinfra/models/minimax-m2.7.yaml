@@ -1,0 +1,19 @@
+id: minimax-m2.7
+name: Minimax M2.7
+family: minimax
+pricing:
+  currency: USD
+  input: 0.25
+  output: 1
+  cache_read: 0.05
+limit:
+  context: 196608
+  output: 196608
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+temperature: true
+last_updated: 2026-06-13

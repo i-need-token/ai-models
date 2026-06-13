@@ -1,0 +1,17 @@
+id: deepinfra--qwen--qwen3.5-27b
+name: Qwen3.5 27b
+family: deepinfra
+pricing:
+  currency: USD
+  input: 0.26
+  output: 2.6
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

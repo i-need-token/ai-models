@@ -1,0 +1,14 @@
+id: nvidia--NVIDIA-Nemotron-3-Ultra-550B-A55B-TEE
+name: "NVIDIA: NVIDIA Nemotron 3 Ultra 550B A55B TEE"
+family: nvidia/NVIDIA
+pricing:
+  currency: USD
+  input: 1.5
+  output: 4
+  cache_read: 0.75
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

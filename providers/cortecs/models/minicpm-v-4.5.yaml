@@ -1,0 +1,14 @@
+id: minicpm-v-4.5
+name: minicpm-v-4.5
+family: minicpm
+pricing:
+  currency: EUR
+  input: 0.584
+  output: 0.985
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-06-02
+last_updated: 2026-06-02

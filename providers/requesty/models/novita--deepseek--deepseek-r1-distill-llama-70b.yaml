@@ -6,7 +6,6 @@ pricing:
   input: 0.8
   output: 0.8
   cache_read: 0.8
-  cache_write: 0.8
 modalities:
   input:
     - text

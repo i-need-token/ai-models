@@ -3,12 +3,13 @@ name: Qwen3 Coder
 family: qwen
 pricing:
   currency: USD
-  input: 0.4
-  output: 1.6
+  input: 0.3
+  output: 1
+  cache_read: 0.1
 modalities:
   input:
     - text
   output:
     - text
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

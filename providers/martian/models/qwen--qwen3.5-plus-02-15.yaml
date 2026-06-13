@@ -5,11 +5,10 @@ pricing:
   currency: USD
   input: 0.26
   output: 1.56
-  cache_write: 0.325
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-04-17
-last_updated: 2026-04-17
+release_date: 2026-05-28
+last_updated: 2026-05-28

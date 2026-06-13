@@ -1,0 +1,18 @@
+id: nex-agi--nex-n2-pro
+name: Nex N2 Pro
+family: nex
+pricing:
+  unit: free
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

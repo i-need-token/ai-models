@@ -1,0 +1,16 @@
+id: gemma-4-31B-it
+name: Gemma 4 31B It
+family: gemma
+pricing:
+  currency: USD
+  input: 0.38
+  output: 1.15
+limit:
+  context: 131072
+  output: 131072
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

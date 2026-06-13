@@ -3,12 +3,12 @@ name: Step 3.5 Flash
 family: step
 pricing:
   currency: USD
-  input: 0.05
-  output: 0.15
+  input: 0.055
+  output: 0.165
 modalities:
   input:
     - text
     - image
   output:
     - text
-last_updated: 2026-05-19
+last_updated: 2026-06-13

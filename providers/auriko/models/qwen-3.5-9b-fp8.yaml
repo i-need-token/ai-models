@@ -3,8 +3,8 @@ name: Qwen 3.5 9b Fp8
 family: qwen
 pricing:
   currency: USD
-  input: 0.1
-  output: 0.15
+  input: 0.17
+  output: 0.25
 modalities:
   input:
     - text
@@ -13,5 +13,5 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-release_date: 2026-05-19
-last_updated: 2026-05-19
+release_date: 2026-06-10
+last_updated: 2026-06-10

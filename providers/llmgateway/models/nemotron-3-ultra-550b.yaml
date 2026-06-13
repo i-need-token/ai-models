@@ -1,0 +1,16 @@
+id: nemotron-3-ultra-550b
+name: Nemotron 3 Ultra 550b
+family: nemotron
+pricing:
+  currency: USD
+  input: 0.5
+  output: 2.5
+  cache_read: 0.15
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+tool_call: true
+last_updated: 2026-06-13

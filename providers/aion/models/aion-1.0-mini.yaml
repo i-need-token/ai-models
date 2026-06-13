@@ -1,6 +1,6 @@
 id: aion-1.0-mini
 name: Aion 1.0 Mini
-family: aion-1.0
+family: aion
 pricing:
   currency: USD
   input: 0.7

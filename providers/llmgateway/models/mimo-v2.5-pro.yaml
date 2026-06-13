@@ -3,9 +3,9 @@ name: Mimo V2.5 Pro
 family: mimo
 pricing:
   currency: USD
-  input: 1
-  output: 3
-  cache_read: 0.2
+  input: 0.435
+  output: 0.87
+  cache_read: 0.087
 modalities:
   input:
     - text
@@ -13,4 +13,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

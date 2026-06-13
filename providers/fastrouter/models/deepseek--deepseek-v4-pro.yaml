@@ -3,9 +3,9 @@ name: Deepseek V4 Pro
 family: deepseek
 pricing:
   currency: USD
-  input: 2.1
-  output: 4.4
-  cache_read: 0.2
+  input: 1.74
+  output: 3.48
+  cache_read: 0.15
 limit:
   context: 1048576
   output: 384000
@@ -16,4 +16,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

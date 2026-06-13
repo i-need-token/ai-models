@@ -1,0 +1,16 @@
+id: qwen--qwen-2-7b-instruct
+name: Qwen 2 7b Instruct
+family: qwen
+pricing:
+  currency: USD
+  input: 0.054
+  output: 0.054
+limit:
+  context: 32768
+  output: 32768
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

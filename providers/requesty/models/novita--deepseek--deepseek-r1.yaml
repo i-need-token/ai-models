@@ -6,7 +6,6 @@ pricing:
   input: 4
   output: 4
   cache_read: 4
-  cache_write: 4
 modalities:
   input:
     - text

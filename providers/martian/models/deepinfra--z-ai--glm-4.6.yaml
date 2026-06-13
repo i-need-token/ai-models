@@ -3,12 +3,13 @@ name: Glm 4.6
 family: glm
 pricing:
   currency: USD
-  input: 0.39
-  output: 1.9
+  input: 0.43
+  output: 1.74
+  cache_read: 0.08
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-03-05
-last_updated: 2026-03-05
+release_date: 2026-05-18
+last_updated: 2026-05-18

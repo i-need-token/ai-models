@@ -3,8 +3,8 @@ name: Qwen3 30b A3b
 family: qwen
 pricing:
   currency: USD
-  input: 0.08
-  output: 0.29
+  input: 0.09
+  output: 0.45
 limit:
   context: 40960
   output: 40960
@@ -15,4 +15,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

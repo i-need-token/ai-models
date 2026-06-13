@@ -1,0 +1,12 @@
+id: eleven-v3
+name: Eleven V3
+family: eleven
+pricing:
+  unit: free
+modalities:
+  input:
+    - text
+  output:
+    - audio
+tool_call: true
+last_updated: 2026-06-13

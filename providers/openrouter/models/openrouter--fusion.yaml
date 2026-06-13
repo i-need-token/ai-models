@@ -1,0 +1,14 @@
+id: openrouter--fusion
+name: Fusion
+family: openrouter
+pricing:
+  currency: USD
+  input: -1000000
+  output: -1000000
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-05-13
+last_updated: 2026-05-13

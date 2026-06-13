@@ -1,0 +1,15 @@
+id: novita--kwaipilot--kat-coder-pro
+name: Kat Coder Pro
+family: novita
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.2
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

@@ -1,0 +1,16 @@
+id: qwen--qwen3.7-plus
+name: Qwen3.7 Plus
+family: qwen
+pricing:
+  currency: USD
+  input: 0.4
+  output: 1.6
+  cache_read: 0.08
+  cache_write: 0.5
+modalities:
+  input:
+    - text
+  output:
+    - text
+release_date: 2026-06-08
+last_updated: 2026-06-08

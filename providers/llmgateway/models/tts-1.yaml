@@ -1,0 +1,12 @@
+id: tts-1
+name: Tts 1
+family: tts
+pricing:
+  unit: free
+modalities:
+  input:
+    - text
+  output:
+    - audio
+tool_call: true
+last_updated: 2026-06-13

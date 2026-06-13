@@ -1,0 +1,13 @@
+id: TEE--deepseek-v4-flash
+name: "TEE: deepseek v4 FLASH"
+family: deepseek
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.4
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

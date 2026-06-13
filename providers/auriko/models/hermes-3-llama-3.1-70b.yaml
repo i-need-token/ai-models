@@ -3,8 +3,8 @@ name: Hermes 3 Llama 3.1 70b
 family: hermes
 pricing:
   currency: USD
-  input: 0.3
-  output: 0.3
+  input: 0.7
+  output: 0.7
 limit:
   context: 131072
   output: 16384
@@ -14,5 +14,5 @@ modalities:
   output:
     - text
 structured_output: true
-release_date: 2026-05-19
-last_updated: 2026-05-19
+release_date: 2026-06-08
+last_updated: 2026-06-08

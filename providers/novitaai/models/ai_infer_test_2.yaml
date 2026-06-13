@@ -1,0 +1,16 @@
+id: ai_infer_test_2
+name: Ai_infer_test_2
+family: ai_infer_test_2
+pricing:
+  unit: free
+limit:
+  context: 200000
+  output: 200000
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

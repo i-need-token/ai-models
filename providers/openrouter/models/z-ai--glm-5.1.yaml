@@ -2,10 +2,10 @@ id: z-ai--glm-5.1
 name: Glm 5.1
 family: glm
 pricing:
-  unit: free
-limit:
-  context: 202800
-  output: 202800
+  currency: USD
+  input: 0.98
+  output: 3.08
+  cache_read: 0.182
 modalities:
   input:
     - text

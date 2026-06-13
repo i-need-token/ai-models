@@ -3,13 +3,13 @@ name: Kimi K2.6
 family: kimi
 pricing:
   currency: USD
-  input: 0.74
-  output: 3.5
-  cache_read: 0.25
+  input: 0.68
+  output: 3.41
+  cache_read: 0.34
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-05-12
-last_updated: 2026-05-12
+release_date: 2026-06-08
+last_updated: 2026-06-08

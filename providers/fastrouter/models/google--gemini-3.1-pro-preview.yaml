@@ -5,8 +5,7 @@ pricing:
   currency: USD
   input: 2
   output: 12
-  cache_read: 0.31
-  cache_write: 1.625
+  cache_read: 0.2
 limit:
   context: 1048576
   output: 65536
@@ -21,4 +20,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

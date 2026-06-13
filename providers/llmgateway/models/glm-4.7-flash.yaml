@@ -2,12 +2,14 @@ id: glm-4.7-flash
 name: Glm 4.7 Flash
 family: glm
 pricing:
-  unit: free
+  currency: USD
+  input: 0.06
+  output: 0.4
+  cache_read: 0.01
 modalities:
   input:
     - text
   output:
     - text
-reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

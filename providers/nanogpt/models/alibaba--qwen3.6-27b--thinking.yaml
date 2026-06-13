@@ -3,11 +3,11 @@ name: "Alibaba: qwen3.6 27B  thinking"
 family: qwen
 pricing:
   currency: USD
-  input: 0.6
-  output: 3.6
+  input: 0.203
+  output: 2.24
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

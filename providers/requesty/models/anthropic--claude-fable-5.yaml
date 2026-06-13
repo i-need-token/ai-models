@@ -1,0 +1,22 @@
+id: anthropic--claude-fable-5
+name: Claude Fable 5
+family: claude
+pricing:
+  currency: USD
+  input: 10
+  output: 50
+  cache_read: 1
+  cache_write: 12.5
+limit:
+  context: 1000000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-06-10
+last_updated: 2026-06-10

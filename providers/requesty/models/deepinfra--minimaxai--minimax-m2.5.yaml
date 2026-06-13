@@ -1,0 +1,17 @@
+id: deepinfra--minimaxai--minimax-m2.5
+name: Minimax M2.5
+family: deepinfra
+pricing:
+  currency: USD
+  input: 0.15
+  output: 1.15
+  cache_read: 0.03
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

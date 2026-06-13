@@ -1,0 +1,14 @@
+id: stepfun--step-3.7-flash--thinking
+name: "StepFun: step 3.7 FLASH  thinking"
+family: step
+pricing:
+  currency: USD
+  input: 0.2
+  output: 1.15
+  cache_read: 0.04
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

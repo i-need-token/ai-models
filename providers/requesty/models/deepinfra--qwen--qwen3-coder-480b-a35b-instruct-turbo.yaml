@@ -1,0 +1,16 @@
+id: deepinfra--qwen--qwen3-coder-480b-a35b-instruct-turbo
+name: Qwen3 Coder 480b A35b Instruct Turbo
+family: deepinfra
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1
+  cache_read: 0.1
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

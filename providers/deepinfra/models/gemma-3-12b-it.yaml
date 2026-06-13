@@ -3,8 +3,8 @@ name: Gemma 3.12b It
 family: gemma
 pricing:
   currency: USD
-  input: 0.04
-  output: 0.13
+  input: 0.05
+  output: 0.15
 limit:
   context: 131072
   output: 131072
@@ -14,4 +14,4 @@ modalities:
     - image
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

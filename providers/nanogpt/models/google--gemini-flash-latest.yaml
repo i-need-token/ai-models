@@ -3,11 +3,12 @@ name: "Google: gemini FLASH latest"
 family: gemini
 pricing:
   currency: USD
-  input: 0.5
-  output: 3
+  input: 1.5
+  output: 9
+  cache_read: 0.15
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

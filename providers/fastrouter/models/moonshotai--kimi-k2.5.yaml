@@ -4,7 +4,8 @@ family: moonshotai
 pricing:
   currency: USD
   input: 0.45
-  output: 2.8
+  output: 2.25
+  cache_read: 0.07
 limit:
   context: 262144
   output: 65535
@@ -16,4 +17,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

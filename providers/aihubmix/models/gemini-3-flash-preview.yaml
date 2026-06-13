@@ -1,0 +1,19 @@
+id: gemini-3-flash-preview
+name: Gemini 3 Flash Preview
+family: gemini
+pricing:
+  currency: USD
+  input: 0.25
+  output: 1.5
+  cache_read: 0.025
+modalities:
+  input:
+    - text
+    - image
+    - audio
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

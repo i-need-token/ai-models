@@ -1,0 +1,16 @@
+id: glm-5v-turbo
+name: Glm 5v Turbo
+family: glm
+pricing:
+  currency: USD
+  input: 0.3521
+  output: 1.54924
+  cache_read: 0.084504
+modalities:
+  input:
+    - text
+    - image
+    - video
+  output:
+    - text
+last_updated: 2026-06-13

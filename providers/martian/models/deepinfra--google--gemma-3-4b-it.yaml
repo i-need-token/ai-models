@@ -3,12 +3,12 @@ name: Gemma 3 4b It
 family: gemma
 pricing:
   currency: USD
-  input: 0.04
-  output: 0.08
+  input: 0.05
+  output: 0.1
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-04-28
-last_updated: 2026-04-28
+release_date: 2026-06-08
+last_updated: 2026-06-08

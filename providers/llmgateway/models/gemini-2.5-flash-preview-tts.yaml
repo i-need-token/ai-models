@@ -1,0 +1,14 @@
+id: gemini-2.5-flash-preview-tts
+name: Gemini 2.5 Flash Preview Tts
+family: gemini
+pricing:
+  currency: USD
+  input: 0.5
+  output: 10
+modalities:
+  input:
+    - text
+  output:
+    - audio
+tool_call: true
+last_updated: 2026-06-13

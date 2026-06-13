@@ -8,7 +8,7 @@ pricing:
   cache_read: 0.15625
 limit:
   context: 256000
-  output: 65536
+  output: 16384
 modalities:
   input:
     - text

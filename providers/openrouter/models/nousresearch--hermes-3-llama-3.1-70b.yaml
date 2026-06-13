@@ -3,8 +3,8 @@ name: Hermes 3 Llama 3.1 70b
 family: nousresearch
 pricing:
   currency: USD
-  input: 0.3
-  output: 0.3
+  input: 0.7
+  output: 0.7
 limit:
   context: 131072
   output: 16384

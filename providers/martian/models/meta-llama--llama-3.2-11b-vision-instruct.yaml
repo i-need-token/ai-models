@@ -3,12 +3,12 @@ name: Llama 3.2 11b Vision Instruct
 family: llama
 pricing:
   currency: USD
-  input: 0.245
-  output: 0.245
+  input: 0.345
+  output: 0.345
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-04-16
-last_updated: 2026-04-16
+release_date: 2026-06-08
+last_updated: 2026-06-08

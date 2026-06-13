@@ -7,13 +7,12 @@ pricing:
   output: 0.26
   cache_read: 0.029
 limit:
-  context: 131000
+  context: 262000
   output: 262000
 modalities:
   input:
     - text
   output:
     - text
-tool_call: true
-release_date: 2026-05-19
-last_updated: 2026-05-19
+release_date: 2026-06-08
+last_updated: 2026-06-08

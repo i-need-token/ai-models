@@ -4,7 +4,7 @@ family: llama
 pricing:
   currency: USD
   input: 0.02
-  output: 0.05
+  output: 0.03
 limit:
   context: 131072
   output: 16384

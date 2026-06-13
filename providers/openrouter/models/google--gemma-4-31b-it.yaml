@@ -4,10 +4,11 @@ family: gemma
 pricing:
   currency: USD
   input: 0.12
-  output: 0.37
+  output: 0.35
+  cache_read: 0.09
 limit:
   context: 262144
-  output: 16384
+  output: 262144
 modalities:
   input:
     - image

@@ -1,0 +1,16 @@
+id: cosmos3-super-reasoner
+name: cosmos3-super-reasoner
+family: cosmos3
+pricing:
+  currency: EUR
+  input: 0.089
+  output: 0.266
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-06-02
+last_updated: 2026-06-02

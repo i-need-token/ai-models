@@ -1,0 +1,13 @@
+id: nex-agi--nex-n2-pro
+name: "Nex-agi: nex n2 PRO"
+family: nex
+pricing:
+  currency: USD
+  input: 0.5
+  output: 1.5
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

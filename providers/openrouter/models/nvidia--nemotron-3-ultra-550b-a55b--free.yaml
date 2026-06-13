@@ -1,0 +1,17 @@
+id: nvidia--nemotron-3-ultra-550b-a55b--free
+name: Free
+family: nemotron
+pricing:
+  unit: free
+limit:
+  context: 1000000
+  output: 65536
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-06-04
+last_updated: 2026-06-04

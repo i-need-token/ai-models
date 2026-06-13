@@ -3,11 +3,11 @@ name: azure o1
 family: o
 pricing:
   currency: USD
-  input: 8.82
-  output: 35.29
+  input: 15
+  output: 60
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

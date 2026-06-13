@@ -1,0 +1,20 @@
+id: o3-deep-research-2025-06-26
+name: O3 Deep Research 2025 06 26
+family: o
+pricing:
+  currency: USD
+  input: 10
+  output: 40
+  cache_read: 2.5
+limit:
+  context: 200000
+  output: 100000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+release_date: 2026-06-10
+last_updated: 2026-06-10

@@ -3,7 +3,7 @@ name: Llama 4 Scout 17b 16e Instruct
 family: llama
 pricing:
   currency: USD
-  input: 0.08
+  input: 0.1
   output: 0.3
 limit:
   context: 327680
@@ -16,5 +16,5 @@ modalities:
     - text
 tool_call: true
 structured_output: true
-release_date: 2026-05-19
-last_updated: 2026-05-19
+release_date: 2026-06-08
+last_updated: 2026-06-08

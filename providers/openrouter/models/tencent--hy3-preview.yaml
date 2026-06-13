@@ -3,12 +3,9 @@ name: Hy3 Preview
 family: tencent
 pricing:
   currency: USD
-  input: 0.066
-  output: 0.26
-  cache_read: 0.029
-limit:
-  context: 262144
-  output: 262144
+  input: 0.063
+  output: 0.21
+  cache_read: 0.021
 modalities:
   input:
     - text

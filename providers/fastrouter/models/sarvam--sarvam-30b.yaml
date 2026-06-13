@@ -2,7 +2,10 @@ id: sarvam--sarvam-30b
 name: Sarvam 30b
 family: sarvam
 pricing:
-  unit: free
+  currency: USD
+  input: 0.025
+  output: 0.1
+  cache_read: 0.015
 limit:
   context: 128000
   output: 128000
@@ -13,4 +16,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

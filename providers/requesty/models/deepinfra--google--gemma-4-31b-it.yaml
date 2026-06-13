@@ -1,0 +1,17 @@
+id: deepinfra--google--gemma-4-31b-it
+name: Gemma 4 31b It
+family: deepinfra
+pricing:
+  currency: USD
+  input: 0.13
+  output: 0.38
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

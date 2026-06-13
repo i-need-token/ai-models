@@ -1,0 +1,23 @@
+id: claude-opus-4-8
+name: claude-opus-4-8
+family: claude-opus
+pricing:
+  currency: USD
+  input: 6
+  output: 30
+  cache_read: 0.6
+limit:
+  context: 1000000
+  output: 128000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+attachment: true
+structured_output: true
+release_date: 2026-05-28
+last_updated: 2026-05-28

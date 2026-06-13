@@ -3,8 +3,8 @@ name: Hermes 3 Llama 3.1.70b
 family: llama
 pricing:
   currency: USD
-  input: 0.3
-  output: 0.3
+  input: 0.7
+  output: 0.7
 limit:
   context: 131072
   output: 131072
@@ -13,4 +13,4 @@ modalities:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

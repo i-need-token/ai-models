@@ -3,12 +3,12 @@ name: Llama 3 8b Instruct
 family: llama
 pricing:
   currency: USD
-  input: 0.04
-  output: 0.04
+  input: 0.14
+  output: 0.14
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-05-12
-last_updated: 2026-05-12
+release_date: 2026-06-08
+last_updated: 2026-06-08

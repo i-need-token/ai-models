@@ -1,0 +1,13 @@
+id: mistral-code-latest
+name: mistral code latest
+family: mistral
+pricing:
+  currency: USD
+  input: 0.3
+  output: 0.9
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

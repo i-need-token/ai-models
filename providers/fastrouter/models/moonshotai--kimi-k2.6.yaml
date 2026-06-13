@@ -3,8 +3,8 @@ name: Kimi K2.6
 family: moonshotai
 pricing:
   currency: USD
-  input: 0.55
-  output: 2.5
+  input: 0.75
+  output: 3.5
   cache_read: 0.15
 modalities:
   input:
@@ -14,4 +14,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

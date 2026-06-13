@@ -1,0 +1,20 @@
+id: fireworks--qwen3.7-plus
+name: Qwen3.7 Plus
+family: fireworks
+pricing:
+  currency: USD
+  input: 0.4
+  output: 1.6
+  cache_read: 0.08
+limit:
+  context: 262144
+  output: 262144
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+tool_call: true
+release_date: 2026-06-13
+last_updated: 2026-06-13

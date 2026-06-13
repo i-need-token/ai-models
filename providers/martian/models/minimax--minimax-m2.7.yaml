@@ -3,12 +3,13 @@ name: Minimax M2.7
 family: minimax
 pricing:
   currency: USD
-  input: 0.28
-  output: 1.2
+  input: 0.27
+  output: 1.08
+  cache_read: 0.054
 modalities:
   input:
     - text
   output:
     - text
-release_date: 2026-05-12
-last_updated: 2026-05-12
+release_date: 2026-06-09
+last_updated: 2026-06-09

@@ -1,0 +1,21 @@
+id: o3-pro-2025-06-10
+name: O3 Pro 2025 06 10
+family: o
+pricing:
+  currency: USD
+  input: 20
+  output: 80
+limit:
+  context: 200000
+  output: 100000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+release_date: 2026-06-10
+last_updated: 2026-06-10

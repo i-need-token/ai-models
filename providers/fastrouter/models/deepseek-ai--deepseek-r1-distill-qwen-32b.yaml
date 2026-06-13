@@ -3,8 +3,8 @@ name: Deepseek R1 Distill Qwen 32b
 family: deepseek
 pricing:
   currency: USD
-  input: 0.27
-  output: 0.27
+  input: 0.7
+  output: 0.8
 limit:
   context: 131072
   output: 16384
@@ -14,4 +14,4 @@ modalities:
   output:
     - text
 reasoning: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

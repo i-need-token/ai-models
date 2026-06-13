@@ -1,0 +1,14 @@
+id: gpt-4o-mini-tts
+name: Gpt 4o Mini Tts
+family: gpt
+pricing:
+  currency: USD
+  input: 0.6
+  output: 12
+modalities:
+  input:
+    - text
+  output:
+    - audio
+tool_call: true
+last_updated: 2026-06-13

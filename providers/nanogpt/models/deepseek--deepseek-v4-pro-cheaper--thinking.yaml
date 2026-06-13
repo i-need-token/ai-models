@@ -5,10 +5,10 @@ pricing:
   currency: USD
   input: 0.435
   output: 0.87
-  cache_read: 0.0435
+  cache_read: 0.003625
 modalities:
   input:
     - text
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

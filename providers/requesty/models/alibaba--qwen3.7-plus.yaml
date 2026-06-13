@@ -1,0 +1,21 @@
+id: alibaba--qwen3.7-plus
+name: Qwen3.7 Plus
+family: qwen
+pricing:
+  currency: USD
+  input: 0.32
+  output: 1.28
+  cache_read: 0.032
+  cache_write: 0.4
+limit:
+  context: 1048576
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+tool_call: true
+release_date: 2026-06-13
+last_updated: 2026-06-13

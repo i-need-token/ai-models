@@ -1,0 +1,16 @@
+id: teknium--openhermes-2.5-mistral-7b
+name: Openhermes 2.5 Mistral 7b
+family: hermes
+pricing:
+  currency: USD
+  input: 0.17
+  output: 0.17
+limit:
+  context: 4096
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

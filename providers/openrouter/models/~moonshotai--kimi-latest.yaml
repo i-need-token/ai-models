@@ -3,9 +3,9 @@ name: Kimi Latest
 family: ~moonshotai
 pricing:
   currency: USD
-  input: 0.73
-  output: 3.49
-  cache_read: 0.25
+  input: 0.68
+  output: 3.41
+  cache_read: 0.34
 limit:
   context: 262144
   output: 262142

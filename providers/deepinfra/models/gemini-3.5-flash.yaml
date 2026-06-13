@@ -1,0 +1,18 @@
+id: gemini-3.5-flash
+name: Gemini 3.5 Flash
+family: gemini
+pricing:
+  currency: USD
+  input: 1.5
+  output: 9
+limit:
+  context: 1000000
+  output: 1000000
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+last_updated: 2026-06-13

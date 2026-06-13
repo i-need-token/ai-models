@@ -1,0 +1,17 @@
+id: deepseek--deepseek-v3--community
+name: Community
+family: deepseek
+pricing:
+  currency: USD
+  input: 0.89
+  output: 0.89
+limit:
+  context: 64000
+  output: 8000
+modalities:
+  input:
+    - text
+  output:
+    - text
+tool_call: true
+last_updated: 2026-06-13

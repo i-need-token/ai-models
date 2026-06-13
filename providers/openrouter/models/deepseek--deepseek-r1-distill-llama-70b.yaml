@@ -3,17 +3,16 @@ name: Deepseek R1 Distill Llama 70b
 family: deepseek
 pricing:
   currency: USD
-  input: 0.7
+  input: 0.8
   output: 0.8
 limit:
-  context: 131072
-  output: 16384
+  context: 128000
+  output: 8192
 modalities:
   input:
     - text
   output:
     - text
 reasoning: true
-structured_output: true
 release_date: 2025-01-24
 last_updated: 2025-01-24

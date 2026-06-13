@@ -1,0 +1,19 @@
+id: qwen--qwen3.7-max
+name: Qwen3.7 Max
+family: qwen
+pricing:
+  currency: USD
+  input: 1.25
+  output: 3.75
+limit:
+  context: 1000000
+  output: 65536
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+structured_output: true
+last_updated: 2026-06-13

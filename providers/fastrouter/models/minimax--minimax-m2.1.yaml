@@ -3,8 +3,8 @@ name: Minimax M2.1
 family: minimax
 pricing:
   currency: USD
-  input: 0.27
-  output: 0.95
+  input: 0.15
+  output: 1.15
   cache_read: 0.03
 limit:
   context: 196608
@@ -16,4 +16,4 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

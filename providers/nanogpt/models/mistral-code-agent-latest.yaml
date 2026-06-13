@@ -1,0 +1,13 @@
+id: mistral-code-agent-latest
+name: mistral code agent latest
+family: mistral
+pricing:
+  currency: USD
+  input: 0.4
+  output: 2
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

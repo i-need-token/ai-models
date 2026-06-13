@@ -1,0 +1,23 @@
+id: qwen-3-7-plus
+name: qwen-3-7-plus
+family: qwen
+pricing:
+  currency: USD
+  input: 0.5
+  output: 2
+  cache_read: 0.05
+limit:
+  context: 1000000
+  output: 65536
+modalities:
+  input:
+    - text
+    - image
+  output:
+    - text
+reasoning: true
+tool_call: true
+attachment: true
+structured_output: true
+release_date: 2026-06-02
+last_updated: 2026-06-02

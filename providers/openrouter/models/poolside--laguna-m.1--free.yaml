@@ -4,8 +4,8 @@ family: poolside
 pricing:
   unit: free
 limit:
-  context: 131072
-  output: 8192
+  context: 262144
+  output: 32768
 modalities:
   input:
     - text

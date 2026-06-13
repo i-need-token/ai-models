@@ -3,7 +3,7 @@ name: Qwen2.5 Vl 32b Instruct
 family: qwen
 pricing:
   currency: USD
-  input: 0.2
+  input: 0.15
   output: 0.6
 modalities:
   input:
@@ -11,4 +11,4 @@ modalities:
     - image
   output:
     - text
-last_updated: 2026-05-20
+last_updated: 2026-06-13

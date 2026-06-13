@@ -5,16 +5,12 @@ pricing:
   currency: USD
   input: 0.78
   output: 3.9
-limit:
-  context: 131000
-  output: 131000
 modalities:
   input:
     - text
-    - image
   output:
     - text
-temperature: true
-tool_call: true
-structured_output: true
-last_updated: 2026-05-19
+temperature: false
+tool_call: false
+structured_output: false
+last_updated: 2026-06-13

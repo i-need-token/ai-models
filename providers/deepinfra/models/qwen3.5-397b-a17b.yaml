@@ -3,9 +3,9 @@ name: Qwen3.5.397b A17b
 family: qwen
 pricing:
   currency: USD
-  input: 0.49
-  output: 3.6
-  cache_read: 0.3
+  input: 0.45
+  output: 3
+  cache_read: 0.22
 limit:
   context: 262144
   output: 262144
@@ -17,4 +17,4 @@ modalities:
     - text
 reasoning: true
 temperature: true
-last_updated: 2026-05-20
+last_updated: 2026-06-13

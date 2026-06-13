@@ -1,0 +1,14 @@
+id: minimax--minimax-m3
+name: "MiniMax: minimax m3"
+family: minimax
+pricing:
+  currency: USD
+  input: 0.3
+  output: 1.2
+  cache_read: 0.06
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13

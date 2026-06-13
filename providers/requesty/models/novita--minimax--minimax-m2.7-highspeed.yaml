@@ -1,0 +1,16 @@
+id: novita--minimax--minimax-m2.7-highspeed
+name: Minimax M2.7 Highspeed
+family: novita
+pricing:
+  currency: USD
+  input: 0.6
+  output: 2.4
+modalities:
+  input:
+    - text
+  output:
+    - text
+reasoning: true
+tool_call: true
+release_date: 2026-05-27
+last_updated: 2026-05-27

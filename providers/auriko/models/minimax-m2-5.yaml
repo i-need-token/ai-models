@@ -14,5 +14,5 @@ modalities:
     - text
 reasoning: true
 tool_call: true
-release_date: 2026-04-27
-last_updated: 2026-04-27
+release_date: 2026-06-08
+last_updated: 2026-06-08

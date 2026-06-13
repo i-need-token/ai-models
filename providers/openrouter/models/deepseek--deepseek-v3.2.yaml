@@ -3,12 +3,11 @@ name: Deepseek V3.2
 family: deepseek
 pricing:
   currency: USD
-  input: 0.252
-  output: 0.378
-  cache_read: 0.0252
+  input: 0.2288
+  output: 0.3432
 limit:
   context: 131072
-  output: 65536
+  output: 64000
 modalities:
   input:
     - text

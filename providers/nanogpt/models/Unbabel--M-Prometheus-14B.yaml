@@ -1,0 +1,13 @@
+id: Unbabel--M-Prometheus-14B
+name: "Unbabel: M Prometheus 14B"
+family: Unbabel/M
+pricing:
+  currency: USD
+  input: 0.2
+  output: 0.2
+modalities:
+  input:
+    - text
+  output:
+    - text
+last_updated: 2026-06-13
